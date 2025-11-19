@@ -15,8 +15,6 @@ public class UIBuilder : SingletonScriptableObject<UIBuilder>
     public GameObject VLayoutPrefab;
     public GameObject HLayoutPrefab;
     public GameObject GridLayoutPrefab;
-
-
     public void Build(RectTransform container, IEnumerable<UIContent> contents)
     {
         //delete all children
@@ -31,6 +29,9 @@ public class UIBuilder : SingletonScriptableObject<UIBuilder>
             switch (item.ContentType)
             {
                 case UIContentType.Header:
+                    var headerTMPObj = GameObject.Instantiate(TextMeshProPrefab, rowHolder);
+                    var headerTMP = headerTMPObj.GetComponent<TextMeshProUGUI>();
+                    headerTMP.text = string.IsNullOrEmpty(item.Header) ? item.Text : item.Header;
                     break;
                 case UIContentType.Text:
                     break;

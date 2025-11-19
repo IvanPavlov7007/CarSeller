@@ -8,5 +8,5 @@ public class GameEvents : Singleton<GameEvents>
     public Action OnGamePaused;
     public Action OnGameUnpaused;
 
-
+    public Action<ObjectWithPopupMenuTest> onObjectWithPopupClicked;
 }

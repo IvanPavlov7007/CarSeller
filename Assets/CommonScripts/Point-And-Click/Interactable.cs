@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    public Action<Interactable> CursorEntered { get; set; }
-    public Action<Interactable> CursorExited { get; set; }
-    public Action<Interactable> CursorSelectStarted { get; set; }
-    public Action<Interactable> CursorSelectEnded { get; set; }
-    public Action<Interactable> CursorDragStarted { get; set; }
-    public Action<Interactable> CursorDragEnded { get; set; }
+    public event Action<Interactable> CursorEntered;
+    public event Action<Interactable> CursorExited;
+    public event Action<Interactable> CursorSelectStarted;
+    public event Action<Interactable> CursorSelectEnded;
+    public event Action<Interactable> CursorDragStarted;
+    public event Action<Interactable> CursorDragEnded;
 
     protected bool CursorHovering { get; private set; }
 
