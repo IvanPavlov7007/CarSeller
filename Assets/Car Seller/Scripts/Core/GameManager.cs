@@ -13,6 +13,12 @@ public class GameManager : Singleton<GameManager>
     TimeState currentTimeState = TimeState.Normal;
     public TimeState CurrentTimeState { get { return currentTimeState; } }
 
+    private void OnEnable()
+    {
+        UIInputController.Instance.onPaused += () => Pause(true);
+        UIInputController.Instance.onResumed += () => Pause(false);
+    }
+
 
 
     public void Pause(bool pause)
@@ -21,13 +27,28 @@ public class GameManager : Singleton<GameManager>
         bool unpausing = !pause && currentTimeState == TimeState.Paused;
 
         currentTimeState = pause ? TimeState.Paused : TimeState.Normal;
-        // change notification
+        changeTime();
+
+        //if there was a change
+        if (pausing || unpausing)
+        {
+            if(pause)
+                PlayerInputLocator.Instance.PlayerInput.SwitchCurrentActionMap("UI");
+            else
+                PlayerInputLocator.Instance.PlayerInput.SwitchCurrentActionMap("Player");
+        }
+
+            // change notification
         if (pausing)
             GameEvents.Instance.OnGamePaused?.Invoke();
         else if (unpausing)
             GameEvents.Instance.OnGameUnpaused?.Invoke();
+    }
 
-        changeTime();
+    public void switchFastForward()
+    {
+        bool currentFastForward = currentTimeState == TimeState.FastForward;
+        FastForward(!currentFastForward);
     }
 
     public void FastForward(bool fastForward)
@@ -35,6 +56,11 @@ public class GameManager : Singleton<GameManager>
         if(currentTimeState != TimeState.Paused)
             currentTimeState = fastForward ? TimeState.FastForward : TimeState.Normal;
         changeTime();
+    }
+
+    public void ResetGame()
+    {
+        // delete the save data, reset the whole game from the beginning
     }
 
     void changeTime()

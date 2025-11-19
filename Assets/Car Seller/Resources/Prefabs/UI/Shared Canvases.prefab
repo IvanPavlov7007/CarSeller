@@ -284,7 +284,7 @@ CanvasGroup:
   m_GameObject: {fileID: 2822891348834384506}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 0
+  m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &7471277690519275232
@@ -426,7 +426,7 @@ CanvasGroup:
   m_GameObject: {fileID: 5829639601807059869}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 0
+  m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &6665597898465680934
@@ -450,10 +450,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5829639601807059869}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb6d7a94c1bf49f4d85f44b0d3c0fb14, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f96b5adc7a55c7408815d88c4a7dfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dontDestroyOnLoad: 1
+  container: {fileID: 2619267306214796547}
 --- !u!1 &6743048900102241750
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,6 +601,8 @@ GameObject:
   - component: {fileID: 7623146326275636369}
   - component: {fileID: 2631564364510978407}
   - component: {fileID: 8173110618622922053}
+  - component: {fileID: 7441298906662016921}
+  - component: {fileID: 7956140264003935314}
   m_Layer: 5
   m_Name: Dynamic Canvas - Hint
   m_TagString: Untagged
@@ -700,9 +702,34 @@ CanvasGroup:
   m_GameObject: {fileID: 9149368329832367916}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 0
+  m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &7441298906662016921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9149368329832367916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55938fb1577dd4ad3af7e994048c86f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7956140264003935314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9149368329832367916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e82866c07f5e20b4283d32d7c09532e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dontDestroyOnLoad: 1
 --- !u!1001 &3620857546003391906
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -917,6 +944,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ae0c8597917e3344a2e36d1d6debe6d, type: 3}
+--- !u!224 &2619267306214796547 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7318871379597320363, guid: 9ae0c8597917e3344a2e36d1d6debe6d, type: 3}
+  m_PrefabInstance: {fileID: 4740138675966430632}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &9197898424781322170 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4498292149152315922, guid: 9ae0c8597917e3344a2e36d1d6debe6d, type: 3}
