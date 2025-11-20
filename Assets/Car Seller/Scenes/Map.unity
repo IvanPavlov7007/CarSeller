@@ -547,10 +547,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 55
   use3dPhysics: 0
-  dragStartDistancePixels: 10
-  holdStartTime: 0.35
-  holdMoveTolerancePixels: 6
-  clickMaxTime: 0.3
+  mouseDragStartDistancePixels: 10
+  mouseHoldStartTime: 0.35
+  mouseHoldMoveTolerancePixels: 6
+  mouseClickMaxTime: 0.3
+  touchDragStartDistancePixels: 22
+  touchHoldStartTime: 0.5
+  touchHoldMoveTolerancePixels: 10
+  touchClickMaxTime: 0.5
+  clickAfterHold: 0
+  debugGestures: 0
 --- !u!114 &285772774
 MonoBehaviour:
   m_ObjectHideFlags: 0

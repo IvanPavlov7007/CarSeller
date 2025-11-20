@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Pixelplacement;
 using UnityEngine.InputSystem;
@@ -10,34 +8,43 @@ public class GameCursor : Singleton<GameCursor>
     public Interactable currentInteractable { get; private set; }
     public Interactable draggedInteractable { get; private set; }
 
-    [SerializeField]
-    private LayerMask interactableLayers;
-
+    [SerializeField] private LayerMask interactableLayers;
     public bool use3dPhysics = false;
 
-    // Gesture thresholds (pixels/time)
-    [Header("Gesture thresholds")]
-    [Tooltip("Minimum screen-space movement to start dragging.")]
-    [SerializeField] private float dragStartDistancePixels = 10f;
-    [Tooltip("How long to press (no movement) before Hold begins.")]
-    [SerializeField] private float holdStartTime = 0.35f;
-    [Tooltip("Allowed small jitter while evaluating Hold.")]
-    [SerializeField] private float holdMoveTolerancePixels = 6f;
-    [Tooltip("Max duration to still count as Click when released (if not dragged or held).")]
-    [SerializeField] private float clickMaxTime = 0.30f;
+    [Header("Mouse Gesture Thresholds")]
+    [SerializeField] private float mouseDragStartDistancePixels = 10f;
+    [SerializeField] private float mouseHoldStartTime = 0.35f;
+    [SerializeField] private float mouseHoldMoveTolerancePixels = 6f;
+    [SerializeField] private float mouseClickMaxTime = 0.30f;
 
-    private bool dragStarted = false;
+    [Header("Touch Gesture Thresholds")]
+    [SerializeField] private float touchDragStartDistancePixels = 22f;
+    [SerializeField] private float touchHoldStartTime = 0.50f;
+    [SerializeField] private float touchHoldMoveTolerancePixels = 10f;
+    [SerializeField] private float touchClickMaxTime = 0.50f;
 
-    // Pointer state
+    [Header("Behavior Flags")]
+    [Tooltip("If true a long press (hold) will still emit a click on release.")]
+    [SerializeField] private bool clickAfterHold = false;
+    [Tooltip("Log gesture decisions for debugging.")]
+    [SerializeField] private bool debugGestures = false;
+
+    // Active thresholds for current press
+    private float dragStartDistancePixels;
+    private float holdStartTime;
+    private float holdMoveTolerancePixels;
+    private float clickMaxTime;
+
+    private bool dragStarted;
     private Vector2 lastScreenPosition;
     private bool pointerWasPressed;
     private bool isPointerDown;
 
-    // Gesture state
     private Vector2 pressScreenPosition;
     private float pressTimeUnscaled;
     private Interactable pressInteractable;
     private bool holdActive;
+    private bool isTouchPress;
 
     private void Start()
     {
@@ -47,42 +54,61 @@ public class GameCursor : Singleton<GameCursor>
     private void Update()
     {
         HandlePointerInput();
-        updateWorldPosition();      // keep transform synced
+        updateWorldPosition();
         processDrag();
         processHold();
+    }
+
+    private bool IsTouchControlScheme()
+    {
+        var locator = PlayerInputLocator.Instance;
+        var playerInput = locator != null ? locator.PlayerInput : null;
+        var scheme = playerInput != null ? playerInput.currentControlScheme : null;
+        if (string.IsNullOrEmpty(scheme)) return false;
+        return scheme.IndexOf("touch", StringComparison.OrdinalIgnoreCase) >= 0;
     }
 
     private void HandlePointerInput()
     {
         bool pointerPressed;
+        bool pointerPressedThisFrame = false;
+        bool pointerReleasedThisFrame = false;
         Vector2 pointerPosition;
 
-        // Prefer touch when present
-        if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
+        // Simplest control scheme check
+        bool schemeIsTouch = IsTouchControlScheme();
+
+        if (schemeIsTouch && Touchscreen.current != null)
         {
+            // Touch path
             var touch = Touchscreen.current.primaryTouch;
             pointerPosition = touch.position.ReadValue();
             pointerPressed = touch.press.isPressed;
+            pointerPressedThisFrame = touch.press.wasPressedThisFrame;
+            pointerReleasedThisFrame = touch.press.wasReleasedThisFrame ||
+                                       touch.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Canceled;
+            isTouchPress = true;
         }
         else if (Mouse.current != null)
         {
+            // Mouse path (fallback if no touch or scheme not touch)
             pointerPosition = Mouse.current.position.ReadValue();
             pointerPressed = Mouse.current.leftButton.isPressed;
+            pointerPressedThisFrame = Mouse.current.leftButton.wasPressedThisFrame;
+            pointerReleasedThisFrame = Mouse.current.leftButton.wasReleasedThisFrame;
+            isTouchPress = false;
         }
         else
         {
-            // No pointer device available
             return;
         }
 
         lastScreenPosition = pointerPosition;
-
-        // Update hover / current interactable each frame (even during press/drag, tweak if needed)
         Vector2 worldPosition = ScreenToWorld(lastScreenPosition);
         currentInteractable = updateCurrentInteractable(currentInteractable, worldPosition, interactableLayers);
 
         // Press start
-        if (pointerPressed && !pointerWasPressed)
+        if (pointerPressedThisFrame)
         {
             isPointerDown = true;
             pressScreenPosition = lastScreenPosition;
@@ -92,54 +118,85 @@ public class GameCursor : Singleton<GameCursor>
             draggedInteractable = null;
             holdActive = false;
 
+            // Apply thresholds based on scheme
+            if (schemeIsTouch)
+            {
+                dragStartDistancePixels = touchDragStartDistancePixels;
+                holdStartTime = touchHoldStartTime;
+                holdMoveTolerancePixels = touchHoldMoveTolerancePixels;
+                clickMaxTime = touchClickMaxTime;
+            }
+            else
+            {
+                dragStartDistancePixels = mouseDragStartDistancePixels;
+                holdStartTime = mouseHoldStartTime;
+                holdMoveTolerancePixels = mouseHoldMoveTolerancePixels;
+                clickMaxTime = mouseClickMaxTime;
+            }
+
             if (pressInteractable != null)
             {
                 pressInteractable.CursorSelectStart();
             }
+
+            if (debugGestures)
+            {
+                Debug.Log($"[GameCursor] Press start ({(schemeIsTouch ? "Touch" : "Mouse")}) on {pressInteractable?.name}");
+            }
         }
 
-        // While pressed: evaluate drag/hold thresholds
-        if (pointerPressed && pointerWasPressed)
+        // Held frame
+        if (isPointerDown && !pointerReleasedThisFrame && pressInteractable != null)
         {
-            if (pressInteractable != null)
+            float heldTime = Time.unscaledTime - pressTimeUnscaled;
+            float movedPixels = Vector2.Distance(lastScreenPosition, pressScreenPosition);
+
+            if (!dragStarted && movedPixels >= dragStartDistancePixels)
             {
-                float heldTime = Time.unscaledTime - pressTimeUnscaled;
-                float movedPixels = Vector2.Distance(lastScreenPosition, pressScreenPosition);
-
-                // If we were holding and movement now exceeds drag threshold, switch to drag
-                if (!dragStarted && movedPixels >= dragStartDistancePixels)
+                if (holdActive)
                 {
-                    if (holdActive)
-                    {
-                        pressInteractable.CursorHoldEnd();
-                        holdActive = false;
-                    }
-
-                    draggedInteractable = pressInteractable;
-                    dragStarted = true;
-                    // DragStart happens in processDrag (next step continuously calls Drag)
-                    draggedInteractable.DragStart();
+                    pressInteractable.CursorHoldEnd();
+                    holdActive = false;
                 }
-                else if (!dragStarted)
+
+                draggedInteractable = pressInteractable;
+                dragStarted = true;
+                draggedInteractable.DragStart();
+
+                if (debugGestures)
                 {
-                    // Consider starting Hold
-                    if (!holdActive && heldTime >= holdStartTime && movedPixels <= holdMoveTolerancePixels)
+                    Debug.Log($"[GameCursor] DragStart (moved {movedPixels:0.0}px)");
+                }
+            }
+            else if (!dragStarted)
+            {
+                if (!holdActive && heldTime >= holdStartTime && movedPixels <= holdMoveTolerancePixels)
+                {
+                    holdActive = true;
+                    pressInteractable.CursorHoldStart();
+
+                    if (debugGestures)
                     {
-                        holdActive = true;
-                        pressInteractable.CursorHoldStart();
+                        Debug.Log($"[GameCursor] HoldStart (time {heldTime:0.000}s)");
                     }
+                }
+                else if (holdActive && movedPixels > dragStartDistancePixels)
+                {
+                    pressInteractable.CursorHoldEnd();
+                    holdActive = false;
                 }
             }
         }
 
-        // Press end
-        if (!pointerPressed && pointerWasPressed)
+        // Release
+        if (pointerReleasedThisFrame && pointerWasPressed)
         {
-            // Release
             isPointerDown = false;
 
             float totalHeldTime = Time.unscaledTime - pressTimeUnscaled;
             float movedPixels = Vector2.Distance(lastScreenPosition, pressScreenPosition);
+
+            bool emittedClick = false;
 
             if (dragStarted && draggedInteractable != null)
             {
@@ -151,24 +208,35 @@ public class GameCursor : Singleton<GameCursor>
                 {
                     pressInteractable.CursorHoldEnd();
                     holdActive = false;
+
+                    if (clickAfterHold)
+                    {
+                        pressInteractable.CursorClick();
+                        emittedClick = true;
+                    }
                 }
                 else
                 {
-                    // Click if not dragged or held (also optionally require short duration and low movement)
-                    if (totalHeldTime <= clickMaxTime && movedPixels <= holdMoveTolerancePixels)
+                    bool withinMovement = movedPixels <= holdMoveTolerancePixels;
+                    bool withinTime = totalHeldTime <= clickMaxTime || schemeIsTouch;
+                    if (withinMovement && withinTime)
                     {
                         pressInteractable.CursorClick();
+                        emittedClick = true;
                     }
                 }
             }
 
-            // Pair with the same interactable we pressed on
             if (pressInteractable != null)
             {
                 pressInteractable.CursorSelectEnd();
             }
 
-            // Reset
+            if (debugGestures)
+            {
+                Debug.Log($"[GameCursor] Release on {pressInteractable?.name} | drag={dragStarted} holdEnded={!holdActive} click={emittedClick} time={totalHeldTime:0.000}s moved={movedPixels:0.0}px");
+            }
+
             pressInteractable = null;
             draggedInteractable = null;
             dragStarted = false;
@@ -182,17 +250,7 @@ public class GameCursor : Singleton<GameCursor>
     {
         if (draggedInteractable != null)
         {
-            if (!dragStarted)
-            {
-                // Safety: in the new flow we call DragStart when starting drag;
-                // this guard keeps legacy behavior if needed.
-                draggedInteractable.DragStart();
-                dragStarted = true;
-            }
-            else
-            {
-                draggedInteractable.Drag();
-            }
+            draggedInteractable.Drag();
         }
     }
 
@@ -206,11 +264,7 @@ public class GameCursor : Singleton<GameCursor>
 
     private void endDrag()
     {
-        if (draggedInteractable == null)
-        {
-            Debug.Log("Cursor endDrag while draggedInteractable is not set");
-            return;
-        }
+        if (draggedInteractable == null) return;
         draggedInteractable.DragEnd();
         draggedInteractable = null;
         dragStarted = false;
@@ -235,15 +289,8 @@ public class GameCursor : Singleton<GameCursor>
 
         if (hitInteracrable != current)
         {
-            if (current != null)
-            {
-                current.CursorExit();
-            }
-
-            if (hitInteracrable != null)
-            {
-                hitInteracrable.CursorEnter();
-            }
+            current?.CursorExit();
+            hitInteracrable?.CursorEnter();
         }
 
         return hitInteracrable;
@@ -267,7 +314,6 @@ public class GameCursor : Singleton<GameCursor>
                 var tr = rayHits[0].rigidbody != null ? rayHits[0].rigidbody.transform : rayHits[0].transform;
                 hitInteractable = tr.GetComponentInParent<Interactable>();
             }
-            // add sorting and comparing if there are many
         }
 
         return hitInteractable;
