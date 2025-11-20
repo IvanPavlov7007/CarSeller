@@ -1,18 +1,20 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Product : MonoBehaviour
+/// <summary>
+/// An data representation of a product instance in the game
+/// </summary>
+public abstract class Product : IProductIconProvider
 {
+    public abstract Sprite GetIcon();
+}
 
-    // Use this for initialization
-    void Start()
-    {
+public interface IProductIconProvider
+{
+    public Sprite GetIcon();
+}
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+public interface IProductsHolder
+{
+    public Product[] GetProducts();
 }
