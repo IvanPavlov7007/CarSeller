@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
+[Serializable]
 public sealed class WheelRuntimeConfig
 {
     public WheelType wheelType;
@@ -10,7 +12,7 @@ public sealed class WheelRuntimeConfig
     public Color color;
 }
 
-[System.Serializable]
+[Serializable]
 public enum WheelType
 {
     Sport,

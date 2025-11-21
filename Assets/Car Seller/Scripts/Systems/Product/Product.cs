@@ -1,20 +1,25 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
 /// An data representation of a product instance in the game
 /// </summary>
-public abstract class Product : IProductIconProvider
+public abstract class Product : IProductRepresentationProvider
 {
-    public abstract Sprite GetIcon();
+    private readonly Guid _id = Guid.NewGuid();
+    public Guid Id => _id;
+    public abstract string Name { get; }
+    public string UniqueName => Name + "_" + Id.ToString();
+    public abstract T GetRepresentation<T>(IProductViewBuilder<T> builder);
 }
 
-public interface IProductIconProvider
+public interface IProductRepresentationProvider
 {
-    public Sprite GetIcon();
+    public abstract T GetRepresentation<T>(IProductViewBuilder<T> builder);
 }
 
 public interface IProductsHolder
 {
-    public Product[] GetProducts();
+    public IProductLocation[] GetProducts();
 }

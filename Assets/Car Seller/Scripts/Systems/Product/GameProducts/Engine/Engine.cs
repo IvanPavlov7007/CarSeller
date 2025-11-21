@@ -3,8 +3,8 @@ using UnityEngine;
 public sealed class Engine : Product
 {
     public EngineRuntimeConfig runtimeConfig;
-    public override Sprite GetIcon()
+    public override T GetRepresentation<T>(IProductViewBuilder<T> builder)
     {
-        return IconBuilder.BuildEngineSprite(runtimeConfig);
+        return builder.BuildEngine(this);
     }
 }

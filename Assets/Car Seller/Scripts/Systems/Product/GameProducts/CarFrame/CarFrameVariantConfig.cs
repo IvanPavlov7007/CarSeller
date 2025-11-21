@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class CarFrameVariantConfig
+public class CarFrameVariantConfig : ScriptableObject
 {
     public CarFrameBaseConfig baseFallbackConfig;
 

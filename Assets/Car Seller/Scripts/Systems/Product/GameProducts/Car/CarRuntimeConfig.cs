@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CarRuntimeConfig
 {
+    public string Name;
     public CarFrameRuntimeConfig carFrameRuntimeConfig;
     public List<PartSlotRuntimeConfig> slotConfigs;
 }

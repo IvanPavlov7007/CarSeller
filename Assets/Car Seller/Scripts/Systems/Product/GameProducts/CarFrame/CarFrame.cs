@@ -4,8 +4,11 @@ using UnityEngine;
 public class CarFrame : Product
 {
     public CarFrameRuntimeConfig runtimeConfig;
-    public override Sprite GetIcon()
+
+    public override string Name => runtimeConfig.Name;
+
+    public override T GetRepresentation<T>(IProductViewBuilder<T> builder)
     {
-        return IconBuilder.BuildCarFrameSprite(runtimeConfig);
+        return builder.BuildCarFrame(this);
     }
 }

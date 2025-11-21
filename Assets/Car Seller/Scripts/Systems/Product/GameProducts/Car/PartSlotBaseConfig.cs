@@ -2,41 +2,25 @@
 using System.Collections;
 using UnityEngine;
 [System.Serializable]
-public class PartSlotBaseConfig
+public abstract class PartSlotBaseConfig : ScriptableObject
 {
-    [LabelText("Part Slot Type")]
-    [OnValueChanged("HandleChange")]
-    public PartSlotType partSlotType;
-
-    [ShowIf("@partSlotType == PartSlotType.Wheels")]
-    public WheelBaseConfig wheelBaseConfig;
-    [ShowIf("@partSlotType == PartSlotType.Engine")]
-    public EngineBaseConfig engineBaseConfig;
-    [ShowIf("@partSlotType == PartSlotType.Spoiler")]
-    public SpoilerBaseConfig spoilerBaseConfig;
-
-#if UNITY_EDITOR
-    // Optional: Clean up unrelated config references when toggling
-    private void HandleChange()
-    {
-
-        switch (partSlotType)
-        {
-            case PartSlotType.Wheels:
-                engineBaseConfig = null;
-                spoilerBaseConfig = null;
-                break;
-            case PartSlotType.Engine:
-                wheelBaseConfig = null;
-                spoilerBaseConfig = null;
-                break;
-            case PartSlotType.Spoiler:
-                wheelBaseConfig = null;
-                engineBaseConfig = null;
-                break;
-        }
-    }
-#endif
+    public abstract PartSlotType SlotType { get; }
 }
 
-//public interface IVariantConfigProvider<TBase, TVariant> { }
+public class EngineSlotBaseConfig : PartSlotBaseConfig
+{
+    public override PartSlotType SlotType => PartSlotType.Engine;
+    public EngineBaseConfig engineBaseConfig;
+}
+
+public class WheelSlotBaseConfig : PartSlotBaseConfig
+{
+    public override PartSlotType SlotType => PartSlotType.Wheels;
+    public WheelBaseConfig wheelBaseConfig;
+}
+
+public class SpoilerSlotBaseConfig : PartSlotBaseConfig
+{
+    public override PartSlotType SlotType => PartSlotType.Spoiler;
+    public SpoilerBaseConfig spoilerBaseConfig;
+}

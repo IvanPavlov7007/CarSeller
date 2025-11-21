@@ -3,9 +3,9 @@ using UnityEngine;
 
 public sealed class Wheel : Product
 {
-    WheelRuntimeConfig runtimeConfig;
-    public override Sprite GetIcon()
+    public WheelRuntimeConfig runtimeConfig;
+    public override T GetRepresentation<T>(IProductViewBuilder<T> builder)
     {
-        return IconBuilder.BuildWheelSprite(runtimeConfig);
+        return builder.BuildWheel(this);
     }
 }

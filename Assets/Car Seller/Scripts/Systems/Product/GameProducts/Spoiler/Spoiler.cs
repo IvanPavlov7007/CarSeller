@@ -2,9 +2,10 @@
 using UnityEngine;
 public sealed class Spoiler : Product
 {
-    SpoilerRuntimeConfig runtimeConfig;
-    public override Sprite GetIcon()
+    public SpoilerRuntimeConfig runtimeConfig;
+
+    public override T GetRepresentation<T>(IProductViewBuilder<T> builder)
     {
-        return IconBuilder.BuildSpoilerSprite(runtimeConfig);
+        return builder.BuildSpoiler(this);
     }
 }
