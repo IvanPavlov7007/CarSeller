@@ -2,9 +2,14 @@
 using System.Collections;
 using UnityEngine;
 [System.Serializable]
-public abstract class PartSlotBaseConfig : ScriptableObject
+public abstract class PartSlotBaseConfig
 {
     public abstract PartSlotType SlotType { get; }
+
+    public bool Hidden; // not shown, e g engine
+    public Vector2 LocalPosition;
+    public Vector3 LocalRotation;
+    public Vector3 LocalScale;
 }
 
 public class EngineSlotBaseConfig : PartSlotBaseConfig

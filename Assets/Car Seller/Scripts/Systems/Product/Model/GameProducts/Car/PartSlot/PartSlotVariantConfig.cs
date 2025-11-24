@@ -3,7 +3,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 [System.Serializable]
-public abstract class PartSlotVariantConfig : ScriptableObject
+public abstract class PartSlotVariantConfig
 {
     public abstract PartSlotType SlotType { get; }
 }

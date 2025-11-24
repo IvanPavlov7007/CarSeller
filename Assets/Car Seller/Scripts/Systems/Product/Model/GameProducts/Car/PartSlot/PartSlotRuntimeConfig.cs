@@ -7,6 +7,11 @@ public abstract class PartSlotRuntimeConfig : IPartSlot
     public abstract PartSlotType SlotType { get; }
     public abstract bool TryAccept(Product product);
     public abstract void Detach();
+
+    public bool Hidden; // not shown, e g engine
+    public Vector2 LocalPosition;
+    public Vector3 LocalRotation;
+    public Vector3 LocalScale;
 }
 
 [Serializable]
