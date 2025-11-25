@@ -24,6 +24,8 @@ public struct PartSlotData
     public Vector3 LocalRotation;
     [HideIf("Hidden")]
     public Vector3 LocalScale;
+    [HideIf("Hidden")]
+    public bool facingBackwards;
 
 }
 

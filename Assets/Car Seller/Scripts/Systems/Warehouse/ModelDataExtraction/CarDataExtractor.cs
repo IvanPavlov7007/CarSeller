@@ -1,0 +1,125 @@
+using Sirenix.OdinInspector;
+using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
+using UnityEditor;
+using UnityEngine;
+
+//TODO Make this work safely, saving changes, and being careful with the config
+public class CarDataExtractor : MonoBehaviour
+{
+    public CarBaseConfig carBaseConfig;
+
+    public List<Transform> slots = new List<Transform>();
+    public Transform frame;
+    public SpriteRenderer windshieldSpriteRenderer;
+    public SpriteRenderer frameSpriteRenderer;
+
+    [ShowInInspector]
+    public static string frameChildName = "body";
+    [ShowInInspector]
+    public static string windshieldChildName = "windshield";
+
+    private Dictionary<PartSlotBaseConfig, Transform> slotsMap = new Dictionary<PartSlotBaseConfig, Transform>();
+
+    // load slot data
+    [Button]
+    [ContextMenu("Load The Config To This Object")]
+    public void LoadConfigToThisObject()
+    {
+        if (carBaseConfig == null)
+        {
+            Debug.LogError("CarBaseConfig is not assigned.");
+            return;
+        }
+        cleanUp();
+
+        if(carBaseConfig.CarFrameBaseConfig != null)
+        {
+            var frameGO = Instantiate(carBaseConfig.CarFrameBaseConfig.Prefab,
+                transform);
+            windshieldSpriteRenderer = CommonTools.AllChildren(frameGO?.transform).
+                First(item => item.name.ContainsInsensitive(windshieldChildName))?.GetComponent<SpriteRenderer>();
+            frameSpriteRenderer = CommonTools.AllChildren(frameGO?.transform).
+                First(item => item.name.ContainsInsensitive(frameChildName))?.GetComponent<SpriteRenderer>();
+
+            windshieldSpriteRenderer.color = carBaseConfig.CarFrameBaseConfig.WindshieldColor;
+            frameSpriteRenderer.color = carBaseConfig.CarFrameBaseConfig.FrameColor;
+            frame = frameGO.transform;
+        }
+
+        foreach(var slotConfig in carBaseConfig.SlotConfigs)
+        {
+            if (slotConfig.partSlotData.Hidden)
+                continue;
+            var slotTransform = new GameObject().transform;
+            slotTransform.SetParent(transform);
+            slotTransform.localPosition = slotConfig.partSlotData.LocalPosition;
+            slotTransform.localRotation = Quaternion.Euler(slotConfig.partSlotData.LocalRotation);
+            slotTransform.localScale = slotConfig.partSlotData.LocalScale;
+            slotTransform.name = slotConfig.SlotType.ToString() + " Slot";
+            slots.Add(slotTransform);
+            slotsMap.Add(slotConfig, slotTransform);
+        }
+    }
+
+    private void cleanUp()
+    {
+        var list = new List<GameObject>(new[] { gameObject });
+        list.AddRange(slots.Select(transformItem => transformItem.gameObject));
+        if (frame != null)
+        {
+            list.Add(frame.gameObject);
+        }
+        Undo.RecordObjects(list.ToArray(), "Load Car Config");
+        destroySlotsRepresintation();
+        if (frame != null)
+        {
+            DestroyImmediate(frame.gameObject);
+        }
+
+        windshieldSpriteRenderer = null;
+        frameSpriteRenderer = null;
+    }
+
+    private void destroySlotsRepresintation()
+    {
+        foreach(var slot in slots)
+        {
+            DestroyImmediate(slot.gameObject);
+        }
+        slots.Clear();
+        slotsMap.Clear();
+    }
+
+    // save all slot data
+    [Button]
+    public void SaveThisObjectToConfig()
+    {
+        if (carBaseConfig == null)
+        {
+            Debug.LogError("CarBaseConfig is not assigned.");
+            return;
+        }
+
+        if(windshieldSpriteRenderer != null)
+        {
+            carBaseConfig.CarFrameBaseConfig.WindshieldColor = windshieldSpriteRenderer.color;
+        }
+        if(frameSpriteRenderer != null)
+        {
+            carBaseConfig.CarFrameBaseConfig.FrameColor = frameSpriteRenderer.color;
+        }
+
+        foreach(var slotConfig in carBaseConfig.SlotConfigs)
+        {
+            if (slotsMap.TryGetValue(slotConfig, out var slotTransform))
+            {
+                slotConfig.partSlotData.LocalPosition = slotTransform.localPosition;
+                slotConfig.partSlotData.LocalRotation = slotTransform.localRotation.eulerAngles;
+                slotConfig.partSlotData.LocalScale = slotTransform.localScale;
+            }
+        }
+
+    }
+}

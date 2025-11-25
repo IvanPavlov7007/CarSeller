@@ -22,10 +22,6 @@ public class CarFrameVariantOverrides : IConfigOverrides
     [ShowIf("OverrideName")]
     public string Name;
 
-    public bool OverrideSprite;
-    [ShowIf("OverrideSprite")]
-    public Sprite Sprite;
-
     public bool OverrideFrameColor;
     [ShowIf("OverrideFrameColor")]
     public Color FrameColor;

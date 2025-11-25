@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2940fdc0f58bfa7419a04b8e9bdd9f85, type: 3}
+  m_Name: CarPartViewBuilder
+  m_EditorClassIdentifier: 
+  baseWheelPrefab: {fileID: 616940900618508482, guid: ade8445843e5ff94f8c138040e97dd19, type: 3}
+  baseSpoilerPrefab: {fileID: 6065146602511213070, guid: 11b1466f72871bf4d8ce29ef816bf836, type: 3}
+  baseEnginePrefab: {fileID: 6065146602511213070, guid: 11b1466f72871bf4d8ce29ef816bf836, type: 3}

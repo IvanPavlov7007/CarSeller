@@ -662,7 +662,7 @@ public class ConfigResolverTest
         var config = ScriptableObject.CreateInstance<CarBaseConfig>();
         config.name = "Test Car Base Config";
         config.SlotConfigs = slots;
-        config.CarFrameRuntimeConfig = carFrameBaseConfig;
+        config.CarFrameBaseConfig = carFrameBaseConfig;
         return config;
     }
 

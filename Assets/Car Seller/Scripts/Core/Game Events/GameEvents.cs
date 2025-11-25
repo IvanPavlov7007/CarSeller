@@ -9,4 +9,6 @@ public class GameEvents : Singleton<GameEvents>
     public Action OnGameUnpaused;
 
     public Action<ObjectWithPopupMenuTest> onObjectWithPopupClicked;
+
+    public Action<IProductLocation> onProductLocationChanged;
 }

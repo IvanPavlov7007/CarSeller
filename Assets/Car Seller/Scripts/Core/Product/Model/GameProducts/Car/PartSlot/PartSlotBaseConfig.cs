@@ -1,15 +1,17 @@
 ﻿using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using UnityEngine;
-[System.Serializable]
+[Serializable]
 public abstract class PartSlotBaseConfig
 {
     public abstract PartSlotType SlotType { get; }
     public abstract IBaseConfig BaseConfig { get; }
-
-    public PartSlotData partSlotData;
+    //Initial value here
+    public PartSlotData partSlotData = new PartSlotData { LocalScale = Vector3.one };
 }
 
+[Serializable]
 public class EngineSlotBaseConfig : PartSlotBaseConfig
 {
     public override PartSlotType SlotType => PartSlotType.Engine;
@@ -18,6 +20,7 @@ public class EngineSlotBaseConfig : PartSlotBaseConfig
 
     public EngineBaseConfig engineBaseConfig;
 }
+[Serializable]
 
 public class WheelSlotBaseConfig : PartSlotBaseConfig
 {
@@ -25,6 +28,7 @@ public class WheelSlotBaseConfig : PartSlotBaseConfig
     public override IBaseConfig BaseConfig => wheelBaseConfig;
     public WheelBaseConfig wheelBaseConfig;
 }
+[Serializable]
 
 public class SpoilerSlotBaseConfig : PartSlotBaseConfig
 {

@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using Sirenix.OdinInspector;
+using Sirenix.Serialization;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +8,7 @@ using UnityEngine;
 public class CarBaseConfig : ScriptableObject, IBaseConfig
 {
     public string Name = "New Car";
-    public CarFrameBaseConfig CarFrameRuntimeConfig;
-    public List<PartSlotBaseConfig> SlotConfigs;
+    public CarFrameBaseConfig CarFrameBaseConfig;
+    [ShowInInspector]
+    public List<PartSlotBaseConfig> SlotConfigs = new List<PartSlotBaseConfig>();
 }

@@ -54,7 +54,7 @@ public class CarResolver
     private CarFrameRuntimeConfig ResolveFrame(CarBaseConfig baseCfg, CarVariantConfig variantCfg)
     {
         return _resolver.Resolve<CarFrameBaseConfig, CarFrameVariantConfig, CarFrameRuntimeConfig>(
-            baseCfg.CarFrameRuntimeConfig,
+            baseCfg.CarFrameBaseConfig,
             variantCfg?.carFrameRuntimeConfig
         );
     }

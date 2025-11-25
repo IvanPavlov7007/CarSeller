@@ -12,6 +12,17 @@ using Random = UnityEngine.Random;
 /// </summary>
 public static class CommonTools
 {
+    public static Transform[] AllChildren(Transform transform)
+    {
+        List<Transform> children = new List<Transform>();
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            children.Add(transform.GetChild(i));
+        }
+        return children.ToArray();
+    }
+
+
     public static float truncateFloat(float orig, float truncate_value = 100f)
     {
         return Mathf.Round(orig * truncate_value) / truncate_value;

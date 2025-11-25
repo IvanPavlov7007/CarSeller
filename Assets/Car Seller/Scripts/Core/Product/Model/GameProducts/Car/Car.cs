@@ -6,6 +6,7 @@ public sealed class Car : Product, IProductsHolder
 {
     CarRuntimeConfig runtimeConfig;
     public Dictionary<CarPartLocation, PartSlotRuntimeConfig> carParts;
+    public CarFrame CarFrame { get; private set; }
 
     public override string Name => runtimeConfig.Name;
 
