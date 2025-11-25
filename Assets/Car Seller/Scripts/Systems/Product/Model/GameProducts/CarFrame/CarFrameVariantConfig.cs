@@ -5,14 +5,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Frame", menuName = "Configs/Products/Frame/Frame Variant Config")]
 public class CarFrameVariantConfig : ScriptableObject, IVariantConfig
 {
+    public bool OverrideBase;
     public CarFrameBaseConfig BaseConfig;
     public CarFrameVariantOverrides CarFrameVariantOverrides;
 
-    public IBaseConfig FallbackBase => throw new System.NotImplementedException();
+    public IBaseConfig FallbackBase => BaseConfig;
 
-    public bool OverrideBase => throw new System.NotImplementedException();
+    bool IVariantConfig.OverrideBase => OverrideBase;
 
-    public IConfigOverrides Overrides => throw new System.NotImplementedException();
+    public IConfigOverrides Overrides => CarFrameVariantOverrides;
 }
 
 public class CarFrameVariantOverrides : IConfigOverrides

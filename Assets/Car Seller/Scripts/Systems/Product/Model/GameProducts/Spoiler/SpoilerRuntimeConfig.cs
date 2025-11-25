@@ -3,9 +3,10 @@ using System.Collections;
 using UnityEngine;
 
 [Serializable]
-public class SpoilerRuntimeConfig
+public class SpoilerRuntimeConfig : IRuntimeConfig
 {
-    public string spoilerName;
-    public GameObject spoilerPrefab;
-    public Color color;
+    public string Name;
+    public Sprite Sprite;
+    public Color Color;
+    public float Size;
 }

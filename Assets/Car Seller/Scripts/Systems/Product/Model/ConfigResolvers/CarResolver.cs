@@ -5,6 +5,12 @@ using System.Linq;
 public class CarResolver
 {
     private readonly GenericConfigResolver _resolver = new GenericConfigResolver();
+    private readonly PartSlotResolver _partSlotResolver;
+
+    public CarResolver()
+    {
+        _partSlotResolver = new PartSlotResolver(_resolver);
+    }
 
     public CarRuntimeConfig Resolve(CarBaseConfig carBase, CarVariantConfig carVariant)
     {
@@ -20,30 +26,26 @@ public class CarResolver
             ? new List<PartSlotBaseConfig>(carBase.SlotConfigs)
             : new List<PartSlotBaseConfig>();
 
-        var variantPool = (carVariant != null && carVariant.slotConfigs != null)
+        var variantPool = (carVariant?.slotConfigs != null)
             ? new List<PartSlotVariantConfig>(carVariant.slotConfigs)
             : new List<PartSlotVariantConfig>();
 
         // Compare one-by-one: for each variant slot, try to find a matching base slot by type.
         foreach (var vSlot in variantPool)
         {
-            var baseIndex = basePool.FindIndex(b => b.SlotType == vSlot.SlotType);
-            if (baseIndex >= 0)
+            var idx = basePool.FindIndex(b => b.SlotType == vSlot.SlotType);
+            if (idx >= 0)
             {
-                var bSlot = basePool[baseIndex];
-                var runtimeSlot = ResolveSlot(bSlot, vSlot);
-                result.SlotConfigs.Add(runtimeSlot);
-
-                // Remove matched base slot from the pool
-                basePool.RemoveAt(baseIndex);
+                var bSlot = basePool[idx];
+                result.SlotConfigs.Add(_partSlotResolver.Resolve(bSlot, vSlot));
+                basePool.RemoveAt(idx);
             }
         }
 
         // No variants left: apply remaining base slots as-is
-        foreach (var remainingBase in basePool)
+        foreach (var remaining in basePool)
         {
-            var runtimeSlot = ResolveSlot(remainingBase, null);
-            result.SlotConfigs.Add(runtimeSlot);
+            result.SlotConfigs.Add(_partSlotResolver.Resolve(remaining, null));
         }
 
         return result;
@@ -55,40 +57,5 @@ public class CarResolver
             baseCfg.CarFrameRuntimeConfig,
             variantCfg?.carFrameRuntimeConfig
         );
-    }
-
-    private PartSlotRuntimeConfig ResolveSlot(PartSlotBaseConfig baseSlot, PartSlotVariantConfig variantSlot)
-    {
-        switch (baseSlot)
-        {
-            case WheelSlotBaseConfig wheelBase:
-                return ResolveWheelSlot(
-                    wheelBase,
-                    variantSlot as WheelSlotVariantConfig
-                );
-
-            // add EngineSlot, BatterySlot, etc here…
-
-            default:
-                throw new Exception($"Unknown slot type {baseSlot}");
-        }
-    }
-
-    private WheelSlotRuntimeConfig ResolveWheelSlot(
-        WheelSlotBaseConfig baseCfg,
-        WheelSlotVariantConfig variantCfg)
-    {
-        var runtime = new WheelSlotRuntimeConfig();
-
-        runtime.wheelConfig = _resolver.Resolve<
-            WheelBaseConfig,
-            WheelVariantConfig,
-            WheelRuntimeConfig
-        >(
-            baseCfg.wheelBaseConfig,
-            variantCfg != null ? variantCfg.wheelVariantConfig : null
-        );
-
-        return runtime;
     }
 }

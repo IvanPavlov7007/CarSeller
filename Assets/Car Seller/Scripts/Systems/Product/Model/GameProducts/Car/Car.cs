@@ -1,15 +1,17 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public sealed class Car : Product, IProductsHolder
 {
     CarRuntimeConfig runtimeConfig;
-    public CarPartLocation[] carParts;
+    public Dictionary<CarPartLocation, PartSlotRuntimeConfig> carParts;
 
     public override string Name => runtimeConfig.Name;
 
     public IProductLocation[] GetProducts()
     {
-        return carParts;
+        return carParts.Keys.ToArray();
     }
 
     public override T GetRepresentation<T>(IProductViewBuilder<T> builder)

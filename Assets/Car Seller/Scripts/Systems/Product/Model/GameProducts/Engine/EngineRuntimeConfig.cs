@@ -3,9 +3,9 @@ using System.Collections;
 using UnityEngine;
 
 [Serializable]
-public class EngineRuntimeConfig
+public class EngineRuntimeConfig : IRuntimeConfig
 {
-    public string engineName;
-    public GameObject enginePrefab;
-    public int level;
+    public string Name;
+    public Sprite Sprite;
+    public int Level;
 }

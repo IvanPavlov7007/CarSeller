@@ -18,8 +18,8 @@ public class WarehouseManager : Singleton<WarehouseManager>
         {
             if (location.Product != null)
             {
-                var productObject = Instantiate(location.Product.Prefab, location.Position, Quaternion.identity);
-                productObject.GetComponent<ProductBehaviour>().Initialise(location.Product, location);
+                //var productObject = Instantiate(location.Product.Prefab, location.Position, Quaternion.identity);
+                //productObject.GetComponent<ProductBehaviour>().Initialise(location.Product, location);
             }
         }
     }

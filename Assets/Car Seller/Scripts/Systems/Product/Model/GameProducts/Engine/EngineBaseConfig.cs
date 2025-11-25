@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class EngineBaseConfig : ScriptableObject
+[CreateAssetMenu(fileName = "EngineBaseConfig", menuName = "Configs/Products/Engine/Engine Base Config")]
+public class EngineBaseConfig : ScriptableObject, IBaseConfig
 {
-    public GameObject enginePrefab;
-    public int level;
+    public string Name;
+    public Sprite Sprite;
+    public int Level;
 }

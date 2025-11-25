@@ -1,16 +1,28 @@
-﻿using System;
+﻿using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using UnityEngine;
 [Serializable]
 public abstract class PartSlotRuntimeConfig : IPartSlot
 {
+    public PartSlotData partSlotData;
     public abstract PartSlotType SlotType { get; }
     public abstract bool TryAccept(Product product);
     public abstract void Detach();
 
+    
+    
+}
+[Serializable]
+public struct PartSlotData
+{
+    [ToggleGroup("Part slot data")]
     public bool Hidden; // not shown, e g engine
+    [ToggleGroup("Part slot data")]
     public Vector2 LocalPosition;
+    [ToggleGroup("Part slot data")]
     public Vector3 LocalRotation;
+    [ToggleGroup("Part slot data")]
     public Vector3 LocalScale;
 }
 
