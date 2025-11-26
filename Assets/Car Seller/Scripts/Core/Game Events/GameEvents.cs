@@ -3,8 +3,21 @@ using UnityEngine;
 using Pixelplacement;
 using System;
 
-public class GameEvents : Singleton<GameEvents>
+public class GameEvents
 {
+    public static GameEvents Instance = new GameEvents();
+
+    public void Reset()
+    {
+        OnGamePaused = null;
+        OnGameUnpaused = null;
+        OnObjectWithPopupClicked = null;
+        OnProductLocationChanged = null;
+        OnProductCreated = null;
+        OnProductDestroyed = null;
+    }
+
+
     public Action OnGamePaused;
     public Action OnGameUnpaused;
 

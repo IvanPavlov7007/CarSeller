@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SpoilerVariantConfig", menuName = "Configs/Products/Spoiler/Spoiler Variant Config")]
@@ -12,6 +13,7 @@ public class SpoilerVariantConfig : ScriptableObject, IVariantConfig
     IConfigOverrides IVariantConfig.Overrides => Overrides;
     IBaseConfig IVariantConfig.FallbackBase => FallbackConfig;
 
+    [Serializable]
     public class SpoilerConfigOverrides : IConfigOverrides
     {
         public bool OverrideName;
@@ -22,10 +24,10 @@ public class SpoilerVariantConfig : ScriptableObject, IVariantConfig
         public Sprite Sprite;
         public bool OverrideColor;
         [ShowIf("OverrideColor")]
-        public Color Color;
+        public Color Color = Color.white;
         public bool OverrideSize;
         [ShowIf("OverrideSize")]
-        public float Size;
+        public float Size = 1f;
     }
 
 }

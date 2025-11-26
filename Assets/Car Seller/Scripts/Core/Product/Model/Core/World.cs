@@ -18,9 +18,9 @@ public class World
 /// <summary>
 /// A place for things that exist in the world, but are not stored in a city/warehouse/etc.
 /// </summary>
-public class HiddenSpace
+public class HiddenSpace : IProductsHolder
 {
-    public List<HiddenSpaceLocation> worldLocations = new List<HiddenSpaceLocation>();
+    public List<HiddenSpaceLocation> hiddenLocations = new List<HiddenSpaceLocation>();
 
     public HiddenSpaceLocation GetEmptyLocation()
     {
@@ -28,16 +28,23 @@ public class HiddenSpace
         return location;
     }
 
+    public IProductLocation[] GetProducts()
+    {
+        return hiddenLocations.ToArray();
+    }
+
     public class HiddenSpaceLocation : IProductLocation
     {
         public Product Product { get; private set; }
+
+        public IProductsHolder Holder => World.Instance.hiddenSpace;
 
         public bool Attach(Product product)
         {
             if (product != null)
                 return false;
             Product = product;
-            World.Instance.hiddenSpace.worldLocations.Add(this);
+            World.Instance.hiddenSpace.hiddenLocations.Add(this);
             return true;
         }
 
@@ -46,7 +53,7 @@ public class HiddenSpace
             if (Product == null)
                 return;
             Product = null;
-            World.Instance.hiddenSpace.worldLocations.Remove(this);
+            World.Instance.hiddenSpace.hiddenLocations.Remove(this);
         }
     }
 }

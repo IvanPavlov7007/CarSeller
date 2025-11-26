@@ -53,6 +53,7 @@ public sealed class Car : Product, IProductsHolder
 
         public Car Car { get; private set; }
         public Product Product => CarFrame;
+        public IProductsHolder Holder => Car;
         public CarFrame CarFrame { get; private set; }
 
         public bool Attach(Product product)
@@ -77,6 +78,7 @@ public sealed class Car : Product, IProductsHolder
         }
 
         public Car Car { get; private set; }
+        public IProductsHolder Holder => Car;
         public PartSlotRuntimeConfig PartSlotRuntimeConfig { get; private set; }
         public Product Product { get; private set; }
 

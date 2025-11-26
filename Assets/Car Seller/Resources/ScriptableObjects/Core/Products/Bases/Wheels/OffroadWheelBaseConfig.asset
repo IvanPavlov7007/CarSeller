@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200c17422237d414b88c288cab01907b, type: 3}
+  m_Name: OffroadWheelBaseConfig
+  m_EditorClassIdentifier: 
+  Name: Offroad Wheel
+  WheelType: 1
+  FrontSideViewSprite: {fileID: 2043105073, guid: b881d3a462c38054a93a6973bd7b76e9, type: 3}
+  BackSideViewSprite: {fileID: 2000507839, guid: 373e193a9ecec7f41aa8e534be5a0e16, type: 3}
+  TopViewSprite: {fileID: 897452380, guid: b881d3a462c38054a93a6973bd7b76e9, type: 3}
+  Color: {r: 1, g: 1, b: 1, a: 1}
+  SideViewSize: 1
+  TopViewSize: 1

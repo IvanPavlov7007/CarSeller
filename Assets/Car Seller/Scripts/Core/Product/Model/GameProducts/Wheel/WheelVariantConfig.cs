@@ -24,11 +24,11 @@ public class WheelOverrides : IConfigOverrides
 
     public bool OverrideColor;
     [ShowIf("OverrideColor")]
-    public Color Color;
+    public Color Color = Color.white;
 
     public bool OverrideSideViewSize;
     [ShowIf("OverrideSideViewSize")]
-    public float SideViewSize;
+    public float SideViewSize = 1f;
 
     public bool OverrideTopViewSize;
     [ShowIf("OverrideTopViewSize")]

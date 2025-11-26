@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfe4b9843d2ee22468076cb1d618e500, type: 3}
-  m_Name: PickupFullBaseConfig
+  m_Script: {fileID: 1726182683, guid: a4865f1ab4504ed8a368670db22f409c, type: 3}
+  m_Name: AOTGenerationConfig
   m_EditorClassIdentifier: 
-  Name: PickupFullBaseConfig
-  CarFrameBaseConfig: {fileID: 11400000, guid: f21d305ae093c4947ae112b2b1cada25, type: 2}
+  automateBeforeBuilds: 0
+  deleteDllAfterBuilds: 1
+  AutomateForAllAOTPlatforms: 1
+  automateForPlatforms: 0900000014000000
+  supportSerializedTypes: []

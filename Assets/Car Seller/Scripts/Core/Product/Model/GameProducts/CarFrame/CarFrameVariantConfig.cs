@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ public class CarFrameVariantConfig : ScriptableObject, IVariantConfig
     public IConfigOverrides Overrides => CarFrameVariantOverrides;
 }
 
+[Serializable]
 public class CarFrameVariantOverrides : IConfigOverrides
 {
     public bool OverrideName;
@@ -24,9 +26,9 @@ public class CarFrameVariantOverrides : IConfigOverrides
 
     public bool OverrideFrameColor;
     [ShowIf("OverrideFrameColor")]
-    public Color FrameColor;
+    public Color FrameColor = Color.white;
 
     public bool OverrideWindshieldColor;
     [ShowIf("OverrideWindshieldColor")]
-    public Color WindshieldColor;
+    public Color WindshieldColor = Color.white;
 }

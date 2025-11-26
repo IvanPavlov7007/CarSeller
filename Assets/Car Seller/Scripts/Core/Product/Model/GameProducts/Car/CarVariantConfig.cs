@@ -1,12 +1,15 @@
-﻿using System;
+﻿using Sirenix.OdinInspector;
+using Sirenix.Serialization;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CarVariantConfig", menuName = "Configs/Products/Car/Car Variant Config")]
-public class CarVariantConfig : ScriptableObject
+public class CarVariantConfig : SerializedScriptableObject
 {
     public CarBaseConfig baseFallbackConfig;
     public CarFrameVariantConfig carFrameRuntimeConfig;
-    public List<PartSlotVariantConfig> slotConfigs;
+    [OdinSerialize]
+    public List<PartSlotVariantConfig> slotConfigs = new List<PartSlotVariantConfig>();
 }

@@ -1,8 +1,13 @@
 ﻿using System.Collections.Generic;
 
-public class SuppliesList
+public class SuppliesList : IProductsHolder
 {
     public List<SupplyProductLocation> supplies;
+
+    public IProductLocation[] GetProducts()
+    {
+        return supplies.ToArray();
+    }
 
     public class SupplyProductLocation : IProductLocation
     {
@@ -16,6 +21,8 @@ public class SuppliesList
         public SuppliesList SuppliesList { get; private set; }
         public Supply Supply { get; private set; }
         public Product Product { get; private set; }
+
+        public IProductsHolder Holder => SuppliesList;
 
         public bool Attach(Product product)
         {

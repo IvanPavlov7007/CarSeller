@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Sprots frame
   Prefab: {fileID: -8653719598885068355, guid: 71fcd1da1e9a8bd449432b0ee10c3c93, type: 3}
-  FrameColor: {r: 1, g: 1, b: 1, a: 0}
-  WindshieldColor: {r: 0.20223323, g: 0.16487184, b: 0.6132076, a: 0.78039217}
+  FrameColor: {r: 1, g: 1, b: 1, a: 1}
+  WindshieldColor: {r: 0.09668176, g: 0.066972226, b: 0.4056604, a: 0.70980394}

@@ -62,7 +62,7 @@ public class ProductManager
     protected void InitializeProductLocation(Product product, IProductLocation location)
     {
         //not rising event here
-        if (!LocationService.Instance.MoveProductSilently(product, location))
+        if (!G.Instance.LocationService.MoveProductSilently(product, location))
         {
             Debug.LogError($"Failed to place product {product.Name} at location {location}");
         }
@@ -87,7 +87,7 @@ public class ProductDeletionService
 {
     public void DeleteProduct(Product product)
     {
-        LocationService.Instance.RemoveProduct(product);
+        G.Instance.LocationService.RemoveProduct(product);
         GameEvents.Instance.OnProductDestroyed(new ProductDestroyedEventData(product));
     }
 }

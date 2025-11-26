@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09bc5643391541e4da7040fb546ad57e, type: 3}
-  m_Name: PickupFrameBaseConfig
+  m_Name: SupercarFrameBaseConfig
   m_EditorClassIdentifier: 
-  Name: Pickup frame
-  Prefab: {fileID: -8653719598885068355, guid: f5a36f0ca7cffc54a8db56e2c7068791, type: 3}
-  FrameColor: {r: 1, g: 1, b: 1, a: 0}
-  WindshieldColor: {r: 0.20223323, g: 0.16487184, b: 0.6132076, a: 0.78039217}
+  Name: Supercar Frame
+  Prefab: {fileID: -8653719598885068355, guid: a4c30aeab910a1c4b85b57ecc99af412, type: 3}
+  FrameColor: {r: 1, g: 1, b: 1, a: 1}
+  WindshieldColor: {r: 0.09668176, g: 0.066972226, b: 0.4056604, a: 0.70980394}

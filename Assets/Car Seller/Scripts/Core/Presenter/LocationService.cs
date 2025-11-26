@@ -42,7 +42,7 @@ public class LocationService
         }
     }
 
-    public static IProductLocation GetProductLocation(Product product)
+    public IProductLocation GetProductLocation(Product product)
     {
         if (World.Instance.productLocations.TryGetValue(product, out IProductLocation location))
         {

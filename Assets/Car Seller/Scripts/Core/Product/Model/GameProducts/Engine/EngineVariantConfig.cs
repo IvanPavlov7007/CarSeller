@@ -22,7 +22,7 @@ public class EngineVariantConfig : ScriptableObject, IVariantConfig
 
         public bool OverrideLevel;
         [ShowIf("OverrideLevel")]
-        public int Level;
+        public int Level = 1;
 
     }
 }

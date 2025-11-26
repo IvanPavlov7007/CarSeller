@@ -19,7 +19,3 @@ public interface IProductRepresentationProvider
     public abstract T GetRepresentation<T>(IProductViewBuilder<T> builder);
 }
 
-public interface IProductsHolder
-{
-    public IProductLocation[] GetProducts();
-}

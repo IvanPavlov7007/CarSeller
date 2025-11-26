@@ -28,6 +28,8 @@ public class Warehouse : IProductsHolder
         public Product Product { get; private set; }
         public DimensionalPositionData Position { get; set; }
 
+        public IProductsHolder Holder => Warehouse;
+
         public WarehouseProductLocation(Warehouse warehouse, DimensionalPositionData position, Product product)
         {
             Product = product;
