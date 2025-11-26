@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EngineBaseConfig", menuName = "Configs/Products/Engine/Engine Base Config")]
 public class EngineBaseConfig : ScriptableObject, IBaseConfig
 {
-    public string Name;
+    public string Name = "Default Engine";
     public Sprite Sprite;
-    public int Level;
+    public int Level = 1;
 }

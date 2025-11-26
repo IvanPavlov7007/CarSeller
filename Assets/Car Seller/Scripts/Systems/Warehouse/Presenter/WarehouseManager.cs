@@ -6,10 +6,11 @@ using UnityEngine;
 public class WarehouseManager : Singleton<WarehouseManager>
 {
     public static Warehouse Warehouse { get; private set; }
+    public WarehouseProductViewBuilder productViewBuilder;
 
     private void Awake()
     {
-        
+        initialiseWarehouse();
     }
 
     void initialiseWarehouse()
@@ -22,5 +23,10 @@ public class WarehouseManager : Singleton<WarehouseManager>
                 //productObject.GetComponent<ProductBehaviour>().Initialise(location.Product, location);
             }
         }
+    }
+
+    void newProductCreated()
+    {
+
     }
 }

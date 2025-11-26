@@ -4,20 +4,67 @@ using UnityEngine;
 
 public sealed class Car : Product, IProductsHolder
 {
-    CarRuntimeConfig runtimeConfig;
-    public Dictionary<CarPartLocation, PartSlotRuntimeConfig> carParts;
+    public CarRuntimeConfig runtimeConfig { get; private set; }
+    public Dictionary<CarPartLocation, PartSlotRuntimeConfig> carParts { get; private set; }
+    private FrameProductLocation FrameLocation;
+
     public CarFrame CarFrame { get; private set; }
 
     public override string Name => runtimeConfig.Name;
 
+    public Car(CarRuntimeConfig runtimeConfig)
+    {
+        this.runtimeConfig = runtimeConfig;
+    }
+
+    public void SetCarFrame(CarFrame carFrame)
+    {
+        Debug.Assert(CarFrame == null, $"Car {UniqueName}: Car frame has already been set.");
+        CarFrame = carFrame;
+        FrameLocation = new FrameProductLocation(this, carFrame);
+    }
+
+    public void addSlots(Dictionary<CarPartLocation, PartSlotRuntimeConfig> slots)
+    {
+        Debug.Assert(carParts == null, $"Car {UniqueName}: Car parts have already been set.");
+        carParts = slots;
+    }
+
     public IProductLocation[] GetProducts()
     {
-        return carParts.Keys.ToArray();
+        Debug.Assert(carParts != null, $"Car {UniqueName}: Car parts have not been set.");
+        Debug.Assert(CarFrame != null, $"Car {UniqueName}: Car frame has not been set.");
+
+        return carParts.Keys.Cast<IProductLocation>().Concat(new[] { FrameLocation }).ToArray();
     }
 
     public override T GetRepresentation<T>(IProductViewBuilder<T> builder)
     {
         return builder.BuildCar(this);
+    }
+
+    public class FrameProductLocation : IProductLocation
+    {
+        public FrameProductLocation(Car car, CarFrame carFrame)
+        {
+            Car = car;
+            CarFrame = carFrame;
+        }
+
+        public Car Car { get; private set; }
+        public Product Product => CarFrame;
+        public CarFrame CarFrame { get; private set; }
+
+        public bool Attach(Product product)
+        {
+            Debug.LogWarning($"Car {Car.UniqueName}: Cannot attach product { product.Name} to FrameLocation: location is fixed to CarFrame {CarFrame.Name}.");
+            return false;
+        }
+
+        public void Detach()
+        {
+            Debug.LogWarning($"Car {Car.UniqueName}: Cannot detach product { Product.Name} from FrameLocation: location is fixed to CarFrame {CarFrame.Name}.");
+        }
     }
 
     public class CarPartLocation : IProductLocation

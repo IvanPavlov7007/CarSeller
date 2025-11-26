@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Warehouse : IProductsHolder
 {
-    public Vector2 emptyProductLocation;
-    public List<WarehouseProductLocation> products;
+    public DimensionalPositionData emptyProductLocation { get; set; }
+    public List<WarehouseProductLocation> products = new List<WarehouseProductLocation>();
     public SuppliesList suppliesList;
+
+    public Warehouse(DimensionalPositionData emptyProductLocation)
+    {
+        this.emptyProductLocation = emptyProductLocation;
+    }
 
     public IProductLocation GetEmptyLocation()
     {
-        return new WarehouseProductLocation(this,new Vector3(emptyProductLocation.x, 0, emptyProductLocation.y), null);
+        return new WarehouseProductLocation(this,emptyProductLocation, null);
     }
 
     public IProductLocation[] GetProducts()
@@ -21,14 +26,15 @@ public class Warehouse : IProductsHolder
     {
         public Warehouse Warehouse { get; private set; }
         public Product Product { get; private set; }
-        public Vector3 Position { get; private set; }
+        public DimensionalPositionData Position { get; set; }
 
-        public WarehouseProductLocation(Warehouse warehouse, Vector3 position, Product product)
+        public WarehouseProductLocation(Warehouse warehouse, DimensionalPositionData position, Product product)
         {
             Product = product;
             Position = position;
             Warehouse = warehouse;
         }
+
         public bool Attach(Product product)
         {
             if (Product != null)
@@ -43,5 +49,12 @@ public class Warehouse : IProductsHolder
             Warehouse.products.Remove(this);
         }
     }
+
+    public struct DimensionalPositionData
+    {
+        public Vector3 LocalPosition;
+        public Vector3 LocalRotation;
+    }
 }
+
 

@@ -9,12 +9,12 @@ public class PopUpMenuManager : Singleton<PopUpMenuManager>
 
     private void OnEnable()
     {
-        GameEvents.Instance.onObjectWithPopupClicked += ObjectSelected;
+        GameEvents.Instance.OnObjectWithPopupClicked += ObjectSelected;
     }
 
     private void OnDisable()
     {
-        GameEvents.Instance.onObjectWithPopupClicked -= ObjectSelected;
+        GameEvents.Instance.OnObjectWithPopupClicked -= ObjectSelected;
     }
 
     public void ObjectSelected(ObjectWithPopupMenuTest objectWithProvider)

@@ -6,7 +6,7 @@ using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
 [CreateAssetMenu(fileName = "CarPartViewBuilder", menuName = "Configs/View/Car Part View Builder")]
-public class CarPartViewBuilder : ScriptableObject, IProductViewBuilder<GameObject>
+public class CarPartViewBuilder : ScriptableObject, IProductViewBuilder<GameObject>, IProductViewInitializer<ProductView>
 {
     public GameObject baseWheelPrefab;
     public GameObject baseSpoilerPrefab;
@@ -19,36 +19,8 @@ public class CarPartViewBuilder : ScriptableObject, IProductViewBuilder<GameObje
 
     public GameObject BuildCar(Car car)
     {
-        GameObject carGO = new GameObject(car.Name);
-
-        var frameGO = car.CarFrame.GetRepresentation(this);
-        frameGO.transform.SetParent(carGO.transform);
-        frameGO.transform.localPosition = Vector3.zero;
-
-        foreach (var partLocation in car.GetProducts())
-        {
-            var slotData = car.carParts[partLocation as Car.CarPartLocation]?.partSlotData;
-            if (slotData?.Hidden == true)
-                continue;
-            var part = partLocation.Product.GetRepresentation(this);
-            if (part != null && slotData != null)
-            {
-                part.transform.SetParent(carGO.transform);
-                part.transform.localPosition = slotData.Value.LocalPosition;
-                part.transform.localRotation = Quaternion.Euler(slotData.Value.LocalRotation);
-                part.transform.localScale = slotData.Value.LocalScale;
-            }
-        }
-
-        initializeView(carGO, car);
-
-        return carGO;
-    }
-
-    private void initializeView(GameObject go, Product product)
-    {
-        var controller = go.AddComponent<ProductView>();
-        controller.Initialize(product, LocationService.getProductLocation(product));
+        Debug.LogError("CarPartViewBuilder does not support building full Car views. " + car.UniqueName);
+        return null;
     }
 
     #region collision
@@ -155,7 +127,7 @@ public class CarPartViewBuilder : ScriptableObject, IProductViewBuilder<GameObje
 
         windshieldSpriteRenderer.color = carFrame.runtimeConfig.WindshieldColor;
         frameSpriteRenderer.color = carFrame.runtimeConfig.FrameColor;
-        initializeView(frameGO, carFrame);
+        InitializeView(frameGO, carFrame);
         initializeCollision(frameSpriteRenderer);
         return frameGO;
     }
@@ -167,7 +139,7 @@ public class CarPartViewBuilder : ScriptableObject, IProductViewBuilder<GameObje
         var engineSpriteRenderer = engineGO.GetComponent<SpriteRenderer>();
         //TODO add engine sprite etc
         initializeCollision(engineSpriteRenderer);
-        initializeView(engineGO, engine);
+        InitializeView(engineGO, engine);
         return engineGO;
     }
 
@@ -177,8 +149,18 @@ public class CarPartViewBuilder : ScriptableObject, IProductViewBuilder<GameObje
         spoilerGO.name = spoiler.Name;
         var spoilerSpriteRenderer = spoilerGO.GetComponent<SpriteRenderer>();
         spoilerSpriteRenderer.color = spoiler.runtimeConfig.Color;
-        var slotLocation = LocationService.getProductLocation(spoiler) as Car.CarPartLocation;
-        initializeView(spoilerGO, spoiler);
+
+        var slotLocation = LocationService.GetProductLocation(spoiler) as Car.CarPartLocation;
+        var data = slotLocation.PartSlotRuntimeConfig.partSlotData;
+
+        // Apply slot positioning data
+        var spoilerTransform = spoilerGO.transform;
+        spoilerTransform.localScale = data.LocalScale * spoiler.runtimeConfig.Size;
+        spoilerTransform.localRotation = Quaternion.Euler(data.LocalRotation);
+        spoilerTransform.localPosition = data.LocalPosition;
+
+
+        InitializeView(spoilerGO, spoiler);
         return spoilerGO;
     }
 
@@ -187,19 +169,32 @@ public class CarPartViewBuilder : ScriptableObject, IProductViewBuilder<GameObje
         var wheelGO = Instantiate(baseWheelPrefab);
 
         wheelGO.name = wheel.Name;
-        wheelGO.transform.localScale = Vector3.one * wheel.runtimeConfig.SideViewSize;
 
         var wheelSpriteRenderer = wheelGO.GetComponent<SpriteRenderer>();
         wheelSpriteRenderer.color = wheel.runtimeConfig.Color;
 
-        var slotLocation = LocationService.getProductLocation(wheel) as Car.CarPartLocation;
+        var slotLocation = LocationService.GetProductLocation(wheel) as Car.CarPartLocation;
         var chosenSprite = slotLocation.PartSlotRuntimeConfig.partSlotData.facingBackwards ?
             wheel.runtimeConfig.BackSideViewSprite : wheel.runtimeConfig.FrontSideViewSprite;
+        var data = slotLocation.PartSlotRuntimeConfig.partSlotData;
+
+        // Apply slot positioning data
+        var wheelTransform = wheelGO.transform;
+        wheelTransform.localRotation = Quaternion.Euler(data.LocalRotation);
+        wheelTransform.localPosition = data.LocalPosition;
+        wheelTransform.localScale = data.LocalScale * wheel.runtimeConfig.SideViewSize;
 
         wheelSpriteRenderer.sprite = chosenSprite;
 
         initializeCollision(wheelSpriteRenderer);
-        initializeView(wheelGO, wheel);
+        InitializeView(wheelGO, wheel);
         return wheelGO;
+    }
+
+    public ProductView InitializeView(GameObject gameObject, Product product)
+    {
+        var controller = gameObject.AddComponent<ProductView>();
+        controller.Initialize(product, LocationService.GetProductLocation(product));
+        return controller;
     }
 }

@@ -2,6 +2,8 @@
 using System;
 using UnityEngine;
 
+//Todo maybe move type switch to classes themselves
+
 public class PartSlotResolver
 {
     private readonly GenericConfigResolver _resolver;

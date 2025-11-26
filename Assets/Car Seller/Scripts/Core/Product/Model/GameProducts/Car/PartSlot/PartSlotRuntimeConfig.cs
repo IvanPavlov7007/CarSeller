@@ -9,9 +9,10 @@ public abstract class PartSlotRuntimeConfig : IPartSlot
     public abstract PartSlotType SlotType { get; }
     public abstract bool TryAccept(Product product);
     public abstract void Detach();
+    
+    public abstract IRuntimeConfig RuntimeConfig { get; }
 
-    
-    
+    public abstract Product BuildOccupyingProduct(IProductBuilder productBuilder);
 }
 [Serializable]
 public struct PartSlotData
@@ -50,6 +51,14 @@ public class EngineSlotRuntimeConfig : PartSlotRuntimeConfig
     {
         engineConfig = null;
     }
+
+    public override IRuntimeConfig RuntimeConfig => engineConfig;
+
+    public override Product BuildOccupyingProduct(IProductBuilder productBuilder)
+    {
+        if (engineConfig == null) return null;
+        return productBuilder.BuildEngine(engineConfig);
+    }
 }
 [Serializable]
 public class WheelSlotRuntimeConfig : PartSlotRuntimeConfig
@@ -69,6 +78,14 @@ public class WheelSlotRuntimeConfig : PartSlotRuntimeConfig
     public override void Detach()
     {
         wheelConfig = null;
+    }
+
+    public override IRuntimeConfig RuntimeConfig => wheelConfig;
+
+    public override Product BuildOccupyingProduct(IProductBuilder productBuilder)
+    {
+        if (wheelConfig == null) return null;
+        return productBuilder.BuildWheel(wheelConfig);
     }
 }
 
@@ -90,5 +107,13 @@ public class SpoilerSlotRuntimeConfig : PartSlotRuntimeConfig
     public override void Detach()
     {
         spoilerConfig = null;
+    }
+
+    public override IRuntimeConfig RuntimeConfig => spoilerConfig;
+
+    public override Product BuildOccupyingProduct(IProductBuilder productBuilder)
+    {
+        if (spoilerConfig == null) return null;
+        return productBuilder.BuildSpoiler(spoilerConfig);
     }
 }

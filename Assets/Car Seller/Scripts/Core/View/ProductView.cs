@@ -1,5 +1,11 @@
 ﻿using System.Collections;
 using UnityEngine;
+
+public interface IProductViewInitializer<TProductView> where TProductView : ProductView
+{
+    public TProductView InitializeView(GameObject gameObject, Product product);
+}
+
 public class ProductView : MonoBehaviour
 {
     public Product Product { get; private set; }
@@ -7,7 +13,7 @@ public class ProductView : MonoBehaviour
 
     public bool Initialized { get; private set; } = false;
 
-    public void Initialize(Product product, IProductLocation representedProductLocation)
+    public virtual void Initialize(Product product, IProductLocation representedProductLocation)
     {
         this.Product = product;
         this.RepresentedProductLocation = representedProductLocation;
@@ -16,12 +22,12 @@ public class ProductView : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        GameEvents.Instance.onProductLocationChanged += productLocationChanged;
+        GameEvents.Instance.OnProductLocationChanged += productLocationChanged;
     }
 
     protected virtual void OnDisable()
     {
-        GameEvents.Instance.onProductLocationChanged -= productLocationChanged;
+        GameEvents.Instance.OnProductLocationChanged -= productLocationChanged;
     }
 
     public virtual void productLocationChanged(IProductLocation newLocation)

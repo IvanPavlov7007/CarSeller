@@ -6,6 +6,11 @@ public sealed class Engine : Product
 
     public override string Name => runtimeConfig.Name;
 
+    public Engine(EngineRuntimeConfig runtimeConfig)
+    {
+        this.runtimeConfig = runtimeConfig;
+    }
+
     public override T GetRepresentation<T>(IProductViewBuilder<T> builder)
     {
         return builder.BuildEngine(this);

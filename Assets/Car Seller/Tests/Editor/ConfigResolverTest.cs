@@ -8,7 +8,7 @@ using UnityEngine.TestTools;
 public class ConfigResolverTest
 {
     GenericConfigResolver genericResolver = new GenericConfigResolver();
-    CarResolver carResolver = new CarResolver();
+    CarConfigResolver carResolver = new CarConfigResolver();
 
     [Test]
     public void WheelRuntimeConfig_FromBaseConfig()

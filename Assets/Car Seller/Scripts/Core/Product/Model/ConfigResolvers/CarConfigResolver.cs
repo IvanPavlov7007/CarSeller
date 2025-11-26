@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class CarResolver
+public class CarConfigResolver
 {
     private readonly GenericConfigResolver _resolver = new GenericConfigResolver();
     private readonly PartSlotResolver _partSlotResolver;
 
-    public CarResolver()
+    public CarConfigResolver()
     {
         _partSlotResolver = new PartSlotResolver(_resolver);
     }

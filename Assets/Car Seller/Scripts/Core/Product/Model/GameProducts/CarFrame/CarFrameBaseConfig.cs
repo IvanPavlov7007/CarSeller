@@ -3,8 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CarFrameBaseConfig", menuName = "Configs/Products/Frame/FrameBaseConfig")]
 public class CarFrameBaseConfig : ScriptableObject, IBaseConfig
 {
-    public string Name;
+    public string Name = "Default Frame";
     public GameObject Prefab;
-    public Color FrameColor;
-    public Color WindshieldColor;
+    public Color FrameColor = Color.white;
+    public Color WindshieldColor = Color.white;
 }

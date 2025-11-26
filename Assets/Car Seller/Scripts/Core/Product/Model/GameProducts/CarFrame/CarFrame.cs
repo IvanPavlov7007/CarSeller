@@ -7,6 +7,11 @@ public class CarFrame : Product
 
     public override string Name => runtimeConfig.Name;
 
+    public CarFrame(CarFrameRuntimeConfig runtimeConfig)
+    {
+        this.runtimeConfig = runtimeConfig;
+    }
+
     public override T GetRepresentation<T>(IProductViewBuilder<T> builder)
     {
         return builder.BuildCarFrame(this);

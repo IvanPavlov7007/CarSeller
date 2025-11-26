@@ -8,7 +8,10 @@ public class GameEvents : Singleton<GameEvents>
     public Action OnGamePaused;
     public Action OnGameUnpaused;
 
-    public Action<ObjectWithPopupMenuTest> onObjectWithPopupClicked;
+    public Action<ObjectWithPopupMenuTest> OnObjectWithPopupClicked;
 
-    public Action<IProductLocation> onProductLocationChanged;
+
+    public Action<ProductLocationChangedEventData> OnProductLocationChanged;
+    public Action<ProductCreatedEventData> OnProductCreated;
+    public Action<ProductDestroyedEventData> OnProductDestroyed;
 }
