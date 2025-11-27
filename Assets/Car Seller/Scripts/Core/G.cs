@@ -9,8 +9,8 @@ public class G : Singleton<G>
 
     //Views
     //Warehouse
-    public WarehouseProductViewBuilder warehouseProductViewBuilder;
-    public CarPartViewBuilder carPartViewBuilder;
+    public WarehouseProductGameObjectBuilder warehouseProductViewBuilder;
+    public CarPartGameObjectBuilder carPartViewBuilder;
 
     private void Awake()
     {

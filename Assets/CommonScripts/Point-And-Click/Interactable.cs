@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
 
@@ -18,6 +19,10 @@ public class Interactable : MonoBehaviour
     public event Action<Interactable> CursorHoldEnded;
 
     protected bool CursorHovering { get; private set; }
+
+    [Sirenix.OdinInspector.BoxGroup("Debug")]
+    [ShowInInspector]
+    protected bool logEvents = false;
 
     public void CursorSelectStart()
     {
@@ -88,52 +93,64 @@ public class Interactable : MonoBehaviour
 
     protected virtual void OnCursorEnter()
     {
+        if(logEvents)
         Debug.Log("OnCursorEnter");
     }
     protected virtual void OnCursorStay() 
     {
-        Debug.Log("OnCursorStay");
+        if (logEvents)
+            Debug.Log("OnCursorStay");
     }
     protected virtual void OnCursorExit() 
     {
-        Debug.Log("OnCursorExit");
+        if (logEvents)
+            Debug.Log("OnCursorExit");
     }
     protected virtual void OnCursorSelectEnd() 
     {
-        Debug.Log("OnCursorSelectEnd");
+        if (logEvents)
+            Debug.Log("OnCursorSelectEnd");
     }
     protected virtual void OnCursorSelectStart() 
     {
-        Debug.Log("OnCursorSelectStart");
+        if (logEvents)
+            Debug.Log("OnCursorSelectStart");
     }
     protected virtual void OnCursorDrag() 
     {
-        Debug.Log("OnCursorDrag");
+        if (logEvents)
+            Debug.Log("OnCursorDrag");
     }
     protected virtual void OnCursorDragStart() 
     {
-        Debug.Log("OnCursorDragStart");
+        if (logEvents)
+            Debug.Log("OnCursorDragStart");
     }
     protected virtual void OnCursorDragEnd() 
     {
-        Debug.Log("OnCursorDragEnd");
+        if (logEvents)
+            Debug.Log("OnCursorDragEnd");
     }
 
     // New virtuals
     protected virtual void OnCursorClick() 
     {
-        Debug.Log("OnCursorClick");
+        if (logEvents)
+            Debug.Log("OnCursorClick");
     }
     protected virtual void OnCursorHoldStart() 
     {
-        Debug.Log("OnCursorHoldStart");
+        if (logEvents)
+            Debug.Log("OnCursorHoldStart");
     }
     protected virtual void OnCursorHold() 
     {
-        Debug.Log("OnCursorHold");
+        if (logEvents)
+            Debug.Log("OnCursorHold");
     }
     protected virtual void OnCursorHoldEnd() 
     {
-        Debug.Log("OnCursorHoldEnd");
+        if (logEvents)
+            Debug.Log("OnCursorHoldEnd");
     }
 }

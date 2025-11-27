@@ -7,7 +7,7 @@ using static UnityEngine.Rendering.GPUSort;
 /// <summary>
 /// Car view in the warehouse on a change, view partially updates itself based on what changed
 /// </summary>
-public class CarView : ProductView
+public class WarehouseCarView : WarehouseProductView
 {
     public List<CarPartView> parts;
     public Car car { get; private set; }

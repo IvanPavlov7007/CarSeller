@@ -1,12 +1,16 @@
 ﻿using NUnit.Framework;
+using Unity.VisualScripting;
 using UnityEngine;
 using static Car;
+using static UnityEditor.FilePathAttribute;
 using static UnityEngine.Rendering.GPUSort;
 
 [CreateAssetMenu(fileName = "WarehouseProductViewBuilder", menuName = "Configs/View/WarehouseProductViewBuilder")]
-public class WarehouseProductViewBuilder : ScriptableObject, IProductViewBuilder<GameObject>, IProductViewInitializer<WarehouseProductView>
+public class WarehouseProductGameObjectBuilder : ScriptableObject, IProductViewBuilder<GameObject>
 {
-    public CarPartViewBuilder carPartViewBuilder;
+    public CarPartGameObjectBuilder carPartViewBuilder;
+    IProductViewComponentBuilder<WarehouseProductView> productViewComponentBuilder = new WarehouseProductViewComponentBuilder();
+
 
     public GameObject rectanglePrefab;
 
@@ -28,7 +32,7 @@ public class WarehouseProductViewBuilder : ScriptableObject, IProductViewBuilder
             CarPartViewPlacementHelper.BuildCarPartAtPosition(partLocation, carGO.transform,carPartViewBuilder);
         }
 
-        InitializeView(carGO, car);
+        productViewComponentBuilder.BuildViewComponent(carGO, car);
 
         return carGO;
     }
@@ -46,7 +50,8 @@ public class WarehouseProductViewBuilder : ScriptableObject, IProductViewBuilder
         go.name = engine.Name;
         sr.sprite = engine.runtimeConfig.Sprite;
         CollisionBuilder.InitializeCollision(sr);
-        InitializeView(go, engine);
+
+        productViewComponentBuilder.BuildViewComponent(go, engine);
         return go;
     }
 
@@ -59,7 +64,8 @@ public class WarehouseProductViewBuilder : ScriptableObject, IProductViewBuilder
         sr.color = spoiler.runtimeConfig.Color;
         go.transform.localScale = Vector3.one * spoiler.runtimeConfig.Size;
         CollisionBuilder.InitializeCollision(sr);
-        InitializeView(go, spoiler);
+
+        productViewComponentBuilder.BuildViewComponent(go, spoiler);
         return go;
     }
 
@@ -72,14 +78,33 @@ public class WarehouseProductViewBuilder : ScriptableObject, IProductViewBuilder
         sr.color = wheel.runtimeConfig.Color;
         go.transform.localScale = Vector3.one * wheel.runtimeConfig.TopViewSize;
         CollisionBuilder.InitializeCollision(sr);
-        InitializeView(go, wheel);
+
+        productViewComponentBuilder.BuildViewComponent(go, wheel);
         return go;
     }
 
-    public WarehouseProductView InitializeView(GameObject gameObject, Product product)
+
+    public class WarehouseProductViewComponentBuilder : IProductViewComponentBuilder<WarehouseProductView>
     {
-        var warehouseProductView = gameObject.AddComponent<WarehouseProductView>();
-        warehouseProductView.Initialize(product, World.Instance.Warehouse.GetEmptyLocation());
-        return warehouseProductView;
+        public WarehouseProductView BuildViewComponent(GameObject gameObject, Product product)
+        {
+            Debug.Assert(gameObject != null, "gameObject != null");
+            Debug.Assert(product != null, "product != null");
+
+
+            WarehouseProductView view;
+
+            if (product is Car)
+            {
+                view = gameObject.AddComponent<WarehouseCarView>();
+            }
+            else
+            {
+                view = gameObject.AddComponent<WarehouseProductView>();
+            }
+            gameObject.AddComponent<DirectDragInteractable>();
+            view.Initialize(product, G.Instance.LocationService.GetProductLocation(product));
+            return view;
+        }
     }
 }

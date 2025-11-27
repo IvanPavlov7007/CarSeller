@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public interface IProductViewInitializer<TProductView> where TProductView : ProductView
+public interface IProductViewComponentBuilder<TProductView> where TProductView : ProductView
 {
-    public TProductView InitializeView(GameObject gameObject, Product product);
+    public TProductView BuildViewComponent(GameObject gameObject, Product product);
 }
 
 public class ProductView : MonoBehaviour

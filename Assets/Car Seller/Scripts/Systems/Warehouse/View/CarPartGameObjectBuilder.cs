@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CarPartViewBuilder", menuName = "Configs/View/Car Part View Builder")]
-public class CarPartViewBuilder : ScriptableObject, IProductViewBuilder<GameObject>, IProductViewInitializer<ProductView>
+public class CarPartGameObjectBuilder : ScriptableObject, IProductViewBuilder<GameObject>
 {
     public GameObject baseWheelPrefab;
     public GameObject baseSpoilerPrefab;
@@ -14,6 +14,8 @@ public class CarPartViewBuilder : ScriptableObject, IProductViewBuilder<GameObje
     public static string frameChildName = "body";
     [ShowInInspector]
     public static string windshieldChildName = "windshield";
+
+    IProductViewComponentBuilder<ProductView> viewComponentBuilder = new CarPartViewComponentBuilder();
 
     public GameObject BuildCar(Car car)
     {
@@ -33,7 +35,7 @@ public class CarPartViewBuilder : ScriptableObject, IProductViewBuilder<GameObje
 
         windshieldSpriteRenderer.color = carFrame.runtimeConfig.WindshieldColor;
         frameSpriteRenderer.color = carFrame.runtimeConfig.FrameColor;
-        InitializeView(frameGO, carFrame);
+        viewComponentBuilder.BuildViewComponent(frameGO, carFrame);
         CollisionBuilder.InitializeCollision(frameSpriteRenderer);
         return frameGO;
     }
@@ -45,7 +47,7 @@ public class CarPartViewBuilder : ScriptableObject, IProductViewBuilder<GameObje
         var engineSpriteRenderer = engineGO.GetComponent<SpriteRenderer>();
         //TODO add engine sprite etc
         CollisionBuilder.InitializeCollision(engineSpriteRenderer);
-        InitializeView(engineGO, engine);
+        viewComponentBuilder.BuildViewComponent(engineGO, engine);
         return engineGO;
     }
 
@@ -56,6 +58,7 @@ public class CarPartViewBuilder : ScriptableObject, IProductViewBuilder<GameObje
         var spoilerSpriteRenderer = spoilerGO.GetComponent<SpriteRenderer>();
         spoilerSpriteRenderer.color = spoiler.runtimeConfig.Color;
         spoilerSpriteRenderer.sprite = spoiler.runtimeConfig.Sprite;
+        spoilerSpriteRenderer.sortingOrder--;
 
         var slotLocation = G.Instance.LocationService.GetProductLocation(spoiler) as Car.CarPartLocation;
         var data = slotLocation.PartSlotRuntimeConfig.partSlotData;
@@ -67,7 +70,7 @@ public class CarPartViewBuilder : ScriptableObject, IProductViewBuilder<GameObje
         spoilerTransform.localPosition = data.LocalPosition;
 
 
-        InitializeView(spoilerGO, spoiler);
+        viewComponentBuilder.BuildViewComponent(spoilerGO, spoiler);
         return spoilerGO;
     }
 
@@ -92,23 +95,30 @@ public class CarPartViewBuilder : ScriptableObject, IProductViewBuilder<GameObje
         wheelTransform.localScale = data.LocalScale * wheel.runtimeConfig.SideViewSize;
 
         wheelSpriteRenderer.sprite = chosenSprite;
+        if(data.facingBackwards)
+            wheelSpriteRenderer.sortingOrder -= 1;
 
         CollisionBuilder.InitializeCollision(wheelSpriteRenderer);
-        InitializeView(wheelGO, wheel);
+        viewComponentBuilder.BuildViewComponent(wheelGO, wheel);
         return wheelGO;
     }
-
-    public ProductView InitializeView(GameObject gameObject, Product product)
+    public class CarPartViewComponentBuilder : IProductViewComponentBuilder<ProductView>
     {
-        var controller = gameObject.AddComponent<ProductView>();
-        controller.Initialize(product, G.Instance.LocationService.GetProductLocation(product));
-        return controller;
+        public ProductView BuildViewComponent(GameObject gameObject, Product product)
+        {
+            Debug.Assert(product != null, "Cannot build view component for null product.");
+            Debug.Assert(gameObject!= null, "Cannot build view component on null game object for product: " + product.UniqueName);
+
+            var controller = gameObject.AddComponent<ProductView>();
+            controller.Initialize(product, G.Instance.LocationService.GetProductLocation(product));
+            return controller;
+        }
     }
 }
 
 public static class CarPartViewPlacementHelper
 {
-    public static GameObject BuildCarPartAtPosition(Car.CarPartLocation carPartLocation, Transform parentCarViewTransform, CarPartViewBuilder carPartViewBuilder)
+    public static GameObject BuildCarPartAtPosition(Car.CarPartLocation carPartLocation, Transform parentCarViewTransform, CarPartGameObjectBuilder carPartViewBuilder)
     {
         Debug.Assert(carPartLocation.Product != null, "Car part location has no product attached: " + carPartLocation.PartSlotRuntimeConfig.SlotType);
 
