@@ -92,4 +92,4 @@ MonoBehaviour:
       Entry: 8
       Data: 
   baseFallbackConfig: {fileID: 0}
-  carFrameRuntimeConfig: {fileID: 0}
+  carFrameRuntimeConfig: {fileID: 11400000, guid: ab40992943a11f2479bd16d83c825292, type: 2}

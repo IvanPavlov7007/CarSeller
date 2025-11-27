@@ -1,9 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using System;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 [CreateAssetMenu(fileName = "CarPartViewBuilder", menuName = "Configs/View/Car Part View Builder")]
 public class CarPartViewBuilder : ScriptableObject, IProductViewBuilder<GameObject>, IProductViewInitializer<ProductView>
@@ -23,98 +21,6 @@ public class CarPartViewBuilder : ScriptableObject, IProductViewBuilder<GameObje
         return null;
     }
 
-    #region collision
-    private void initializeCollision(SpriteRenderer sr)
-    {
-        if (sr == null || sr.sprite == null) return;
-
-        var collider = sr.gameObject.GetComponent<Collider2D>();
-
-        // 1) If collider exists: adjust based on type.
-        if (collider != null)
-        {
-            switch (collider)
-            {
-                case PolygonCollider2D poly:
-                    RegeneratePolygon(poly, sr);
-                    return;
-
-                case BoxCollider2D box:
-                    AdjustBox(box, sr);
-                    return;
-
-                case CircleCollider2D circle:
-                    AdjustCircle(circle, sr);
-                    return;
-
-                // Other collider types are ignored intentionally.
-                default:
-                    return;
-            }
-        }
-
-        // 2) If none exists: add PolygonCollider2D and regenerate.
-        var newPoly = sr.gameObject.AddComponent<PolygonCollider2D>();
-        RegeneratePolygon(newPoly, sr);
-    }
-
-    private void RegeneratePolygon(PolygonCollider2D poly, SpriteRenderer sr)
-    {
-        if (poly == null || sr == null || sr.sprite == null) return;
-
-        var sprite = sr.sprite;
-        int shapeCount = sprite.GetPhysicsShapeCount();
-
-        if (shapeCount == 0)
-        {
-            // Fallback: use sprite rectangular bounds.
-            var b = sprite.bounds;
-            Vector2 min = b.min;
-            Vector2 max = b.max;
-            poly.pathCount = 1;
-            poly.SetPath(0, new[]
-            {
-                new Vector2(min.x, min.y),
-                new Vector2(min.x, max.y),
-                new Vector2(max.x, max.y),
-                new Vector2(max.x, min.y)
-            });
-            return;
-        }
-
-        poly.pathCount = shapeCount;
-        var points = new System.Collections.Generic.List<Vector2>();
-        for (int i = 0; i < shapeCount; i++)
-        {
-            points.Clear();
-            sprite.GetPhysicsShape(i, points);
-            // Points are already in local sprite space; assign directly.
-            poly.SetPath(i, points);
-        }
-    }
-
-    private void AdjustBox(BoxCollider2D box, SpriteRenderer sr)
-    {
-        if (box == null || sr == null || sr.sprite == null) return;
-
-        // Use sprite local bounds for size and offset.
-        var b = sr.sprite.bounds;
-        box.size = b.size;
-        box.offset = b.center;
-    }
-
-    private void AdjustCircle(CircleCollider2D circle, SpriteRenderer sr)
-    {
-        if (circle == null || sr == null || sr.sprite == null) return;
-
-        var b = sr.sprite.bounds;
-        // Radius = half of max dimension.
-        float radius = Mathf.Max(b.size.x, b.size.y) * 0.5f;
-        circle.radius = radius;
-        circle.offset = b.center;
-    }
-    #endregion
-
     //TODO make a better and faster implementation, maybe change the stored value from prefab to something else
     public GameObject BuildCarFrame(CarFrame carFrame)
     {
@@ -128,7 +34,7 @@ public class CarPartViewBuilder : ScriptableObject, IProductViewBuilder<GameObje
         windshieldSpriteRenderer.color = carFrame.runtimeConfig.WindshieldColor;
         frameSpriteRenderer.color = carFrame.runtimeConfig.FrameColor;
         InitializeView(frameGO, carFrame);
-        initializeCollision(frameSpriteRenderer);
+        CollisionBuilder.InitializeCollision(frameSpriteRenderer);
         return frameGO;
     }
 
@@ -138,7 +44,7 @@ public class CarPartViewBuilder : ScriptableObject, IProductViewBuilder<GameObje
         engineGO.name = engine.Name;
         var engineSpriteRenderer = engineGO.GetComponent<SpriteRenderer>();
         //TODO add engine sprite etc
-        initializeCollision(engineSpriteRenderer);
+        CollisionBuilder.InitializeCollision(engineSpriteRenderer);
         InitializeView(engineGO, engine);
         return engineGO;
     }
@@ -149,6 +55,7 @@ public class CarPartViewBuilder : ScriptableObject, IProductViewBuilder<GameObje
         spoilerGO.name = spoiler.Name;
         var spoilerSpriteRenderer = spoilerGO.GetComponent<SpriteRenderer>();
         spoilerSpriteRenderer.color = spoiler.runtimeConfig.Color;
+        spoilerSpriteRenderer.sprite = spoiler.runtimeConfig.Sprite;
 
         var slotLocation = G.Instance.LocationService.GetProductLocation(spoiler) as Car.CarPartLocation;
         var data = slotLocation.PartSlotRuntimeConfig.partSlotData;
@@ -186,7 +93,7 @@ public class CarPartViewBuilder : ScriptableObject, IProductViewBuilder<GameObje
 
         wheelSpriteRenderer.sprite = chosenSprite;
 
-        initializeCollision(wheelSpriteRenderer);
+        CollisionBuilder.InitializeCollision(wheelSpriteRenderer);
         InitializeView(wheelGO, wheel);
         return wheelGO;
     }
@@ -196,5 +103,26 @@ public class CarPartViewBuilder : ScriptableObject, IProductViewBuilder<GameObje
         var controller = gameObject.AddComponent<ProductView>();
         controller.Initialize(product, G.Instance.LocationService.GetProductLocation(product));
         return controller;
+    }
+}
+
+public static class CarPartViewPlacementHelper
+{
+    public static GameObject BuildCarPartAtPosition(Car.CarPartLocation carPartLocation, Transform parentCarViewTransform, CarPartViewBuilder carPartViewBuilder)
+    {
+        Debug.Assert(carPartLocation.Product != null, "Car part location has no product attached: " + carPartLocation.PartSlotRuntimeConfig.SlotType);
+
+        var slotData = carPartLocation.PartSlotRuntimeConfig.partSlotData;
+
+        var part = carPartLocation.Product.GetRepresentation(carPartViewBuilder);
+        if (part != null)
+        {
+            part.transform.SetParent(parentCarViewTransform);
+            part.transform.localPosition = slotData.LocalPosition;
+            part.transform.localRotation = Quaternion.Euler(slotData.LocalRotation);
+            part.transform.localScale = slotData.LocalScale;
+        }
+
+        return part;
     }
 }

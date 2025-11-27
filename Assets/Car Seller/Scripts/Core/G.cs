@@ -7,11 +7,16 @@ public class G : Singleton<G>
     public LocationService LocationService;
     public ProductManager ProductManager;
 
+    //Views
+    //Warehouse
+    public WarehouseProductViewBuilder warehouseProductViewBuilder;
+    public CarPartViewBuilder carPartViewBuilder;
+
     private void Awake()
     {
+        ResetGameState();
         LocationService = new LocationService();
         ProductManager = new ProductManager();
-        ResetGameState();
     }
 
     public void ResetGameState()

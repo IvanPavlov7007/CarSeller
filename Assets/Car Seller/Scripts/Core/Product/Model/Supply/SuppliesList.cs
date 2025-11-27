@@ -4,7 +4,7 @@ public class SuppliesList : IProductsHolder
 {
     public List<SupplyProductLocation> supplies;
 
-    public IProductLocation[] GetProducts()
+    public IProductLocation[] GetProductLocations()
     {
         return supplies.ToArray();
     }

@@ -7,15 +7,13 @@ using UnityEngine;
 [ExecuteAlways]
 public class WarehouseManager : Singleton<WarehouseManager>
 {
-    public static Warehouse Warehouse { get; private set; }
+    public Warehouse Warehouse => World.Instance.Warehouse;
 
     public Transform emptyPosition;
 
-    public WarehouseProductViewBuilder productViewBuilder;
-
-    private void Awake()
+    private void Start()
     {
-        initialiseWarehouse();
+        initializeWarehouse();
     }
 
     private void OnEnable()
@@ -28,22 +26,13 @@ public class WarehouseManager : Singleton<WarehouseManager>
         GameEvents.Instance.OnProductCreated -= onNewProductCreated;
     }
 
-    [Button]
-    public void ResetWarehouse()
+    private void Update()
     {
-        if(emptyPosition != null)
-            Warehouse = new Warehouse(
-                new Warehouse.DimensionalPositionData
-                {
-                    LocalPosition = emptyPosition.localPosition,
-                    LocalRotation = emptyPosition.localEulerAngles
-                }
-            );
-        else
-            Warehouse = new Warehouse(new Warehouse.DimensionalPositionData());
+        World.Instance.Warehouse.emptyProductLocation = new Warehouse.DimensionalPositionData
+        { LocalPosition =  emptyPosition.localPosition, LocalRotation = emptyPosition.localEulerAngles };
     }
 
-    void initialiseWarehouse()
+    void initializeWarehouse()
     {
         if (Warehouse == null)
         {
@@ -76,7 +65,7 @@ public class WarehouseManager : Singleton<WarehouseManager>
 
     void buildProductView(Product product, IProductLocation location)
     {
-        var productViewGO = product.GetRepresentation(productViewBuilder);
+        var productViewGO = product.GetRepresentation(G.Instance.warehouseProductViewBuilder);
         var transform = productViewGO.transform;
 
         transform.SetParent(this.transform);

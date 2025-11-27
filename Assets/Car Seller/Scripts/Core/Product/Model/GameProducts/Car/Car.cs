@@ -30,7 +30,7 @@ public sealed class Car : Product, IProductsHolder
         carParts = slots;
     }
 
-    public IProductLocation[] GetProducts()
+    public IProductLocation[] GetProductLocations()
     {
         Debug.Assert(carParts != null, $"Car {UniqueName}: Car parts have not been set.");
         Debug.Assert(CarFrame != null, $"Car {UniqueName}: Car frame has not been set.");

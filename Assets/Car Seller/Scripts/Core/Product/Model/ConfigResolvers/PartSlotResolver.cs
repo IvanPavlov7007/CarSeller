@@ -28,52 +28,80 @@ public class PartSlotResolver
         Debug.Assert(baseConfig.SlotType == variantConfig?.SlotType,
             $"Mismatched slot types: base '{baseConfig.SlotType}', variant '{variantConfig?.SlotType}'");
 
+        //check if any base config is present in either base or variant (via fallback) - otherwise only slot data is resolved
+        bool resolveProduct = baseConfig.BaseConfig != null ||
+            (variantConfig?.VariantConfig != null && variantConfig.VariantConfig.FallbackBase != null);
+
         switch (baseConfig.SlotType)
         {
             case PartSlotType.Wheels:
-                return ResolveWheel(baseConfig as WheelSlotBaseConfig, variantConfig as WheelSlotVariantConfig);
-
+                var wheelRuntimeSlot = CreateWheelRuntimeSlot(baseConfig as WheelSlotBaseConfig);
+                if(resolveProduct)
+                    wheelRuntimeSlot.wheelConfig = 
+                        ResolveWheel(baseConfig as WheelSlotBaseConfig, variantConfig as WheelSlotVariantConfig);
+                return wheelRuntimeSlot;
             case PartSlotType.Engine:
-                return ResolveEngine(baseConfig as EngineSlotBaseConfig, variantConfig as EngineSlotVariantConfig);
+                var engineRuntimeSlot = CreateEngineRuntimeSlot(baseConfig as EngineSlotBaseConfig);
+                if(resolveProduct)
+                    engineRuntimeSlot.engineConfig =
+                        ResolveEngine(baseConfig as EngineSlotBaseConfig, variantConfig as EngineSlotVariantConfig);
+                return engineRuntimeSlot;
 
             case PartSlotType.Spoiler:
-                return ResolveSpoiler(baseConfig as SpoilerSlotBaseConfig, variantConfig as SpoilerSlotVariantConfig);
+                var spoilerRuntimeSlot = CreateSpoilerRuntimeSlot(baseConfig as SpoilerSlotBaseConfig);
+                if(resolveProduct)
+                    spoilerRuntimeSlot.spoilerConfig =
+                        ResolveSpoiler(baseConfig as SpoilerSlotBaseConfig, variantConfig as SpoilerSlotVariantConfig);
+                return spoilerRuntimeSlot;
 
             default:
                 throw new Exception($"Unknown slot base config type: {baseConfig.GetType().Name}");
         }
     }
 
-    private WheelSlotRuntimeConfig ResolveWheel(WheelSlotBaseConfig baseCfg, WheelSlotVariantConfig variantCfg)
+
+    private WheelSlotRuntimeConfig CreateWheelRuntimeSlot(WheelSlotBaseConfig baseCfg)
     {
         var runtimeSlot = new WheelSlotRuntimeConfig
         {
             partSlotData = baseCfg.partSlotData
         };
-        if (baseCfg.BaseConfig != null || variantCfg?.VariantConfig != null)
+        return runtimeSlot;
+    }
+
+    private EngineSlotRuntimeConfig CreateEngineRuntimeSlot(EngineSlotBaseConfig baseCfg)
+    {
+        var runtimeSlot = new EngineSlotRuntimeConfig
         {
-        runtimeSlot.wheelConfig = _resolver.Resolve<
+            partSlotData = baseCfg.partSlotData
+        };
+        return runtimeSlot;
+    }
+
+    private SpoilerSlotRuntimeConfig CreateSpoilerRuntimeSlot(SpoilerSlotBaseConfig baseCfg)
+    {
+        var runtimeSlot = new SpoilerSlotRuntimeConfig
+        {
+            partSlotData = baseCfg.partSlotData
+        };
+        return runtimeSlot;
+    }
+
+    private WheelRuntimeConfig ResolveWheel(WheelSlotBaseConfig baseCfg, WheelSlotVariantConfig variantCfg)
+    {
+        return _resolver.Resolve<
             WheelBaseConfig,
             WheelVariantConfig,
             WheelRuntimeConfig
             >(
                 baseCfg.wheelBaseConfig,
                 variantCfg?.wheelVariantConfig
-            );
-        }
-        return runtimeSlot;
+            ); ;
     }
 
-    private EngineSlotRuntimeConfig ResolveEngine(EngineSlotBaseConfig baseCfg, EngineSlotVariantConfig variantCfg)
+    private EngineRuntimeConfig ResolveEngine(EngineSlotBaseConfig baseCfg, EngineSlotVariantConfig variantCfg)
     {
-        var runtimeSlot = new EngineSlotRuntimeConfig
-        {
-            partSlotData = baseCfg.partSlotData
-        };
-
-        if (baseCfg.BaseConfig != null || variantCfg?.VariantConfig != null)
-        {
-        runtimeSlot.engineConfig = _resolver.Resolve<
+        return _resolver.Resolve<
             EngineBaseConfig,
             EngineVariantConfig,
             EngineRuntimeConfig
@@ -81,30 +109,17 @@ public class PartSlotResolver
                 baseCfg.engineBaseConfig,
                 variantCfg?.engineVariantConfig
             );
-        }
-
-        return runtimeSlot;
     }
 
-    private SpoilerSlotRuntimeConfig ResolveSpoiler(SpoilerSlotBaseConfig baseCfg, SpoilerSlotVariantConfig variantCfg)
+    private SpoilerRuntimeConfig ResolveSpoiler(SpoilerSlotBaseConfig baseCfg, SpoilerSlotVariantConfig variantCfg)
     {
-        var runtimeSlot = new SpoilerSlotRuntimeConfig
-        {
-            partSlotData = baseCfg.partSlotData
-        };
-
-        if (baseCfg.BaseConfig != null || variantCfg?.VariantConfig != null)
-        {
-            runtimeSlot.spoilerConfig = _resolver.Resolve<
+        return _resolver.Resolve<
                 SpoilerBaseConfig,
                 SpoilerVariantConfig,
                 SpoilerRuntimeConfig
             >(
                 baseCfg.spoilerBaseConfig,
                 variantCfg?.spoilerVariantConfig
-            );
-        }
-
-        return runtimeSlot;
+            ); 
     }
 }

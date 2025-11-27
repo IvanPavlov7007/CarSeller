@@ -4,47 +4,48 @@ using System.Collections.Generic;
 using UnityEngine;
 public class LocationService
 {
-    public bool MoveProductSilently(Product product, IProductLocation newLocation)
+    Dictionary<Product, IProductLocation> productLocations => World.Instance.productLocations;
+
+    public void RegisterProductLocation(Product product, IProductLocation location)
     {
-        var currentLocation = GetProductLocation(product);
+        Debug.Assert(product != null, "Product cannot be null when registering a location.");
+        Debug.Assert(location != null, "Location cannot be null when registering a product.");
+        Debug.Assert(!productLocations.ContainsKey(product), $"Product {product.Name} is already registered with a location.");
+
+        productLocations[product] = location;
+    }
+
+    public bool MoveProduct(Product product, IProductLocation newLocation)
+    {
+        var previousLocation = GetProductLocation(product);
 
         if (newLocation.Attach(product))
         {
-            if (currentLocation != null)
+            if (previousLocation != null)
             {
-                currentLocation.Detach();
+                previousLocation.Detach();
             }
-            World.Instance.productLocations[product] = newLocation;
-
+            productLocations[product] = newLocation;
+            GameEvents.Instance.OnProductLocationChanged?.Invoke(new ProductLocationChangedEventData(product, newLocation, previousLocation));
             return true;
         }
 
         return false;
     }
 
-    public bool MoveProduct(Product product, IProductLocation newLocation)
-    {
-        var previousLocation = GetProductLocation(product);
-        bool moved = MoveProductSilently(product, newLocation);
-        if (moved)
-        {
-            GameEvents.Instance.OnProductLocationChanged?.Invoke(new ProductLocationChangedEventData(product,newLocation, previousLocation));
-        }
-        return moved;
-    }
-
     public void RemoveProduct(Product product)
     {
-        if (World.Instance.productLocations.TryGetValue(product, out IProductLocation location))
+        if (productLocations.TryGetValue(product, out IProductLocation location))
         {
             location.Detach();
-            World.Instance.productLocations.Remove(product);
+            productLocations.Remove(product);
+            GameEvents.Instance.OnProductLocationChanged?.Invoke(new ProductLocationChangedEventData(product, null, location));
         }
     }
 
     public IProductLocation GetProductLocation(Product product)
     {
-        if (World.Instance.productLocations.TryGetValue(product, out IProductLocation location))
+        if (productLocations.TryGetValue(product, out IProductLocation location))
         {
             return location;
         }

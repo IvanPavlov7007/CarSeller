@@ -409,3 +409,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 1
+  warehouseProductViewBuilder: {fileID: 11400000, guid: f89c79dee8c6ad946a82b44e4e94a0a2, type: 2}
+  carPartViewBuilder: {fileID: 11400000, guid: 9280239a7aae48041bc89e3309ad1261, type: 2}

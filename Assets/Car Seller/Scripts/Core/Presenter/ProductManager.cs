@@ -12,14 +12,14 @@ public class ProductManager
     {
         CarRuntimeConfig runtimeConfig = carResolver.Resolve(baseConfig, variantConfig);
         Car car = productBuilder.BuildCar(runtimeConfig);
+        
+        attachProductToLocation(car, location);
 
-
-        //We don't want to rise event here, as we are creating a complex product
-        InitializeProductLocation(car, location);
-        foreach(var locations in car.GetProducts())
+        G.Instance.LocationService.RegisterProductLocation(car, location);
+        foreach(var locations in car.GetNonEmptyProductLocations())
         {
             //not rising events here
-            InitializeProductLocation(locations.Product, locations);
+            G.Instance.LocationService.RegisterProductLocation(locations.Product, locations);
         }
 
         GameEvents.Instance.OnProductCreated?.Invoke(new ProductCreatedEventData(car));
@@ -30,7 +30,10 @@ public class ProductManager
     {
         WheelRuntimeConfig runtimeConfig = configResolver.Resolve<WheelBaseConfig,WheelVariantConfig,WheelRuntimeConfig>(baseConfig, variantConfig);
         Wheel wheel = productBuilder.BuildWheel(runtimeConfig) as Wheel;
-        InitializeProductLocation(wheel, location);
+
+        attachProductToLocation(wheel, location);
+
+        G.Instance.LocationService.RegisterProductLocation(wheel, location);
         GameEvents.Instance.OnProductCreated?.Invoke(new ProductCreatedEventData(wheel));
         return wheel;
     }
@@ -39,7 +42,10 @@ public class ProductManager
     {
         EngineRuntimeConfig runtimeConfig = configResolver.Resolve<EngineBaseConfig,EngineVariantConfig,EngineRuntimeConfig>(baseConfig, variantConfig);
         Engine engine = productBuilder.BuildEngine(runtimeConfig) as Engine;
-        InitializeProductLocation(engine, location);
+        
+        attachProductToLocation(engine, location);
+
+        G.Instance.LocationService.RegisterProductLocation(engine, location);
         GameEvents.Instance.OnProductCreated?.Invoke(new ProductCreatedEventData(engine));
         return engine;
     }
@@ -48,25 +54,27 @@ public class ProductManager
     {
         SpoilerRuntimeConfig runtimeConfig = configResolver.Resolve<SpoilerBaseConfig,SpoilerVariantConfig,SpoilerRuntimeConfig>(baseConfig, variantConfig);
         Spoiler spoiler = productBuilder.BuildSpoiler(runtimeConfig) as Spoiler;
-        InitializeProductLocation(spoiler, location);
+
+        attachProductToLocation(spoiler, location);
+
+        G.Instance.LocationService.RegisterProductLocation(spoiler, location);
         GameEvents.Instance.OnProductCreated?.Invoke(new ProductCreatedEventData(spoiler));
         return spoiler;
     }
 
-
     /// <summary>
-    /// silently place product at location without rising events
+    /// internally attach product to location and log error if failed
     /// </summary>
     /// <param name="product"></param>
     /// <param name="location"></param>
-    protected void InitializeProductLocation(Product product, IProductLocation location)
+    private void attachProductToLocation(Product product, IProductLocation location)
     {
-        //not rising event here
-        if (!G.Instance.LocationService.MoveProductSilently(product, location))
+        if(!location.Attach(product))
         {
             Debug.LogError($"Failed to place product {product.Name} at location {location}");
         }
     }
+
 }
 
 public class ProductCreationService

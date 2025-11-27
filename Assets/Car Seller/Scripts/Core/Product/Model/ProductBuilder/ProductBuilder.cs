@@ -32,15 +32,9 @@ public class ProductBuilder : IProductBuilder
             {
                 product = slotConfig.BuildOccupyingProduct(this);
             }
-            //3.2 create slot location
+            //3.2 create slot location with product inside
             var slotLocation = new Car.CarPartLocation(car,slotConfig,product);
             slotsDict.Add(slotLocation, slotConfig);
-
-            //3.3 attach product to slot location
-            if (product != null)
-            {
-                slotLocation.Attach(product);
-            }
         }
         car.addSlots(slotsDict);
         return car;

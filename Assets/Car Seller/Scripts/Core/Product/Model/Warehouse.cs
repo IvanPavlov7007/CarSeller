@@ -7,17 +7,12 @@ public class Warehouse : IProductsHolder
     public List<WarehouseProductLocation> products = new List<WarehouseProductLocation>();
     public SuppliesList suppliesList;
 
-    public Warehouse(DimensionalPositionData emptyProductLocation)
-    {
-        this.emptyProductLocation = emptyProductLocation;
-    }
-
     public IProductLocation GetEmptyLocation()
     {
         return new WarehouseProductLocation(this,emptyProductLocation, null);
     }
 
-    public IProductLocation[] GetProducts()
+    public IProductLocation[] GetProductLocations()
     {
         return products.ToArray();
     }

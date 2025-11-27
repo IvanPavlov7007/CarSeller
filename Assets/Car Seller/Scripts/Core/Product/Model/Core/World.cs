@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 public class World
 {
-    public HiddenSpace hiddenSpace = new HiddenSpace();
+    public Warehouse Warehouse = new Warehouse();
+    public HiddenSpace HiddenSpace = new HiddenSpace();
     public Dictionary<Product, IProductLocation> productLocations = new Dictionary<Product, IProductLocation>();
 
     public static World Instance = new World();
@@ -28,7 +29,7 @@ public class HiddenSpace : IProductsHolder
         return location;
     }
 
-    public IProductLocation[] GetProducts()
+    public IProductLocation[] GetProductLocations()
     {
         return hiddenLocations.ToArray();
     }
@@ -37,14 +38,14 @@ public class HiddenSpace : IProductsHolder
     {
         public Product Product { get; private set; }
 
-        public IProductsHolder Holder => World.Instance.hiddenSpace;
+        public IProductsHolder Holder => World.Instance.HiddenSpace;
 
         public bool Attach(Product product)
         {
             if (product != null)
                 return false;
             Product = product;
-            World.Instance.hiddenSpace.hiddenLocations.Add(this);
+            World.Instance.HiddenSpace.hiddenLocations.Add(this);
             return true;
         }
 
@@ -53,7 +54,7 @@ public class HiddenSpace : IProductsHolder
             if (Product == null)
                 return;
             Product = null;
-            World.Instance.hiddenSpace.hiddenLocations.Remove(this);
+            World.Instance.HiddenSpace.hiddenLocations.Remove(this);
         }
     }
 }

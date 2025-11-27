@@ -30,7 +30,7 @@ public class ProductView : MonoBehaviour
         GameEvents.Instance.OnProductLocationChanged -= productLocationChanged;
     }
 
-    public virtual void productLocationChanged(ProductLocationChangedEventData data)
+    private void productLocationChanged(ProductLocationChangedEventData data)
     {
         if(data.NewLocation.Product == Product && RepresentedProductLocation != data.NewLocation)
         {

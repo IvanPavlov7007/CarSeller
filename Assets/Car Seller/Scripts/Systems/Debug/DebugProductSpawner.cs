@@ -27,7 +27,7 @@ public class DebugProductSpawner : MonoBehaviour
         G.Instance.ProductManager.CreateCar(
             carBaseConfig,
             carVariantConfig,
-            WarehouseManager.Warehouse.GetEmptyLocation() );
+            WarehouseManager.Instance.Warehouse.GetEmptyLocation() );
     }
 
     [Button]
@@ -36,7 +36,7 @@ public class DebugProductSpawner : MonoBehaviour
         G.Instance.ProductManager.CreateWheel(
             wheelBaseConfig,
             wheelVariantConfig,
-            WarehouseManager.Warehouse.GetEmptyLocation() );
+            WarehouseManager.Instance.Warehouse.GetEmptyLocation() );
     }
     [Button]
     public void SpawnEngine()
@@ -44,7 +44,7 @@ public class DebugProductSpawner : MonoBehaviour
         G.Instance.ProductManager.CreateEngine(
             engineBaseConfig,
             engineVariantConfig,
-            WarehouseManager.Warehouse.GetEmptyLocation() );
+            WarehouseManager.Instance.Warehouse.GetEmptyLocation() );
     }
     [Button]
     public void SpawnSpoiler()
@@ -52,7 +52,7 @@ public class DebugProductSpawner : MonoBehaviour
         G.Instance.ProductManager.CreateSpoiler(
             spoilerBaseConfig,
             spoilerVariantConfig,
-            WarehouseManager.Warehouse.GetEmptyLocation() );
+            WarehouseManager.Instance.Warehouse.GetEmptyLocation() );
     }
 
 }

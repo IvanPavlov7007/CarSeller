@@ -1,4 +1,6 @@
-﻿public interface IProductLocation
+﻿using System.Linq;
+
+public interface IProductLocation
 {
     // Usual structure:
     // 1) location
@@ -14,5 +16,11 @@
 
 public interface IProductsHolder
 {
-    public IProductLocation[] GetProducts();
+    IProductLocation[] GetProductLocations();
+}
+
+public static class ProductsHolderExtensions
+{
+    public static IProductLocation[] GetNonEmptyProductLocations(this IProductsHolder holder)
+        => holder.GetProductLocations().Where(l => l.Product != null).ToArray();
 }
