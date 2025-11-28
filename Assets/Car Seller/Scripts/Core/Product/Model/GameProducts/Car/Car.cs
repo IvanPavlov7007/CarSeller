@@ -30,6 +30,18 @@ public sealed class Car : Product, IProductsHolder
         carParts = slots;
     }
 
+    public CarPartLocation AvailableSlot(Product product)
+    {
+        foreach (var slotLocation in carParts.Keys)
+        {
+            if (slotLocation.CanAccept(product))
+            {
+                return slotLocation;
+            }
+        }
+        return null;
+    }
+
     public IProductLocation[] GetProductLocations()
     {
         Debug.Assert(carParts != null, $"Car {UniqueName}: Car parts have not been set.");
@@ -82,6 +94,11 @@ public sealed class Car : Product, IProductsHolder
         public PartSlotRuntimeConfig PartSlotRuntimeConfig { get; private set; }
         public Product Product { get; private set; }
 
+        public bool CanAccept(Product product)
+        {
+            return PartSlotRuntimeConfig.CanAccept(product) && Product == null;
+        }
+
         public bool Attach(Product product)
         {
             if(Product != null)
@@ -105,4 +122,6 @@ public sealed class Car : Product, IProductsHolder
             Product = null;
         }
     }
+
+    
 }

@@ -17,20 +17,20 @@ public class PartSlotResolver
     /// 
     /// </summary>
     /// <param name="baseConfig"></param>
-    /// <param name="variantConfig"></param>
+    /// <param name="variantSlotConfig"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="Exception"></exception>
-    internal PartSlotRuntimeConfig Resolve(PartSlotBaseConfig baseConfig, PartSlotVariantConfig variantConfig)
+    internal PartSlotRuntimeConfig Resolve(PartSlotBaseConfig baseConfig, PartSlotVariantConfig variantSlotConfig)
     {
         if (baseConfig == null) throw new ArgumentNullException(nameof(baseConfig));
-        if(variantConfig != null)
-        Debug.Assert(baseConfig.SlotType == variantConfig?.SlotType,
-            $"Mismatched slot types: base '{baseConfig.SlotType}', variant '{variantConfig?.SlotType}'");
+        if(variantSlotConfig != null)
+        Debug.Assert(baseConfig.SlotType == variantSlotConfig?.SlotType,
+            $"Mismatched slot types: base '{baseConfig.SlotType}', variant '{variantSlotConfig?.SlotType}'");
 
         //check if any base config is present in either base or variant (via fallback) - otherwise only slot data is resolved
-        bool resolveProduct = baseConfig.BaseConfig != null ||
-            (variantConfig?.VariantConfig != null && variantConfig.VariantConfig.FallbackBase != null);
+        
+        bool resolveProduct = IsResolveProductNeeded(baseConfig,variantSlotConfig);
 
         switch (baseConfig.SlotType)
         {
@@ -38,25 +38,40 @@ public class PartSlotResolver
                 var wheelRuntimeSlot = CreateWheelRuntimeSlot(baseConfig as WheelSlotBaseConfig);
                 if(resolveProduct)
                     wheelRuntimeSlot.wheelConfig = 
-                        ResolveWheel(baseConfig as WheelSlotBaseConfig, variantConfig as WheelSlotVariantConfig);
+                        ResolveWheel(baseConfig as WheelSlotBaseConfig, variantSlotConfig as WheelSlotVariantConfig);
                 return wheelRuntimeSlot;
             case PartSlotType.Engine:
                 var engineRuntimeSlot = CreateEngineRuntimeSlot(baseConfig as EngineSlotBaseConfig);
                 if(resolveProduct)
                     engineRuntimeSlot.engineConfig =
-                        ResolveEngine(baseConfig as EngineSlotBaseConfig, variantConfig as EngineSlotVariantConfig);
+                        ResolveEngine(baseConfig as EngineSlotBaseConfig, variantSlotConfig as EngineSlotVariantConfig);
                 return engineRuntimeSlot;
 
             case PartSlotType.Spoiler:
                 var spoilerRuntimeSlot = CreateSpoilerRuntimeSlot(baseConfig as SpoilerSlotBaseConfig);
                 if(resolveProduct)
                     spoilerRuntimeSlot.spoilerConfig =
-                        ResolveSpoiler(baseConfig as SpoilerSlotBaseConfig, variantConfig as SpoilerSlotVariantConfig);
+                        ResolveSpoiler(baseConfig as SpoilerSlotBaseConfig, variantSlotConfig as SpoilerSlotVariantConfig);
                 return spoilerRuntimeSlot;
 
             default:
                 throw new Exception($"Unknown slot base config type: {baseConfig.GetType().Name}");
         }
+    }
+
+    private bool IsResolveProductNeeded(PartSlotBaseConfig baseConfig, PartSlotVariantConfig variantSlotConfig)
+    {
+        bool variantConfigForcesNull =
+            variantSlotConfig != null &&
+            variantSlotConfig.VariantConfig != null &&
+            variantSlotConfig.VariantConfig.FallbackBase == null &&
+            variantSlotConfig.VariantConfig.ForceFallback;
+
+        if(variantConfigForcesNull)
+            return false;
+
+        return baseConfig.BaseConfig != null ||
+            (variantSlotConfig?.VariantConfig != null && variantSlotConfig.VariantConfig.FallbackBase != null);
     }
 
 

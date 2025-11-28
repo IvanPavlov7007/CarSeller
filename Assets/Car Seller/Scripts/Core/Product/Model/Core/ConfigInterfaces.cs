@@ -1,5 +1,7 @@
 ﻿
 // example: [CreateAssetMenu(fileName = "WheelBaseConfig", menuName = "Configs/Products/Wheel/Wheel Base Config")]
+using Sirenix.OdinInspector;
+
 public interface IBaseConfig
 {
 }
@@ -11,6 +13,8 @@ public interface IVariantConfig
     bool ForceFallback { get; }
     IConfigOverrides Overrides { get; }
 }
+
+
 
 public interface IConfigOverrides
 {

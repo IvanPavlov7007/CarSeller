@@ -8,8 +8,9 @@ public abstract class PartSlotRuntimeConfig : IPartSlot
     public PartSlotData partSlotData;
     public abstract PartSlotType SlotType { get; }
     public abstract bool TryAccept(Product product);
+    public abstract bool CanAccept(Product product);
+
     public abstract void Detach();
-    
     public abstract IRuntimeConfig RuntimeConfig { get; }
 
     public abstract Product BuildOccupyingProduct(IProductBuilder productBuilder);
@@ -47,6 +48,11 @@ public class EngineSlotRuntimeConfig : PartSlotRuntimeConfig
         return false;
     }
 
+    public override bool CanAccept(Product product)
+    {
+        return product is Engine;
+    }
+
     public override void Detach()
     {
         engineConfig = null;
@@ -59,6 +65,7 @@ public class EngineSlotRuntimeConfig : PartSlotRuntimeConfig
         if (engineConfig == null) return null;
         return productBuilder.BuildEngine(engineConfig);
     }
+    
 }
 [Serializable]
 public class WheelSlotRuntimeConfig : PartSlotRuntimeConfig
@@ -75,6 +82,12 @@ public class WheelSlotRuntimeConfig : PartSlotRuntimeConfig
         }
         return false;
     }
+
+    public override bool CanAccept(Product product)
+    {
+        return product is Wheel;
+    }
+
     public override void Detach()
     {
         wheelConfig = null;
@@ -104,6 +117,12 @@ public class SpoilerSlotRuntimeConfig : PartSlotRuntimeConfig
         }
         return false;
     }
+
+    public override bool CanAccept(Product product)
+    {
+        return product is Spoiler;
+    }
+
     public override void Detach()
     {
         spoilerConfig = null;

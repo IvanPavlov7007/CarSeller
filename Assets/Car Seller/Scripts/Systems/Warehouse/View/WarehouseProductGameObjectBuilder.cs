@@ -26,9 +26,6 @@ public class WarehouseProductGameObjectBuilder : ScriptableObject, IProductViewB
         foreach (var partLocation in car.carParts.Keys)
         {
             var slotData = partLocation.PartSlotRuntimeConfig.partSlotData;
-            //if hidden or not occupied, skip
-            if (slotData.Hidden == true || partLocation.Product == null)
-                continue;
             CarPartViewPlacementHelper.BuildCarPartAtPosition(partLocation, carGO.transform,carPartViewBuilder);
         }
 
@@ -102,9 +99,20 @@ public class WarehouseProductGameObjectBuilder : ScriptableObject, IProductViewB
             {
                 view = gameObject.AddComponent<WarehouseProductView>();
             }
-            gameObject.AddComponent<DirectDragInteractable>();
             view.Initialize(product, G.Instance.LocationService.GetProductLocation(product));
+            initializeAdditionalComponents(gameObject, product);
             return view;
+        }
+
+        // Add any additional components based on product type if needed
+        private void initializeAdditionalComponents(GameObject gameObject, Product product)
+        {
+            gameObject.AddComponent<DirectDragInteractable>();
+            if (product is not Car)
+            {
+                gameObject.AddComponent<DragCollisionDisabler>();
+                gameObject.AddComponent<DragSortingOrderChanger>();
+            }
         }
     }
 }

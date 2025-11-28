@@ -120,9 +120,11 @@ public static class CarPartViewPlacementHelper
 {
     public static GameObject BuildCarPartAtPosition(Car.CarPartLocation carPartLocation, Transform parentCarViewTransform, CarPartGameObjectBuilder carPartViewBuilder)
     {
-        Debug.Assert(carPartLocation.Product != null, "Car part location has no product attached: " + carPartLocation.PartSlotRuntimeConfig.SlotType);
-
         var slotData = carPartLocation.PartSlotRuntimeConfig.partSlotData;
+
+        //if hidden or not occupied, skip
+        if (slotData.Hidden == true || carPartLocation.Product == null)
+            return null;
 
         var part = carPartLocation.Product.GetRepresentation(carPartViewBuilder);
         if (part != null)

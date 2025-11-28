@@ -3,6 +3,9 @@ using UnityEngine;
 using Pixelplacement;
 using System;
 
+/// <summary>
+/// Currently in the background of GameFlowManager, probably should merge
+/// </summary>
 public class GameManager : Singleton<GameManager>
 {
     public enum TimeState
@@ -18,8 +21,6 @@ public class GameManager : Singleton<GameManager>
         UIInputController.Instance.onPaused += () => Pause(true);
         UIInputController.Instance.onResumed += () => Pause(false);
     }
-
-
 
     public void Pause(bool pause)
     {

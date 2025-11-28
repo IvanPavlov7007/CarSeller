@@ -24,6 +24,16 @@ public class Interactable : MonoBehaviour
     [ShowInInspector]
     protected bool logEvents = false;
 
+    protected virtual void OnEnable()
+    {
+        InteractionController.Instance.RegisterInteractable(this);
+    }
+
+    protected virtual void OnDisable()
+    {
+        InteractionController.Instance.UnregisterInteractable(this);
+    }
+
     public void CursorSelectStart()
     {
         CursorSelectStarted?.Invoke(this);

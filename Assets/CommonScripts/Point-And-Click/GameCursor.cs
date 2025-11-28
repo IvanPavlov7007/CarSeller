@@ -8,6 +8,8 @@ public class GameCursor : Singleton<GameCursor>
     public Interactable currentInteractable { get; private set; }
     public Interactable draggedInteractable { get; private set; }
 
+    public LayerMask interactableLayersMask => interactableLayers;
+
     [SerializeField] private LayerMask interactableLayers;
     public bool use3dPhysics = false;
 
@@ -285,7 +287,7 @@ public class GameCursor : Singleton<GameCursor>
 
     private Interactable updateCurrentInteractable(Interactable current, Vector2 worldPosition, LayerMask layerMask)
     {
-        var hitInteracrable = RaycastForInteractable(layerMask, worldPosition);
+        var hitInteracrable = InteractionPhysics.RaycastForInteractable(layerMask, worldPosition,use3dPhysics);
 
         if (hitInteracrable != current)
         {
@@ -294,28 +296,5 @@ public class GameCursor : Singleton<GameCursor>
         }
 
         return hitInteracrable;
-    }
-
-    private Interactable RaycastForInteractable(LayerMask layerMask, Vector2 positoin)
-    {
-        Interactable hitInteractable = null;
-
-        if (use3dPhysics)
-        {
-            var rayHits = Physics.SphereCastAll(positoin, 0.1f, Vector3.up, 0.1f, layerMask);
-            if (rayHits.Length > 0)
-                hitInteractable = rayHits[0].transform.GetComponentInParent<Interactable>();
-        }
-        else
-        {
-            var rayHits = Physics2D.RaycastAll(positoin, Vector2.zero, 1000f, layerMask);
-            if (rayHits.Length > 0)
-            {
-                var tr = rayHits[0].rigidbody != null ? rayHits[0].rigidbody.transform : rayHits[0].transform;
-                hitInteractable = tr.GetComponentInParent<Interactable>();
-            }
-        }
-
-        return hitInteractable;
     }
 }
