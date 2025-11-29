@@ -7,17 +7,29 @@ public class PopUpMenuManager : Singleton<PopUpMenuManager>
     public Vector2 offsetFromPosition = new Vector2(0, 10);
     public GameObject popUpMenuPrefab;
 
+    IUIBuilder contextMenuBuilder => SimpleUIBuilder.Instance;
+
+
     private void OnEnable()
     {
-        GameEvents.Instance.OnObjectWithPopupClicked += ObjectSelected;
+        GameEvents.Instance.OnObjectWithPopupClicked += TestObjectSelected;
     }
 
     private void OnDisable()
     {
-        GameEvents.Instance.OnObjectWithPopupClicked -= ObjectSelected;
+        GameEvents.Instance.OnObjectWithPopupClicked -= TestObjectSelected;
     }
 
-    public void ObjectSelected(ObjectWithPopupMenuTest objectWithProvider)
+    public void CreateContextMenu(GameObject target, UIContent content)
+    {
+        RectTransform panel = Instantiate(popUpMenuPrefab).GetComponent<RectTransform>();
+        panel.position = target.transform.position + (Vector3)offsetFromPosition;
+        SimpleUIBuilder.Instance.Build(panel.GetChild(0).GetChild(0) as RectTransform, content);
+    }
+
+
+    // Temporary test methods
+    private void TestObjectSelected(ObjectWithPopupMenuTest objectWithProvider)
     {
         ObjectWithPopupMenuTest clickable = objectWithProvider as ObjectWithPopupMenuTest;
         if(clickable != null)
@@ -28,10 +40,15 @@ public class PopUpMenuManager : Singleton<PopUpMenuManager>
         }
 
     }
-
     public void ShowPopUpMenu(RectTransform container, UIContentProvider contentProvider, UIContext context)
     {
         var contents = contentProvider.GetContents(context);
-        UIBuilder.Instance.Build(container, contents);
+        SimpleUIBuilder.Instance.Build(container, contents);
     }
+
+
+
+    
+
+
 }

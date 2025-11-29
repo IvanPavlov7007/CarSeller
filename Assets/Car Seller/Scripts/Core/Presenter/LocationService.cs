@@ -2,6 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+/// <summary>
+/// General service to manage product locations. Should be used as the only tool to move products between locations.
+/// </summary>
 public class LocationService
 {
     Dictionary<Product, IProductLocation> productLocations => World.Instance.productLocations;

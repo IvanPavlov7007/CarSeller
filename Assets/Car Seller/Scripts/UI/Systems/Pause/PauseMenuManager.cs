@@ -27,7 +27,7 @@ public class PauseMenuManager : Singleton<PauseMenuManager>
     void onPaused()
     {
         BlockUIManager.Instance.Block(canvas,()=> GameManager.Instance.Pause(false));
-        UIBuilder.Instance?.Build(container, contentProvider.GetContents(new UIContext()));
+        SimpleUIBuilder.Instance?.Build(container, contentProvider.GetContents(new UIContext()));
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
     }
@@ -42,12 +42,12 @@ public class PauseMenuManager : Singleton<PauseMenuManager>
 
     private class PauseContentProvider : UIContentProvider
     {
-        public IEnumerable<UIContent> GetContents(UIContext context)
+        public IEnumerable<UISingleContent> GetContents(UIContext context)
         {
-            List<UIContent> contents = new List<UIContent>
+            List<UISingleContent> contents = new List<UISingleContent>
             {
-                new UIContent { Header = "Pause Menu", ContentType = UIContentType.Header },
-                new UIContent
+                new UISingleContent { Header = "Pause Menu", ContentType = UIContentType.Header },
+                new UISingleContent
                 {
                     Text = "Resume",
                     ContentType = UIContentType.Button,
@@ -56,7 +56,7 @@ public class PauseMenuManager : Singleton<PauseMenuManager>
                         GameManager.Instance.Pause(false);
                     }
                 },
-                new UIContent
+                new UISingleContent
                 {
                     Text = "Reset Game",
                     ContentType = UIContentType.Button,

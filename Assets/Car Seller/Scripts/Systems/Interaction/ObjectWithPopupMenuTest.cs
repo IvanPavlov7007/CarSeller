@@ -60,11 +60,11 @@ public class ObjectWithPopupMenuTest : MonoBehaviour
             this.owner = owner;
         }
 
-        public IEnumerable<UIContent> GetContents(UIContext context)
+        public IEnumerable<UISingleContent> GetContents(UIContext context)
         {
-            List<UIContent> contents = new List<UIContent>()
+            List<UISingleContent> contents = new List<UISingleContent>()
             {
-                new UIContent{ ContentType = UIContentType.Header, Header = owner.name}
+                new UISingleContent{ ContentType = UIContentType.Header, Header = owner.name}
             };
             return contents;
         }

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using NUnit.Framework;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class WarehouseInteractionManager : IInteractionManager
 {
@@ -9,6 +11,8 @@ public class WarehouseInteractionManager : IInteractionManager
 
     Product draggedProduct;
 
+    WarehouseContextMenuContentProfile ctxMenuProfile = new WarehouseContextMenuContentProfile();
+
     public void OnProductViewClick(Interactable interactable)
     {
         var productView = interactable.GetComponent<ProductView>();
@@ -16,6 +20,12 @@ public class WarehouseInteractionManager : IInteractionManager
         {
             //open product details popup
             //WarehouseUIManager.Instance.OpenProductDetailsPopup(productView.Product);
+            var contentProvider = productView.GetComponent<ContentProvider>();
+            var ctxMenuContent = contentProvider?.ProvideContent(ctxMenuProfile, null);
+            if (ctxMenuContent != null)
+            {
+                PopUpMenuManager.Instance.CreateContextMenu(interactable.gameObject, ctxMenuContent);
+            }
         }
     }
     public void OnDragEnd(Interactable interactable)
@@ -73,9 +83,49 @@ public class WarehouseInteractionManager : IInteractionManager
             draggedProduct = productView.Product;
         }
     }
-    public class WarehouseInteractionState
+    public class WarehouseContextMenuContentProfile : IInteractionContentProfile<UIContent>, IProductViewBuilder<UIContent>
     {
+        public UIContent BuildCar(Car car)
+        {
+            List<UISingleContent> contents = new List<UISingleContent>();
+            //Add header
+            //Add button to dissasemble
+            //Add button to ride
+            //Add button to sell
+            return new UIContent(contents.ToArray());
+        }
 
+        public UIContent BuildCarFrame(CarFrame carFrame)
+        {
+            return null;
+        }
+
+        public UIContent BuildEngine(Engine engine)
+        {
+            return null;
+        }
+
+        public UIContent BuildSpoiler(Spoiler spoiler)
+        {
+            return null;
+        }
+
+        public UIContent BuildWheel(Wheel wheel)
+        {
+            return null;
+        }
+
+        public UIContent GenerateContent(object model, IInteractionContext context)
+        {
+            switch (model)
+            {
+                case Product product:
+                    return product.GetRepresentation(this);
+                default:
+                    Debug.LogWarning("No context menu available for model type " + model.GetType() + " in this content profile " + this);
+                    return UIContent.Error;
+            }
+        }
     }
 
 }

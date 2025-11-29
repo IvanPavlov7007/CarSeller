@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using Sirenix.Utilities;
 
 [CreateAssetMenu(fileName = "UIBuilder", menuName = "GameUI/UIBuilder")]
-public class UIBuilder : SingletonScriptableObject<UIBuilder>
+public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IUIBuilder
 {
     public GameObject RowHolderPrefab;
     public GameObject PushButtonPrefab;
@@ -15,7 +15,7 @@ public class UIBuilder : SingletonScriptableObject<UIBuilder>
     public GameObject VLayoutPrefab;
     public GameObject HLayoutPrefab;
     public GameObject GridLayoutPrefab;
-    public void Build(RectTransform container, IEnumerable<UIContent> contents)
+    public void Build(RectTransform container, IEnumerable<UISingleContent> contents)
     {
         //delete all children
         foreach (Transform child in container)
@@ -46,5 +46,10 @@ public class UIBuilder : SingletonScriptableObject<UIBuilder>
                     break;
             }
         }
+    }
+
+    public void Build(RectTransform container, UIContent contents)
+    {
+        Build(container, contents.UIContents);
     }
 }

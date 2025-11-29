@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface UIContentProvider
 {
-    IEnumerable<UIContent> GetContents(UIContext context);
+    IEnumerable<UISingleContent> GetContents(UIContext context);
 }
