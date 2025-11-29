@@ -42,12 +42,12 @@ public class PauseMenuManager : Singleton<PauseMenuManager>
 
     private class PauseContentProvider : UIContentProvider
     {
-        public IEnumerable<UISingleContent> GetContents(UIContext context)
+        public IEnumerable<UIContent> GetContents(UIContext context)
         {
-            List<UISingleContent> contents = new List<UISingleContent>
+            List<UIContent> contents = new List<UIContent>
             {
-                new UISingleContent { Header = "Pause Menu", ContentType = UIContentType.Header },
-                new UISingleContent
+                new UIContent { Header = "Pause Menu", ContentType = UIContentType.Header },
+                new UIContent
                 {
                     Text = "Resume",
                     ContentType = UIContentType.Button,
@@ -56,7 +56,7 @@ public class PauseMenuManager : Singleton<PauseMenuManager>
                         GameManager.Instance.Pause(false);
                     }
                 },
-                new UISingleContent
+                new UIContent
                 {
                     Text = "Reset Game",
                     ContentType = UIContentType.Button,

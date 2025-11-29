@@ -1,4 +1,9 @@
-﻿public interface IProductViewBuilder<T>
+﻿/// <summary>
+/// A Visitor-Pattern interface for building product views.
+/// Products select the appropriate method to call based on their type.
+/// </summary>
+/// <typeparam name="T"></typeparam>
+public interface IProductViewBuilder<T>
 {
     T BuildCar(Car car);
     T BuildWheel(Wheel wheel);

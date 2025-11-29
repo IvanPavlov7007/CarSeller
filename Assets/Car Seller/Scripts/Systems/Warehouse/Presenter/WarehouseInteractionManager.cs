@@ -83,39 +83,39 @@ public class WarehouseInteractionManager : IInteractionManager
             draggedProduct = productView.Product;
         }
     }
-    public class WarehouseContextMenuContentProfile : IInteractionContentProfile<UIContent>, IProductViewBuilder<UIContent>
+    public class WarehouseContextMenuContentProfile : IInteractionContentProfile<UIContentList>, IProductViewBuilder<UIContentList>
     {
-        public UIContent BuildCar(Car car)
+        public UIContentList BuildCar(Car car)
         {
-            List<UISingleContent> contents = new List<UISingleContent>();
+            List<UIContent> contents = new List<UIContent>();
             //Add header
             //Add button to dissasemble
             //Add button to ride
             //Add button to sell
-            return new UIContent(contents.ToArray());
+            return new UIContentList(contents.ToArray());
         }
 
-        public UIContent BuildCarFrame(CarFrame carFrame)
+        public UIContentList BuildCarFrame(CarFrame carFrame)
         {
             return null;
         }
 
-        public UIContent BuildEngine(Engine engine)
+        public UIContentList BuildEngine(Engine engine)
         {
             return null;
         }
 
-        public UIContent BuildSpoiler(Spoiler spoiler)
+        public UIContentList BuildSpoiler(Spoiler spoiler)
         {
             return null;
         }
 
-        public UIContent BuildWheel(Wheel wheel)
+        public UIContentList BuildWheel(Wheel wheel)
         {
             return null;
         }
 
-        public UIContent GenerateContent(object model, IInteractionContext context)
+        public UIContentList GenerateContent(object model, IInteractionContext context)
         {
             switch (model)
             {
@@ -123,7 +123,7 @@ public class WarehouseInteractionManager : IInteractionManager
                     return product.GetRepresentation(this);
                 default:
                     Debug.LogWarning("No context menu available for model type " + model.GetType() + " in this content profile " + this);
-                    return UIContent.Error;
+                    return null;
             }
         }
     }

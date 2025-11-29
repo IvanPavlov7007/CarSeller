@@ -7,7 +7,7 @@ public class PopUpMenuManager : Singleton<PopUpMenuManager>
     public Vector2 offsetFromPosition = new Vector2(0, 10);
     public GameObject popUpMenuPrefab;
 
-    IUIBuilder contextMenuBuilder => SimpleUIBuilder.Instance;
+    IRectFillBuilder contextMenuBuilder => SimpleUIBuilder.Instance;
 
 
     private void OnEnable()
@@ -20,11 +20,12 @@ public class PopUpMenuManager : Singleton<PopUpMenuManager>
         GameEvents.Instance.OnObjectWithPopupClicked -= TestObjectSelected;
     }
 
-    public void CreateContextMenu(GameObject target, UIContent content)
+    public void CreateContextMenu(GameObject target, UIContentList content)
     {
         RectTransform panel = Instantiate(popUpMenuPrefab).GetComponent<RectTransform>();
         panel.position = target.transform.position + (Vector3)offsetFromPosition;
         SimpleUIBuilder.Instance.Build(panel.GetChild(0).GetChild(0) as RectTransform, content);
+        BlockUIManager.Instance.Block(panel.GetComponent<Canvas>,);
     }
 
 
