@@ -7,11 +7,12 @@ using UnityEngine;
 public class G : Singleton<G>
 {
     //MODEL
-    public LocationService LocationService;
-    public ProductManager ProductManager;
+
 
     //REPRESENTATION
-    
+    public ProductManager ProductManager;
+    public LocationService LocationService;
+
     public GameFlowController GameFlowController = new GameFlowController();
 
     //Interaction
@@ -33,7 +34,6 @@ public class G : Singleton<G>
     public void ResetGameState()
     {
         World.Reset();
-        GameEvents.Instance.Reset();
     }
 
 }

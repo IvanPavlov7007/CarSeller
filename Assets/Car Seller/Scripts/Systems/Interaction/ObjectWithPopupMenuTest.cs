@@ -7,14 +7,6 @@ public class ObjectWithPopupMenuTest : MonoBehaviour
     public enum TestButton { Crouch, Jump}
     public TestButton buttonToTest;
 
-    public SimpleContentProvider contentProvider { get; private set; }
-
-    private void Awake()
-    {
-     contentProvider = new SimpleContentProvider(this.gameObject);
-    }
-
-
     void OnTestButton()
     {
         GameEvents.Instance.OnObjectWithPopupClicked?.Invoke(this);
@@ -48,25 +40,6 @@ public class ObjectWithPopupMenuTest : MonoBehaviour
                 break;
             default:
                 break;
-        }
-    }
-
-    public class SimpleContentProvider : UIContentProvider
-    {
-        GameObject owner;
-
-        public SimpleContentProvider(GameObject owner)
-        {
-            this.owner = owner;
-        }
-
-        public IEnumerable<UIContent> GetContents(UIContext context)
-        {
-            List<UIContent> contents = new List<UIContent>()
-            {
-                new UIContent{ ContentType = UIContentType.Header, Header = owner.name}
-            };
-            return contents;
         }
     }
 }

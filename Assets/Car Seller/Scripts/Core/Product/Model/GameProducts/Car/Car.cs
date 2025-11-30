@@ -42,6 +42,19 @@ public sealed class Car : Product, IProductsHolder
         return null;
     }
 
+    public bool IsComplete()
+    {
+        Debug.Assert(carParts != null, $"Car {UniqueName}: Car parts have not been set.");
+        foreach (var slotLocation in carParts.Keys)
+        {
+            if (slotLocation.PartSlotRuntimeConfig.partSlotData.Required && slotLocation.Product == null)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public IProductLocation[] GetProductLocations()
     {
         Debug.Assert(carParts != null, $"Car {UniqueName}: Car parts have not been set.");
@@ -80,6 +93,9 @@ public sealed class Car : Product, IProductsHolder
         }
     }
 
+    /// <summary>
+    /// Car Slot-representing instances
+    /// </summary>
     public class CarPartLocation : IProductLocation
     {
         public CarPartLocation(Car car, PartSlotRuntimeConfig partSlotRuntimeConfig, Product product)

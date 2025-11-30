@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using Sirenix.Utilities;
 
 [CreateAssetMenu(fileName = "UIBuilder", menuName = "GameUI/UIBuilder")]
-public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IRectFillBuilder
+public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IUIElementBuilder<RectTransform>
 {
     public GameObject RowHolderPrefab;
     public GameObject PushButtonPrefab;
@@ -15,41 +15,42 @@ public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IRect
     public GameObject VLayoutPrefab;
     public GameObject HLayoutPrefab;
     public GameObject GridLayoutPrefab;
-    public void Build(RectTransform container, IEnumerable<UIContent> contents)
+    public RectTransform Build(UIElement content, RectTransform container)
     {
-        //delete all children
-        foreach (Transform child in container)
+        switch(content.Type)
         {
-            Destroy(child.gameObject);
-        }
-
-        foreach (var item in contents)
-        {
-            Transform rowHolder = GameObject.Instantiate(RowHolderPrefab, container).transform;
-            switch (item.ContentType)
-            {
-                case UIContentType.Header:
-                    var headerTMPObj = GameObject.Instantiate(TextMeshProPrefab, rowHolder);
-                    var headerTMP = headerTMPObj.GetComponent<TextMeshProUGUI>();
-                    headerTMP.text = string.IsNullOrEmpty(item.Header) ? item.Text : item.Header;
-                    break;
-                case UIContentType.Text:
-                    break;
-                case UIContentType.Button:
-                    var buttonObj = GameObject.Instantiate(PushButtonPrefab, rowHolder);
-                    var buttonTMP = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
-                    var button = buttonObj.GetComponent<Button>();
-                    buttonTMP.text = string.IsNullOrEmpty(item.Header) ? item.Text : item.Header;
-                    button.onClick.AddListener(() => item.pushAction?.Invoke());
-                    break;
-                default:
-                    break;
-            }
+            case UIElementType.Container:
+                foreach(var child in content.Children)
+                {
+                    Build(child, container);
+                }
+                return container;
+            case UIElementType.Button:
+                return BuildButton(content, container);
+            case UIElementType.Text:
+                return BuildText(content, container);
+            default:
+                return null;
         }
     }
 
-    public void Build(RectTransform container, UIContentList contents)
+    private RectTransform BuildText(UIElement item, RectTransform container)
     {
-        Build(container, contents.UIContents);
+        RectTransform rowHolder = GameObject.Instantiate(RowHolderPrefab, container).GetComponent<RectTransform>();
+        var headerTMPObj = GameObject.Instantiate(TextMeshProPrefab, rowHolder);
+        var headerTMP = headerTMPObj.GetComponent<TextMeshProUGUI>();
+        headerTMP.text = item.Text;
+        return rowHolder;
+    }
+
+    private RectTransform BuildButton(UIElement item, RectTransform container)
+    {
+        RectTransform rowHolder = GameObject.Instantiate(RowHolderPrefab, container).GetComponent<RectTransform>();
+        var buttonObj = GameObject.Instantiate(PushButtonPrefab, rowHolder);
+        var buttonTMP = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
+        buttonTMP.text = item.Text;
+        buttonObj.AddComponent<ButtonStateController>().
+             Initialize(item);
+        return rowHolder;
     }
 }

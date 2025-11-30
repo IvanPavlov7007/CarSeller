@@ -108,6 +108,7 @@ public class WarehouseProductGameObjectBuilder : ScriptableObject, IProductViewB
         private void initializeAdditionalComponents(GameObject gameObject, Product product)
         {
             gameObject.AddComponent<DirectDragInteractable>();
+            gameObject.AddComponent<ContentProvider>().Initialize(product);
             if (product is not Car)
             {
                 gameObject.AddComponent<DragCollisionDisabler>();

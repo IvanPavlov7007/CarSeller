@@ -24,7 +24,7 @@ public class WarehouseInteractionManager : IInteractionManager
             var ctxMenuContent = contentProvider?.ProvideContent(ctxMenuProfile, null);
             if (ctxMenuContent != null)
             {
-                PopUpMenuManager.Instance.CreateContextMenu(interactable.gameObject, ctxMenuContent);
+                ContextMenuManager.Instance.CreateContextMenu(interactable.gameObject, ctxMenuContent);
             }
         }
     }
@@ -83,39 +83,59 @@ public class WarehouseInteractionManager : IInteractionManager
             draggedProduct = productView.Product;
         }
     }
-    public class WarehouseContextMenuContentProfile : IInteractionContentProfile<UIContentList>, IProductViewBuilder<UIContentList>
+    public class WarehouseContextMenuContentProfile : IInteractionContentProfile<UIElement>, IProductViewBuilder<UIElement>
     {
-        public UIContentList BuildCar(Car car)
+        public UIElement BuildCar(Car car)
         {
-            List<UIContent> contents = new List<UIContent>();
-            //Add header
-            //Add button to dissasemble
-            //Add button to ride
-            //Add button to sell
-            return new UIContentList(contents.ToArray());
+            UIElement element = new UIElement()
+            {
+                Type = UIElementType.Container,
+                Children = new List<UIElement>()
+                {
+                    new UIElement()
+                    {
+                        Type = UIElementType.Button,
+                        Text = "Disassemble",
+                        IsInteractable = CarMechanicService.Instance.CanDisassembleCar(car),
+                        OnClick = () =>
+                        {
+                            CarMechanicService.Instance.DisassembleCar(World.Instance.Warehouse, car);
+                        },
+                        UnavailabilityReason = "Car has nothing to disassemble"
+                    }
+                    //,new UIElement()
+                    //{
+                    //    Type = UIElementType.Button,
+                    //    Text = "Ride",
+                    //    IsInteractable = car.IsComplete(),
+                    //    OnClick = () => G.Instance.GameFlowController.RideCar(car)
+                    //}
+                }
+            };
+            return element;
         }
 
-        public UIContentList BuildCarFrame(CarFrame carFrame)
+        public UIElement BuildCarFrame(CarFrame carFrame)
         {
             return null;
         }
 
-        public UIContentList BuildEngine(Engine engine)
+        public UIElement BuildEngine(Engine engine)
         {
             return null;
         }
 
-        public UIContentList BuildSpoiler(Spoiler spoiler)
+        public UIElement BuildSpoiler(Spoiler spoiler)
         {
             return null;
         }
 
-        public UIContentList BuildWheel(Wheel wheel)
+        public UIElement BuildWheel(Wheel wheel)
         {
             return null;
         }
 
-        public UIContentList GenerateContent(object model, IInteractionContext context)
+        public UIElement GenerateContent(object model, IInteractionContext context)
         {
             switch (model)
             {

@@ -19,11 +19,13 @@ public class WarehouseManager : Singleton<WarehouseManager>
     private void OnEnable()
     {
         GameEvents.Instance.OnProductCreated += onNewProductCreated;
+        GameEvents.Instance.OnProductLocationChanged += onProductLocationChanged;
     }
 
     private void OnDisable()
     {
         GameEvents.Instance.OnProductCreated -= onNewProductCreated;
+        GameEvents.Instance.OnProductLocationChanged -= onProductLocationChanged;
     }
 
     private void Update()
@@ -60,6 +62,16 @@ public class WarehouseManager : Singleton<WarehouseManager>
         if (location.Holder == Warehouse)
         {
             buildProductView(data.Product, location);
+        }
+    }
+
+    void onProductLocationChanged(ProductLocationChangedEventData data)
+    {
+        Debug.Assert(Warehouse != null, "Warehouse instance is not set");
+
+        if (data.NewLocation?.Holder == Warehouse)
+        {
+            buildProductView(data.Product, data.NewLocation);
         }
     }
 

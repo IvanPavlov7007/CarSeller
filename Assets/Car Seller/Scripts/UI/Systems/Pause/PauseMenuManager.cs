@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Pixelplacement;
+using UnityEngine.UIElements;
 
-public class PauseMenuManager : Singleton<PauseMenuManager>
+public class PauseMenuManager : Singleton<PauseMenuManager>, IClosable
 {
     CanvasGroup canvasGroup;
     Canvas canvas;
     [SerializeField]
     RectTransform container;
-
-    PauseContentProvider contentProvider = new PauseContentProvider();
 
     private void Awake()
     {
@@ -24,10 +23,48 @@ public class PauseMenuManager : Singleton<PauseMenuManager>
         GameEvents.Instance.OnGameUnpaused += onResumed;
     }
 
+    public void Close()
+    {
+        GameManager.Instance.Pause(false);
+    }
+
     void onPaused()
     {
         BlockUIManager.Instance.Block(canvas,()=> GameManager.Instance.Pause(false));
-        SimpleUIBuilder.Instance?.Build(container, contentProvider.GetContents(new UIContext()));
+        SimpleUIBuilder.Instance?.Build(
+            new UIElement
+            {
+                Type = UIElementType.Container,
+                Children = new List<UIElement>()
+                {
+                    new UIElement
+                    {
+                        Text = "Pause Menu",
+                        Type = UIElementType.Text
+                    },
+                    new UIElement
+                    {
+                        Text = "Resume",
+                        Type = UIElementType.Button,
+                        OnClick = () =>
+                        {
+                            GameManager.Instance.Pause(false);
+                        }
+                    },
+                    new UIElement
+                    {
+                        Text = "Reset Game",
+                        Type = UIElementType.Button,
+                        OnClick = () =>
+                        {
+                            GameManager.Instance.ResetGame();
+                        }
+                    }
+
+                }
+            }
+
+            , container);
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
     }
@@ -35,40 +72,12 @@ public class PauseMenuManager : Singleton<PauseMenuManager>
     void onResumed()
     {
         BlockUIManager.Instance.Unblock(canvas);
+        foreach (Transform child in container)
+        {
+            Destroy(child.gameObject);
+        }
         canvasGroup.alpha = 0f;
         canvasGroup.blocksRaycasts = false;
-    }
-
-
-    private class PauseContentProvider : UIContentProvider
-    {
-        public IEnumerable<UIContent> GetContents(UIContext context)
-        {
-            List<UIContent> contents = new List<UIContent>
-            {
-                new UIContent { Header = "Pause Menu", ContentType = UIContentType.Header },
-                new UIContent
-                {
-                    Text = "Resume",
-                    ContentType = UIContentType.Button,
-                    pushAction = () =>
-                    {
-                        GameManager.Instance.Pause(false);
-                    }
-                },
-                new UIContent
-                {
-                    Text = "Reset Game",
-                    ContentType = UIContentType.Button,
-                    pushAction = () =>
-                    {
-                        GameManager.Instance.ResetGame();
-                    }
-                }
-            };
-
-            return contents;
-        }
     }
     
 }
