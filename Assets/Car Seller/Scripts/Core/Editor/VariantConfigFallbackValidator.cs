@@ -4,7 +4,7 @@ using Sirenix.OdinInspector.Editor.Validation;
 // Register this validator for all properties/objects whose value type is IVariantConfig.
 [assembly: RegisterValidator(typeof(VariantConfigFallbackValidator))]
 
-public class VariantConfigFallbackValidator : ValueValidator<IVariantConfig>
+public class VariantConfigFallbackValidator : ValueValidator<ISimpleVariantConfig>
 {
     protected override void Validate(ValidationResult result)
     {

@@ -6,8 +6,11 @@ public interface IBaseConfig
 {
 }
 
+
+public interface IVariantConfig { }
+
 //example: [CreateAssetMenu(fileName = "WheelVariantConfig", menuName = "Configs/Products/Wheel/Wheel Variant Config")]
-public interface IVariantConfig
+public interface ISimpleVariantConfig : IVariantConfig
 {
     IBaseConfig FallbackBase { get; }
     bool ForceFallback { get; }

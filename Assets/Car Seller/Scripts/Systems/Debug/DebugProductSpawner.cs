@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DebugProductSpawner : MonoBehaviour
 {
-    public WarehouseManager warehouseManager;
+    public WarehouseSceneManager warehouseManager;
 
     public CarBaseConfig carBaseConfig;
     public CarVariantConfig carVariantConfig;
@@ -27,7 +27,7 @@ public class DebugProductSpawner : MonoBehaviour
         G.Instance.ProductManager.CreateCar(
             carBaseConfig,
             carVariantConfig,
-            WarehouseManager.Instance.Warehouse.GetEmptyLocation() );
+            WarehouseSceneManager.Instance.Warehouse.GetEmptyLocation() );
     }
 
     [Button]
@@ -36,7 +36,7 @@ public class DebugProductSpawner : MonoBehaviour
         G.Instance.ProductManager.CreateWheel(
             wheelBaseConfig,
             wheelVariantConfig,
-            WarehouseManager.Instance.Warehouse.GetEmptyLocation() );
+            WarehouseSceneManager.Instance.Warehouse.GetEmptyLocation() );
     }
     [Button]
     public void SpawnEngine()
@@ -44,7 +44,7 @@ public class DebugProductSpawner : MonoBehaviour
         G.Instance.ProductManager.CreateEngine(
             engineBaseConfig,
             engineVariantConfig,
-            WarehouseManager.Instance.Warehouse.GetEmptyLocation() );
+            WarehouseSceneManager.Instance.Warehouse.GetEmptyLocation() );
     }
     [Button]
     public void SpawnSpoiler()
@@ -52,7 +52,7 @@ public class DebugProductSpawner : MonoBehaviour
         G.Instance.ProductManager.CreateSpoiler(
             spoilerBaseConfig,
             spoilerVariantConfig,
-            WarehouseManager.Instance.Warehouse.GetEmptyLocation() );
+            WarehouseSceneManager.Instance.Warehouse.GetEmptyLocation() );
     }
 
 }

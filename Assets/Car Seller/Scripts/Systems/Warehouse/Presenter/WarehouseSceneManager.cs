@@ -3,9 +3,11 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 
-// Loads and manages warehouse in the warehouse scene
-[ExecuteAlways]
-public class WarehouseManager : Singleton<WarehouseManager>
+/// <summary>
+/// Loads and manages warehouse in the warehouse scene
+/// </summary>
+//[ExecuteAlways]
+public class WarehouseSceneManager : Singleton<WarehouseSceneManager>
 {
     public Warehouse Warehouse => World.Instance.Warehouse;
 

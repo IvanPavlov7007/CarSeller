@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Frame", menuName = "Configs/Products/Frame/Frame Variant Config")]
-public class CarFrameVariantConfig : ScriptableObject, IVariantConfig
+public class CarFrameVariantConfig : ScriptableObject, ISimpleVariantConfig
 {
     public bool OverrideBase;
     public CarFrameBaseConfig BaseConfig;
@@ -12,7 +12,7 @@ public class CarFrameVariantConfig : ScriptableObject, IVariantConfig
 
     public IBaseConfig FallbackBase => BaseConfig;
 
-    bool IVariantConfig.ForceFallback => OverrideBase;
+    bool ISimpleVariantConfig.ForceFallback => OverrideBase;
 
     public IConfigOverrides Overrides => CarFrameVariantOverrides;
 }

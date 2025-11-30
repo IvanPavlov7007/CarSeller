@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CarVariantConfig", menuName = "Configs/Products/Car/Car Variant Config")]
-public class CarVariantConfig : SerializedScriptableObject
+public class CarVariantConfig : SerializedScriptableObject, IVariantConfig
 {
     public CarBaseConfig baseFallbackConfig;
     public CarFrameVariantConfig carFrameRuntimeConfig;

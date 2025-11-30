@@ -3,15 +3,15 @@ using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SpoilerVariantConfig", menuName = "Configs/Products/Spoiler/Spoiler Variant Config")]
-public class SpoilerVariantConfig : ScriptableObject, IVariantConfig
+public class SpoilerVariantConfig : ScriptableObject, ISimpleVariantConfig
 {
     public bool OverrideBase;
     public SpoilerBaseConfig FallbackConfig;
     public SpoilerConfigOverrides Overrides;
 
-    bool IVariantConfig.ForceFallback => OverrideBase;
-    IConfigOverrides IVariantConfig.Overrides => Overrides;
-    IBaseConfig IVariantConfig.FallbackBase => FallbackConfig;
+    bool ISimpleVariantConfig.ForceFallback => OverrideBase;
+    IConfigOverrides ISimpleVariantConfig.Overrides => Overrides;
+    IBaseConfig ISimpleVariantConfig.FallbackBase => FallbackConfig;
 
     [Serializable]
     public class SpoilerConfigOverrides : IConfigOverrides

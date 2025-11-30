@@ -4,15 +4,15 @@ using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "WheelVariantConfig", menuName = "Configs/Products/Wheel/Wheel Variant Config")]
-public class WheelVariantConfig : ScriptableObject, IVariantConfig
+public class WheelVariantConfig : ScriptableObject, ISimpleVariantConfig
 {
     public WheelBaseConfig BaseFallback;
     public bool ForceFallback;
     public WheelOverrides Overrides;
 
     public IBaseConfig FallbackBase => BaseFallback;
-    bool IVariantConfig.ForceFallback => ForceFallback;
-    IConfigOverrides IVariantConfig.Overrides => Overrides;
+    bool ISimpleVariantConfig.ForceFallback => ForceFallback;
+    IConfigOverrides ISimpleVariantConfig.Overrides => Overrides;
 }
 
 [Serializable]

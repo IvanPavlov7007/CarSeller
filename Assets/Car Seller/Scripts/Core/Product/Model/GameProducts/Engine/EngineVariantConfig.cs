@@ -3,15 +3,15 @@ using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EngineVariantConfig", menuName = "Configs/Products/Engine/Engine Variant Config")]
-public class EngineVariantConfig : ScriptableObject, IVariantConfig
+public class EngineVariantConfig : ScriptableObject, ISimpleVariantConfig
 {
     public bool OverrideBase;
     public EngineBaseConfig FallbackBase;
     public ConfigOverrides Overrides;
 
-    bool IVariantConfig.ForceFallback => OverrideBase;
-    IConfigOverrides IVariantConfig.Overrides => Overrides;
-    IBaseConfig IVariantConfig.FallbackBase => FallbackBase;
+    bool ISimpleVariantConfig.ForceFallback => OverrideBase;
+    IConfigOverrides ISimpleVariantConfig.Overrides => Overrides;
+    IBaseConfig ISimpleVariantConfig.FallbackBase => FallbackBase;
 
     [Serializable]
     public class ConfigOverrides : IConfigOverrides

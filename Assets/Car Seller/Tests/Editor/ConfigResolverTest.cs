@@ -631,7 +631,7 @@ public class ConfigResolverTest
         return result;
     }
 
-    PartSlotVariantConfig createVariantSlot(PartSlotType slotType, IVariantConfig config)
+    PartSlotVariantConfig createVariantSlot(PartSlotType slotType, ISimpleVariantConfig config)
     {
         PartSlotVariantConfig result;
         switch (slotType)

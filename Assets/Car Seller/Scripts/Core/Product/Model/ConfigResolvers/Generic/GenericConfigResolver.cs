@@ -7,7 +7,7 @@ public class GenericConfigResolver
         TVariant variantConfig
     )
         where TBase : IBaseConfig
-        where TVariant : IVariantConfig
+        where TVariant : ISimpleVariantConfig
         where TResolved : IRuntimeConfig, new()
     {
         // 1. Determine the base to use
