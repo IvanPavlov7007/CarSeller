@@ -97,8 +97,12 @@ public class City : IProductsHolder
             set
             {
                 Debug.Assert(nodeA != nodeB, "Nodes cannot be the same");
-                Debug.Assert(nodeA.connectedNeighbors.Contains(nodeB), "Nodes are not connected");
+                Debug.Assert(value == null || nodeA.connectedNeighbors.Contains(nodeB), "Nodes are not connected");
                 nodeB = value;
+                if(nodeB == null)
+                {
+                    relativePosition = 0f;
+                }
             }
         }
         public float RelativePosition

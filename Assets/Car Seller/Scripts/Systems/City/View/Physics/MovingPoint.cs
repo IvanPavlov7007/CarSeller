@@ -33,22 +33,44 @@ public class MovingPoint : MonoBehaviour
         arrowRotationPoint.rotation = Quaternion.Lerp(arrowRotationPoint.rotation,  Quaternion.FromToRotation(Vector2.up, nextDirection.normalized),lerpV);
         arrowRotationPoint.localScale = new Vector3(1f, Mathf.Lerp(arrowRotationPoint.localScale.y, nextDirection.magnitude, lerpV), 1f);
 
+        //Anchor node - node from which we move from
+        Node a = positionData.NodeA;
+        //target node- node to which we move to, can be null if we are just starting from NodeA
+        Node b;
+        Vector2 a_to_b = Vector2.zero; 
 
-        Node currentNode = positionData.NodeA;
-        Node nextNode = positionData.NodeB == null ? currentNode.PickClosestNeighbourDirection(nextDirection, out _) : positionData.NodeB;
+        //First check if we exactly on a node
+        if (positionData.NodeB == null)
+        {
+            //Check if there is a neighbour in the desired direction
+            b = a.PickClosestNeighbourDirection(nextDirection, out a_to_b);
+            //No neighbour in that direction
+            if (Vector2.Dot(a_to_b, nextDirection) < 0f)
+            {
+                return;
+            }
+        }
+        else
+        {
+            //keeping moving towards NodeB
+            b = positionData.NodeB;
+            a_to_b = (b.CurrentPosition - a.CurrentPosition).normalized;
+        }
 
-        Vector2 nextNPos = nextNode.CurrentPosition;
-        Vector2 curNPos = currentNode.CurrentPosition;
+        //TODO old code below, refactor!
+
+        Vector2 nextNPos = b.CurrentPosition;
+        Vector2 curNPos = a.CurrentPosition;
 
         Vector2 curToNextVec = (nextNPos - curNPos);
 
+        //Check if we need to swap nodes
         float dot = Vector2.Dot(nextDirection, curToNextVec);
-
         if (dot < 0)
         {
-            Node c = currentNode;
-            currentNode = nextNode;
-            nextNode = c;
+            Node c = a;
+            a = b;
+            b = c;
             relativePosBetweenNodes = 1f - relativePosBetweenNodes;
             curToNextVec *= -1f;
             Vector2 vC = curNPos;
@@ -71,16 +93,16 @@ public class MovingPoint : MonoBehaviour
         {
             stepLenght -= distToNextNode * (1f -relativePosBetweenNodes);
             relativePosBetweenNodes = 0f;
-            currentNode = nextNode;
-            nextNode = nextNode.PickClosestNeighbourDirection(nextDirection, out _);
+            a = b;
+            b = b.PickClosestNeighbourDirection(nextDirection, out _);
 
-            nextNPos = nextNode.CurrentPosition;
-            curNPos = currentNode.CurrentPosition;
+            nextNPos = b.CurrentPosition;
+            curNPos = a.CurrentPosition;
 
             curToNextVec = nextNPos - curNPos;
 
             lastDist = distToNextNode;
-            distToNextNode = (nextIdealPos - (Vector2)nextNode.CurrentPosition).magnitude;
+            distToNextNode = (nextIdealPos - (Vector2)b.CurrentPosition).magnitude;
         }
         
         newStandingPoint = CommonTools.GetPerpendicularPointFromPointToLine(nextIdealPos, nextNPos, curNPos);
