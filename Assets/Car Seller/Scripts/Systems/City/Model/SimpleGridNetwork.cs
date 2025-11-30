@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
 
-public interface INodesNet
+public interface INodesNetwork
 {
     Node GetClosestNode(Vector2 worldPosition);
     IList<Node> Nodes { get; }
 }
 
-public class SimpleGridNet : INodesNet
+public class SimpleGridNetwork : INodesNetwork
 {
     /// <summary>
     /// World position of the left up corner of the grid
@@ -22,9 +22,9 @@ public class SimpleGridNet : INodesNet
 
     public List<Node> Nodes { get; private set; }
 
-    IList<Node> INodesNet.Nodes => Nodes;
+    IList<Node> INodesNetwork.Nodes => Nodes;
 
-    public SimpleGridNet(Vector2 leftUpWorld, int nodesCountX, int nodesCountY, float nodesWorldStep)
+    public SimpleGridNetwork(Vector2 leftUpWorld, int nodesCountX, int nodesCountY, float nodesWorldStep)
     {
         LeftUpCorner = leftUpWorld;
         NodesCountX = nodesCountX;

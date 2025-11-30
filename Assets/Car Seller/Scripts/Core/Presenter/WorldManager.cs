@@ -57,8 +57,9 @@ public class WorldManager
                     G.Instance.ProductManager.CreateCar(carBaseConfig, carVariantConfig, outsideLocation);
                     break;
                 default:
-                    Debug.LogError($"Only cars can be spawned outside the warehouse. Tried to spawn {productToSpawn.productBaseConfig.name}.");
+                    Debug.LogError($"Only cars can be spawned outside the warehouse. Tried to spawn {productToSpawn.productBaseConfig}.");
                     break;
             }
         }
     }
+}

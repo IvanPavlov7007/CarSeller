@@ -5,6 +5,7 @@ public class GameFlowController
 {
     public void EnterWarehouse(Warehouse warehouse)
     {
+        WarehouseSceneManager.SceneWarehouseModel = warehouse;
         G.Instance.InteractionManager = new WarehouseInteractionManager();
     }
 

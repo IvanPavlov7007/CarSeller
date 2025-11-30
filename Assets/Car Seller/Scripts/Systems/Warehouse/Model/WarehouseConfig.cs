@@ -4,7 +4,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "WarehouseConfig", menuName = "Configs/WarehouseConfig")]
 public class WarehouseConfig : ScriptableObject
 {
-    public string sceneName;
+    public string DisplayName;
+
+    public string SceneToLoad;
 
     //Current Mockup Parameters
     public Vector2 warehouseClosestInitialPosition;

@@ -6,7 +6,7 @@ public class City : IProductsHolder
 {
     public Dictionary<object, CityPosition> Objects { get; private set; } = new Dictionary<object, CityPosition>();
     private List<IProductLocation> productLocations = new List<IProductLocation>();
-    public INodesNet nodesNet { get; private set; } = new SimpleGridNet(Vector2.zero, 6, 6, 2f);
+    public INodesNetwork nodesNet { get; private set; } = new SimpleGridNetwork(Vector2.zero, 6, 6, 2f);
 
     public CityProductLocation GetEmptyProductLocation(CityPosition position)
     {
@@ -63,69 +63,47 @@ public class City : IProductsHolder
         return productLocations.ToArray();
     }
 
+    /// <summary>
+    /// Reference to a mutable position in the city, either at a node or between two nodes
+    /// </summary>
     public class CityPosition
     {
 
         public CityPosition(Node nodeA)
         {
-            NodeA = nodeA;
+            SetAtNode(nodeA);
         }
 
         public CityPosition(Node nodeA, Node nodeB, float relativePosition)
         {
-            NodeA = nodeA;
-            NodeB = nodeB;
-            this.RelativePosition = relativePosition;
+            SetBetween(nodeA, nodeB, relativePosition);
+        }
+        public Node NodeA{ get; private set; }
+        public Node NodeB { get; private set; }
+        public float RelativePosition { get; private set; }
+
+        public void SetAtNode(Node node)
+        {
+            Debug.Assert(node != null);
+            NodeA = node;
+            NodeB = null;
+            RelativePosition = 0;
         }
 
-        Node nodeA;
-        Node nodeB;
-        float relativePosition;
-        public Node NodeA
+        public void SetBetween(Node a, Node b, float t)
         {
-            get { return nodeA; }
-            set
-            {
-                Debug.Assert(value != null, "NodeA cannot be null");
-                NodeA = value;
-            }
+            Debug.Assert(a != b);
+            Debug.Assert(a.connectedNeighbors.Contains(b));
+            Debug.Assert(t >= 0 && t <= 1);
+
+            NodeA = a;
+            NodeB = b;
+            RelativePosition = t;
         }
 
-        public Node NodeB
-        {
-            get { return nodeB; }
-            set
-            {
-                Debug.Assert(nodeA != nodeB, "Nodes cannot be the same");
-                Debug.Assert(value == null || nodeA.connectedNeighbors.Contains(nodeB), "Nodes are not connected");
-                nodeB = value;
-                if(nodeB == null)
-                {
-                    relativePosition = 0f;
-                }
-            }
-        }
-        public float RelativePosition
-        {
-            get { return relativePosition; }
-            set
-            {
-                Debug.Assert(value >= 0f && value <= 1f, "Relative position must be between 0 and 1");
-                relativePosition = value;
-            }
-        }
-
-        public Vector2 GetWorldPosition()
-        {
-            if (NodeB == null)
-            {
-                return NodeA.CurrentPosition;
-            }
-            else
-            {
-                return Vector2.Lerp(NodeA.CurrentPosition, NodeB.CurrentPosition, RelativePosition);
-            }
-        }
+        public Vector2 WorldPosition =>
+            NodeB == null ? NodeA.CurrentPosition :
+            Vector2.Lerp(NodeA.CurrentPosition, NodeB.CurrentPosition, RelativePosition);
     }
 
     public class CityProductLocation : IProductLocation

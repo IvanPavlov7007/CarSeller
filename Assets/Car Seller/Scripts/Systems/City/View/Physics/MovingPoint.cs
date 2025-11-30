@@ -37,15 +37,16 @@ public class MovingPoint : MonoBehaviour
         Node a = positionData.NodeA;
         //target node- node to which we move to, can be null if we are just starting from NodeA
         Node b;
-        Vector2 a_to_b = Vector2.zero; 
+        Vector2 dir_a_to_b = Vector2.zero; 
+        
 
         //First check if we exactly on a node
         if (positionData.NodeB == null)
         {
             //Check if there is a neighbour in the desired direction
-            b = a.PickClosestNeighbourDirection(nextDirection, out a_to_b);
+            b = a.PickClosestNeighbourDirection(nextDirection, out dir_a_to_b);
             //No neighbour in that direction
-            if (Vector2.Dot(a_to_b, nextDirection) < 0f)
+            if (Vector2.Dot(dir_a_to_b, nextDirection) < 0f)
             {
                 return;
             }
@@ -54,62 +55,72 @@ public class MovingPoint : MonoBehaviour
         {
             //keeping moving towards NodeB
             b = positionData.NodeB;
-            a_to_b = (b.CurrentPosition - a.CurrentPosition).normalized;
+            dir_a_to_b = (b.CurrentPosition - a.CurrentPosition).normalized;
         }
 
-        //TODO old code below, refactor!
-
-        Vector2 nextNPos = b.CurrentPosition;
-        Vector2 curNPos = a.CurrentPosition;
-
-        Vector2 curToNextVec = (nextNPos - curNPos);
-
+        float t = positionData.RelativePosition;
         //Check if we need to swap nodes
-        float dot = Vector2.Dot(nextDirection, curToNextVec);
+        float dot = Vector2.Dot(nextDirection, dir_a_to_b);
         if (dot < 0)
         {
             Node c = a;
             a = b;
             b = c;
-            relativePosBetweenNodes = 1f - relativePosBetweenNodes;
-            curToNextVec *= -1f;
-            Vector2 vC = curNPos;
-            curNPos = nextNPos;
-            nextNPos = curNPos;
+            t = 1f - t;
+            dir_a_to_b *= -1f;
         }
 
-        Vector2 newStandingPoint = curNPos + curToNextVec * relativePosBetweenNodes;
+        float dist_a_to_b = (b.CurrentPosition - a.CurrentPosition).magnitude;
 
+        Vector2 currentPos = a.CurrentPosition + dir_a_to_b * dist_a_to_b * t;
+
+        //Luftlinie[de] direction we want to go
         Vector2 nextStepInDir = nextDirection * Time.deltaTime * maxSpeed;
-        float stepLenght = nextStepInDir.magnitude;
-        Vector2 nextIdealPos = newStandingPoint + nextStepInDir;
+        float stepLength = nextStepInDir.magnitude;
+        //Luftlinie[de] position of where we would be if there were no nodes
+        Vector2 nextIdealPos = currentPos + nextStepInDir;
 
-        float distToNextNode, lastDist;
-
-        distToNextNode = curToNextVec.magnitude;
-        lastDist = (newStandingPoint - curNPos).magnitude;
-
-        while(stepLenght >= distToNextNode *(1f - relativePosBetweenNodes))
+        //water flow in a noded network
+        while (stepLength >= dist_a_to_b * (1f - t))// While step is longer than remaining distance to B
         {
-            stepLenght -= distToNextNode * (1f -relativePosBetweenNodes);
-            relativePosBetweenNodes = 0f;
+            stepLength -= dist_a_to_b * (1f -t);
+            t = 0f;
             a = b;
-            b = b.PickClosestNeighbourDirection(nextDirection, out _);
+            b = b.PickClosestNeighbourDirection(nextDirection, out dir_a_to_b);
 
-            nextNPos = b.CurrentPosition;
-            curNPos = a.CurrentPosition;
+            if (Vector2.Dot(dir_a_to_b, nextDirection) < 0f)
+            {
+                //Cannot proceed further, stop at the current node
+                stepLength = 0f;
+                b = null;
+                break;
+            }
 
-            curToNextVec = nextNPos - curNPos;
-
-            lastDist = distToNextNode;
-            distToNextNode = (nextIdealPos - (Vector2)b.CurrentPosition).magnitude;
+            
+            dist_a_to_b = (b.CurrentPosition - a.CurrentPosition).magnitude;
+            nextDirection = nextIdealPos - a.CurrentPosition;
+            //wierd code before
+            //dist_a_to_b = (nextIdealPos - (Vector2)b.CurrentPosition).magnitude;
         }
-        
-        newStandingPoint = CommonTools.GetPerpendicularPointFromPointToLine(nextIdealPos, nextNPos, curNPos);
-        Vector2 curToNewStand = newStandingPoint - curNPos;
 
-        relativePosBetweenNodes = relativePosBetweenNodes + stepLenght / curToNextVec.magnitude;
+        if (b == null)
+        {
+            //We have reached the end of the line, stop at node A
+            transform.position = a.CurrentPosition;
+            positionData.SetAtNode(a);
+            return;
+        }
+        else
+        {
+            t = stepLength / dir_a_to_b.magnitude;
 
-        transform.position = curNPos + curToNextVec * relativePosBetweenNodes;
+            positionData.SetBetween(a, b, t);
+
+            //wierd code before
+            //currentPos = CommonTools.GetPerpendicularPointFromPointToLine(nextIdealPos, b.CurrentPosition, a.CurrentPosition);
+            //Vector2 curToNewStand = currentPos - curNPos;
+        }
+
+        transform.position = positionData.WorldPosition;
     }
 }

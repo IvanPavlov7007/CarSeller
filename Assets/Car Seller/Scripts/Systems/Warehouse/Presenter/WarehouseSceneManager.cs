@@ -9,7 +9,7 @@ using UnityEngine;
 //[ExecuteAlways]
 public class WarehouseSceneManager : Singleton<WarehouseSceneManager>
 {
-    public Warehouse Warehouse => World.Instance.Warehouse;
+    public static Warehouse SceneWarehouseModel { get; set; }
 
     public Transform emptyPosition;
 
@@ -32,18 +32,18 @@ public class WarehouseSceneManager : Singleton<WarehouseSceneManager>
 
     private void Update()
     {
-        World.Instance.Warehouse.emptyProductLocation = new Warehouse.DimensionalPositionData
+        SceneWarehouseModel.emptyProductLocation = new Warehouse.DimensionalPositionData
         { LocalPosition =  emptyPosition.localPosition, LocalRotation = emptyPosition.localEulerAngles };
     }
 
     void initializeWarehouse()
     {
-        if (Warehouse == null)
+        if (SceneWarehouseModel == null)
         {
             Debug.LogWarning("Warehouse instance is not set");
             return;
         }
-        foreach (var location in Warehouse.products)
+        foreach (var location in SceneWarehouseModel.products)
         {
             if (location.Product != null)
             {
@@ -56,12 +56,12 @@ public class WarehouseSceneManager : Singleton<WarehouseSceneManager>
     void onNewProductCreated(ProductCreatedEventData data)
     {
         var location = G.Instance.LocationService.GetProductLocation(data.Product);
-        if (Warehouse == null)
+        if (SceneWarehouseModel == null)
         {
             Debug.LogError("Warehouse instance is not set");
             return;
         }
-        if (location.Holder == Warehouse)
+        if (location.Holder == SceneWarehouseModel)
         {
             buildProductView(data.Product, location);
         }
@@ -69,9 +69,9 @@ public class WarehouseSceneManager : Singleton<WarehouseSceneManager>
 
     void onProductLocationChanged(ProductLocationChangedEventData data)
     {
-        Debug.Assert(Warehouse != null, "Warehouse instance is not set");
+        Debug.Assert(SceneWarehouseModel != null, "Warehouse instance is not set");
 
-        if (data.NewLocation?.Holder == Warehouse)
+        if (data.NewLocation?.Holder == SceneWarehouseModel)
         {
             buildProductView(data.Product, data.NewLocation);
         }

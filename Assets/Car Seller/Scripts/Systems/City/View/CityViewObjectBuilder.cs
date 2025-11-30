@@ -34,7 +34,7 @@ public class CityViewObjectBuilder : SingletonScriptableObject<CityViewObjectBui
     public GameObject buildWarehouse(Warehouse warehouse)
     {
         var position = World.Instance.City.Objects[warehouse];
-        GameObject warehouseGO = Instantiate(warehouseViewPrefab, position.GetWorldPosition(),Quaternion.identity);
+        GameObject warehouseGO = Instantiate(warehouseViewPrefab, position.WorldPosition,Quaternion.identity);
         return warehouseGO;
     }
 }
