@@ -29,7 +29,7 @@ public class MovingPoint : MonoBehaviour
     void LateUpdate()
     {
 
-       Vector2 nextDirection = directionProvider.ProvidedDirection;
+       Vector2 nextDirection = Vector2.ClampMagnitude(directionProvider.ProvidedDirection,1f);
 
         float lerpV = 10f * Time.deltaTime;
         arrowRotationPoint.rotation = Quaternion.Lerp(arrowRotationPoint.rotation,  Quaternion.FromToRotation(Vector2.up, nextDirection.normalized),lerpV);
@@ -48,7 +48,7 @@ public class MovingPoint : MonoBehaviour
             //Check if there is a neighbour in the desired direction
             b = a.PickClosestNeighbourDirection(nextDirection, out dir_a_to_b);
             //No neighbour in that direction
-            if (Vector2.Dot(dir_a_to_b, nextDirection) < 0f)
+            if (Vector2.Dot(dir_a_to_b, nextDirection) < 0f || b == null)
             {
                 body.up = dir_a_to_b;
                 return;

@@ -2,6 +2,8 @@
 using UnityEngine;
 using Pixelplacement;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public class GameCursor : Singleton<GameCursor>
 {
@@ -70,6 +72,20 @@ public class GameCursor : Singleton<GameCursor>
         return scheme.IndexOf("touch", StringComparison.OrdinalIgnoreCase) >= 0;
     }
 
+    // Returns true if the given screen position is over any UI element.
+    private bool IsPointerOverUI(Vector2 screenPosition)
+    {
+        if (EventSystem.current == null) return false;
+
+        var eventData = new PointerEventData(EventSystem.current)
+        {
+            position = screenPosition
+        };
+        var results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+        return results.Count > 0;
+    }
+
     private void HandlePointerInput()
     {
         bool pointerPressed;
@@ -77,12 +93,10 @@ public class GameCursor : Singleton<GameCursor>
         bool pointerReleasedThisFrame = false;
         Vector2 pointerPosition;
 
-        // Simplest control scheme check
         bool schemeIsTouch = IsTouchControlScheme();
 
         if (schemeIsTouch && Touchscreen.current != null)
         {
-            // Touch path
             var touch = Touchscreen.current.primaryTouch;
             pointerPosition = touch.position.ReadValue();
             pointerPressed = touch.press.isPressed;
@@ -93,7 +107,6 @@ public class GameCursor : Singleton<GameCursor>
         }
         else if (Mouse.current != null)
         {
-            // Mouse path (fallback if no touch or scheme not touch)
             pointerPosition = Mouse.current.position.ReadValue();
             pointerPressed = Mouse.current.leftButton.isPressed;
             pointerPressedThisFrame = Mouse.current.leftButton.wasPressedThisFrame;
@@ -106,6 +119,54 @@ public class GameCursor : Singleton<GameCursor>
         }
 
         lastScreenPosition = pointerPosition;
+
+        // If pointer is over UI, suppress interactions and clear hover.
+        if (IsPointerOverUI(lastScreenPosition))
+        {
+            if (currentInteractable != null)
+            {
+                currentInteractable.CursorExit();
+                currentInteractable = null;
+            }
+
+            // If a press started over UI, we ignore it and reset our gesture state.
+            if (pointerPressedThisFrame)
+            {
+                isPointerDown = false;
+                pressInteractable = null;
+                draggedInteractable = null;
+                dragStarted = false;
+                holdActive = false;
+            }
+
+            // Also treat release-over-UI as a hard cancel of any ongoing gesture.
+            if (pointerReleasedThisFrame && isPointerDown)
+            {
+                isPointerDown = false;
+                if (dragStarted && draggedInteractable != null)
+                {
+                    endDrag();
+                }
+                if (pressInteractable != null)
+                {
+                    // Cancel hold without emitting click/select end on UI
+                    if (holdActive)
+                    {
+                        pressInteractable.CursorHoldEnd();
+                        holdActive = false;
+                    }
+                    pressInteractable.CursorSelectEnd();
+                }
+
+                pressInteractable = null;
+                draggedInteractable = null;
+                dragStarted = false;
+            }
+
+            pointerWasPressed = pointerPressed;
+            return;
+        }
+
         Vector2 worldPosition = ScreenToWorld(lastScreenPosition);
         currentInteractable = updateCurrentInteractable(currentInteractable, worldPosition, interactableLayers);
 
@@ -287,7 +348,7 @@ public class GameCursor : Singleton<GameCursor>
 
     private Interactable updateCurrentInteractable(Interactable current, Vector2 worldPosition, LayerMask layerMask)
     {
-        var hitInteracrable = InteractionPhysics.RaycastForInteractable(layerMask, worldPosition,use3dPhysics);
+        var hitInteracrable = InteractionPhysics.RaycastForInteractable(layerMask, worldPosition, use3dPhysics);
 
         if (hitInteracrable != current)
         {

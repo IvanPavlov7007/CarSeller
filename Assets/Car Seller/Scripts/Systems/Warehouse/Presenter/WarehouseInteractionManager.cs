@@ -114,6 +114,7 @@ public class WarehouseInteractionManager : IInteractionManager
                         Type = UIElementType.Button,
                         Text = "Ride",
                         IsInteractable = car.IsComplete(),
+                        UnavailabilityReason = "Some car part's are missing",
                         OnClick = () =>
                         {
                             CarMechanicService.Instance.RideCarFromWarehouse(car,WarehouseSceneManager.SceneWarehouseModel);

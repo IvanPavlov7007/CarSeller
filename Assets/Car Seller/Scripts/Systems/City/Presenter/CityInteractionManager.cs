@@ -40,7 +40,7 @@ public class CityInteractionManager : IInteractionManager
 
         private UIElement generateCarConent(Car car)
         {
-            var closesWarehouse = getClosesWarehouse(car, out float distance);
+            var closesWarehouse = getClosestWarehouse(car, out float distance);
             bool carNearWarehouse = distance < 0.5f;
 
             UIElement content = new UIElement
@@ -71,9 +71,12 @@ public class CityInteractionManager : IInteractionManager
 
         }
 
-        private Warehouse getClosesWarehouse(Car car, out float distance)
+        private Warehouse getClosestWarehouse(Car car, out float distance)
         {
+            
+
             var city = World.Instance.City;
+            Debug.Assert(city.Positions.ContainsKey(car), "CityInteractionManager: Car position not found in city positions");
             Vector2 carPosition = city.Positions[car].WorldPosition;
             Dictionary<Warehouse, float> warehouseDistances = new Dictionary<Warehouse, float>();
             foreach (var obj in city.Positions.Keys)

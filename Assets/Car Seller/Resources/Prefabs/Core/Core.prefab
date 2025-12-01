@@ -331,7 +331,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 1
-  offsetFromPosition: {x: 0, y: 4}
+  offsetUp: {x: 0, y: 3}
+  offsetDown: {x: 0, y: -4}
   popUpMenuPrefab: {fileID: 2077581998197807761, guid: 58a27aebe5fca6f47a9231f8d7d40bc1, type: 3}
 --- !u!1 &8329972248815281270
 GameObject:
@@ -542,7 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 1
-  cityConfig: {fileID: 11400000, guid: 019b64f633192674d96b6736f40bfb93, type: 2}
+  cityConfig: {fileID: 11400000, guid: 365f4d838f000674b9891038e28cbdf9, type: 2}
   warehouseProductViewBuilder: {fileID: 11400000, guid: f89c79dee8c6ad946a82b44e4e94a0a2, type: 2}
   carPartViewBuilder: {fileID: 11400000, guid: 9280239a7aae48041bc89e3309ad1261, type: 2}
   cityViewObjectBuilder: {fileID: 11400000, guid: b8b2cb1796673254fbd1b5a05d793650, type: 2}

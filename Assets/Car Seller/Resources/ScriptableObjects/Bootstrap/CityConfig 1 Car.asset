@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cityName: City
   SceneToLoad: City Scene
-  cityLeftUpPos: {x: -5, y: -5}
-  gridNodesCountX: 7
-  gridNodesCountY: 7
+  cityLeftUpPos: {x: -8, y: -5}
+  gridNodesCountX: 12
+  gridNodesCountY: 4
   gridNodeWorldSize: 2
   warehouseConfigs:
   - {fileID: 11400000, guid: 6805e19a361611e4fa3c799938c3cd96, type: 2}

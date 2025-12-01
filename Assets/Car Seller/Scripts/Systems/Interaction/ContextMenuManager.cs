@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 public class ContextMenuManager : Singleton<ContextMenuManager>
 {
-    public Vector2 offsetFromPosition = new Vector2(0, 10);
+    public Vector2 offsetUp = new Vector2(0, 10);
+    public Vector2 offsetDown = new Vector2(0, -10);
     public GameObject popUpMenuPrefab;
 
     List<PopUpContextMenu> activeMenus = new List<PopUpContextMenu>();
@@ -35,7 +36,7 @@ public class ContextMenuManager : Singleton<ContextMenuManager>
         GameObject panel = Instantiate(popUpMenuPrefab);
         RectTransform panelTransform = panel.GetComponent<RectTransform>();
 
-        var offset = target.transform.position.y < 0 ? offsetFromPosition : -offsetFromPosition;
+        var offset = target.transform.position.y < 0 ? offsetUp : offsetDown;
         panelTransform.position = target.transform.position + (Vector3)offset;
         SimpleUIBuilder.Instance.Build(content,panelTransform.GetChild(0).GetChild(0) as RectTransform);
         createContextMenu(panel, content.blockingInput);
@@ -58,7 +59,7 @@ public class ContextMenuManager : Singleton<ContextMenuManager>
         if(clickable != null)
         {
             RectTransform panel = Instantiate(popUpMenuPrefab).GetComponent<RectTransform>();
-            panel.position = objectWithProvider.transform.position + (Vector3) offsetFromPosition;
+            panel.position = objectWithProvider.transform.position + (Vector3) offsetUp;
         }
 
     }
