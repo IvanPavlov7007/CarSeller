@@ -71,4 +71,26 @@ public class CarMechanicService : Singleton<CarMechanicService>
         }
     }
 
+    public void RideCarFromWarehouse(Car car, Warehouse sceneWarehouseModel)
+    {
+        Debug.Assert(car != null, "Car cannot be null when riding from warehouse.");
+        if (coroutinesOnCars.ContainsKey(car))
+        {
+            return;
+        }
+
+        List<Action> actions = new List<Action>
+        {
+            () =>
+        {
+            var city = World.Instance.City;
+            G.Instance.LocationService.MoveProduct(car, city.GetEmptyProductLocation(city.Positions[sceneWarehouseModel]));
+        },
+            () => G.Instance.GameFlowController.GetToTheCity()
+        };
+
+        var coroutine = StartCoroutine(carCoroutine(car, actions, 0.2f));
+
+    }
+
 }

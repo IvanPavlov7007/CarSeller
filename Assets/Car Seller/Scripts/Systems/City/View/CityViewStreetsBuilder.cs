@@ -1,31 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+
+// provided by ChatGPT
 
 public class CityViewStreetsBuilder
 {
-    private readonly Material _lineMaterial;
-    private readonly float _lineWidth;
-    private readonly HashSet<(Node, Node)> _createdEdges = new HashSet<(Node, Node)>(new EdgeComparer());
-
-    public CityViewStreetsBuilder(Material lineMaterial = null, float lineWidth = 0.05f)
-    {
-        _lineMaterial = lineMaterial;
-        _lineWidth = lineWidth;
-    }
-
-    public void BuildCity(City city)
+    /// <summary>
+    /// Builds LineRenderers for all unique connections between nodes.
+    /// Returns the created root GameObject so the caller owns its lifecycle.
+    /// </summary>
+    public GameObject BuildStreets(
+        City city,
+        Transform parent = null,
+        Material lineMaterial = null,
+        float lineWidth = 0.05f)
     {
         if (city == null || city.nodesNet == null || city.nodesNet.Nodes == null)
-            return;
+            return null;
 
-        Transform _streetsRoot = new GameObject("City Streets").transform;
+        var streetsRoot = new GameObject("City Streets");
+        if (parent != null)
+            streetsRoot.transform.SetParent(parent, false);
 
-        // Create or reuse a parent container for street segments
-        //if (_streetsRoot == null)
-        //{
-        //    _streetsRoot = new GameObject("City Streets");
-        //}
+        // Track unique undirected edges for this build only (no persistent state).
+        var seenEdges = new HashSet<(Node, Node)>(new UndirectedEdgeComparer());
 
         foreach (var node in city.nodesNet.Nodes)
         {
@@ -36,22 +36,21 @@ public class CityViewStreetsBuilder
             {
                 if (neighbor == null) continue;
 
-                // Ensure we only create one segment per undirected edge
-                var edgeKey = GetOrderedEdge(node, neighbor);
-                if (_createdEdges.Contains(edgeKey))
+                var edge = (node, neighbor);
+                if (!seenEdges.Add(edge)) // already handled (a,b) or (b,a)
                     continue;
 
-                _createdEdges.Add(edgeKey);
-
-                CreateLineSegment(_streetsRoot, node, neighbor);
+                CreateLineSegment(streetsRoot.transform, node, neighbor, lineMaterial, lineWidth);
             }
         }
+
+        return streetsRoot;
     }
 
-    private void CreateLineSegment(Transform _streetsRoot, Node a, Node b)
+    private static void CreateLineSegment(Transform parent, Node a, Node b, Material lineMaterial, float lineWidth)
     {
-        var go = new GameObject($"Street [{a.InitialPosition}] -> [{b.InitialPosition}]");
-        go.transform.SetParent(_streetsRoot.transform, false);
+        var go = new GameObject($"Street [{a.InitialPosition}] <-> [{b.InitialPosition}]");
+        go.transform.SetParent(parent, false);
 
         var lr = go.AddComponent<LineRenderer>();
         lr.positionCount = 2;
@@ -64,23 +63,19 @@ public class CityViewStreetsBuilder
         lr.SetPosition(0, p0);
         lr.SetPosition(1, p1);
 
-        lr.startWidth = _lineWidth;
-        lr.endWidth = _lineWidth;
+        lr.startWidth = lineWidth;
+        lr.endWidth = lineWidth;
 
-        // Basic material setup (falls back to a default if none provided)
-        if (_lineMaterial != null)
+        if (lineMaterial != null)
         {
-            lr.material = _lineMaterial;
+            lr.material = lineMaterial;
         }
         else
         {
-            // Minimal default material to avoid pink lines
-            var mat = new Material(Shader.Find("Sprites/Default"));
-            mat.color = Color.gray;
+            var mat = new Material(Shader.Find("Sprites/Default")) { color = Color.gray };
             lr.material = mat;
         }
 
-        // Optional visual settings
         lr.sortingOrder = -50;
         lr.numCornerVertices = 2;
         lr.numCapVertices = 2;
@@ -88,27 +83,25 @@ public class CityViewStreetsBuilder
         lr.textureMode = LineTextureMode.Stretch;
     }
 
-    private static (Node, Node) GetOrderedEdge(Node a, Node b)
-    {
-        // Order deterministically to treat (a,b) == (b,a)
-        return ReferenceEquals(a, b) || a.GetHashCode() <= b.GetHashCode() ? (a, b) : (b, a);
-    }
-
-    private class EdgeComparer : IEqualityComparer<(Node, Node)>
+    /// <summary>
+    /// Treats (a,b) and (b,a) as the same edge using reference identity.
+    /// Uses RuntimeHelpers.GetHashCode to avoid issues if Node overrides GetHashCode.
+    /// </summary>
+    private sealed class UndirectedEdgeComparer : IEqualityComparer<(Node, Node)>
     {
         public bool Equals((Node, Node) x, (Node, Node) y)
         {
-            return ReferenceEquals(x.Item1, y.Item1) && ReferenceEquals(x.Item2, y.Item2);
+            return (ReferenceEquals(x.Item1, y.Item1) && ReferenceEquals(x.Item2, y.Item2)) ||
+                   (ReferenceEquals(x.Item1, y.Item2) && ReferenceEquals(x.Item2, y.Item1));
         }
 
         public int GetHashCode((Node, Node) obj)
         {
-            unchecked
-            {
-                int h1 = obj.Item1 != null ? obj.Item1.GetHashCode() : 0;
-                int h2 = obj.Item2 != null ? obj.Item2.GetHashCode() : 0;
-                return (h1 * 397) ^ h2;
-            }
+            int h1 = obj.Item1 != null ? RuntimeHelpers.GetHashCode(obj.Item1) : 0;
+            int h2 = obj.Item2 != null ? RuntimeHelpers.GetHashCode(obj.Item2) : 0;
+            // Order-independent combine to ensure (a,b) and (b,a) collide.
+            if (h2 < h1) { var t = h1; h1 = h2; h2 = t; }
+            unchecked { return (h1 * 397) ^ h2; }
         }
     }
 }

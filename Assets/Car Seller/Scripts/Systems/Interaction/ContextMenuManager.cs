@@ -34,7 +34,9 @@ public class ContextMenuManager : Singleton<ContextMenuManager>
     {
         GameObject panel = Instantiate(popUpMenuPrefab);
         RectTransform panelTransform = panel.GetComponent<RectTransform>();
-        panelTransform.position = target.transform.position + (Vector3)offsetFromPosition;
+
+        var offset = target.transform.position.y < 0 ? offsetFromPosition : -offsetFromPosition;
+        panelTransform.position = target.transform.position + (Vector3)offset;
         SimpleUIBuilder.Instance.Build(content,panelTransform.GetChild(0).GetChild(0) as RectTransform);
         createContextMenu(panel, content.blockingInput);
     }

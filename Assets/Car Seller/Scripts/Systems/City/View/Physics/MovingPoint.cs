@@ -87,7 +87,6 @@ public class MovingPoint : MonoBehaviour
         while (stepLength >= dist_a_to_b * (1f - t))// While step is longer than remaining distance to B
         {
             stepLength -= dist_a_to_b * (1f -t);
-            t = 0f;
             a = b;
             b = b.PickClosestNeighbourDirection(nextDirection, out dir_a_to_b);
 
@@ -102,6 +101,16 @@ public class MovingPoint : MonoBehaviour
             
             dist_a_to_b = (b.CurrentPosition - a.CurrentPosition).magnitude;
             nextDirection = nextIdealPos - a.CurrentPosition;
+            t = 0f;
+            //if (stepLength > dist_a_to_b)
+            //{
+            //    t = 0f;
+            //}
+            //else
+            //{
+            //    t = stepLength / dist_a_to_b;
+            //}
+
             //wierd code before
             //dist_a_to_b = (nextIdealPos - (Vector2)b.CurrentPosition).magnitude;
         }
@@ -116,7 +125,7 @@ public class MovingPoint : MonoBehaviour
         }
         else
         {
-            t = stepLength / dist_a_to_b;
+            t = (dist_a_to_b * t + stepLength) / dist_a_to_b;
 
             positionData.SetBetween(a, b, t);
 

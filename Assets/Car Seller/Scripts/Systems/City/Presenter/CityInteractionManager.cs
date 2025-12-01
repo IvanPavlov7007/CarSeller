@@ -74,13 +74,13 @@ public class CityInteractionManager : IInteractionManager
         private Warehouse getClosesWarehouse(Car car, out float distance)
         {
             var city = World.Instance.City;
-            Vector2 carPosition = city.Objects[car].WorldPosition;
+            Vector2 carPosition = city.Positions[car].WorldPosition;
             Dictionary<Warehouse, float> warehouseDistances = new Dictionary<Warehouse, float>();
-            foreach (var obj in city.Objects.Keys)
+            foreach (var obj in city.Positions.Keys)
             {
                 if (obj is not Warehouse)
                     continue;
-                var warehousePosition = city.Objects[obj].WorldPosition;
+                var warehousePosition = city.Positions[obj].WorldPosition;
                 warehouseDistances.Add(obj as Warehouse, Vector2.Distance(warehousePosition, carPosition));
             }
             warehouseDistances = warehouseDistances.OrderBy(kv => kv.Value).ToDictionary(kv => kv.Key, kv => kv.Value);
@@ -132,14 +132,21 @@ public class CityInteractionManager : IInteractionManager
         private Car getClosestCar(Warehouse warehouse, out float distance)
         {
             var city = World.Instance.City;
-            Vector2 warehousePosition = city.Objects[warehouse].WorldPosition;
+            Vector2 warehousePosition = city.Positions[warehouse].WorldPosition;
             Dictionary<Car, float> carDistances = new Dictionary<Car, float>();
-            foreach (var obj in city.Objects.Keys)
+            foreach (var obj in city.Positions.Keys)
             {
                 if (obj is not Car)
                     continue;
-                var carPosition = city.Objects[obj].WorldPosition;
+                var carPosition = city.Positions[obj].WorldPosition;
                 carDistances.Add(obj as Car, Vector2.Distance(carPosition, warehousePosition));
+            }
+
+
+            if(carDistances.Count == 0)
+            {
+                distance = float.MaxValue;
+                return null;
             }
             carDistances = carDistances.OrderBy(kv => kv.Value).ToDictionary(kv => kv.Key, kv => kv.Value);
             distance = carDistances.First().Value;

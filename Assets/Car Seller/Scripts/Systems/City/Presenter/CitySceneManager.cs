@@ -36,12 +36,12 @@ public class CitySceneManager : Singleton<CitySceneManager>
 
     private void initializeMap()
     {
-        G.Instance.cityViewStreetsBuilder.BuildCity(City);
+        G.Instance.cityViewStreetsBuilder.BuildStreets(City);
     }
 
     private void initializeObjects()
     {
-        foreach (var obj in City.Objects.Keys)
+        foreach (var obj in City.Positions.Keys)
         {
             Debug.Assert(obj != null, "City object cannot be null");
             G.Instance.cityViewObjectBuilder.BuildObject(obj);

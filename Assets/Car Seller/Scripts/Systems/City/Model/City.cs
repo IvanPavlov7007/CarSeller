@@ -5,7 +5,7 @@ using UnityEngine;
 public class City : IProductsHolder
 {
     public CityConfig Config;
-    public Dictionary<object, CityPosition> Objects { get; private set; } = new Dictionary<object, CityPosition>();
+    public Dictionary<object, CityPosition> Positions { get; private set; } = new Dictionary<object, CityPosition>();
     private List<IProductLocation> productLocations = new List<IProductLocation>();
     public INodesNetwork nodesNet { get; private set; }
 
@@ -58,7 +58,7 @@ public class City : IProductsHolder
     /// <param name="position"></param>
     public void PlaceObjectAtPosition(object obj, CityPosition position)
     {
-        Objects[obj] = position;
+        Positions[obj] = position;
     }
 
     public CityPosition GetRandomPosition()
@@ -143,7 +143,7 @@ public class City : IProductsHolder
             {
                 Product = product;
                 City.productLocations.Add(this);
-                City.Objects[product] = CityPosition;
+                City.Positions[product] = CityPosition;
                 return true;
             }
             return false;
@@ -152,7 +152,7 @@ public class City : IProductsHolder
         public void Detach()
         {
             City.productLocations.Remove(this);
-            City.Objects.Remove(Product);
+            City.Positions.Remove(Product);
             Product = null;
         }
     }

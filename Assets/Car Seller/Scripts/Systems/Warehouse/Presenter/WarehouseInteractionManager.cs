@@ -109,13 +109,16 @@ public class WarehouseInteractionManager : IInteractionManager
                         },
                         UnavailabilityReason = "Car has nothing to disassemble"
                     }
-                    //,new UIElement()
-                    //{
-                    //    Type = UIElementType.Button,
-                    //    Text = "Ride",
-                    //    IsInteractable = car.IsComplete(),
-                    //    OnClick = () => G.Instance.GameFlowController.RideCar(car)
-                    //}
+                    ,new UIElement()
+                    {
+                        Type = UIElementType.Button,
+                        Text = "Ride",
+                        IsInteractable = car.IsComplete(),
+                        OnClick = () =>
+                        {
+                            CarMechanicService.Instance.RideCarFromWarehouse(car,WarehouseSceneManager.SceneWarehouseModel);
+                        }
+                    }
                 }
             };
             return element;
