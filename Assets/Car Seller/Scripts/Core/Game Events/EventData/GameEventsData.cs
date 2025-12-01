@@ -1,9 +1,11 @@
 ﻿public class ProductCreatedEventData
 {
     public Product Product { get; private set; }
-    public ProductCreatedEventData(Product product)
+    public IProductLocation Location { get; private set; }
+    public ProductCreatedEventData(Product product, IProductLocation location)
     {
         Product = product;
+        Location = location;
     }
 }
 

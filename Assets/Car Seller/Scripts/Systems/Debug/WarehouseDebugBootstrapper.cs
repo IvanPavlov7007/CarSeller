@@ -4,6 +4,6 @@ public class WarehouseDebugBootstrapper : MonoBehaviour
 {
     private void Start()
     {
-        G.Instance.GameFlowController.EnterWarehouse(WarehouseSceneManager.Instance.SceneWarehouseModel);
+        G.Instance.GameFlowController.EnterWarehouse(WarehouseSceneManager.SceneWarehouseModel);
     }
 }

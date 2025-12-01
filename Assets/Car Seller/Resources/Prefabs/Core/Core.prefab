@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &362369392517887601
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 513774421667250196}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &513774421667250196
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 362369392517887601}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 3786126769609166702}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &453304330104206948
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0f3d38e731ebee4e8f1b208d26b9828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dontDestroyOnLoad: 0
+  _dontDestroyOnLoad: 1
   interactables: []
 --- !u!1 &3303562401181090476
 GameObject:
@@ -184,7 +153,6 @@ Transform:
   - {fileID: 1954165389836885580}
   - {fileID: 1787587102874665164}
   - {fileID: 2709094839571514640}
-  - {fileID: 513774421667250196}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5797109456203409878
@@ -574,5 +542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 1
+  cityConfig: {fileID: 11400000, guid: 365f4d838f000674b9891038e28cbdf9, type: 2}
   warehouseProductViewBuilder: {fileID: 11400000, guid: f89c79dee8c6ad946a82b44e4e94a0a2, type: 2}
   carPartViewBuilder: {fileID: 11400000, guid: 9280239a7aae48041bc89e3309ad1261, type: 2}
+  cityViewObjectBuilder: {fileID: 11400000, guid: b8b2cb1796673254fbd1b5a05d793650, type: 2}

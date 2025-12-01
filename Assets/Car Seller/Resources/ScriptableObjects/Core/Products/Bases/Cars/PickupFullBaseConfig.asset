@@ -432,5 +432,5 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  Name: PickupFullBaseConfig
+  Name: Pickup
   CarFrameBaseConfig: {fileID: 11400000, guid: f21d305ae093c4947ae112b2b1cada25, type: 2}

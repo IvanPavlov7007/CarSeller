@@ -7,13 +7,18 @@ using UnityEngine;
 public class G : Singleton<G>
 {
     //MODEL
-
+    public CityConfig cityConfig;
 
     //REPRESENTATION
-    public ProductManager ProductManager;
-    public LocationService LocationService;
+    public ProductManager ProductManager = new ProductManager();
+    public LocationService LocationService = new LocationService();
 
     public GameFlowController GameFlowController = new GameFlowController();
+
+    public WorldManager WorldManager = new WorldManager();
+
+    //City
+    public CityActionService CityActionService = new CityActionService();
 
     //Interaction
     public IInteractionManager InteractionManager;
@@ -24,16 +29,20 @@ public class G : Singleton<G>
     public WarehouseProductGameObjectBuilder warehouseProductViewBuilder;
     public CarPartGameObjectBuilder carPartViewBuilder;
 
-    private void Awake()
+    //City
+    public CityViewObjectBuilder cityViewObjectBuilder;
+    public CityViewStreetsBuilder cityViewStreetsBuilder = new CityViewStreetsBuilder();
+
+    protected override void OnRegistration()
     {
+        base.OnRegistration();
+        GameEvents.Instance.Reset();
         ResetGameState();
-        LocationService = new LocationService();
-        ProductManager = new ProductManager();
     }
 
     public void ResetGameState()
     {
-        World.Reset();
+        WorldManager.InitializeCity(cityConfig);
     }
 
 }

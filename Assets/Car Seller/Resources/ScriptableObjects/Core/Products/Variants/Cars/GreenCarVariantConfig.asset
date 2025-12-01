@@ -10,15 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c5cc74843f79d642be09ac3bf16b281, type: 3}
-  m_Name: BlueCarWithOverrideEngingeVariantConfig
+  m_Name: GreenCarVariantConfig
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: aa58472cc33716543b79630f8eb0cfef, type: 2}
-    - {fileID: 11400000, guid: 17536685ea3648b46bf74040a5d0ae1e, type: 2}
-    - {fileID: 11400000, guid: 977b9ae224116004f9a1d9d0db473329, type: 2}
+    - {fileID: 11400000, guid: 629b514e17c7c4347b820927b4d9ee7c, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -30,11 +28,11 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 6
+      Data: 4
     - Name: 
       Entry: 7
-      Data: 1|EngineSlotVariantConfig, ProductCore
-    - Name: engineVariantConfig
+      Data: 1|WheelSlotVariantConfig, ProductCore
+    - Name: wheelVariantConfig
       Entry: 10
       Data: 0
     - Name: 
@@ -42,10 +40,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|SpoilerSlotVariantConfig, ProductCore
-    - Name: spoilerVariantConfig
+      Data: 2|WheelSlotVariantConfig, ProductCore
+    - Name: wheelVariantConfig
       Entry: 10
-      Data: 1
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -54,7 +52,7 @@ MonoBehaviour:
       Data: 3|WheelSlotVariantConfig, ProductCore
     - Name: wheelVariantConfig
       Entry: 10
-      Data: 2
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -63,25 +61,7 @@ MonoBehaviour:
       Data: 4|WheelSlotVariantConfig, ProductCore
     - Name: wheelVariantConfig
       Entry: 10
-      Data: 2
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 5|WheelSlotVariantConfig, ProductCore
-    - Name: wheelVariantConfig
-      Entry: 10
-      Data: 2
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 6|WheelSlotVariantConfig, ProductCore
-    - Name: wheelVariantConfig
-      Entry: 10
-      Data: 2
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -92,4 +72,4 @@ MonoBehaviour:
       Entry: 8
       Data: 
   baseFallbackConfig: {fileID: 0}
-  carFrameRuntimeConfig: {fileID: 11400000, guid: ab40992943a11f2479bd16d83c825292, type: 2}
+  carFrameRuntimeConfig: {fileID: 11400000, guid: cdd4e53c8df80b74c8e9837e416d51cd, type: 2}

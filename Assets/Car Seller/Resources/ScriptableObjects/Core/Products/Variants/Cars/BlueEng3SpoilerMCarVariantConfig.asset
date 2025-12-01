@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c5cc74843f79d642be09ac3bf16b281, type: 3}
+  m_Name: BlueEng3SpoilerMCarVariantConfig
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: aa58472cc33716543b79630f8eb0cfef, type: 2}
+    - {fileID: 11400000, guid: 75e8eed78ff0a2f49b80b8623e803f7d, type: 2}
+    - {fileID: 11400000, guid: 977b9ae224116004f9a1d9d0db473329, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: slotConfigs
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[PartSlotVariantConfig, ProductCore]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 6
+    - Name: 
+      Entry: 7
+      Data: 1|EngineSlotVariantConfig, ProductCore
+    - Name: engineVariantConfig
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 2|SpoilerSlotVariantConfig, ProductCore
+    - Name: spoilerVariantConfig
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|WheelSlotVariantConfig, ProductCore
+    - Name: wheelVariantConfig
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|WheelSlotVariantConfig, ProductCore
+    - Name: wheelVariantConfig
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 5|WheelSlotVariantConfig, ProductCore
+    - Name: wheelVariantConfig
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 6|WheelSlotVariantConfig, ProductCore
+    - Name: wheelVariantConfig
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  baseFallbackConfig: {fileID: 0}
+  carFrameRuntimeConfig: {fileID: 11400000, guid: ab40992943a11f2479bd16d83c825292, type: 2}

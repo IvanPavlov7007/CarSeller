@@ -6,7 +6,7 @@ public class WorldManager
     // On bootstrap, create the initial cities and warehouses
     public void AddWarehouse(City city, WarehouseConfig warehouseConfig)
     {
-        Warehouse warehouse = new Warehouse();
+        Warehouse warehouse = new Warehouse(warehouseConfig);
         var pos = city.GetClosestPosition(warehouseConfig.warehouseClosestInitialPosition);
         city.PlaceObjectAtPosition(warehouse, pos);
         initializeWarehouse(warehouse, warehouseConfig);
@@ -39,9 +39,10 @@ public class WorldManager
         }
     }
 
-    private void InitializeCity(CityConfig cityConfig)
+    public void InitializeCity(CityConfig cityConfig)
     {
-        World.Instance.City = new City();
+        World.Reset();
+        World.Instance.City = new City(cityConfig);
         foreach (var warehouseConfig in cityConfig.warehouseConfigs)
         {
             AddWarehouse(World.Instance.City, warehouseConfig);

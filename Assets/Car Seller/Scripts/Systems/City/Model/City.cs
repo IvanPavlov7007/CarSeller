@@ -4,9 +4,20 @@ using UnityEngine;
 
 public class City : IProductsHolder
 {
+    public CityConfig Config;
     public Dictionary<object, CityPosition> Objects { get; private set; } = new Dictionary<object, CityPosition>();
     private List<IProductLocation> productLocations = new List<IProductLocation>();
-    public INodesNetwork nodesNet { get; private set; } = new SimpleGridNetwork(Vector2.zero, 6, 6, 2f);
+    public INodesNetwork nodesNet { get; private set; }
+
+    public City(CityConfig config)
+    {
+        this.Config = config;
+        nodesNet = new SimpleGridNetwork(
+            config.cityLeftUpPos,
+            config.gridNodesCountX,
+            config.gridNodesCountY,
+            config.gridNodeWorldSize);
+    }
 
     public CityProductLocation GetEmptyProductLocation(CityPosition position)
     {
@@ -127,11 +138,13 @@ public class City : IProductsHolder
 
         public bool Attach(Product product)
         {
-            if (product == null)
+            Debug.Assert(product != null, "Product to attach cannot be null");
+            if (this.Product == null && product != null)
             {
                 Product = product;
                 City.productLocations.Add(this);
                 City.Objects[product] = CityPosition;
+                return true;
             }
             return false;
         }

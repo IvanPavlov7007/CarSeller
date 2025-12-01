@@ -22,7 +22,7 @@ public class ProductManager
             G.Instance.LocationService.RegisterProductLocation(locations.Product, locations);
         }
 
-        GameEvents.Instance.OnProductCreated?.Invoke(new ProductCreatedEventData(car));
+        GameEvents.Instance.OnProductCreated?.Invoke(new ProductCreatedEventData(car, location));
         return car;
     }
 
@@ -34,7 +34,7 @@ public class ProductManager
         attachProductToLocation(wheel, location);
 
         G.Instance.LocationService.RegisterProductLocation(wheel, location);
-        GameEvents.Instance.OnProductCreated?.Invoke(new ProductCreatedEventData(wheel));
+        GameEvents.Instance.OnProductCreated?.Invoke(new ProductCreatedEventData(wheel, location));
         return wheel;
     }
 
@@ -46,7 +46,7 @@ public class ProductManager
         attachProductToLocation(engine, location);
 
         G.Instance.LocationService.RegisterProductLocation(engine, location);
-        GameEvents.Instance.OnProductCreated?.Invoke(new ProductCreatedEventData(engine));
+        GameEvents.Instance.OnProductCreated?.Invoke(new ProductCreatedEventData(engine, location));
         return engine;
     }
 
@@ -58,7 +58,7 @@ public class ProductManager
         attachProductToLocation(spoiler, location);
 
         G.Instance.LocationService.RegisterProductLocation(spoiler, location);
-        GameEvents.Instance.OnProductCreated?.Invoke(new ProductCreatedEventData(spoiler));
+        GameEvents.Instance.OnProductCreated?.Invoke(new ProductCreatedEventData(spoiler, location));
         return spoiler;
     }
 

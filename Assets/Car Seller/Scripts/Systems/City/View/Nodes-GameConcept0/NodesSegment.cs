@@ -5,6 +5,7 @@ public class NodesSegment : MonoBehaviour
 {
     public Transform pointA, pointB;
     public Color col = Color.white;
+    public int sortingOrder = -100;
     LineRenderer lr;
     private void Awake()
     {
@@ -13,6 +14,7 @@ public class NodesSegment : MonoBehaviour
         lr.endWidth = 0.1f;
         lr.startColor = col;
         lr.endColor = col;
+        lr.sortingOrder = sortingOrder;
     }
 
     public void SetPoints(Transform a, Transform b)

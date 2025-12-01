@@ -50,7 +50,7 @@ public class GameCursor : Singleton<GameCursor>
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Confined;
+        //Cursor.lockState = CursorLockMode.Confined;
     }
 
     private void Update()

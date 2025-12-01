@@ -18,6 +18,6 @@ MonoBehaviour:
     OverrideName: 0
     Name: 
     OverrideFrameColor: 1
-    FrameColor: {r: 0.009611944, g: 0.030517232, b: 0.6792453, a: 1}
+    FrameColor: {r: 0.19058831, g: 0.08788714, b: 0.745283, a: 1}
     OverrideWindshieldColor: 0
     WindshieldColor: {r: 0, g: 0, b: 0, a: 0}

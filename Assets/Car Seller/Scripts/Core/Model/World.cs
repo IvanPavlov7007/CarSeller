@@ -5,7 +5,7 @@ public class World
 {
     public HiddenSpace HiddenSpace = new HiddenSpace();
     public Dictionary<Product, IProductLocation> productLocations = new Dictionary<Product, IProductLocation>();
-    public City City = new City();
+    public City City;
 
     public static World Instance = new World();
 

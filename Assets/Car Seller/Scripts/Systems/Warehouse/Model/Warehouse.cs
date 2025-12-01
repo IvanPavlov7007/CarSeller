@@ -3,9 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Warehouse : IProductsHolder
 {
+    public WarehouseConfig Config;
     public DimensionalPositionData emptyProductLocation { get; set; }
     public List<WarehouseProductLocation> products = new List<WarehouseProductLocation>();
     public SuppliesList suppliesList;
+
+
+    public Warehouse(WarehouseConfig config)
+    {
+        this.Config = config;
+    }
 
     public IProductLocation GetEmptyLocation()
     {

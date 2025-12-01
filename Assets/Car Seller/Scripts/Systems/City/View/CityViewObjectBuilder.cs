@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "CityViewObjectBuilder", menuName = "Configs/View/CityViewObjectBuilder")]
-public class CityViewObjectBuilder : SingletonScriptableObject<CityViewObjectBuilder>
+public class CityViewObjectBuilder : ScriptableObject
 {
     public GameObject carViewPrefab;
     public GameObject warehouseViewPrefab;
 
-    public GameObject buildObject(object cityObject)
+    public GameObject BuildObject(object cityObject)
     {
         switch(cityObject)
         {
@@ -26,7 +26,7 @@ public class CityViewObjectBuilder : SingletonScriptableObject<CityViewObjectBui
         var location = G.Instance.LocationService.GetProductLocation(car) as City.CityProductLocation;
         carGO.AddComponent<ProductView>().Initialize(car, location);
         carGO.AddComponent<ContentProvider>().Initialize(car);
-        carGO.AddComponent<DragInteractable>();
+        carGO.AddComponent<DragInteractable>().sortingOrder = 10;
         carGO.AddComponent<MovingPoint>().Initialize(location.CityPosition);
         return carGO;
     }
@@ -35,6 +35,8 @@ public class CityViewObjectBuilder : SingletonScriptableObject<CityViewObjectBui
     {
         var position = World.Instance.City.Objects[warehouse];
         GameObject warehouseGO = Instantiate(warehouseViewPrefab, position.WorldPosition,Quaternion.identity);
+        warehouseGO.AddComponent<Interactable>();
+        warehouseGO.AddComponent<ContentProvider>().Initialize(warehouse);
         return warehouseGO;
     }
 }

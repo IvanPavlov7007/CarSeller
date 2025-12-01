@@ -432,5 +432,5 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  Name: SuperCarFullBaseConfig
+  Name: Supercar
   CarFrameBaseConfig: {fileID: 11400000, guid: a994ec9977ffb5e48a0ec6d89b62690e, type: 2}

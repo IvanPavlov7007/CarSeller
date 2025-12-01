@@ -1,5 +1,7 @@
 ﻿
 using Pixelplacement;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameFlowController
 {
@@ -7,12 +9,12 @@ public class GameFlowController
     {
         WarehouseSceneManager.SceneWarehouseModel = warehouse;
         G.Instance.InteractionManager = new WarehouseInteractionManager();
+        SceneManager.LoadScene(warehouse.Config.SceneToLoad);
     }
 
-    //TODO add building context and stuff
-
-    public void RideCar(Car car)
+    public void GetToTheCity()
     {
-        
+        G.Instance.InteractionManager = new CityInteractionManager();
+        SceneManager.LoadScene(World.Instance.City.Config.SceneToLoad);
     }
 }

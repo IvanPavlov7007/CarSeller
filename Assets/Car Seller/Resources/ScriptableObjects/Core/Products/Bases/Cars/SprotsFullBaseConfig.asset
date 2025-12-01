@@ -432,5 +432,5 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  Name: SprotsFullBaseConfig
+  Name: Sportscar
   CarFrameBaseConfig: {fileID: 11400000, guid: 526c83c7d5e9c39488bba242842be9a0, type: 2}

@@ -11,11 +11,13 @@ public class MovingPoint : MonoBehaviour
 
     IDirectionProvider directionProvider;
     Transform arrowRotationPoint;
+    Transform body;
 
     private void Awake()
     {
         directionProvider = GetComponent<IDirectionProvider>();
-        arrowRotationPoint = transform.GetChild(0);
+        body = transform.GetChild(0);
+        arrowRotationPoint = transform.GetChild(1);
     }
 
     public void Initialize(City.CityPosition posData)
@@ -31,7 +33,7 @@ public class MovingPoint : MonoBehaviour
 
         float lerpV = 10f * Time.deltaTime;
         arrowRotationPoint.rotation = Quaternion.Lerp(arrowRotationPoint.rotation,  Quaternion.FromToRotation(Vector2.up, nextDirection.normalized),lerpV);
-        arrowRotationPoint.localScale = new Vector3(1f, Mathf.Lerp(arrowRotationPoint.localScale.y, nextDirection.magnitude, lerpV), 1f);
+        arrowRotationPoint.localScale = new Vector3(1f, Mathf.Lerp(arrowRotationPoint.localScale.y, Mathf.Clamp01(nextDirection.magnitude), lerpV), 1f);
 
         //Anchor node - node from which we move from
         Node a = positionData.NodeA;
@@ -48,6 +50,7 @@ public class MovingPoint : MonoBehaviour
             //No neighbour in that direction
             if (Vector2.Dot(dir_a_to_b, nextDirection) < 0f)
             {
+                body.up = dir_a_to_b;
                 return;
             }
         }
@@ -108,11 +111,12 @@ public class MovingPoint : MonoBehaviour
             //We have reached the end of the line, stop at node A
             transform.position = a.CurrentPosition;
             positionData.SetAtNode(a);
+            body.up = dir_a_to_b;
             return;
         }
         else
         {
-            t = stepLength / dir_a_to_b.magnitude;
+            t = stepLength / dist_a_to_b;
 
             positionData.SetBetween(a, b, t);
 
@@ -121,6 +125,7 @@ public class MovingPoint : MonoBehaviour
             //Vector2 curToNewStand = currentPos - curNPos;
         }
 
+        body.up = dir_a_to_b;
         transform.position = positionData.WorldPosition;
     }
 }

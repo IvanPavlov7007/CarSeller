@@ -94,12 +94,18 @@ public class WarehouseInteractionManager : IInteractionManager
                 {
                     new UIElement()
                     {
+                        Type = UIElementType.Text,
+                        Text = car.Name,
+                        Style = "header"
+                    },
+                    new UIElement()
+                    {
                         Type = UIElementType.Button,
                         Text = "Disassemble",
                         IsInteractable = CarMechanicService.Instance.CanDisassembleCar(car),
                         OnClick = () =>
                         {
-                            CarMechanicService.Instance.DisassembleCar(World.Instance.Warehouse, car);
+                            CarMechanicService.Instance.DisassembleCar(WarehouseSceneManager.SceneWarehouseModel, car);
                         },
                         UnavailabilityReason = "Car has nothing to disassemble"
                     }

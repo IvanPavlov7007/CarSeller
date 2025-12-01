@@ -1,9 +1,4 @@
-﻿using NUnit.Framework;
-using Unity.VisualScripting;
-using UnityEngine;
-using static Car;
-using static UnityEditor.FilePathAttribute;
-using static UnityEngine.Rendering.GPUSort;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "WarehouseProductViewBuilder", menuName = "Configs/View/WarehouseProductViewBuilder")]
 public class WarehouseProductGameObjectBuilder : ScriptableObject, IProductViewBuilder<GameObject>

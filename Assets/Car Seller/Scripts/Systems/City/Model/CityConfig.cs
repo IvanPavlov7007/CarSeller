@@ -4,6 +4,13 @@
 public class CityConfig : ScriptableObject
 {
     public string cityName;
+    public string SceneToLoad;
+
+    public Vector2 cityLeftUpPos;
+    public int gridNodesCountX;
+    public int gridNodesCountY;
+    public float gridNodeWorldSize;
+
     public WarehouseConfig[] warehouseConfigs;
     public SimpleProductSpawnConfig[] initialProductsToSpawn;
 }

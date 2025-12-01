@@ -16,6 +16,6 @@ public class WarehouseConfig : ScriptableObject
 [Serializable]
 public class SimpleProductSpawnConfig
 {
-    public IBaseConfig productBaseConfig;
-    public ISimpleVariantConfig productVariantConfig;
+    public ScriptableObject productBaseConfig;
+    public ScriptableObject productVariantConfig;
 }

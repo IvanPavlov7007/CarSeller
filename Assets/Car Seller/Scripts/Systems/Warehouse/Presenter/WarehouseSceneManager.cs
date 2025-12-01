@@ -13,8 +13,13 @@ public class WarehouseSceneManager : Singleton<WarehouseSceneManager>
 
     public Transform emptyPosition;
 
-    private void Start()
+    private void Awake()
     {
+        if(SceneWarehouseModel == null)
+        {
+            Debug.LogError("Warehouse instance is not set in the WarehouseSceneManager");
+            return;
+        }
         initializeWarehouse();
     }
 
@@ -32,8 +37,17 @@ public class WarehouseSceneManager : Singleton<WarehouseSceneManager>
 
     private void Update()
     {
-        SceneWarehouseModel.emptyProductLocation = new Warehouse.DimensionalPositionData
-        { LocalPosition =  emptyPosition.localPosition, LocalRotation = emptyPosition.localEulerAngles };
+        if (emptyPosition != null)
+        {
+            SceneWarehouseModel.emptyProductLocation = new Warehouse.DimensionalPositionData
+            { LocalPosition = emptyPosition.localPosition, LocalRotation = emptyPosition.localEulerAngles };
+        }
+        else
+        {
+            SceneWarehouseModel.emptyProductLocation = new Warehouse.DimensionalPositionData
+            { LocalPosition = Vector3.up * 4f, LocalRotation = Vector3.zero };
+        }
+        
     }
 
     void initializeWarehouse()
@@ -45,11 +59,9 @@ public class WarehouseSceneManager : Singleton<WarehouseSceneManager>
         }
         foreach (var location in SceneWarehouseModel.products)
         {
-            if (location.Product != null)
-            {
-                //var productObject = Instantiate(location.Product.Prefab, location.Position, Quaternion.identity);
-                //productObject.GetComponent<ProductBehaviour>().Initialise(location.Product, location);
-            }
+            Debug.Assert(location.Product != null, "Product at the location is null");
+
+            buildProductView(location.Product, location);
         }
     }
 

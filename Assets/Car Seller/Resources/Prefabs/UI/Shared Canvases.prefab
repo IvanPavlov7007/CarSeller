@@ -185,6 +185,7 @@ GameObject:
   - component: {fileID: 4259505806075564180}
   - component: {fileID: 7471277690519275232}
   - component: {fileID: 4692084012509145370}
+  - component: {fileID: 5888160140712487461}
   m_Layer: 5
   m_Name: Dynamic Canvas - Block
   m_TagString: Untagged
@@ -311,7 +312,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a681409fd87ac647858808361439a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dontDestroyOnLoad: 1
+  _dontDestroyOnLoad: 0
+--- !u!114 &5888160140712487461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2822891348834384506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e7074dc87c29448b3cae7c7ca28ef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5829639601807059869
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,6 +340,7 @@ GameObject:
   - component: {fileID: 7867279872748149185}
   - component: {fileID: 6665597898465680934}
   - component: {fileID: 7023735185606444856}
+  - component: {fileID: 4853053783389213410}
   m_Layer: 5
   m_Name: Dynamic Canvas - Pause
   m_TagString: Untagged
@@ -453,7 +467,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f96b5adc7a55c7408815d88c4a7dfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dontDestroyOnLoad: 0
   container: {fileID: 2619267306214796547}
+--- !u!114 &4853053783389213410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5829639601807059869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e7074dc87c29448b3cae7c7ca28ef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6743048900102241750
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,6 +630,7 @@ GameObject:
   - component: {fileID: 8173110618622922053}
   - component: {fileID: 7441298906662016921}
   - component: {fileID: 7956140264003935314}
+  - component: {fileID: 2914403506866984763}
   m_Layer: 5
   m_Name: Dynamic Canvas - Hint
   m_TagString: Untagged
@@ -729,7 +757,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82866c07f5e20b4283d32d7c09532e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dontDestroyOnLoad: 1
+  _dontDestroyOnLoad: 0
+--- !u!114 &2914403506866984763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9149368329832367916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e7074dc87c29448b3cae7c7ca28ef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3620857546003391906
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -30,5 +30,6 @@ public class DragInteractable : Interactable, IDirectionProvider
     {
         base.OnCursorDragEnd();
         dragging = false;
+        ProvidedDirection = Vector2.zero;
     }
 }

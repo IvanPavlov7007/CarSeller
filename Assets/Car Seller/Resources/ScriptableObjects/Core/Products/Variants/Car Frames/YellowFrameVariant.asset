@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6985f2bd67e48ef45a7ec64f2a58ac71, type: 3}
+  m_Name: YellowFrameVariant
+  m_EditorClassIdentifier: 
+  OverrideBase: 0
+  BaseConfig: {fileID: 0}
+  CarFrameVariantOverrides:
+    OverrideName: 0
+    Name: 
+    OverrideFrameColor: 1
+    FrameColor: {r: 0.9216926, g: 0.9245283, b: 0.14391243, a: 1}
+    OverrideWindshieldColor: 0
+    WindshieldColor: {r: 0, g: 0, b: 0, a: 0}

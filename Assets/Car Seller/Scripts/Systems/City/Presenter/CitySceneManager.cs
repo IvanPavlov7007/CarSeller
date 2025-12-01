@@ -1,11 +1,13 @@
 ﻿using Pixelplacement;
 using System;
+using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 
 public class CitySceneManager : Singleton<CitySceneManager>
 {
     public City City => World.Instance.City;
-    private void Start()
+
+    private void Awake()
     {
         initializeCity();
     }
@@ -28,42 +30,39 @@ public class CitySceneManager : Singleton<CitySceneManager>
             Debug.LogWarning("City instance is not set");
             return;
         }
-        foreach (var obj in City.Objects.Keys)
-        {
-            Debug.Assert(obj != null, "City object cannot be null");
-
-            switch(obj)
-            {
-                case Car:                    // Initialize car in the scene
-                    break;
-                case Warehouse:              // Initialize warehouse in the scene
-                    break;
-                // Add cases for different object types to initialize them in the scene
-                default:
-                    Debug.LogWarning($"Unhandled city object type: {obj.GetType().Name}");
-                    break;
-            }   
-        }
+        initializeMap();
+        initializeObjects();
     }
 
     private void initializeMap()
     {
-
+        G.Instance.cityViewStreetsBuilder.BuildCity(City);
     }
 
     private void initializeObjects()
     {
+        foreach (var obj in City.Objects.Keys)
+        {
+            Debug.Assert(obj != null, "City object cannot be null");
+            G.Instance.cityViewObjectBuilder.BuildObject(obj);
+        }
 
     }
 
     private void onProductLocationChanged(ProductLocationChangedEventData data)
     {
-        throw new NotImplementedException();
+        if(data.NewLocation.Holder == City)
+        {
+            G.Instance.cityViewObjectBuilder.BuildObject(data.Product);
+        }
     }
 
     private void onNewProductCreated(ProductCreatedEventData data)
     {
-        throw new NotImplementedException();
+        if (data.Location.Holder == City)
+        {
+            G.Instance.cityViewObjectBuilder.BuildObject(data.Product);
+        }
     }
 
 }
