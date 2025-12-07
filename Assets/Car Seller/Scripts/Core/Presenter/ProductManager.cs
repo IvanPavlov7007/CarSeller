@@ -19,7 +19,7 @@ public class ProductManager
         foreach(var locations in car.GetNonEmptyProductLocations())
         {
             //not rising events here
-            G.Instance.LocationService.RegisterProductLocation(locations.Occupant, locations);
+            G.Instance.LocationService.RegisterProductLocation(locations.Occupant as Product, locations);
         }
 
         GameEvents.Instance.OnProductCreated?.Invoke(new ProductCreatedEventData(car, location));

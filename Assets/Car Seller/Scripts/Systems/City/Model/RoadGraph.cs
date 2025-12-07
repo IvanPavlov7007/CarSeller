@@ -1,26 +1,38 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Pixelplacement;
+using UnityEngine.Splines;
 
-[Serializable]
+[System.Serializable]
 public sealed class RoadNode
 {
-    public string Id;                      // Stable id for references
-    public Vector2 Position;               // World position (editor set)
+    public string Id;
+    public Vector2 Position;
     public List<RoadEdge> Outgoing = new List<RoadEdge>();
     public List<RoadEdge> Incoming = new List<RoadEdge>();
 }
 
-[Serializable]
+[System.Serializable]
 public sealed class RoadEdge
 {
-    public string Id;                      // Stable id
+    public string Id;
     public RoadNode From;
     public RoadNode To;
-    public Spline Spline;                  // Runtime reference to the spline instance
-    public float Length;                   // Cached from Spline.Length (optional)
-    public bool Bidirectional = true;      // Whether both directions are allowed
+
+    // Unity Splines authoring model: container holding one or more splines
+    public SplineContainer Container;
+    public int SplineIndex;
+
+    public float Length;
+    public bool Bidirectional = true;
+
+    public Spline GetSpline()
+    {
+        if (Container == null) return null;
+        var splines = Container.Splines;
+        if (splines == null || SplineIndex < 0 || SplineIndex >= splines.Count) return null;
+        return splines[SplineIndex];
+    }
 }
 
 public interface IJunctionPolicy

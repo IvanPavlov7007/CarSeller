@@ -47,7 +47,7 @@ public sealed class Car : Product, ILocationsHolder
         Debug.Assert(carParts != null, $"Car {UniqueName}: Car parts have not been set.");
         foreach (var slotLocation in carParts.Keys)
         {
-            if (slotLocation.PartSlotRuntimeConfig.partSlotData.Required && slotLocation.Product == null)
+            if (slotLocation.PartSlotRuntimeConfig.partSlotData.Required && slotLocation.Occupant == null)
             {
                 return false;
             }
@@ -77,19 +77,19 @@ public sealed class Car : Product, ILocationsHolder
         }
 
         public Car Car { get; private set; }
-        public Product Product => CarFrame;
+        public ILocatable Occupant => CarFrame;
         public ILocationsHolder Holder => Car;
         public CarFrame CarFrame { get; private set; }
 
-        public bool Attach(Product product)
+        public bool Attach(ILocatable locatable)
         {
-            Debug.LogWarning($"Car {Car.UniqueName}: Cannot attach product { product.Name} to FrameLocation: location is fixed to CarFrame {CarFrame.Name}.");
+            Debug.LogWarning($"Car {Car.UniqueName}: Cannot attach { locatable} to FrameLocation: location is fixed to CarFrame {CarFrame.Name}.");
             return false;
         }
 
         public void Detach()
         {
-            Debug.LogWarning($"Car {Car.UniqueName}: Cannot detach product { Product.Name} from FrameLocation: location is fixed to CarFrame {CarFrame.Name}.");
+            Debug.LogWarning($"Car {Car.UniqueName}: Cannot detach product {(Occupant as CarFrame).Name} from FrameLocation: location is fixed to CarFrame {CarFrame.Name}.");
         }
     }
 
@@ -102,24 +102,27 @@ public sealed class Car : Product, ILocationsHolder
         {
             Car = car;
             PartSlotRuntimeConfig = partSlotRuntimeConfig;
-            Product = product;
+            Occupant = product;
         }
 
         public Car Car { get; private set; }
         public ILocationsHolder Holder => Car;
         public PartSlotRuntimeConfig PartSlotRuntimeConfig { get; private set; }
-        public Product Product { get; private set; }
+        public ILocatable Occupant { get; private set; }
 
         public bool CanAccept(Product product)
         {
-            return PartSlotRuntimeConfig.CanAccept(product) && Product == null;
+            return PartSlotRuntimeConfig.CanAccept(product) && Occupant == null;
         }
 
-        public bool Attach(Product product)
+        public bool Attach(ILocatable locatable)
         {
-            if(Product != null)
+
+            Product product = locatable as Product;
+
+            if(Occupant != null)
             {
-                Debug.LogWarning($"Car {Car.UniqueName}: Cannot attach product { product.Name} to CarPartLocation: already occupied by product {Product.Name}.");
+                Debug.LogWarning($"Car {Car.UniqueName}: Cannot attach product { product.Name} to CarPartLocation: already occupied by product {(Occupant as Product).Name}.");
                 return false;
             }
 
@@ -128,14 +131,14 @@ public sealed class Car : Product, ILocationsHolder
                 Debug.LogWarning($"Car {Car.UniqueName}: Cannot attach product { product.Name} to CarPartLocation: incompatible product for slot type {PartSlotRuntimeConfig.SlotType}.");
                 return false;
             }
-            Product = product;
+            Occupant = product;
             return true;
         }
 
         public void Detach()
         {
             PartSlotRuntimeConfig.Detach();
-            Product = null;
+            Occupant = null;
         }
     }
 

@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dba4c929977e03428e2a18b32a177ae, type: 3}
+  m_Name: CityGraph
+  m_EditorClassIdentifier: 
+  Nodes:
+  - Id: cab30f2c5d944425a13275fabe17639f
+    Position: {x: -3.06, y: 0.9}
+  - Id: 49c1097ed24241ce88fddd7dfa17f50f
+    Position: {x: 1.61, y: 3.32}
+  - Id: d204ae5418124e3f83576be81bb73a92
+    Position: {x: -3.53, y: 3.94}
+  - Id: c727579c618241d5b6defe6c582d1c93
+    Position: {x: 4.34, y: -2.11}
+  - Id: 252b8feb5a574f12916baddfd3a23d4a
+    Position: {x: -3.57, y: -4.25}
+  - Id: baa6f8b1341043f48df9d15e234c61f9
+    Position: {x: 3.3, y: -3.95}
+  - Id: 6ae36e41650e4061a0223416f79a8135
+    Position: {x: -0.15, y: 0.95}
+  Edges:
+  - Id: 1acb4f88474c4ad08f35fe8dcdfbb975
+    FromNodeId: cab30f2c5d944425a13275fabe17639f
+    ToNodeId: 49c1097ed24241ce88fddd7dfa17f50f
+    Bidirectional: 1
+    EdgeAuthorId: 1acb4f88474c4ad08f35fe8dcdfbb975
+    EdgeAuthorPath: CityAuthoringRoot/Edge_cab30f2c5d944425a13275fabe17639f_to_49c1097ed24241ce88fddd7dfa17f50f
+    SplineIndex: 0
+  - Id: f9120fb7e46744e580f66890a778d85d
+    FromNodeId: cab30f2c5d944425a13275fabe17639f
+    ToNodeId: d204ae5418124e3f83576be81bb73a92
+    Bidirectional: 1
+    EdgeAuthorId: f9120fb7e46744e580f66890a778d85d
+    EdgeAuthorPath: CityAuthoringRoot/Edge_cab30f2c5d944425a13275fabe17639f_to_d204ae5418124e3f83576be81bb73a92
+    SplineIndex: 0
+  - Id: e859977f4d3748709bb1b1bd5e116f46
+    FromNodeId: 49c1097ed24241ce88fddd7dfa17f50f
+    ToNodeId: d204ae5418124e3f83576be81bb73a92
+    Bidirectional: 1
+    EdgeAuthorId: e859977f4d3748709bb1b1bd5e116f46
+    EdgeAuthorPath: CityAuthoringRoot/Edge_49c1097ed24241ce88fddd7dfa17f50f_to_d204ae5418124e3f83576be81bb73a92
+    SplineIndex: 0
+  - Id: 8c868787012d447585b88da5f7dc2777
+    FromNodeId: baa6f8b1341043f48df9d15e234c61f9
+    ToNodeId: cab30f2c5d944425a13275fabe17639f
+    Bidirectional: 1
+    EdgeAuthorId: 8c868787012d447585b88da5f7dc2777
+    EdgeAuthorPath: CityAuthoringRoot/Edge_baa6f8b1341043f48df9d15e234c61f9_to_cab30f2c5d944425a13275fabe17639f
+    SplineIndex: 0
+  - Id: ceb6e81b499d46dea82f4df9a8e33de7
+    FromNodeId: 252b8feb5a574f12916baddfd3a23d4a
+    ToNodeId: baa6f8b1341043f48df9d15e234c61f9
+    Bidirectional: 1
+    EdgeAuthorId: ceb6e81b499d46dea82f4df9a8e33de7
+    EdgeAuthorPath: CityAuthoringRoot/Edge_252b8feb5a574f12916baddfd3a23d4a_to_baa6f8b1341043f48df9d15e234c61f9
+    SplineIndex: 0
+  - Id: a814d3e5cfe14503b4694b0cba5a51b7
+    FromNodeId: 6ae36e41650e4061a0223416f79a8135
+    ToNodeId: c727579c618241d5b6defe6c582d1c93
+    Bidirectional: 1
+    EdgeAuthorId: a814d3e5cfe14503b4694b0cba5a51b7
+    EdgeAuthorPath: CityAuthoringRoot/Edge_6ae36e41650e4061a0223416f79a8135_to_c727579c618241d5b6defe6c582d1c93
+    SplineIndex: 0
+  - Id: d75eed2e326c4952977dcf8fd669caae
+    FromNodeId: 6ae36e41650e4061a0223416f79a8135
+    ToNodeId: 49c1097ed24241ce88fddd7dfa17f50f
+    Bidirectional: 1
+    EdgeAuthorId: d75eed2e326c4952977dcf8fd669caae
+    EdgeAuthorPath: CityAuthoringRoot/Edge_6ae36e41650e4061a0223416f79a8135_to_49c1097ed24241ce88fddd7dfa17f50f
+    SplineIndex: 0

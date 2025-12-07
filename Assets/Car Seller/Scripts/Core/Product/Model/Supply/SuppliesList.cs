@@ -21,12 +21,15 @@ public class SuppliesList : ILocationsHolder
         public SuppliesList SuppliesList { get; private set; }
         public Supply Supply { get; private set; }
         public Product Product { get; private set; }
+        public ILocatable Occupant => Product;
 
         public ILocationsHolder Holder => SuppliesList;
 
-        public bool Attach(Product product)
+        public bool Attach(ILocatable Occupant)
         {
-            if(Product != null)
+            var product = Occupant as Product;
+
+            if (Product != null)
                 return false;
             Product = product;
             SuppliesList.supplies.Add(this);

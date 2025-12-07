@@ -123,10 +123,10 @@ public static class CarPartViewPlacementHelper
         var slotData = carPartLocation.PartSlotRuntimeConfig.partSlotData;
 
         //if hidden or not occupied, skip
-        if (slotData.Hidden == true || carPartLocation.Product == null)
+        if (slotData.Hidden == true || carPartLocation.Occupant == null)
             return null;
 
-        var part = carPartLocation.Product.GetRepresentation(carPartViewBuilder);
+        var part = (carPartLocation.Occupant as Product).GetRepresentation(carPartViewBuilder);
         if (part != null)
         {
             part.transform.SetParent(parentCarViewTransform);

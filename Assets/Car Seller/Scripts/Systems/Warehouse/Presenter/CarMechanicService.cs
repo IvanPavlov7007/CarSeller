@@ -23,9 +23,9 @@ public class CarMechanicService : Singleton<CarMechanicService>
         var carPartLocations = car.carParts;
         foreach (var location in carPartLocations.Keys)
         {
-            if(location.Product != null)
+            if(location.Occupant != null)
             {
-                parts.Add(location.Product);
+                parts.Add(location.Occupant as Product);
             }
         }
         List<Action> partRemovals = new List<Action>();
@@ -50,7 +50,7 @@ public class CarMechanicService : Singleton<CarMechanicService>
         Debug.Assert(car != null, "Car cannot be null when checking if it can be disassembled.");
         foreach (var location in car.carParts.Keys)
         {
-            if(location.Product != null)
+            if(location.Occupant != null)
             {
                 return true;
             }
@@ -84,7 +84,7 @@ public class CarMechanicService : Singleton<CarMechanicService>
             () =>
         {
             var city = World.Instance.City;
-            G.Instance.LocationService.MoveProduct(car, city.GetEmptyProductLocation(
+            G.Instance.LocationService.MoveProduct(car, city.GetEmptyLocation(
                 city.GetClosestPosition(city.Positions[sceneWarehouseModel].WorldPosition)
                 ));
         },

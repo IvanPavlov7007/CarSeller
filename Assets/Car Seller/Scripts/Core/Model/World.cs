@@ -36,24 +36,24 @@ public class HiddenSpace : ILocationsHolder
 
     public class HiddenSpaceLocation : ILocation
     {
-        public Product Product { get; private set; }
+        public ILocatable Occupant { get; private set; }
 
         public ILocationsHolder Holder => World.Instance.HiddenSpace;
 
-        public bool Attach(Product product)
+        public bool Attach(ILocatable locatable)
         {
-            if (product != null)
+            if (locatable != null)
                 return false;
-            Product = product;
+            Occupant = locatable;
             World.Instance.HiddenSpace.hiddenLocations.Add(this);
             return true;
         }
 
         public void Detach()
         {
-            if (Product == null)
+            if (Occupant == null)
                 return;
-            Product = null;
+            Occupant = null;
             World.Instance.HiddenSpace.hiddenLocations.Remove(this);
         }
     }

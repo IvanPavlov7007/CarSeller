@@ -23,7 +23,7 @@ public class CityViewObjectBuilder : ScriptableObject
     public GameObject buildCar(Car car)
     {
         GameObject carGO = Instantiate(carViewPrefab);
-        var location = G.Instance.LocationService.GetProductLocation(car) as City.CityProductLocation;
+        var location = G.Instance.LocationService.GetProductLocation(car) as City.CityLocation;
         carGO.AddComponent<ProductView>().Initialize(car, location);
         carGO.AddComponent<ContentProvider>().Initialize(car);
         carGO.AddComponent<DragInteractable>().sortingOrder = 10;

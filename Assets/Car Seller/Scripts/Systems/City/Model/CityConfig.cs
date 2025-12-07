@@ -10,7 +10,9 @@ public class CityConfig : ScriptableObject
     public int gridNodesCountX;
     public int gridNodesCountY;
     public float gridNodeWorldSize;
+    public CityGraphAsset CityGraph;
 
     public WarehouseConfig[] warehouseConfigs;
     public SimpleProductSpawnConfig[] initialProductsToSpawn;
+    
 }

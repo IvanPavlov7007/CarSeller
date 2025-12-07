@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Warehouse : ILocationsHolder
+public class Warehouse : ILocationsHolder, ILocatable
 {
     public WarehouseConfig Config;
     public DimensionalPositionData emptyProductLocation { get; set; }
@@ -31,6 +31,7 @@ public class Warehouse : ILocationsHolder
         public DimensionalPositionData Position { get; set; }
 
         public ILocationsHolder Holder => Warehouse;
+        public ILocatable Occupant => Product;
 
         public WarehouseProductLocation(Warehouse warehouse, DimensionalPositionData position, Product product)
         {
@@ -39,8 +40,11 @@ public class Warehouse : ILocationsHolder
             Warehouse = warehouse;
         }
 
-        public bool Attach(Product product)
+        public bool Attach(ILocatable locatable)
         {
+            var product = locatable as Product;
+            if(product == null)
+                return false;
             if (Product != null)
                 return false;
             Product = product;

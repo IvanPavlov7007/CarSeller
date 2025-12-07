@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// An data representation of a product instance in the game
 /// </summary>
-public abstract class Product : IProductRepresentationProvider
+public abstract class Product : IProductRepresentationProvider, ILocatable
 {
     private readonly Guid _id = Guid.NewGuid();
     public Guid Id => _id;
