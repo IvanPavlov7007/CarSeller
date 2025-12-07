@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 
-public class SuppliesList : IProductsHolder
+public class SuppliesList : ILocationsHolder
 {
     public List<SupplyProductLocation> supplies;
 
-    public IProductLocation[] GetProductLocations()
+    public ILocation[] GetLocations()
     {
         return supplies.ToArray();
     }
 
-    public class SupplyProductLocation : IProductLocation
+    public class SupplyProductLocation : ILocation
     {
         public SupplyProductLocation(SuppliesList suppliesList, Supply supply, Product product)
         {
@@ -22,7 +22,7 @@ public class SuppliesList : IProductsHolder
         public Supply Supply { get; private set; }
         public Product Product { get; private set; }
 
-        public IProductsHolder Holder => SuppliesList;
+        public ILocationsHolder Holder => SuppliesList;
 
         public bool Attach(Product product)
         {

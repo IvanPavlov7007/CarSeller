@@ -89,7 +89,7 @@ public class WarehouseSceneManager : Singleton<WarehouseSceneManager>
         }
     }
 
-    void buildProductView(Product product, IProductLocation location)
+    void buildProductView(Product product, ILocation location)
     {
         var productViewGO = product.GetRepresentation(G.Instance.warehouseProductViewBuilder);
         var transform = productViewGO.transform;

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Warehouse : IProductsHolder
+public class Warehouse : ILocationsHolder
 {
     public WarehouseConfig Config;
     public DimensionalPositionData emptyProductLocation { get; set; }
@@ -14,23 +14,23 @@ public class Warehouse : IProductsHolder
         this.Config = config;
     }
 
-    public IProductLocation GetEmptyLocation()
+    public ILocation GetEmptyLocation()
     {
         return new WarehouseProductLocation(this,emptyProductLocation, null);
     }
 
-    public IProductLocation[] GetProductLocations()
+    public ILocation[] GetLocations()
     {
         return products.ToArray();
     }
 
-    public class WarehouseProductLocation : IProductLocation
+    public class WarehouseProductLocation : ILocation
     {
         public Warehouse Warehouse { get; private set; }
         public Product Product { get; private set; }
         public DimensionalPositionData Position { get; set; }
 
-        public IProductsHolder Holder => Warehouse;
+        public ILocationsHolder Holder => Warehouse;
 
         public WarehouseProductLocation(Warehouse warehouse, DimensionalPositionData position, Product product)
         {

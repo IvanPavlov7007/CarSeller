@@ -8,7 +8,7 @@ public class ProductManager
 
     ProductBuilder productBuilder = new ProductBuilder();
 
-    public Car CreateCar(CarBaseConfig baseConfig, CarVariantConfig variantConfig, IProductLocation location)
+    public Car CreateCar(CarBaseConfig baseConfig, CarVariantConfig variantConfig, ILocation location)
     {
         CarRuntimeConfig runtimeConfig = carResolver.Resolve(baseConfig, variantConfig);
         Car car = productBuilder.BuildCar(runtimeConfig);
@@ -19,14 +19,14 @@ public class ProductManager
         foreach(var locations in car.GetNonEmptyProductLocations())
         {
             //not rising events here
-            G.Instance.LocationService.RegisterProductLocation(locations.Product, locations);
+            G.Instance.LocationService.RegisterProductLocation(locations.Occupant, locations);
         }
 
         GameEvents.Instance.OnProductCreated?.Invoke(new ProductCreatedEventData(car, location));
         return car;
     }
 
-    public Wheel CreateWheel(WheelBaseConfig baseConfig, WheelVariantConfig variantConfig, IProductLocation location)
+    public Wheel CreateWheel(WheelBaseConfig baseConfig, WheelVariantConfig variantConfig, ILocation location)
     {
         WheelRuntimeConfig runtimeConfig = configResolver.Resolve<WheelBaseConfig,WheelVariantConfig,WheelRuntimeConfig>(baseConfig, variantConfig);
         Wheel wheel = productBuilder.BuildWheel(runtimeConfig) as Wheel;
@@ -38,7 +38,7 @@ public class ProductManager
         return wheel;
     }
 
-    public Engine CreateEngine(EngineBaseConfig baseConfig, EngineVariantConfig variantConfig, IProductLocation location)
+    public Engine CreateEngine(EngineBaseConfig baseConfig, EngineVariantConfig variantConfig, ILocation location)
     {
         EngineRuntimeConfig runtimeConfig = configResolver.Resolve<EngineBaseConfig,EngineVariantConfig,EngineRuntimeConfig>(baseConfig, variantConfig);
         Engine engine = productBuilder.BuildEngine(runtimeConfig) as Engine;
@@ -50,7 +50,7 @@ public class ProductManager
         return engine;
     }
 
-    public Spoiler CreateSpoiler(SpoilerBaseConfig baseConfig, SpoilerVariantConfig variantConfig, IProductLocation location)
+    public Spoiler CreateSpoiler(SpoilerBaseConfig baseConfig, SpoilerVariantConfig variantConfig, ILocation location)
     {
         SpoilerRuntimeConfig runtimeConfig = configResolver.Resolve<SpoilerBaseConfig,SpoilerVariantConfig,SpoilerRuntimeConfig>(baseConfig, variantConfig);
         Spoiler spoiler = productBuilder.BuildSpoiler(runtimeConfig) as Spoiler;
@@ -67,7 +67,7 @@ public class ProductManager
     /// </summary>
     /// <param name="product"></param>
     /// <param name="location"></param>
-    private void attachProductToLocation(Product product, IProductLocation location)
+    private void attachProductToLocation(Product product, ILocation location)
     {
         if(!location.Attach(product))
         {

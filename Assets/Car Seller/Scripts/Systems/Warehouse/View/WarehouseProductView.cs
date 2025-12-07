@@ -8,7 +8,7 @@ public class WarehouseProductView : ProductView
 {
     protected Warehouse.WarehouseProductLocation warehouseLocation;
 
-    public override void Initialize(Product product, IProductLocation representedProductLocation)
+    public override void Initialize(Product product, ILocation representedProductLocation)
     {
         base.Initialize(product, representedProductLocation);
         warehouseLocation = representedProductLocation as Warehouse.WarehouseProductLocation;

@@ -1,8 +1,8 @@
 ﻿public class ProductCreatedEventData
 {
     public Product Product { get; private set; }
-    public IProductLocation Location { get; private set; }
-    public ProductCreatedEventData(Product product, IProductLocation location)
+    public ILocation Location { get; private set; }
+    public ProductCreatedEventData(Product product, ILocation location)
     {
         Product = product;
         Location = location;
@@ -20,7 +20,7 @@ public class ProductDestroyedEventData
 
 public class ProductLocationChangedEventData
 {
-    public ProductLocationChangedEventData(Product product, IProductLocation newLocation, IProductLocation oldLocation)
+    public ProductLocationChangedEventData(Product product, ILocation newLocation, ILocation oldLocation)
     {
         Product = product;
         NewLocation = newLocation;
@@ -28,6 +28,6 @@ public class ProductLocationChangedEventData
     }
 
     public Product Product { get; private set; }
-    public IProductLocation NewLocation { get; private set; }
-    public IProductLocation OldLocation { get; set; }
+    public ILocation NewLocation { get; private set; }
+    public ILocation OldLocation { get; set; }
 }

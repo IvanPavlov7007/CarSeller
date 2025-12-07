@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class City : IProductsHolder
+public class City : ILocationsHolder
 {
     public CityConfig Config;
-    public Dictionary<object, CityPosition> Positions { get; private set; } = new Dictionary<object, CityPosition>();
-    private List<IProductLocation> productLocations = new List<IProductLocation>();
+    public Dictionary<ILocatable, CityPosition> Positions { get; private set; } = new Dictionary<ILocatable, CityPosition>();
+    private readonly List<ILocation> locations = new List<ILocation>();
     public INodesNetwork nodesNet { get; private set; }
 
     public City(CityConfig config)
@@ -19,17 +18,15 @@ public class City : IProductsHolder
             config.gridNodeWorldSize);
     }
 
-    public CityProductLocation GetEmptyProductLocation(CityPosition position)
-    {
-        return new CityProductLocation(this, position);
-    }
+    // Always constructs a new independent location with its own position instance
+    public CityLocation GetEmptyLocation(CityPosition position) => new CityLocation(this, position);
 
     public CityPosition GetClosestPosition(Vector2 worldPosition)
     {
         Node closestNode = nodesNet.GetClosestNode(worldPosition);
         var direction = (worldPosition - closestNode.CurrentPosition).normalized;
         Node closestNeighbour = closestNode.PickClosestNeighbourDirection(direction, out Vector2 closestDirection);
-        if(Vector2.Dot(direction, closestDirection) > 0)
+        if (Vector2.Dot(direction, closestDirection) > 0)
         {
             closestPointBetweenNodesPerpendicularToPoint(closestNode, closestNeighbour, worldPosition, out float relativePos);
             return new CityPosition(closestNode, closestNeighbour, relativePos);
@@ -45,105 +42,92 @@ public class City : IProductsHolder
         Vector2 worldBetweenPos = CommonTools.GetPerpendicularPointFromPointToLine(worldPoint, nodeA.CurrentPosition, nodeB.CurrentPosition);
         float totalDistance = Vector2.Distance(nodeA.CurrentPosition, nodeB.CurrentPosition);
         float distanceFromA = Vector2.Distance(nodeA.CurrentPosition, worldBetweenPos);
-        relativePos = distanceFromA / totalDistance;
-        relativePos = Mathf.Clamp01(relativePos);
+        relativePos = Mathf.Clamp01(distanceFromA / totalDistance);
         return worldBetweenPos;
     }
 
-    /// <summary>
-    /// Use for placing not product objects in the city!
-    /// Refactor this later. Problematic to have object as key and there are 2 different ways of placing objects(products and others)
-    /// </summary>
-    /// <param name="obj"></param>
-    /// <param name="position"></param>
-    public void PlaceObjectAtPosition(object obj, CityPosition position)
+    public void PlaceAtPosition(ILocatable locatable, CityPosition position)
     {
-        Positions[obj] = position;
+        Debug.Assert(locatable != null, "Locatable cannot be null");
+        // Value-type copy ensures no shared mutable state
+        Positions[locatable] = position;
     }
 
     public CityPosition GetRandomPosition()
     {
         Node random = nodesNet.Nodes[Random.Range(0, nodesNet.Nodes.Count)];
-        Node neigbour = random.connectedNeighbors[Random.Range(0, random.connectedNeighbors.Count)];
+        Node neighbour = random.connectedNeighbors[Random.Range(0, random.connectedNeighbors.Count)];
         float relativePosition = Random.Range(0f, 1f);
-        return new CityPosition(random, neigbour, relativePosition);
+        return new CityPosition(random, neighbour, relativePosition);
     }
 
-    public IProductLocation[] GetProductLocations()
-    {
-        return productLocations.ToArray();
-    }
+    public ILocation[] GetLocations() => locations.ToArray();
 
-    /// <summary>
-    /// Reference to a mutable position in the city, either at a node or between two nodes
-    /// </summary>
-    public class CityPosition
+    public readonly struct CityPosition
     {
-
         public CityPosition(Node nodeA)
         {
-            SetAtNode(nodeA);
+            Debug.Assert(nodeA != null);
+            NodeA = nodeA;
+            NodeB = null;
+            RelativePosition = 0f;
         }
 
         public CityPosition(Node nodeA, Node nodeB, float relativePosition)
         {
-            SetBetween(nodeA, nodeB, relativePosition);
-        }
-        public Node NodeA{ get; private set; }
-        public Node NodeB { get; private set; }
-        public float RelativePosition { get; private set; }
+            Debug.Assert(nodeA != null);
+            Debug.Assert(nodeB != null);
+            Debug.Assert(nodeA != nodeB);
+            Debug.Assert(nodeA.connectedNeighbors.Contains(nodeB));
+            Debug.Assert(relativePosition >= 0f && relativePosition <= 1f);
 
-        public void SetAtNode(Node node)
-        {
-            Debug.Assert(node != null);
-            NodeA = node;
-            NodeB = null;
-            RelativePosition = 0;
+            NodeA = nodeA;
+            NodeB = nodeB;
+            RelativePosition = relativePosition;
         }
 
-        public void SetBetween(Node a, Node b, float t)
-        {
-            Debug.Assert(a != b);
-            Debug.Assert(a.connectedNeighbors.Contains(b));
-            Debug.Assert(t >= 0 && t <= 1);
-
-            NodeA = a;
-            NodeB = b;
-            RelativePosition = t;
-        }
+        public Node NodeA { get; }
+        public Node NodeB { get; }
+        public float RelativePosition { get; }
 
         public Vector2 WorldPosition =>
             NodeB == null ? NodeA.CurrentPosition :
             Vector2.Lerp(NodeA.CurrentPosition, NodeB.CurrentPosition, RelativePosition);
+
+        // Helper to create a new position along the same edge
+        public CityPosition WithRelative(float t) => new CityPosition(NodeA, NodeB, t);
+
+        // Helper to create a new position at a node
+        public static CityPosition At(Node node) => new CityPosition(node);
+
+        // Helper to create a new position between nodes
+        public static CityPosition Between(Node a, Node b, float t) => new CityPosition(a, b, t);
     }
 
-    public class CityProductLocation : IProductLocation
+    public class CityLocation : ILocation
     {
         public CityPosition CityPosition { get; private set; }
-        public CityProductLocation(City city, CityPosition initialCityPosition, Product product = null)
-        {
-            Debug.Assert(initialCityPosition != null, "Initial city position cannot be null");
+        public City City { get; private set; }
+        public ILocatable Occupant { get; private set; }
 
+        public CityLocation(City city, CityPosition initialCityPosition, ILocatable initialOccupant = null)
+        {
             City = city;
-            this.CityPosition = initialCityPosition;
-            if(product != null)
-                Attach(product);
+            CityPosition = initialCityPosition;
+
+            City.locations.Add(this);
+            if (initialOccupant != null) Attach(initialOccupant);
         }
 
-        public City City { get; private set; }
+        public ILocationsHolder Holder => City;
 
-        public Product Product { get; private set; }
-
-        public IProductsHolder Holder => City;
-
-        public bool Attach(Product product)
+        public bool Attach(ILocatable locatable)
         {
-            Debug.Assert(product != null, "Product to attach cannot be null");
-            if (this.Product == null && product != null)
+            Debug.Assert(locatable != null, "Locatable to attach cannot be null");
+            if (Occupant == null)
             {
-                Product = product;
-                City.productLocations.Add(this);
-                City.Positions[product] = CityPosition;
+                Occupant = locatable;
+                City.Positions[locatable] = CityPosition;
                 return true;
             }
             return false;
@@ -151,9 +135,21 @@ public class City : IProductsHolder
 
         public void Detach()
         {
-            City.productLocations.Remove(this);
-            City.Positions.Remove(Product);
-            Product = null;
+            if (Occupant != null)
+            {
+                City.Positions.Remove(Occupant);
+                Occupant = null;
+            }
+        }
+
+        // Optional: controlled movement API to prevent external mutation
+        public void MoveTo(CityPosition newPosition)
+        {
+            CityPosition = newPosition;
+            if (Occupant != null)
+            {
+                City.Positions[Occupant] = CityPosition;
+            }
         }
     }
 }

@@ -25,7 +25,7 @@ public class WarehouseCarView : WarehouseProductView
         GameEvents.Instance.OnProductLocationChanged -= onAnyProductLocationChanged;
     }
 
-    public override void Initialize(Product product, IProductLocation representedProductLocation)
+    public override void Initialize(Product product, ILocation representedProductLocation)
     {
         Debug.Assert(product is Car, "CarView can represent only a Car");
         base.Initialize(product, representedProductLocation);

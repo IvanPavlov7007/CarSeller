@@ -16,7 +16,7 @@ public class WorldManager
     {
         foreach (var productToSpawn in warehouseConfig.initialProductsToSpawn)
         {
-            IProductLocation insideWarehouseLocation = warehouse.GetEmptyLocation();
+            ILocation insideWarehouseLocation = warehouse.GetEmptyLocation();
             switch (productToSpawn.productBaseConfig)
             {
                 case CarBaseConfig carBaseConfig:
@@ -50,7 +50,7 @@ public class WorldManager
         foreach (var productToSpawn in cityConfig.initialProductsToSpawn)
         {
             City.CityPosition randomOutsidePosition = World.Instance.City.GetRandomPosition();
-            IProductLocation outsideLocation = World.Instance.City.GetEmptyProductLocation(randomOutsidePosition);
+            ILocation outsideLocation = World.Instance.City.GetEmptyProductLocation(randomOutsidePosition);
             switch (productToSpawn.productBaseConfig)
             {
                 case CarBaseConfig carBaseConfig:

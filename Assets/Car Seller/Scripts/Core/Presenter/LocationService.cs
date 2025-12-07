@@ -8,9 +8,9 @@ using UnityEngine;
 /// </summary>
 public class LocationService
 {
-    Dictionary<Product, IProductLocation> productLocations => World.Instance.productLocations;
+    Dictionary<Product, ILocation> productLocations => World.Instance.productLocations;
 
-    public void RegisterProductLocation(Product product, IProductLocation location)
+    public void RegisterProductLocation(Product product, ILocation location)
     {
         Debug.Assert(product != null, "Product cannot be null when registering a location.");
         Debug.Assert(location != null, "Location cannot be null when registering a product.");
@@ -19,7 +19,7 @@ public class LocationService
         productLocations[product] = location;
     }
 
-    public bool MoveProduct(Product product, IProductLocation newLocation)
+    public bool MoveProduct(Product product, ILocation newLocation)
     {
         var previousLocation = GetProductLocation(product);
 
@@ -39,7 +39,7 @@ public class LocationService
 
     public void RemoveProduct(Product product)
     {
-        if (productLocations.TryGetValue(product, out IProductLocation location))
+        if (productLocations.TryGetValue(product, out ILocation location))
         {
             location.Detach();
             productLocations.Remove(product);
@@ -47,9 +47,9 @@ public class LocationService
         }
     }
 
-    public IProductLocation GetProductLocation(Product product)
+    public ILocation GetProductLocation(Product product)
     {
-        if (productLocations.TryGetValue(product, out IProductLocation location))
+        if (productLocations.TryGetValue(product, out ILocation location))
         {
             return location;
         }

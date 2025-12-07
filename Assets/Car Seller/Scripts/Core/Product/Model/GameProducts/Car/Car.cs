@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-public sealed class Car : Product, IProductsHolder
+public sealed class Car : Product, ILocationsHolder
 {
     public CarRuntimeConfig runtimeConfig { get; private set; }
     public Dictionary<CarPartLocation, PartSlotRuntimeConfig> carParts { get; private set; }
@@ -55,12 +55,12 @@ public sealed class Car : Product, IProductsHolder
         return true;
     }
 
-    public IProductLocation[] GetProductLocations()
+    public ILocation[] GetLocations()
     {
         Debug.Assert(carParts != null, $"Car {UniqueName}: Car parts have not been set.");
         Debug.Assert(CarFrame != null, $"Car {UniqueName}: Car frame has not been set.");
 
-        return carParts.Keys.Cast<IProductLocation>().Concat(new[] { FrameLocation }).ToArray();
+        return carParts.Keys.Cast<ILocation>().Concat(new[] { FrameLocation }).ToArray();
     }
 
     public override T GetRepresentation<T>(IProductViewBuilder<T> builder)
@@ -68,7 +68,7 @@ public sealed class Car : Product, IProductsHolder
         return builder.BuildCar(this);
     }
 
-    public class FrameProductLocation : IProductLocation
+    public class FrameProductLocation : ILocation
     {
         public FrameProductLocation(Car car, CarFrame carFrame)
         {
@@ -78,7 +78,7 @@ public sealed class Car : Product, IProductsHolder
 
         public Car Car { get; private set; }
         public Product Product => CarFrame;
-        public IProductsHolder Holder => Car;
+        public ILocationsHolder Holder => Car;
         public CarFrame CarFrame { get; private set; }
 
         public bool Attach(Product product)
@@ -96,7 +96,7 @@ public sealed class Car : Product, IProductsHolder
     /// <summary>
     /// Car Slot-representing instances
     /// </summary>
-    public class CarPartLocation : IProductLocation
+    public class CarPartLocation : ILocation
     {
         public CarPartLocation(Car car, PartSlotRuntimeConfig partSlotRuntimeConfig, Product product)
         {
@@ -106,7 +106,7 @@ public sealed class Car : Product, IProductsHolder
         }
 
         public Car Car { get; private set; }
-        public IProductsHolder Holder => Car;
+        public ILocationsHolder Holder => Car;
         public PartSlotRuntimeConfig PartSlotRuntimeConfig { get; private set; }
         public Product Product { get; private set; }
 

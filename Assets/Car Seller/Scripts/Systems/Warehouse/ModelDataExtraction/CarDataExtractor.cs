@@ -1,13 +1,16 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 //TODO Make this work safely, saving changes, and being careful with the config
 public class CarDataExtractor : MonoBehaviour
 {
+#if UNITY_EDITOR
+
     public CarBaseConfig carBaseConfig;
 
     public List<Transform> slots = new List<Transform>();
@@ -39,9 +42,9 @@ public class CarDataExtractor : MonoBehaviour
             var frameGO = Instantiate(carBaseConfig.CarFrameBaseConfig.Prefab,
                 transform);
             windshieldSpriteRenderer = CommonTools.AllChildren(frameGO?.transform).
-                First(item => item.name.ContainsInsensitive(windshieldChildName))?.GetComponent<SpriteRenderer>();
+                First(item => item.name.Contains(windshieldChildName,System.StringComparison.OrdinalIgnoreCase))?.GetComponent<SpriteRenderer>();
             frameSpriteRenderer = CommonTools.AllChildren(frameGO?.transform).
-                First(item => item.name.ContainsInsensitive(frameChildName))?.GetComponent<SpriteRenderer>();
+                First(item => item.name.Contains(frameChildName, System.StringComparison.OrdinalIgnoreCase))?.GetComponent<SpriteRenderer>();
 
             windshieldSpriteRenderer.color = carBaseConfig.CarFrameBaseConfig.WindshieldColor;
             frameSpriteRenderer.color = carBaseConfig.CarFrameBaseConfig.FrameColor;
@@ -122,4 +125,5 @@ public class CarDataExtractor : MonoBehaviour
         }
 
     }
+#endif
 }

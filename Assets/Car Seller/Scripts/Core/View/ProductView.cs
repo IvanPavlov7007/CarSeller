@@ -9,11 +9,11 @@ public interface IProductViewComponentBuilder<TProductView> where TProductView :
 public class ProductView : MonoBehaviour
 {
     public Product Product { get; private set; }
-    public IProductLocation RepresentedProductLocation { get; private set; }
+    public ILocation RepresentedProductLocation { get; private set; }
 
     public bool Initialized { get; private set; } = false;
 
-    public virtual void Initialize(Product product, IProductLocation representedProductLocation)
+    public virtual void Initialize(Product product, ILocation representedProductLocation)
     {
         this.Product = product;
         this.RepresentedProductLocation = representedProductLocation;
@@ -32,7 +32,7 @@ public class ProductView : MonoBehaviour
 
     private void productLocationChanged(ProductLocationChangedEventData data)
     {
-        if(data.NewLocation.Product == Product && RepresentedProductLocation != data.NewLocation)
+        if(data.NewLocation.Occupant == Product && RepresentedProductLocation != data.NewLocation)
         {
             OnProductLocationChanged();
         }
