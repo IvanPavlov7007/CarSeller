@@ -18,6 +18,7 @@ MonoBehaviour:
   gridNodesCountX: 12
   gridNodesCountY: 4
   gridNodeWorldSize: 2
+  CityGraph: {fileID: 11400000, guid: 5389cb2a25bee4549811721f2d7263b9, type: 2}
   warehouseConfigs:
   - {fileID: 11400000, guid: 6805e19a361611e4fa3c799938c3cd96, type: 2}
   - {fileID: 11400000, guid: 3090245f56f43f046bf7da2fe7f02e6f, type: 2}

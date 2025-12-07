@@ -7,7 +7,9 @@ using UnityEngine;
 public class G : Singleton<G>
 {
     //MODEL
-    public CityConfig cityConfig;
+    public CityConfig CityConfig;
+    //MODEL AND VIEW MIXED (SORRY)
+    public GameObject CityRoot { get; set; }
 
     //REPRESENTATION
     public ProductManager ProductManager = new ProductManager();
@@ -42,7 +44,7 @@ public class G : Singleton<G>
 
     public void ResetGameState()
     {
-        WorldManager.InitializeCity(cityConfig);
+        WorldManager.InitializeCity(CityConfig);
     }
 
 }

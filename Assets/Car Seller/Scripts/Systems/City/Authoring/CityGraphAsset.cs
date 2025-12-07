@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CityGraph", menuName = "City/Graph")]
 public class CityGraphAsset : ScriptableObject
 {
+    public GameObject PrefabRoot; // prefab root for authoring linkage
+
     [Serializable]
     public class NodeData
     {

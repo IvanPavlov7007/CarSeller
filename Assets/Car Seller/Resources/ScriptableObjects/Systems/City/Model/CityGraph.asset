@@ -12,21 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dba4c929977e03428e2a18b32a177ae, type: 3}
   m_Name: CityGraph
   m_EditorClassIdentifier: 
+  PrefabRoot: {fileID: 3086309769972837672, guid: df5b4da92bb88df479ec8354e654d56d, type: 3}
   Nodes:
   - Id: cab30f2c5d944425a13275fabe17639f
-    Position: {x: -3.06, y: 0.9}
+    Position: {x: -3.87, y: 1.03}
   - Id: 49c1097ed24241ce88fddd7dfa17f50f
-    Position: {x: 1.61, y: 3.32}
+    Position: {x: 0.29, y: 3.26}
   - Id: d204ae5418124e3f83576be81bb73a92
-    Position: {x: -3.53, y: 3.94}
+    Position: {x: -2.5, y: 3.1}
   - Id: c727579c618241d5b6defe6c582d1c93
-    Position: {x: 4.34, y: -2.11}
+    Position: {x: 2.15, y: -1.08}
   - Id: 252b8feb5a574f12916baddfd3a23d4a
-    Position: {x: -3.57, y: -4.25}
+    Position: {x: -5.38, y: -2.42}
   - Id: baa6f8b1341043f48df9d15e234c61f9
-    Position: {x: 3.3, y: -3.95}
+    Position: {x: -0.89, y: -2.35}
   - Id: 6ae36e41650e4061a0223416f79a8135
-    Position: {x: -0.15, y: 0.95}
+    Position: {x: 1.3999999, y: 0.57000005}
   Edges:
   - Id: 1acb4f88474c4ad08f35fe8dcdfbb975
     FromNodeId: cab30f2c5d944425a13275fabe17639f
@@ -76,4 +77,25 @@ MonoBehaviour:
     Bidirectional: 1
     EdgeAuthorId: d75eed2e326c4952977dcf8fd669caae
     EdgeAuthorPath: CityAuthoringRoot/Edge_6ae36e41650e4061a0223416f79a8135_to_49c1097ed24241ce88fddd7dfa17f50f
+    SplineIndex: 0
+  - Id: 6b3f71f7e86d4ef9bf3aec2368889608
+    FromNodeId: cab30f2c5d944425a13275fabe17639f
+    ToNodeId: 252b8feb5a574f12916baddfd3a23d4a
+    Bidirectional: 1
+    EdgeAuthorId: 6b3f71f7e86d4ef9bf3aec2368889608
+    EdgeAuthorPath: CityAuthoringRoot/Edge_cab30f2c5d944425a13275fabe17639f_to_252b8feb5a574f12916baddfd3a23d4a
+    SplineIndex: 0
+  - Id: 971d3599f4c14d7b8fede452c87dab95
+    FromNodeId: baa6f8b1341043f48df9d15e234c61f9
+    ToNodeId: c727579c618241d5b6defe6c582d1c93
+    Bidirectional: 1
+    EdgeAuthorId: 971d3599f4c14d7b8fede452c87dab95
+    EdgeAuthorPath: CityAuthoringRoot/Edge_baa6f8b1341043f48df9d15e234c61f9_to_c727579c618241d5b6defe6c582d1c93
+    SplineIndex: 0
+  - Id: ebf8f5c163d442c2b97f10db6323822e
+    FromNodeId: 252b8feb5a574f12916baddfd3a23d4a
+    ToNodeId: baa6f8b1341043f48df9d15e234c61f9
+    Bidirectional: 1
+    EdgeAuthorId: ebf8f5c163d442c2b97f10db6323822e
+    EdgeAuthorPath: CityAuthoringRoot/Edge_252b8feb5a574f12916baddfd3a23d4a_to_baa6f8b1341043f48df9d15e234c61f9
     SplineIndex: 0

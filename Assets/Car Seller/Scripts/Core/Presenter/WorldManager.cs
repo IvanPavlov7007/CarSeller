@@ -42,7 +42,13 @@ public class WorldManager
     public void InitializeCity(CityConfig cityConfig)
     {
         World.Reset();
-        World.Instance.City = new City(cityConfig);
+
+        if (G.Instance.CityRoot == null)
+        {
+            G.Instance.CityRoot = GameObject.Instantiate(cityConfig.CityGraph.PrefabRoot);
+            G.Instance.CityRoot.SetActive(false);
+        }
+        World.Instance.City = new City(cityConfig, G.Instance.CityRoot.transform);
         foreach (var warehouseConfig in cityConfig.warehouseConfigs)
         {
             AddWarehouse(World.Instance.City, warehouseConfig);

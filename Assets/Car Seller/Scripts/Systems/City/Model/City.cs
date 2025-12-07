@@ -16,12 +16,12 @@ public class City : ILocationsHolder
     private readonly List<RoadNode> _nodes = new();
     private readonly List<RoadEdge> _edges = new();
 
-    public City(CityConfig cityConfig)
+    public City(CityConfig cityConfig, Transform graphRoot)
     {
         Config = cityConfig;
         // IMPORTANT: pass a valid root that contains your authored edges/nodes when available.
         // If null, CityGraphLoader must scan the active scene root(s).
-        CityGraphLoader.LoadFromScene(this, cityConfig.CityGraph, null);
+        CityGraphLoader.LoadFromScene(this, cityConfig.CityGraph, graphRoot);
     }
 
     public void InitializeFromGraph(CityGraphAsset graphAsset)

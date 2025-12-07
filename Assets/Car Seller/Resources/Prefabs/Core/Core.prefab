@@ -543,7 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 1
-  cityConfig: {fileID: 11400000, guid: 365f4d838f000674b9891038e28cbdf9, type: 2}
+  CityConfig: {fileID: 11400000, guid: 365f4d838f000674b9891038e28cbdf9, type: 2}
   warehouseProductViewBuilder: {fileID: 11400000, guid: f89c79dee8c6ad946a82b44e4e94a0a2, type: 2}
   carPartViewBuilder: {fileID: 11400000, guid: 9280239a7aae48041bc89e3309ad1261, type: 2}
   cityViewObjectBuilder: {fileID: 11400000, guid: b8b2cb1796673254fbd1b5a05d793650, type: 2}

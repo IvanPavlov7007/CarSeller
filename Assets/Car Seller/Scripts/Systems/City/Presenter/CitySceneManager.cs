@@ -10,6 +10,7 @@ public class CitySceneManager : Singleton<CitySceneManager>
     private void Awake()
     {
         initializeCity();
+        G.Instance.CityRoot.SetActive(true);
     }
     private void OnEnable()
     {
@@ -21,6 +22,8 @@ public class CitySceneManager : Singleton<CitySceneManager>
     {
         GameEvents.Instance.OnProductCreated -= onNewProductCreated;
         GameEvents.Instance.OnProductLocationChanged -= onProductLocationChanged;
+        if(G.Instance.CityRoot != null)
+            G.Instance.CityRoot.SetActive(false);
     }
 
     void initializeCity()

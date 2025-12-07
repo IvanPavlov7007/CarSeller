@@ -2,29 +2,76 @@
 using UnityEditor;
 using UnityEngine;
 using System.Linq;
+using System.Collections.Generic;
+using System.IO;
 
 public static class CityGraphBaker
 {
+    private const string LastFolderPrefKey = "CityGraphBaker.LastFolder";
+
     [MenuItem("City/Bake Graph From Selection")]
     public static void BakeSelected()
     {
         var root = Selection.activeGameObject;
         if (root == null)
         {
-            EditorUtility.DisplayDialog("City Bake", "Select a root GameObject containing nodes and edges.", "OK");
+            Debug.Log("Select a root GameObject containing nodes and edges.");
             return;
         }
 
         var nodes = root.GetComponentsInChildren<RoadNodeAuthor>(true);
         var edges = root.GetComponentsInChildren<RoadEdgeAuthor>(true);
 
-        foreach (var n in nodes) n.EnsureId();
+        foreach (var n in nodes)
+        {
+            n.EnsureId();
+#if UNITY_EDITOR
+            // Re-check uniqueness at baking time
+            var dupes = nodes.Where(x => x != n && x.Id == n.Id).ToList();
+            if (dupes.Count > 0)
+            {
+                // Regenerate this node's Id to avoid conflicts in the asset
+                n.GetType().GetMethod("EnsureUniqueIdInScene", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+                    ?.Invoke(n, null);
+            }
+#endif
+        }
         foreach (var e in edges) e.EnsureId();
 
-        var path = EditorUtility.SaveFilePanelInProject("Save CityGraph", "CityGraph", "asset", "Choose asset location");
+        // Load last-used folder (default to Assets)
+        var lastFolder = EditorPrefs.GetString(LastFolderPrefKey, "Assets");
+        if (string.IsNullOrEmpty(lastFolder) || !lastFolder.StartsWith("Assets"))
+            lastFolder = "Assets";
+
+        string path;
+        // Prefer the overload with directory if available
+        try
+        {
+            path = EditorUtility.SaveFilePanelInProject(
+                "Save CityGraph",
+                "CityGraph",
+                "asset",
+                "Choose asset location",
+                lastFolder);
+        }
+        catch // fallback for older Unity versions without the directory overload
+        {
+            path = EditorUtility.SaveFilePanelInProject(
+                "Save CityGraph",
+                "CityGraph",
+                "asset",
+                "Choose asset location");
+        }
+
         if (string.IsNullOrEmpty(path)) return;
 
-        // Load or create asset at path (keeps GUID if exists)
+        // Persist the chosen folder for next time
+        var chosenFolder = Path.GetDirectoryName(path)?.Replace('\\', '/');
+        if (!string.IsNullOrEmpty(chosenFolder) && chosenFolder.StartsWith("Assets"))
+        {
+            EditorPrefs.SetString(LastFolderPrefKey, chosenFolder);
+        }
+
         var graph = AssetDatabase.LoadAssetAtPath<CityGraphAsset>(path);
         if (graph == null)
         {
@@ -44,14 +91,33 @@ public static class CityGraphBaker
             FromNodeId = e.From ? e.From.Id : null,
             ToNodeId = e.To ? e.To.Id : null,
             Bidirectional = e.Bidirectional,
+            // We no longer store scene references here for persistence hygiene
             EdgeAuthorId = e.Id,
             EdgeAuthorPath = GetHierarchyPath(e.gameObject),
             SplineIndex = 0
         }).ToList();
 
+        // Warn for multiple splines between same node pair
+        var duplicates = new Dictionary<(string from, string to), int>();
+        foreach (var ed in graph.Edges)
+        {
+            if (string.IsNullOrEmpty(ed.FromNodeId) || string.IsNullOrEmpty(ed.ToNodeId)) continue;
+            var key = (ed.FromNodeId, ed.ToNodeId);
+            if (!duplicates.ContainsKey(key)) duplicates[key] = 0;
+            duplicates[key]++;
+        }
+
+        foreach (var kv in duplicates)
+        {
+            if (kv.Value > 1)
+            {
+                Debug.LogWarning($"Multiple edges detected between nodes '{kv.Key.from}' and '{kv.Key.to}' ({kv.Value}).");
+            }
+        }
+
         EditorUtility.SetDirty(graph);
         AssetDatabase.SaveAssets();
-        EditorUtility.DisplayDialog("City Bake", $"Baked {graph.Nodes.Count} nodes and {graph.Edges.Count} edges.", "OK");
+        Debug.Log($"Baked {graph.Nodes.Count} nodes and {graph.Edges.Count} edges to '{path}'.");
     }
 
     private static string GetHierarchyPath(GameObject go)
