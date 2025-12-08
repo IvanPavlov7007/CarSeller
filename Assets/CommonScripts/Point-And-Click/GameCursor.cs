@@ -50,6 +50,21 @@ public class GameCursor : Singleton<GameCursor>
     private bool holdActive;
     private bool isTouchPress;
 
+    // Public read-only flag to let camera movement know when interactions are happening
+    public bool IsInteracting
+    {
+        get
+        {
+            // Interaction is considered active while a press is ongoing on an interactable,
+            // or when a drag is in progress, or while a hold is active.
+            // Also treat UI suppression path as interaction (press over UI).
+            bool pressOnInteractable = isPointerDown && (pressInteractable != null || currentInteractable != null);
+            bool dragging = draggedInteractable != null;
+            bool holding = isPointerDown && holdActive;
+            return pressOnInteractable || dragging || holding;
+        }
+    }
+
     private void Start()
     {
         //Cursor.lockState = CursorLockMode.Confined;
