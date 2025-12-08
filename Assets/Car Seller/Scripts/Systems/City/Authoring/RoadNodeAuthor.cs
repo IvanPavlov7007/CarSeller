@@ -8,6 +8,7 @@ public class RoadNodeAuthor : MonoBehaviour
     [SerializeField, ReadOnly] private string id;
     [ShowInInspector, ReadOnly] public string Id => id;
 
+    // Allow flipping the start look direction rule
     [SerializeField] public bool StartLooksAway = false;
 
     [Button, DisableInPlayMode]
@@ -16,26 +17,6 @@ public class RoadNodeAuthor : MonoBehaviour
         if (string.IsNullOrEmpty(id))
             id = System.Guid.NewGuid().ToString("N");
     }
-
-#if UNITY_EDITOR
-    private void EnsureUniqueIdInScene()
-    {
-        if (string.IsNullOrEmpty(id)) return;
-
-        var all = UnityEngine.Object.FindObjectsOfType<RoadNodeAuthor>(true);
-        foreach (var other in all)
-        {
-            if (other == this) continue;
-            if (other.Id == id)
-            {
-                // Duplicate detected -> assign a new GUID to this instance
-                id = System.Guid.NewGuid().ToString("N");
-                UnityEditor.EditorUtility.SetDirty(this);
-                break;
-            }
-        }
-    }
-#endif
 
     [Button("Connect To Selected Node"), DisableInPlayMode]
     public void ConnectToSelected()
@@ -58,7 +39,6 @@ public class RoadNodeAuthor : MonoBehaviour
         edge.From = this;
         edge.To = other;
         edge.Bidirectional = true;
-        edge.StartLooksAway = StartLooksAway;
         edge.EnsureId();
 
         var container = edgeGO.AddComponent<SplineContainer>();
@@ -68,22 +48,25 @@ public class RoadNodeAuthor : MonoBehaviour
         var spline = container.Splines.Count > 0 ? container.Splines[0] : container.AddSpline();
         spline.Clear();
 
-        Vector3 a = container.transform.InverseTransformPoint(transform.position);
-        Vector3 b = container.transform.InverseTransformPoint(other.transform.position);
+        // World-space endpoints
+        Vector3 aWorld = transform.position;
+        Vector3 bWorld = other.transform.position;
+
+        // Local positions (planar XY)
+        Vector3 a = container.transform.InverseTransformPoint(aWorld);
+        Vector3 b = container.transform.InverseTransformPoint(bWorld);
         a.z = 0f; b.z = 0f;
 
-        float handleLen = 1.0f;
-        Vector3 outZ = new Vector3(0f, 0f, Mathf.Abs(handleLen));
-        Vector3 inZ  = new Vector3(0f, 0f, -Mathf.Abs(handleLen));
+        // One rotation that faces from A to B
+        Quaternion rotation = Quaternion.LookRotation(b - a, Vector3.forward);
 
-        Quaternion rotStart = StartLooksAway
-            ? Quaternion.Euler(0f, 90f, 270f)
-            : Quaternion.Euler(0f, 270f, 90f);
+        // Planar Z-only tangents
+        const float handleLen = 1f;
+        Vector3 outZ = new Vector3(0f, 0f, handleLen);
+        Vector3 inZ  = new Vector3(0f, 0f, -handleLen);
 
-        Quaternion rotEnd = Quaternion.Euler(0f, 270f, 90f);
-
-        var knotA = new BezierKnot(a, Vector3.zero, outZ, rotStart);
-        var knotB = new BezierKnot(b, inZ, Vector3.zero, rotEnd);
+        var knotA = new BezierKnot(a, Vector3.zero, outZ, rotation);
+        var knotB = new BezierKnot(b, inZ, Vector3.zero, rotation);
 
         spline.Add(knotA);
         spline.Add(knotB);
@@ -95,6 +78,25 @@ public class RoadNodeAuthor : MonoBehaviour
         UnityEditor.Selection.activeGameObject = edgeGO;
 #endif
     }
+
+#if UNITY_EDITOR
+    // Ensure uniqueness on duplication in editor sessions
+    private void EnsureUniqueIdInScene()
+    {
+        if (string.IsNullOrEmpty(id)) return;
+        var all = Object.FindObjectsOfType<RoadNodeAuthor>(true);
+        foreach (var other in all)
+        {
+            if (other == this) continue;
+            if (other.Id == id)
+            {
+                id = System.Guid.NewGuid().ToString("N");
+                UnityEditor.EditorUtility.SetDirty(this);
+                break;
+            }
+        }
+    }
+#endif
 
     private void OnValidate()
     {

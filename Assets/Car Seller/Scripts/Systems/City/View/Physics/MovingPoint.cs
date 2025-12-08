@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Splines;
-
+    
 public class MovingPoint : MonoBehaviour
 {
     public static float maxSpeed = 2f;
@@ -10,9 +12,7 @@ public class MovingPoint : MonoBehaviour
     Transform arrowRotationPoint;
     Transform body;
 
-    // Track last traversed edge to avoid immediate re-pick causing a jump
-    RoadEdge lastEdge = null;
-    bool lastForward = true;
+    private const float Epsilon = 1e-4f;
 
     private void Awake()
     {
@@ -21,182 +21,154 @@ public class MovingPoint : MonoBehaviour
         arrowRotationPoint = transform.GetChild(1);
     }
 
-    public void Initialize(City.CityPosition pos)
-    {
-        position = pos;
-        lastEdge = pos.Edge;
-        lastForward = pos.Forward;
-    }
+    public void Initialize(City.CityPosition pos) { position = pos; }
 
     void LateUpdate()
     {
+        if (directionProvider == null) return;
+
         Vector2 desired = Vector2.ClampMagnitude(directionProvider.ProvidedDirection, 1f);
         float lerpV = 10f * Time.deltaTime;
-        if (desired.sqrMagnitude > 1e-6f)
-        {
-            arrowRotationPoint.rotation = Quaternion.Lerp(arrowRotationPoint.rotation, Quaternion.FromToRotation(Vector2.up, desired.normalized), lerpV);
-        }
+        var aim = desired.sqrMagnitude > 1e-6f ? desired.normalized : Vector2.up;
+        arrowRotationPoint.rotation = Quaternion.Lerp(arrowRotationPoint.rotation, Quaternion.FromToRotation(Vector2.up, aim), lerpV);
         arrowRotationPoint.localScale = new Vector3(1f, Mathf.Lerp(arrowRotationPoint.localScale.y, Mathf.Clamp01(desired.magnitude), lerpV), 1f);
 
+        // If at a node, pick an outgoing edge
         if (position.Edge == null)
         {
             var node = position.Node;
-            if (node == null || desired.sqrMagnitude < 1e-6f) { return; }
+            if (node == null || desired.sqrMagnitude < 1e-6f) return;
 
-            // Pick edge to leave this node
-            var pick = PickBestOutgoingEdge(node, desired);
-            if (pick.edge == null)
+            if (!TryPickEdgeFromNode(node, desired, out var nextEdge, out bool forward, out Vector2 leaveDir))
             {
-                body.up = desired;
+                body.up = leaveDir == Vector2.zero ? aim : leaveDir;
                 return;
             }
 
-            // Start on the chosen edge with tiny epsilon to avoid sticking at exact 0/1
-            const float epsilon = 1e-4f;
-            position = City.CityPosition.On(pick.edge, pick.forward ? epsilon : (1f - epsilon), pick.forward);
-            lastEdge = pick.edge;
-            lastForward = pick.forward;
+            // Start on edge at small epsilon
+            position = City.CityPosition.On(nextEdge, forward ? Epsilon : (1f - Epsilon), forward);
+            body.up = leaveDir;
         }
 
         // Advance along current edge
         var edge = position.Edge;
-        var splineCurrent = edge.GetSpline();
-        if (splineCurrent == null) return;
+        var spline = edge.GetSpline();
+        if (spline == null) return;
 
-        var p = position.Forward ? position.Percentage : 1f - position.Percentage;
+        float t = position.Forward ? position.Percentage : 1f - position.Percentage;
 
-        // Tangent at current t (local), convert to world
-        var tanLocal = SplineUtility.EvaluateTangent(splineCurrent, p);
-        var tanWorld = edge.Container != null
+        // Current tangent (local -> world)
+        var tanLocal = SplineUtility.EvaluateTangent(spline, t);
+        var tanWorld3 = edge.Container != null
             ? edge.Container.transform.TransformDirection((Vector3)tanLocal)
             : (Vector3)tanLocal;
-        var tangent2 = ((Vector2)tanWorld).normalized;
+        var tangent2 = ((Vector2)tanWorld3).normalized;
 
+        // Project desired onto tangent and move forward only
         var speedAlong = Vector2.Dot(desired, tangent2);
         var delta = Mathf.Max(0f, speedAlong) * Time.deltaTime * maxSpeed;
 
-        // Normalize by arc length
-        var length = Mathf.Max(edge.Length, 0.0001f);
-        var normalizedDelta = delta / length;
+        // Normalize by edge length (world-space length already precomputed)
+        float length = Mathf.Max(edge.Length, 0.0001f);
+        float dt = delta / length;
 
-        p += normalizedDelta;
+        t += dt;
 
-        if (p >= 1f)
+        if (t >= 1f)
         {
-            // Overshoot past end; carry leftover into the next edge
-            float leftover = p - 1f;
-
+            // Arrive at end node
             var endNode = position.Forward ? edge.To : edge.From;
 
-            var posLocalEnd = SplineUtility.EvaluatePosition(splineCurrent, 1f);
-            var posWorldEnd = edge.Container != null
+            var posLocalEnd = SplineUtility.EvaluatePosition(spline, 1f);
+            var posWorldEnd3 = edge.Container != null
                 ? edge.Container.transform.TransformPoint((Vector3)posLocalEnd)
                 : (Vector3)posLocalEnd;
+            transform.position = new Vector2(posWorldEnd3.x, posWorldEnd3.y);
 
-            transform.position = new Vector2(posWorldEnd.x, posWorldEnd.y);
-
-            // Choose next edge from endNode based on desired
-            var pick = PickBestOutgoingEdge(endNode, desired);
-            if (pick.edge == null)
+            // Pick next edge from the end node
+            if (!TryPickEdgeFromNode(endNode, desired, out var nextEdge, out bool forward, out Vector2 leaveDir))
             {
-                // Stop at node
                 position = City.CityPosition.At(endNode);
                 body.up = tangent2;
-                lastEdge = null;
                 return;
             }
 
-            // Move a small epsilon into next edge plus leftover progress
-            const float epsilon = 1e-4f;
-            float startT = pick.forward ? epsilon : (1f - epsilon);
-            float nextP = pick.forward ? startT + leftover : startT - leftover;
+            position = City.CityPosition.On(nextEdge, forward ? Epsilon : (1f - Epsilon), forward);
+            body.up = leaveDir;
 
-            // Clamp nextP to valid range and set percentage accordingly
-            nextP = Mathf.Clamp01(nextP);
-            position = City.CityPosition.On(pick.edge, pick.forward ? nextP : (1f - nextP), pick.forward);
-            lastEdge = pick.edge;
-            lastForward = pick.forward;
-
-            // Update transform on new edge
-            var nextSpline = pick.edge.GetSpline();
-            if (nextSpline != null)
-            {
-                var posLocal = SplineUtility.EvaluatePosition(nextSpline, nextP);
-                var posWorld = pick.edge.Container != null
-                    ? pick.edge.Container.transform.TransformPoint((Vector3)posLocal)
-                    : (Vector3)posLocal;
-                transform.position = new Vector2(posWorld.x, posWorld.y);
-
-                var nextTanLocal = SplineUtility.EvaluateTangent(nextSpline, nextP);
-                var nextTanWorld = pick.edge.Container != null
-                    ? pick.edge.Container.transform.TransformDirection((Vector3)nextTanLocal)
-                    : (Vector3)nextTanLocal;
-                body.up = ((Vector2)nextTanWorld).normalized;
-            }
-
+            // Update transform on new edge start
+            var nextSpline = nextEdge.GetSpline();
+            float nextT = forward ? Epsilon : (1f - Epsilon);
+            var posLocal = SplineUtility.EvaluatePosition(nextSpline, nextT);
+            var posWorld3 = nextEdge.Container != null
+                ? nextEdge.Container.transform.TransformPoint((Vector3)posLocal)
+                : (Vector3)posLocal;
+            transform.position = new Vector2(posWorld3.x, posWorld3.y);
             return;
         }
-        else
-        {
-            var posLocal = SplineUtility.EvaluatePosition(splineCurrent, p);
-            var posWorld = edge.Container != null
-                ? edge.Container.transform.TransformPoint((Vector3)posLocal)
-                : (Vector3)posLocal;
 
-            transform.position = new Vector2(posWorld.x, posWorld.y);
-            var newPercentage = position.Forward ? p : 1f - p;
-            position = position.WithPercentage(newPercentage);
-        }
+        // Stay on edge
+        var posLocalCur = SplineUtility.EvaluatePosition(spline, t);
+        var posWorldCur3 = edge.Container != null
+            ? edge.Container.transform.TransformPoint((Vector3)posLocalCur)
+            : (Vector3)posLocalCur;
+        transform.position = new Vector2(posWorldCur3.x, posWorldCur3.y);
 
+        float newPercentage = position.Forward ? t : 1f - t;
+        position = position.WithPercentage(newPercentage);
         body.up = tangent2;
     }
 
-    private (RoadEdge edge, bool forward) PickBestOutgoingEdge(RoadNode node, Vector2 desired)
+    // Picks the best outgoing edge from a node based on desired direction.
+    // Returns false if no suitable edge exists; out leaveDir is what we aim the body at.
+    private bool TryPickEdgeFromNode(RoadNode node, Vector2 desired, out RoadEdge edge, out bool forward, out Vector2 leaveDir)
     {
-        RoadEdge bestEdge = null;
-        bool bestForward = true;
-        float bestDot = -Mathf.Infinity;
+        edge = null;
+        forward = true;
+        leaveDir = Vector2.zero;
 
-        var dirN = desired.sqrMagnitude > 1e-6f ? desired.normalized : Vector2.zero;
+        var desiredN = desired.sqrMagnitude > 1e-6f ? desired.normalized : Vector2.zero;
+        float bestDot = -Mathf.Infinity;
 
         foreach (var e in node.Outgoing)
         {
             var spline = e.GetSpline();
             if (spline == null) continue;
 
-            // Leave node along correct tangent depending on which end this node is
+            // If this node is the 'From', leaving along t=0
             if (node == e.From)
             {
                 var tanLocal = SplineUtility.EvaluateTangent(spline, 0f);
-                var tanWorld = e.Container != null
+                var tanWorld3 = e.Container != null
                     ? e.Container.transform.TransformDirection((Vector3)tanLocal)
                     : (Vector3)tanLocal;
+                var outDir = ((Vector2)tanWorld3).normalized;
 
-                var d = Vector2.Dot(dirN, ((Vector2)tanWorld).normalized);
+                float d = Vector2.Dot(desiredN, outDir);
                 if (d > bestDot)
                 {
-                    bestDot = d; bestEdge = e; bestForward = true;
+                    bestDot = d; edge = e; forward = true; leaveDir = outDir;
                 }
             }
-            else if (node == e.To)
+            // If this node is the 'To', leaving along -tangent at t=1 (requires bidirectional)
+            else if (node == e.To && e.Bidirectional)
             {
-                if (!e.Bidirectional) continue;
-
                 var tanLocal = SplineUtility.EvaluateTangent(spline, 1f);
-                var tanWorld = e.Container != null
+                var tanWorld3 = e.Container != null
                     ? e.Container.transform.TransformDirection((Vector3)tanLocal)
                     : (Vector3)tanLocal;
+                var outDir = -((Vector2)tanWorld3).normalized;
 
-                // Leaving from 'To' towards 'From' requires negating the tangent at t=1
-                var leaveDir = -((Vector2)tanWorld).normalized;
-                var d = Vector2.Dot(dirN, leaveDir);
+                float d = Vector2.Dot(desiredN, outDir);
                 if (d > bestDot)
                 {
-                    bestDot = d; bestEdge = e; bestForward = false;
+                    bestDot = d; edge = e; forward = false; leaveDir = outDir;
                 }
             }
         }
 
-        return (bestEdge, bestForward);
+        // Allow backward choice (dot < 0) by flipping 'forward' flag as picked above.
+        // If no edge found at all, return false.
+        return edge != null;
     }
 }
