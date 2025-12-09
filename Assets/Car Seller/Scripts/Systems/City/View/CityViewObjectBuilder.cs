@@ -27,15 +27,15 @@ public class CityViewObjectBuilder : ScriptableObject
         carGO.AddComponent<ProductView>().Initialize(car, location);
         carGO.AddComponent<ContentProvider>().Initialize(car);
         carGO.AddComponent<DragInteractable>().sortingOrder = 10;
-        carGO.AddComponent<MovingPoint>().Initialize(location.CityPosition);
+        carGO.AddComponent<MovingPoint>().Initialize(location);
         carGO.GetComponentInChildren<SpriteRenderer>().color = car.CarFrame.runtimeConfig.FrameColor;
         return carGO;
     }
 
     public GameObject buildWarehouse(Warehouse warehouse)
     {
-        var position = World.Instance.City.Positions[warehouse];
-        GameObject warehouseGO = Instantiate(warehouseViewPrefab, position.WorldPosition,Quaternion.identity);
+        var location = World.Instance.City.Locations[warehouse];
+        GameObject warehouseGO = Instantiate(warehouseViewPrefab, location.CityPosition.WorldPosition,Quaternion.identity);
         warehouseGO.AddComponent<Interactable>();
         warehouseGO.AddComponent<ContentProvider>().Initialize(warehouse);
         return warehouseGO;

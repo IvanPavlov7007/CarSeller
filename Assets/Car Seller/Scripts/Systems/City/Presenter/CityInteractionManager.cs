@@ -76,14 +76,14 @@ public class CityInteractionManager : IInteractionManager
             
 
             var city = World.Instance.City;
-            Debug.Assert(city.Positions.ContainsKey(car), "CityInteractionManager: Car position not found in city positions");
-            Vector2 carPosition = city.Positions[car].WorldPosition;
+            Debug.Assert(city.Locations.ContainsKey(car), "CityInteractionManager: Car position not found in city positions");
+            Vector2 carPosition = city.Locations[car].CityPosition.WorldPosition;
             Dictionary<Warehouse, float> warehouseDistances = new Dictionary<Warehouse, float>();
-            foreach (var obj in city.Positions.Keys)
+            foreach (var obj in city.Locations.Keys)
             {
                 if (obj is not Warehouse)
                     continue;
-                var warehousePosition = city.Positions[obj].WorldPosition;
+                var warehousePosition = city.Locations[obj].CityPosition.WorldPosition;
                 warehouseDistances.Add(obj as Warehouse, Vector2.Distance(warehousePosition, carPosition));
             }
             warehouseDistances = warehouseDistances.OrderBy(kv => kv.Value).ToDictionary(kv => kv.Key, kv => kv.Value);
@@ -135,13 +135,13 @@ public class CityInteractionManager : IInteractionManager
         private Car getClosestCar(Warehouse warehouse, out float distance)
         {
             var city = World.Instance.City;
-            Vector2 warehousePosition = city.Positions[warehouse].WorldPosition;
+            Vector2 warehousePosition = city.Locations[warehouse].CityPosition.WorldPosition;
             Dictionary<Car, float> carDistances = new Dictionary<Car, float>();
-            foreach (var obj in city.Positions.Keys)
+            foreach (var obj in city.Locations.Keys)
             {
                 if (obj is not Car)
                     continue;
-                var carPosition = city.Positions[obj].WorldPosition;
+                var carPosition = city.Locations[obj].CityPosition.WorldPosition;
                 carDistances.Add(obj as Car, Vector2.Distance(carPosition, warehousePosition));
             }
 

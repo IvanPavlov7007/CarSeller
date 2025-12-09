@@ -61,7 +61,7 @@ public class RoadNodeAuthor : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(b - a, Vector3.forward);
 
         // Planar Z-only tangents
-        const float handleLen = 1f;
+        float handleLen = Mathf.Min((a - b).magnitude * 0.1f,1f);
         Vector3 outZ = new Vector3(0f, 0f, handleLen);
         Vector3 inZ  = new Vector3(0f, 0f, -handleLen);
 

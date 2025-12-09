@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 
 /// <summary>
@@ -9,7 +10,18 @@ public class DragInteractable : Interactable, IDirectionProvider
 {
     bool dragging = false;
 
+    [ShowInInspector]
     public Vector2 ProvidedDirection { get; private set; }
+
+    private void Update()
+    {
+        // Security check that dragging is still valid
+        // fast fix for issue when switching windows while dragging
+        if (dragging && GameCursor.Instance.draggedInteractable == null)
+        {
+            OnCursorDragEnd();
+        }
+    }
 
     private void LateUpdate()
     {

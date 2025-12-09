@@ -6,7 +6,7 @@ using UnityEngine.Splines;
 public class City : ILocationsHolder
 {
     public CityConfig Config;
-    public Dictionary<ILocatable, CityPosition> Positions { get; private set; } = new();
+    public Dictionary<ILocatable, CityLocation> Locations { get; private set; } = new();
     private readonly List<ILocation> locations = new();
     public INodesNetwork nodesNet { get; private set; } // Legacy grid (optional)
 
@@ -188,18 +188,21 @@ public class City : ILocationsHolder
                     Debug.Assert(Node != null, "CityPosition must have either Node or Edge.");
                     return Node.Position;
                 }
-
-                var spline = Edge.GetSpline();
-                Debug.Assert(spline != null, "CityPosition.WorldPosition: Edge spline is missing.");
-
-                var p = Forward ? Percentage : (1f - Percentage);
-                var localPos = SplineUtility.EvaluatePosition(spline, p);
-                var worldPos = Edge.Container != null
-                    ? Edge.Container.transform.TransformPoint((Vector3)localPos)
-                    : (Vector3)localPos;
-
-                return new Vector2(worldPos.x, worldPos.y);
+                return SpecificWorldPositionOnEdge(Percentage);
             }
+        }
+
+        public Vector2 SpecificWorldPositionOnEdge(float t)
+        {
+            Debug.Assert(Edge != null, "SpecificWorldPositionOnEdge can only be used for edge positions.");
+            Debug.Assert(t >= 0f && t <= 1f, "SpecificWorldPositionOnEdge t must be in [0,1].");
+            var spline = Edge.GetSpline();
+            Debug.Assert(spline != null, "SpecificWorldPositionOnEdge: Edge spline is missing.");
+            var localPos = SplineUtility.EvaluatePosition(spline, Forward? t : 1f - t);
+            var worldPos = Edge.Container != null
+                ? Edge.Container.transform.TransformPoint((Vector3)localPos)
+                : (Vector3)localPos;
+            return new Vector2(worldPos.x, worldPos.y);
         }
 
         public CityPosition WithPercentage(float t)
@@ -227,6 +230,11 @@ public class City : ILocationsHolder
             if (initialOccupant != null) Attach(initialOccupant);
         }
 
+        public void SetCityPosition(CityPosition newPosition)
+        {
+            CityPosition = newPosition;
+        }
+
         public ILocationsHolder Holder => City;
 
         public bool Attach(ILocatable locatable)
@@ -234,21 +242,15 @@ public class City : ILocationsHolder
             Debug.Assert(locatable != null, "Locatable to attach cannot be null");
             if (Occupant != null || locatable == null) return false;
             Occupant = locatable;
-            City.Positions[locatable] = CityPosition;
+            City.Locations[locatable] = this;
             return true;
         }
 
         public void Detach()
         {
             if (Occupant == null) return;
-            City.Positions.Remove(Occupant);
+            City.Locations.Remove(Occupant);
             Occupant = null;
-        }
-
-        public void MoveTo(CityPosition newPosition)
-        {
-            CityPosition = newPosition;
-            if (Occupant != null) City.Positions[Occupant] = CityPosition;
         }
     }
 }

@@ -44,7 +44,7 @@ public class CitySceneManager : Singleton<CitySceneManager>
 
     private void initializeObjects()
     {
-        foreach (var obj in City.Positions.Keys)
+        foreach (var obj in City.Locations.Keys)
         {
             Debug.Assert(obj != null, "City object cannot be null");
             G.Instance.cityViewObjectBuilder.BuildObject(obj);

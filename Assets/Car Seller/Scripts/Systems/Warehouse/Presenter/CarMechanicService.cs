@@ -85,7 +85,7 @@ public class CarMechanicService : Singleton<CarMechanicService>
         {
             var city = World.Instance.City;
             G.Instance.LocationService.MoveProduct(car, city.GetEmptyLocation(
-                city.GetClosestPosition(city.Positions[sceneWarehouseModel].WorldPosition)
+                city.GetClosestPosition(city.Locations[sceneWarehouseModel].CityPosition.WorldPosition)
                 ));
         },
             () => G.Instance.GameFlowController.GetToTheCity()
