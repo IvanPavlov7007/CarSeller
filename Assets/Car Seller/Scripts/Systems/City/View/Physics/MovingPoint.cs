@@ -72,13 +72,6 @@ public class MovingPoint : MonoBehaviour
         {
             //We are between nodes, need to understand which direction
 
-            for(int i = 0; i <= 10; i++)
-            {
-                float step = i * 0.1f;
-                Vector2 posOnEdge = tanDirectionFromNodeAtEdge(edge.From, edge, step, out _);
-                Debug.Log($"t={step} pos={posOnEdge}");
-            }
-
             if (forward)
             {
                 a = edge.From;

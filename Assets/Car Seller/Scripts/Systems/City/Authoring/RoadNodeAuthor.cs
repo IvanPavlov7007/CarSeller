@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.Splines;
+#if UNITY_EDITOR
+using UnityEditor;
+using UnityEditor.SceneManagement;
+#endif
 
 [ExecuteAlways]
 public class RoadNodeAuthor : MonoBehaviour
@@ -29,8 +33,8 @@ public class RoadNodeAuthor : MonoBehaviour
         if (other == this) { Debug.Log("Select a different node."); return; }
 
         EnsureId(); other.EnsureId();
-        EnsureUniqueIdInScene();
-        other.EnsureUniqueIdInScene();
+        EnsureUniqueIdInCurrentStage();
+        other.EnsureUniqueIdInCurrentStage();
 
         var edgeGO = new GameObject($"Edge_{Id}_to_{other.Id}");
         edgeGO.transform.SetParent(transform.parent, false);
@@ -80,18 +84,34 @@ public class RoadNodeAuthor : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-    // Ensure uniqueness on duplication in editor sessions
-    private void EnsureUniqueIdInScene()
+    // Stage-aware uniqueness: only checks within the current scene or prefab stage.
+    private void EnsureUniqueIdInCurrentStage()
     {
         if (string.IsNullOrEmpty(id)) return;
-        var all = Object.FindObjectsOfType<RoadNodeAuthor>(true);
+
+        // Determine current stage. In Prefab Mode, only check objects in that stage.
+        var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
+        RoadNodeAuthor[] all;
+
+        if (prefabStage != null)
+        {
+            // Search under the prefab stage root only.
+            all = prefabStage.stageHandle.FindComponentsOfType<RoadNodeAuthor>();
+        }
+        else
+        {
+            // Search in the active scene only.
+            all = Object.FindObjectsByType<RoadNodeAuthor>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        }
+
         foreach (var other in all)
         {
             if (other == this) continue;
             if (other.Id == id)
             {
                 id = System.Guid.NewGuid().ToString("N");
-                UnityEditor.EditorUtility.SetDirty(this);
+                // Avoid SetDirty in validation paths; only mark dirty for explicit operations.
+                EditorUtility.SetDirty(this);
                 break;
             }
         }
@@ -102,10 +122,24 @@ public class RoadNodeAuthor : MonoBehaviour
     {
         if (!Application.isPlaying)
         {
-            EnsureId();
-#if UNITY_EDITOR
-            EnsureUniqueIdInScene();
-#endif
+            // Only assign an ID if missing; do not run duplicate resolution automatically.
+            if (string.IsNullOrEmpty(id))
+                id = System.Guid.NewGuid().ToString("N");
         }
     }
+
+#if UNITY_EDITOR
+    private void OnEnable()
+    {
+        // In editor sessions, after duplication or creation, we can ensure stage-local uniqueness.
+        if (!Application.isPlaying)
+        {
+            // Skip for prefab assets to avoid churn when opening prefab mode.
+            if (!PrefabUtility.IsPartOfPrefabAsset(gameObject))
+            {
+                EnsureUniqueIdInCurrentStage();
+            }
+        }
+    }
+#endif
 }

@@ -112,6 +112,11 @@ public class RoadEdgeAuthor : MonoBehaviour
 
     private void OnValidate()
     {
-        if (!Application.isPlaying) EnsureId();
+        if (!Application.isPlaying)
+        {
+            // Only assign an ID if missing; no other mutations to avoid dirty flags.
+            if (string.IsNullOrEmpty(id))
+                id = System.Guid.NewGuid().ToString("N");
+        }
     }
 }
