@@ -28,6 +28,52 @@ public class CityGraphAsset : ScriptableObject
         public int SplineIndex = 0;     // convention: one spline per edge
     }
 
+    // MARKERS
+
+    [Serializable]
+    public enum MarkerAnchorKind
+    {
+        WorldPoint,
+        Node,
+        Edge
+    }
+
+    [Serializable]
+    public class MarkerAnchorData
+    {
+        public MarkerAnchorKind Kind = MarkerAnchorKind.WorldPoint;
+
+        // Node anchor:
+        public string NodeId;
+
+        // Edge anchor:
+        [Range(0f, 1f)] public float T;
+        public bool Forward = true;
+        public string EdgeId;
+
+        // World point anchor:
+        public Vector2 WorldPoint;
+    }
+
+    [Serializable]
+    public class MarkerData
+    {
+        public string Id;
+        public string DisplayName;
+        public string[] Tags;
+        public string RegionId;
+        public float Radius;
+
+        public MarkerAnchorData Anchor = new MarkerAnchorData();
+
+        // Authoring linkage
+        public string AuthorId;
+        public string AuthorPath;
+    }
+
     public List<NodeData> Nodes = new();
     public List<EdgeData> Edges = new();
+
+    // New: Markers authored in scene/prefab and baked here
+    public List<MarkerData> Markers = new();
 }

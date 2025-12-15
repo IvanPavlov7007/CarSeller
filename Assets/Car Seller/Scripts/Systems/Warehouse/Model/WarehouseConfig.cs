@@ -8,6 +8,9 @@ public class WarehouseConfig : ScriptableObject
 
     public string SceneToLoad;
 
+    [Tooltip("Optional marker ID to place this warehouse. Falls back to 'warehouseClosestInitialPosition' if empty.")]
+    public string CityMarkerId;
+
     //Current Mockup Parameters
     public Vector2 warehouseClosestInitialPosition;
     public SimpleProductSpawnConfig[] initialProductsToSpawn;

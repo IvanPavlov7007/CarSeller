@@ -7,7 +7,21 @@ public class WorldManager
     public void AddWarehouse(City city, WarehouseConfig warehouseConfig)
     {
         Warehouse warehouse = new Warehouse(warehouseConfig);
-        var pos = city.GetClosestPosition(warehouseConfig.warehouseClosestInitialPosition);
+
+        City.CityPosition pos;
+        if (!string.IsNullOrEmpty(warehouseConfig.CityMarkerId) &&
+            city.TryGetMarker(warehouseConfig.CityMarkerId, out var marker))
+        {
+            // Prefer exact graph anchor if available; otherwise snap world point to nearest graph
+            pos = marker.PositionOnGraph.HasValue
+                ? marker.PositionOnGraph.Value
+                : city.GetClosestPosition(marker.WorldPosition);
+        }
+        else
+        {
+            pos = city.GetClosestPosition(warehouseConfig.warehouseClosestInitialPosition);
+        }
+
         city.GetEmptyLocation(pos).Attach(warehouse);
         initializeWarehouse(warehouse, warehouseConfig);
     }

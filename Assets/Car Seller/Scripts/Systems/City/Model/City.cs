@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -15,6 +16,74 @@ public class City : ILocationsHolder
 
     private readonly List<RoadNode> _nodes = new();
     private readonly List<RoadEdge> _edges = new();
+
+    // MARKERS RUNTIME
+    public sealed class CityMarker
+    {
+        public string Id;
+        public string Name;
+        public string[] Tags;
+        public string RegionId;
+        public float Radius;
+
+        public CityPosition? PositionOnGraph; // Node or Edge@T anchor
+        public Vector2? WorldPoint;           // WorldPoint anchor fallback
+
+        public Vector2 WorldPosition => PositionOnGraph.HasValue
+            ? PositionOnGraph.Value.WorldPosition
+            : (WorldPoint ?? Vector2.zero);
+
+        public bool HasTag(string tag)
+        {
+            if (Tags == null || tag == null) return false;
+            for (int i = 0; i < Tags.Length; i++)
+            {
+                if (string.Equals(Tags[i], tag, StringComparison.OrdinalIgnoreCase)) return true;
+            }
+            return false;
+        }
+    }
+
+    private readonly Dictionary<string, CityMarker> _markersById = new();
+    public IReadOnlyDictionary<string, CityMarker> MarkersById => _markersById;
+
+    internal void InitializeMarkers(IEnumerable<CityMarker> markers)
+    {
+        _markersById.Clear();
+        foreach (var m in markers)
+        {
+            if (!string.IsNullOrEmpty(m.Id))
+            {
+                _markersById[m.Id] = m;
+            }
+        }
+    }
+
+    public bool TryGetMarker(string id, out CityMarker marker)
+    {
+        if (string.IsNullOrEmpty(id))
+        {
+            marker = null;
+            return false;
+        }
+        return _markersById.TryGetValue(id, out marker);
+    }
+
+    public IEnumerable<CityMarker> QueryMarkers(string tag = null, string region = null, Predicate<CityMarker> predicate = null)
+    {
+        IEnumerable<CityMarker> q = _markersById.Values;
+        if (!string.IsNullOrEmpty(tag)) q = q.Where(m => m.HasTag(tag));
+        if (!string.IsNullOrEmpty(region)) q = q.Where(m => string.Equals(m.RegionId, region, StringComparison.OrdinalIgnoreCase));
+        if (predicate != null) q = q.Where(m => predicate(m));
+        return q;
+    }
+
+    public CityMarker GetRandomMarker(string tag = null, string region = null, Predicate<CityMarker> predicate = null)
+    {
+        var list = QueryMarkers(tag, region, predicate).ToList();
+        if (list.Count == 0) return null;
+        return list[UnityEngine.Random.Range(0, list.Count)];
+    }
 
     public City(CityConfig cityConfig, Transform graphRoot)
     {
@@ -42,7 +111,7 @@ public class City : ILocationsHolder
 
         foreach (var e in graphAsset.Edges)
         {
-            Debug.Assert(!string.IsNullOrEmpty(e.Id), "EdgeData.Id must be set.");
+            Debug.Assert(!string.IsNullOrEmpty(e.Id), "EdgeData.Id must not be null.");
             Debug.Assert(nodeMap.ContainsKey(e.FromNodeId), $"Edge.FromNodeId '{e.FromNodeId}' not found.");
             Debug.Assert(nodeMap.ContainsKey(e.ToNodeId), $"Edge.ToNodeId '{e.ToNodeId}' not found.");
 
@@ -68,6 +137,9 @@ public class City : ILocationsHolder
                 edge.From.Incoming.Add(edge);
             }
         }
+
+        // Markers are finalized after edges' containers are resolved in CityGraphLoader.
+        InitializeMarkers(Array.Empty<CityMarker>());
     }
 
     public CityLocation GetEmptyLocation(CityPosition position) => new CityLocation(this, position);

@@ -21,6 +21,7 @@ public static class CityGraphBaker
 
         var nodes = root.GetComponentsInChildren<RoadNodeAuthor>(true);
         var edges = root.GetComponentsInChildren<RoadEdgeAuthor>(true);
+        var markers = root.GetComponentsInChildren<CityMarkerAuthor>(true);
 
         foreach (var n in nodes)
         {
@@ -37,6 +38,19 @@ public static class CityGraphBaker
 #endif
         }
         foreach (var e in edges) e.EnsureId();
+
+        foreach (var m in markers)
+        {
+            m.EnsureId();
+#if UNITY_EDITOR
+            var dupes = markers.Where(x => x != m && x.Id == m.Id).ToList();
+            if (dupes.Count > 0)
+            {
+                m.GetType().GetMethod("EnsureUniqueIdInScene", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+                    ?.Invoke(m, null);
+            }
+#endif
+        }
 
         // Load last-used folder (default to Assets)
         var lastFolder = EditorPrefs.GetString(LastFolderPrefKey, "Assets");
@@ -97,6 +111,45 @@ public static class CityGraphBaker
             SplineIndex = 0
         }).ToList();
 
+        // New: bake markers
+        graph.Markers = markers.Select(m =>
+        {
+            var md = new CityGraphAsset.MarkerData
+            {
+                Id = m.Id,
+                DisplayName = m.DisplayName,
+                Tags = m.Tags,
+                RegionId = m.RegionId,
+                Radius = m.Radius,
+                AuthorId = m.Id,
+                AuthorPath = GetHierarchyPath(m.gameObject),
+                Anchor = new CityGraphAsset.MarkerAnchorData()
+            };
+
+            switch (m.Kind)
+            {
+                case CityMarkerAuthor.AnchorKind.WorldPoint:
+                    md.Anchor.Kind = CityGraphAsset.MarkerAnchorKind.WorldPoint;
+                    var p = m.transform.position;
+                    md.Anchor.WorldPoint = new Vector2(p.x, p.y);
+                    break;
+
+                case CityMarkerAuthor.AnchorKind.Node:
+                    md.Anchor.Kind = CityGraphAsset.MarkerAnchorKind.Node;
+                    md.Anchor.NodeId = m.Node ? m.Node.Id : null;
+                    break;
+
+                case CityMarkerAuthor.AnchorKind.Edge:
+                    md.Anchor.Kind = CityGraphAsset.MarkerAnchorKind.Edge;
+                    md.Anchor.EdgeId = m.Edge ? m.Edge.Id : null;
+                    md.Anchor.T = Mathf.Clamp01(m.T);
+                    md.Anchor.Forward = m.Forward;
+                    break;
+            }
+
+            return md;
+        }).ToList();
+
         // Warn for multiple splines between same node pair
         var duplicates = new Dictionary<(string from, string to), int>();
         foreach (var ed in graph.Edges)
@@ -117,7 +170,7 @@ public static class CityGraphBaker
 
         EditorUtility.SetDirty(graph);
         AssetDatabase.SaveAssets();
-        Debug.Log($"Baked {graph.Nodes.Count} nodes and {graph.Edges.Count} edges to '{path}'.");
+        Debug.Log($"Baked {graph.Nodes.Count} nodes, {graph.Edges.Count} edges, {graph.Markers.Count} markers to '{path}'.");
     }
 
     private static string GetHierarchyPath(GameObject go)
