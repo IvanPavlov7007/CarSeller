@@ -86,7 +86,7 @@ public class MovingPoint : MonoBehaviour
 
         //Check if we need to swap direction on the edge
         float dot = Vector2.Dot(inputDirection, chosenTangentDirection);
-        if (dot < 0)
+        if (dot < -0.2f) // angle more than ~100 degrees
         {
             if (!edge.Bidirectional)
             {

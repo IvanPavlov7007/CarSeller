@@ -102,10 +102,10 @@ public class WarehouseInteractionManager : IInteractionManager
                     {
                         Type = UIElementType.Button,
                         Text = "Disassemble",
-                        IsInteractable = CarMechanicService.Instance.CanDisassembleCar(car),
+                        IsInteractable = G.Instance.CarMechanicService.CanDisassembleCar(car),
                         OnClick = () =>
                         {
-                            CarMechanicService.Instance.DisassembleCar(WarehouseSceneManager.SceneWarehouseModel, car);
+                            G.Instance.CarMechanicService.DisassembleCar(WarehouseSceneManager.SceneWarehouseModel, car);
                         },
                         UnavailabilityReason = "Car has nothing to disassemble"
                     }
@@ -117,7 +117,7 @@ public class WarehouseInteractionManager : IInteractionManager
                         UnavailabilityReason = "Some car part's are missing",
                         OnClick = () =>
                         {
-                            CarMechanicService.Instance.RideCarFromWarehouse(car,WarehouseSceneManager.SceneWarehouseModel);
+                            G.Instance.CarMechanicService.RideCarFromWarehouse(car,WarehouseSceneManager.SceneWarehouseModel);
                         }
                     }
                 }

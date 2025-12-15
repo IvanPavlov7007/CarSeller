@@ -9,7 +9,7 @@ public class ObjectWithPopupMenuTest : MonoBehaviour
 
     void OnTestButton()
     {
-        GameEvents.Instance.OnObjectWithPopupClicked?.Invoke(this);
+        //GameEvents.Instance.OnObjectWithPopupClicked?.Invoke(this);
     }
 
     private void OnEnable()

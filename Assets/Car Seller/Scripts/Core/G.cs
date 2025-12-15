@@ -6,8 +6,11 @@ using UnityEngine;
 /// </summary>
 public class G : Singleton<G>
 {
+    //Use only for reading
     //MODEL
     public CityConfig CityConfig;
+    public GameState GameState;
+
     //MODEL AND VIEW MIXED (SORRY)
     public GameObject CityRoot { get; set; }
 
@@ -15,9 +18,12 @@ public class G : Singleton<G>
     public ProductManager ProductManager = new ProductManager();
     public LocationService LocationService = new LocationService();
 
+    public GameFlowManager GameFlowManager = new GameFlowManager();
     public GameFlowController GameFlowController = new GameFlowController();
 
     public WorldManager WorldManager = new WorldManager();
+
+    public CarMechanicService CarMechanicService = new CarMechanicService();
 
     //City
     public CityActionService CityActionService = new CityActionService();

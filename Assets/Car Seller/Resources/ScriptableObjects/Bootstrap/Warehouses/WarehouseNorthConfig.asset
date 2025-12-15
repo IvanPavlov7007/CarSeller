@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: Warehouse North
   SceneToLoad: Warehouse North
-  warehouseClosestInitialPosition: {x: 5, y: 4}
+  warehouseClosestInitialPosition: {x: 2, y: 21}
   initialProductsToSpawn:
   - productBaseConfig: {fileID: 11400000, guid: f63816bf1af38734c9fb3cbd64a7eb41, type: 2}
-    productVariantConfig: {fileID: 11400000, guid: 764b23df13cc84c469852bbee56371d7, type: 2}
+    productVariantConfig: {fileID: 11400000, guid: 2b3a91484d1de1c4a8badc61a1c2a7e0, type: 2}

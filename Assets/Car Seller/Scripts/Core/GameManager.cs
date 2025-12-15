@@ -75,7 +75,7 @@ public class GameManager : Singleton<GameManager>
                 Time.timeScale = 0f;
                 break;
             case TimeState.FastForward:
-                Time.timeScale = 2f;
+                Time.timeScale = 10f;
                 break;
         }
     }

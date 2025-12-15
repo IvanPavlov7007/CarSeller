@@ -22,6 +22,7 @@ MonoBehaviour:
   warehouseConfigs:
   - {fileID: 11400000, guid: 6805e19a361611e4fa3c799938c3cd96, type: 2}
   - {fileID: 11400000, guid: 3090245f56f43f046bf7da2fe7f02e6f, type: 2}
+  - {fileID: 11400000, guid: 797317532479ce749b4a01b958ad0ff3, type: 2}
   initialProductsToSpawn:
   - productBaseConfig: {fileID: 11400000, guid: d59b21759925cf54fa4a547272179a3c, type: 2}
     productVariantConfig: {fileID: 11400000, guid: 2b3a91484d1de1c4a8badc61a1c2a7e0, type: 2}

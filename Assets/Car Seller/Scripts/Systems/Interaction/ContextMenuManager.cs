@@ -21,16 +21,6 @@ public class ContextMenuManager : Singleton<ContextMenuManager>
         }
     }
 
-    private void OnEnable()
-    {
-        GameEvents.Instance.OnObjectWithPopupClicked += TestObjectSelected;
-    }
-
-    private void OnDisable()
-    {
-        GameEvents.Instance.OnObjectWithPopupClicked -= TestObjectSelected;
-    }
-
     public void CreateContextMenu(GameObject target, UIElement content)
     {
         GameObject panel = Instantiate(popUpMenuPrefab);

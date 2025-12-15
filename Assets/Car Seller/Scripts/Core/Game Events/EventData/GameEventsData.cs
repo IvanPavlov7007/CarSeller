@@ -31,3 +31,15 @@ public class ProductLocationChangedEventData
     public ILocation NewLocation { get; private set; }
     public ILocation OldLocation { get; set; }
 }
+
+public class GameStateChangeEventData
+{
+    private GameState oldState;
+    private GameState newState;
+
+    public GameStateChangeEventData(GameState oldState, GameState newState)
+    {
+        this.oldState = oldState;
+        this.newState = newState;
+    }
+}

@@ -5,16 +5,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarMechanicService : Singleton<CarMechanicService>
+public class CarMechanicService : RoutinedObject
 {
-
     readonly Dictionary<Car, Coroutine> coroutinesOnCars = new Dictionary<Car, Coroutine>();
 
     public void DisassembleCar(Warehouse warehouse, Car car)
     {
         Debug.Assert(car != null, "Car cannot be null when disassembling.");
 
-        if(coroutinesOnCars.ContainsKey(car))
+        if (coroutinesOnCars.ContainsKey(car))
         {
             return;
         }
@@ -23,25 +22,26 @@ public class CarMechanicService : Singleton<CarMechanicService>
         var carPartLocations = car.carParts;
         foreach (var location in carPartLocations.Keys)
         {
-            if(location.Occupant != null)
+            if (location.Occupant != null)
             {
                 parts.Add(location.Occupant as Product);
             }
         }
+
         List<Action> partRemovals = new List<Action>();
-        foreach(var part in parts)
+        foreach (var part in parts)
         {
             partRemovals.Add(() =>
             {
                 var location = G.Instance.LocationService.GetProductLocation(part);
-                if(location != null)
+                if (location != null)
                 {
                     G.Instance.LocationService.MoveProduct(part, warehouse.GetEmptyLocation());
                 }
             });
         }
 
-        var coroutine = StartCoroutine(carCoroutine(car, partRemovals, 0.1f));
+        var coroutine = StartRoutine(carCoroutine(car, partRemovals, 0.1f));
         coroutinesOnCars.Add(car, coroutine);
     }
 
@@ -50,7 +50,7 @@ public class CarMechanicService : Singleton<CarMechanicService>
         Debug.Assert(car != null, "Car cannot be null when checking if it can be disassembled.");
         foreach (var location in car.carParts.Keys)
         {
-            if(location.Occupant != null)
+            if (location.Occupant != null)
             {
                 return true;
             }
@@ -60,12 +60,12 @@ public class CarMechanicService : Singleton<CarMechanicService>
 
     IEnumerator carCoroutine(Car car, List<Action> actions, float period)
     {
-        foreach(var action in actions)
+        foreach (var action in actions)
         {
             action?.Invoke();
             yield return new WaitForSeconds(period);
         }
-        if(coroutinesOnCars.ContainsKey(car))
+        if (coroutinesOnCars.ContainsKey(car))
         {
             coroutinesOnCars.Remove(car);
         }
@@ -82,17 +82,16 @@ public class CarMechanicService : Singleton<CarMechanicService>
         List<Action> actions = new List<Action>
         {
             () =>
-        {
-            var city = World.Instance.City;
-            G.Instance.LocationService.MoveProduct(car, city.GetEmptyLocation(
-                city.GetClosestPosition(city.Locations[sceneWarehouseModel].CityPosition.WorldPosition)
+            {
+                var city = World.Instance.City;
+                G.Instance.LocationService.MoveProduct(car, city.GetEmptyLocation(
+                    city.GetClosestPosition(city.Locations[sceneWarehouseModel].CityPosition.WorldPosition)
                 ));
-        },
+            },
             () => G.Instance.GameFlowController.GetToTheCity()
         };
 
-        var coroutine = StartCoroutine(carCoroutine(car, actions, 0.2f));
-
+        var coroutine = StartRoutine(carCoroutine(car, actions, 0.2f));
+        coroutinesOnCars.Add(car, coroutine);
     }
-
 }

@@ -11,20 +11,27 @@ public class GameEvents
     {
         OnGamePaused = null;
         OnGameUnpaused = null;
-        OnObjectWithPopupClicked = null;
         OnProductLocationChanged = null;
         OnProductCreated = null;
         OnProductDestroyed = null;
-    }
+        OnGameStateChanged = null;
 
+        OnPlayerCancel = null;
+        OnPlayerCaught = null;
+        OnPlayerSucceed = null;
+    }
 
     public Action OnGamePaused;
     public Action OnGameUnpaused;
 
-    public Action<ObjectWithPopupMenuTest> OnObjectWithPopupClicked;
-
-
     public Action<ProductLocationChangedEventData> OnProductLocationChanged;
     public Action<ProductCreatedEventData> OnProductCreated;
     public Action<ProductDestroyedEventData> OnProductDestroyed;
+
+    public Action<GameStateChangeEventData> OnGameStateChanged;
+
+    // Game Flow Events
+    public Action<PlayerActionEventData> OnPlayerCancel;
+    public Action<PlayerActionEventData> OnPlayerCaught;
+    public Action<PlayerActionEventData> OnPlayerSucceed;
 }
