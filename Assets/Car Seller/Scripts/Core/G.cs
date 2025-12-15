@@ -20,12 +20,12 @@ public sealed class G : Singleton<G>
     public ProductManager ProductManager = new ProductManager();
     public LocationService LocationService = new LocationService();
 
-    public GameFlowManager GameFlowManager = new GameFlowManager();
+    public GameFlowManager GameFlowManager;
     public GameFlowController GameFlowController = new GameFlowController();
 
     public WorldManager WorldManager = new WorldManager();
 
-    public CarMechanicService CarMechanicService = new CarMechanicService();
+    public CarMechanicService CarMechanicService;
 
     public PlayerManager PlayerManager = new PlayerManager();
     public TransactionProcessor TransactionProcessor;
@@ -59,7 +59,6 @@ public sealed class G : Singleton<G>
     private void Initialize()
     {
         GameFlowManager = new GameFlowManager();
-
         CarMechanicService = new CarMechanicService();
 
         TransactionProcessor transactionProcessor = new TransactionProcessor(new Dictionary<TransactionType, ITransactionHandler>

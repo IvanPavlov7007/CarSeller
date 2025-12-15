@@ -126,12 +126,14 @@ public static class CityGraphBaker
                 Anchor = new CityGraphAsset.MarkerAnchorData()
             };
 
+            // Always store the marker's world position for snapping fallback
+            var wp = m.transform.position;
+            md.Anchor.WorldPoint = new Vector2(wp.x, wp.y);
+
             switch (m.Kind)
             {
                 case CityMarkerAuthor.AnchorKind.WorldPoint:
                     md.Anchor.Kind = CityGraphAsset.MarkerAnchorKind.WorldPoint;
-                    var p = m.transform.position;
-                    md.Anchor.WorldPoint = new Vector2(p.x, p.y);
                     break;
 
                 case CityMarkerAuthor.AnchorKind.Node:

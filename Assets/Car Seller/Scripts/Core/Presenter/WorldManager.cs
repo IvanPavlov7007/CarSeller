@@ -9,13 +9,40 @@ public class WorldManager
         Warehouse warehouse = new Warehouse(warehouseConfig);
 
         City.CityPosition pos;
-        if (!string.IsNullOrEmpty(warehouseConfig.CityMarkerId) &&
-            city.TryGetMarker(warehouseConfig.CityMarkerId, out var marker))
+
+        if (warehouseConfig.Marker.IsValid)
         {
-            // Prefer exact graph anchor if available; otherwise snap world point to nearest graph
-            pos = marker.PositionOnGraph.HasValue
-                ? marker.PositionOnGraph.Value
-                : city.GetClosestPosition(marker.WorldPosition);
+            // Read the baked marker from the selected graph
+            var graph = warehouseConfig.Marker.Graph;
+            var markerData = graph.Markers.Find(m => m.Id == warehouseConfig.Marker.MarkerId);
+
+            if (markerData != null)
+            {
+                // WorldPoint markers remain unbound. Snap here if desired.
+                if (markerData.Anchor.Kind == CityGraphAsset.MarkerAnchorKind.WorldPoint)
+                {
+                    pos = city.GetClosestPosition(markerData.Anchor.WorldPoint);
+                }
+                else if (markerData.Anchor.Kind == CityGraphAsset.MarkerAnchorKind.Node)
+                {
+                    // If you prefer to ignore node-edge binding and still snap, you can still do closest:
+                    pos = city.GetClosestPosition(markerData.Anchor.WorldPoint);
+                }
+                else if (markerData.Anchor.Kind == CityGraphAsset.MarkerAnchorKind.Edge)
+                {
+                    // Edge anchors can be interpreted, but you can also snap anyway:
+                    pos = city.GetClosestPosition(markerData.Anchor.WorldPoint);
+                }
+                else
+                {
+                    pos = city.GetClosestPosition(warehouseConfig.warehouseClosestInitialPosition);
+                }
+            }
+            else
+            {
+                // Marker id not found; fallback
+                pos = city.GetClosestPosition(warehouseConfig.warehouseClosestInitialPosition);
+            }
         }
         else
         {

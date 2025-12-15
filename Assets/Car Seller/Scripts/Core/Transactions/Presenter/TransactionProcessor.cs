@@ -2,7 +2,7 @@
 
 public class TransactionProcessor
 {
-    Dictionary<TransactionType, ITransactionHandler> Handlers { get; private set; }
+    Dictionary<TransactionType, ITransactionHandler> Handlers { get; set; }
 
     public TransactionProcessor(Dictionary<TransactionType, ITransactionHandler> handlers)
     {

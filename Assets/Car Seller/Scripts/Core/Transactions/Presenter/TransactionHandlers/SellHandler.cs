@@ -4,6 +4,6 @@
 
     public override TransactionResult Handle(Transaction transaction)
     {
-
+        throw new System.NotImplementedException();
     }
 }

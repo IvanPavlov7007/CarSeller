@@ -12,8 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84883806d149d2147b5d641239454d24, type: 3}
   m_Name: WarehouseSouthConfig
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   DisplayName: Warehouse South
   SceneToLoad: Warehouse South
+  Marker:
+    Graph: {fileID: 11400000, guid: 5389cb2a25bee4549811721f2d7263b9, type: 2}
+    MarkerId: s_wh_1
   warehouseClosestInitialPosition: {x: -4, y: -3}
   initialProductsToSpawn:
   - productBaseConfig: {fileID: 11400000, guid: d59b21759925cf54fa4a547272179a3c, type: 2}
