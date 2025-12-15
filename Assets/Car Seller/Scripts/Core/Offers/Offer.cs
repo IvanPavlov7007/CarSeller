@@ -1,4 +1,4 @@
-﻿public class Offer
+﻿public interface IOffer
 {
-
+    public abstract Transaction Accept();
 }

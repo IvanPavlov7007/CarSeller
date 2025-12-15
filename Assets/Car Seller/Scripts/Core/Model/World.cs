@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class World
 {
+    public Player Player = new Player();
+
     public HiddenSpace HiddenSpace = new HiddenSpace();
     public Dictionary<Product, ILocation> productLocations = new Dictionary<Product, ILocation>();
     public City City;

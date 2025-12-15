@@ -50,13 +50,22 @@ public class GameFlowManager : RoutinedObject
                 // Player got caught — handle penalty and return to normal (or specific) state
                 HandleCaughtOutcome(car);
             },
+            // Player succeeded — apply selling transaction and move to the warehouse
             onSucceed: (warehouse) =>
             {
-                // Player succeeded — move car to the selected warehouse, then normal state
-                if (warehouse != null)
+                Debug.Assert(warehouse != null, "Warehouse should not be null on successful sale.");
+
+                Transaction stealingTransaction = new Transaction
+                (
+                    TransactionType.Steal, new StealTransactionData(car, warehouse)
+                );
+
+                var result = G.TransactionProcessor.Process(stealingTransaction);
+                if(result.Type != TransactionResultType.Success)
                 {
-                    new CityActionService().PutCarInsideWarehouse(car, warehouse);
+                    Debug.LogError("Failed to process stealing transaction during selling sequence.");
                 }
+                GameFlowController.EnterWarehouse(warehouse);
             }
         );
         GameFlowController.SetGameState(new NormalGameState());

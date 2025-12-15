@@ -2,8 +2,11 @@
 
 public class CityActionService
 {
-    public void PutCarInsideWarehouse(Car car, Warehouse warehouse)
+    public bool PutCarInsideWarehouse(Car car, Warehouse warehouse)
     {
-        G.Instance.LocationService.MoveProduct(car, warehouse.GetEmptyLocation());
+        var location = warehouse.GetEmptyLocation();
+        if (location == null)
+            return false;
+        return G.Instance.LocationService.MoveProduct(car, location);
     }
 }

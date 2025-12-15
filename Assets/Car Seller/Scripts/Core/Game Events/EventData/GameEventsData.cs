@@ -43,3 +43,12 @@ public class GameStateChangeEventData
         this.newState = newState;
     }
 }
+
+public class PossesionChangeEventData
+{
+    public IPossession Possession { get; private set; }
+    public PossesionChangeEventData(IPossession possesion)
+    {
+        Possession = possesion;
+    }
+}

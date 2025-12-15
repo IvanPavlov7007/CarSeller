@@ -1,10 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Warehouse : ILocationsHolder, ILocatable
+public class Warehouse : ILocationsHolder, ILocatable, IPossession
 {
     public WarehouseConfig Config;
     public DimensionalPositionData emptyProductLocation { get; set; }
+
+    private readonly Guid _id = Guid.NewGuid();
+    public Guid Id => _id;
+    public string Name { get; }
+
     public List<WarehouseProductLocation> products = new List<WarehouseProductLocation>();
     public SuppliesList suppliesList;
 

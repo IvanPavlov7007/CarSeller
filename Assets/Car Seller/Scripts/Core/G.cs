@@ -1,10 +1,11 @@
 ﻿using Pixelplacement;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
 /// Global services locator
 /// </summary>
-public class G : Singleton<G>
+public sealed class G : Singleton<G>
 {
     //Use only for reading
     //MODEL
@@ -15,6 +16,7 @@ public class G : Singleton<G>
     public GameObject CityRoot { get; set; }
 
     //REPRESENTATION
+
     public ProductManager ProductManager = new ProductManager();
     public LocationService LocationService = new LocationService();
 
@@ -24,6 +26,9 @@ public class G : Singleton<G>
     public WorldManager WorldManager = new WorldManager();
 
     public CarMechanicService CarMechanicService = new CarMechanicService();
+
+    public PlayerManager PlayerManager = new PlayerManager();
+    public TransactionProcessor TransactionProcessor;
 
     //City
     public CityActionService CityActionService = new CityActionService();
@@ -44,8 +49,28 @@ public class G : Singleton<G>
     protected override void OnRegistration()
     {
         base.OnRegistration();
+
+        Initialize();
+
         GameEvents.Instance.Reset();
         ResetGameState();
+    }
+
+    private void Initialize()
+    {
+        GameFlowManager = new GameFlowManager();
+
+        CarMechanicService = new CarMechanicService();
+
+        TransactionProcessor transactionProcessor = new TransactionProcessor(new Dictionary<TransactionType, ITransactionHandler>
+        {
+            { TransactionType.Purchase, new PurchaseHandler() },
+            { TransactionType.Sell, new SellHandler() },
+            { TransactionType.Reward, new RewardHandler() },
+            { TransactionType.Lose, new LoseHandler() },
+            { TransactionType.Confiscate, new ConfiscateHandler() },
+            { TransactionType.Steal, new StealHandler()   }
+        });
     }
 
     public void ResetGameState()

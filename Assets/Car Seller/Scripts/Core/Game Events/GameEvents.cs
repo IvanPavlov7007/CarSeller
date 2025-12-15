@@ -24,11 +24,14 @@ public class GameEvents
     public Action OnGamePaused;
     public Action OnGameUnpaused;
 
+    public Action<GameStateChangeEventData> OnGameStateChanged;
+
     public Action<ProductLocationChangedEventData> OnProductLocationChanged;
     public Action<ProductCreatedEventData> OnProductCreated;
     public Action<ProductDestroyedEventData> OnProductDestroyed;
 
-    public Action<GameStateChangeEventData> OnGameStateChanged;
+    public Action<PossesionChangeEventData> OnPlayerPossessionLose;
+    public Action<PossesionChangeEventData> OnPlayerPossessionAcquired;
 
     // Game Flow Events
     public Action<PlayerActionEventData> OnPlayerCancel;
