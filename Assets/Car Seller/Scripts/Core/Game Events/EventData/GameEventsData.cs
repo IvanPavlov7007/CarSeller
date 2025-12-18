@@ -52,3 +52,18 @@ public class PossesionChangeEventData
         Possession = possesion;
     }
 }
+
+public class PlayerMoneyChangeEventData
+{
+    public PlayerMoneyChangeEventData(Player player, float oldMoney, float newMoney)
+    {
+        Player = player;
+        OldMoney = oldMoney;
+        NewMoney = newMoney;
+    }
+
+    public Player Player { get; private set; }
+    public float OldMoney { get; private set; }
+    public float NewMoney { get; private set; }
+    
+}

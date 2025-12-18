@@ -32,9 +32,12 @@ public class GameEvents
 
     public Action<PossesionChangeEventData> OnPlayerPossessionLose;
     public Action<PossesionChangeEventData> OnPlayerPossessionAcquired;
+    public Action<PlayerMoneyChangeEventData> OnPlayerMoneyChanged { get; internal set; }
 
     // Game Flow Events
     public Action<PlayerActionEventData> OnPlayerCancel;
     public Action<PlayerActionEventData> OnPlayerCaught;
     public Action<PlayerActionEventData> OnPlayerSucceed;
+
+    
 }

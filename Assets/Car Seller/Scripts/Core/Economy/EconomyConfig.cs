@@ -1,0 +1,10 @@
+﻿using UnityEngine;
+using Sirenix;
+using Sirenix.OdinInspector;
+
+[CreateAssetMenu(fileName = "EconomyConfig", menuName = "Configs/Economy/EconomyConfig")]
+public class  EconomyConfig : SerializedScriptableObject
+{
+    public WarehouseOffersConfig WarehouseOffersConfig;
+
+}

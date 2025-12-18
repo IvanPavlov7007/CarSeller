@@ -10,6 +10,9 @@ public sealed class G : Singleton<G>
     //Use only for reading
     //MODEL
     public CityConfig CityConfig;
+    public EconomyConfig EconomyConfig;
+
+
     public GameState GameState;
 
     //MODEL AND VIEW MIXED (SORRY)
@@ -74,7 +77,7 @@ public sealed class G : Singleton<G>
 
     public void ResetGameState()
     {
-        WorldManager.InitializeCity(CityConfig);
+        WorldManager.InitializeWorld(CityConfig, EconomyConfig);
     }
 
 }

@@ -1,13 +1,15 @@
 ﻿using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 
 public class World
 {
-    public Player Player = new Player();
+    public WorldRegistry WorldRegistry = new WorldRegistry();
 
     public HiddenSpace HiddenSpace = new HiddenSpace();
     public Dictionary<Product, ILocation> productLocations = new Dictionary<Product, ILocation>();
     public City City;
+    public Economy Economy;
 
     public static World Instance = new World();
 

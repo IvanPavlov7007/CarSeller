@@ -14,5 +14,6 @@ public class CityConfig : ScriptableObject
 
     public WarehouseConfig[] warehouseConfigs;
     public SimpleProductSpawnConfig[] initialProductsToSpawn;
+
     
 }

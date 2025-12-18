@@ -12,6 +12,12 @@ public class TransactionProcessor
     public TransactionResult Process(Transaction transaction)
     {
         TransactionResult result;
+        if(transaction == null)
+        {
+            result = TransactionResult.InvalidTransaction("Transaction is null");
+            return result;
+        }
+
         if (Handlers.TryGetValue(transaction.Type, out var handler) && handler.CanHandle(transaction))
         {
             result = handler.Handle(transaction);

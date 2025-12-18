@@ -2,6 +2,9 @@
 
 public class WorldManager
 {
+    //TODO register more things in the world registry
+    World World => World.Instance;
+    
 
     // On bootstrap, create the initial cities and warehouses
     public void AddWarehouse(City city, WarehouseConfig warehouseConfig)
@@ -78,9 +81,18 @@ public class WorldManager
                     break;
             }
         }
+        World.WorldRegistry.Register<Warehouse>(warehouse,warehouseConfig);
     }
 
-    public void InitializeCity(CityConfig cityConfig)
+    public void InitializeWorld(CityConfig cityConfig, EconomyConfig economyConfig)
+    {
+        initializeCity(cityConfig);
+        // Initialize economy after city so that economy can reference city objects if needed
+        initializeEconomy(economyConfig);
+    }
+
+    //1.
+    private void initializeCity(CityConfig cityConfig)
     {
         World.Reset();
 
@@ -109,5 +121,10 @@ public class WorldManager
                     break;
             }
         }
+    }
+    //2.
+    private void initializeEconomy(EconomyConfig economyConfig)
+    {
+        World.Instance.Economy = new Economy(economyConfig);
     }
 }

@@ -2,7 +2,7 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-[CreateAssetMenu(fileName = "WarehouseConfig", menuName = "Configs/WarehouseConfig")]
+[CreateAssetMenu(fileName = "WarehouseConfig", menuName = "Configs/Economy/WarehouseConfig")]
 public class WarehouseConfig : SerializedScriptableObject
 {
     public string DisplayName;

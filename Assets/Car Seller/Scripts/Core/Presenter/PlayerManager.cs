@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerManager
 {
-    Player Player => World.Instance.Player;
+    Player Player => World.Instance.Economy.Player;
 
     public bool RemovePossession(IPossession possession)
     {
@@ -43,11 +44,37 @@ public class PlayerManager
         }
     }
 
+    public float SetPlayerMoney(float amount)
+    {
+        float oldMoney = Player.Money;
+        Player.ChangeMoney(amount);
+        GameEvents.Instance.OnPlayerMoneyChanged?.Invoke(new PlayerMoneyChangeEventData(Player, oldMoney, Player.Money));
+        return Player.Money;
+    }
+
+    public float AddPlayerMoney(float amount)
+    {
+        return SetPlayerMoney(Player.Money + amount);
+    }
+
+    public float SubtractPlayerMoney(float amount)
+    {
+        return SetPlayerMoney(Player.Money - amount);
+    }
+
     public void RegisterPlayerPossession(IPossession possession)
     {
         Debug.Assert(possession != null, "Possession cannot be null when registering to player.");
         Debug.Assert(!Player.Possessions.Contains(possession), $"Possession {possession.Name} is already registered to player.");
         Player.Possessions.Add(possession);
+    }
+
+    internal void AddPossessions(IPossession[] items)
+    {
+        foreach (var item in items)
+        {
+            AddPossession(item);
+        }
     }
 }
 
