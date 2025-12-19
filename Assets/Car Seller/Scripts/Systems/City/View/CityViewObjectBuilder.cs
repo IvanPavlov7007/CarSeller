@@ -20,6 +20,20 @@ public class CityViewObjectBuilder : ScriptableObject
         }
     }
 
+    public GameObject BuildObjectDisabled(object cityObject)
+    {
+        var objGO = BuildObject(cityObject);
+        if (objGO != null)
+        {
+            var spriteRenderers = objGO.GetComponentsInChildren<SpriteRenderer>();
+            foreach (var spriteRenderer in spriteRenderers)
+            {
+                spriteRenderer.color = Color.gray;
+            }
+        }
+        return objGO;
+    }
+
     public GameObject buildCar(Car car)
     {
         GameObject carGO = Instantiate(carViewPrefab);

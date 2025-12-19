@@ -3,10 +3,12 @@ using Pixelplacement;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Methods to control the game flow, holding the current game state
+/// </summary>
 public class GameFlowController
 {
-    G G=> G.Instance;
-
+    public GameState GameState = new NeutralGameState();
     GameSceneType currentSceneType;
     public enum GameSceneType
     {
@@ -16,8 +18,8 @@ public class GameFlowController
 
     public void SetGameState(GameState newState)
     {
-        var oldState = G.GameState;
-        G.GameState = newState;
+        var oldState = GameState;
+        GameState = newState;
         GameEvents.Instance.OnGameStateChanged?.Invoke(new GameStateChangeEventData(oldState, newState));
     }
 

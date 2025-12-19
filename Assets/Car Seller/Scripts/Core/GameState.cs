@@ -3,7 +3,7 @@
 
 }
 
-public class NormalGameState : GameState
+public class NeutralGameState : GameState
 {
     
 }

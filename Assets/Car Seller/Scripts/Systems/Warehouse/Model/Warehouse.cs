@@ -14,7 +14,7 @@ public class Warehouse : ILocationsHolder, ILocatable, IPossession
     public List<WarehouseProductLocation> products = new List<WarehouseProductLocation>();
     public SuppliesList suppliesList;
 
-
+    public int AvailableCarParkingSpots { get; private set; }
     public Warehouse(WarehouseConfig config)
     {
         this.Config = config;

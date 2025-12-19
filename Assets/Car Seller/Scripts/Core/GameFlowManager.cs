@@ -11,7 +11,6 @@ public class GameFlowManager : RoutinedObject
     {
         var go = new GameObject("GameFlowManagerRoutines");
         Object.DontDestroyOnLoad(go);
-        G.GameState = new NormalGameState();
     }
 
     public void SellCar(Car car)
@@ -68,7 +67,7 @@ public class GameFlowManager : RoutinedObject
                 GameFlowController.EnterWarehouse(warehouse);
             }
         );
-        GameFlowController.SetGameState(new NormalGameState());
+        GameFlowController.SetGameState(new NeutralGameState());
     }
 
     private IEnumerator StealingSequence(Car car)
@@ -98,7 +97,7 @@ public class GameFlowManager : RoutinedObject
                 
             }
         );
-        GameFlowController.SetGameState(new NormalGameState());
+        GameFlowController.SetGameState(new NeutralGameState());
     }
 
     private IEnumerator AwaitPlayerOutcome(System.Action onCanceled, System.Action onCaught, System.Action<Warehouse> onSucceed)

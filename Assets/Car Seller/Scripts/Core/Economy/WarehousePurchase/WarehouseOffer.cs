@@ -37,6 +37,6 @@ public class WarehouseOffer : IOffer
     public bool CanAccept()
     {
         Debug.Assert(!IsAccepted);
-        return World.Instance.Player.Money >= Price;
+        return World.Instance.Economy.Player.Money >= Price;
     }
 }

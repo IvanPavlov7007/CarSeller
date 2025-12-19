@@ -10,6 +10,10 @@ public class Player
         Debug.Assert(newAmount >= 0, "Player money cannot be negative.");
         Money = newAmount;
     }
+    public bool Owns(IPossession possession)
+    {
+        return Possessions.Contains(possession);
+    }
 
     public HashSet<IPossession> Possessions { get; private set; }
 }

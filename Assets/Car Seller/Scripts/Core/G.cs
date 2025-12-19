@@ -12,8 +12,14 @@ public sealed class G : Singleton<G>
     public CityConfig CityConfig;
     public EconomyConfig EconomyConfig;
 
+    
 
-    public GameState GameState;
+    //References
+    public static City City => World.Instance.City;
+    public static Economy Economy => World.Instance.Economy;
+    public static Player Player => World.Instance.Economy.Player;
+
+    public static GameState GameState => Instance.GameFlowController.GameState;
 
     //MODEL AND VIEW MIXED (SORRY)
     public GameObject CityRoot { get; set; }

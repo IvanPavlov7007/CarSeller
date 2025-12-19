@@ -34,8 +34,8 @@ public class ProductLocationChangedEventData
 
 public class GameStateChangeEventData
 {
-    private GameState oldState;
-    private GameState newState;
+    public GameState oldState { get; private set; }
+    public GameState newState { get; private set; }
 
     public GameStateChangeEventData(GameState oldState, GameState newState)
     {
