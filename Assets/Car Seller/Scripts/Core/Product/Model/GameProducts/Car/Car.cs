@@ -12,6 +12,8 @@ public sealed class Car : Product, ILocationsHolder
 
     public override string Name => runtimeConfig.Name;
 
+    public override float BasePrice => runtimeConfig.BasePrice;
+
     public Car(CarRuntimeConfig runtimeConfig)
     {
         this.runtimeConfig = runtimeConfig;

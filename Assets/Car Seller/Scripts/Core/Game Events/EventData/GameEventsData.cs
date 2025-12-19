@@ -32,6 +32,41 @@ public class ProductLocationChangedEventData
     public ILocation OldLocation { get; set; }
 }
 
+
+public class LocatableCreatedEventData
+{
+    public ILocatable Locatable { get; private set; }
+    public ILocation Location { get; private set; }
+    public LocatableCreatedEventData(ILocatable locatable, ILocation location)
+    {
+        Locatable = locatable;
+        Location = location;
+    }
+}
+
+public class LocatableDestroyedEventData
+{
+    public ILocatable Locatable { get; private set; }
+    public LocatableDestroyedEventData(ILocatable locatable)
+    {
+        Locatable = locatable;
+    }
+}
+
+public class LocatableLocationChangedEventData
+{
+    public LocatableLocationChangedEventData(ILocatable locatable, ILocation newLocation, ILocation oldLocation)
+    {
+        Locatable = locatable;
+        NewLocation = newLocation;
+        OldLocation = oldLocation;
+    }
+
+    public ILocatable Locatable { get; private set; }
+    public ILocation NewLocation { get; private set; }
+    public ILocation OldLocation { get; set; }
+}
+
 public class GameStateChangeEventData
 {
     public GameState oldState { get; private set; }

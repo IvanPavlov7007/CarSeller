@@ -33,10 +33,10 @@ public class CarMechanicService : RoutinedObject
         {
             partRemovals.Add(() =>
             {
-                var location = G.Instance.LocationService.GetProductLocation(part);
+                var location = G.Instance.ProductLocationService.GetProductLocation(part);
                 if (location != null)
                 {
-                    G.Instance.LocationService.MoveProduct(part, warehouse.GetEmptyLocation());
+                    G.Instance.ProductLocationService.MoveProduct(part, warehouse.GetEmptyLocation());
                 }
             });
         }
@@ -84,7 +84,7 @@ public class CarMechanicService : RoutinedObject
             () =>
             {
                 var city = World.Instance.City;
-                G.Instance.LocationService.MoveProduct(car, city.GetEmptyLocation(
+                G.Instance.ProductLocationService.MoveProduct(car, city.GetEmptyLocation(
                     city.GetClosestPosition(city.Locations[sceneWarehouseModel].CityPosition.WorldPosition)
                 ));
             },

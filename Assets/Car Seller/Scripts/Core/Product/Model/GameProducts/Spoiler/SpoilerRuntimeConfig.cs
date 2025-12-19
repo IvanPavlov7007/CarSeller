@@ -9,4 +9,5 @@ public class SpoilerRuntimeConfig : IRuntimeConfig
     public Sprite Sprite;
     public Color Color;
     public float Size;
+    public float BasePrice;
 }

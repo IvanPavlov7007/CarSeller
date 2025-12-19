@@ -33,4 +33,8 @@ public class WheelOverrides : IConfigOverrides
     public bool OverrideTopViewSize;
     [ShowIf("OverrideTopViewSize")]
     public float TopViewSize;
+
+    public bool OverrideBasePrice;
+    [ShowIf("OverrideBasePrice")]
+    public float BasePrice;
 }

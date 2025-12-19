@@ -28,6 +28,9 @@ public class SpoilerVariantConfig : ScriptableObject, ISimpleVariantConfig
         public bool OverrideSize;
         [ShowIf("OverrideSize")]
         public float Size = 1f;
+        public bool OverrideBasePrice;
+        [ShowIf("OverrideBasePrice")]
+        public float BasePrice;
     }
 
 }

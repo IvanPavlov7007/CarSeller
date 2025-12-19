@@ -7,6 +7,6 @@ public class CityActionService
         var location = warehouse.GetEmptyLocation();
         if (location == null)
             return false;
-        return G.Instance.LocationService.MoveProduct(car, location);
+        return G.Instance.ProductLocationService.MoveProduct(car, location);
     }
 }

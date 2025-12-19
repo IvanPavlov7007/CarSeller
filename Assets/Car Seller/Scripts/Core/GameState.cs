@@ -11,9 +11,11 @@ public class NeutralGameState : GameState
 public class SellingGameState : GameState
 {
     public readonly Car SellingCar;
-    public SellingGameState(Car sellingCar)
+    public readonly Buyer Buyer;
+    public SellingGameState(Car sellingCar , Buyer buyer)
     {
         SellingCar = sellingCar;
+        Buyer = buyer;
     }
 }
 

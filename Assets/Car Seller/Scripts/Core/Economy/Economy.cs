@@ -10,6 +10,10 @@ public class Economy
 
     public WarehouseOfferProvider WarehouseOfferProvider;
 
+    public CarSellOneTimeOfferProvider CarSellOfferProvider;
+
+    public ProductPriceCalculator ProductPriceCalculator = new ProductPriceCalculator();
+
     public Economy(EconomyConfig config)
     {
         Config = config;

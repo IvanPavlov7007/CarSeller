@@ -13,6 +13,7 @@ public sealed class WheelRuntimeConfig : IRuntimeConfig
     public Color Color;
     public float SideViewSize;
     public float TopViewSize;
+    public float BasePrice;
 }
 
 [Serializable]

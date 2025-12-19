@@ -6,14 +6,14 @@
         Data = data;
     }
 
-    public void FinalizeResult(TransactionResultType result)
+    public void FinalizeResult(TransactionResult result)
     {
         Result = result;
     }   
 
     public TransactionType Type { get; private set; }
     public ITransactionData Data { get; private set; }
-    public TransactionResultType Result { get; private set; }
+    public TransactionResult Result { get; private set; }
 
 }
 

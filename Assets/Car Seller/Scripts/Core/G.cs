@@ -27,7 +27,7 @@ public sealed class G : Singleton<G>
     //REPRESENTATION
 
     public ProductManager ProductManager = new ProductManager();
-    public LocationService LocationService = new LocationService();
+    public ProductLocationService ProductLocationService = new ProductLocationService();
 
     public GameFlowManager GameFlowManager;
     public GameFlowController GameFlowController = new GameFlowController();

@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// General service to manage product locations. Should be used as the only tool to move products between locations.
 /// </summary>
-public class LocationService
+public class ProductLocationService
 {
     Dictionary<Product, ILocation> productLocations => World.Instance.productLocations;
 
@@ -31,6 +31,8 @@ public class LocationService
             }
             productLocations[product] = newLocation;
             GameEvents.Instance.OnProductLocationChanged?.Invoke(new ProductLocationChangedEventData(product, newLocation, previousLocation));
+            Debug.Assert(product is ILocatable);
+            GameEvents.Instance.OnLocatableLocationChanged?.Invoke(new LocatableLocationChangedEventData(product, newLocation, previousLocation));
             return true;
         }
 
@@ -44,6 +46,8 @@ public class LocationService
             location.Detach();
             productLocations.Remove(product);
             GameEvents.Instance.OnProductLocationChanged?.Invoke(new ProductLocationChangedEventData(product, null, location));
+            Debug.Assert(product is ILocatable);
+            GameEvents.Instance.OnLocatableLocationChanged?.Invoke(new LocatableLocationChangedEventData(product, null, location));
         }
     }
 

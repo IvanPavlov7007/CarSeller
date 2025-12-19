@@ -19,16 +19,21 @@ public class CitySceneManager : Singleton<CitySceneManager>
     }
     private void OnEnable()
     {
-        GameEvents.Instance.OnProductCreated += onNewProductCreated;
-        GameEvents.Instance.OnProductLocationChanged += onProductLocationChanged;
+        GameEvents.Instance.OnLocatableCreated += onNewLocatableCreated;
+        GameEvents.Instance.OnLocatableLocationChanged += onLocatableLocationChanged;
+        GameEvents.Instance.OnLocatableDestroyed += onLocatableDestroyed;
+        
         GameEvents.Instance.OnGameStateChanged += onGameStateChanged;
+
         currentProfile = profileRegistry.Get(G.GameState);
     }
 
     private void OnDisable()
     {
-        GameEvents.Instance.OnProductCreated -= onNewProductCreated;
-        GameEvents.Instance.OnProductLocationChanged -= onProductLocationChanged;
+        GameEvents.Instance.OnLocatableCreated -= onNewLocatableCreated;
+        GameEvents.Instance.OnLocatableLocationChanged -= onLocatableLocationChanged;
+        GameEvents.Instance.OnLocatableDestroyed -= onLocatableDestroyed;
+        
         GameEvents.Instance.OnGameStateChanged -= onGameStateChanged;
 
         if (G.Instance.CityRoot != null)
@@ -74,19 +79,28 @@ public class CitySceneManager : Singleton<CitySceneManager>
         builtObjectsViews.Clear();
     }
 
-    private void onProductLocationChanged(ProductLocationChangedEventData data)
+    private void onLocatableLocationChanged(LocatableLocationChangedEventData data)
     {
         if(data.NewLocation.Holder == City)
         {
-            G.Instance.cityViewObjectBuilder.BuildObject(data.Product);
+            applyProfileToObject(data.Locatable);
         }
     }
 
-    private void onNewProductCreated(ProductCreatedEventData data)
+    private void onNewLocatableCreated(LocatableCreatedEventData data)
     {
         if (data.Location.Holder == City)
         {
-            G.Instance.cityViewObjectBuilder.BuildObject(data.Product);
+            applyProfileToObject(data.Locatable);
+        }
+    }
+
+    private void onLocatableDestroyed(LocatableDestroyedEventData data)
+    {
+        if(builtObjectsViews.TryGetValue(data.Locatable, out var view))
+        {
+            Destroy(view);
+            builtObjectsViews.Remove(data.Locatable);
         }
     }
 
@@ -143,6 +157,11 @@ public class CitySceneManager : Singleton<CitySceneManager>
                 break;
         }
         registerNewView(locatable,view);
+    }
+
+    private void applyProfileToObject(ILocatable locatable)
+    {
+        applyProfileToObject(locatable, G.GameState);
     }
 }
 

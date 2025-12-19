@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GameFlowController
 {
-    public GameState GameState = new NeutralGameState();
-    GameSceneType currentSceneType;
+    public GameState GameState { get; private set; } = new NeutralGameState();
+    public GameSceneType currentSceneType { get; private set; }
     public enum GameSceneType
     {
         City,

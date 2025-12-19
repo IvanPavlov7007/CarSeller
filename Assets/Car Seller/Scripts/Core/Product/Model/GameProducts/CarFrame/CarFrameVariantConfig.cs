@@ -31,4 +31,8 @@ public class CarFrameVariantOverrides : IConfigOverrides
     public bool OverrideWindshieldColor;
     [ShowIf("OverrideWindshieldColor")]
     public Color WindshieldColor = Color.white;
+
+    public bool OverrideBasePrice;
+    [ShowIf("OverrideBasePrice")]
+    public float BasePrice;
 }

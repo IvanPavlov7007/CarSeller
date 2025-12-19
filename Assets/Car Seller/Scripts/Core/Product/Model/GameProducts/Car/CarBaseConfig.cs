@@ -8,6 +8,7 @@ using UnityEngine;
 public class CarBaseConfig : SerializedScriptableObject, IBaseConfig
 {
     public string Name = "New Car";
+    public float BasePrice = 1000f;
     public CarFrameBaseConfig CarFrameBaseConfig;
     [ShowInInspector]
     [OdinSerialize]

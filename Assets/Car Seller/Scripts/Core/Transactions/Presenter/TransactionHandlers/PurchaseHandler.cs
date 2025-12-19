@@ -11,39 +11,52 @@ public class PurchaseHandler : TransactionHandler
         Debug.Assert(transaction != null && transaction.Type == TransactionType.Purchase,
             "PurchaseHandler received a non-purchase transaction.");
 
+        TransactionResult result = null;
+
         if (transaction == null || transaction.Type != TransactionType.Purchase)
         {
-            return TransactionResult.InvalidTransaction("Invalid transaction: expected Purchase.");
+            result = TransactionResult.InvalidTransaction("Invalid transaction: expected Purchase.");
         }
 
-        var purchaseData = transaction.Data as PurchaseTransactionData;
-        if (purchaseData == null)
+        var purchaseData = transaction?.Data as PurchaseTransactionData;
+        if (result == null && purchaseData == null)
         {
-            return TransactionResult.InvalidTransaction("Invalid data: expected PurchaseTransactionData.");
+            result = TransactionResult.InvalidTransaction("Invalid data: expected PurchaseTransactionData.");
         }
 
         var player = World.Instance.Economy.Player;
-        if (player == null)
+        if (result == null && player == null)
         {
-            return TransactionResult.InvalidTransaction("Player not found.");
+            result = TransactionResult.InvalidTransaction("Player not found.");
         }
 
-        if (purchaseData.Price > player.Money)
+        if (result == null && purchaseData.Price > player.Money)
         {
-            return TransactionResult.InvalidTransaction(
+            result = TransactionResult.InvalidTransaction(
                 "Insufficient funds: price " + purchaseData.Price + ", available " + player.Money + ".");
         }
 
-        if (purchaseData.Items == null)
+        if (result == null && purchaseData.Items == null)
         {
-            return TransactionResult.InvalidTransaction("No items specified for purchase.");
+            result = TransactionResult.InvalidTransaction("No items specified for purchase.");
         }
 
         // TODO: check if items are available in the world for purchase
 
-        G.Instance.PlayerManager.SubtractPlayerMoney(purchaseData.Price);
-        G.Instance.PlayerManager.AddPossessions(purchaseData.Items);
+        if (result == null)
+        {
+            result = TransactionResult.Success();
+        }
 
-        return TransactionResult.Success();
+        if (result.Type == TransactionResultType.Success)
+        {
+            G.Instance.PlayerManager.SubtractPlayerMoney(purchaseData.Price);
+            G.Instance.PlayerManager.AddPossessions(purchaseData.Items);
+        }
+
+        transaction.FinalizeResult(result);
+
+        GameEvents.Instance.OnTransactionComplete(new TransactionEventData(transaction));
+        return result;
     }
 }

@@ -24,5 +24,8 @@ public class EngineVariantConfig : ScriptableObject, ISimpleVariantConfig
         [ShowIf("OverrideLevel")]
         public int Level = 1;
 
+        public bool OverrideBasePrice;
+        [ShowIf("OverrideBasePrice")]
+        public float BasePrice;
     }
 }

@@ -30,9 +30,15 @@ public class GameEvents
     public Action<ProductCreatedEventData> OnProductCreated;
     public Action<ProductDestroyedEventData> OnProductDestroyed;
 
+    public Action<LocatableCreatedEventData> OnLocatableCreated;
+    public Action<LocatableDestroyedEventData> OnLocatableDestroyed;
+    public Action<LocatableLocationChangedEventData> OnLocatableLocationChanged;
+
     public Action<PossesionChangeEventData> OnPlayerPossessionLose;
     public Action<PossesionChangeEventData> OnPlayerPossessionAcquired;
-    public Action<PlayerMoneyChangeEventData> OnPlayerMoneyChanged { get; internal set; }
+    public Action<PlayerMoneyChangeEventData> OnPlayerMoneyChanged;
+
+    public Action<TransactionEventData> OnTransactionComplete;
 
     // Game Flow Events
     public Action<PlayerActionEventData> OnPlayerCancel;

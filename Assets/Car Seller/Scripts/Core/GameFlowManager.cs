@@ -13,9 +13,10 @@ public class GameFlowManager : RoutinedObject
         Object.DontDestroyOnLoad(go);
     }
 
-    public void SellCar(Car car)
+    public void SellCar(CarSellOffer offer)
     {
-        if(!TryStartRoutine(SellingSequence(car)))
+
+        if(!TryStartRoutine(SellingSequence(offer)))
         {
             Debug.LogWarning("A selling sequence is already in progress.");
         }
@@ -29,12 +30,17 @@ public class GameFlowManager : RoutinedObject
         }
     }
 
-    private IEnumerator SellingSequence(Car car)
+    private IEnumerator SellingSequence(CarSellOffer offer)
     {
-        // Enter selling state
-        GameFlowController.SetGameState(new SellingGameState(car));
+        Debug.Assert(G.GameFlowController.currentSceneType == GameFlowController.GameSceneType.Warehouse);
 
-        var initialWarehouse = G.LocationService.GetProductLocation(car) as Warehouse;
+        var car = offer.Car;
+        var buyer = BuyerManager.CreateBuyer(car);
+
+        // Enter selling state
+        GameFlowController.SetGameState(new SellingGameState(car, buyer));
+
+        var initialWarehouse = G.ProductLocationService.GetProductLocation(car) as Warehouse;
         // Move to the city/map
         G.CarMechanicService.RideCarFromWarehouse(car, initialWarehouse);
 
@@ -50,21 +56,15 @@ public class GameFlowManager : RoutinedObject
                 HandleCaughtOutcome(car);
             },
             // Player succeeded — apply selling transaction and move to the warehouse
-            onSucceed: (warehouse) =>
+            onSucceed: (_) =>
             {
-                Debug.Assert(warehouse != null, "Warehouse should not be null on successful sale.");
+                Transaction selling = offer.Accept();
 
-                Transaction stealingTransaction = new Transaction
-                (
-                    TransactionType.Steal, new StealTransactionData(car, warehouse)
-                );
-
-                var result = G.TransactionProcessor.Process(stealingTransaction);
+                var result = G.TransactionProcessor.Process(selling);
                 if(result.Type != TransactionResultType.Success)
                 {
                     Debug.LogError("Failed to process stealing transaction during selling sequence.");
                 }
-                GameFlowController.EnterWarehouse(warehouse);
             }
         );
         GameFlowController.SetGameState(new NeutralGameState());

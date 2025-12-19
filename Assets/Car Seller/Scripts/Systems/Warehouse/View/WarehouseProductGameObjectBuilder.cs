@@ -94,7 +94,7 @@ public class WarehouseProductGameObjectBuilder : ScriptableObject, IProductViewB
             {
                 view = gameObject.AddComponent<WarehouseProductView>();
             }
-            view.Initialize(product, G.Instance.LocationService.GetProductLocation(product));
+            view.Initialize(product, G.Instance.ProductLocationService.GetProductLocation(product));
             initializeAdditionalComponents(gameObject, product);
             return view;
         }

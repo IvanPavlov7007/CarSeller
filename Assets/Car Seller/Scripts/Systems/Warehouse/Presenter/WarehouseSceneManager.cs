@@ -67,7 +67,7 @@ public class WarehouseSceneManager : Singleton<WarehouseSceneManager>
 
     void onNewProductCreated(ProductCreatedEventData data)
     {
-        var location = G.Instance.LocationService.GetProductLocation(data.Product);
+        var location = G.Instance.ProductLocationService.GetProductLocation(data.Product);
         if (SceneWarehouseModel == null)
         {
             Debug.LogError("Warehouse instance is not set");

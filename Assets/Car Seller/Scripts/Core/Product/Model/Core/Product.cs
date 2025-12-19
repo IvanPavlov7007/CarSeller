@@ -10,6 +10,9 @@ public abstract class Product : IProductRepresentationProvider, IPossession, ILo
     private readonly Guid _id = Guid.NewGuid();
     public Guid Id => _id;
     public abstract string Name { get; }
+
+    public abstract float BasePrice { get; }
+
     public string UniqueName => Name + "_" + Id.ToString();
     public abstract T GetRepresentation<T>(IProductViewBuilder<T> builder);
 

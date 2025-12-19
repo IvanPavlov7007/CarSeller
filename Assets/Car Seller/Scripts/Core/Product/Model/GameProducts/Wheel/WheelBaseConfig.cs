@@ -12,4 +12,5 @@ public class WheelBaseConfig : ScriptableObject, IBaseConfig
     public Color Color = Color.white;
     public float SideViewSize = 1f;
     public float TopViewSize = 1f;
+    public float BasePrice = 100f;
 }

@@ -7,4 +7,5 @@ public class SpoilerBaseConfig : ScriptableObject, IBaseConfig
     public Sprite Sprite;
     public Color Color = Color.white;
     public float Size = 1f;
+    public float BasePrice = 100f;
 }

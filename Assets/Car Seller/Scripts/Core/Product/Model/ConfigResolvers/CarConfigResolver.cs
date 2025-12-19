@@ -21,6 +21,13 @@ public class CarConfigResolver
             SlotConfigs = new List<PartSlotRuntimeConfig>()
         };
 
+        if (carVariant.OverrideBasePrice)
+        {
+            result.BasePrice = carVariant.BasePrice;
+        }
+        else
+            result.BasePrice = carBase.BasePrice;
+
         // Build pools
         var basePool = carBase.SlotConfigs != null
             ? new List<PartSlotBaseConfig>(carBase.SlotConfigs)

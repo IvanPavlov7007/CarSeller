@@ -15,14 +15,14 @@ public class ProductManager
         
         attachProductToLocation(car, location);
 
-        G.Instance.LocationService.RegisterProductLocation(car, location);
+        G.Instance.ProductLocationService.RegisterProductLocation(car, location);
         foreach(var locations in car.GetNonEmptyProductLocations())
         {
             //not rising events here
-            G.Instance.LocationService.RegisterProductLocation(locations.Occupant as Product, locations);
+            G.Instance.ProductLocationService.RegisterProductLocation(locations.Occupant as Product, locations);
         }
 
-        GameEvents.Instance.OnProductCreated?.Invoke(new ProductCreatedEventData(car, location));
+        raiseEvents(car, location);
         return car;
     }
 
@@ -33,8 +33,8 @@ public class ProductManager
 
         attachProductToLocation(wheel, location);
 
-        G.Instance.LocationService.RegisterProductLocation(wheel, location);
-        GameEvents.Instance.OnProductCreated?.Invoke(new ProductCreatedEventData(wheel, location));
+        G.Instance.ProductLocationService.RegisterProductLocation(wheel, location);
+        raiseEvents(wheel, location);
         return wheel;
     }
 
@@ -45,8 +45,8 @@ public class ProductManager
         
         attachProductToLocation(engine, location);
 
-        G.Instance.LocationService.RegisterProductLocation(engine, location);
-        GameEvents.Instance.OnProductCreated?.Invoke(new ProductCreatedEventData(engine, location));
+        G.Instance.ProductLocationService.RegisterProductLocation(engine, location);
+        raiseEvents(engine, location);
         return engine;
     }
 
@@ -57,9 +57,15 @@ public class ProductManager
 
         attachProductToLocation(spoiler, location);
 
-        G.Instance.LocationService.RegisterProductLocation(spoiler, location);
-        GameEvents.Instance.OnProductCreated?.Invoke(new ProductCreatedEventData(spoiler, location));
+        G.Instance.ProductLocationService.RegisterProductLocation(spoiler, location);
+        raiseEvents(spoiler, location);
         return spoiler;
+    }
+
+    private void raiseEvents(Product product, ILocation location)
+    {
+        GameEvents.Instance.OnProductCreated?.Invoke(new ProductCreatedEventData(product, location));
+        GameEvents.Instance.OnLocatableCreated?.Invoke(new LocatableCreatedEventData(product as ILocatable, location));
     }
 
     /// <summary>
@@ -95,7 +101,9 @@ public class ProductDeletionService
 {
     public void DeleteProduct(Product product)
     {
-        G.Instance.LocationService.RemoveProduct(product);
+        G.Instance.ProductLocationService.RemoveProduct(product);
         GameEvents.Instance.OnProductDestroyed(new ProductDestroyedEventData(product));
+        Debug.Assert(product is ILocatable);
+        GameEvents.Instance.OnLocatableDestroyed(new LocatableDestroyedEventData(product));
     }
 }
