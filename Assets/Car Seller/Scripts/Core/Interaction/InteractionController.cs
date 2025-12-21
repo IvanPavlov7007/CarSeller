@@ -1,5 +1,6 @@
 using Pixelplacement;
 using System.Collections.Generic;
+using UnityEditor.Localization.Plugins.XLIFF.V20;
 using UnityEngine;
 
 /// <summary>
@@ -8,6 +9,7 @@ using UnityEngine;
 public class InteractionController : Singleton<InteractionController>
 {
     public List<Interactable> interactables = new List<Interactable>();
+    public List<ITriggerable> triggerables = new List<ITriggerable>();
 
     IInteractionManager interactionManager => G.Instance.InteractionManager;
     
@@ -23,6 +25,17 @@ public class InteractionController : Singleton<InteractionController>
         }
     }
 
+    public void RegisterTriggerable(ITriggerable triggerable)
+    {
+        if (!triggerables.Contains(triggerable))
+        {
+            triggerables.Add(triggerable);
+            triggerable.OnTriggerEntered += OnTriggerEntered;
+        }
+    }
+
+    
+
     public void UnregisterInteractable(Interactable interactable)
     {
         if (interactables.Contains(interactable))
@@ -31,6 +44,15 @@ public class InteractionController : Singleton<InteractionController>
             interactable.CursorClicked -= OnClick;
             interactable.CursorDragStarted -= OnDragStart;
             interactable.CursorDragEnded -= OnDragEnd;
+        }
+    }
+
+    public void UnregisterTriggerable(ITriggerable triggerable)
+    {
+        if (triggerables.Contains(triggerable))
+        {
+            triggerables.Remove(triggerable);
+            triggerable.OnTriggerEntered -= OnTriggerEntered;
         }
     }
 
@@ -49,4 +71,8 @@ public class InteractionController : Singleton<InteractionController>
         interactionManager.OnDragEnd(interactable); 
     }
 
+    void OnTriggerEntered(ContentProvider trigger, ContentProvider triggerCause)
+    {
+        interactionManager.OnTriggerEntered(trigger, triggerCause);
+    }
 }

@@ -97,9 +97,9 @@ public class ProductCreationService
 /// <summary>
 /// Removing references to a product and notifying the system that it has been destroyed.
 /// </summary>
-public class ProductDeletionService
+public static class ProductDeletionService
 {
-    public void DeleteProduct(Product product)
+    public static void DeleteProduct(Product product)
     {
         G.Instance.ProductLocationService.RemoveProduct(product);
         GameEvents.Instance.OnProductDestroyed(new ProductDestroyedEventData(product));

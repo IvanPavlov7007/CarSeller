@@ -8,4 +8,5 @@
 
 public interface IInteractionContent { }
 
-public interface IInteractionContext { }
+public interface IInteractionContext {
+}

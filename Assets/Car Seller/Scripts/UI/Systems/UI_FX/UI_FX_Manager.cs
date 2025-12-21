@@ -31,6 +31,8 @@ public class UI_FX_Manager : Singleton<UI_FX_Manager>
             case TransactionType.Sell:
                 if(transaction.Result.Type == TransactionResultType.Success)
                 {
+                    var transactionData = transaction.Data as SellTransactionData;
+                    WorldEffectsDisplayer.Instance.PlayMoneyEffect(transactionData.Price, transaction.Result.Location.Position);
                 }
                 break;
             case TransactionType.Reward:

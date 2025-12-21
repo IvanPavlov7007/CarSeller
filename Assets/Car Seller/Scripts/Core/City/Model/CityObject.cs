@@ -1,14 +1,18 @@
 ﻿using UnityEngine;
-//TODO use global Location Service to manage locatables
 
-public class Buyer : ILocatable
+/// <summary>
+/// Base class for objects that only exist within the city environment.
+/// Used by Profiles through ContentProvider
+/// </summary>
+public class CityObject : ILocatable
 {
     public string Name { get; private set; }
-    public Buyer(string name, ILocation location)
+    public string InfoText { get; set; }
+    public CityObject(string name, string infoText, ILocation location)
     {
         Name = name;
-
-        if(location.Attach(this))
+        InfoText = infoText;
+        if (location.Attach(this))
             GameEvents.Instance.OnLocatableCreated?.Invoke(new LocatableCreatedEventData(this, location));
         else
             Debug.LogError($"Failed to attach buyer {name} to location {location}");

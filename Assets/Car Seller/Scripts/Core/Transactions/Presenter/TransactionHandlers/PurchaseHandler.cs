@@ -53,10 +53,6 @@ public class PurchaseHandler : TransactionHandler
             G.Instance.PlayerManager.SubtractPlayerMoney(purchaseData.Price);
             G.Instance.PlayerManager.AddPossessions(purchaseData.Items);
         }
-
-        transaction.FinalizeResult(result);
-
-        GameEvents.Instance.OnTransactionComplete(new TransactionEventData(transaction));
         return result;
     }
 }

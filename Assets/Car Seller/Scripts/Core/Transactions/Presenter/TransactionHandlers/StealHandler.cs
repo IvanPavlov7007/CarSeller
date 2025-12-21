@@ -21,7 +21,7 @@
         }
         else // couldn't find space in the warehouse
         {
-            result = new TransactionResult(TransactionResultType.Failure, new WarehousePlacingFailureData(targetWarehouse));
+            result = new TransactionResult(TransactionResultType.Failure, data: new WarehousePlacingFailureData(targetWarehouse));
         }
         return result;
     }

@@ -35,7 +35,7 @@ public class GameFlowManager : RoutinedObject
         Debug.Assert(G.GameFlowController.currentSceneType == GameFlowController.GameSceneType.Warehouse);
 
         var car = offer.Car;
-        var buyer = BuyerManager.CreateBuyer(car);
+        var buyer = BuyerManager.CreateBuyer(car, offer);
 
         // Enter selling state
         GameFlowController.SetGameState(new SellingGameState(car, buyer));
@@ -67,6 +67,8 @@ public class GameFlowManager : RoutinedObject
                 }
             }
         );
+
+        buyer.Destroy();
         GameFlowController.SetGameState(new NeutralGameState());
     }
 

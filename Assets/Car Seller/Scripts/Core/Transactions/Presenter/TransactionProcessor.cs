@@ -24,7 +24,8 @@ public class TransactionProcessor
         }
         else
             result = TransactionResult.InvalidTransaction($"No handler found for transaction type {transaction.Type}");
-        transaction.FinalizeResult(result.Type);
+        transaction.FinalizeResult(result);
+        GameEvents.Instance.OnTransactionComplete(new TransactionEventData(transaction));
         return result;
     }
 

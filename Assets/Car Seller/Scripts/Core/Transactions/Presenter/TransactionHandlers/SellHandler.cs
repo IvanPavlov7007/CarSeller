@@ -6,12 +6,55 @@ public class SellHandler : TransactionHandler
 
     public override TransactionResult Handle(Transaction transaction)
     {
-        var sellData = transaction.Data as SellTransactionData;
+        // Programming error if the processor routed a non-sell transaction here.
+        Debug.Assert(transaction != null && transaction.Type == TransactionType.Sell,
+            "SellHandler received a non-sell transaction.");
 
-        Debug.Assert(sellData != null, "SellHandler received a transaction with invalid data.");
+        TransactionResult result = null;
 
-        TransactionResult result = new 
-        
-        GameEvents.Instance.OnTransactionComplete(new TransactionEventData(transaction, resu));
+        if (transaction == null || transaction.Type != TransactionType.Sell)
+        {
+            result = TransactionResult.InvalidTransaction("Invalid transaction: expected Sell.");
+        }
+
+        var sellData = transaction?.Data as SellTransactionData;
+
+        if (result == null && sellData == null)
+        {
+            result = TransactionResult.InvalidTransaction("Invalid data: expected SellTransactionData.");
+        }
+
+        var player = World.Instance.Economy.Player;
+        if (result == null && player == null)
+        {
+            result = TransactionResult.InvalidTransaction("Player not found.");
+        }
+
+        var car = sellData?.Car;
+
+        if (result == null && car == null)
+        {
+            result = TransactionResult.InvalidTransaction("No car specified for sale.");
+        }
+
+        if (result == null && !player.Possessions.Contains(car))
+        {
+            result = TransactionResult.InvalidTransaction("Player does not own the car being sold.");
+        }
+
+        if (result == null)
+        {
+            result = TransactionResult.Success(
+                location: new TransactionLocation(TransactionLocationType.WorldSpace,
+                CityPositionLocator.GetCarLocation(car).CityPosition.WorldPosition));
+        }
+
+        if (result.Type == TransactionResultType.Success)
+        {
+            G.Instance.PlayerManager.AddPlayerMoney(sellData.Price);
+            G.Instance.PlayerManager.RemovePossession(car);
+            ProductDeletionService.DeleteProduct(car);
+        }
+        return result;
     }
 }
