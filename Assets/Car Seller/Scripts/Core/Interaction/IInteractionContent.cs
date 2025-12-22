@@ -1,12 +1,13 @@
-﻿public interface IInteractionContentProfile<T> where T : IInteractionContent
+﻿public interface IInteractionContentProfile<T, U>
+    where T : IInteractionContent
+    where U : IInteractionContext
 {
     T GenerateContent(
         object model,
-        IInteractionContext context
+        U context
     );
 }
 
 public interface IInteractionContent { }
 
-public interface IInteractionContext {
-}
+public interface IInteractionContext { }

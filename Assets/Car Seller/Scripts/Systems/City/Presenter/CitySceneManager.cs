@@ -10,7 +10,7 @@ public class CitySceneManager : Singleton<CitySceneManager>
     CitySceneProfileRegistry profileRegistry = new CitySceneProfileRegistry();
     CitySceneProfile currentProfile;
 
-    Dictionary<ILocatable, GameObject> builtObjectsViews = new Dictionary<ILocatable, GameObject>();
+    Dictionary<ILocatable, CityViewObjectController> builtObjectsViews = new Dictionary<ILocatable, CityViewObjectController>();
 
     private void Awake()
     {
@@ -22,7 +22,8 @@ public class CitySceneManager : Singleton<CitySceneManager>
         GameEvents.Instance.OnLocatableCreated += onNewLocatableCreated;
         GameEvents.Instance.OnLocatableLocationChanged += onLocatableLocationChanged;
         GameEvents.Instance.OnLocatableDestroyed += onLocatableDestroyed;
-        
+        GameEvents.Instance.OnLocatableStateChanged += onLocatableStateChanged;
+
         GameEvents.Instance.OnGameStateChanged += onGameStateChanged;
 
         currentProfile = profileRegistry.Get(G.GameState);
@@ -33,7 +34,8 @@ public class CitySceneManager : Singleton<CitySceneManager>
         GameEvents.Instance.OnLocatableCreated -= onNewLocatableCreated;
         GameEvents.Instance.OnLocatableLocationChanged -= onLocatableLocationChanged;
         GameEvents.Instance.OnLocatableDestroyed -= onLocatableDestroyed;
-        
+        GameEvents.Instance.OnLocatableStateChanged -= onLocatableStateChanged;
+
         GameEvents.Instance.OnGameStateChanged -= onGameStateChanged;
 
         if (G.Instance.CityRoot != null)
@@ -56,7 +58,7 @@ public class CitySceneManager : Singleton<CitySceneManager>
         G.Instance.cityViewStreetsBuilder.BuildStreets(City);
     }
 
-    private void registerNewView(ILocatable locatable, GameObject view)
+    private void registerNewView(ILocatable locatable, CityViewObjectController view)
     {
         builtObjectsViews[locatable] = view;
     }
@@ -65,7 +67,7 @@ public class CitySceneManager : Singleton<CitySceneManager>
     {
         if (builtObjectsViews.TryGetValue(locatable, out var view))
         {
-            Destroy(view);
+            Destroy(view.gameObject);
             builtObjectsViews.Remove(locatable);
         }
     }
@@ -74,7 +76,7 @@ public class CitySceneManager : Singleton<CitySceneManager>
     {
         foreach (var view in builtObjectsViews.Values)
         {
-            Destroy(view);
+            Destroy(view.gameObject);
         }
         builtObjectsViews.Clear();
     }
@@ -97,11 +99,7 @@ public class CitySceneManager : Singleton<CitySceneManager>
 
     private void onLocatableDestroyed(LocatableDestroyedEventData data)
     {
-        if(builtObjectsViews.TryGetValue(data.Locatable, out var view))
-        {
-            Destroy(view);
-            builtObjectsViews.Remove(data.Locatable);
-        }
+        clearView(data.Locatable);
     }
 
     private void onGameStateChanged(GameStateChangeEventData data)
@@ -111,6 +109,14 @@ public class CitySceneManager : Singleton<CitySceneManager>
         currentProfile = profileRegistry.Get(data.newState);
         currentProfile.OnProfileActivated(data.newState);
         rebuildSceneForState(data.newState);
+    }
+
+    private void onLocatableStateChanged(LocatableStateChangedEventData data)
+    {
+        if ( CityPositionLocator.IsInCity(data.Locatable))
+        {
+            applyProfileToObject(data.Locatable);
+        }
     }
 
     private void rebuildSceneForState(GameState state)
@@ -129,34 +135,27 @@ public class CitySceneManager : Singleton<CitySceneManager>
     private void applyProfileToObject(ILocatable locatable, GameState state)
     {
         // if rebuilding only partial views, check if the view exists
-        //if (!currentProfile.ShouldShow(locatable, state))
-        //{
-        //    clearView(locatable);
-        //    return;
-        //}
-
-        // if the profile says not to show, skip
         if (!currentProfile.ShouldShow(locatable, state))
         {
+            clearView(locatable);
             return;
         }
 
-        var visualState = currentProfile.GetObjectVisualState(locatable, state);
+        var visualState = currentProfile.GetObjectViewState(locatable, state);
 
-        GameObject view = null;
-
-        switch (visualState)
+        if (builtObjectsViews.TryGetValue(locatable, out var existingView))
         {
-            case CityObjectVisualState.Normal:
-                view = G.Instance.cityViewObjectBuilder.BuildObject(locatable);
-                break;
-            case CityObjectVisualState.Disabled:
-                view = G.Instance.cityViewObjectBuilder.BuildObjectDisabled(locatable);
-                break;
-            default:
-                break;
+            // update existing view
+            existingView.SetViewState(visualState);
+            return;
         }
-        registerNewView(locatable,view);
+        else
+        {
+
+            CityViewObjectController view = G.Instance.cityViewObjectBuilder.BuildObject(locatable);
+            view.SetViewState(visualState);
+            registerNewView(locatable, view);
+        }
     }
 
     private void applyProfileToObject(ILocatable locatable)

@@ -33,7 +33,6 @@ public class InteractionController : Singleton<InteractionController>
             triggerable.OnTriggerEntered += OnTriggerEntered;
         }
     }
-
     
 
     public void UnregisterInteractable(Interactable interactable)

@@ -5,8 +5,9 @@ public class CityViewObjectBuilder : ScriptableObject
 {
     public GameObject carViewPrefab;
     public GameObject warehouseViewPrefab;
+    public GameObject buyerViewPrefab;
 
-    public GameObject BuildObject(object cityObject)
+    public CityViewObjectController BuildObject(object cityObject)
     {
         switch(cityObject)
         {
@@ -14,44 +15,53 @@ public class CityViewObjectBuilder : ScriptableObject
                 return buildCar(car);
             case Warehouse warehouse:
                 return buildWarehouse(warehouse);
+            case Buyer buyer:
+                return BuildBuyer(buyer);
             default:
                 Debug.LogError($"No builder for city object of type {cityObject.GetType().Name}");
                 return null;
         }
     }
 
-    public GameObject BuildObjectDisabled(object cityObject)
+    public CityViewObjectController BuildBuyer(Buyer buyer)
     {
-        var objGO = BuildObject(cityObject);
-        if (objGO != null)
-        {
-            var spriteRenderers = objGO.GetComponentsInChildren<SpriteRenderer>();
-            foreach (var spriteRenderer in spriteRenderers)
-            {
-                spriteRenderer.color = Color.gray;
-            }
-        }
-        return objGO;
+        GameObject buyerGO = Instantiate(buyerViewPrefab);
+        var location = CityPositionLocator.GetCityLocation(buyer);
+        var viewController =
+            buyerGO.AddComponent<CityViewObjectController>().Initialize(buyer, ViewObjectVisualState.Normal, true);
+        buyerGO.AddComponent<ContentProvider>().Initialize(buyer);
+        buyerGO.AddComponent<Interactable>();
+        buyerGO.AddComponent<ViewStateChanger>();
+        return viewController;
     }
 
-    public GameObject buildCar(Car car)
+    public CityViewObjectController buildCar(Car car)
     {
         GameObject carGO = Instantiate(carViewPrefab);
+        
         var location = G.Instance.ProductLocationService.GetProductLocation(car) as City.CityLocation;
+
         carGO.AddComponent<ProductView>().Initialize(car, location);
+        var viewController = 
+            carGO.AddComponent<CityViewObjectController>().Initialize(car);
         carGO.AddComponent<ContentProvider>().Initialize(car);
         carGO.AddComponent<DragInteractable>().sortingOrder = 10;
+        carGO.AddComponent<DragDisabler>();
+        carGO.AddComponent<ViewStateChanger>();
         carGO.AddComponent<MovingPoint>().Initialize(location);
         carGO.GetComponentInChildren<SpriteRenderer>().color = car.CarFrame.runtimeConfig.FrameColor;
-        return carGO;
+        return viewController;
     }
 
-    public GameObject buildWarehouse(Warehouse warehouse)
+    public CityViewObjectController buildWarehouse(Warehouse warehouse)
     {
         var location = World.Instance.City.Locations[warehouse];
         GameObject warehouseGO = Instantiate(warehouseViewPrefab, location.CityPosition.WorldPosition,Quaternion.identity);
+        var viewController =
+            warehouseGO.AddComponent<CityViewObjectController>().Initialize(warehouse);
+        warehouseGO.AddComponent<ViewStateChanger>();
         warehouseGO.AddComponent<Interactable>();
         warehouseGO.AddComponent<ContentProvider>().Initialize(warehouse);
-        return warehouseGO;
+        return viewController;
     }
 }

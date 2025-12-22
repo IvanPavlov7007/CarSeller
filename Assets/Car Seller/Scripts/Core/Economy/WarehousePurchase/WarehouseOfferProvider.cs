@@ -15,6 +15,15 @@ public class WarehouseOfferProvider : IOfferProvider<WarehouseOffer>
         offers.Remove(offer.Warehouse);
     }
 
+    public WarehouseOffer GetOfferForWarehouse(Warehouse warehouse)
+    {
+        if (offers.TryGetValue(warehouse, out var offer))
+        {
+            return offer;
+        }
+        return null;
+    }
+
     List<WarehouseOffer> IOfferProvider<WarehouseOffer>.GetOffers()
     {
         return offers.Values.ToList<WarehouseOffer>();

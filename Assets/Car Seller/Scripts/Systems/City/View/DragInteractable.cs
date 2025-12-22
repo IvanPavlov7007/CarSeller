@@ -6,8 +6,10 @@ using UnityEngine;
 /// Interactable that can be dragged and provides drag direction
 /// </summary>
 ///
-public class DragInteractable : Interactable, IDirectionProvider
+public class DragInteractable : Interactable, IDirectionProvider, IActivatable
 {
+
+    bool active = true;
     bool dragging = false;
 
     [ShowInInspector]
@@ -33,6 +35,8 @@ public class DragInteractable : Interactable, IDirectionProvider
 
     protected override void OnCursorDragStart()
     {
+        if (!active)
+            return;
         base.OnCursorDragStart();
         ProvidedDirection = Vector2.zero;
         dragging = true;
@@ -43,5 +47,28 @@ public class DragInteractable : Interactable, IDirectionProvider
         base.OnCursorDragEnd();
         dragging = false;
         ProvidedDirection = Vector2.zero;
+    }
+
+    public void Activate()
+    {
+        active = true;
+    }
+
+    public void Deactivate()
+    {
+        active = false;
+        OnCursorDragEnd();
+    }
+
+    public void SetActive(bool active)
+    {
+        if (active)
+        {
+            Activate();
+        }
+        else
+        {
+            Deactivate();
+        }
     }
 }

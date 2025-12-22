@@ -30,6 +30,7 @@ public class GameEvents
     public Action<ProductCreatedEventData> OnProductCreated;
     public Action<ProductDestroyedEventData> OnProductDestroyed;
 
+    public Action<LocatableStateChangedEventData> OnLocatableStateChanged;
     public Action<LocatableCreatedEventData> OnLocatableCreated;
     public Action<LocatableDestroyedEventData> OnLocatableDestroyed;
     public Action<LocatableLocationChangedEventData> OnLocatableLocationChanged;

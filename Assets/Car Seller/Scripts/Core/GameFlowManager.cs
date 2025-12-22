@@ -58,9 +58,9 @@ public class GameFlowManager : RoutinedObject
             // Player succeeded — apply selling transaction and move to the warehouse
             onSucceed: (_) =>
             {
-                Transaction selling = offer.Accept();
+                Transaction sellingTransaction = offer.Accept();
 
-                var result = G.TransactionProcessor.Process(selling);
+                var result = G.TransactionProcessor.Process(sellingTransaction);
                 if(result.Type != TransactionResultType.Success)
                 {
                     Debug.LogError("Failed to process stealing transaction during selling sequence.");

@@ -8,7 +8,7 @@ public class UIElement : IInteractionContent
     public List<UIElement> Children;
     public string Text;
     public string info;
-    public Sprite Icon;
+    public Sprite Image;
     public bool IsInteractable = true;
     public bool closePopupOnClick = true;
     public bool blockingInput = true;

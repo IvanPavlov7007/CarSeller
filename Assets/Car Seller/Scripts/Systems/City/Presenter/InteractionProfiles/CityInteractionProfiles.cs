@@ -5,324 +5,300 @@ using System.Linq;
 using UnityEngine;
 
 
-
-public abstract class CityContextMenuContentProfile : IInteractionContentProfile<UIElement>
+public class ContextMenuContext : IInteractionContext
 {
-    public UIElement GenerateContent(object model, IInteractionContext context)
+    public GameState GameState;
+}
+
+public class CityContextMenuContentProfile : IInteractionContentProfile<UIElement, ContextMenuContext>
+{
+    public UIElement GenerateContent(object model, ContextMenuContext context)
+    {
+        Debug.Assert(context != null);
+        Debug.Assert(model != null);
+
+        switch (context.GameState)
+        {
+            case NeutralGameState normalState:
+                return generateNormalContent(normalState, model);
+            case StealingGameState stealingState:
+                return generateStealingContent(stealingState, model);
+            case SellingGameState sellingState:
+                return generateSellingContent(sellingState, model);
+            default:
+                Debug.LogError("Unknown context for generating content");
+                return null;
+        }
+    }
+    // Content-independent
+    private UIElement generateGenericCityObjectContent(CityObject cityObject)
+    {
+        UIElement content = new UIElement
+        {
+            Type = UIElementType.Container,
+            Children = new List<UIElement>()
+                {
+                    CTX_Menu_Tools.Header(cityObject.Name),
+                    CTX_Menu_Tools.Description(cityObject.InfoText),
+                }
+        };
+        return content;
+    }
+
+    // Neutral
+    private UIElement generateNormalContent(NeutralGameState neutralGameState, object model)
     {
         switch (model)
         {
             case Car car:
-                return generateCarContent(car);
+                return generateNormalCarContent(neutralGameState, car);
             case Warehouse warehouse:
-                return generateWarehouseContent(warehouse);
+                return generateNormalWarehouseContent(neutralGameState, warehouse);
             case CityObject cityObject:
-                return generateCityObjectContent(cityObject);
+                return generateGenericCityObjectContent(cityObject);
             default:
                 Debug.LogError($"CityInteractionManager: Unsupported model type {model.GetType()}");
                 return null;
         }
     }
-    public virtual UIElement generateCityObjectContent(CityObject cityObject)
+    private UIElement generateNormalCarContent(NeutralGameState neutralGameState,Car car)
     {
         UIElement content = new UIElement
         {
             Type = UIElementType.Container,
-            Children = new List<UIElement>()
+            Children = CTX_Menu_Tools.CarBaseInfoElements(car).Concat(
+            new List<UIElement>()
                 {
-                    new UIElement
-                    {
-                        Type = UIElementType.Text,
-                        Text = cityObject.Name,
-                        Style = "header"
-                    },
-                    new UIElement
-                    {
-                        Type = UIElementType.Text,
-                        Text = cityObject.InfoText,
-                    },
-                }
-        };
-        return content;
-    }
-
-    protected abstract UIElement generateCarContent(Car car);
-    protected abstract UIElement generateWarehouseContent(Warehouse warehouse);
-}
-
-public class NormalCityContextMenuContentProfile : CityContextMenuContentProfile
-{
-
-    protected override UIElement generateCarContent(Car car)
-    {
-        var closesWarehouse = getClosestWarehouse(car, out float distance);
-        bool carNearWarehouse = distance < 0.5f;
-
-        UIElement content = new UIElement
-        {
-            Type = UIElementType.Container,
-            Children = new List<UIElement>()
-                {
-                    new UIElement
-                    {
-                        Type = UIElementType.Text,
-                        Text = $"Car: {car.Name}"
-                    },
                     new UIElement
                     {
                         Type = UIElementType.Button,
-                        Text = "Put inside warehouse",
-                        IsInteractable = carNearWarehouse,
-                        UnavailabilityReason = carNearWarehouse ? null : "Car is too far from warehouse",
+                        Text = "Steal",
+                        IsInteractable = true,
                         OnClick = () =>
                         {
-                            G.Instance.CityActionService.PutCarInsideWarehouse(car, closesWarehouse);
+                            G.Instance.GameFlowManager.StealCar(car);
                         }
                     },
                 }
+            ).ToList()
         };
-
         return content;
-
     }
-
-    private Warehouse getClosestWarehouse(Car car, out float distance)
+    private UIElement generateNormalWarehouseContent(NeutralGameState neutralGameState,Warehouse warehouse)
     {
+        var warehouseOffer = G.Economy.WarehouseOfferProvider.GetOfferForWarehouse(warehouse);
 
-
-        var city = World.Instance.City;
-        Debug.Assert(city.Locations.ContainsKey(car), "CityInteractionManager: Car position not found in city positions");
-        Vector2 carPosition = city.Locations[car].CityPosition.WorldPosition;
-        Dictionary<Warehouse, float> warehouseDistances = new Dictionary<Warehouse, float>();
-        foreach (var obj in city.Locations.Keys)
+        // Build children list
+        var elementsList = CTX_Menu_Tools.WarehouseBaseInfoElements(warehouse);
+        if(warehouseOffer != null)
         {
-            if (obj is not Warehouse)
-                continue;
-            var warehousePosition = city.Locations[obj].CityPosition.WorldPosition;
-            warehouseDistances.Add(obj as Warehouse, Vector2.Distance(warehousePosition, carPosition));
+            elementsList.AddRange(CTX_Menu_Tools.WarehousePurchaseElements(warehouseOffer));
         }
-        warehouseDistances = warehouseDistances.OrderBy(kv => kv.Value).ToDictionary(kv => kv.Key, kv => kv.Value);
-        distance = warehouseDistances.First().Value;
-        return warehouseDistances.First().Key;
-    }
-    protected override UIElement generateWarehouseContent(Warehouse warehouse)
-    {
-        var closestCar = getClosestCar(warehouse, out float distance);
-        bool carNearWarehouse = distance < 0.5f;
-
-        UIElement content = new UIElement
+        else // No offer, already owned
         {
-            Type = UIElementType.Container,
-            Children = new List<UIElement>()
+            elementsList.Add(new UIElement
+            {
+                Type = UIElementType.Button,
+                Text = "Enter",
+                OnClick = () =>
                 {
-                    new UIElement
-                    {
-                        Type = UIElementType.Text,
-                        Text = $"Warehouse: {warehouse.Config.DisplayName}"
-                    },
-                    new UIElement
-                    {
-                        Type = UIElementType.Button,
-                        Text = "Open",
-                        OnClick = () =>
-                        {
-                            G.Instance.GameFlowController.EnterWarehouse(warehouse);
-                        },
-                    },
-                    new UIElement
-                    {
-                        Type = UIElementType.Button,
-                        Text = "Put closest car inside",
-                        IsInteractable = carNearWarehouse,
-                        UnavailabilityReason = carNearWarehouse ? null : "No car near warehouse",
-                        OnClick = () =>
-                        {
-                            G.Instance.CityActionService.PutCarInsideWarehouse(closestCar, warehouse);
-                        }
-                    },
-                }
-        };
-        return content;
-    }
-
-    private Car getClosestCar(Warehouse warehouse, out float distance)
-    {
-        var city = World.Instance.City;
-        Vector2 warehousePosition = city.Locations[warehouse].CityPosition.WorldPosition;
-        Dictionary<Car, float> carDistances = new Dictionary<Car, float>();
-        foreach (var obj in city.Locations.Keys)
-        {
-            if (obj is not Car)
-                continue;
-            var carPosition = city.Locations[obj].CityPosition.WorldPosition;
-            carDistances.Add(obj as Car, Vector2.Distance(carPosition, warehousePosition));
+                    G.Instance.GameFlowController.EnterWarehouse(warehouse);
+                },
+            });
         }
 
 
-        if (carDistances.Count == 0)
+            UIElement content = new UIElement
+            {
+                Type = UIElementType.Container,
+                Children = elementsList.ToList()
+            };
+        return content;
+    }
+
+    // Stealing
+    private UIElement generateStealingContent(StealingGameState stealingGameState, object model)
+    {
+        switch (model)
         {
-            distance = float.MaxValue;
-            return null;
+            case Car car:
+                return generateStealingCarContent(stealingGameState,car);
+            case Warehouse warehouse:
+                return generateStealingWarehouseContent(stealingGameState,warehouse);
+            case CityObject cityObject:
+                return generateGenericCityObjectContent(cityObject);
+            default:
+                Debug.LogError($"CityInteractionManager: Unsupported model type {model.GetType()}");
+                return null;
         }
-        carDistances = carDistances.OrderBy(kv => kv.Value).ToDictionary(kv => kv.Key, kv => kv.Value);
-        distance = carDistances.First().Value;
-        return carDistances.First().Key;
     }
-}
-
-public class StealingCityContextMenuContentProfile : CityContextMenuContentProfile
-{
-    protected override UIElement generateCarContent(Car car)
+    private UIElement generateStealingCarContent(StealingGameState stealingGameState, Car car)
     {
-        UIElement content = new UIElement
+        var elementsList = CTX_Menu_Tools.CarBaseInfoElements(car);
+        if(stealingGameState.StealingCar == car)
+        {
+            elementsList.Add(CTX_Menu_Tools.Hint("This is the car you are currently stealing. Find a warehouse to store it in."));
+            elementsList.Add(CTX_Menu_Tools.CancelButton());
+        }
+        else
+        {
+            elementsList.Add(CTX_Menu_Tools.Hint("You are already stealing another car. Find a warehouse to store it in before stealing another."));
+        }
+
+        var content = new UIElement
         {
             Type = UIElementType.Container,
-            Children = new List<UIElement>()
-                {
-                    new UIElement
-                    {
-                        Type = UIElementType.Text,
-                        Text = $"Car: {car.Name}"
-                    },
-                }
+            Children = elementsList.ToList()
         };
         return content;
     }
-    protected override UIElement generateWarehouseContent(Warehouse warehouse)
+    private UIElement generateStealingWarehouseContent(StealingGameState stealingGameState, Warehouse warehouse)
     {
+        var warehouseOffer = G.Economy.WarehouseOfferProvider.GetOfferForWarehouse(warehouse);
+
+        // Build children list
+        var elementsList = CTX_Menu_Tools.WarehouseBaseInfoElements(warehouse);
+        if (warehouseOffer != null)
+        {
+            elementsList.AddRange(CTX_Menu_Tools.WarehousePurchaseElements(warehouseOffer));
+        }
+        else // No offer, already owned
+        {
+            elementsList.Add(
+                CTX_Menu_Tools.Hint(warehouse.AvailableCarParkingSpots > 0 ? 
+                "Ride into this warehouse to complete your car-theft" : 
+                "Not enough space to store an additional auto"));
+        }
+
         UIElement content = new UIElement
         {
             Type = UIElementType.Container,
-            Children = new List<UIElement>()
-                {
-                    new UIElement
-                    {
-                        Type = UIElementType.Text,
-                        Text = $"Warehouse: {warehouse.Config.DisplayName}"
-                    },
-                }
+            Children = elementsList.ToList()
+        };
+        return content;
+    }
+
+    // Selling
+    private UIElement generateSellingContent(SellingGameState sellingState, object model)
+    {
+        switch (model)
+        {
+            case Car car:
+                return generateSellingCarContent(sellingState, car);
+            case Warehouse warehouse:
+                return generateSellingWarehouseContent(sellingState, warehouse);
+            case CityObject cityObject:
+                return generateGenericCityObjectContent(cityObject);
+            default:
+                Debug.LogError($"CityInteractionManager: Unsupported model type {model.GetType()}");
+                return null;
+        }
+    }
+    private UIElement generateSellingWarehouseContent(SellingGameState sellingState, Warehouse warehouse)
+    {
+        // Build children list
+        var elementsList = CTX_Menu_Tools.WarehouseBaseInfoElements(warehouse);
+        UIElement content = new UIElement
+        {
+            Type = UIElementType.Container,
+            Children = elementsList.ToList()
+        };
+        return content;
+    }
+    private UIElement generateSellingCarContent(SellingGameState sellingState, Car car)
+    {
+        var elementsList = CTX_Menu_Tools.CarBaseInfoElements(car);
+        elementsList.Add(CTX_Menu_Tools.Hint("This is the car you are currently selling. Bring it to the buyer."));
+        elementsList.Add(CTX_Menu_Tools.CancelButton());
+
+        var  content = new UIElement
+        {
+            Type = UIElementType.Container,
+            Children = elementsList.ToList()
         };
         return content;
     }
 }
 
-public class SellingCityContextMenuContentProfile : CityContextMenuContentProfile
+
+public class TriggerContext : IInteractionContext
 {
-    protected override UIElement generateCarContent(Car car)
+    public readonly GameState GameState;
+    public readonly ContentProvider TriggerCause;
+    public TriggerContext(GameState gameState, ContentProvider triggerCause)
     {
-        UIElement content = new UIElement
+        GameState = gameState;
+        TriggerCause = triggerCause;
+    }
+}
+
+public class TriggerAction : IInteractionContent
+{
+    public TriggerAction()
+    {
+        CanProceed = false;
+        Action = null;
+    }
+
+    public TriggerAction(bool canProceed, Action action)
+    {
+        CanProceed = canProceed;
+        Action = action;
+    }
+
+    public bool CanProceed { get; private set; } = false;
+    public Action Action { get; private set; }
+}
+
+public class InteractionTriggerProfile : IInteractionContentProfile<TriggerAction, TriggerContext>
+{
+    public TriggerAction GenerateContent(object model, TriggerContext context)
+    {
+        switch (context.GameState)
         {
-            Type = UIElementType.Container,
-            Children = new List<UIElement>()
-                {
-                    new UIElement
-                    {
-                        Type = UIElementType.Text,
-                        Text = $"Car: {car.Name}"
-                    },
-                }
-        };
-        return content;
+            case NeutralGameState normalState:
+                return generateNormalTriggerAction(normalState, model, context.TriggerCause.Model);
+            case StealingGameState stealingState:
+                return generateStealingTriggerAction(stealingState,model,context.TriggerCause.Model);
+            case SellingGameState sellingState:
+                return generateSellingTriggerAction(sellingState, model, context.TriggerCause.Model);
+            default:
+                Debug.LogWarning($"CityInteractionManager: Unsupported game state type {context.GameState.GetType()}");
+                return new TriggerAction();
+        }
     }
-    protected override UIElement generateWarehouseContent(Warehouse warehouse)
+
+    private TriggerAction generateSellingTriggerAction(SellingGameState sellingState, object trigger, object triggerCause)
     {
-        UIElement content = new UIElement
+        Debug.Assert(sellingState.SellingCar != null, "SellingCityInteractionTriggerProfile: SellingCar is null");
+        Debug.Assert(sellingState.Buyer != null, "SellingCityInteractionTriggerProfile: Buyer is null");
+
+        return new TriggerAction(
+            (trigger as Buyer == sellingState.Buyer) && (triggerCause as Car == sellingState.SellingCar),
+            () => GameEvents.Instance.OnPlayerSucceed(new PlayerActionEventData(PlayerOutcome.Succeeded, null))
+            );
+    }
+
+    public TriggerAction generateNormalTriggerAction(NeutralGameState neutralState, object trigger, object triggerCause)
+    {
+        Debug.LogWarning("InteractionTriggerProfile: No trigger actions defined in normal city state");
+        return new TriggerAction();
+    }
+
+    public TriggerAction generateStealingTriggerAction(StealingGameState stealingState, object trigger, object triggerCause)
+    {
+        bool canProceed = false;
+        Action triggerAction = null;
+
+        var warehouse = trigger as Warehouse;
+        Debug.Assert(warehouse != null, "StealingCityInteractionTriggerProfile: trigger is not Warehouse");
+        Debug.Assert(stealingState.StealingCar != null, "StealingCityInteractionTriggerProfile: StealingCar is null");
+
+        canProceed = warehouse.AvailableCarParkingSpots > 0 && (triggerCause as Car == stealingState.StealingCar);
+        triggerAction = () =>
         {
-            Type = UIElementType.Container,
-            Children = new List<UIElement>()
-                {
-                    new UIElement
-                    {
-                        Type = UIElementType.Text,
-                        Text = $"Warehouse: {warehouse.Config.DisplayName}"
-                    },
-                }
+            GameEvents.Instance.OnPlayerSucceed(new PlayerActionEventData(PlayerOutcome.Succeeded, warehouse));
         };
-        return content;
+        return new TriggerAction(canProceed, triggerAction);
     }
-}
-
-
-
-public abstract class InteractionTriggerProfile
-{
-    public abstract bool CanProceed(GameState gameState, ContentProvider trigger, ContentProvider triggerCause);
-    public override void Execute(GameState gameState, ContentProvider trigger, ContentProvider triggerCause);
-}
-
-public class NormalCityInteractionTriggerProfile : InteractionTriggerProfile
-{
-    public override bool CanProceed(GameState gameState, ContentProvider trigger, ContentProvider triggerCause)
-    {
-        Debug.LogWarning("NormalCityInteractionTriggerProfile: No trigger actions defined in normal city state");
-        return false;
-    }
-    public override void Execute(GameState gameState, ContentProvider trigger, ContentProvider triggerCause)
-    {
-        // No-op
-    }
-}
-
-public class StealingCityInteractionTriggerProfile : InteractionTriggerProfile
-{
-    public override bool CanProceed(GameState gameState, ContentProvider trigger, ContentProvider triggerCause)
-    {
-        Debug.Assert(gameState is StealingGameState);
-
-        var stealingData = gameState as StealingGameState;
-        var warehouse = trigger.Model as Warehouse;
-
-        return warehouse != null && warehouse.AvailableCarParkingSpots > 0 && (triggerCause.Model as Car == stealingData.StealingCar);
-        
-    }
-
-    public override void Execute(GameState gameState, ContentProvider trigger, ContentProvider triggerCause)
-    {
-        var stealingState = gameState as StealingGameState;
-        GameEvents.Instance.OnPlayerSucceed(new PlayerActionEventData(PlayerOutcome.Succeeded, trigger.Model as Warehouse));
-    }
-}
-
-public class SellingCityInteractionTriggerProfile : InteractionTriggerProfile
-{
-    public override bool CanProceed(GameState gameState, ContentProvider trigger, ContentProvider triggerCause)
-    {
-        var sellingState = gameState as SellingGameState;
-
-        return (trigger.Model as Buyer == sellingState.Buyer) && (triggerCause.Model as Car == sellingState.SellingCar);
-
-    }
-    public override void Execute(GameState gameState, ContentProvider trigger, ContentProvider triggerCause)
-    {
-        GameEvents.Instance.OnPlayerSucceed(new PlayerActionEventData(PlayerOutcome.Succeeded, null));
-    }
-}
-
-
-public sealed class CityInteractionProfileRegistry
-{
-    private readonly Dictionary<Type, CityContextMenuContentProfile> _ContextMenuProfiles;
-    private readonly Dictionary<Type, InteractionTriggerProfile> _TriggerProfiles;
-
-    public CityInteractionProfileRegistry()
-    {
-        _ContextMenuProfiles = new()
-        {
-            { typeof(NeutralGameState), new NormalCityContextMenuContentProfile() },
-            { typeof(StealingGameState), new StealingCityContextMenuContentProfile() },
-            { typeof(SellingGameState), new SellingCityContextMenuContentProfile() },
-        };
-        _TriggerProfiles = new()
-        {
-            { typeof(NeutralGameState), new NormalCityInteractionTriggerProfile() },
-            { typeof(StealingGameState), new StealingCityInteractionTriggerProfile() },
-            { typeof(SellingGameState), new SellingCityInteractionTriggerProfile() },
-        };
-    }
-
-    public CityContextMenuContentProfile GetContextMenuProfile(GameState state)
-        => _ContextMenuProfiles[state.GetType()];
-
-    public InteractionTriggerProfile GetTriggerProfile(GameState state)
-        => _TriggerProfiles[state.GetType()];
 }

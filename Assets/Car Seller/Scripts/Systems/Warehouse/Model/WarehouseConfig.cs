@@ -1,11 +1,15 @@
 ﻿using System;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "WarehouseConfig", menuName = "Configs/Economy/WarehouseConfig")]
 public class WarehouseConfig : SerializedScriptableObject
 {
     public string DisplayName;
+
+    public Sprite image;
+    public string SizeCategory = "Small garage";
 
     public string SceneToLoad;
 

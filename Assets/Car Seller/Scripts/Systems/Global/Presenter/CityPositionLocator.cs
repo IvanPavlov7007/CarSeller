@@ -1,7 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public static class CityPositionLocator
 {
+    public static bool IsInCity(ILocatable locatable)
+    {
+        return G.City.Locations.ContainsKey(locatable);
+    }
+
     public static Warehouse GetWarehouse(Car car)
     {
         var warehouse = G.Instance.ProductLocationService.GetProductLocation(car) as Warehouse;
@@ -25,5 +33,54 @@ public static class CityPositionLocator
             return G.City.Locations[car];
         }
         return GetWarehouseLocation(warehouse);
+    }
+
+    public static Warehouse GetClosestWarehouse(Car car, out float distance)
+    {
+
+
+        var city = World.Instance.City;
+        Debug.Assert(city.Locations.ContainsKey(car), "CityInteractionManager: Car position not found in city positions");
+        Vector2 carPosition = city.Locations[car].CityPosition.WorldPosition;
+        Dictionary<Warehouse, float> warehouseDistances = new Dictionary<Warehouse, float>();
+        foreach (var obj in city.Locations.Keys)
+        {
+            if (obj is not Warehouse)
+                continue;
+            var warehousePosition = city.Locations[obj].CityPosition.WorldPosition;
+            warehouseDistances.Add(obj as Warehouse, Vector2.Distance(warehousePosition, carPosition));
+        }
+        warehouseDistances = warehouseDistances.OrderBy(kv => kv.Value).ToDictionary(kv => kv.Key, kv => kv.Value);
+        distance = warehouseDistances.First().Value;
+        return warehouseDistances.First().Key;
+    }
+
+    public static Car GetClosestCar(Warehouse warehouse, out float distance)
+    {
+        var city = World.Instance.City;
+        Vector2 warehousePosition = city.Locations[warehouse].CityPosition.WorldPosition;
+        Dictionary<Car, float> carDistances = new Dictionary<Car, float>();
+        foreach (var obj in city.Locations.Keys)
+        {
+            if (obj is not Car)
+                continue;
+            var carPosition = city.Locations[obj].CityPosition.WorldPosition;
+            carDistances.Add(obj as Car, Vector2.Distance(carPosition, warehousePosition));
+        }
+
+
+        if (carDistances.Count == 0)
+        {
+            distance = float.MaxValue;
+            return null;
+        }
+        carDistances = carDistances.OrderBy(kv => kv.Value).ToDictionary(kv => kv.Key, kv => kv.Value);
+        distance = carDistances.First().Value;
+        return carDistances.First().Key;
+    }
+
+    public static ILocation GetCityLocation(Buyer buyer)
+    {
+        return G.City.Locations[buyer];
     }
 }

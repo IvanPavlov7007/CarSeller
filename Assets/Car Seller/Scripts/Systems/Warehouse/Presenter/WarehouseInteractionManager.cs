@@ -83,80 +83,108 @@ public class WarehouseInteractionManager : IInteractionManager
             draggedProduct = productView.Product;
         }
     }
-    public class WarehouseContextMenuContentProfile : IInteractionContentProfile<UIElement>, IProductViewBuilder<UIElement>
+
+    public void OnTriggerEntered(ContentProvider trigger, ContentProvider triggerCause)
     {
-        public UIElement BuildCar(Car car)
+        Debug.LogError("WarehouseInteractionManager: OnTriggerEntered is not implemented");
+    }
+
+    public class WarehouseContextMenuContentProfile : IInteractionContentProfile<UIElement, ContextMenuContext>
+    {
+        ProductContextMenuContentBuilder productContextMenuContentBuilder = new ProductContextMenuContentBuilder();
+
+        public UIElement GenerateContent(object model, ContextMenuContext context)
         {
-            UIElement element = new UIElement()
+
+            switch(context.GameState)
             {
-                Type = UIElementType.Container,
-                Children = new List<UIElement>()
-                {
-                    new UIElement()
-                    {
-                        Type = UIElementType.Text,
-                        Text = car.Name,
-                        Style = "header"
-                    },
-                    new UIElement()
-                    {
-                        Type = UIElementType.Button,
-                        Text = "Disassemble",
-                        IsInteractable = G.Instance.CarMechanicService.CanDisassembleCar(car),
-                        OnClick = () =>
-                        {
-                            G.Instance.CarMechanicService.DisassembleCar(WarehouseSceneManager.SceneWarehouseModel, car);
-                        },
-                        UnavailabilityReason = "Car has nothing to disassemble"
-                    }
-                    ,new UIElement()
-                    {
-                        Type = UIElementType.Button,
-                        Text = "Ride",
-                        IsInteractable = car.IsComplete(),
-                        UnavailabilityReason = "Some car part's are missing",
-                        OnClick = () =>
-                        {
-                            G.Instance.CarMechanicService.RideCarFromWarehouse(car,WarehouseSceneManager.SceneWarehouseModel);
-                        }
-                    }
-                }
-            };
-            return element;
+                case NeutralGameState neutralGameState:
+                    return generateNormalContent(neutralGameState, model);
+                default:
+                    Debug.LogWarning("No context menu available for game state type " + context.GameState.GetType() + " in this content profile " + this);
+                    return null;
+            }
+
         }
 
-        public UIElement BuildCarFrame(CarFrame carFrame)
-        {
-            return null;
-        }
-
-        public UIElement BuildEngine(Engine engine)
-        {
-            return null;
-        }
-
-        public UIElement BuildSpoiler(Spoiler spoiler)
-        {
-            return null;
-        }
-
-        public UIElement BuildWheel(Wheel wheel)
-        {
-            return null;
-        }
-
-        public UIElement GenerateContent(object model, IInteractionContext context)
+        private UIElement generateNormalContent(NeutralGameState neutralGameState, object model)
         {
             switch (model)
             {
                 case Product product:
-                    return product.GetRepresentation(this);
+                    return product.GetRepresentation(productContextMenuContentBuilder);
                 default:
                     Debug.LogWarning("No context menu available for model type " + model.GetType() + " in this content profile " + this);
                     return null;
             }
         }
-    }
 
+        class ProductContextMenuContentBuilder : IProductViewBuilder<UIElement>
+        {
+            public UIElement BuildCar(Car car)
+            {
+                var elementsList = CTX_Menu_Tools.CarBaseInfoElements(car);
+                elementsList.Add(new UIElement()
+                {
+                    Type = UIElementType.Button,
+                    Text = "Disassemble",
+                    IsInteractable = G.Instance.CarMechanicService.CanDisassembleCar(car),
+                    OnClick = () =>
+                    {
+                        G.Instance.CarMechanicService.DisassembleCar(WarehouseSceneManager.SceneWarehouseModel, car);
+                    },
+                    UnavailabilityReason = "Car has nothing to disassemble"
+                });
+                elementsList.Add(new UIElement()
+                {
+                    Type = UIElementType.Button,
+                    Text = "Sell",
+                    IsInteractable = car.IsComplete(),
+                    OnClick = () =>
+                    {
+                        G.Instance.GameFlowManager.SellCar( G.Economy.CarSellOfferProvider.GetOfferByCar(car));
+                    },
+                    UnavailabilityReason = "Some car part's are missing"
+                });
+                //elementsList.Add(new UIElement()
+                //{
+                //    Type = UIElementType.Button,
+                //    Text = "Ride",
+                //    IsInteractable = car.IsComplete(),
+                //    UnavailabilityReason = "Some car part's are missing",
+                //    OnClick = () =>
+                //    {
+                //        G.Instance.CarMechanicService.RideCarFromWarehouse(car, WarehouseSceneManager.SceneWarehouseModel);
+                //    }
+                //});                
+                return new UIElement()
+                {
+                    Type = UIElementType.Container,
+                    Children = elementsList
+                };
+            }
+
+            public UIElement BuildCarFrame(CarFrame carFrame)
+            {
+                return null;
+            }
+
+            public UIElement BuildEngine(Engine engine)
+            {
+                return null;
+            }
+
+            public UIElement BuildSpoiler(Spoiler spoiler)
+            {
+                return null;
+            }
+
+            public UIElement BuildWheel(Wheel wheel)
+            {
+                return null;
+            }
+        }
+
+    }
 }
 

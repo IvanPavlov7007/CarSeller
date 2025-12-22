@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static StealingCityInteractionTriggerProfile;
 
 public class CityInteractionManager : IInteractionManager
 {
-    CityInteractionProfileRegistry interactionProfileRegistry = new CityInteractionProfileRegistry();
 
-    CityContextMenuContentProfile currentContextMenuProfile;
-     InteractionTriggerProfile currentTriggerProfile;
-
+    CityContextMenuContentProfile contextMenuProfile = new CityContextMenuContentProfile();
+    InteractionTriggerProfile triggerProfile = new InteractionTriggerProfile();
 
     public void OnDragEnd(Interactable interactable)
     {
@@ -23,20 +20,30 @@ public class CityInteractionManager : IInteractionManager
     public void OnProductViewClick(Interactable interactable)
     {
         var contentProvider = interactable.GetComponent<ContentProvider>();
-        var content = contentProvider.ProvideContent(currentContextMenuProfile, null);
+        var content = contentProvider.ProvideContent(contextMenuProfile, null);
         if(content != null)
             ContextMenuManager.Instance.CreateContextMenu(interactable.gameObject, content);
     }
 
     public void OnTriggerEntered(ContentProvider trigger, ContentProvider triggerCause)
     {
-        if (currentTriggerProfile.CanProceed(G.GameState, trigger, triggerCause))
-            currentTriggerProfile.Execute(G.GameState, trigger, triggerCause);
-    }
-
-    public void OnGameStateChanged(GameStateChangeEventData data)
-    {
-        currentContextMenuProfile = interactionProfileRegistry.GetContextMenuProfile(data.newState);
-        currentTriggerProfile = interactionProfileRegistry.GetTriggerProfile(data.newState);
+        TriggerContext context = new TriggerContext(G.GameState, triggerCause);
+        TriggerAction triggerAction = trigger.ProvideContent(triggerProfile, context);
+        if(triggerAction == null)
+        {
+            Debug.LogError("CityInteractionManager: TriggerAction is null");
+        }
+        else
+        {
+            if(triggerAction.CanProceed)
+            {
+                if(triggerAction.Action == null)
+                {
+                    Debug.LogError("CityInteractionManager: TriggerAction.Action is null");
+                    return;
+                }
+                triggerAction.Action.Invoke();
+            }
+        }
     }
 }

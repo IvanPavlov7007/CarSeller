@@ -42,6 +42,6 @@ public class CarSellOffer : IOffer
 
     public bool CanAccept()
     {
-        return true;
+        return !Accepted;
     }
 }

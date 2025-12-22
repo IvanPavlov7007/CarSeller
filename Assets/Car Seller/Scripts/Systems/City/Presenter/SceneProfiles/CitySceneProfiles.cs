@@ -1,18 +1,25 @@
 ﻿using UnityEngine;
 
-public enum CityObjectVisualState
+public struct CityObjectState
 {
-    Normal,
-    Disabled,
+    public ViewObjectVisualState visualState;
+    public bool draggable;
+    public bool interactable;
+    public CityObjectState(ViewObjectVisualState visualState = ViewObjectVisualState.Normal, bool draggable = true, bool interactable = true)
+    {
+        this.visualState = visualState;
+        this.draggable = draggable;
+        this.interactable = interactable;
+    }
 }
 
 public abstract class CitySceneProfile
 {
     public abstract bool ShouldShow(object obj, GameState gameState);
 
-    public virtual CityObjectVisualState GetObjectVisualState(object obj, GameState gameState)
+    public virtual CityObjectState GetObjectViewState(object obj, GameState gameState)
     {
-        return CityObjectVisualState.Normal;
+        return new CityObjectState();
     }
 
     public virtual void OnProfileActivated(GameState gameState) { }
@@ -25,6 +32,18 @@ public sealed class NormalCitySceneProfile : CitySceneProfile
     public override bool ShouldShow(object obj, GameState gameState)
     {
         return true;
+    }
+
+    public override CityObjectState GetObjectViewState(object obj, GameState gameState)
+    {
+        switch (obj)
+        {
+            // disable dragging for cars in normal profile
+            case Car car:
+                return new CityObjectState(ViewObjectVisualState.Normal, draggable: false);
+        }
+
+        return base.GetObjectViewState(obj, gameState);
     }
 }
 
@@ -53,7 +72,7 @@ public sealed class StealingCitySceneProfile : CitySceneProfile
         }
     }
 
-    public override CityObjectVisualState GetObjectVisualState(object obj, GameState gameState)
+    public override CityObjectState GetObjectViewState(object obj, GameState gameState)
     {
         switch (obj)
         {
@@ -61,13 +80,13 @@ public sealed class StealingCitySceneProfile : CitySceneProfile
                 {
                     var stealingState = gameState as StealingGameState;
                     if (warehouse.AvailableCarParkingSpots > 0)
-                        return CityObjectVisualState.Normal;
+                        return new CityObjectState();
                     else
-                        return CityObjectVisualState.Disabled;
+                        return new CityObjectState(ViewObjectVisualState.Disabled);
                 }
             default:
                 {
-                    return CityObjectVisualState.Normal;
+                    return base.GetObjectViewState(obj, gameState);
                 }
         }
     }

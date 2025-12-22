@@ -1,4 +1,6 @@
-﻿public class ProductCreatedEventData
+﻿using static UnityEditor.FilePathAttribute;
+
+public class ProductCreatedEventData
 {
     public Product Product { get; private set; }
     public ILocation Location { get; private set; }
@@ -32,6 +34,14 @@ public class ProductLocationChangedEventData
     public ILocation OldLocation { get; set; }
 }
 
+public class LocatableStateChangedEventData
+{
+    public ILocatable Locatable { get; private set; }
+    public LocatableStateChangedEventData(ILocatable locatable)
+    {
+        Locatable = locatable;
+    }
+}
 
 public class LocatableCreatedEventData
 {

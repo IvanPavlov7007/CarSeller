@@ -9,10 +9,10 @@ public class ContentProvider : MonoBehaviour
         Model = model;
     }
 
-    public T ProvideContent<T>(
-        IInteractionContentProfile<T> profile,
-        IInteractionContext context
-        ) where T : IInteractionContent
+    public T ProvideContent<T,U>(
+        IInteractionContentProfile<T,U> profile,
+        U context
+        ) where T : IInteractionContent where U : IInteractionContext
     {
         return profile.GenerateContent(Model, context);
     }

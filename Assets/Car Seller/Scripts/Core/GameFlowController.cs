@@ -1,6 +1,7 @@
 ﻿
 using Pixelplacement;
 using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
@@ -20,6 +21,7 @@ public class GameFlowController
     {
         var oldState = GameState;
         GameState = newState;
+        Debug.Log($"GameFlowController: Game state changed from {oldState.GetType().Name} to {newState.GetType().Name}");
         GameEvents.Instance.OnGameStateChanged?.Invoke(new GameStateChangeEventData(oldState, newState));
     }
 
