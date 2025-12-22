@@ -13,8 +13,8 @@ public class Warehouse : ILocationsHolder, ILocatable, IPossession
 
     public List<WarehouseProductLocation> products = new List<WarehouseProductLocation>();
     public SuppliesList suppliesList;
-    public int OverallCarParkingSpots { get; private set; }
-    public int AvailableCarParkingSpots { get; private set; }
+    public int OverallCarParkingSpots => Config.CarParkingSpots;
+    public int AvailableCarParkingSpots => OverallCarParkingSpots - products.FindAll(p => p.Product is Car).Count;
     public Warehouse(WarehouseConfig config)
     {
         this.Config = config;
@@ -50,12 +50,33 @@ public class Warehouse : ILocationsHolder, ILocatable, IPossession
         {
             var product = locatable as Product;
             if(product == null)
+            {
+                Debug.LogWarning("WarehouseProductLocation: Attempt to attach a non-product locatable to a product location");
                 return false;
+            }
             if (Product != null)
+            {
+                 Debug.LogWarning("WarehouseProductLocation: Attempt to attach a product to an occupied product location");
                 return false;
+            }
+            if(ifCarAndNoSpotsAvailable(product))
+            {
+                return false;
+            }
+
             Product = product;
             Warehouse.products.Add(this);
             return true;
+        }
+
+        private bool ifCarAndNoSpotsAvailable(Product product)
+        {
+            if (product is Car && Warehouse.AvailableCarParkingSpots <= 0)
+            {
+                Debug.LogWarning("WarehouseProductLocation: Attempt to attach a car product when there are no available parking spots");
+                return true;
+            }
+            return false;
         }
         public void Detach()
         {

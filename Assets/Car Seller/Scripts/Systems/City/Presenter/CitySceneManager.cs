@@ -3,6 +3,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Managers that loads and manages city in the city scene
+/// Set ups and changes states( visuals, interactive) of city views based on the game state
+/// </summary>
 public class CitySceneManager : Singleton<CitySceneManager>
 {
     public City City => World.Instance.City;

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+
+/// <summary>
+/// manager that handles logics of interactions in the city scene
+/// </summary>
 public class CityInteractionManager : IInteractionManager
 {
-
     CityContextMenuContentProfile contextMenuProfile = new CityContextMenuContentProfile();
     InteractionTriggerProfile triggerProfile = new InteractionTriggerProfile();
 

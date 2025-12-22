@@ -10,6 +10,7 @@ public class WarehouseConfig : SerializedScriptableObject
 
     public Sprite image;
     public string SizeCategory = "Small garage";
+    public int CarParkingSpots = 5;
 
     public string SceneToLoad;
 
