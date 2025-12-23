@@ -15,13 +15,15 @@ public class WarehouseInteractionManager : IInteractionManager
 
     public void OnProductViewClick(Interactable interactable)
     {
+        var ctxMenuContext = new ContextMenuContext(G.GameState);
+
         var productView = interactable.GetComponent<ProductView>();
         if (productView != null)
         {
             //open product details popup
             //WarehouseUIManager.Instance.OpenProductDetailsPopup(productView.Product);
             var contentProvider = productView.GetComponent<ContentProvider>();
-            var ctxMenuContent = contentProvider?.ProvideContent(ctxMenuProfile, null);
+            var ctxMenuContent = contentProvider?.ProvideContent(ctxMenuProfile, ctxMenuContext);
             if (ctxMenuContent != null)
             {
                 ContextMenuManager.Instance.CreateContextMenu(interactable.gameObject, ctxMenuContent);
@@ -166,22 +168,51 @@ public class WarehouseInteractionManager : IInteractionManager
 
             public UIElement BuildCarFrame(CarFrame carFrame)
             {
-                return null;
+                var elementsList = new List<UIElement>();
+                elementsList.Add(CTX_Menu_Tools.Header(carFrame.Name));
+                elementsList.Add(CTX_Menu_Tools.Image(IconBuilderHelper.BuildCarFrameSprite(carFrame)));
+                return new UIElement()
+                {
+                    Type = UIElementType.Container,
+                    Children = elementsList
+                };
             }
 
             public UIElement BuildEngine(Engine engine)
             {
-                return null;
+                var elementsList = new List<UIElement>();
+                elementsList.Add(CTX_Menu_Tools.Header(engine.Name));
+                elementsList.Add(CTX_Menu_Tools.Image(IconBuilderHelper.BuildEngineSprite(engine)));
+
+                return new UIElement()
+                {
+                    Type = UIElementType.Container,
+                    Children = elementsList
+                };
             }
 
             public UIElement BuildSpoiler(Spoiler spoiler)
             {
-                return null;
+                var elementsList = new List<UIElement>();
+                elementsList.Add(CTX_Menu_Tools.Header(spoiler.Name));
+                elementsList.Add(CTX_Menu_Tools.Image(IconBuilderHelper.BuildSpoilerSprite(spoiler)));
+                return new UIElement()
+                {
+                    Type = UIElementType.Container,
+                    Children = elementsList
+                };
             }
 
             public UIElement BuildWheel(Wheel wheel)
             {
-                return null;
+                var elementsList = new List<UIElement>();
+                elementsList.Add(CTX_Menu_Tools.Header(wheel.Name));
+                elementsList.Add(CTX_Menu_Tools.Image(IconBuilderHelper.BuildWheelSprite(wheel)));
+                return new UIElement()
+                {
+                    Type = UIElementType.Container,
+                    Children = elementsList
+                };
             }
         }
 

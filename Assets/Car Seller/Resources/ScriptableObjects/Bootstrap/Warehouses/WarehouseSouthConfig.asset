@@ -22,6 +22,9 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   DisplayName: Warehouse South
+  image: {fileID: 0}
+  SizeCategory: Small garage
+  CarParkingSpots: 2
   SceneToLoad: Warehouse South
   Marker:
     Graph: {fileID: 11400000, guid: 5389cb2a25bee4549811721f2d7263b9, type: 2}

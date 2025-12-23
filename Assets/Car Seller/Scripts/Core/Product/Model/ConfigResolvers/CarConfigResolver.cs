@@ -21,9 +21,10 @@ public class CarConfigResolver
             SlotConfigs = new List<PartSlotRuntimeConfig>()
         };
 
-        if (carVariant.OverrideBasePrice)
+        // Base price
+        if (carVariant != null && carVariant.OverrideBasePrice)
         {
-            result.BasePrice = carVariant.BasePrice;
+                result.BasePrice = carVariant.BasePrice;
         }
         else
             result.BasePrice = carBase.BasePrice;

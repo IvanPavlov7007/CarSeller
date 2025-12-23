@@ -11,6 +11,9 @@ public class Warehouse : ILocationsHolder, ILocatable, IPossession
     public Guid Id => _id;
     public string Name { get; }
 
+    public string DistrictName => G.City.MarkersById[Config.Marker.MarkerId].RegionId;
+    public string SizeCatergory => Config.SizeCategory;
+
     public List<WarehouseProductLocation> products = new List<WarehouseProductLocation>();
     public SuppliesList suppliesList;
     public int OverallCarParkingSpots => Config.CarParkingSpots;

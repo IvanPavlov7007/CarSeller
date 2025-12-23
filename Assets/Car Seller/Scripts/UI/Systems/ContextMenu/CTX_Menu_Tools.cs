@@ -100,7 +100,7 @@ public static class CTX_Menu_Tools
         return new UIElement
         {
             Type = UIElementType.Text,
-            Text = "\n - Size: Large\n - Location: Downtown"
+            Text = $"\n - Size: {warehouse.SizeCatergory}\n - Location: {warehouse.DistrictName}\n - Parking lots: {warehouse.AvailableCarParkingSpots}/{warehouse.OverallCarParkingSpots}"
         };
     }
 
@@ -146,7 +146,7 @@ public static class CTX_Menu_Tools
 
     public static UIElement CarIcon(Car car)
     {
-        return Image(IconBuilder.BuildCarSprite(car.runtimeConfig));
+        return Image(IconBuilderHelper.BuildCarSprite(car));
     }
 
     public static UIElement CarStats(Car car)

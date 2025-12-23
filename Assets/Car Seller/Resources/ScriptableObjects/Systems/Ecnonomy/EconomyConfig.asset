@@ -21,4 +21,4 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  WarehouseOffersConfig: {fileID: 0}
+  WarehouseOffersConfig: {fileID: 11400000, guid: 1f405d688c1016a49b8dc092fe2bb0d1, type: 2}

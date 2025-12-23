@@ -7,6 +7,10 @@ using UnityEngine;
 
 public class ContextMenuContext : IInteractionContext
 {
+    public ContextMenuContext(GameState gameState)
+    {
+        GameState = gameState;
+    }
     public GameState GameState;
 }
 

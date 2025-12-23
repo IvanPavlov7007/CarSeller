@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3588149582775311804}
   - component: {fileID: 1800334786277336364}
   - component: {fileID: 8694655744456333761}
+  - component: {fileID: 4731887801603242991}
   m_Layer: 0
   m_Name: Warehouse
   m_TagString: Untagged
@@ -60,6 +61,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 0
   emptyPosition: {fileID: 0}
+--- !u!114 &4731887801603242991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2318030660712153618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55938fb1577dd4ad3af7e994048c86f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3184874157555752195
 GameObject:
   m_ObjectHideFlags: 0
