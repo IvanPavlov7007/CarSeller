@@ -121,7 +121,7 @@ MonoBehaviour:
   iconRenderCamera: {fileID: 3395718480461934406}
   buildPosition: {fileID: 2864832981138773849}
   width: 256
-  height: 150
+  height: 256
   backgroundColor: {r: 0, g: 0, b: 0, a: 0}
   padding: 0.08
   spritePixelsPerUnit: 100
@@ -708,6 +708,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 1
   popUpMenuPrefab: {fileID: 1448607247116826726, guid: 9534f3d911e21984c89040eb9fe3f72b, type: 3}
+  _menuTargetPadding: 8
+  _screenEdgePadding: 8
+  _positionLerpFactor: 0.25
+  IdealViewHight: 500
 --- !u!1 &7622794948036269532
 GameObject:
   m_ObjectHideFlags: 0

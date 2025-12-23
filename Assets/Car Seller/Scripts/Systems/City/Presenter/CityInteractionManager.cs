@@ -22,8 +22,9 @@ public class CityInteractionManager : IInteractionManager
 
     public void OnProductViewClick(Interactable interactable)
     {
+        var context = new ContextMenuContext(G.GameState);
         var contentProvider = interactable.GetComponent<ContentProvider>();
-        var content = contentProvider.ProvideContent(contextMenuProfile, null);
+        var content = contentProvider.ProvideContent(contextMenuProfile, context);
         if(content != null)
             ContextMenuManager.Instance.CreateContextMenu(interactable.gameObject, content);
     }

@@ -10,7 +10,7 @@ public class Economy
 
     public WarehouseOfferProvider WarehouseOfferProvider;
 
-    public CarSellOneTimeOfferProvider CarSellOfferProvider;
+    public CarSellOneTimeOfferProvider CarSellOfferProvider = new CarSellOneTimeOfferProvider();
 
     public ProductPriceCalculator ProductPriceCalculator = new ProductPriceCalculator();
 

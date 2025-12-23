@@ -19,6 +19,7 @@ public class CitySceneManager : Singleton<CitySceneManager>
 
     private void Awake()
     {
+        currentProfile = profileRegistry.Get(G.GameState);
         initializeCity();
         G.Instance.CityRoot.SetActive(true);
     }
@@ -30,8 +31,6 @@ public class CitySceneManager : Singleton<CitySceneManager>
         GameEvents.Instance.OnLocatableStateChanged += onLocatableStateChanged;
 
         GameEvents.Instance.OnGameStateChanged += onGameStateChanged;
-
-        currentProfile = profileRegistry.Get(G.GameState);
     }
 
     private void OnDisable()
@@ -139,6 +138,10 @@ public class CitySceneManager : Singleton<CitySceneManager>
 
     private void applyProfileToObject(ILocatable locatable, GameState state)
     {
+        Debug.Assert(currentProfile != null);
+        Debug.Assert(state != null);
+        Debug.Assert(locatable != null);
+
         // if rebuilding only partial views, check if the view exists
         if (!currentProfile.ShouldShow(locatable, state))
         {
