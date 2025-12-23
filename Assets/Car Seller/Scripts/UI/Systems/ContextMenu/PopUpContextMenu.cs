@@ -6,20 +6,10 @@ public class PopUpContextMenu : MonoBehaviour, IClosable
     public RectTransform RectTransform { get; private set; }
     public RectTransform ContentTransform { get; private set; }
     public Transform TargetTransform { get; private set; }
-    public CanvasGroup CanvasGroup { get; private set; }
-
-    // These settings are now controlled by ContextMenuManager
-    public float EdgePadding { get; set; }
-    public float SideMargin { get; set; }
-    public float TargetClearance { get; set; }
-    public float MaxHeightRatio { get; set; }
-    public float FollowLerp { get; set; }
 
     private void Awake()
     {
         RectTransform = GetComponent<RectTransform>();
-        CanvasGroup = GetComponent<CanvasGroup>();
-        if (CanvasGroup == null) CanvasGroup = gameObject.AddComponent<CanvasGroup>();
     }
 
     public void Initialize(Transform targetTransform)
