@@ -214,16 +214,16 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 1954165389836885580}
   - {fileID: 7591298403264055895}
   - {fileID: 7733344110849816519}
+  - {fileID: 5552873365360413264}
   - {fileID: 9127706560135085043}
-  - {fileID: 582605018508926142}
-  - {fileID: 1954165389836885580}
   - {fileID: 1787587102874665164}
   - {fileID: 2709094839571514640}
-  - {fileID: 5709913536750373088}
   - {fileID: 5206546684087025682}
-  - {fileID: 5552873365360413264}
+  - {fileID: 582605018508926142}
+  - {fileID: 5709913536750373088}
   - {fileID: 6985368509500141688}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -707,9 +707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 1
-  offsetUp: {x: 0, y: 3}
-  offsetDown: {x: 0, y: -4}
-  popUpMenuPrefab: {fileID: 2077581998197807761, guid: 58a27aebe5fca6f47a9231f8d7d40bc1, type: 3}
+  popUpMenuPrefab: {fileID: 1448607247116826726, guid: 9534f3d911e21984c89040eb9fe3f72b, type: 3}
 --- !u!1 &7622794948036269532
 GameObject:
   m_ObjectHideFlags: 0
