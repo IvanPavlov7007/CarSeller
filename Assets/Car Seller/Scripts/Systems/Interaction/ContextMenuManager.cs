@@ -41,6 +41,29 @@ public class ContextMenuManager : Singleton<ContextMenuManager>
         return panel.GetComponentInChildren<LayoutGroup>().GetComponent<RectTransform>();
     }
 
+    private void adjustViewRect(RectTransform view, RectTransform content)
+    {
+        if (view.sizeDelta.y > content.sizeDelta.y)
+        {
+            var size = view.sizeDelta;
+            size.y = content.sizeDelta.y;
+            view.sizeDelta = size;
+        }
+    }
+
+    private void adjustContainerHeight(RectTransform container)
+    {
+        float sum = 0f;
+        foreach (RectTransform child in container)
+        {
+            sum += child.rect.height;
+        }
+        // Instead of assigning to container.rect (which is read-only), set sizeDelta
+        var sizeDelta = container.sizeDelta;
+        sizeDelta.y = sum;
+        container.sizeDelta = sizeDelta;
+    }
+
     private PopUpContextMenu createContextMenu(GameObject panel, Transform target, bool blocking)
     {
         var ctxMenu = panel.AddComponent<PopUpContextMenu>();
@@ -51,7 +74,7 @@ public class ContextMenuManager : Singleton<ContextMenuManager>
         return ctxMenu;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         for (int i = 0; i < activeMenus.Count; i++)
         {
@@ -61,7 +84,10 @@ public class ContextMenuManager : Singleton<ContextMenuManager>
 
     private void UpdateContextMenu(PopUpContextMenu menu)
     {
-
+        var canvas = ContextMenuCanvas.Instance.Canvas;
+        var camera = Camera.main;
+        adjustContainerHeight(menu.ContentTransform);
+        adjustViewRect(menu.RectTransform, menu.ContentTransform);
     }
     public static Vector2 worldScreenHalfSize(Camera cam)
     {

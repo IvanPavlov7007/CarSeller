@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public static class CTX_Menu_Tools
 {
@@ -15,6 +17,21 @@ public static class CTX_Menu_Tools
             Style = "header"
         };
     }
+    public static UIElement Price(float price)
+    {
+        return new UIElement
+        {
+            Type = UIElementType.Text,
+            Text = FormatPrice(price),
+            Style = "price"
+        };
+    }
+
+    static string FormatPrice(float price)
+    {
+        return price.ToString("C2", CultureInfo.CurrentCulture);
+    }
+
     public static UIElement Description(string description)
     {
         return new UIElement
@@ -73,12 +90,7 @@ public static class CTX_Menu_Tools
     {
         return new List<UIElement>()
         {
-            new UIElement
-            {
-                Type = UIElementType.Text,
-                Text = $"{offer.Price}",
-                Style = "price"
-            },
+            Price(offer.Price),
             new UIElement
             {
                 Type = UIElementType.Button,
@@ -124,7 +136,7 @@ public static class CTX_Menu_Tools
             new UIElement
             {
                 Type = UIElementType.Text,
-                Text = $"sell for: {offer.InitialOfferPrice}",
+                Text = $"sell for: {FormatPrice(offer.InitialOfferPrice)}",
                 Style = "price"
             },
             new UIElement
@@ -155,18 +167,16 @@ public static class CTX_Menu_Tools
         return new UIElement
         {
             Type = UIElementType.Text,
-            Text = "- Max Speed: 180\n - Acceleration: 5.0\n - Handling: 80"
+            Text = "Placeholder stats:\n- Max Speed: 180\n- Acceleration: 5.0\n- Handling: 80",
+            Style = "description"
         };
     }
 
+    
+
     public static UIElement CarPrice(Car car)
     {
-        return new UIElement
-        {
-            Type = UIElementType.Text,
-            Text = $"{G.Economy.ProductPriceCalculator.Calculate(car)}",
-            Style = "price"
-        };
+        return Price(G.Economy.ProductPriceCalculator.Calculate(car));
     }
 
     

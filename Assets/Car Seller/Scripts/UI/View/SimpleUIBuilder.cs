@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Sirenix.Utilities;
+using Sirenix.OdinInspector;
 
 [CreateAssetMenu(fileName = "UIBuilder", menuName = "GameUI/UIBuilder")]
 public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IUIElementBuilder<RectTransform>
@@ -19,9 +20,13 @@ public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IUIEl
 
     [Header("Touch Sizing")]
     [Tooltip("Minimum row height to provide a comfortable touch target.")]
-    public float MinRowHeight = 64f;
+    [ShowInInspector]
+    public const float MinRowHeight = 64f;
     [Tooltip("Minimum button height to provide a comfortable touch target.")]
-    public float MinButtonHeight = 64f;
+    [ShowInInspector]
+    public const float MinButtonHeight = 120f;
+    [ShowInInspector]
+    public const float MinImageHeight = 400f;
 
     public RectTransform Build(UIElement content, RectTransform container)
     {
@@ -43,52 +48,64 @@ public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IUIEl
                 return null;
         }
     }
+    
 
     private RectTransform BuildText(UIElement item, RectTransform container)
     {
-        RectTransform rowHolder = GameObject.Instantiate(RowHolderPrefab, container).GetComponent<RectTransform>();
-        EnsureRowMinHeight(rowHolder);
-
-        var headerTMPObj = GameObject.Instantiate(TextMeshProPrefab, rowHolder);
+        var headerTMPObj = GameObject.Instantiate(TextMeshProPrefab, container);
         var headerTMP = headerTMPObj.GetComponent<TextMeshProUGUI>();
         headerTMP.text = item.Text;
         switch (item.Style)
         {
             case "header":
-                headerTMP.fontSize = 24;
+                headerTMP.fontSize = 48;
                 headerTMP.fontStyle = FontStyles.Bold;
                 headerTMP.alignment = TextAlignmentOptions.Top;
                 break;
             case "description":
-                headerTMP.fontSize = 18;
+                headerTMP.fontSize = 32;
                 headerTMP.fontStyle = FontStyles.Italic;
                 headerTMP.alignment = TextAlignmentOptions.Left;
                 break;
             case "hint":
-                headerTMP.fontSize = 14;
+                headerTMP.fontSize = 32;
                 headerTMP.color = Color.gray;
                 headerTMP.alignment = TextAlignmentOptions.Right;
                 break;
             case "price":
-                headerTMP.fontSize = 20;
+                headerTMP.fontSize = 38;
                 headerTMP.fontStyle = FontStyles.Bold;
                 headerTMP.alignment = TextAlignmentOptions.Baseline;
                 headerTMP.color = Color.white;
                 break;
             default:
-                headerTMP.fontSize = 18; // bump default for readability on touch
+                headerTMP.fontSize = 24; // bump default for readability on touch
                 break;
         }
 
-        return rowHolder;
+        // Make TMP auto-size to use available vertical space
+        //headerTMP.enableAutoSizing = true;
+        headerTMP.textWrappingMode = TextWrappingModes.Normal;
+
+        RectTransform recT = headerTMP.GetComponent<RectTransform>();
+
+        // Ensure row has at least MinRowHeight, but expand to fit text if needed
+        LayoutRebuilder.ForceRebuildLayoutImmediate(recT);
+        var preferredHeight = headerTMP.preferredHeight;
+
+        var le = recT.GetComponent<LayoutElement>();
+        if (le == null) le = recT.gameObject.AddComponent<LayoutElement>();
+
+        le.minHeight = Mathf.Max(MinRowHeight, preferredHeight);
+        le.preferredHeight = Mathf.Max(le.preferredHeight, preferredHeight);
+        le.flexibleHeight = 0f;
+
+        return recT;
     }
 
     private RectTransform BuildButton(UIElement item, RectTransform container)
     {
-        RectTransform rowHolder = GameObject.Instantiate(RowHolderPrefab, container).GetComponent<RectTransform>();
-        EnsureRowMinHeight(rowHolder);
-
-        var buttonObj = GameObject.Instantiate(PushButtonPrefab, rowHolder);
+        var buttonObj = GameObject.Instantiate(PushButtonPrefab, container);
         var buttonTMP = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
         if (buttonTMP != null)
         {
@@ -96,32 +113,31 @@ public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IUIEl
             buttonTMP.fontSize = Mathf.Max(buttonTMP.fontSize, 20); // comfortable default
         }
 
-        // Ensure button itself has adequate hit size via LayoutElement
-        var le = buttonObj.GetComponent<LayoutElement>();
-        if (le == null) le = buttonObj.AddComponent<LayoutElement>();
-        le.minHeight = Mathf.Max(le.minHeight, MinButtonHeight);
-
         buttonObj.AddComponent<ButtonStateController>().
              Initialize(item);
-        return rowHolder;
+
+        RectTransform recT = buttonObj.GetComponent<RectTransform>();
+        // Ensure button itself has adequate hit size via LayoutElement
+        EnsureMinHeight(recT, MinButtonHeight);
+        return recT;
     }
 
     private RectTransform BuildImage(UIElement item, RectTransform container)
     {
-        RectTransform rowHolder = GameObject.Instantiate(RowHolderPrefab, container).GetComponent<RectTransform>();
-        EnsureRowMinHeight(rowHolder);
-
-        var imageObj = GameObject.Instantiate(ImagePrefab, rowHolder);
+        var imageObj = GameObject.Instantiate(ImagePrefab, container);
         var image = imageObj.GetComponent<Image>();
         image.sprite = item.Image;
-        return rowHolder;
+
+        RectTransform recT = imageObj.GetComponent<RectTransform>();
+        EnsureMinHeight(recT, MinImageHeight);
+        return recT;
     }
 
-    private void EnsureRowMinHeight(RectTransform rowHolder)
+    private void EnsureMinHeight(RectTransform rowHolder, float minHeight = MinRowHeight)
     {
         var le = rowHolder.GetComponent<LayoutElement>();
         if (le == null) le = rowHolder.gameObject.AddComponent<LayoutElement>();
-        if (le.minHeight < MinRowHeight) le.minHeight = MinRowHeight;
+        if (le.minHeight < minHeight) le.minHeight = minHeight;
         // Disallow flexible shrinking to preserve touch targets
         le.flexibleHeight = 0f;
     }
