@@ -11,7 +11,7 @@ public class UIElement : IInteractionContent
     public Sprite Image;
     public bool IsInteractable = true;
     public bool closePopupOnClick = true;
-    public bool blockingInput = true;
+    public bool blockingInput = false;
     public Action OnClick;
     public string UnavailabilityReason;
     public object CustomData; // widget-specific data
