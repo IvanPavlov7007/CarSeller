@@ -14,16 +14,16 @@ public static class IconBuilderHelper
 
     public static Sprite BuildWheelSprite(Wheel wheel)
     {
-        return IconBuilderManager.Instance.BuildWheel(wheel);
+        return wheel.runtimeConfig.FrontSideViewSprite;
     }
 
     public static Sprite BuildSpoilerSprite(Spoiler spoiler)
     {
-        return IconBuilderManager.Instance.BuildSpoiler(spoiler);
+        return spoiler.runtimeConfig.Sprite;
     }
 
     public static Sprite BuildEngineSprite(Engine engine)
     {
-        return IconBuilderManager.Instance.BuildEngine(engine);
+        return engine.runtimeConfig.Sprite;
     }
 }
