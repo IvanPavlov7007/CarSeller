@@ -18,7 +18,33 @@ public class Economy
     {
         Config = config;
         Player = new Player();
+        initializePlayerStartState();
         initializeWarehouseOffers();
+    }
+
+    private void initializePlayerStartState()
+    {
+        Player.ChangeMoney(Config.PlayerStartState.initialMoney);
+        foreach (var warehouseConfig in Config.PlayerStartState.ownWarehouses)
+        {
+            var registryList = World.Instance.WorldRegistry.GetByConfig<Warehouse>(warehouseConfig);
+            Debug.Assert(registryList != null, $"No warehouses found for config {warehouseConfig}.");
+            if (registryList == null)
+                continue;
+            Debug.Assert(registryList.Count == 1, $"Expected exactly one warehouse for config {warehouseConfig}, but found {registryList.Count}.");
+            Warehouse warehouse = registryList.First();
+            G.Instance.PlayerManager.AddPossession(warehouse);
+            foreach (var productLocation in warehouse.products)
+            {
+                if (productLocation.Occupant != null)
+                {
+                    //DIRTY FIX: since ownership system is not finished, we only add cars to possessions
+                    //Because they are removed later by game logic (currently when selling)
+                    if (productLocation.Occupant is Car)
+                        G.Instance.PlayerManager.AddPossession(productLocation.Occupant as IPossession);
+                }
+            }
+        }
     }
 
     private void initializeWarehouseOffers()

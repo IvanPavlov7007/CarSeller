@@ -1276,7 +1276,7 @@ MonoBehaviour:
       EdgeId: 
       WorldPoint: {x: 2.65, y: 5.1}
     AuthorId: s_wh_2
-    AuthorPath: CityAuthoringRoot/SouthWarehouseMarker (1)
+    AuthorPath: CityAuthoringRoot/SouthWarehouseMarker Second
   - Id: wh_n_1
     DisplayName: 
     Tags: []
@@ -1291,3 +1291,483 @@ MonoBehaviour:
       WorldPoint: {x: -1.35, y: 27.49}
     AuthorId: wh_n_1
     AuthorPath: CityAuthoringRoot/NorthWarehouseMarker
+  - Id: 16ca0978438e4e0fb4b3753ee281cf52
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -7.13, y: -0.82}
+    AuthorId: 16ca0978438e4e0fb4b3753ee281cf52
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Edge)
+  - Id: 546b9958666748bfa754acccf54510c3
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -6.98, y: -3.17}
+    AuthorId: 546b9958666748bfa754acccf54510c3
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Edge) (1)
+  - Id: 1c1c0f5597db4d6bbbfc81cd0f8a8455
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -8.7, y: -2.13}
+    AuthorId: 1c1c0f5597db4d6bbbfc81cd0f8a8455
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Edge) (2)
+  - Id: 0cf0eeb46ef7454399f97c68211cfe51
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -4.93, y: -4}
+    AuthorId: 0cf0eeb46ef7454399f97c68211cfe51
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Edge) (3)
+  - Id: 0d2ec6d5bf0c41b68f1e3be45ff9047e
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -4.1, y: 1.54}
+    AuthorId: 0d2ec6d5bf0c41b68f1e3be45ff9047e
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Edge) (4)
+  - Id: e612a6c2a0cc44988c7521f816fab6d7
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 0.15, y: 3.34}
+    AuthorId: e612a6c2a0cc44988c7521f816fab6d7
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Edge) (5)
+  - Id: 3280576bdd0d477a8a25941291fd9e65
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 3.92, y: 3.09}
+    AuthorId: 3280576bdd0d477a8a25941291fd9e65
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Edge) (6)
+  - Id: 1edda550974142fb941e25f28b44aac6
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 5.84, y: -0.53}
+    AuthorId: 1edda550974142fb941e25f28b44aac6
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Edge) (7)
+  - Id: 624d947432cd409eaf78d0f09d441e28
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 1.89, y: -4.09}
+    AuthorId: 624d947432cd409eaf78d0f09d441e28
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Edge) (8)
+  - Id: f8ea8df258434826900fd4b8509aef6a
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -6.16, y: 4.33}
+    AuthorId: f8ea8df258434826900fd4b8509aef6a
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Edge) (9)
+  - Id: 4b7e196ba8614c33aba305d833ceb372
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -8.06, y: 4.09}
+    AuthorId: 4b7e196ba8614c33aba305d833ceb372
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Edge) (10)
+  - Id: f6267bba7e4b4d62b5b503a2429b1c61
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -7.97, y: 2.73}
+    AuthorId: f6267bba7e4b4d62b5b503a2429b1c61
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Edge) (11)
+  - Id: 806e4e026b7f4a52a55e32b67f3e4f5b
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 0.14, y: 15.33}
+    AuthorId: 806e4e026b7f4a52a55e32b67f3e4f5b
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Edge) (12)
+  - Id: ada59688ef3049489319b76ff8c98934
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 1.44, y: 20.71}
+    AuthorId: ada59688ef3049489319b76ff8c98934
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Edge) (13)
+  - Id: 31e13d7a09e44e5a9d94b9b07bb73339
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 4.67, y: 17.62}
+    AuthorId: 31e13d7a09e44e5a9d94b9b07bb73339
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Edge) (14)
+  - Id: da60e68f1bc64cb0b6feb79e0fcebd4c
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 2.15, y: 24.44}
+    AuthorId: da60e68f1bc64cb0b6feb79e0fcebd4c
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Edge) (15)
+  - Id: dc1be9c470bc4fb8979bac7cd02d9aab
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -3.05, y: 26.19}
+    AuthorId: dc1be9c470bc4fb8979bac7cd02d9aab
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Edge) (16)
+  - Id: 806809e220c247d0ada64e80590b32bb
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -6.19, y: 28.75}
+    AuthorId: 806809e220c247d0ada64e80590b32bb
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Edge) (17)
+  - Id: b7969c4d779e4ca5bc6df036efd456f3
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -15.33, y: 18.84}
+    AuthorId: b7969c4d779e4ca5bc6df036efd456f3
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Edge) (18)
+  - Id: 20cc347f751a4f2590d47f1d7910acef
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -16.9, y: 13.73}
+    AuthorId: 20cc347f751a4f2590d47f1d7910acef
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Edge) (19)
+  - Id: 4494c0d5fc7f45f2a90e32e2298689e2
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -11.7, y: 15.88}
+    AuthorId: 4494c0d5fc7f45f2a90e32e2298689e2
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Edge) (20)
+  - Id: 8912e6bf06144aac94914eb2876ff929
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -10.36, y: 14.4}
+    AuthorId: 8912e6bf06144aac94914eb2876ff929
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Edge) (21)
+  - Id: b51f2d72acdf4029b1f98934c196e374
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -12.59, y: 22.47}
+    AuthorId: b51f2d72acdf4029b1f98934c196e374
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Edge) (22)
+  - Id: 399d01406a7e41e68d4ccaa9ad23e241
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 1
+      NodeId: 0d41c82776ad48fcac363897fdf36aae
+      T: 0
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -5.16, y: -0.57}
+    AuthorId: 399d01406a7e41e68d4ccaa9ad23e241
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Node)
+  - Id: 04bb67eca01a40a2846d7d9a213f6e31
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 1
+      NodeId: 0d41c82776ad48fcac363897fdf36aae
+      T: 0
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -0.48, y: 1.8}
+    AuthorId: 04bb67eca01a40a2846d7d9a213f6e31
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Node) (1)
+  - Id: dfe9b988f6584b57b0b24f82f0a1b66e
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 1
+      NodeId: 0d41c82776ad48fcac363897fdf36aae
+      T: 0
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 1.22, y: -0.77}
+    AuthorId: dfe9b988f6584b57b0b24f82f0a1b66e
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Node) (2)
+  - Id: 91cd40b208334297aba4fc494f903904
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 1
+      NodeId: 0d41c82776ad48fcac363897fdf36aae
+      T: 0
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 3, y: -0.61}
+    AuthorId: 91cd40b208334297aba4fc494f903904
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Node) (3)
+  - Id: ede4252b1fad40469141d36d6935e9dd
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 1
+      NodeId: 0d41c82776ad48fcac363897fdf36aae
+      T: 0
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 3.19, y: -2.14}
+    AuthorId: ede4252b1fad40469141d36d6935e9dd
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Node) (4)
+  - Id: 8cc12318a4214502abfa895db2a73722
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 1
+      NodeId: 0d41c82776ad48fcac363897fdf36aae
+      T: 0
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -4.31, y: 5.33}
+    AuthorId: 8cc12318a4214502abfa895db2a73722
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Node) (5)
+  - Id: 4c0bb57c6c4c409583ba79bffa976a4a
+    DisplayName: 
+    Tags:
+    - Car
+    - Buyer
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 1
+      NodeId: 0d41c82776ad48fcac363897fdf36aae
+      T: 0
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -15.85, y: 15.17}
+    AuthorId: 4c0bb57c6c4c409583ba79bffa976a4a
+    AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Node) (6)

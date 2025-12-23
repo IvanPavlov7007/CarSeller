@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+//Should I also implement it as a system, like with ownership?
+
 public class WorldRegistry
 {
     private Dictionary<(Type runtimeType, ScriptableObject config), List<object>> map

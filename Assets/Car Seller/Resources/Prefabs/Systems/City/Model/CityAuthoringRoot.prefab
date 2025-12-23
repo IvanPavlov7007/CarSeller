@@ -440,6 +440,62 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &41648860660040945
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4470078235411864221}
+  - component: {fileID: 2655516449380762818}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Edge) (16)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4470078235411864221
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41648860660040945}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.05, y: 26.19, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2655516449380762818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41648860660040945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: dc1be9c470bc4fb8979bac7cd02d9aab
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &51402077716174483
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,6 +1028,118 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &249179751525612496
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7255188666588732880}
+  - component: {fileID: 4303044567967181153}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Node) (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7255188666588732880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249179751525612496}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.19, y: -2.14, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4303044567967181153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249179751525612496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: ede4252b1fad40469141d36d6935e9dd
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 1
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
+--- !u!1 &249903781937726054
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1877131050724214608}
+  - component: {fileID: 9096883757457153479}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Node) (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1877131050724214608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249903781937726054}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3, y: -0.61, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9096883757457153479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249903781937726054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 91cd40b208334297aba4fc494f903904
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 1
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &269074899317971396
 GameObject:
   m_ObjectHideFlags: 0
@@ -2742,6 +2910,118 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 7f077fbf22194564b19e08f48ab75522
   StartLooksAway: 0
+--- !u!1 &858033830361913705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1027301984262873174}
+  - component: {fileID: 8134169253566834354}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Node) (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1027301984262873174
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858033830361913705}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.48, y: 1.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8134169253566834354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858033830361913705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 04bb67eca01a40a2846d7d9a213f6e31
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 1
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
+--- !u!1 &986099830513157289
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7286350877371350081}
+  - component: {fileID: 6732853152401394509}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Edge) (18)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7286350877371350081
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986099830513157289}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.33, y: 18.84, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6732853152401394509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986099830513157289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: b7969c4d779e4ca5bc6df036efd456f3
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &1016688879970233154
 GameObject:
   m_ObjectHideFlags: 0
@@ -3402,6 +3682,62 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &1064234350134345517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2303937652441993415}
+  - component: {fileID: 2829019652866514544}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Edge) (19)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2303937652441993415
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064234350134345517}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -16.9, y: 13.73, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2829019652866514544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064234350134345517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 20cc347f751a4f2590d47f1d7910acef
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &1096199006157023319
 GameObject:
   m_ObjectHideFlags: 0
@@ -4026,6 +4362,118 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 67f18bf2f8904f6da800ebd5d0d95c3f
   StartLooksAway: 0
+--- !u!1 &1260122397711993328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2052561904695742556}
+  - component: {fileID: 2287210816001816720}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Node)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2052561904695742556
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260122397711993328}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.16, y: -0.57, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2287210816001816720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260122397711993328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 399d01406a7e41e68d4ccaa9ad23e241
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 1
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
+--- !u!1 &1289357107975040285
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4180130139769777957}
+  - component: {fileID: 5407398957482520074}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Edge) (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4180130139769777957
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289357107975040285}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.7, y: -2.13, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5407398957482520074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289357107975040285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 1c1c0f5597db4d6bbbfc81cd0f8a8455
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &1292964881306605976
 GameObject:
   m_ObjectHideFlags: 0
@@ -4686,6 +5134,62 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &1624918123218574720
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4211504915439671825}
+  - component: {fileID: 5086847740268441055}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Edge) (12)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4211504915439671825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624918123218574720}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.14, y: 15.33, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5086847740268441055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624918123218574720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 806e4e026b7f4a52a55e32b67f3e4f5b
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &1659378155424366547
 GameObject:
   m_ObjectHideFlags: 0
@@ -5438,6 +5942,62 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &1809997057572498712
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4658448185254639446}
+  - component: {fileID: 895071212438365886}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Edge) (21)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4658448185254639446
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809997057572498712}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -10.36, y: 14.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &895071212438365886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809997057572498712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 8912e6bf06144aac94914eb2876ff929
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &1961489538437735046
 GameObject:
   m_ObjectHideFlags: 0
@@ -7656,6 +8216,62 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &2302711797504500777
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8237625392515658646}
+  - component: {fileID: 7633394693572136767}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Edge) (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8237625392515658646
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2302711797504500777}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.92, y: 3.09, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7633394693572136767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2302711797504500777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 3280576bdd0d477a8a25941291fd9e65
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &2334853898658408704
 GameObject:
   m_ObjectHideFlags: 0
@@ -7968,6 +8584,118 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &2381388125573550045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6128763179948372949}
+  - component: {fileID: 4576093650330793764}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Edge) (10)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6128763179948372949
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2381388125573550045}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.06, y: 4.09, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4576093650330793764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2381388125573550045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 4b7e196ba8614c33aba305d833ceb372
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
+--- !u!1 &2396935984903922175
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3421118655997943151}
+  - component: {fileID: 991720851819501506}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Edge) (13)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3421118655997943151
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2396935984903922175}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.44, y: 20.71, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &991720851819501506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2396935984903922175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: ada59688ef3049489319b76ff8c98934
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &2502151737730262614
 GameObject:
   m_ObjectHideFlags: 0
@@ -10118,6 +10846,36 @@ Transform:
   - {fileID: 9182494016429064224}
   - {fileID: 325899974334231779}
   - {fileID: 7188931246996942824}
+  - {fileID: 5502221091689671450}
+  - {fileID: 2317182323568840330}
+  - {fileID: 4180130139769777957}
+  - {fileID: 87500253163701078}
+  - {fileID: 4979594078042396417}
+  - {fileID: 8464229551752288571}
+  - {fileID: 8237625392515658646}
+  - {fileID: 7697770737147757089}
+  - {fileID: 6037252791762034634}
+  - {fileID: 4429306713314040319}
+  - {fileID: 6128763179948372949}
+  - {fileID: 8600452745316512236}
+  - {fileID: 4211504915439671825}
+  - {fileID: 3421118655997943151}
+  - {fileID: 6490056458137661937}
+  - {fileID: 5085613023870452097}
+  - {fileID: 4470078235411864221}
+  - {fileID: 9128677009059295836}
+  - {fileID: 7286350877371350081}
+  - {fileID: 2303937652441993415}
+  - {fileID: 6612636552902545022}
+  - {fileID: 4658448185254639446}
+  - {fileID: 1558288118460696085}
+  - {fileID: 2052561904695742556}
+  - {fileID: 1027301984262873174}
+  - {fileID: 7653363208776591944}
+  - {fileID: 1877131050724214608}
+  - {fileID: 7255188666588732880}
+  - {fileID: 6079206405967840591}
+  - {fileID: 6756633666900925937}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7092553036261487221
@@ -10191,6 +10949,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 13449421f0b34a6c9248736bb0646c29
   StartLooksAway: 0
+--- !u!1 &3242184967093822113
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6756633666900925937}
+  - component: {fileID: 4703286542922146962}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Node) (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6756633666900925937
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3242184967093822113}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.85, y: 15.17, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4703286542922146962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3242184967093822113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 4c0bb57c6c4c409583ba79bffa976a4a
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 1
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &3266703569427367645
 GameObject:
   m_ObjectHideFlags: 0
@@ -10943,6 +11757,62 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &3343779361453553083
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6037252791762034634}
+  - component: {fileID: 9054492330661147566}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Edge) (8)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6037252791762034634
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3343779361453553083}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.89, y: -4.09, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9054492330661147566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3343779361453553083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 624d947432cd409eaf78d0f09d441e28
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &3355424757220515686
 GameObject:
   m_ObjectHideFlags: 0
@@ -12841,6 +13711,62 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &3735109018541798215
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2317182323568840330}
+  - component: {fileID: 4702967439202637843}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Edge) (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2317182323568840330
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3735109018541798215}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.98, y: -3.17, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4702967439202637843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3735109018541798215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 546b9958666748bfa754acccf54510c3
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &3769706949432120076
 GameObject:
   m_ObjectHideFlags: 0
@@ -15583,6 +16509,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 97b4f0d8068e4019b8b8948dd6a7012e
   StartLooksAway: 0
+--- !u!1 &4175399611144295929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7697770737147757089}
+  - component: {fileID: 6354490421188237631}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Edge) (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7697770737147757089
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4175399611144295929}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.84, y: -0.53, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6354490421188237631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4175399611144295929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 1edda550974142fb941e25f28b44aac6
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &4196623686708687150
 GameObject:
   m_ObjectHideFlags: 0
@@ -15941,6 +16923,118 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 36008a9bd6ed4cf2b205b73f952e8f4b
   StartLooksAway: 0
+--- !u!1 &4303857436368037944
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5502221091689671450}
+  - component: {fileID: 2665131790177123761}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Edge)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5502221091689671450
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4303857436368037944}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.13, y: -0.82, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2665131790177123761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4303857436368037944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 16ca0978438e4e0fb4b3753ee281cf52
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
+--- !u!1 &4324017184782372658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6490056458137661937}
+  - component: {fileID: 5494871512748701922}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Edge) (14)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6490056458137661937
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4324017184782372658}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.67, y: 17.62, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5494871512748701922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4324017184782372658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 31e13d7a09e44e5a9d94b9b07bb73339
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &4378419577167468790
 GameObject:
   m_ObjectHideFlags: 0
@@ -16207,6 +17301,62 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &4484304290375000247
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8600452745316512236}
+  - component: {fileID: 961116733616640470}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Edge) (11)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8600452745316512236
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4484304290375000247}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.97, y: 2.73, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &961116733616640470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4484304290375000247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: f6267bba7e4b4d62b5b503a2429b1c61
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &4495887191078051794
 GameObject:
   m_ObjectHideFlags: 0
@@ -21067,6 +22217,62 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &5436454509011780596
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5085613023870452097}
+  - component: {fileID: 7105143875807468913}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Edge) (15)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5085613023870452097
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5436454509011780596}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.15, y: 24.44, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7105143875807468913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5436454509011780596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: da60e68f1bc64cb0b6feb79e0fcebd4c
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &5455728670699906819
 GameObject:
   m_ObjectHideFlags: 0
@@ -24295,6 +25501,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 5d1cdbd81fcd46d8a4c321a8d7f191d6
   StartLooksAway: 0
+--- !u!1 &6088939488919725242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8464229551752288571}
+  - component: {fileID: 5172517059885517291}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Edge) (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8464229551752288571
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6088939488919725242}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.15, y: 3.34, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5172517059885517291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6088939488919725242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: e612a6c2a0cc44988c7521f816fab6d7
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &6179410496771185369
 GameObject:
   m_ObjectHideFlags: 0
@@ -24561,6 +25823,62 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &6208155838218550198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4979594078042396417}
+  - component: {fileID: 4283531042709942554}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Edge) (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4979594078042396417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6208155838218550198}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.1, y: 1.54, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4283531042709942554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6208155838218550198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 0d2ec6d5bf0c41b68f1e3be45ff9047e
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &6247862543511504405
 GameObject:
   m_ObjectHideFlags: 0
@@ -25707,6 +27025,62 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &6402835381150805061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4429306713314040319}
+  - component: {fileID: 218684643757424998}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Edge) (9)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4429306713314040319
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6402835381150805061}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.16, y: 4.33, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &218684643757424998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6402835381150805061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: f8ea8df258434826900fd4b8509aef6a
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &6420875514103787620
 GameObject:
   m_ObjectHideFlags: 0
@@ -26030,7 +27404,7 @@ GameObject:
   - component: {fileID: 325899974334231779}
   - component: {fileID: 6625728294976689827}
   m_Layer: 0
-  m_Name: SouthWarehouseMarker (1)
+  m_Name: SouthWarehouseMarker Second
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -26559,6 +27933,62 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &6754945357925475099
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9128677009059295836}
+  - component: {fileID: 1461972697051827013}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Edge) (17)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9128677009059295836
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6754945357925475099}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.19, y: 28.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1461972697051827013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6754945357925475099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 806809e220c247d0ada64e80590b32bb
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &6802368045102047181
 GameObject:
   m_ObjectHideFlags: 0
@@ -29091,6 +30521,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3dd75991ebbb49999d5e9a3da495b84f
   StartLooksAway: 0
+--- !u!1 &7399013660741912426
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7653363208776591944}
+  - component: {fileID: 1588999014650487827}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Node) (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7653363208776591944
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7399013660741912426}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.22, y: -0.77, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1588999014650487827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7399013660741912426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: dfe9b988f6584b57b0b24f82f0a1b66e
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 1
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &7409203469479853120
 GameObject:
   m_ObjectHideFlags: 0
@@ -32319,6 +33805,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: d50dc0fd9bf54f1387ce493cbdc52da1
   StartLooksAway: 0
+--- !u!1 &8056723336230943083
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 87500253163701078}
+  - component: {fileID: 6130778635831800583}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Edge) (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &87500253163701078
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8056723336230943083}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.93, y: -4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6130778635831800583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8056723336230943083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 0cf0eeb46ef7454399f97c68211cfe51
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &8099375699101661195
 GameObject:
   m_ObjectHideFlags: 0
@@ -34089,6 +35631,62 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &8307231066845671260
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1558288118460696085}
+  - component: {fileID: 2614690836943614636}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Edge) (22)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1558288118460696085
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8307231066845671260}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.59, y: 22.47, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2614690836943614636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8307231066845671260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: b51f2d72acdf4029b1f98934c196e374
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &8310070090095665979
 GameObject:
   m_ObjectHideFlags: 0
@@ -34979,6 +36577,62 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &8516717764076600869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6079206405967840591}
+  - component: {fileID: 1918410412289306427}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Node) (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6079206405967840591
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8516717764076600869}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.31, y: 5.33, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1918410412289306427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8516717764076600869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 8cc12318a4214502abfa895db2a73722
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 1
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &8558450101420375300
 GameObject:
   m_ObjectHideFlags: 0
@@ -35969,6 +37623,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: e10c22e04adb4beb8e6acea59be2a6d8
   StartLooksAway: 0
+--- !u!1 &8773752165319025420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6612636552902545022}
+  - component: {fileID: 3504828059079957591}
+  m_Layer: 0
+  m_Name: CarOrBuyerMarker(Edge) (20)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6612636552902545022
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8773752165319025420}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.7, y: 15.88, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3504828059079957591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8773752165319025420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 4494c0d5fc7f45f2a90e32e2298689e2
+  DisplayName: 
+  Tags:
+  - Car
+  - Buyer
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 1481263439057607828}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &8858118045808977900
 GameObject:
   m_ObjectHideFlags: 0
