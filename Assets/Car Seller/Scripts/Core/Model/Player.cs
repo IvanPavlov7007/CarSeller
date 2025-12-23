@@ -15,6 +15,6 @@ public class Player
         return Possessions.Contains(possession);
     }
 
-    internal HashSet<IPossession> Possessions { get; private set; }
+    internal HashSet<IPossession> Possessions { get; private set; } = new HashSet<IPossession>();
 }
 

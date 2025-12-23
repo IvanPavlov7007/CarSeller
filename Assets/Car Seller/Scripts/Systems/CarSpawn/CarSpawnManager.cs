@@ -21,20 +21,22 @@ public static class CarSpawnManager
     private static void SpawnTemporaryCars()
     {
         
-        var carSpawnConfigs = G.Instance.Economy.Config.CarSpawnConfigs;
-        foreach (var carSpawnConfig in carSpawnConfigs)
+        var carSpawnConfig = G.Economy.Config.CarSpawnConfig;
+        foreach (var carSpawnEntry in carSpawnConfig.GetRandomCarSpawnEntriesWithPuttingBack())
         {
-            for (int i = 0; i < carSpawnConfig.TemporaryCarsCount; i++)
-            {
-                var randomMarker = G.City.GetRandomMarker(carSpawnConfig.MarkerTag);
-                var location = G.City.GetEmptyLocation(randomMarker.PositionOnGraph.Value);
-                Car car = G.Instance.ProductManager.CreateCar(
-                    carSpawnConfig.CarBaseConfig,
-                    carSpawnConfig.CarVariantConfig,
-                    location);
-                temporaryCars.Add(car);
-            }
+            var randomMarker = G.City.GetRandomMarker("car");
+            var location = G.City.GetEmptyLocation(randomMarker.PositionOnGraph.Value);
+            var car = generateCar(location, carSpawnEntry);
         }
+    }
+
+    private static Car generateCar(City.CityLocation location, CarSpawnConfig.CarSpawnEntry carSpawnEntry)
+    {
+        Car car = G.Instance.ProductManager.CreateCar(
+                    carSpawnEntry.CarBaseConfig,
+                    carSpawnEntry.CarVariantConfig,
+                    location);
+        return car;
     }
 
     private static void RemoveTemporaryCars()

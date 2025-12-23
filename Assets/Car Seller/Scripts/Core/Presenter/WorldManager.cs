@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class WorldManager
 {
@@ -7,7 +8,7 @@ public class WorldManager
     
 
     // On bootstrap, create the initial cities and warehouses
-    public void AddWarehouse(City city, WarehouseConfig warehouseConfig)
+    private void addWarehouse(City city, WarehouseConfig warehouseConfig)
     {
         Warehouse warehouse = new Warehouse(warehouseConfig);
 
@@ -89,6 +90,7 @@ public class WorldManager
         initializeCity(cityConfig);
         // Initialize economy after city so that economy can reference city objects if needed
         initializeEconomy(economyConfig);
+        CarSpawnManager.NewCarsRotation();
     }
 
     //1.
@@ -104,12 +106,18 @@ public class WorldManager
         World.Instance.City = new City(cityConfig, G.Instance.CityRoot.transform);
         foreach (var warehouseConfig in cityConfig.warehouseConfigs)
         {
-            AddWarehouse(World.Instance.City, warehouseConfig);
+            addWarehouse(World.Instance.City, warehouseConfig);
         }
+        //spawnProductsInCity(World.Instance.City, cityConfig);
+    }
+
+    [Obsolete("Spawning products in city is deprecated")]
+    private void spawnProductsInCity(City city, CityConfig cityConfig)
+    {
         foreach (var productToSpawn in cityConfig.initialProductsToSpawn)
         {
-            City.CityPosition randomOutsidePosition = World.Instance.City.GetRandomPosition();
-            ILocation outsideLocation = World.Instance.City.GetEmptyLocation(randomOutsidePosition);
+            City.CityPosition randomOutsidePosition = city.GetRandomPosition();
+            ILocation outsideLocation = city.GetEmptyLocation(randomOutsidePosition);
             switch (productToSpawn.productBaseConfig)
             {
                 case CarBaseConfig carBaseConfig:
@@ -122,6 +130,7 @@ public class WorldManager
             }
         }
     }
+
     //2.
     private void initializeEconomy(EconomyConfig economyConfig)
     {

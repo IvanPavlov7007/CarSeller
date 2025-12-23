@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab8e45237bec76548b7b5e68bd5d67d0, type: 3}
+  m_Name: CarSpawnConfig
+  m_EditorClassIdentifier: 
+  CarsToSpawnCount: 15
+  carSpawnEntries:
+  - CarBaseConfig: {fileID: 11400000, guid: ffff342da52be704faab569db95fc79c, type: 2}
+    CarVariantConfig: {fileID: 0}
+  - CarBaseConfig: {fileID: 11400000, guid: ffff342da52be704faab569db95fc79c, type: 2}
+    CarVariantConfig: {fileID: 11400000, guid: e2150ed0432f02f4a8a6256d8ad3f45d, type: 2}
+  - CarBaseConfig: {fileID: 11400000, guid: d59b21759925cf54fa4a547272179a3c, type: 2}
+    CarVariantConfig: {fileID: 0}
+  - CarBaseConfig: {fileID: 11400000, guid: 857812dc0c3ec3040a7c758c266cbe4b, type: 2}
+    CarVariantConfig: {fileID: 11400000, guid: 2b3a91484d1de1c4a8badc61a1c2a7e0, type: 2}
+  - CarBaseConfig: {fileID: 11400000, guid: ffff342da52be704faab569db95fc79c, type: 2}
+    CarVariantConfig: {fileID: 0}
+  - CarBaseConfig: {fileID: 11400000, guid: d59b21759925cf54fa4a547272179a3c, type: 2}
+    CarVariantConfig: {fileID: 0}
+  - CarBaseConfig: {fileID: 11400000, guid: 857812dc0c3ec3040a7c758c266cbe4b, type: 2}
+    CarVariantConfig: {fileID: 11400000, guid: 3d98103e50bd0d34a9afed789f4b4910, type: 2}
+  - CarBaseConfig: {fileID: 11400000, guid: f63816bf1af38734c9fb3cbd64a7eb41, type: 2}
+    CarVariantConfig: {fileID: 11400000, guid: abf656a7d9677f04b8cdfd7c7feff53d, type: 2}

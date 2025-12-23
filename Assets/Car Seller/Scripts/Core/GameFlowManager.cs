@@ -65,6 +65,7 @@ public class GameFlowManager : RoutinedObject
                 {
                     Debug.LogError("Failed to process stealing transaction during selling sequence.");
                 }
+                CarSpawnManager.NewCarsRotation();
             }
         );
 
@@ -96,7 +97,7 @@ public class GameFlowManager : RoutinedObject
                 {
                     G.CityActionService.PutCarInsideWarehouse(car, warehouse);
                 }
-                
+                CarSpawnManager.NewCarsRotation();
             }
         );
         GameFlowController.SetGameState(new NeutralGameState());
@@ -147,5 +148,6 @@ public class GameFlowManager : RoutinedObject
     {
         // TODO: implement penalties, confiscation, or state changes as appropriate
         // This is a placeholder hook to centralize "caught" logic.
+        CarSpawnManager.NewCarsRotation();
     }
 }

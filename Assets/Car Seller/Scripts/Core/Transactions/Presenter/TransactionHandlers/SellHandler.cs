@@ -55,6 +55,7 @@ public class SellHandler : TransactionHandler
             // Please move that to the dedicated ownership system
             // SellHandler should only handle the game logic
             G.Instance.PlayerManager.RemovePossession(car);
+            CarSpawnManager.ReleaseCar(car);
             ProductDeletionService.DeleteProduct(car);
         }
         return result;

@@ -17,6 +17,7 @@
 
         if (G.Instance.CityActionService.PutCarInsideWarehouse(car, targetWarehouse))
         {
+            CarSpawnManager.ReleaseCar(car);
             result = TransactionResult.Success();
         }
         else // couldn't find space in the warehouse

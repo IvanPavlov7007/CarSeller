@@ -7,4 +7,5 @@ public class  EconomyConfig : SerializedScriptableObject
 {
     public WarehouseOffersConfig WarehouseOffersConfig;
     public PlayerStartState PlayerStartState;
+    public CarSpawnConfig CarSpawnConfig;
 }
