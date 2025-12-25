@@ -68,5 +68,7 @@ public class Economy
             );
             dictionary[warehouse] = warehouseOffer;
         }
+
+        WarehouseOfferProvider.Initialize(dictionary);
     }
 }

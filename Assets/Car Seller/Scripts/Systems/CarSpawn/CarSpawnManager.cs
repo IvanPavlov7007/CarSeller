@@ -1,6 +1,8 @@
 ﻿using Pixelplacement;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public static class CarSpawnManager
 {
@@ -22,11 +24,22 @@ public static class CarSpawnManager
     {
         
         var carSpawnConfig = G.Economy.Config.CarSpawnConfig;
+
+        var locations = G.City.QueryMarkers("car").ToList();
+
+        Debug.Assert(locations.Count >= carSpawnConfig.CarsToSpawnCount, $"Not enough car markers in the city to spawn {carSpawnConfig.CarsToSpawnCount} cars. Found only {locations.Count} markers.");
+
+        //shuffle markers
+        locations.Shuffle();
+
         foreach (var carSpawnEntry in carSpawnConfig.GetRandomCarSpawnEntriesWithPuttingBack())
         {
-            var randomMarker = G.City.GetRandomMarker("car");
+            var randomMarker = locations[0];
+            locations.RemoveAt(0);
             var location = G.City.GetEmptyLocation(randomMarker.PositionOnGraph.Value);
             var car = generateCar(location, carSpawnEntry);
+            
+            temporaryCars.Add(car);
         }
     }
 

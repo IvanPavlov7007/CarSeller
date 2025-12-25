@@ -27,8 +27,8 @@ MonoBehaviour:
   CarParkingSpots: 3
   SceneToLoad: Warehouse South
   Marker:
-    Graph: {fileID: 0}
-    MarkerId: 
+    Graph: {fileID: 11400000, guid: 5389cb2a25bee4549811721f2d7263b9, type: 2}
+    MarkerId: s_wh_2
   warehouseClosestInitialPosition: {x: 5, y: 4}
   initialProductsToSpawn:
   - productBaseConfig: {fileID: 11400000, guid: ffff342da52be704faab569db95fc79c, type: 2}

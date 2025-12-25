@@ -32,6 +32,7 @@ public class CityViewObjectBuilder : ScriptableObject
         buyerGO.AddComponent<ContentProvider>().Initialize(buyer);
         buyerGO.AddComponent<Interactable>();
         buyerGO.AddComponent<ViewStateChanger>();
+        buyerGO.AddComponent<Triggerable>();
         return viewController;
     }
 
@@ -44,6 +45,8 @@ public class CityViewObjectBuilder : ScriptableObject
         carGO.AddComponent<ProductView>().Initialize(car, location);
         var viewController = 
             carGO.AddComponent<CityViewObjectController>().Initialize(car);
+        var rigidbody2D = carGO.AddComponent<Rigidbody2D>();
+        rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
         carGO.AddComponent<ContentProvider>().Initialize(car);
         carGO.AddComponent<DragInteractable>().sortingOrder = 10;
         carGO.AddComponent<DragDisabler>();
@@ -62,6 +65,7 @@ public class CityViewObjectBuilder : ScriptableObject
         warehouseGO.AddComponent<ViewStateChanger>();
         warehouseGO.AddComponent<Interactable>();
         warehouseGO.AddComponent<ContentProvider>().Initialize(warehouse);
+        warehouseGO.AddComponent<Triggerable>();
         return viewController;
     }
 }

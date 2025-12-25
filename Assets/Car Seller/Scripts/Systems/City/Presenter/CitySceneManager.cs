@@ -125,11 +125,7 @@ public class CitySceneManager : Singleton<CitySceneManager>
 
     private void rebuildSceneForState(GameState state)
     {
-        // clear existing views
-        clearViews();
-
         // rebuild views based on the current profile
-
         foreach (var product in City.Locations.Keys)
         {
             applyProfileToObject(product, state);

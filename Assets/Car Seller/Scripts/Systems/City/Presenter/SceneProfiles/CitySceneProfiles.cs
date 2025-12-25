@@ -5,6 +5,10 @@ public struct CityObjectState
     public ViewObjectVisualState visualState;
     public bool draggable;
     public bool interactable;
+
+    public static CityObjectState Default =>
+        new CityObjectState(ViewObjectVisualState.Normal, true, true);
+
     public CityObjectState(ViewObjectVisualState visualState = ViewObjectVisualState.Normal, bool draggable = true, bool interactable = true)
     {
         this.visualState = visualState;
@@ -19,7 +23,7 @@ public abstract class CitySceneProfile
 
     public virtual CityObjectState GetObjectViewState(object obj, GameState gameState)
     {
-        return new CityObjectState();
+        return CityObjectState.Default;
     }
 
     public virtual void OnProfileActivated(GameState gameState) { }
@@ -80,7 +84,7 @@ public sealed class StealingCitySceneProfile : CitySceneProfile
                 {
                     var stealingState = gameState as StealingGameState;
                     if (warehouse.AvailableCarParkingSpots > 0)
-                        return new CityObjectState();
+                        return CityObjectState.Default;
                     else
                         return new CityObjectState(ViewObjectVisualState.Disabled);
                 }

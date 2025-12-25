@@ -1252,7 +1252,7 @@ MonoBehaviour:
   - Id: s_wh_1
     DisplayName: 
     Tags: []
-    RegionId: 
+    RegionId: south
     Radius: 0
     Anchor:
       Kind: 1
@@ -1260,13 +1260,13 @@ MonoBehaviour:
       T: 0
       Forward: 1
       EdgeId: 
-      WorldPoint: {x: -5.05, y: -1.89}
+      WorldPoint: {x: -5.013, y: -1.862}
     AuthorId: s_wh_1
     AuthorPath: CityAuthoringRoot/SouthWarehouseMarker
   - Id: s_wh_2
     DisplayName: 
     Tags: []
-    RegionId: 
+    RegionId: south
     Radius: 0
     Anchor:
       Kind: 2
@@ -1280,7 +1280,7 @@ MonoBehaviour:
   - Id: wh_n_1
     DisplayName: 
     Tags: []
-    RegionId: 
+    RegionId: north
     Radius: 0
     Anchor:
       Kind: 2
@@ -1668,7 +1668,7 @@ MonoBehaviour:
     Radius: 0
     Anchor:
       Kind: 1
-      NodeId: 0d41c82776ad48fcac363897fdf36aae
+      NodeId: 
       T: 0
       Forward: 1
       EdgeId: 
@@ -1684,7 +1684,7 @@ MonoBehaviour:
     Radius: 0
     Anchor:
       Kind: 1
-      NodeId: 0d41c82776ad48fcac363897fdf36aae
+      NodeId: 
       T: 0
       Forward: 1
       EdgeId: 
@@ -1700,7 +1700,7 @@ MonoBehaviour:
     Radius: 0
     Anchor:
       Kind: 1
-      NodeId: 0d41c82776ad48fcac363897fdf36aae
+      NodeId: 
       T: 0
       Forward: 1
       EdgeId: 
@@ -1716,7 +1716,7 @@ MonoBehaviour:
     Radius: 0
     Anchor:
       Kind: 1
-      NodeId: 0d41c82776ad48fcac363897fdf36aae
+      NodeId: 
       T: 0
       Forward: 1
       EdgeId: 
@@ -1732,7 +1732,7 @@ MonoBehaviour:
     Radius: 0
     Anchor:
       Kind: 1
-      NodeId: 0d41c82776ad48fcac363897fdf36aae
+      NodeId: 
       T: 0
       Forward: 1
       EdgeId: 
@@ -1748,7 +1748,7 @@ MonoBehaviour:
     Radius: 0
     Anchor:
       Kind: 1
-      NodeId: 0d41c82776ad48fcac363897fdf36aae
+      NodeId: 
       T: 0
       Forward: 1
       EdgeId: 
@@ -1764,7 +1764,7 @@ MonoBehaviour:
     Radius: 0
     Anchor:
       Kind: 1
-      NodeId: 0d41c82776ad48fcac363897fdf36aae
+      NodeId: 
       T: 0
       Forward: 1
       EdgeId: 

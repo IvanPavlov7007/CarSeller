@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carViewPrefab: {fileID: 3499829529434668817, guid: 160474d917472894395e9318086cb3f4, type: 3}
   warehouseViewPrefab: {fileID: 4203573308617025643, guid: 8b9b63445d715bb40b60dd5463138eea, type: 3}
+  buyerViewPrefab: {fileID: 7600114309630284208, guid: 0f3e69e10be3486458ae482852b713d8, type: 3}

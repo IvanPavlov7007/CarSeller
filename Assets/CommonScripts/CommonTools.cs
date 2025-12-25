@@ -1,4 +1,4 @@
-//Vesion: 3
+//Vesion: 4
 //increment version each change
 using System;
 using System.Collections;
@@ -137,7 +137,6 @@ public static class CommonTools
             throw new System.Exception("weights count doesn't match elements count");
         return elements[RandomIndex(weights)];
     }
-
     public static Vector2 RotateDir(Vector2 dir, float angle)
     {
         float cosA = Mathf.Cos(Mathf.Deg2Rad * angle);
@@ -441,3 +440,19 @@ public class RecordedValue<T>
 //    public static implicit operator T(TrackedValue<T> tracked) => tracked._value;
 //    public static implicit operator TrackedValue<T>(T value) => new TrackedValue<T>(value);
 //}
+
+public static class ListExtensions
+{
+    public static void Shuffle<T>(this IList<T> list)
+    {
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = Random.Range(0, n + 1);
+            T value = list[k];
+            list[k] = list[n];
+            list[n] = value;
+        }
+    }
+}
