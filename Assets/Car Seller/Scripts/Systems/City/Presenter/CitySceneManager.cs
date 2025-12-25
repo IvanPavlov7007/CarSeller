@@ -7,6 +7,9 @@ using UnityEngine;
 /// <summary>
 /// Managers that loads and manages city in the city scene
 /// Set ups and changes states( visuals, interactive) of city views based on the game state
+/// Creates and destroys views for locatables in the city
+/// 
+/// ACHTUNG: Don't use ProductView, since it handles it's own destruction
 /// </summary>
 public class CitySceneManager : Singleton<CitySceneManager>
 {
@@ -87,7 +90,17 @@ public class CitySceneManager : Singleton<CitySceneManager>
 
     private void onLocatableLocationChanged(LocatableLocationChangedEventData data)
     {
-        if(data.NewLocation.Holder == City)
+        Debug.Assert(data.Locatable != null, "Locatable cannot be null in location change event data");
+        Debug.Assert(data.NewLocation != null, "New location cannot be null in location change event data");
+        Debug.Assert(data.OldLocation != null, "Old location cannot be null in location change event data");
+
+
+        if (data.OldLocation.Holder == City)
+        {
+            clearView(data.Locatable);
+        }
+
+        if (data.NewLocation.Holder == City)
         {
             applyProfileToObject(data.Locatable);
         }

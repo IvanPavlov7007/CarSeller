@@ -93,6 +93,7 @@ public class ProductCreationService
     //}
 }
 
+//TODO: OWNERSHIP system should handle ownership removal on deletion
 
 /// <summary>
 /// Removing references to a product and notifying the system that it has been destroyed.
@@ -101,9 +102,14 @@ public static class ProductDeletionService
 {
     public static void DeleteProduct(Product product)
     {
-        G.Instance.ProductLocationService.RemoveProduct(product);
-        GameEvents.Instance.OnProductDestroyed(new ProductDestroyedEventData(product));
+        var location = G.Instance.ProductLocationService.GetProductLocation(product);
+        Debug.Assert(location != null, $"Trying to delete product {product.Name} that has no location.");
+        location.Detach();
+        //TODO remove ownerships/registrations, but the best way to do is to have those systems handle this by themselves
+
+        Debug.Assert(product != null, "Trying to delete a null product.");
+        GameEvents.Instance.OnProductDestroyed?.Invoke(new ProductDestroyedEventData(product));
         Debug.Assert(product is ILocatable);
-        GameEvents.Instance.OnLocatableDestroyed(new LocatableDestroyedEventData(product));
+        GameEvents.Instance.OnLocatableDestroyed?.Invoke(new LocatableDestroyedEventData(product));
     }
 }

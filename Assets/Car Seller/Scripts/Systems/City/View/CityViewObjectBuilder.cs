@@ -42,7 +42,6 @@ public class CityViewObjectBuilder : ScriptableObject
         
         var location = G.Instance.ProductLocationService.GetProductLocation(car) as City.CityLocation;
 
-        carGO.AddComponent<ProductView>().Initialize(car, location);
         var viewController = 
             carGO.AddComponent<CityViewObjectController>().Initialize(car);
         var rigidbody2D = carGO.AddComponent<Rigidbody2D>();
@@ -50,9 +49,9 @@ public class CityViewObjectBuilder : ScriptableObject
         carGO.AddComponent<ContentProvider>().Initialize(car);
         carGO.AddComponent<DragInteractable>().sortingOrder = 10;
         carGO.AddComponent<DragDisabler>();
-        carGO.AddComponent<ViewStateChanger>();
         carGO.AddComponent<MovingPoint>().Initialize(location);
         carGO.GetComponentInChildren<SpriteRenderer>().color = car.CarFrame.runtimeConfig.FrameColor;
+        carGO.AddComponent<ViewStateChanger>();
         return viewController;
     }
 
@@ -62,10 +61,10 @@ public class CityViewObjectBuilder : ScriptableObject
         GameObject warehouseGO = Instantiate(warehouseViewPrefab, location.CityPosition.WorldPosition,Quaternion.identity);
         var viewController =
             warehouseGO.AddComponent<CityViewObjectController>().Initialize(warehouse);
-        warehouseGO.AddComponent<ViewStateChanger>();
         warehouseGO.AddComponent<Interactable>();
         warehouseGO.AddComponent<ContentProvider>().Initialize(warehouse);
         warehouseGO.AddComponent<Triggerable>();
+        warehouseGO.AddComponent<ViewStateChanger>();
         return viewController;
     }
 }

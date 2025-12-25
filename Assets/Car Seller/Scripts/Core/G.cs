@@ -70,7 +70,7 @@ public sealed class G : Singleton<G>
         GameFlowManager = new GameFlowManager();
         CarMechanicService = new CarMechanicService();
 
-        TransactionProcessor transactionProcessor = new TransactionProcessor(new Dictionary<TransactionType, ITransactionHandler>
+        TransactionProcessor = new TransactionProcessor(new Dictionary<TransactionType, ITransactionHandler>
         {
             { TransactionType.Purchase, new PurchaseHandler() },
             { TransactionType.Sell, new SellHandler() },

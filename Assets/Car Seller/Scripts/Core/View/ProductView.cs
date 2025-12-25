@@ -6,6 +6,11 @@ public interface IProductViewComponentBuilder<TProductView> where TProductView :
     public TProductView BuildViewComponent(GameObject gameObject, Product product);
 }
 
+/// <summary>
+/// Since products can be located in deffent locations (warehouse, city, etc), this view represents a product in a specific location.
+/// It destroys itself when the product is moved to a different location or destroyed.
+/// Handles its own destruction
+/// </summary>
 public class ProductView : MonoBehaviour
 {
     public Product Product { get; private set; }
@@ -23,11 +28,13 @@ public class ProductView : MonoBehaviour
     protected virtual void OnEnable()
     {
         GameEvents.Instance.OnProductLocationChanged += productLocationChanged;
+        GameEvents.Instance.OnProductDestroyed += productDestroyed;
     }
 
     protected virtual void OnDisable()
     {
         GameEvents.Instance.OnProductLocationChanged -= productLocationChanged;
+        GameEvents.Instance.OnProductDestroyed -= productDestroyed;
     }
 
     private void productLocationChanged(ProductLocationChangedEventData data)
@@ -38,7 +45,20 @@ public class ProductView : MonoBehaviour
         }
     }
 
-    public virtual void OnProductLocationChanged()
+    private void productDestroyed(ProductDestroyedEventData data)
+    {
+        if(data.Product == Product)
+        {
+            OnProductDestroyed();
+        }
+    }
+
+    protected virtual void OnProductDestroyed()
+    {
+        Destroy(gameObject);
+    }
+
+    protected virtual void OnProductLocationChanged()
     {
         Destroy(gameObject);
     }

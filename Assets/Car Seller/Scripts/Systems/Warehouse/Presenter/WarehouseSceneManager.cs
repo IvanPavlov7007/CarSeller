@@ -5,6 +5,7 @@ using UnityEngine;
 
 /// <summary>
 /// Loads and manages warehouse in the warehouse scene
+/// Listens when to create product views and creates them in the scene
 /// </summary>
 //[ExecuteAlways]
 public class WarehouseSceneManager : Singleton<WarehouseSceneManager>
@@ -88,6 +89,7 @@ public class WarehouseSceneManager : Singleton<WarehouseSceneManager>
             buildProductView(data.Product, data.NewLocation);
         }
     }
+
 
     void buildProductView(Product product, ILocation location)
     {

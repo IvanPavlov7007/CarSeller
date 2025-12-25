@@ -92,11 +92,11 @@ public class GameFlowManager : RoutinedObject
             },
             onSucceed: (warehouse) =>
             {
-                // Theft succeeded — stash car in a warehouse if provided
-                if (warehouse != null)
-                {
-                    G.CityActionService.PutCarInsideWarehouse(car, warehouse);
-                }
+                Debug.Assert(warehouse != null, "StealingSequence: warehouse is null on succeed.");
+                Debug.Assert(car != null, "StealingSequence: car is null on succeed.");
+                G.TransactionProcessor.Process(
+                    new Transaction(TransactionType.Steal, new StealTransactionData(car, warehouse))
+                );
                 CarSpawnManager.NewCarsRotation();
             }
         );
