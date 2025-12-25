@@ -6,9 +6,9 @@ public static class BuyerManager
 {
     public static Buyer CreateBuyer(Car car, CarSellOffer offer)
     {
-        Warehouse warehouse = CityPositionLocator.GetWarehouse(car);
+        Warehouse warehouse = CityLocatorHelper.GetWarehouse(car);
         Debug.Assert(warehouse != null, "Warehouse should not be null when creating a buyer.");
-        var warehouseLocation = CityPositionLocator.GetWarehouseLocation(warehouse);
+        var warehouseLocation = CityLocatorHelper.GetCityLocation(warehouse);
 
         var randomBuyerMarker = G.City.GetRandomMarker("buyer", predicate: marker => marker.PositionOnGraph != null);
 

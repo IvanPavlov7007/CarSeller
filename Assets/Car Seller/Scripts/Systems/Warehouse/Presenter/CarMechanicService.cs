@@ -85,7 +85,7 @@ public class CarMechanicService : RoutinedObject
             {
                 var city = World.Instance.City;
                 G.Instance.ProductLocationService.MoveProduct(car, city.GetEmptyLocation(
-                    city.GetClosestPosition(city.Locations[sceneWarehouseModel].CityPosition.WorldPosition)
+                    CityLocatorHelper.GetCityLocation(sceneWarehouseModel).CityPosition
                 ));
             },
             () => G.Instance.GameFlowController.GetToTheCity()

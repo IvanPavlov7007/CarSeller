@@ -34,14 +34,30 @@ public class PlayerManager
         }
         if (Player.Possessions.Add(possession))
         {
-            GameEvents.Instance.OnPlayerPossessionAcquired?.Invoke(new PossesionChangeEventData(possession));
-            return true;
+            //TODO instead of having manager, make the ownership system, that checks things like this
+            return addRecursiveStoredPossessions(possession);
         }
         else
         {
             Debug.LogWarning("Failed to add possession to player.");
             return false;
         }
+    }
+
+    bool addRecursiveStoredPossessions(IPossession possession)
+    {
+        GameEvents.Instance.OnPlayerPossessionAcquired?.Invoke(new PossesionChangeEventData(possession));
+        bool cumulative = true;
+        if(possession is ILocationsHolder container)
+        {
+            foreach (var location in container.GetLocations())
+            {
+                if(location.Occupant is IPossession childPossession)
+                    cumulative &= AddPossession(childPossession);
+            }
+        }
+
+        return cumulative;
     }
 
     public float SetPlayerMoney(float amount)

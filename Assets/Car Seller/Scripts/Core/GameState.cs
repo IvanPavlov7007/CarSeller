@@ -14,10 +14,12 @@ public class SellingGameState : GameState
 {
     public readonly Car SellingCar;
     public readonly Buyer Buyer;
-    public SellingGameState(Car sellingCar , Buyer buyer)
+    public readonly Warehouse SellingWarehouse;
+    public SellingGameState(Car sellingCar , Buyer buyer, Warehouse sellingWarehouse)
     {
         SellingCar = sellingCar;
         Buyer = buyer;
+        SellingWarehouse = sellingWarehouse;
     }
 }
 

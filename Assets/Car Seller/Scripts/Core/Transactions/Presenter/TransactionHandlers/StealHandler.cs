@@ -11,13 +11,16 @@
         }
         var car = data.Car;
         var targetWarehouse = data.TargetWarehouse;
-        // Logic to add the stolen car to the target warehouse
 
+        // Logic to add the stolen car to the target warehouse
+        
         TransactionResult result;
+
+        CarSpawnManager.ReleaseCar(car);
+        G.Instance.PlayerManager.AddPossession(car);
 
         if (G.Instance.CityActionService.PutCarInsideWarehouse(car, targetWarehouse))
         {
-            CarSpawnManager.ReleaseCar(car);
             result = TransactionResult.Success();
         }
         else // couldn't find space in the warehouse

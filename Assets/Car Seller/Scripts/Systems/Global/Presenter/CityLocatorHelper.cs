@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public static class CityPositionLocator
+/// <summary>
+/// Streamlined helper methods for locating objects within the city.
+/// Use it to find warehouses, cars, and their respective locations.
+/// </summary>
+public static class CityLocatorHelper
 {
     public static bool IsInCity(ILocatable locatable)
     {
@@ -12,7 +16,7 @@ public static class CityPositionLocator
 
     public static Warehouse GetWarehouse(Car car)
     {
-        var warehouse = G.Instance.ProductLocationService.GetProductLocation(car) as Warehouse;
+        var warehouse = G.Instance.ProductLocationService.GetProductLocation(car).Holder as Warehouse;
         if (warehouse == null)
         {
             Debug.LogWarning("Car is not located in any warehouse.");
@@ -20,19 +24,19 @@ public static class CityPositionLocator
         return warehouse;
     }
 
-    public static City.CityLocation GetWarehouseLocation(Warehouse warehouse)
-    {
-        return G.City.Locations[warehouse];
-    }
-
-    public static City.CityLocation GetCarLocation(Car car)
+    /// <summary>
+    /// Gets the city location of the parent warehouse if the car is in a warehouse,
+    /// </summary>
+    /// <param name="car"></param>
+    /// <returns></returns>
+    public static City.CityLocation GetCarParentLocation(Car car)
     {
         var warehouse = GetWarehouse(car);
         if (warehouse == null)
         {
             return G.City.Locations[car];
         }
-        return GetWarehouseLocation(warehouse);
+        return GetCityLocation(warehouse);
     }
 
     public static Warehouse GetClosestWarehouse(Car car, out float distance)
@@ -79,8 +83,8 @@ public static class CityPositionLocator
         return carDistances.First().Key;
     }
 
-    public static ILocation GetCityLocation(Buyer buyer)
+    public static City.CityLocation GetCityLocation(ILocatable locatable)
     {
-        return G.City.Locations[buyer];
+        return G.City.Locations[locatable];
     }
 }

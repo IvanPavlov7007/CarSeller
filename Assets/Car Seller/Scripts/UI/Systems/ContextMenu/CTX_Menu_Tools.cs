@@ -29,7 +29,7 @@ public static class CTX_Menu_Tools
 
     static string FormatPrice(float price)
     {
-        return price.ToString("C2", CultureInfo.CurrentCulture);
+        return price.ToString("C0", CultureInfo.CurrentCulture);
     }
 
     public static UIElement Description(string description)

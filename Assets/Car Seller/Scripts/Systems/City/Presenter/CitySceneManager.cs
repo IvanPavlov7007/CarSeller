@@ -130,7 +130,7 @@ public class CitySceneManager : Singleton<CitySceneManager>
 
     private void onLocatableStateChanged(LocatableStateChangedEventData data)
     {
-        if ( CityPositionLocator.IsInCity(data.Locatable))
+        if ( CityLocatorHelper.IsInCity(data.Locatable))
         {
             applyProfileToObject(data.Locatable);
         }

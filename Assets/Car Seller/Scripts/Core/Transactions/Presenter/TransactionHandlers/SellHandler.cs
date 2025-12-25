@@ -37,7 +37,7 @@ public class SellHandler : TransactionHandler
             result = TransactionResult.InvalidTransaction("No car specified for sale.");
         }
 
-        if (result == null && !player.Possessions.Contains(car))
+        if (result == null && !player.Owns(car))
         {
             result = TransactionResult.InvalidTransaction("Player does not own the car being sold.");
         }
@@ -46,7 +46,7 @@ public class SellHandler : TransactionHandler
         {
             result = TransactionResult.Success(
                 location: new TransactionLocation(TransactionLocationType.WorldSpace,
-                CityPositionLocator.GetCarLocation(car).CityPosition.WorldPosition));
+                CityLocatorHelper.GetCityLocation(car).CityPosition.WorldPosition));
         }
 
         if (result.Type == TransactionResultType.Success)

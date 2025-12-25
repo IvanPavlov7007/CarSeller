@@ -25,8 +25,8 @@ public class CityViewObjectBuilder : ScriptableObject
 
     public CityViewObjectController BuildBuyer(Buyer buyer)
     {
-        GameObject buyerGO = Instantiate(buyerViewPrefab);
-        var location = CityPositionLocator.GetCityLocation(buyer);
+        var location = CityLocatorHelper.GetCityLocation(buyer);
+        GameObject buyerGO = Instantiate(buyerViewPrefab, location.CityPosition.WorldPosition, Quaternion.identity);
         var viewController =
             buyerGO.AddComponent<CityViewObjectController>().Initialize(buyer, ViewObjectVisualState.Normal, true);
         buyerGO.AddComponent<ContentProvider>().Initialize(buyer);
@@ -57,7 +57,7 @@ public class CityViewObjectBuilder : ScriptableObject
 
     public CityViewObjectController buildWarehouse(Warehouse warehouse)
     {
-        var location = World.Instance.City.Locations[warehouse];
+        var location = CityLocatorHelper.GetCityLocation(warehouse);
         GameObject warehouseGO = Instantiate(warehouseViewPrefab, location.CityPosition.WorldPosition,Quaternion.identity);
         var viewController =
             warehouseGO.AddComponent<CityViewObjectController>().Initialize(warehouse);

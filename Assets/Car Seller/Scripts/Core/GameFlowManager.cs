@@ -35,12 +35,13 @@ public class GameFlowManager : RoutinedObject
         Debug.Assert(G.GameFlowController.currentSceneType == GameFlowController.GameSceneType.Warehouse);
 
         var car = offer.Car;
+        var warehouse = CityLocatorHelper.GetWarehouse(car);
         var buyer = BuyerManager.CreateBuyer(car, offer);
 
         // Enter selling state
-        GameFlowController.SetGameState(new SellingGameState(car, buyer));
+        GameFlowController.SetGameState(new SellingGameState(car, buyer, warehouse));
 
-        var initialWarehouse = G.ProductLocationService.GetProductLocation(car) as Warehouse;
+        var initialWarehouse = CityLocatorHelper.GetWarehouse(car);
         // Move to the city/map
         G.CarMechanicService.RideCarFromWarehouse(car, initialWarehouse);
 

@@ -48,6 +48,6 @@ public class PlayerPossessionTracker : Singleton<PlayerPossessionTracker>
 
     private bool isPlayerOwner(ILocation location)
     {
-        return World.Instance.Economy.Player.Possessions.Contains(location as IPossession);
+        return G.Player.Owns(location as IPossession);
     }
 }

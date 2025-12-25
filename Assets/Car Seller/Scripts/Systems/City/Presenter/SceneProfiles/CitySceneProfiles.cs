@@ -66,8 +66,6 @@ public sealed class StealingCitySceneProfile : CitySceneProfile
                 return car == stealingState.StealingCar;
             case Warehouse warehouse:
                 {
-                    if (!G.Player.Owns(warehouse))
-                        return false;
                     return true;
                 }
             default:
@@ -108,10 +106,10 @@ public sealed class SellingCitySceneProfile : CitySceneProfile
                 return car == sellingState.SellingCar;
             case Warehouse warehouse:
                 {
-                    if (!G.Player.Owns(warehouse))
-                        return false;
-                    return true;
+                    return warehouse == sellingState.SellingWarehouse;
                 }
+            case Buyer buyer:
+                return buyer == sellingState.Buyer;
             default:
                 Debug.LogError($"SellingCitySceneProfile: Unsupported object type {obj.GetType()}");
                 return false;
