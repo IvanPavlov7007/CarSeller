@@ -298,7 +298,7 @@ public class InteractionTriggerProfile : IInteractionContentProfile<TriggerActio
         Debug.Assert(warehouse != null, "StealingCityInteractionTriggerProfile: trigger is not Warehouse");
         Debug.Assert(stealingState.StealingCar != null, "StealingCityInteractionTriggerProfile: StealingCar is null");
 
-        canProceed = warehouse.AvailableCarParkingSpots > 0 && (triggerCause as Car == stealingState.StealingCar);
+        canProceed = G.Player.Owns(warehouse) && warehouse.AvailableCarParkingSpots > 0 && (triggerCause as Car == stealingState.StealingCar);
         triggerAction = () =>
         {
             GameEvents.Instance.OnPlayerSucceed(new PlayerActionEventData(PlayerOutcome.Succeeded, warehouse));

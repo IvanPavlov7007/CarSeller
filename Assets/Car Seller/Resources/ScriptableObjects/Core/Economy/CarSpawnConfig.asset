@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab8e45237bec76548b7b5e68bd5d67d0, type: 3}
   m_Name: CarSpawnConfig
   m_EditorClassIdentifier: 
-  CarsToSpawnCount: 15
+  CarsToSpawnMaxCount: 8
+  CarsToHaveMinCount: 4
   carSpawnEntries:
   - CarBaseConfig: {fileID: 11400000, guid: ffff342da52be704faab569db95fc79c, type: 2}
     CarVariantConfig: {fileID: 0}

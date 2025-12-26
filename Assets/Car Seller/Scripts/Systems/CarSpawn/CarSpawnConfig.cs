@@ -5,13 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CarSpawnConfig", menuName = "Configs/Economy/CarSpawnConfig")]
 public class CarSpawnConfig : ScriptableObject
 {
-    public int CarsToSpawnCount = 15;
+    public int CarsToSpawnMaxCount = 15;
+    public int CarsToHaveMinCount = 5;
     public CarSpawnEntry[] carSpawnEntries;
 
-    public CarSpawnEntry[] GetRandomCarSpawnEntriesWithPuttingBack()
+    public CarSpawnEntry[] GetRandomCarSpawnEntriesWithPuttingBack(int count)
     {
         List<CarSpawnEntry> selectedEntries = new List<CarSpawnEntry>();
-        for (int i = 0; i < CarsToSpawnCount; i++)
+        for (int i = 0; i < count; i++)
         {
             int randomIndex = UnityEngine.Random.Range(0, carSpawnEntries.Length);
             selectedEntries.Add(carSpawnEntries[randomIndex]);
