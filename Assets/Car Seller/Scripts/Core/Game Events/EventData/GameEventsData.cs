@@ -1,6 +1,4 @@
-﻿using static UnityEditor.FilePathAttribute;
-
-public class ProductCreatedEventData
+﻿public class ProductCreatedEventData
 {
     public Product Product { get; private set; }
     public ILocation Location { get; private set; }

@@ -22,6 +22,7 @@ public class CitySceneManager : Singleton<CitySceneManager>
 
     private void Awake()
     {
+        CitySceneBootstrap.Execute();
         currentProfile = profileRegistry.Get(G.GameState);
         initializeCity();
         G.Instance.CityRoot.SetActive(true);
