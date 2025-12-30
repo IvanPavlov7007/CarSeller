@@ -1077,7 +1077,7 @@ MonoBehaviour:
   Tags:
   - Car
   - Buyer
-  RegionId: 
+  RegionId: 1
   Radius: 0
   Kind: 1
   Node: {fileID: 0}
@@ -1133,7 +1133,7 @@ MonoBehaviour:
   Tags:
   - Car
   - Buyer
-  RegionId: 
+  RegionId: 1
   Radius: 0
   Kind: 1
   Node: {fileID: 0}
@@ -2959,7 +2959,7 @@ MonoBehaviour:
   Tags:
   - Car
   - Buyer
-  RegionId: 
+  RegionId: 1
   Radius: 0
   Kind: 1
   Node: {fileID: 0}
@@ -4411,7 +4411,7 @@ MonoBehaviour:
   Tags:
   - Car
   - Buyer
-  RegionId: 
+  RegionId: 1
   Radius: 0
   Kind: 1
   Node: {fileID: 0}
@@ -4467,7 +4467,7 @@ MonoBehaviour:
   Tags:
   - Car
   - Buyer
-  RegionId: 
+  RegionId: 1
   Radius: 0
   Kind: 2
   Node: {fileID: 0}
@@ -8265,7 +8265,7 @@ MonoBehaviour:
   Tags:
   - Car
   - Buyer
-  RegionId: 
+  RegionId: 1
   Radius: 0
   Kind: 2
   Node: {fileID: 0}
@@ -8853,7 +8853,7 @@ MonoBehaviour:
   Tags:
   - Car
   - Buyer
-  RegionId: 
+  RegionId: 1
   Radius: 0
   Kind: 2
   Node: {fileID: 0}
@@ -12914,7 +12914,7 @@ MonoBehaviour:
   Tags:
   - Car
   - Buyer
-  RegionId: 
+  RegionId: 1
   Radius: 0
   Kind: 2
   Node: {fileID: 0}
@@ -14648,7 +14648,7 @@ MonoBehaviour:
   Tags:
   - Car
   - Buyer
-  RegionId: 
+  RegionId: 1
   Radius: 0
   Kind: 2
   Node: {fileID: 0}
@@ -17006,7 +17006,7 @@ MonoBehaviour:
   Tags:
   - Car
   - Buyer
-  RegionId: 
+  RegionId: 1
   Radius: 0
   Kind: 2
   Node: {fileID: 0}
@@ -17420,7 +17420,7 @@ MonoBehaviour:
   Tags:
   - Car
   - Buyer
-  RegionId: 
+  RegionId: 1
   Radius: 0
   Kind: 2
   Node: {fileID: 0}
@@ -18238,7 +18238,7 @@ MonoBehaviour:
   Tags:
   - Car
   - Buyer
-  RegionId: 
+  RegionId: 1
   Radius: 0
   Kind: 2
   Node: {fileID: 0}
@@ -26750,7 +26750,7 @@ MonoBehaviour:
   Tags:
   - Car
   - Buyer
-  RegionId: 
+  RegionId: 1
   Radius: 0
   Kind: 2
   Node: {fileID: 0}
@@ -27072,7 +27072,7 @@ MonoBehaviour:
   Tags:
   - Car
   - Buyer
-  RegionId: 
+  RegionId: 1
   Radius: 0
   Kind: 2
   Node: {fileID: 0}
@@ -28274,7 +28274,7 @@ MonoBehaviour:
   Tags:
   - Car
   - Buyer
-  RegionId: 
+  RegionId: 1
   Radius: 0
   Kind: 2
   Node: {fileID: 0}
@@ -31770,7 +31770,7 @@ MonoBehaviour:
   Tags:
   - Car
   - Buyer
-  RegionId: 
+  RegionId: 1
   Radius: 0
   Kind: 1
   Node: {fileID: 0}
@@ -35054,7 +35054,7 @@ MonoBehaviour:
   Tags:
   - Car
   - Buyer
-  RegionId: 
+  RegionId: 1
   Radius: 0
   Kind: 2
   Node: {fileID: 0}
@@ -37652,7 +37652,7 @@ MonoBehaviour:
   Tags:
   - Car
   - Buyer
-  RegionId: 
+  RegionId: 1
   Radius: 0
   Kind: 1
   Node: {fileID: 0}

@@ -14,20 +14,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CarsToSpawnMaxCount: 8
   CarsToHaveMinCount: 4
-  carSpawnEntries:
-  - CarBaseConfig: {fileID: 11400000, guid: ffff342da52be704faab569db95fc79c, type: 2}
-    CarVariantConfig: {fileID: 0}
-  - CarBaseConfig: {fileID: 11400000, guid: ffff342da52be704faab569db95fc79c, type: 2}
-    CarVariantConfig: {fileID: 11400000, guid: e2150ed0432f02f4a8a6256d8ad3f45d, type: 2}
-  - CarBaseConfig: {fileID: 11400000, guid: d59b21759925cf54fa4a547272179a3c, type: 2}
-    CarVariantConfig: {fileID: 0}
-  - CarBaseConfig: {fileID: 11400000, guid: 857812dc0c3ec3040a7c758c266cbe4b, type: 2}
-    CarVariantConfig: {fileID: 11400000, guid: 2b3a91484d1de1c4a8badc61a1c2a7e0, type: 2}
-  - CarBaseConfig: {fileID: 11400000, guid: ffff342da52be704faab569db95fc79c, type: 2}
-    CarVariantConfig: {fileID: 0}
-  - CarBaseConfig: {fileID: 11400000, guid: d59b21759925cf54fa4a547272179a3c, type: 2}
-    CarVariantConfig: {fileID: 0}
-  - CarBaseConfig: {fileID: 11400000, guid: 857812dc0c3ec3040a7c758c266cbe4b, type: 2}
-    CarVariantConfig: {fileID: 11400000, guid: 3d98103e50bd0d34a9afed789f4b4910, type: 2}
-  - CarBaseConfig: {fileID: 11400000, guid: f63816bf1af38734c9fb3cbd64a7eb41, type: 2}
-    CarVariantConfig: {fileID: 11400000, guid: abf656a7d9677f04b8cdfd7c7feff53d, type: 2}
+  RegionalCarSpawnEntries:
+  - RegionName: 1
+    CarSpawnEntries:
+    - Weight: 0.3
+      CarBaseConfig: {fileID: 11400000, guid: 63e4ce3fb08a25a4683d3ff1455b38d6, type: 2}
+      CarVariantConfig: {fileID: 0}
+    - Weight: 0.3
+      CarBaseConfig: {fileID: 11400000, guid: ffff342da52be704faab569db95fc79c, type: 2}
+      CarVariantConfig: {fileID: 11400000, guid: 3d98103e50bd0d34a9afed789f4b4910, type: 2}
+    - Weight: 0.3
+      CarBaseConfig: {fileID: 11400000, guid: 857812dc0c3ec3040a7c758c266cbe4b, type: 2}
+      CarVariantConfig: {fileID: 11400000, guid: e2150ed0432f02f4a8a6256d8ad3f45d, type: 2}
+    - Weight: 0.1
+      CarBaseConfig: {fileID: 11400000, guid: d59b21759925cf54fa4a547272179a3c, type: 2}
+      CarVariantConfig: {fileID: 11400000, guid: 2b3a91484d1de1c4a8badc61a1c2a7e0, type: 2}
+  - RegionName: 2
+    CarSpawnEntries:
+    - Weight: 0.1
+      CarBaseConfig: {fileID: 11400000, guid: 63e4ce3fb08a25a4683d3ff1455b38d6, type: 2}
+      CarVariantConfig: {fileID: 11400000, guid: 3d98103e50bd0d34a9afed789f4b4910, type: 2}
+    - Weight: 0.3
+      CarBaseConfig: {fileID: 11400000, guid: ffff342da52be704faab569db95fc79c, type: 2}
+      CarVariantConfig: {fileID: 11400000, guid: e2150ed0432f02f4a8a6256d8ad3f45d, type: 2}
+    - Weight: 0.35
+      CarBaseConfig: {fileID: 11400000, guid: 857812dc0c3ec3040a7c758c266cbe4b, type: 2}
+      CarVariantConfig: {fileID: 11400000, guid: 2b3a91484d1de1c4a8badc61a1c2a7e0, type: 2}
+    - Weight: 0.2
+      CarBaseConfig: {fileID: 11400000, guid: d59b21759925cf54fa4a547272179a3c, type: 2}
+      CarVariantConfig: {fileID: 0}
+    - Weight: 0.05
+      CarBaseConfig: {fileID: 11400000, guid: f63816bf1af38734c9fb3cbd64a7eb41, type: 2}
+      CarVariantConfig: {fileID: 11400000, guid: abf656a7d9677f04b8cdfd7c7feff53d, type: 2}

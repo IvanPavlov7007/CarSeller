@@ -1,4 +1,4 @@
-//Vesion: 4
+//Version: 5
 //increment version each change
 using System;
 using System.Collections;
@@ -137,6 +137,54 @@ public static class CommonTools
             throw new System.Exception("weights count doesn't match elements count");
         return elements[RandomIndex(weights)];
     }
+
+
+    public static int RandomIndex(float[] weights, float weightsSum)
+    {
+        if (weightsSum <= 0f)
+            throw new System.Exception("WeightsSum must be positive");
+
+        float val = Random.Range(0f, weightsSum);
+        float cumulative = 0f;
+
+        for (int i = 0; i < weights.Length; i++)
+        {
+            cumulative += weights[i];
+            if (val < cumulative)
+                return i;
+        }
+
+        // Fallback: if due to float precision we didn't return inside the loop,
+        // but the sum is positive, return the last index instead of throwing.
+        return weights.Length - 1;
+    }
+
+    public static int RandomIndex(float[] weights)
+    {
+        float sum = 0f;
+        for (int i = 0; i < weights.Length; i++)
+        {
+            sum += weights[i];
+        }
+
+        if (sum <= 0f)
+            throw new System.Exception("Sum of weights must be positive");
+
+        return RandomIndex(weights, sum);
+    }
+
+    public static T RandomObject<T>(T[] elements, float[] weights)
+    {
+        if (weights == null)
+            throw new System.ArgumentNullException("weights");
+        if (elements == null)
+            throw new System.ArgumentNullException("elements");
+        if (weights.Length != elements.Length)
+            throw new System.Exception("weights count doesn't match elements count");
+
+        return elements[RandomIndex(weights)];
+    }
+
     public static Vector2 RotateDir(Vector2 dir, float angle)
     {
         float cosA = Mathf.Cos(Mathf.Deg2Rad * angle);

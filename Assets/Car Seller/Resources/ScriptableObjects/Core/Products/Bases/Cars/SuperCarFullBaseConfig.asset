@@ -433,4 +433,5 @@ MonoBehaviour:
       Entry: 8
       Data: 
   Name: Supercar
+  BasePrice: 5000
   CarFrameBaseConfig: {fileID: 11400000, guid: a994ec9977ffb5e48a0ec6d89b62690e, type: 2}

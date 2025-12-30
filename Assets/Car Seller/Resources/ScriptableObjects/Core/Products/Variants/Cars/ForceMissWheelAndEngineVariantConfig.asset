@@ -55,4 +55,6 @@ MonoBehaviour:
       Entry: 8
       Data: 
   baseFallbackConfig: {fileID: 0}
+  OverrideBasePrice: 0
+  BasePrice: 0
   carFrameRuntimeConfig: {fileID: 0}

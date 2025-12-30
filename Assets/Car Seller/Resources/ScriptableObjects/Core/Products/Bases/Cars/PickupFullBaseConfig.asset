@@ -433,5 +433,5 @@ MonoBehaviour:
       Entry: 8
       Data: 
   Name: Pickup
-  BasePrice: 400
+  BasePrice: 1400
   CarFrameBaseConfig: {fileID: 11400000, guid: f21d305ae093c4947ae112b2b1cada25, type: 2}

@@ -15,4 +15,4 @@ MonoBehaviour:
   Name: EngineLevel2
   Sprite: {fileID: -2114970517, guid: b881d3a462c38054a93a6973bd7b76e9, type: 3}
   Level: 1
-  BasePrice: 700
+  BasePrice: 0

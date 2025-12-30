@@ -6,7 +6,7 @@ public class ProductPriceCalculator
 {
     public float Calculate(Car car)
     {
-        float totalPrice = 0f;
+        float totalPrice = car.BasePrice;
         // Add prices of all parts in slots
         foreach (var location in car.GetLocations())
         {

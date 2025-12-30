@@ -57,8 +57,10 @@ public static class CarSpawnManager
 
         int carsToSpawn = nextCarsToSpawnCount - temporaryCars.Count;
 
-        spawnCarsAtMarkers(markers,
-            carSpawnConfig.GetRandomCarSpawnEntriesWithPuttingBack(carsToSpawn));
+        Debug.Assert(carsToSpawn > 0);
+        Debug.Assert(carsToSpawn <= markers.Count);
+        
+        spawnCarsAtMarkers(markers.Take(carsToSpawn).ToList());
     }
 
     private static void pickCarsCount()
@@ -80,10 +82,14 @@ public static class CarSpawnManager
         //shuffle markers
         markers.Shuffle();
 
-        spawnCarsAtMarkers(markers,
-            carSpawnConfig.GetRandomCarSpawnEntriesWithPuttingBack(nextCarsToSpawnCount));
+        spawnCarsAtMarkers(markers.Take(nextCarsToSpawnCount).ToList());
     }
 
+    /// <summary>
+    /// Old method, spawns cars from provided entries at provided markers
+    /// </summary>
+    /// <param name="markers"></param>
+    /// <param name="carSpawnEntries"></param>
     private static void spawnCarsAtMarkers(List<City.CityMarker> markers, CarSpawnConfig.CarSpawnEntry[] carSpawnEntries)
     {
         Debug.Assert(markers.Count >= carSpawnEntries.Length,
@@ -98,6 +104,19 @@ public static class CarSpawnManager
 
             temporaryCars.Add(car);
             usedMarkers.Add(car, randomMarker);
+        }
+    }
+
+    private static void spawnCarsAtMarkers(List<City.CityMarker> markers)
+    {
+        foreach (var marker in markers)
+        {
+            var carSpawnEntry = carSpawnConfig.GetWeightedRandomCarForRegion(marker.RegionId);
+            var location = G.City.GetEmptyLocation(marker.PositionOnGraph.Value);
+            var car = generateCar(location, carSpawnEntry);
+
+            temporaryCars.Add(car);
+            usedMarkers.Add(car, marker);
         }
     }
 

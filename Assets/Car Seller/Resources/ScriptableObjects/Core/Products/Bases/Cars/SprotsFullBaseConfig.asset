@@ -433,5 +433,5 @@ MonoBehaviour:
       Entry: 8
       Data: 
   Name: Sportscar
-  BasePrice: 300
+  BasePrice: 2200
   CarFrameBaseConfig: {fileID: 11400000, guid: 526c83c7d5e9c39488bba242842be9a0, type: 2}

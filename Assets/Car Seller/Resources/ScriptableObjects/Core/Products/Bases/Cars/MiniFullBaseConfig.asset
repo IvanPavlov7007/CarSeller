@@ -433,5 +433,5 @@ MonoBehaviour:
       Entry: 8
       Data: 
   Name: Mini
-  BasePrice: 200
+  BasePrice: 800
   CarFrameBaseConfig: {fileID: 11400000, guid: 458c8c1c3f4caf3459b5f8711348779e, type: 2}
