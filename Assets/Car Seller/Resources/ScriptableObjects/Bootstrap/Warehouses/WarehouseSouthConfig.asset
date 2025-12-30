@@ -31,5 +31,5 @@ MonoBehaviour:
     MarkerId: s_wh_1
   warehouseClosestInitialPosition: {x: -4, y: -3}
   initialProductsToSpawn:
-  - productBaseConfig: {fileID: 11400000, guid: d59b21759925cf54fa4a547272179a3c, type: 2}
+  - productBaseConfig: {fileID: 11400000, guid: 63e4ce3fb08a25a4683d3ff1455b38d6, type: 2}
     productVariantConfig: {fileID: 0}

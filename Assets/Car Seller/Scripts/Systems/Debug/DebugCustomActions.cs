@@ -2,6 +2,8 @@
 
 public class DebugCustomActions : Singleton<DebugCustomActions>
 {
+#if DEBUG
+
     private void OnEnable()
     {
         PlayerInputController.Instance.crouched += onActionOne;
@@ -16,11 +18,12 @@ public class DebugCustomActions : Singleton<DebugCustomActions>
 
     void onActionOne()
     {
-        FindAnyObjectByType<Interactable>().CursorClick();
+        FindAnyObjectByType<Interactable>()?.CursorClick();
     }
 
     void onActionTwo()
     {
 
     }
+#endif
 }

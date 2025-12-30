@@ -20,3 +20,4 @@ MonoBehaviour:
   Color: {r: 1, g: 1, b: 1, a: 1}
   SideViewSize: 1
   TopViewSize: 1
+  BasePrice: 20

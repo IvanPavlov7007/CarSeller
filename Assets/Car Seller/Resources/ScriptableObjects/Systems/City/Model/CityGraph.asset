@@ -217,9 +217,17 @@ MonoBehaviour:
   - Id: de907eeb20db486bb464ee0740558365
     Position: {x: -0.54, y: 0.23}
   - Id: 9fe05e552a0b4189969eb37e4de9c494
-    Position: {x: -1.89, y: 0.27}
+    Position: {x: -2.099, y: 0.263}
+  - Id: 00a29faf4a6642b3baf29575c9b24dfd
+    Position: {x: -1.864, y: 0.269}
+  - Id: 2cead1bb3f6346ba97166366bab7e0e1
+    Position: {x: -1.629, y: 0.269}
   - Id: 2200adc6cdf941b492dd74a25d850562
-    Position: {x: -1.85, y: -4.23}
+    Position: {x: -2.163, y: -4.07}
+  - Id: 9ae52e661ff848658e77c60caa15e26c
+    Position: {x: -1.923, y: -4.07}
+  - Id: 0933aa7f24034ce9865fa3c463b30bdf
+    Position: {x: -1.708, y: -4.07}
   - Id: 53bf10f8196445c1b55b7127389311ee
     Position: {x: -0.36, y: -4.15}
   - Id: 502113340e154a03b0c9883e26649345
@@ -478,13 +486,6 @@ MonoBehaviour:
     EdgeAuthorId: e3be972d73724e4bbbf7754d82dcd0d2
     EdgeAuthorPath: CityAuthoringRoot/Edge_e1bbbe454c2b4db9967b242f4d0346d8_to_b5a95f0a2b85424290f5a0de00f78dfe
     SplineIndex: 0
-  - Id: 18f05829b7234cd88f5f73f441b7d508
-    FromNodeId: a0e7c48ccf954a5e959903fdc061443f
-    ToNodeId: 9fe05e552a0b4189969eb37e4de9c494
-    Bidirectional: 1
-    EdgeAuthorId: 18f05829b7234cd88f5f73f441b7d508
-    EdgeAuthorPath: CityAuthoringRoot/Edge_d7e15a7ae9284cb89990d0bb65686b87_to_35d342d2ca4c40b58e539c34828a3183
-    SplineIndex: 0
   - Id: d441a5a7bb4046169e3ca839f99f9d33
     FromNodeId: c62fa348252a46b1951729f819baf333
     ToNodeId: 139d35ae7687479b87b7e2e075e9e01c
@@ -498,13 +499,6 @@ MonoBehaviour:
     Bidirectional: 1
     EdgeAuthorId: c941a66dea394b5e92200e3aa60207c1
     EdgeAuthorPath: CityAuthoringRoot/Edge_e30c8e30c95c4bafbd1b244ab0479a4f_to_35d342d2ca4c40b58e539c34828a3183
-    SplineIndex: 0
-  - Id: 87fa8106365f42b2a746e6f4470b486e
-    FromNodeId: 9fe05e552a0b4189969eb37e4de9c494
-    ToNodeId: de907eeb20db486bb464ee0740558365
-    Bidirectional: 1
-    EdgeAuthorId: 87fa8106365f42b2a746e6f4470b486e
-    EdgeAuthorPath: CityAuthoringRoot/Edge_35d342d2ca4c40b58e539c34828a3183_to_2680947965cd41b784685a62b608e390
     SplineIndex: 0
   - Id: 8910417c4fea41e6862e7cff3d1f7d39
     FromNodeId: 3488be294b0c41759eae503c55471790
@@ -660,33 +654,12 @@ MonoBehaviour:
     EdgeAuthorId: 84f42f81465e456ea60ee5ac51c175ba
     EdgeAuthorPath: CityAuthoringRoot/Edge_c0b4a9a828f8478cb5d0627230b519cf_to_62fea20e12064cb5991f99a5fd7afa81
     SplineIndex: 0
-  - Id: dd4f21bce5754a309eb059e4254ddec8
-    FromNodeId: 53bf10f8196445c1b55b7127389311ee
-    ToNodeId: 2200adc6cdf941b492dd74a25d850562
-    Bidirectional: 1
-    EdgeAuthorId: dd4f21bce5754a309eb059e4254ddec8
-    EdgeAuthorPath: CityAuthoringRoot/Edge_071c51dbad8441dbb6205127660c783d_to_4fbde07319c04e6484395aa52b04f7f5
-    SplineIndex: 0
-  - Id: f8dc464c22eb459aa8f91a7221493b2e
-    FromNodeId: 82035739d69045e190e9e228990540de
-    ToNodeId: 2200adc6cdf941b492dd74a25d850562
-    Bidirectional: 1
-    EdgeAuthorId: f8dc464c22eb459aa8f91a7221493b2e
-    EdgeAuthorPath: CityAuthoringRoot/Edge_4c53037ed91e4d04b27e1d697110ec0a_to_4fbde07319c04e6484395aa52b04f7f5
-    SplineIndex: 0
   - Id: b4cd83020a5c40bc971a0d33d5482a11
     FromNodeId: 9fe05e552a0b4189969eb37e4de9c494
     ToNodeId: 2200adc6cdf941b492dd74a25d850562
     Bidirectional: 0
     EdgeAuthorId: b4cd83020a5c40bc971a0d33d5482a11
     EdgeAuthorPath: CityAuthoringRoot/Edge_35d342d2ca4c40b58e539c34828a3183_to_4fbde07319c04e6484395aa52b04f7f5
-    SplineIndex: 0
-  - Id: 8371593e088b4aafba01041d9928ad49
-    FromNodeId: 2200adc6cdf941b492dd74a25d850562
-    ToNodeId: 9fe05e552a0b4189969eb37e4de9c494
-    Bidirectional: 0
-    EdgeAuthorId: 8371593e088b4aafba01041d9928ad49
-    EdgeAuthorPath: CityAuthoringRoot/Edge_4fbde07319c04e6484395aa52b04f7f5_to_35d342d2ca4c40b58e539c34828a3183
     SplineIndex: 0
   - Id: 7a890dc0b3fc454caacb3d0a27d671f3
     FromNodeId: 53bf10f8196445c1b55b7127389311ee
@@ -813,13 +786,6 @@ MonoBehaviour:
     Bidirectional: 1
     EdgeAuthorId: 9bd6f8b1c83b42b28084426392137f95
     EdgeAuthorPath: CityAuthoringRoot/Edge_46f292a9a8a94af489be14e6c6fb8cd5_to_3d995bce56f143cc80b39af60db36974
-    SplineIndex: 0
-  - Id: 1aeef827b9bb43c5ab6cfa31e2aa2adc
-    FromNodeId: 2200adc6cdf941b492dd74a25d850562
-    ToNodeId: d50dc0fd9bf54f1387ce493cbdc52da1
-    Bidirectional: 1
-    EdgeAuthorId: 1aeef827b9bb43c5ab6cfa31e2aa2adc
-    EdgeAuthorPath: CityAuthoringRoot/Edge_4fbde07319c04e6484395aa52b04f7f5_to_5dba2de256804e08b7152aee38aa8d9f
     SplineIndex: 0
   - Id: 20cbf4750a4744ad8bf6995b2157b84b
     FromNodeId: f64b03e9cb3e420ba3f987b9c408b6e1
@@ -1248,6 +1214,76 @@ MonoBehaviour:
     EdgeAuthorId: 213d233eda6c4e71937c8fbe042136ec
     EdgeAuthorPath: CityAuthoringRoot/Edge_7730aa4ed01843b0a2242c5302aa5e55_to_81c9afee83b14fdebf79358042941641
     SplineIndex: 0
+  - Id: bf3b7592795843ab947bd7f280f6880f
+    FromNodeId: 0933aa7f24034ce9865fa3c463b30bdf
+    ToNodeId: 53bf10f8196445c1b55b7127389311ee
+    Bidirectional: 1
+    EdgeAuthorId: bf3b7592795843ab947bd7f280f6880f
+    EdgeAuthorPath: CityAuthoringRoot/Edge_0933aa7f24034ce9865fa3c463b30bdf_to_53bf10f8196445c1b55b7127389311ee
+    SplineIndex: 0
+  - Id: d268cd20dc61482788b97aab03d8a915
+    FromNodeId: 9ae52e661ff848658e77c60caa15e26c
+    ToNodeId: 0933aa7f24034ce9865fa3c463b30bdf
+    Bidirectional: 1
+    EdgeAuthorId: d268cd20dc61482788b97aab03d8a915
+    EdgeAuthorPath: CityAuthoringRoot/Edge_9ae52e661ff848658e77c60caa15e26c_to_0933aa7f24034ce9865fa3c463b30bdf
+    SplineIndex: 0
+  - Id: 90efea3326f44f03b561474407a78413
+    FromNodeId: 2200adc6cdf941b492dd74a25d850562
+    ToNodeId: 9ae52e661ff848658e77c60caa15e26c
+    Bidirectional: 1
+    EdgeAuthorId: 90efea3326f44f03b561474407a78413
+    EdgeAuthorPath: CityAuthoringRoot/Edge_2200adc6cdf941b492dd74a25d850562_to_9ae52e661ff848658e77c60caa15e26c
+    SplineIndex: 0
+  - Id: 1e14103d4d69431598b61ace3bee33eb
+    FromNodeId: 2200adc6cdf941b492dd74a25d850562
+    ToNodeId: 82035739d69045e190e9e228990540de
+    Bidirectional: 1
+    EdgeAuthorId: 1e14103d4d69431598b61ace3bee33eb
+    EdgeAuthorPath: CityAuthoringRoot/Edge_2200adc6cdf941b492dd74a25d850562_to_82035739d69045e190e9e228990540de
+    SplineIndex: 0
+  - Id: 07f9419025f946c3bfa3c252613ee3cc
+    FromNodeId: 0933aa7f24034ce9865fa3c463b30bdf
+    ToNodeId: 2cead1bb3f6346ba97166366bab7e0e1
+    Bidirectional: 0
+    EdgeAuthorId: 07f9419025f946c3bfa3c252613ee3cc
+    EdgeAuthorPath: CityAuthoringRoot/Edge_0933aa7f24034ce9865fa3c463b30bdf_to_2cead1bb3f6346ba97166366bab7e0e1
+    SplineIndex: 0
+  - Id: 77de08f72bed4c819e690f7c55295b2a
+    FromNodeId: 2cead1bb3f6346ba97166366bab7e0e1
+    ToNodeId: de907eeb20db486bb464ee0740558365
+    Bidirectional: 1
+    EdgeAuthorId: 77de08f72bed4c819e690f7c55295b2a
+    EdgeAuthorPath: CityAuthoringRoot/Edge_2cead1bb3f6346ba97166366bab7e0e1_to_de907eeb20db486bb464ee0740558365
+    SplineIndex: 0
+  - Id: 22b44f2a69bd4d67a6085b7ad78000bd
+    FromNodeId: 2cead1bb3f6346ba97166366bab7e0e1
+    ToNodeId: 00a29faf4a6642b3baf29575c9b24dfd
+    Bidirectional: 1
+    EdgeAuthorId: 22b44f2a69bd4d67a6085b7ad78000bd
+    EdgeAuthorPath: CityAuthoringRoot/Edge_2cead1bb3f6346ba97166366bab7e0e1_to_00a29faf4a6642b3baf29575c9b24dfd
+    SplineIndex: 0
+  - Id: e62dd6f6d8ce4616a1935b083b68a4cb
+    FromNodeId: 9fe05e552a0b4189969eb37e4de9c494
+    ToNodeId: 00a29faf4a6642b3baf29575c9b24dfd
+    Bidirectional: 1
+    EdgeAuthorId: e62dd6f6d8ce4616a1935b083b68a4cb
+    EdgeAuthorPath: CityAuthoringRoot/Edge_9fe05e552a0b4189969eb37e4de9c494_to_00a29faf4a6642b3baf29575c9b24dfd
+    SplineIndex: 0
+  - Id: 30b537252cdb40f8b4220e6a77f7201c
+    FromNodeId: a0e7c48ccf954a5e959903fdc061443f
+    ToNodeId: 00a29faf4a6642b3baf29575c9b24dfd
+    Bidirectional: 1
+    EdgeAuthorId: 30b537252cdb40f8b4220e6a77f7201c
+    EdgeAuthorPath: CityAuthoringRoot/Edge_a0e7c48ccf954a5e959903fdc061443f_to_00a29faf4a6642b3baf29575c9b24dfd
+    SplineIndex: 0
+  - Id: 115d70b25bef4fbfb6bc19b698b574e2
+    FromNodeId: 9ae52e661ff848658e77c60caa15e26c
+    ToNodeId: d50dc0fd9bf54f1387ce493cbdc52da1
+    Bidirectional: 1
+    EdgeAuthorId: 115d70b25bef4fbfb6bc19b698b574e2
+    EdgeAuthorPath: CityAuthoringRoot/Edge_9ae52e661ff848658e77c60caa15e26c_to_d50dc0fd9bf54f1387ce493cbdc52da1
+    SplineIndex: 0
   Markers:
   - Id: s_wh_1
     DisplayName: 
@@ -1488,7 +1524,7 @@ MonoBehaviour:
     Tags:
     - Car
     - Buyer
-    RegionId: 
+    RegionId: 2
     Radius: 0
     Anchor:
       Kind: 2
@@ -1504,7 +1540,7 @@ MonoBehaviour:
     Tags:
     - Car
     - Buyer
-    RegionId: 
+    RegionId: 2
     Radius: 0
     Anchor:
       Kind: 2
@@ -1520,7 +1556,7 @@ MonoBehaviour:
     Tags:
     - Car
     - Buyer
-    RegionId: 
+    RegionId: 2
     Radius: 0
     Anchor:
       Kind: 2
@@ -1536,7 +1572,7 @@ MonoBehaviour:
     Tags:
     - Car
     - Buyer
-    RegionId: 
+    RegionId: 2
     Radius: 0
     Anchor:
       Kind: 2
@@ -1552,7 +1588,7 @@ MonoBehaviour:
     Tags:
     - Car
     - Buyer
-    RegionId: 
+    RegionId: 2
     Radius: 0
     Anchor:
       Kind: 2
@@ -1568,7 +1604,7 @@ MonoBehaviour:
     Tags:
     - Car
     - Buyer
-    RegionId: 
+    RegionId: 2
     Radius: 0
     Anchor:
       Kind: 2
@@ -1584,7 +1620,7 @@ MonoBehaviour:
     Tags:
     - Car
     - Buyer
-    RegionId: 
+    RegionId: 2
     Radius: 0
     Anchor:
       Kind: 2
@@ -1600,7 +1636,7 @@ MonoBehaviour:
     Tags:
     - Car
     - Buyer
-    RegionId: 
+    RegionId: 2
     Radius: 0
     Anchor:
       Kind: 2
@@ -1616,7 +1652,7 @@ MonoBehaviour:
     Tags:
     - Car
     - Buyer
-    RegionId: 
+    RegionId: 2
     Radius: 0
     Anchor:
       Kind: 2
@@ -1632,7 +1668,7 @@ MonoBehaviour:
     Tags:
     - Car
     - Buyer
-    RegionId: 
+    RegionId: 2
     Radius: 0
     Anchor:
       Kind: 2
@@ -1648,7 +1684,7 @@ MonoBehaviour:
     Tags:
     - Car
     - Buyer
-    RegionId: 
+    RegionId: 2
     Radius: 0
     Anchor:
       Kind: 2
@@ -1760,7 +1796,7 @@ MonoBehaviour:
     Tags:
     - Car
     - Buyer
-    RegionId: 
+    RegionId: 2
     Radius: 0
     Anchor:
       Kind: 1

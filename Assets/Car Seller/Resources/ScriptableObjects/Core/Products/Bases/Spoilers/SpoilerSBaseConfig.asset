@@ -16,3 +16,4 @@ MonoBehaviour:
   Sprite: {fileID: 44842310, guid: b881d3a462c38054a93a6973bd7b76e9, type: 3}
   Color: {r: 1, g: 1, b: 1, a: 1}
   Size: 1
+  BasePrice: 300
