@@ -2,7 +2,8 @@
 using UnityEngine;
 using Pixelplacement;
 using System.Collections.Generic;
-using UnityEngine.UI; // for LayoutRebuilder
+using UnityEngine.UI;
+using UnityEngine.Pool; // for LayoutRebuilder
 
 public class ContextMenuManager : Singleton<ContextMenuManager>
 {
@@ -73,14 +74,77 @@ public class ContextMenuManager : Singleton<ContextMenuManager>
 
     private void adjustContainerHeight(RectTransform container)
     {
-        float sum = 0f;
+        if (container == null)
+            return;
+
+        // Force Unity to rebuild the layout before we measure
+        LayoutRebuilder.ForceRebuildLayoutImmediate(container);
+
+        float totalPreferredHeight = 0f;
+
+        // Sum preferred heights of immediate children, including layout info
         foreach (RectTransform child in container)
         {
-            sum += child.rect.height;
+            if (child == null || !child.gameObject.activeInHierarchy)
+                continue;
+
+            float childHeight = 0f;
+
+            // Query all ILayoutElement(s) on the child
+            var layoutElements = ListPool<Component>.Get();
+            try
+            {
+                child.GetComponents(typeof(ILayoutElement), layoutElements);
+
+                float preferred = 0f;
+                for (int i = 0; i < layoutElements.Count; i++)
+                {
+                    var layoutElement = layoutElements[i] as ILayoutElement;
+                    if (layoutElement == null)
+                        continue;
+
+                    // Use preferred if set, otherwise min height
+                    float elemPreferred = layoutElement.preferredHeight;
+                    if (elemPreferred <= 0f)
+                        elemPreferred = layoutElement.minHeight;
+
+                    if (elemPreferred > preferred)
+                        preferred = elemPreferred;
+                }
+
+                // Fallback if no layout elements or invalid values
+                if (preferred <= 0f)
+                    preferred = child.sizeDelta.y;
+
+                childHeight = preferred;
+            }
+            finally
+            {
+                ListPool<Component>.Release(layoutElements);
+            }
+
+            totalPreferredHeight += childHeight;
         }
-        // Instead of assigning to container.rect (which is read-only), set sizeDelta
+
+        // Respect any VerticalLayoutGroup padding + spacing
+        var vGroup = container.GetComponent<VerticalLayoutGroup>();
+        if (vGroup != null)
+        {
+            int activeChildCount = 0;
+            foreach (RectTransform child in container)
+            {
+                if (child != null && child.gameObject.activeInHierarchy)
+                    activeChildCount++;
+            }
+
+            float spacingTotal = Mathf.Max(0, activeChildCount - 1) * vGroup.spacing;
+            float paddingTotal = vGroup.padding.top + vGroup.padding.bottom;
+            totalPreferredHeight += spacingTotal + paddingTotal;
+        }
+
+        // Apply new height
         var sizeDelta = container.sizeDelta;
-        sizeDelta.y = sum;
+        sizeDelta.y = totalPreferredHeight;
         container.sizeDelta = sizeDelta;
     }
 

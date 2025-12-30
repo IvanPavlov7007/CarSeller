@@ -21,12 +21,14 @@ public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IUIEl
     [Header("Touch Sizing")]
     [Tooltip("Minimum row height to provide a comfortable touch target.")]
     [ShowInInspector]
-    public const float MinRowHeight = 64f;
+    public const float MinRowHeight = 32f;
     [Tooltip("Minimum button height to provide a comfortable touch target.")]
     [ShowInInspector]
-    public const float MinButtonHeight = 120f;
+    public const float MinButtonHeight = 60f;
     [ShowInInspector]
-    public const float MinImageHeight = 400f;
+    public const float MinImageHeight = 200f;
+    [ShowInInspector]
+    public const float PrefferedButtonHeight = 80f;
 
     public RectTransform Build(UIElement content, RectTransform container)
     {
@@ -58,28 +60,28 @@ public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IUIEl
         switch (item.Style)
         {
             case "header":
-                headerTMP.fontSize = 48;
+                headerTMP.fontSize = 56;
                 headerTMP.fontStyle = FontStyles.Bold;
                 headerTMP.alignment = TextAlignmentOptions.Top;
                 break;
             case "description":
-                headerTMP.fontSize = 32;
+                headerTMP.fontSize = 48;
                 headerTMP.fontStyle = FontStyles.Italic;
-                headerTMP.alignment = TextAlignmentOptions.Left;
+                headerTMP.alignment = TextAlignmentOptions.MidlineLeft;
                 break;
             case "hint":
-                headerTMP.fontSize = 32;
+                headerTMP.fontSize = 48;
                 headerTMP.color = Color.gray;
-                headerTMP.alignment = TextAlignmentOptions.Right;
+                headerTMP.alignment = TextAlignmentOptions.MidlineRight;
                 break;
             case "price":
-                headerTMP.fontSize = 38;
+                headerTMP.fontSize = 56;
                 headerTMP.fontStyle = FontStyles.Bold;
-                headerTMP.alignment = TextAlignmentOptions.Baseline;
+                headerTMP.alignment = TextAlignmentOptions.Midline;
                 headerTMP.color = Color.white;
                 break;
             default:
-                headerTMP.fontSize = 24; // bump default for readability on touch
+                headerTMP.fontSize = 48; // bump default for readability on touch
                 break;
         }
 
@@ -118,27 +120,62 @@ public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IUIEl
 
         RectTransform recT = buttonObj.GetComponent<RectTransform>();
         // Ensure button itself has adequate hit size via LayoutElement
-        EnsureMinHeight(recT, MinButtonHeight);
+        EnsureMinHeight(recT, MinButtonHeight, PrefferedButtonHeight);
         return recT;
     }
 
     private RectTransform BuildImage(UIElement item, RectTransform container)
     {
-        var imageObj = GameObject.Instantiate(ImagePrefab, container);
+        // Parent object that will provide the mask and layout size
+        var maskObj = new GameObject("ImageMask", typeof(RectTransform), typeof(RectMask2D), typeof(MaskedImageFitter));
+        var maskRect = maskObj.GetComponent<RectTransform>();
+        maskRect.SetParent(container, false);
+
+        // Stretch horizontally in the row
+        maskRect.anchorMin = new Vector2(0f, 0.5f);
+        maskRect.anchorMax = new Vector2(1f, 0.5f);
+        maskRect.pivot = new Vector2(0.5f, 0.5f);
+        maskRect.anchoredPosition = Vector2.zero;
+
+        // Ensure minimum height for touch
+        EnsureMinHeight(maskRect, MinImageHeight);
+
+        // Horizontal band: width decides height (e.g. 4:3)
+        var aspect = maskObj.AddComponent<AspectRatioFitter>();
+        aspect.aspectMode = AspectRatioFitter.AspectMode.WidthControlsHeight;
+        aspect.aspectRatio = 4f / 3f; // desired mask aspect
+
+        // Actual image inside the mask – start centered
+        var imageObj = GameObject.Instantiate(ImagePrefab, maskRect);
+        var imageRect = imageObj.GetComponent<RectTransform>();
+        imageRect.anchorMin = new Vector2(0.5f, 0.5f);
+        imageRect.anchorMax = new Vector2(0.5f, 0.5f);
+        imageRect.pivot = new Vector2(0.5f, 0.5f);
+        imageRect.anchoredPosition = Vector2.zero;
+
         var image = imageObj.GetComponent<Image>();
         image.sprite = item.Image;
+        image.type = Image.Type.Simple;
+        image.preserveAspect = true;
 
-        RectTransform recT = imageObj.GetComponent<RectTransform>();
-        EnsureMinHeight(recT, MinImageHeight);
-        return recT;
+        // Configure fitter so it knows which image to size
+        var fitter = maskObj.GetComponent<MaskedImageFitter>();
+        var fitterImageField = typeof(MaskedImageFitter).GetField("image", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+        var fitterImageRectField = typeof(MaskedImageFitter).GetField("imageRect", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+        if (fitterImageField != null) fitterImageField.SetValue(fitter, image);
+        if (fitterImageRectField != null) fitterImageRectField.SetValue(fitter, imageRect);
+
+        return maskRect;
     }
 
-    private void EnsureMinHeight(RectTransform rowHolder, float minHeight = MinRowHeight)
+    private void EnsureMinHeight(RectTransform rowHolder, float minHeight = MinRowHeight, float prefferedHeight = -1f)
     {
         var le = rowHolder.GetComponent<LayoutElement>();
         if (le == null) le = rowHolder.gameObject.AddComponent<LayoutElement>();
         if (le.minHeight < minHeight) le.minHeight = minHeight;
         // Disallow flexible shrinking to preserve touch targets
         le.flexibleHeight = 0f;
+        if(prefferedHeight > 0f)
+            le.preferredHeight = prefferedHeight;
     }
 }
