@@ -13,6 +13,7 @@ public class CityViewObjectController : MonoBehaviour
 
     public event Action<ViewObjectVisualState> OnVisualStateChanged;
     public event Action<bool> OnDraggableStateChanged;
+    public event Action OnDestroyed;
 
     public ViewObjectVisualState CurrentVisualState { get; private set; }
     public bool IsDraggable { get; private set; }
@@ -51,5 +52,10 @@ public class CityViewObjectController : MonoBehaviour
     {
         IsDraggable = draggable;
         OnDraggableStateChanged?.Invoke(draggable);
+    }
+
+    private void OnDestroy()
+    {
+        OnDestroyed?.Invoke();
     }
 }

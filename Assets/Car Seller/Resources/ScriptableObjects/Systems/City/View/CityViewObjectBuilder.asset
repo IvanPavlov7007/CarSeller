@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: CityViewObjectBuilder
   m_EditorClassIdentifier: 
   carViewPrefab: {fileID: 3499829529434668817, guid: 160474d917472894395e9318086cb3f4, type: 3}
-  warehouseViewPrefab: {fileID: 4203573308617025643, guid: 8b9b63445d715bb40b60dd5463138eea, type: 3}
-  buyerViewPrefab: {fileID: 7600114309630284208, guid: 0f3e69e10be3486458ae482852b713d8, type: 3}
+  triggerPrefab: {fileID: 3249641557452852509, guid: 0c0aa54913aecec4fb91c821abe6984d, type: 3}
+  pinUIPrefab: {fileID: 3981913583320138012, guid: 4d0ca99fb5855a34bb681cb2280afe0b, type: 3}
+  WarehouseIcon: {fileID: 21300000, guid: cc82e0110be3916499cec5f5514e6741, type: 3}
+  BuyerIcon: {fileID: 21300000, guid: c1b5f65d87e95354b8d4c90ed54fbc65, type: 3}

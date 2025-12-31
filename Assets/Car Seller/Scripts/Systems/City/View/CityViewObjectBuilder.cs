@@ -5,8 +5,12 @@ using UnityEngine;
 public class CityViewObjectBuilder : ScriptableObject
 {
     public GameObject carViewPrefab;
-    public GameObject warehouseViewPrefab;
-    public GameObject buyerViewPrefab;
+    public GameObject triggerPrefab;
+
+    [Header("UI Prefabs")]
+    public GameObject pinUIPrefab;
+    public Sprite WarehouseIcon;
+    public Sprite BuyerIcon;
 
     public CityViewObjectController BuildObject(object cityObject)
     {
@@ -27,13 +31,14 @@ public class CityViewObjectBuilder : ScriptableObject
     public CityViewObjectController BuildBuyer(Buyer buyer)
     {
         var location = CityLocatorHelper.GetCityLocation(buyer);
-        GameObject buyerGO = Instantiate(buyerViewPrefab, location.CityPosition.WorldPosition, Quaternion.identity);
+        GameObject buyerGO = Instantiate(triggerPrefab, location.CityPosition.WorldPosition, Quaternion.identity);
         var viewController =
             buyerGO.AddComponent<CityViewObjectController>().Initialize(buyer, ViewObjectVisualState.Normal, true);
         buyerGO.AddComponent<ContentProvider>().Initialize(buyer);
         buyerGO.AddComponent<Interactable>();
-        buyerGO.AddComponent<ViewStateChanger>();
         buyerGO.AddComponent<Triggerable>();
+
+        CityUIBuilder.SetUpCityPin(viewController, pinUIPrefab, BuyerIcon);
         return viewController;
     }
 
@@ -61,13 +66,15 @@ public class CityViewObjectBuilder : ScriptableObject
     public CityViewObjectController buildWarehouse(Warehouse warehouse)
     {
         var location = CityLocatorHelper.GetCityLocation(warehouse);
-        GameObject warehouseGO = Instantiate(warehouseViewPrefab, location.CityPosition.WorldPosition,Quaternion.identity);
+        GameObject warehouseViewGO = Instantiate(triggerPrefab, location.CityPosition.WorldPosition,Quaternion.identity);
         var viewController =
-            warehouseGO.AddComponent<CityViewObjectController>().Initialize(warehouse);
-        warehouseGO.AddComponent<Interactable>();
-        warehouseGO.AddComponent<ContentProvider>().Initialize(warehouse);
-        warehouseGO.AddComponent<Triggerable>();
-        warehouseGO.AddComponent<ViewStateChanger>();
+            warehouseViewGO.AddComponent<CityViewObjectController>().Initialize(warehouse);
+        warehouseViewGO.AddComponent<Interactable>();
+        warehouseViewGO.AddComponent<ContentProvider>().Initialize(warehouse);
+        warehouseViewGO.AddComponent<Triggerable>();
+
+        CityUIBuilder.SetUpCityPin(viewController, pinUIPrefab, WarehouseIcon);
+
         return viewController;
     }
 }
