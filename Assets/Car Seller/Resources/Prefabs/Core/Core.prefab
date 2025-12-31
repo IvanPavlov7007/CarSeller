@@ -826,12 +826,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 635c1a18fb7f5ec47b03a698bf24b55e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dontDestroyOnLoad: 1
+  _dontDestroyOnLoad: 0
   popUpMenuPrefab: {fileID: 1448607247116826726, guid: 9534f3d911e21984c89040eb9fe3f72b, type: 3}
   _menuTargetPadding: 8
   _screenEdgePadding: 8
   _positionLerpFactor: 0.25
   IdealViewHight: 800
+  UsedContextMenuColor: {r: 0.7921569, g: 0.7921569, b: 0.7921569, a: 0.3882353}
 --- !u!1 &7622794948036269532
 GameObject:
   m_ObjectHideFlags: 0

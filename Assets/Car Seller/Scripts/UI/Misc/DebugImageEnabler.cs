@@ -10,7 +10,11 @@ public class DebugImageEnabler : MonoBehaviour
     private void Awake()
     {
         debugImage = GetComponent<Image>();
-        debugImage.enabled = enableDebugImage;
+        if(debugImage != null && enableDebugImage)
+        {
+            // Set the debug image color to white
+            debugImage.color = Color.white;
+        }
     }
 #endif
 }

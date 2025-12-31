@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Car Seller/Scenes/Warehouse South.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
+    path: Assets/Car Seller/Scenes/Warehouse South Second.unity
+    guid: fac5be789fd0bcf48809833684fdf714
+  - enabled: 1
     path: Assets/Car Seller/Scenes/Warehouse North.unity
     guid: 0f6ab2fb07c76fe48b726a2321db4820
   m_configObjects:

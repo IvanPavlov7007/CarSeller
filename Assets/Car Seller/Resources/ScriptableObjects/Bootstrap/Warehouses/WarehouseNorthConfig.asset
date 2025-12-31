@@ -22,11 +22,12 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   DisplayName: Warehouse North
+  image: {fileID: 21300000, guid: fdb0a960ba751ef43872016bee058f41, type: 3}
+  SizeCategory: Middle
+  CarParkingSpots: 5
   SceneToLoad: Warehouse North
   Marker:
     Graph: {fileID: 11400000, guid: 5389cb2a25bee4549811721f2d7263b9, type: 2}
     MarkerId: wh_n_1
   warehouseClosestInitialPosition: {x: 2, y: 21}
-  initialProductsToSpawn:
-  - productBaseConfig: {fileID: 11400000, guid: f63816bf1af38734c9fb3cbd64a7eb41, type: 2}
-    productVariantConfig: {fileID: 11400000, guid: 2b3a91484d1de1c4a8badc61a1c2a7e0, type: 2}
+  initialProductsToSpawn: []

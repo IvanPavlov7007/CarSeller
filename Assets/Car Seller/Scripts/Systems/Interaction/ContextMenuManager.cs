@@ -24,6 +24,10 @@ public class ContextMenuManager : Singleton<ContextMenuManager>
 
     [SerializeField] private float IdealViewHight = 500f;
 
+    [Header("Context Menu Visuals")]
+    [SerializeField]
+    private Color UsedContextMenuColor = Color.white;
+
     public void closeMenu(PopUpContextMenu menu)
     {
         if (activeMenus.Contains(menu))
@@ -38,6 +42,13 @@ public class ContextMenuManager : Singleton<ContextMenuManager>
     {
         GameObject panel = Instantiate(popUpMenuPrefab, ContextMenuCanvas.Instance.Canvas.transform);
         RectTransform panelTransform = panel.GetComponent<RectTransform>();
+
+        //Set panel color
+        var image = panelTransform.GetComponent<Image>();
+        if (image != null)
+        {
+            image.color = UsedContextMenuColor;
+        }
 
         // Build content first so layout can size to contents
         RectTransform contentRT = getContentTransform(panel);

@@ -112,7 +112,8 @@ public static class CTX_Menu_Tools
         return new UIElement
         {
             Type = UIElementType.Text,
-            Text = $"\n - Size: {warehouse.SizeCatergory}\n - Location: {warehouse.DistrictName}\n - Parking lots: {warehouse.AvailableCarParkingSpots}/{warehouse.OverallCarParkingSpots}"
+            Text = $"\n - Size: {warehouse.SizeCatergory}\n - Location: {warehouse.DistrictName}\n - Parking lots: {warehouse.AvailableCarParkingSpots}/{warehouse.OverallCarParkingSpots}",
+            Style = "description"
         };
     }
 
@@ -125,7 +126,7 @@ public static class CTX_Menu_Tools
             Header(car.Name),
             CarIcon(car),
             CarPrice(car),
-            CarStats(car)
+            //CarStats(car)
         };
     }
 
