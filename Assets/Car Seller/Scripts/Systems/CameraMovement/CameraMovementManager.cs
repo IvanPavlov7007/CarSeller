@@ -26,6 +26,13 @@ public class CameraMovementManager : Singleton<CameraMovementManager>
     [Tooltip("0 = instant, 1 = very slow. Lerp factor toward target position per frame when inertia is enabled.")]
     public float inertiaLerp = 0.2f;
 
+    [Header("Follow Dragged MovingPoint")]
+    [Tooltip("When true, camera target will automatically track a dragged MovingPoint.")]
+    public bool followDraggedMovingPoint = true;
+    [Tooltip("How strongly the camera centers on the dragged MovingPoint (0 = no follow, 1 = hard lock).")]
+    [Range(0f, 1f)]
+    public float followStrength = 0.25f;
+
     Camera cam => Camera.main;
 
     // Drag state
@@ -35,13 +42,36 @@ public class CameraMovementManager : Singleton<CameraMovementManager>
 
     void Update()
     {
-        if (!enableDrag || cam == null || cameraTarget == null) return;
+        if (cam == null || cameraTarget == null) return;
 
+        var cursor = GameCursor.Instance;
+        Interactable dragged = cursor != null ? cursor.draggedInteractable : null;
+
+        // If we are dragging a MovingPoint, bias the camera toward it.
+        if (followDraggedMovingPoint && dragged != null)
+        {
+            var movingPoint = dragged.GetComponent<MovingPoint>();
+            if (movingPoint != null)
+            {
+                FollowMovingPoint(movingPoint);
+            }
+        }
+
+        // Dragging the camera with pointer is disabled while GameCursor is interacting.
+        if (!enableDrag) return;
+
+        HandlePointerPan(cursor);
+    }
+
+    void HandlePointerPan(GameCursor cursor)
+    {
         // Choose input source: prefer touch ONLY when an actual touch is active; otherwise mouse.
         bool pointerPressed;
         bool pressedThisFrame;
         bool releasedThisFrame;
         Vector2 pointerPos;
+
+        if (cam == null) return;
 
         var touch = Touchscreen.current?.primaryTouch;
         bool touchActive = touch != null && (touch.press.isPressed || touch.press.wasPressedThisFrame || touch.press.wasReleasedThisFrame);
@@ -67,7 +97,6 @@ public class CameraMovementManager : Singleton<CameraMovementManager>
         }
 
         // Block when GameCursor is interacting (press/drag/hold or UI handling)
-        var cursor = GameCursor.Instance;
         bool cursorBlocking = cursor != null && cursor.IsInteracting;
 
         // Optionally block when pointer is over UI (when we don’t have cursor or want extra protection)
@@ -134,6 +163,32 @@ public class CameraMovementManager : Singleton<CameraMovementManager>
         {
             // Continue easing toward pending target when not actively dragging
             cameraTarget.position = Vector3.Lerp(cameraTarget.position, _pendingTargetPos, 1f - Mathf.Pow(1f - inertiaLerp, Time.unscaledDeltaTime * 60f));
+        }
+    }
+
+    void FollowMovingPoint(MovingPoint movingPoint)
+    {
+        // Target the MovingPoint's world position.
+        Vector3 mpPos = movingPoint.transform.position;
+
+        // Blend from current (or pending) toward moving point by followStrength.
+        Vector3 desired = Vector3.Lerp(cameraTarget.position, mpPos, followStrength);
+
+        // Respect confiner.
+        desired = ClampToConfinerShrunk(desired);
+
+        _pendingTargetPos = desired;
+
+        if (useInertia)
+        {
+            cameraTarget.position = Vector3.Lerp(
+                cameraTarget.position,
+                _pendingTargetPos,
+                1f - Mathf.Pow(1f - inertiaLerp, Time.unscaledDeltaTime * 60f));
+        }
+        else
+        {
+            cameraTarget.position = desired;
         }
     }
 
