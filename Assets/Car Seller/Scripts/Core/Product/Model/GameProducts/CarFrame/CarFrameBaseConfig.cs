@@ -7,5 +7,6 @@ public class CarFrameBaseConfig : ScriptableObject, IBaseConfig
     public GameObject Prefab;
     public Color FrameColor = Color.white;
     public Color WindshieldColor = Color.white;
+    public Sprite Icon;
     public float BasePrice = 0f;
 }

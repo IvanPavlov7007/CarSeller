@@ -16,4 +16,5 @@ MonoBehaviour:
   Prefab: {fileID: 2246131030934489078, guid: 5e6262a1bc971674bb956ae6b786001e, type: 3}
   FrameColor: {r: 1, g: 1, b: 1, a: 1}
   WindshieldColor: {r: 0.766, g: 0.766, b: 0.766, a: 1}
+  Icon: {fileID: 21300000, guid: 4bfe0f07d770365458e44cf577a7f191, type: 3}
   BasePrice: 0

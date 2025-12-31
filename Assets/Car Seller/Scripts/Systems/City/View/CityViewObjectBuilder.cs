@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Drawing;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "CityViewObjectBuilder", menuName = "Configs/View/CityViewObjectBuilder")]
 public class CityViewObjectBuilder : ScriptableObject
@@ -50,7 +51,9 @@ public class CityViewObjectBuilder : ScriptableObject
         carGO.AddComponent<DragInteractable>().sortingOrder = 10;
         carGO.AddComponent<DragDisabler>();
         carGO.AddComponent<MovingPoint>().Initialize(location);
-        carGO.GetComponentInChildren<SpriteRenderer>().color = car.CarFrame.runtimeConfig.FrameColor;
+        var sr = carGO.GetComponentInChildren<SpriteRenderer>();
+        sr.sprite = car.CarFrame.runtimeConfig.Icon;
+        sr.color = car.CarFrame.runtimeConfig.FrameColor;
         carGO.AddComponent<ViewStateChanger>();
         return viewController;
     }

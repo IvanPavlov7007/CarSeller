@@ -9,5 +9,6 @@ public class CarFrameRuntimeConfig : IRuntimeConfig
     public GameObject Prefab;
     public Color FrameColor;
     public Color WindshieldColor;
+    public Sprite Icon;
     public float BasePrice;
 }
