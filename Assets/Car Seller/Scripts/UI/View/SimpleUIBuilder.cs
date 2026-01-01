@@ -71,7 +71,6 @@ public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IUIEl
                 break;
             case "hint":
                 headerTMP.fontSize = 48;
-                headerTMP.color = Color.gray;
                 headerTMP.alignment = TextAlignmentOptions.MidlineRight;
                 break;
             case "price":

@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68b4e451fa9781f41ad9bb85992a8424, type: 3}
-  m_Name: Build
+  m_Script: {fileID: 11500000, guid: 37d1f5401f7dea14799c5d31ea1eedcc, type: 3}
+  m_Name: SimpleMoneyGoal
   m_EditorClassIdentifier: 
-  Version: 0
-  BuildNumber: 11
+  GoalID: SimpleMoneyGoal
+  TargetAmount: 10000
+  Description: First test goal

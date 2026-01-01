@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WarehouseSouthConfig
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
+    SerializedFormat: 0
     SerializedBytes: 
     ReferencedUnityObjects: []
     SerializedBytesString: 
@@ -30,4 +30,6 @@ MonoBehaviour:
     Graph: {fileID: 11400000, guid: 5389cb2a25bee4549811721f2d7263b9, type: 2}
     MarkerId: s_wh_1
   warehouseClosestInitialPosition: {x: -4, y: -3}
-  initialProductsToSpawn: []
+  initialProductsToSpawn:
+  - productBaseConfig: {fileID: 11400000, guid: 63e4ce3fb08a25a4683d3ff1455b38d6, type: 2}
+    productVariantConfig: {fileID: 0}

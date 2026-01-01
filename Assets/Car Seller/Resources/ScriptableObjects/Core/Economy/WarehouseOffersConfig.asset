@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Offers:
   - Warehouse: {fileID: 11400000, guid: 797317532479ce749b4a01b958ad0ff3, type: 2}
-    Price: 10000
+    Price: 5000
   - Warehouse: {fileID: 11400000, guid: 3090245f56f43f046bf7da2fe7f02e6f, type: 2}
-    Price: 30000
+    Price: 15000

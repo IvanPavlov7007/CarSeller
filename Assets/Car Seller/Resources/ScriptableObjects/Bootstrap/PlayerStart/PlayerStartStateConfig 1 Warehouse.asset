@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef69532a2ce800d489631b8f8ee9f912, type: 3}
   m_Name: PlayerStartStateConfig 1 Warehouse
   m_EditorClassIdentifier: 
-  initialMoney: 1000000
+  initialMoney: 0
   ownWarehouses:
   - {fileID: 11400000, guid: 6805e19a361611e4fa3c799938c3cd96, type: 2}

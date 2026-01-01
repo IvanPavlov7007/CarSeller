@@ -129,6 +129,17 @@ public class WarehouseInteractionManager : IInteractionManager
                 elementsList.Add(new UIElement()
                 {
                     Type = UIElementType.Button,
+                    Text = "Sell",
+                    IsInteractable = car.IsComplete(),
+                    OnClick = () =>
+                    {
+                        G.Instance.GameFlowManager.SellCar(G.Economy.CarSellOfferProvider.GetOfferByCar(car));
+                    },
+                    UnavailabilityReason = "Some car part's are missing"
+                });
+                elementsList.Add(new UIElement()
+                {
+                    Type = UIElementType.Button,
                     Text = "Disassemble",
                     IsInteractable = G.Instance.CarMechanicService.CanDisassembleCar(car),
                     OnClick = () =>
@@ -137,17 +148,7 @@ public class WarehouseInteractionManager : IInteractionManager
                     },
                     UnavailabilityReason = "Car has nothing to disassemble"
                 });
-                elementsList.Add(new UIElement()
-                {
-                    Type = UIElementType.Button,
-                    Text = "Sell",
-                    IsInteractable = car.IsComplete(),
-                    OnClick = () =>
-                    {
-                        G.Instance.GameFlowManager.SellCar( G.Economy.CarSellOfferProvider.GetOfferByCar(car));
-                    },
-                    UnavailabilityReason = "Some car part's are missing"
-                });
+
                 //elementsList.Add(new UIElement()
                 //{
                 //    Type = UIElementType.Button,
