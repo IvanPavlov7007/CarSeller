@@ -2,6 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//remove later
+public class ContextMenuContext : IInteractionContext
+{
+    public GameState GameState;
+    public ContextMenuContext(GameState gameState)
+    {
+        GameState = gameState;
+    }
+}
+
+
 public class WarehouseInteractionManager : IInteractionManager
 {
     // when dragging starts -> select target objects

@@ -882,7 +882,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6395515076168896260
 Transform:
   m_ObjectHideFlags: 0
@@ -923,7 +923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 0
-  carSpawnConfig: {fileID: 0}
+  carSpawnConfig: {fileID: 11400000, guid: 7a422727c25de964fbc088bbd407a556, type: 2}
   carSpawnPoint: {fileID: 6395515076168896260}
 --- !u!1 &8329972248815281270
 GameObject:

@@ -1,1 +1,120 @@
-﻿
+﻿using System.Collections.Generic;
+using UnityEngine;
+
+public sealed class StealingCityContextMenuProfile : ICityContextMenuProfile
+{
+    public UIElement GenerateContent(object model, GameState gameState)
+    {
+        var stealingState = gameState as StealingGameState;
+        if (stealingState == null)
+        {
+            Debug.LogError($"StealingCityContextMenuProfile used with non-stealing state {gameState?.GetType().Name}");
+            return null;
+        }
+
+        switch (model)
+        {
+            case Car car:
+                return generateStealingCarContent(stealingState, car);
+            case Warehouse warehouse:
+                return generateStealingWarehouseContent(stealingState, warehouse);
+            case CityObject cityObject:
+                return generateGenericCityObjectContent(cityObject);
+            default:
+                Debug.LogError($"StealingCityContextMenuProfile: Unsupported model type {model.GetType()}");
+                return null;
+        }
+    }
+
+    private UIElement generateGenericCityObjectContent(CityObject cityObject)
+    {
+        return new UIElement
+        {
+            Type = UIElementType.Container,
+            Children = new List<UIElement>
+            {
+                CTX_Menu_Tools.Header(cityObject.Name),
+                CTX_Menu_Tools.Description(cityObject.InfoText),
+            }
+        };
+    }
+
+    private UIElement generateStealingCarContent(StealingGameState stealingGameState, Car car)
+    {
+        var elementsList = CTX_Menu_Tools.CarBaseInfoElements(car);
+        if (stealingGameState.StealingCar == car)
+        {
+            elementsList.Add(CTX_Menu_Tools.Hint("This is the car you are currently stealing. Find a warehouse to store it in."));
+            elementsList.Add(CTX_Menu_Tools.CancelButton());
+        }
+        else
+        {
+            elementsList.Add(CTX_Menu_Tools.Hint("You are already stealing another car. Find a warehouse to store it in before stealing another."));
+        }
+
+        return new UIElement
+        {
+            Type = UIElementType.Container,
+            Children = elementsList
+        };
+    }
+
+    private UIElement generateStealingWarehouseContent(StealingGameState stealingGameState, Warehouse warehouse)
+    {
+        var warehouseOffer = G.Economy.WarehouseOfferProvider.GetOfferForWarehouse(warehouse);
+
+        var elementsList = CTX_Menu_Tools.WarehouseBaseInfoElements(warehouse);
+        if (warehouseOffer != null)
+        {
+            elementsList.AddRange(CTX_Menu_Tools.WarehousePurchaseElements(warehouseOffer));
+        }
+        else
+        {
+            elementsList.Add(
+                CTX_Menu_Tools.Hint(
+                    warehouse.AvailableCarParkingSpots > 0
+                        ? "Ride into this warehouse to complete your car-theft"
+                        : "Not enough space to store an additional auto"));
+        }
+
+        return new UIElement
+        {
+            Type = UIElementType.Container,
+            Children = elementsList
+        };
+    }
+}
+
+public sealed class StealingCityTriggerProfile : ICityTriggerProfile
+{
+    public TriggerAction GenerateTriggerAction(object trigger, object triggerCause, GameState gameState)
+    {
+        var stealingState = gameState as StealingGameState;
+        if (stealingState == null)
+        {
+            Debug.LogError($"StealingCityTriggerProfile used with non-stealing state {gameState?.GetType().Name}");
+            return new TriggerAction(false, null);
+        }
+
+        var warehouse = trigger as Warehouse;
+        Debug.Assert(warehouse != null, "StealingCityTriggerProfile: trigger is not Warehouse");
+        Debug.Assert(stealingState.StealingCar != null, "StealingCityTriggerProfile: StealingCar is null");
+
+        bool canProceed =
+            G.Player.Owns(warehouse) &&
+            warehouse.AvailableCarParkingSpots > 0 &&
+            triggerCause as Car == stealingState.StealingCar;
+
+        System.Action action = null;
+        if (canProceed)
+        {
+            action = () =>
+            {
+                GameEvents.Instance.OnPlayerSucceed(
+                    new PlayerActionEventData(PlayerOutcome.Succeeded, warehouse));
+            };
+        }
+
+        return new TriggerAction(canProceed, action);
+    }
+}

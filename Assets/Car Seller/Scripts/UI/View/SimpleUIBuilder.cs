@@ -98,7 +98,7 @@ public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IUIEl
         if (le == null) le = recT.gameObject.AddComponent<LayoutElement>();
 
         le.minHeight = Mathf.Max(MinRowHeight, preferredHeight);
-        le.preferredHeight = Mathf.Max(le.preferredHeight, preferredHeight);
+        //le.preferredHeight = Mathf.Max(le.preferredHeight, preferredHeight);
         le.flexibleHeight = 0f;
 
         return recT;

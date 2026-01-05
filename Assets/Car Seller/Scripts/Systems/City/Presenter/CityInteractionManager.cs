@@ -1,53 +1,90 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 /// <summary>
-/// manager that handles logics of interactions in the city scene
+/// Manager that handles logic of interactions in the city scene,
+/// using registry-based profiles per GameState (similar to CitySceneManager).
 /// </summary>
 public class CityInteractionManager : IInteractionManager
 {
-    CityContextMenuContentProfile contextMenuProfile = new CityContextMenuContentProfile();
-    InteractionTriggerProfile triggerProfile = new InteractionTriggerProfile();
+    readonly CityContextMenuProfileRegistry _contextMenuRegistry = new CityContextMenuProfileRegistry();
+    readonly CityTriggerProfileRegistry _triggerRegistry = new CityTriggerProfileRegistry();
 
     public void OnDragEnd(Interactable interactable)
     {
+        // Not used in city at the moment.
     }
 
     public void OnDragStart(Interactable interactable)
     {
+        // Not used in city at the moment.
     }
 
     public void OnProductViewClick(Interactable interactable)
     {
-        var context = new ContextMenuContext(G.GameState);
+        var gameState = G.GameState;
+        var profile = _contextMenuRegistry.Get(gameState);
+        if (profile == null)
+        {
+            Debug.LogError("CityInteractionManager: No context menu profile available for current game state");
+            return;
+        }
+
         var contentProvider = interactable.GetComponent<ContentProvider>();
-        var content = contentProvider.ProvideContent(contextMenuProfile, context);
-        if(content != null)
+        if (contentProvider == null)
+        {
+            Debug.LogError("CityInteractionManager: Interactable has no ContentProvider, cannot build menu");
+            return;
+        }
+
+        var model = contentProvider.Model;
+        if (model == null)
+        {
+            Debug.LogError("CityInteractionManager: ContentProvider.Model is null");
+            return;
+        }
+
+        var content = profile.GenerateContent(model, gameState);
+        if (content != null)
+        {
             ContextMenuManager.Instance.CreateContextMenu(interactable.gameObject, content);
+        }
     }
 
     public void OnTriggerEntered(ContentProvider trigger, ContentProvider triggerCause)
     {
-        TriggerContext context = new TriggerContext(G.GameState, triggerCause);
-        TriggerAction triggerAction = trigger.ProvideContent(triggerProfile, context);
-        if(triggerAction == null)
+        var gameState = G.GameState;
+        var profile = _triggerRegistry.Get(gameState);
+        if (profile == null)
+        {
+            Debug.LogError("CityInteractionManager: No trigger profile available for current game state");
+            return;
+        }
+
+        if (trigger == null)
+        {
+            Debug.LogError("CityInteractionManager: trigger is null");
+            return;
+        }
+
+        var triggerModel = trigger.Model;
+        var causeModel = triggerCause != null ? triggerCause.Model : null;
+
+        var triggerAction = profile.GenerateTriggerAction(triggerModel, causeModel, gameState);
+        if (triggerAction == null)
         {
             Debug.LogError("CityInteractionManager: TriggerAction is null");
+            return;
         }
-        else
+
+        if (!triggerAction.CanProceed)
+            return;
+
+        if (triggerAction.Action == null)
         {
-            if(triggerAction.CanProceed)
-            {
-                if(triggerAction.Action == null)
-                {
-                    Debug.LogError("CityInteractionManager: TriggerAction.Action is null");
-                    return;
-                }
-                triggerAction.Action.Invoke();
-            }
+            Debug.LogError("CityInteractionManager: TriggerAction.Action is null");
+            return;
         }
+
+        triggerAction.Action.Invoke();
     }
 }
