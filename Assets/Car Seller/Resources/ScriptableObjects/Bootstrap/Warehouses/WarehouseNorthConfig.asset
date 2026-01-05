@@ -21,11 +21,10 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  DisplayName: Warehouse North
+  Name: Warehouse North
   image: {fileID: 21300000, guid: fdb0a960ba751ef43872016bee058f41, type: 3}
   SizeCategory: Middle
   CarParkingSpots: 5
-  SceneToLoad: Warehouse North
   Marker:
     Graph: {fileID: 11400000, guid: 5389cb2a25bee4549811721f2d7263b9, type: 2}
     MarkerId: wh_n_1

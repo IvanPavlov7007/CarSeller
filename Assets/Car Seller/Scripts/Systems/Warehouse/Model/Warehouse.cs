@@ -2,17 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Warehouse : ILocationsHolder, ILocatable, IPossession
+public class Warehouse : ILocationsHolder, ILocatable, IPossession, IRegisterable
 {
     public WarehouseConfig Config;
     public DimensionalPositionData emptyProductLocation { get; set; }
 
     private readonly Guid _id = Guid.NewGuid();
     public Guid Id => _id;
-    public string Name { get; }
+    public string Name => Config.Name;
 
     public string DistrictName => G.City.MarkersById[Config.Marker.MarkerId].RegionId;
-    public string SizeCatergory => Config.SizeCategory;
+    public string SizeCategory => Config.SizeCategory;
 
     public List<WarehouseProductLocation> products = new List<WarehouseProductLocation>();
     public SuppliesList suppliesList;

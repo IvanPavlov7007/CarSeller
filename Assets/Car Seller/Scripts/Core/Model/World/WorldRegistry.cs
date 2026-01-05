@@ -7,28 +7,45 @@ using UnityEngine;
 
 public class WorldRegistry
 {
-    private Dictionary<(Type runtimeType, ScriptableObject config), List<object>> map
+    private Dictionary<(Type runtimeType, ScriptableObject config), List<object>> configsMap
+        = new();
+
+    private Dictionary<string, object> nameMap
         = new();
 
     public void Register<T>(T instance, ScriptableObject config)
+        where T : IRegisterable
     {
         var key = (typeof(T), config);
 
-        if (!map.TryGetValue(key, out var list))
+        if (!configsMap.TryGetValue(key, out var list))
         {
             list = new List<object>();
-            map[key] = list;
+            configsMap[key] = list;
         }
 
         list.Add(instance);
+        nameMap[instance.Name] = instance;
     }
 
     public IReadOnlyList<T> GetByConfig<T>(ScriptableObject config)
     {
         var key = (typeof(T), config);
 
-        return map.TryGetValue(key, out var list)
+        return configsMap.TryGetValue(key, out var list)
             ? list.Cast<T>().ToList()
             : Array.Empty<T>();
     }
+
+    public T GetByName<T>(string name) where T : class
+    {
+        if (nameMap.TryGetValue(name, out var instance))
+        {
+            if(instance is not T)
+                throw new InvalidOperationException($"WorldRegistry.GetByName: Instance with name {name} is not of type {typeof(T).Name}.");
+            return instance as T;
+        }
+        return null;
+    }
+
 }

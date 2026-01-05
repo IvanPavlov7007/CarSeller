@@ -6,13 +6,12 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName = "WarehouseConfig", menuName = "Configs/Economy/WarehouseConfig")]
 public class WarehouseConfig : SerializedScriptableObject
 {
-    public string DisplayName;
+    [InfoBox("Used as WarehouseIdentifier and the same as the scene name")]
+    public string Name;
 
     public Sprite image;
     public string SizeCategory = "Small garage";
     public int CarParkingSpots = 5;
-
-    public string SceneToLoad;
 
     [Title("Placement")]
     [InlineProperty, HideLabel]

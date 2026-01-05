@@ -21,11 +21,10 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  DisplayName: Warehouse South - Second
+  Name: Warehouse South Second
   image: {fileID: 21300000, guid: f80b52ea349feb54c9cdf00f66d46669, type: 3}
   SizeCategory: Small
   CarParkingSpots: 3
-  SceneToLoad: Warehouse South Second
   Marker:
     Graph: {fileID: 11400000, guid: 5389cb2a25bee4549811721f2d7263b9, type: 2}
     MarkerId: s_wh_2

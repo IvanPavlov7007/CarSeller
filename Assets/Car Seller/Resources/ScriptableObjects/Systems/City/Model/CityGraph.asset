@@ -493,13 +493,6 @@ MonoBehaviour:
     EdgeAuthorId: d441a5a7bb4046169e3ca839f99f9d33
     EdgeAuthorPath: CityAuthoringRoot/Edge_dc8d7ef3263142c3ba53a2380a339161_to_e30c8e30c95c4bafbd1b244ab0479a4f
     SplineIndex: 0
-  - Id: c941a66dea394b5e92200e3aa60207c1
-    FromNodeId: 139d35ae7687479b87b7e2e075e9e01c
-    ToNodeId: 9fe05e552a0b4189969eb37e4de9c494
-    Bidirectional: 1
-    EdgeAuthorId: c941a66dea394b5e92200e3aa60207c1
-    EdgeAuthorPath: CityAuthoringRoot/Edge_e30c8e30c95c4bafbd1b244ab0479a4f_to_35d342d2ca4c40b58e539c34828a3183
-    SplineIndex: 0
   - Id: 8910417c4fea41e6862e7cff3d1f7d39
     FromNodeId: 3488be294b0c41759eae503c55471790
     ToNodeId: 1beaff78793a4be9a0c22354073a62c5
@@ -1283,6 +1276,13 @@ MonoBehaviour:
     Bidirectional: 1
     EdgeAuthorId: 115d70b25bef4fbfb6bc19b698b574e2
     EdgeAuthorPath: CityAuthoringRoot/Edge_9ae52e661ff848658e77c60caa15e26c_to_d50dc0fd9bf54f1387ce493cbdc52da1
+    SplineIndex: 0
+  - Id: 6c8c2fefd5444494851b90b2b39a2324
+    FromNodeId: 9fe05e552a0b4189969eb37e4de9c494
+    ToNodeId: 139d35ae7687479b87b7e2e075e9e01c
+    Bidirectional: 1
+    EdgeAuthorId: 6c8c2fefd5444494851b90b2b39a2324
+    EdgeAuthorPath: CityAuthoringRoot/Edge_9fe05e552a0b4189969eb37e4de9c494_to_139d35ae7687479b87b7e2e075e9e01c
     SplineIndex: 0
   Markers:
   - Id: s_wh_1

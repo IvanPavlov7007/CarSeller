@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class World
 {
-    public WorldRegistry WorldRegistry = new WorldRegistry();
+    public WorldRegistry WorldRegistry{ get; private set; } = new WorldRegistry();
 
     public HiddenSpace HiddenSpace = new HiddenSpace();
     // TODO is it also kind of a registry? Should it be moved to WorldRegistry?

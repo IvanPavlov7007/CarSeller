@@ -99,7 +99,7 @@ public static class CTX_Menu_Tools
                 OnClick = () =>
                 {
                     var transaction = offer.Accept();
-                    var result = G.Instance.TransactionProcessor.Process(transaction);
+                    var result = G.TransactionProcessor.Process(transaction);
                 },
                 closePopupOnClick = true,
                 UnavailabilityReason = "Cannot afford"
@@ -112,7 +112,7 @@ public static class CTX_Menu_Tools
         return new UIElement
         {
             Type = UIElementType.Text,
-            Text = $"\n - Size: {warehouse.SizeCatergory}\n - Location: {warehouse.DistrictName}\n - Parking lots: {warehouse.AvailableCarParkingSpots}/{warehouse.OverallCarParkingSpots}",
+            Text = $"\n - Size: {warehouse.SizeCategory}\n - Location: {warehouse.DistrictName}\n - Parking lots: {warehouse.AvailableCarParkingSpots}/{warehouse.OverallCarParkingSpots}",
             Style = "description"
         };
     }
@@ -149,7 +149,7 @@ public static class CTX_Menu_Tools
                 OnClick = () =>
                 {
                     var transaction = offer.Accept();
-                    var result = G.Instance.TransactionProcessor.Process(transaction);
+                    var result = G.TransactionProcessor.Process(transaction);
                 },
                 closePopupOnClick = true,
                 UnavailabilityReason = "Cannot sell car"

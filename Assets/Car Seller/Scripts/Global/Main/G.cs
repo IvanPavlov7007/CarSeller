@@ -62,12 +62,24 @@ public sealed class G : Singleton<G>
 
         GameEvents.Instance.Reset();
         ResetGameState();
+
+        TryInitializeLogic();
     }
 
     private void Initialize()
     {
         GameFlowManager = new GameFlowManager();
         CarMechanicService = new CarMechanicService();
+    }
+
+    /// <summary>
+    /// If the game starts directly in a specific scene, initialize the logic accordingly
+    /// </summary>
+    private void TryInitializeLogic()
+    {
+        SceneEntrancePoint sceneEntrancePoint = FindAnyObjectByType<SceneEntrancePoint>();
+        if(sceneEntrancePoint != null)
+            GameFlowController.Initialize(sceneEntrancePoint);
     }
 
     public void ResetGameState()

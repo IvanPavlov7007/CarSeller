@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WarehouseSouthConfig
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 0
+    SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects: []
     SerializedBytesString: 
@@ -21,11 +21,10 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  DisplayName: Warehouse South
+  Name: Warehouse South
   image: {fileID: 21300000, guid: 5681665451256824296d5a08078768c3, type: 3}
   SizeCategory: Tiny
   CarParkingSpots: 2
-  SceneToLoad: Warehouse South
   Marker:
     Graph: {fileID: 11400000, guid: 5389cb2a25bee4549811721f2d7263b9, type: 2}
     MarkerId: s_wh_1
