@@ -56,7 +56,7 @@ public class SellHandler : TransactionHandler
             // SellHandler should only handle the game logic
             G.Instance.PlayerManager.RemovePossession(car);
             CarSpawnManager.ReleaseCar(car);
-            ProductDeletionService.DeleteProduct(car);
+            G.Instance.ProductManager.DeleteProduct(car);
         }
         return result;
     }

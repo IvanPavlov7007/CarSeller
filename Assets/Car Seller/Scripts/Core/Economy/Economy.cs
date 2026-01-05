@@ -14,12 +14,28 @@ public class Economy
 
     public ProductPriceCalculator ProductPriceCalculator = new ProductPriceCalculator();
 
+    public TransactionProcessor TransactionProcessor { get; private set; }
+
     public Economy(EconomyConfig config)
     {
         Config = config;
         Player = new Player();
+        initializeTransactionProcessor();
         initializePlayerStartState();
         initializeWarehouseOffers();
+    }
+
+    private void initializeTransactionProcessor()
+    {
+        TransactionProcessor = new TransactionProcessor(new Dictionary<TransactionType, ITransactionHandler>
+        {
+            { TransactionType.Purchase, new PurchaseHandler() },
+            { TransactionType.Sell, new SellHandler() },
+            { TransactionType.Reward, new RewardHandler() },
+            { TransactionType.Lose, new LoseHandler() },
+            { TransactionType.Confiscate, new ConfiscateHandler() },
+            { TransactionType.Steal, new StealHandler()   }
+        });
     }
 
     private void initializePlayerStartState()

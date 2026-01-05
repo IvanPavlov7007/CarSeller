@@ -7,11 +7,11 @@ public static class GameInitializer
     public static void Initialize()
     {
         GameEvents.Instance.Reset();
-        InitializeGameObjects();
+        InitializeMutableServices();
         ResetGameState();
     }
 
-    private static void InitializeGameObjects()
+    private static void InitializeMutableServices()
     {
         G.GameFlowManager = new GameFlowManager();
         G.CarMechanicService = new CarMechanicService();

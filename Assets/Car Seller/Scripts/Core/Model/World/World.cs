@@ -7,6 +7,7 @@ public class World
     public WorldRegistry WorldRegistry = new WorldRegistry();
 
     public HiddenSpace HiddenSpace = new HiddenSpace();
+    // TODO is it also kind of a registry? Should it be moved to WorldRegistry?
     public Dictionary<Product, ILocation> productLocations = new Dictionary<Product, ILocation>();
     public City City;
     public Economy Economy;

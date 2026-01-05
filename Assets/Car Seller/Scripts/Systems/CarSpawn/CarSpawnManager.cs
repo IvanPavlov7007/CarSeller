@@ -135,7 +135,7 @@ public static class CarSpawnManager
         {
             //TODO check that the are no leftovers in some registries
 
-            ProductDeletionService.DeleteProduct(car);
+            G.Instance.ProductManager.DeleteProduct(car);
         }
         temporaryCars.Clear();
         usedMarkers.Clear();

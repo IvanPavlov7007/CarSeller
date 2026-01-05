@@ -81,26 +81,13 @@ public class ProductManager
         }
     }
 
-}
+    //TODO: OWNERSHIP system should handle ownership removal on deletion
 
-public class ProductCreationService
-{
-    protected Action<Product> createProductAction;
-
-    //Product productCreated(Product product)
-    //{
-
-    //}
-}
-
-//TODO: OWNERSHIP system should handle ownership removal on deletion
-
-/// <summary>
-/// Removing references to a product and notifying the system that it has been destroyed.
-/// </summary>
-public static class ProductDeletionService
-{
-    public static void DeleteProduct(Product product)
+    /// <summary>
+    /// Removing references to a product and notifying the system that it has been destroyed.
+    /// </summary>
+    /// <param name="product"></param>
+    public void DeleteProduct(Product product)
     {
         var location = G.Instance.ProductLocationService.GetProductLocation(product);
         Debug.Assert(location != null, $"Trying to delete product {product.Name} that has no location.");
@@ -112,4 +99,5 @@ public static class ProductDeletionService
         Debug.Assert(product is ILocatable);
         GameEvents.Instance.OnLocatableDestroyed?.Invoke(new LocatableDestroyedEventData(product));
     }
+
 }

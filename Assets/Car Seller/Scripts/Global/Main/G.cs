@@ -12,14 +12,13 @@ public sealed class G : Singleton<G>
     public CityConfig CityConfig;
     public EconomyConfig EconomyConfig;
 
-    
-
     //References
     public static City City => World.Instance.City;
     public static Economy Economy => World.Instance.Economy;
     public static Player Player => World.Instance.Economy.Player;
-
     public static GameState GameState => Instance.GameFlowController.GameState;
+
+    public static TransactionProcessor TransactionProcessor => Economy.TransactionProcessor;
 
     //MODEL AND VIEW MIXED (SORRY)
     public GameObject CityRoot { get; set; }
@@ -37,7 +36,7 @@ public sealed class G : Singleton<G>
     public CarMechanicService CarMechanicService;
 
     public PlayerManager PlayerManager = new PlayerManager();
-    public TransactionProcessor TransactionProcessor;
+    
 
     //City
     public CityActionService CityActionService = new CityActionService();
@@ -69,16 +68,6 @@ public sealed class G : Singleton<G>
     {
         GameFlowManager = new GameFlowManager();
         CarMechanicService = new CarMechanicService();
-
-        TransactionProcessor = new TransactionProcessor(new Dictionary<TransactionType, ITransactionHandler>
-        {
-            { TransactionType.Purchase, new PurchaseHandler() },
-            { TransactionType.Sell, new SellHandler() },
-            { TransactionType.Reward, new RewardHandler() },
-            { TransactionType.Lose, new LoseHandler() },
-            { TransactionType.Confiscate, new ConfiscateHandler() },
-            { TransactionType.Steal, new StealHandler()   }
-        });
     }
 
     public void ResetGameState()
