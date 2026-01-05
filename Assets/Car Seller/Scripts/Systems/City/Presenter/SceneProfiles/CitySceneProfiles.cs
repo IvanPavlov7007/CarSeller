@@ -116,3 +116,12 @@ public sealed class SellingCitySceneProfile : CitySceneProfile
         }
     }
 }
+
+public sealed class FreeRoamCitySceneProfile : CitySceneProfile
+
+{
+    public override bool ShouldShow(object obj, GameState gameState)
+    {
+        return true;
+    }
+}

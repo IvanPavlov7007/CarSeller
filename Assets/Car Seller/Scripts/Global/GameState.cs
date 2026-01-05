@@ -32,3 +32,13 @@ public class StealingGameState : GameState
         StealingCar = stealingCar;
     }
 }
+
+public class FreeRoamGameState : GameState
+{
+    public Car FocusedCar { get; private set; }
+
+    public FreeRoamGameState(Car focusedCar)
+    {
+        FocusedCar = focusedCar;
+    }
+}

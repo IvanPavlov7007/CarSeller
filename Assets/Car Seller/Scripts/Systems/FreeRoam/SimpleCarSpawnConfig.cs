@@ -1,0 +1,17 @@
+﻿using UnityEngine;
+
+[CreateAssetMenu(fileName = "SimpleCarSpawnConfig", menuName = "Configs/Spawn/CarSpawnConfig")]
+public class SimpleCarSpawnConfig : ScriptableObject
+{
+    public CarBaseConfig CarBaseConfig;
+    public CarVariantConfig CarVariantConfig;
+
+    public Car GenerateCar(City.CityLocation location)
+    {
+        Car car = G.Instance.ProductManager.CreateCar(
+                    CarBaseConfig,
+                    CarVariantConfig,
+                    location);
+        return car;
+    }
+}

@@ -5,6 +5,30 @@ using System.Linq;
 using UnityEngine;
 
 
+public abstract class CityContextMenuContentProfile
+{
+    public virtual UIElement GenerateContent(object model, GameState gameState)
+    {
+        return null;
+    }
+
+    public virtual void OnProfileActivated(GameState gameState) { }
+    public virtual void OnProfileDeactivated() { }
+}
+
+public abstract class CityTriggerContentProfile
+{
+    public UIElement GenerateContent(object model, GameState gameState)
+    {
+        Debug.LogError("CityContextMenuContentProfile: GenerateContent not implemented");
+        return null;
+    }
+
+    public virtual void OnProfileActivated(GameState gameState) { }
+    public virtual void OnProfileDeactivated() { }
+}
+
+
 public class ContextMenuContext : IInteractionContext
 {
     public ContextMenuContext(GameState gameState)
