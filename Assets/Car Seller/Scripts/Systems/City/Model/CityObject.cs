@@ -22,7 +22,7 @@ public class CityObject : ILocatable
         if (location.Attach(this))
             GameEvents.Instance.OnLocatableCreated?.Invoke(new LocatableCreatedEventData(this, location));
         else
-            Debug.LogError($"Failed to attach buyer {name} to location {location}");
+            Debug.LogError($"Failed to attach city object {name} to location {location}");
     }
 
     public void Destroy()

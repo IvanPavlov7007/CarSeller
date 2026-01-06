@@ -34,7 +34,17 @@ public sealed class FreeRoamCityTriggerProfile : ICityTriggerProfile
 {
     public TriggerAction GenerateTriggerAction(object trigger, object triggerCause, GameState gameState)
     {
-        Debug.LogWarning("FreeRoamCityTriggerProfile: No trigger actions defined for free roam state");
+        if(trigger is Collectable collectable)
+        {
+            return new TriggerAction
+            (
+                true,
+                () =>
+                {
+                    collectable.Collect();
+                }
+            );
+        }
         return new TriggerAction(false, null);
     }
 }

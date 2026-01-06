@@ -7,10 +7,15 @@ public class CityViewObjectBuilder : ScriptableObject
     public GameObject carViewPrefab;
     public GameObject triggerPrefab;
 
+    //pure view
+    public GameObject collectablePrefab;
+
     [Header("UI Prefabs")]
     public GameObject pinUIPrefab;
     public Sprite WarehouseIcon;
     public Sprite BuyerIcon;
+
+    CityUIBuilder CityUIBuilder = new CityUIBuilder();
 
     public CityViewObjectController BuildObject(object cityObject)
     {
@@ -22,10 +27,29 @@ public class CityViewObjectBuilder : ScriptableObject
                 return buildWarehouse(warehouse);
             case Buyer buyer:
                 return BuildBuyer(buyer);
+            case Collectable collectable:
+                return BuildCollectable(collectable);
             default:
                 Debug.LogError($"No builder for city object of type {cityObject.GetType().Name}");
                 return null;
         }
+    }
+
+    public CityViewObjectController BuildCollectable(Collectable collectable)
+    {
+        var location = CityLocatorHelper.GetCityLocation(collectable);
+        var pos = location.CityPosition.WorldPosition;
+
+        GameObject collectableGO = Instantiate(triggerPrefab, pos, Quaternion.identity);
+        var viewController =
+            collectableGO.AddComponent<CityViewObjectController>().Initialize(collectable);
+        collectableGO.AddComponent<ContentProvider>().Initialize(collectable);
+        collectableGO.AddComponent<Interactable>();
+        collectableGO.AddComponent<Triggerable>();
+
+        Instantiate(collectablePrefab, pos, Quaternion.identity, collectableGO.transform);
+        return viewController;
+
     }
 
     public CityViewObjectController BuildBuyer(Buyer buyer)
@@ -33,7 +57,7 @@ public class CityViewObjectBuilder : ScriptableObject
         var location = CityLocatorHelper.GetCityLocation(buyer);
         GameObject buyerGO = Instantiate(triggerPrefab, location.CityPosition.WorldPosition, Quaternion.identity);
         var viewController =
-            buyerGO.AddComponent<CityViewObjectController>().Initialize(buyer, ViewObjectVisualState.Normal, true);
+            buyerGO.AddComponent<CityViewObjectController>().Initialize(buyer);
         buyerGO.AddComponent<ContentProvider>().Initialize(buyer);
         buyerGO.AddComponent<Interactable>();
         buyerGO.AddComponent<Triggerable>();

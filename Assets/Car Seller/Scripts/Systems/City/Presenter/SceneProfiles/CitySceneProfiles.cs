@@ -124,4 +124,19 @@ public sealed class FreeRoamCitySceneProfile : CitySceneProfile
     {
         return true;
     }
+
+    public override CityObjectState GetObjectViewState(object obj, GameState gameState)
+    {
+        var freeRoamState = gameState as FreeRoamGameState;
+
+        if (obj is Car car)
+        {
+
+            bool isFocusedCar = car == freeRoamState.FocusedCar;
+            ViewObjectVisualState visualState = isFocusedCar ? ViewObjectVisualState.Selected : ViewObjectVisualState.Normal;
+            return new CityObjectState(visualState, draggable: isFocusedCar, interactable: true);
+        }
+
+        return base.GetObjectViewState(obj, gameState);
+    }
 }

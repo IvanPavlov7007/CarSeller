@@ -4,6 +4,7 @@ using UnityEngine;
 public enum ViewObjectVisualState
 {
     Normal,
+    Selected,
     Disabled,
 }
 
@@ -39,6 +40,8 @@ public class CityViewObjectController : MonoBehaviour
             case ViewObjectVisualState.Normal:
                 break;
             case ViewObjectVisualState.Disabled:
+                break;
+            case ViewObjectVisualState.Selected:
                 break;
             default:
                 Debug.LogError($"CityViewObject: Unsupported visual state {visualState}");

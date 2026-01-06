@@ -32,16 +32,30 @@ public class UI_FX_Manager : Singleton<UI_FX_Manager>
                 if(transaction.Result.Type == TransactionResultType.Success)
                 {
                     var transactionData = transaction.Data as SellTransactionData;
-                    WorldEffectsDisplayer.Instance.PlayMoneyEffect(transactionData.Price, transaction.Result.Location.Position);
+                    playMoneyEffect(transactionData.Price, transaction.Result.Location);
                 }
                 break;
             case TransactionType.Reward:
                 if(transaction.Result.Type == TransactionResultType.Success)
                 {
+                    var transactionData = transaction.Data as RewardTransactionData;
+                    playMoneyEffect(transactionData.Price, transaction.Result.Location);
                 }
                 break;
             default:
                 break;
+        }
+    }
+
+    void playMoneyEffect(float amount, TransactionLocation location)
+    {
+        if(location.Type == TransactionLocationType.WorldSpace)
+        {
+            WorldEffectsDisplayer.Instance.PlayMoneyEffectWorld(amount, location.Position);
+        }
+        else
+        {
+            WorldEffectsDisplayer.Instance.PlayMonetEffectScreen(amount, location.Position);
         }
     }
 

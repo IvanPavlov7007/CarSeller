@@ -808,6 +808,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &126396125571337747
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8577669617002010078}
+  - component: {fileID: 8303718329570408817}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8577669617002010078
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126396125571337747}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.24, y: 1.87, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8303718329570408817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126396125571337747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: ef39a7b902fb4e03a144904dda572f82
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &219405805312982757
 GameObject:
   m_ObjectHideFlags: 0
@@ -2332,6 +2387,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &507054166412482491
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8609236301820289775}
+  - component: {fileID: 5294210760637980216}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8609236301820289775
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507054166412482491}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.21, y: 0.41, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5294210760637980216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507054166412482491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: b3e26f127cbc406d98c8e86f1fed1e7b
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &590686871578934501
 GameObject:
   m_ObjectHideFlags: 0
@@ -2598,6 +2708,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &636484580345725650
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4878037354702652255}
+  - component: {fileID: 3543631343681324747}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (13)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4878037354702652255
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636484580345725650}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.68, y: 0.26, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3543631343681324747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636484580345725650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: f16b368243144950a7578ba069af8e9a
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &669925216861977125
 GameObject:
   m_ObjectHideFlags: 0
@@ -4694,6 +4859,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &1297282387794126216
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6721021531900726247}
+  - component: {fileID: 6691872902755256901}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (9)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6721021531900726247
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297282387794126216}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.89, y: 1.43, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6691872902755256901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297282387794126216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 558e5e3c4e6e46c294d1575e3f93b3ce
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &1433514942081562370
 GameObject:
   m_ObjectHideFlags: 0
@@ -4914,6 +5134,71 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &1443742772368366930
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4544098368497408654}
+  m_Layer: 0
+  m_Name: TestMoneyCollectables
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4544098368497408654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443742772368366930}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 8355495287261558379}
+  - {fileID: 8174729772904626672}
+  - {fileID: 8609236301820289775}
+  - {fileID: 1055203244121820016}
+  - {fileID: 8354563577572444102}
+  - {fileID: 8161839983853981160}
+  - {fileID: 2461647487254238541}
+  - {fileID: 8577669617002010078}
+  - {fileID: 2982064531354776968}
+  - {fileID: 6721021531900726247}
+  - {fileID: 3006378721499308756}
+  - {fileID: 6541418845635836012}
+  - {fileID: 660516675801129122}
+  - {fileID: 4878037354702652255}
+  - {fileID: 1843753424230414495}
+  - {fileID: 6060671942785185836}
+  - {fileID: 4449015347255439519}
+  - {fileID: 2720697392550063369}
+  - {fileID: 234429822702446605}
+  - {fileID: 5007155154235357438}
+  - {fileID: 4569509251602027046}
+  - {fileID: 1253023325534901305}
+  - {fileID: 4216248609643933969}
+  - {fileID: 6924214973562810678}
+  - {fileID: 6283144333750166714}
+  - {fileID: 5857751981398671078}
+  - {fileID: 9211973404413268542}
+  - {fileID: 256862064420170468}
+  - {fileID: 7044835784778746668}
+  - {fileID: 3730045003399606537}
+  - {fileID: 5291572571464698049}
+  - {fileID: 3402849048693678274}
+  - {fileID: 3765796590738628282}
+  - {fileID: 8808863684948209424}
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1609001816669847043
 GameObject:
   m_ObjectHideFlags: 0
@@ -6758,6 +7043,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &2084149175655988606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3402849048693678274}
+  - component: {fileID: 4336723891906357137}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (32)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3402849048693678274
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084149175655988606}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.45, y: -2.86, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4336723891906357137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084149175655988606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 374857d5f1434bed93cd1ade8299cf39
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &2103887126988065537
 GameObject:
   m_ObjectHideFlags: 0
@@ -9024,6 +9364,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &2379789333979652367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2461647487254238541}
+  - component: {fileID: 8987431557958227299}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2461647487254238541
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2379789333979652367}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.9, y: 1.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8987431557958227299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2379789333979652367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 01a277e9d72f4d149c79b4f0ac048c1e
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &2381388125573550045
 GameObject:
   m_ObjectHideFlags: 0
@@ -9130,6 +9525,61 @@ MonoBehaviour:
   - Car
   - Buyer
   RegionId: 2
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
+--- !u!1 &2402146801625832981
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4569509251602027046}
+  - component: {fileID: 3116973592018639548}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (20)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4569509251602027046
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2402146801625832981}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.16, y: -0.88, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3116973592018639548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2402146801625832981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: afdfa851ed7f458683e7814ce1b0d73d
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
   Radius: 0
   Kind: 2
   Node: {fileID: 0}
@@ -9356,6 +9806,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &2521568345836419909
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6541418845635836012}
+  - component: {fileID: 7803824238905370323}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (11)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6541418845635836012
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2521568345836419909}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.13, y: 0.18, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7803824238905370323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2521568345836419909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 738f942c71e943a1aabaea4b74a62506
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &2533182405140238783
 GameObject:
   m_ObjectHideFlags: 0
@@ -9402,6 +9907,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 72d9d0e0ccb64a9783582ea8f87268d4
   StartLooksAway: 0
+--- !u!1 &2612493760552848283
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6924214973562810678}
+  - component: {fileID: 4053682014540658512}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (23)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6924214973562810678
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2612493760552848283}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.11, y: -3.46, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4053682014540658512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2612493760552848283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 6bf85f46751243319753ce7401e91038
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &2647348319862108445
 GameObject:
   m_ObjectHideFlags: 0
@@ -10466,6 +11026,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &2920495264689510784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9211973404413268542}
+  - component: {fileID: 505404697288772829}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (26)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9211973404413268542
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2920495264689510784}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.17, y: -3.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &505404697288772829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2920495264689510784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 3e997d7cb38a424a96a1f6567e80b72e
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &2929700286894735411
 GameObject:
   m_ObjectHideFlags: 0
@@ -10998,6 +11613,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &3062139670755694961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5291572571464698049}
+  - component: {fileID: 2037676191308597403}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (31)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5291572571464698049
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3062139670755694961}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.46, y: -1.49, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2037676191308597403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3062139670755694961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 1f1e67650de242d19426587e74a82390
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &3086309769972837672
 GameObject:
   m_ObjectHideFlags: 0
@@ -11324,6 +11994,7 @@ Transform:
   - {fileID: 1740347145627860351}
   - {fileID: 7710467559556220762}
   - {fileID: 7984686621746324170}
+  - {fileID: 4544098368497408654}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7092553036261487221
@@ -11397,6 +12068,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 13449421f0b34a6c9248736bb0646c29
   StartLooksAway: 0
+--- !u!1 &3120970606773818701
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8355495287261558379}
+  - component: {fileID: 1398018690863949707}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8355495287261558379
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3120970606773818701}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.18, y: 0.33, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1398018690863949707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3120970606773818701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: f7a76b609c8146a784914681f19d8b39
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &3143972088499610296
 GameObject:
   m_ObjectHideFlags: 0
@@ -13407,6 +14133,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &3390141119317794866
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8161839983853981160}
+  - component: {fileID: 1867836400886865968}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8161839983853981160
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3390141119317794866}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.97, y: 1.27, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1867836400886865968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3390141119317794866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 35fe90e5d0ee4d0ca3a3d8ca8190fbd6
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &3412497067115412312
 GameObject:
   m_ObjectHideFlags: 0
@@ -13627,6 +14408,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &3425723671884787843
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1055203244121820016}
+  - component: {fileID: 8693451575106043226}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1055203244121820016
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3425723671884787843}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.7, y: 0.52, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8693451575106043226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3425723671884787843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: bd3929643fbc4a0daf7839e9ffbf02d8
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &3463973432064014880
 GameObject:
   m_ObjectHideFlags: 0
@@ -14819,6 +15655,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &3709271436130770412
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8808863684948209424}
+  - component: {fileID: 6664718182515318590}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (30)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8808863684948209424
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3709271436130770412}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.51, y: -1.08, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6664718182515318590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3709271436130770412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 765b38c9d72c461ebf8a3fdad5973d5c
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &3735109018541798215
 GameObject:
   m_ObjectHideFlags: 0
@@ -17499,6 +18390,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 8f40b33a114b4cad9165d4e2fd92fd1c
   StartLooksAway: 0
+--- !u!1 &4227267492155709418
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 256862064420170468}
+  - component: {fileID: 2513131304669854762}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (27)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &256862064420170468
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4227267492155709418}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.47, y: -3.12, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2513131304669854762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4227267492155709418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 87c4a4d759d844ec86099448396137d8
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &4281936836789399639
 GameObject:
   m_ObjectHideFlags: 0
@@ -18189,6 +19135,116 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &4465295571197198472
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6060671942785185836}
+  - component: {fileID: 7765108575647349035}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (15)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6060671942785185836
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4465295571197198472}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.21, y: -1.32, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7765108575647349035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4465295571197198472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 62a18e498b814f81856759d9536abf33
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
+--- !u!1 &4469655313780072660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3730045003399606537}
+  - component: {fileID: 8855881020085501334}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (29)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3730045003399606537
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4469655313780072660}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.26, y: -0.9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8855881020085501334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4469655313780072660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: f62cbf7ca6b24b16a5d8823c210b70e6
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &4476762167278476730
 GameObject:
   m_ObjectHideFlags: 0
@@ -18951,6 +20007,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &4572808845522865392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4449015347255439519}
+  - component: {fileID: 9008645013994107317}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (16)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4449015347255439519
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4572808845522865392}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.19, y: -2.88, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9008645013994107317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4572808845522865392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 82063835ed1f4363868f6f45e81d365a
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &4592497538853735468
 GameObject:
   m_ObjectHideFlags: 0
@@ -19043,6 +20154,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3488be294b0c41759eae503c55471790
   StartLooksAway: 0
+--- !u!1 &4669369221140143116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1253023325534901305}
+  - component: {fileID: 4816184699051864349}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (21)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1253023325534901305
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4669369221140143116}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.03, y: -2.06, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4816184699051864349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4669369221140143116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 06398f72c38546f584b99592dd1dd895
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &4676579140321610898
 GameObject:
   m_ObjectHideFlags: 0
@@ -19135,6 +20301,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: c52dc381e31644cc9adfc236189ace73
   StartLooksAway: 0
+--- !u!1 &4690419230862975558
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3006378721499308756}
+  - component: {fileID: 3968481591604632013}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (10)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3006378721499308756
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4690419230862975558}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.94, y: 0.84, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3968481591604632013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4690419230862975558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 4b8ebf0baf644d92b0f2caa1ed6747ea
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &4742030107975099963
 GameObject:
   m_ObjectHideFlags: 0
@@ -19667,6 +20888,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: b58948c52ad14a46b542b5b546d69467
   StartLooksAway: 0
+--- !u!1 &4853282268640685438
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2720697392550063369}
+  - component: {fileID: 691481493783483089}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (17)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2720697392550063369
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4853282268640685438}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.96, y: -2.57, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &691481493783483089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4853282268640685438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: ea6b6a7f3d5e43c79f12ac82647d0828
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &4868299487964591602
 GameObject:
   m_ObjectHideFlags: 0
@@ -19933,6 +21209,116 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &4887600177484312054
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2982064531354776968}
+  - component: {fileID: 2482851664567446730}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (8)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2982064531354776968
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4887600177484312054}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.87, y: 1.61, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2482851664567446730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4887600177484312054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 65393bf7670b4c71913d8e0e6d7c871e
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
+--- !u!1 &4889393309767039811
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6283144333750166714}
+  - component: {fileID: 8216885300069912388}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (24)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6283144333750166714
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4889393309767039811}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.99, y: -1.86, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8216885300069912388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4889393309767039811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: e58681b267fa4c2cb92ec35f27b2aa73
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &4924299673129549739
 GameObject:
   m_ObjectHideFlags: 0
@@ -21519,6 +22905,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &5125280457188539361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7044835784778746668}
+  - component: {fileID: 8569058364402053729}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (28)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7044835784778746668
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5125280457188539361}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.58, y: -2.09, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8569058364402053729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5125280457188539361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 4320879dc9584950bf9acbb6986dd3ed
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &5167036562893258945
 GameObject:
   m_ObjectHideFlags: 0
@@ -24271,6 +25712,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 27e79699859b48779f99e240277a3c94
   StartLooksAway: 0
+--- !u!1 &5681857478072572026
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1843753424230414495}
+  - component: {fileID: 2195227621536920088}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (14)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1843753424230414495
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5681857478072572026}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.42, y: -0.68, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2195227621536920088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5681857478072572026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 8d6817a8fa984c61a5ca3f1cc6089fa5
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &5702573268379213910
 GameObject:
   m_ObjectHideFlags: 0
@@ -26751,6 +28247,61 @@ MonoBehaviour:
   - Car
   - Buyer
   RegionId: 1
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
+--- !u!1 &6102209107303683010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5007155154235357438}
+  - component: {fileID: 4629940643112739573}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (19)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5007155154235357438
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6102209107303683010}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.55, y: 0.02, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4629940643112739573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6102209107303683010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 0fa8d878af81491c82454ce9215a3069
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
   Radius: 0
   Kind: 2
   Node: {fileID: 0}
@@ -31097,6 +32648,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &7158249239197310222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4216248609643933969}
+  - component: {fileID: 5488875555512003354}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (22)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4216248609643933969
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7158249239197310222}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.05, y: -3.24, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5488875555512003354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7158249239197310222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: f92d5d18a6ff43ee8d6d5bacbe09ef8c
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &7170085514298151359
 GameObject:
   m_ObjectHideFlags: 0
@@ -31143,6 +32749,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: e6eeaeac440a4e5da98e3b18c417b35b
   StartLooksAway: 0
+--- !u!1 &7306165308910885499
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 660516675801129122}
+  - component: {fileID: 380632254585568340}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (12)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &660516675801129122
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7306165308910885499}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.28, y: 0.11, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &380632254585568340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7306165308910885499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: e786701b864b47d3890ba3470c3aba93
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &7333060299904571463
 GameObject:
   m_ObjectHideFlags: 0
@@ -31997,6 +33658,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &7413958068578766642
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8354563577572444102}
+  - component: {fileID: 5574327704334767557}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8354563577572444102
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7413958068578766642}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.2, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5574327704334767557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7413958068578766642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 05530e33677d43668b08a7f49e7f5814
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &7426388650795380818
 GameObject:
   m_ObjectHideFlags: 0
@@ -34693,6 +36409,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &7929913742597480741
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 234429822702446605}
+  - component: {fileID: 710643153409897977}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (18)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &234429822702446605
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7929913742597480741}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.22, y: -1.47, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &710643153409897977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7929913742597480741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 2327aeb36d38462db42fff7f40d30a9c
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &7992117946699748309
 GameObject:
   m_ObjectHideFlags: 0
@@ -36979,6 +38750,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: ed92b9e02bd1490ab87992bba6b1a1a9
   StartLooksAway: 0
+--- !u!1 &8402261517762132739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8174729772904626672}
+  - component: {fileID: 1932161616855623674}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8174729772904626672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8402261517762132739}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.71, y: 0.37, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1932161616855623674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8402261517762132739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 948e21c41b2944d8926fba01dd326860
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &8407311184474893772
 GameObject:
   m_ObjectHideFlags: 0
@@ -38017,6 +39843,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &8686501437885908631
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5857751981398671078}
+  - component: {fileID: 3220895320793180293}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (25)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5857751981398671078
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8686501437885908631}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.21, y: -1.03, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3220895320793180293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8686501437885908631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: bf7655fa26ce455a9dd09ab655c475cd
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &8722498316223324610
 GameObject:
   m_ObjectHideFlags: 0
@@ -39953,6 +41834,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 6c7b874846ab47578999089a82146359
   StartLooksAway: 0
+--- !u!1 &9192688886880660822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3765796590738628282}
+  - component: {fileID: 9209419002663237176}
+  m_Layer: 0
+  m_Name: CollectalbeMarker(Edge) (33)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3765796590738628282
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9192688886880660822}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.82, y: -2.93, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4544098368497408654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9209419002663237176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9192688886880660822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 49ca7184ea62476888bd1c53020db652
+  DisplayName: 
+  Tags:
+  - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &9211091212461076462
 GameObject:
   m_ObjectHideFlags: 0

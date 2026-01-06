@@ -1,5 +1,6 @@
 ﻿using Pixelplacement;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class Main : Singleton<Main>
@@ -25,5 +26,11 @@ public class Main : Singleton<Main>
 
         var roamingState = new FreeRoamGameState(car);
         G.Instance.GameFlowController.SetGameState(roamingState);
+
+        var locations = G.City.QueryMarkers("cash")
+            .Select(marker => G.City.GetEmptyLocation(marker.PositionOnGraph.Value) as ILocation).ToList();
+
+        CollectablesManager.Instance.Initialize(locations, 900f, null, 20);
+        yield return null;
     }
 }

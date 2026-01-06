@@ -1807,3 +1807,513 @@ MonoBehaviour:
       WorldPoint: {x: -15.85, y: 15.17}
     AuthorId: 4c0bb57c6c4c409583ba79bffa976a4a
     AuthorPath: CityAuthoringRoot/CarOrBuyerMarker(Node) (6)
+  - Id: f7a76b609c8146a784914681f19d8b39
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 0.18, y: 0.33}
+    AuthorId: f7a76b609c8146a784914681f19d8b39
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge)
+  - Id: 948e21c41b2944d8926fba01dd326860
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 0.71, y: 0.37}
+    AuthorId: 948e21c41b2944d8926fba01dd326860
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (1)
+  - Id: b3e26f127cbc406d98c8e86f1fed1e7b
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 1.21, y: 0.41}
+    AuthorId: b3e26f127cbc406d98c8e86f1fed1e7b
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (2)
+  - Id: bd3929643fbc4a0daf7839e9ffbf02d8
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 2.7, y: 0.52}
+    AuthorId: bd3929643fbc4a0daf7839e9ffbf02d8
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (3)
+  - Id: 05530e33677d43668b08a7f49e7f5814
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 3.2, y: 0.5}
+    AuthorId: 05530e33677d43668b08a7f49e7f5814
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (4)
+  - Id: 35fe90e5d0ee4d0ca3a3d8ca8190fbd6
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 1.97, y: 1.27}
+    AuthorId: 35fe90e5d0ee4d0ca3a3d8ca8190fbd6
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (5)
+  - Id: 01a277e9d72f4d149c79b4f0ac048c1e
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 0.9, y: 1.8}
+    AuthorId: 01a277e9d72f4d149c79b4f0ac048c1e
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (6)
+  - Id: ef39a7b902fb4e03a144904dda572f82
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 0.24, y: 1.87}
+    AuthorId: ef39a7b902fb4e03a144904dda572f82
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (7)
+  - Id: 65393bf7670b4c71913d8e0e6d7c871e
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -2.87, y: 1.61}
+    AuthorId: 65393bf7670b4c71913d8e0e6d7c871e
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (8)
+  - Id: 558e5e3c4e6e46c294d1575e3f93b3ce
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -4.89, y: 1.43}
+    AuthorId: 558e5e3c4e6e46c294d1575e3f93b3ce
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (9)
+  - Id: 4b8ebf0baf644d92b0f2caa1ed6747ea
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -5.94, y: 0.84}
+    AuthorId: 4b8ebf0baf644d92b0f2caa1ed6747ea
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (10)
+  - Id: 738f942c71e943a1aabaea4b74a62506
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -5.13, y: 0.18}
+    AuthorId: 738f942c71e943a1aabaea4b74a62506
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (11)
+  - Id: e786701b864b47d3890ba3470c3aba93
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -4.28, y: 0.11}
+    AuthorId: e786701b864b47d3890ba3470c3aba93
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (12)
+  - Id: f16b368243144950a7578ba069af8e9a
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -2.68, y: 0.26}
+    AuthorId: f16b368243144950a7578ba069af8e9a
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (13)
+  - Id: 8d6817a8fa984c61a5ca3f1cc6089fa5
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -3.42, y: -0.68}
+    AuthorId: 8d6817a8fa984c61a5ca3f1cc6089fa5
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (14)
+  - Id: 62a18e498b814f81856759d9536abf33
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -4.21, y: -1.32}
+    AuthorId: 62a18e498b814f81856759d9536abf33
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (15)
+  - Id: 82063835ed1f4363868f6f45e81d365a
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -4.19, y: -2.88}
+    AuthorId: 82063835ed1f4363868f6f45e81d365a
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (16)
+  - Id: ea6b6a7f3d5e43c79f12ac82647d0828
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -5.96, y: -2.57}
+    AuthorId: ea6b6a7f3d5e43c79f12ac82647d0828
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (17)
+  - Id: 2327aeb36d38462db42fff7f40d30a9c
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -6.22, y: -1.47}
+    AuthorId: 2327aeb36d38462db42fff7f40d30a9c
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (18)
+  - Id: 0fa8d878af81491c82454ce9215a3069
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -6.55, y: 0.02}
+    AuthorId: 0fa8d878af81491c82454ce9215a3069
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (19)
+  - Id: afdfa851ed7f458683e7814ce1b0d73d
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -7.16, y: -0.88}
+    AuthorId: afdfa851ed7f458683e7814ce1b0d73d
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (20)
+  - Id: 06398f72c38546f584b99592dd1dd895
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -7.03, y: -2.06}
+    AuthorId: 06398f72c38546f584b99592dd1dd895
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (21)
+  - Id: f92d5d18a6ff43ee8d6d5bacbe09ef8c
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -7.05, y: -3.24}
+    AuthorId: f92d5d18a6ff43ee8d6d5bacbe09ef8c
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (22)
+  - Id: 6bf85f46751243319753ce7401e91038
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -3.11, y: -3.46}
+    AuthorId: 6bf85f46751243319753ce7401e91038
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (23)
+  - Id: e58681b267fa4c2cb92ec35f27b2aa73
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -1.99, y: -1.86}
+    AuthorId: e58681b267fa4c2cb92ec35f27b2aa73
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (24)
+  - Id: bf7655fa26ce455a9dd09ab655c475cd
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -2.21, y: -1.03}
+    AuthorId: bf7655fa26ce455a9dd09ab655c475cd
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (25)
+  - Id: 3e997d7cb38a424a96a1f6567e80b72e
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -2.17, y: -3.4}
+    AuthorId: 3e997d7cb38a424a96a1f6567e80b72e
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (26)
+  - Id: 87c4a4d759d844ec86099448396137d8
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -1.47, y: -3.12}
+    AuthorId: 87c4a4d759d844ec86099448396137d8
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (27)
+  - Id: 4320879dc9584950bf9acbb6986dd3ed
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -1.58, y: -2.09}
+    AuthorId: 4320879dc9584950bf9acbb6986dd3ed
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (28)
+  - Id: f62cbf7ca6b24b16a5d8823c210b70e6
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -0.26, y: -0.9}
+    AuthorId: f62cbf7ca6b24b16a5d8823c210b70e6
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (29)
+  - Id: 1f1e67650de242d19426587e74a82390
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 0.46, y: -1.49}
+    AuthorId: 1f1e67650de242d19426587e74a82390
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (31)
+  - Id: 374857d5f1434bed93cd1ade8299cf39
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 1.45, y: -2.86}
+    AuthorId: 374857d5f1434bed93cd1ade8299cf39
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (32)
+  - Id: 49ca7184ea62476888bd1c53020db652
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 3.82, y: -2.93}
+    AuthorId: 49ca7184ea62476888bd1c53020db652
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (33)
+  - Id: 765b38c9d72c461ebf8a3fdad5973d5c
+    DisplayName: 
+    Tags:
+    - cash
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -1.51, y: -1.08}
+    AuthorId: 765b38c9d72c461ebf8a3fdad5973d5c
+    AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (30)
