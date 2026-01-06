@@ -52,8 +52,15 @@ public sealed class FreeRoamCityTriggerProfile : ICityTriggerProfile
                 }
             );
         }
-        if(trigger is Warehouse warehouse)
+        if (trigger is Warehouse warehouse)
         {
+            // prevent instant re-entry after leaving warehouse ---
+            if (!freeRoamGameState.CanEnterWarehouse(warehouse,car))
+            {
+                // Ignore this trigger for now
+                return new TriggerAction(false, null);
+            }
+
             return new TriggerAction
             (
                 true,

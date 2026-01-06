@@ -1,13 +1,17 @@
+// Version: 2
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class CustomTrigger2D : MonoBehaviour
+public sealed class CustomTrigger2D : MonoBehaviour
 {
     public UnityEvent<Collider2D> onEnter;
     public UnityEvent<Collider2D> onStay;
     public UnityEvent<Collider2D> onExit;
 
-    private void Start()
+    bool armed; // To prevent triggering on the same frame as enabling
+
+    IEnumerator Start()
     {
 #if DEBUG
         if(onEnter == null)
@@ -15,23 +19,25 @@ public class CustomTrigger2D : MonoBehaviour
             Debug.LogWarning("No event listeners on this trigger" + ToString());
         }
 #endif
+        yield return new WaitForFixedUpdate();
+        armed = true;
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if (onEnter != null)
+        if (armed && onEnter != null)
             onEnter.Invoke(collision);
     }
 
-    protected virtual void OnTriggerStay2D(Collider2D collision)
+    void OnTriggerStay2D(Collider2D collision)
     {
-        if (onStay != null)
+        if (armed && onStay != null)
             onStay.Invoke(collision);
     }
 
-    protected virtual void OnTriggerExit2D(Collider2D collision)
+    void OnTriggerExit2D(Collider2D collision)
     {
-        if (onExit != null)
+        if (armed && onExit != null)
             onExit.Invoke(collision);
     }
 

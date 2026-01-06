@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 public abstract class GameState
 {
@@ -35,10 +36,30 @@ public class StealingGameState : GameState
 
 public class FreeRoamGameState : GameState
 {
-    public Car FocusedCar { get; private set; }
+    public Car FocusedCar;
+    bool _skipNextWarehouseEntry;
 
     public FreeRoamGameState(Car focusedCar)
     {
         FocusedCar = focusedCar;
+    }
+
+    public bool CanEnterWarehouse(Warehouse warehouse, Car car)
+    {
+        if (car != FocusedCar)
+            return false;
+
+        if (_skipNextWarehouseEntry)
+        {
+            _skipNextWarehouseEntry = false;
+            return false;
+        }
+
+        return true;
+    }
+
+    public void NotifyExitedWarehouse()
+    {
+        _skipNextWarehouseEntry = true;
     }
 }
