@@ -11,22 +11,27 @@ public class TransactionProcessor
 
     public TransactionResult Process(Transaction transaction)
     {
-        TransactionResult result;
-        if(transaction == null)
-        {
-            result = TransactionResult.InvalidTransaction("Transaction is null");
-            return result;
-        }
+        if (transaction == null)
+            return TransactionResult.InvalidTransaction("Transaction is null");
 
-        if (Handlers.TryGetValue(transaction.Type, out var handler) && handler.CanHandle(transaction))
+        TransactionResult result;
+
+        if (Handlers.TryGetValue(transaction.Type, out var handler) &&
+            handler != null &&
+            handler.CanHandle(transaction))
         {
-            result = handler.Handle(transaction);
+            result = handler.Handle(transaction) 
+                     ?? TransactionResult.InvalidTransaction("Handler returned null result.");
         }
         else
-            result = TransactionResult.InvalidTransaction($"No handler found for transaction type {transaction.Type}");
+        {
+            result = TransactionResult.InvalidTransaction(
+                $"No handler found for transaction type {transaction.Type}");
+        }
+
         transaction.FinalizeResult(result);
         GameEvents.Instance.OnTransactionComplete(new TransactionEventData(transaction));
+
         return result;
     }
-
 }

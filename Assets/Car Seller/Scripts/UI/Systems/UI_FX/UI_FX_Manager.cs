@@ -1,12 +1,9 @@
 ﻿using Pixelplacement;
+using UnityEngine;
 
 public class UI_FX_Manager : Singleton<UI_FX_Manager>
 {
-    private void OnEnable()
-    {
-        GameEvents.Instance.OnTransactionComplete += onTransactionComplete;
-    }
-
+    private void OnEnable() { GameEvents.Instance.OnTransactionComplete += onTransactionComplete; }
     private void OnDisable()
     {
         GameEvents.Instance.OnTransactionComplete -= onTransactionComplete;
@@ -15,33 +12,41 @@ public class UI_FX_Manager : Singleton<UI_FX_Manager>
     void onTransactionComplete(TransactionEventData data)
     {
         var transaction = data.Transaction;
+        if (transaction == null || transaction.Result == null)
+            return;
 
-        switch(transaction.Type)
+        if (transaction.Result.Type != TransactionResultType.Success)
+        {
+            Debug.LogWarning($"Transaction failed as {transaction.Result.Type} with {transaction.Result.Data}");
+            return;
+        }
+
+        switch (transaction.Type)
         {
             case TransactionType.Purchase:
-                if(transaction.Result.Type == TransactionResultType.Success)
-                {
-                }
+                // TODO: add purchase-specific FX if needed
                 break;
+
             case TransactionType.Steal:
-                if(transaction.Result.Type == TransactionResultType.Success)
-                {
-                }
+                // TODO: add steal-specific FX if needed
                 break;
+
             case TransactionType.Sell:
-                if(transaction.Result.Type == TransactionResultType.Success)
                 {
                     var transactionData = transaction.Data as SellTransactionData;
-                    playMoneyEffect(transactionData.Price, transaction.Result.Location);
+                    if (transactionData != null)
+                        playMoneyEffect(transactionData.Price, transaction.Result.Location);
+                    break;
                 }
-                break;
+
             case TransactionType.Reward:
-                if(transaction.Result.Type == TransactionResultType.Success)
                 {
                     var transactionData = transaction.Data as RewardTransactionData;
-                    playMoneyEffect(transactionData.Price, transaction.Result.Location);
+                    if (transactionData != null)
+                        playMoneyEffect(transactionData.Price, transaction.Result.Location);
+                    break;
                 }
-                break;
+
             default:
                 break;
         }
@@ -49,15 +54,19 @@ public class UI_FX_Manager : Singleton<UI_FX_Manager>
 
     void playMoneyEffect(float amount, TransactionLocation location)
     {
-        if(location.Type == TransactionLocationType.WorldSpace)
+        if (location == null)
         {
-            WorldEffectsDisplayer.Instance.PlayMoneyEffectWorld(amount, location.Position);
+            Debug.LogWarning("Transaction location is null, defaulting to OmniDirectional.");
+            location = TransactionLocation.OmniDirectional;
+        }
+
+        if (location.Type == TransactionLocationType.WorldSpace)
+        {
+            UIEffectsDisplayer.Instance.PlayMoneyEffectWorld(amount, location.Position);
         }
         else
         {
-            WorldEffectsDisplayer.Instance.PlayMonetEffectScreen(amount, location.Position);
+            UIEffectsDisplayer.Instance.PlayMonetEffectScreen(amount, location.Position);
         }
     }
-
-
 }
