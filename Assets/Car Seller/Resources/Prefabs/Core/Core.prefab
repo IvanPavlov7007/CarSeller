@@ -801,7 +801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abc9764d38f2ed448932d7b9aec26cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dontDestroyOnLoad: 0
+  _dontDestroyOnLoad: 1
   carSpawnConfig: {fileID: 11400000, guid: 7a422727c25de964fbc088bbd407a556, type: 2}
   carSpawnPoint: {fileID: 6395515076168896260}
 --- !u!1 &8329972248815281270
@@ -1071,8 +1071,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 1
-  CityConfig: {fileID: 11400000, guid: 365f4d838f000674b9891038e28cbdf9, type: 2}
-  EconomyConfig: {fileID: 11400000, guid: 254e34cb4e01cca429baa46ab5f0f0c0, type: 2}
+  CityConfig: {fileID: 11400000, guid: f69e8dc3adaa8b147938f1124e33966e, type: 2}
+  EconomyConfig: {fileID: 11400000, guid: c06296a320d0174459eed86435f69a0f, type: 2}
   warehouseProductViewBuilder: {fileID: 11400000, guid: f89c79dee8c6ad946a82b44e4e94a0a2, type: 2}
   carPartViewBuilder: {fileID: 11400000, guid: 9280239a7aae48041bc89e3309ad1261, type: 2}
   cityViewObjectBuilder: {fileID: 11400000, guid: b8b2cb1796673254fbd1b5a05d793650, type: 2}

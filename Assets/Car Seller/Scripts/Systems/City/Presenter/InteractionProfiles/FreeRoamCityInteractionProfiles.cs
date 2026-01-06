@@ -34,7 +34,14 @@ public sealed class FreeRoamCityTriggerProfile : ICityTriggerProfile
 {
     public TriggerAction GenerateTriggerAction(object trigger, object triggerCause, GameState gameState)
     {
-        if(trigger is Collectable collectable)
+        FreeRoamGameState freeRoamGameState = gameState as FreeRoamGameState;
+        Debug.Assert(freeRoamGameState != null, "FreeRoamCityTriggerProfile: gameState is not FreeRoamGameState");
+
+        if (triggerCause != freeRoamGameState.FocusedCar)
+            return new TriggerAction(false, null);
+        Car car = triggerCause as Car;
+
+        if (trigger is Collectable collectable)
         {
             return new TriggerAction
             (
@@ -42,6 +49,18 @@ public sealed class FreeRoamCityTriggerProfile : ICityTriggerProfile
                 () =>
                 {
                     collectable.Collect();
+                }
+            );
+        }
+        if(trigger is Warehouse warehouse)
+        {
+            return new TriggerAction
+            (
+                true,
+                () =>
+                {
+                    G.Instance.CityActionService.PutCarInsideWarehouse(car, warehouse);
+                    G.Instance.GameFlowController.EnterWarehouse(warehouse);
                 }
             );
         }
