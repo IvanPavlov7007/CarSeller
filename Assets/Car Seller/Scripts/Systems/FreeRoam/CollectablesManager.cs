@@ -54,12 +54,12 @@ public class CollectablesManager : Singleton<CollectablesManager>
         }
         collectables.Remove(collectable.Location);
         
-        var transactionLocation = new TransactionLocation(TransactionLocationType.WorldSpace, collectable.Location.CityPosition.WorldPosition);
+        var transactionLocation = new TransactionFeedbackLocation(TransactionLocationType.WorldSpace, collectable.Location.CityPosition.WorldPosition);
         var rewardTransaction = new Transaction(
             TransactionType.Reward,
-            new RewardTransactionData(collectable.MoneyAmount, null, transactionLocation)
+            new RewardTransactionData(collectable.MoneyAmount, null)
         );
-        G.TransactionProcessor.Process(rewardTransaction);
+        G.TransactionProcessor.Process(rewardTransaction, transactionLocation);
 
         CheckTooFew();
     }

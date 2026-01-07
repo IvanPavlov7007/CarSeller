@@ -11,12 +11,10 @@ public class Transaction
     public void FinalizeResult(TransactionResult result)
     {
         Result = result;
-    }   
-
+    }
     public TransactionType Type { get; private set; }
     public ITransactionData Data { get; private set; }
     public TransactionResult Result { get; private set; }
-
 }
 
 
@@ -29,26 +27,23 @@ public enum TransactionType
     Sell,
     Reward,
     Lose,
-    Confiscate
+    Confiscate,
+    Exchange
 }
 
 public class TransactionResult
 {
     public TransactionResultType Type { get; private set; }
     public ITransactionResultData Data { get; private set; }
-    public TransactionLocation Location { get; set; }
-    public TransactionResult(TransactionResultType type, TransactionLocation location = null, ITransactionResultData data = null)
+    public TransactionResult(TransactionResultType type, ITransactionResultData data = null)
     {
         Type = type;
         Data = data;
-        if (location == null)
-            location = TransactionLocation.OmniDirectional;
-        Location = location;
     }
 
-    public static TransactionResult Success(TransactionLocation location = null, ITransactionResultData data = null)
+    public static TransactionResult Success(ITransactionResultData data = null)
     {
-        return new TransactionResult(TransactionResultType.Success, location, data);
+        return new TransactionResult(TransactionResultType.Success, data);
     }
 
     public static TransactionResult InvalidTransaction(string text)
@@ -58,11 +53,11 @@ public class TransactionResult
 
 }
 
-public class  TransactionLocation
+public class TransactionFeedbackLocation
 {
-    public static readonly TransactionLocation OmniDirectional = new TransactionLocation(TransactionLocationType.OmniDirectional, Vector3.zero);
+    public static readonly TransactionFeedbackLocation OmniDirectional = new TransactionFeedbackLocation(TransactionLocationType.OmniDirectional, Vector3.zero);
 
-    public TransactionLocation(TransactionLocationType type, Vector3 position)
+    public TransactionFeedbackLocation(TransactionLocationType type, Vector3 position)
     {
         Type = type;
         Position = position;

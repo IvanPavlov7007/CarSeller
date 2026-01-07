@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// On-demand created offer to sell a car.
+/// </summary>
 public class CarSellOffer : IOffer
 {
     public Car Car { get; private set; }

@@ -52,12 +52,12 @@ public class UI_FX_Manager : Singleton<UI_FX_Manager>
         }
     }
 
-    void playMoneyEffect(float amount, TransactionLocation location)
+    void playMoneyEffect(float amount, TransactionFeedbackLocation location)
     {
         if (location == null)
         {
             Debug.LogWarning("Transaction location is null, defaulting to OmniDirectional.");
-            location = TransactionLocation.OmniDirectional;
+            location = TransactionFeedbackLocation.OmniDirectional;
         }
 
         if (location.Type == TransactionLocationType.WorldSpace)

@@ -130,6 +130,7 @@ public static class CTX_Menu_Tools
         };
     }
 
+    // TODO Currently not working properly - transaction should be created in the context of the car sell menu
     // TODO Make use of this in the car sell context menu
     public static List<UIElement> SellCarOfferElements(CarSellOffer offer)
     {

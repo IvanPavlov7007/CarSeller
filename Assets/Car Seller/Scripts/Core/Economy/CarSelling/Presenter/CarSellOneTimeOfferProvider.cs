@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Simple provider that creates one-time car sell offers on demand.
+/// </summary>
 public class CarSellOneTimeOfferProvider
 {
     public CarSellOffer GetOfferByCar(Car car)

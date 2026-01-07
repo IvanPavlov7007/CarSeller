@@ -61,7 +61,9 @@ public class GameFlowManager : RoutinedObject
             {
                 Transaction sellingTransaction = offer.Accept();
 
-                var result = G.TransactionProcessor.Process(sellingTransaction);
+                var feedbackLocation = new TransactionFeedbackLocation(TransactionLocationType.WorldSpace,
+                CityLocatorHelper.GetCityLocation(car).CityPosition.WorldPosition);
+                var result = G.TransactionProcessor.Process(sellingTransaction, feedbackLocation);
                 if(result.Type != TransactionResultType.Success)
                 {
                     Debug.LogError("Failed to process stealing transaction during selling sequence.");
@@ -94,8 +96,12 @@ public class GameFlowManager : RoutinedObject
             {
                 Debug.Assert(warehouse != null, "StealingSequence: warehouse is null on succeed.");
                 Debug.Assert(car != null, "StealingSequence: car is null on succeed.");
+
+                var location = new TransactionFeedbackLocation(TransactionLocationType.WorldSpace,
+                    CityLocatorHelper.GetCityLocation(car).CityPosition.WorldPosition);
                 G.TransactionProcessor.Process(
-                    new Transaction(TransactionType.Steal, new StealTransactionData(car, warehouse))
+                    new Transaction(TransactionType.Steal, new StealTransactionData(car, warehouse)),
+                    location
                 );
             }
         );

@@ -68,6 +68,11 @@ public class PlayerManager
         return Player.Money;
     }
 
+    public float DeltaPlayerMoney(float delta)
+    {
+        return SetPlayerMoney(Player.Money + delta);
+    }
+
     public float AddPlayerMoney(float amount)
     {
         return SetPlayerMoney(Player.Money + amount);

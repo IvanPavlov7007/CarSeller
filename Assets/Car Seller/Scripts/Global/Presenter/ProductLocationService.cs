@@ -29,14 +29,49 @@ public class ProductLocationService
             {
                 previousLocation.Detach();
             }
-            productLocations[product] = newLocation;
-            GameEvents.Instance.OnProductLocationChanged?.Invoke(new ProductLocationChangedEventData(product, newLocation, previousLocation));
-            Debug.Assert(product is ILocatable);
-            GameEvents.Instance.OnLocatableLocationChanged?.Invoke(new LocatableLocationChangedEventData(product, newLocation, previousLocation));
+            updateSystems(product, newLocation, previousLocation);
             return true;
         }
 
         return false;
+    }
+
+    public bool SwapProducts(Product productA, Product productB)
+    {
+        Debug.Assert(productA != null);
+        Debug.Assert(productB != null);
+
+        var locationA = GetProductLocation(productA);
+        var locationB = GetProductLocation(productB);
+
+        Debug.Assert(locationA != null);
+        Debug.Assert(locationB != null);
+
+        locationA.Detach();
+        locationB.Detach();
+
+        if (!locationB.Attach(productA))
+        {
+            Debug.LogError($"Couldn't attach {productA} to {locationB}");
+            return false;
+        }
+        if (!locationA.Attach(productB))
+        {
+            Debug.LogError($"Couldn't attach {productB} to {locationA}");
+            return false;
+        }
+
+        updateSystems(productA, locationB, locationA);
+        updateSystems(productB, locationA, locationB);
+        return true;
+    }
+
+    private void updateSystems(Product product, ILocation newLocation, ILocation previousLocation)
+    {
+        productLocations[product] = newLocation;
+        GameEvents.Instance.OnProductLocationChanged?.Invoke(new ProductLocationChangedEventData(product, newLocation, previousLocation));
+        Debug.Assert(product is ILocatable);
+        GameEvents.Instance.OnLocatableLocationChanged?.Invoke(new LocatableLocationChangedEventData(product, newLocation, previousLocation));
     }
 
     public void RemoveProduct(Product product)

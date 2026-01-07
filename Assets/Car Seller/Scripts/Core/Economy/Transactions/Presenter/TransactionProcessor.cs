@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class TransactionProcessor
 {
@@ -9,18 +10,27 @@ public class TransactionProcessor
         Handlers = handlers;
     }
 
-    public TransactionResult Process(Transaction transaction)
+    public TransactionResult Process(Transaction transaction, TransactionFeedbackLocation location)
     {
+        Debug.Assert(Handlers != null, "TransactionProcessor handlers dictionary is null.");
+
         if (transaction == null)
             return TransactionResult.InvalidTransaction("Transaction is null");
 
+        if (location == null)
+        {
+            Debug.LogWarning("TransactionProcessor.Process called with null location. Defaulting to OmniDirectional.");
+            location = TransactionFeedbackLocation.OmniDirectional;
+        }
+
         TransactionResult result;
 
-        if (Handlers.TryGetValue(transaction.Type, out var handler) &&
+        if (Handlers != null &&
+            Handlers.TryGetValue(transaction.Type, out var handler) &&
             handler != null &&
             handler.CanHandle(transaction))
         {
-            result = handler.Handle(transaction) 
+            result = handler.Handle(transaction)
                      ?? TransactionResult.InvalidTransaction("Handler returned null result.");
         }
         else
@@ -30,8 +40,13 @@ public class TransactionProcessor
         }
 
         transaction.FinalizeResult(result);
-        GameEvents.Instance.OnTransactionComplete(new TransactionEventData(transaction));
+        GameEvents.Instance.OnTransactionComplete(new TransactionEventData(transaction, location));
 
         return result;
+    }
+
+    public TransactionResult Process(Transaction transaction)
+    {
+        return Process(transaction, TransactionFeedbackLocation.OmniDirectional);
     }
 }

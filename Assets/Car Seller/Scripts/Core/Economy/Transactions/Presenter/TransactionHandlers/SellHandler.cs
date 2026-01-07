@@ -44,9 +44,7 @@ public class SellHandler : TransactionHandler
 
         if (result == null)
         {
-            result = TransactionResult.Success(
-                location: new TransactionLocation(TransactionLocationType.WorldSpace,
-                CityLocatorHelper.GetCityLocation(car).CityPosition.WorldPosition));
+            result = TransactionResult.Success();
         }
 
         if (result.Type == TransactionResultType.Success)

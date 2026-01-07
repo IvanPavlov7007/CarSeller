@@ -34,7 +34,8 @@ public class Economy
             { TransactionType.Reward, new RewardHandler() },
             { TransactionType.Lose, new LoseHandler() },
             { TransactionType.Confiscate, new ConfiscateHandler() },
-            { TransactionType.Steal, new StealHandler()   }
+            { TransactionType.Steal, new StealHandler()   },
+            { TransactionType.Exchange, new ExchangeHandler() }
         });
     }
 
