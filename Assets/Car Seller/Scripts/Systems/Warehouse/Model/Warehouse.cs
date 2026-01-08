@@ -14,10 +14,10 @@ public class Warehouse : ILocationsHolder, ILocatable, IPossession, IRegisterabl
     public string DistrictName => G.City.MarkersById[Config.Marker.MarkerId].RegionId;
     public string SizeCategory => Config.SizeCategory;
 
-    public List<WarehouseProductLocation> products = new List<WarehouseProductLocation>();
+    public List<WarehouseProductLocation> productLocations = new List<WarehouseProductLocation>();
     public SuppliesList suppliesList;
     public int OverallCarParkingSpots => Config.CarParkingSpots;
-    public int AvailableCarParkingSpots => OverallCarParkingSpots - products.FindAll(p => p.Product is Car).Count;
+    public int AvailableCarParkingSpots => OverallCarParkingSpots - productLocations.FindAll(p => p.Product is Car).Count;
     public Warehouse(WarehouseConfig config)
     {
         this.Config = config;
@@ -30,7 +30,20 @@ public class Warehouse : ILocationsHolder, ILocatable, IPossession, IRegisterabl
 
     public ILocation[] GetLocations()
     {
-        return products.ToArray();
+        return productLocations.ToArray();
+    }
+
+    public List<Car> GetCars()
+    {
+        List<Car> cars = new List<Car>();
+        foreach (var location in productLocations)
+        {
+            if (location.Occupant is Car car)
+            {
+                cars.Add(car);
+            }
+        }
+        return cars;
     }
 
     public class WarehouseProductLocation : ILocation
@@ -68,7 +81,7 @@ public class Warehouse : ILocationsHolder, ILocatable, IPossession, IRegisterabl
             }
 
             Product = product;
-            Warehouse.products.Add(this);
+            Warehouse.productLocations.Add(this);
             return true;
         }
 
@@ -84,7 +97,7 @@ public class Warehouse : ILocationsHolder, ILocatable, IPossession, IRegisterabl
         public void Detach()
         {
             Product = null;
-            Warehouse.products.Remove(this);
+            Warehouse.productLocations.Remove(this);
         }
     }
 

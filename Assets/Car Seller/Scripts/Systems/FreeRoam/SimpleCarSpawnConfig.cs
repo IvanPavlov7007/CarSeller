@@ -6,7 +6,7 @@ public class SimpleCarSpawnConfig : ScriptableObject
     public CarBaseConfig CarBaseConfig;
     public CarVariantConfig CarVariantConfig;
 
-    public Car GenerateCar(City.CityLocation location)
+    public Car GenerateCar(ILocation location)
     {
         Car car = G.Instance.ProductManager.CreateCar(
                     CarBaseConfig,

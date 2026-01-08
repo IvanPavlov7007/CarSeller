@@ -25,8 +25,8 @@ public class CarShopOffer : IOffer
     {
         Debug.Assert(!Accepted);
         Debug.Assert(CanAccept(), "Cannot accept offer: car not available.");
-        var exchangeData = new ExchangeTransactionData(ReceivedCar, GivenCar, MoneyDelta);
-        Transaction transaction = new Transaction(TransactionType.Purchase, purchaseData);
+        var exchangeData = new ExchangeTransactionData(MoneyDelta,ReceivedCar, GivenCar);
+        Transaction transaction = new Transaction(TransactionType.Purchase, exchangeData);
         Accepted = true;
         return transaction;
     }

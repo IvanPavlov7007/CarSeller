@@ -28,7 +28,8 @@ public class ExchangeHandler : TransactionHandler
         if (result.Type == TransactionResultType.Success)
         {
             G.Instance.PlayerManager.DeltaPlayerMoney(exchangeData.DeltaMoney);
-
+            G.Instance.ProductLocationService.SwapProducts(exchangeData.GivenCar,
+                exchangeData.ReceivedCar);
         }
 
         return result;

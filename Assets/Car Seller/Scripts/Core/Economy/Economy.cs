@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -12,8 +13,9 @@ public class Economy
 
     public CarSellOneTimeOfferProvider CarSellOfferProvider = new CarSellOneTimeOfferProvider();
 
-    public ProductPriceCalculator ProductPriceCalculator = new ProductPriceCalculator();
+    public CarShopOfferProvider CarShopOfferProvider;
 
+    public ProductPriceCalculator ProductPriceCalculator = new ProductPriceCalculator();
     public TransactionProcessor TransactionProcessor { get; private set; }
 
     public Economy(EconomyConfig config)
@@ -23,7 +25,10 @@ public class Economy
         initializeTransactionProcessor();
         initializePlayerStartState();
         initializeWarehouseOffers();
+        initializeCarShopOfferProvider();
     }
+
+   
 
     private void initializeTransactionProcessor()
     {
@@ -51,7 +56,7 @@ public class Economy
             Debug.Assert(registryList.Count == 1, $"Expected exactly one warehouse for config {warehouseConfig}, but found {registryList.Count}.");
             Warehouse warehouse = registryList.First();
             Player.Possessions.Add(warehouse);
-            foreach (var productLocation in warehouse.products)
+            foreach (var productLocation in warehouse.productLocations)
             {
                 if (productLocation.Occupant != null)
                 {
@@ -64,8 +69,33 @@ public class Economy
         }
     }
 
+    private void initializeCarShopOfferProvider()
+    {
+        if(Config.CarShopOffersConfig == null)
+        {
+            Debug.LogWarning("Economy: No CarShopOffersConfig found in EconomyConfig. Car Shop offers are disabled");
+            return;
+        }
+
+        var carOptions = new List<Car>();
+        foreach (var offerConfig in Config.CarShopOffersConfig.offerConfigs)
+        {
+            // Pre-generate cars for sale in Car Shop
+            var emptyLocation = World.Instance.HiddenSpace.GetEmptyLocation();
+            var car = offerConfig.carSpawnConfig.GenerateCar(emptyLocation);
+            carOptions.Add(car);
+        }
+        CarShopOfferProvider = new CarShopOfferProvider(carOptions);
+    }
+
     private void initializeWarehouseOffers()
     {
+        if(Config.WarehouseOffersConfig == null)
+        {
+            Debug.LogWarning("Economy: No WarehouseOffersConfig found in EconomyConfig. Warehouses acquirement is impossible");
+            return;
+        }
+
         WarehouseOfferProvider = new WarehouseOfferProvider();
         var dictionary = new Dictionary<Warehouse, WarehouseOffer>();
 

@@ -10,6 +10,13 @@ public class TransactionProcessor
         Handlers = handlers;
     }
 
+
+    /// <summary>
+    /// Finds handler for the transaction, executes, saves result, and triggers transaction complete event.
+    /// </summary>
+    /// <param name="transaction"></param>
+    /// <param name="location"></param>
+    /// <returns></returns>
     public TransactionResult Process(Transaction transaction, TransactionFeedbackLocation location)
     {
         Debug.Assert(Handlers != null, "TransactionProcessor handlers dictionary is null.");

@@ -58,7 +58,7 @@ public class WarehouseSceneManager : Singleton<WarehouseSceneManager>
             Debug.LogWarning("Warehouse instance is not set");
             return;
         }
-        foreach (var location in SceneWarehouseModel.products)
+        foreach (var location in SceneWarehouseModel.productLocations)
         {
             Debug.Assert(location.Product != null, "Product at the location is null");
 
