@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d740ddb4606e5489e2dd17adfa80f0, type: 3}
+  m_Name: BluePickupSpawnConfig
+  m_EditorClassIdentifier: 
+  CarBaseConfig: {fileID: 11400000, guid: 857812dc0c3ec3040a7c758c266cbe4b, type: 2}
+  CarVariantConfig: {fileID: 11400000, guid: 2b3a91484d1de1c4a8badc61a1c2a7e0, type: 2}

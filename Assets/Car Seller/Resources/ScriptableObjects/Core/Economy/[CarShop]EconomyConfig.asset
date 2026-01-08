@@ -24,3 +24,4 @@ MonoBehaviour:
   WarehouseOffersConfig: {fileID: 11400000, guid: c9d5e5c87f253e0469ca29f734268275, type: 2}
   PlayerStartState: {fileID: 11400000, guid: a47e80a43c6d0974ebf1540b67507a31, type: 2}
   CarSpawnConfig: {fileID: 11400000, guid: d4f62c8366b8fe94987922e465e0d4a8, type: 2}
+  CarShopOffersConfig: {fileID: 11400000, guid: f854ec33eec525a4ca848573f09d9581, type: 2}

@@ -66,6 +66,7 @@ public class IconBuilderManager : Singleton<IconBuilderManager>, IProductViewBui
     {
         if (iconRenderCamera == null || buildPosition == null)
         {
+            go.SetActive(false);
             SafeDestroy(go);
             Debug.LogError("IconBuilderManager: iconRenderCamera and buildPosition must be assigned.");
             return null;
@@ -91,6 +92,7 @@ public class IconBuilderManager : Singleton<IconBuilderManager>, IProductViewBui
         }
         finally
         {
+            go.SetActive(false);
             SafeDestroy(go);
         }
     }

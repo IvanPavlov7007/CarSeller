@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d740ddb4606e5489e2dd17adfa80f0, type: 3}
+  m_Name: GreenSportSpawnConfig
+  m_EditorClassIdentifier: 
+  CarBaseConfig: {fileID: 11400000, guid: d59b21759925cf54fa4a547272179a3c, type: 2}
+  CarVariantConfig: {fileID: 11400000, guid: e2150ed0432f02f4a8a6256d8ad3f45d, type: 2}

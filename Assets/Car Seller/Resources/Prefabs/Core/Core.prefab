@@ -804,6 +804,7 @@ MonoBehaviour:
   _dontDestroyOnLoad: 1
   carSpawnConfig: {fileID: 11400000, guid: 7a422727c25de964fbc088bbd407a556, type: 2}
   carSpawnPoint: {fileID: 6395515076168896260}
+  carshopWarehouseConfig: {fileID: 11400000, guid: a67fc9d79f0ce4141af102bbcb775bc8, type: 2}
 --- !u!1 &8329972248815281270
 GameObject:
   m_ObjectHideFlags: 0

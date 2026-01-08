@@ -45,7 +45,7 @@ public class ButtonStateController : MonoBehaviour, IPointerUpHandler
                 if (popup != null)
                     popup.Close();
                 else
-                    Debug.LogError("No popup context menu found in parents for this ui element " + uIElement);
+                    Debug.LogWarning("No popup context menu found in parents for this ui element " + uIElement);
             }
         }
     }

@@ -47,7 +47,7 @@ public class HiddenSpace : ILocationsHolder
 
         public bool Attach(ILocatable locatable)
         {
-            if (locatable != null)
+            if (locatable == null)
                 return false;
             Occupant = locatable;
             World.Instance.HiddenSpace.hiddenLocations.Add(this);

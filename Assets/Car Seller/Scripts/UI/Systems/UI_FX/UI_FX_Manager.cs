@@ -35,7 +35,7 @@ public class UI_FX_Manager : Singleton<UI_FX_Manager>
                 {
                     var transactionData = transaction.Data as SellTransactionData;
                     if (transactionData != null)
-                        playMoneyEffect(transactionData.Price, transaction.Result.Location);
+                        playMoneyEffect(transactionData.Price, data.TransactionFeedbackLocation);
                     break;
                 }
 
@@ -43,7 +43,7 @@ public class UI_FX_Manager : Singleton<UI_FX_Manager>
                 {
                     var transactionData = transaction.Data as RewardTransactionData;
                     if (transactionData != null)
-                        playMoneyEffect(transactionData.Price, transaction.Result.Location);
+                        playMoneyEffect(transactionData.Price, data.TransactionFeedbackLocation);
                     break;
                 }
 

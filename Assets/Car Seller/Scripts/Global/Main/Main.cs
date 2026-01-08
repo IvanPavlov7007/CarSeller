@@ -7,6 +7,7 @@ public class Main : Singleton<Main>
 {
     [SerializeField] SimpleCarSpawnConfig carSpawnConfig;
     [SerializeField] Transform carSpawnPoint;
+    [SerializeField] WarehouseConfig carshopWarehouseConfig;
 
     private IEnumerator Start()
     {
@@ -31,6 +32,26 @@ public class Main : Singleton<Main>
             .Select(marker => G.City.GetEmptyLocation(marker.PositionOnGraph.Value) as ILocation).ToList();
 
         CollectablesManager.Instance.Initialize(locations, 900f, null, 20);
+
+        tryEnterCarShop(car);
+
         yield return null;
+    }
+
+    void tryEnterCarShop(Car car)
+    {
+        var carShopWarehouse = World.Instance.WorldRegistry.GetByConfig<Warehouse>(carshopWarehouseConfig)?.First();
+        if (carShopWarehouse == null)
+        {
+            Debug.LogError("CarShop warehouse not found in WorldRegistry.");
+            return;
+        }
+        if (G.Instance.CityActionService.PutCarInsideWarehouse
+            (car, carShopWarehouse))
+        {
+            G.Instance.GameFlowController.EnterWarehouse(carShopWarehouse);
+        }
+        else
+            Debug.LogError("Failed to put car inside carshop warehouse.");
     }
 }

@@ -1,13 +1,13 @@
 ﻿public class ExchangeTransactionData : ITransactionData
 {
-    public ExchangeTransactionData(float deltaMoney, Car givenCar, Car receivedCar)
+    public ExchangeTransactionData(float deltaMoney, Car fromPlayer, Car toPlayer)
     {
         DeltaMoney = deltaMoney;
-        GivenCar = givenCar;
-        ReceivedCar = receivedCar;
+        FromPlayer = fromPlayer;
+        ToPlayer = toPlayer;
     }
 
     public float DeltaMoney { get; private set; }
-    public Car GivenCar { get; private set; }
-    public Car ReceivedCar { get; private set; }
+    public Car FromPlayer { get; private set; }
+    public Car ToPlayer { get; private set; }
 }

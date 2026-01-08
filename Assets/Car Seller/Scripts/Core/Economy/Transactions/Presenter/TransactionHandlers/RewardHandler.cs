@@ -27,7 +27,7 @@ public class RewardHandler : TransactionHandler
             return TransactionResult.InvalidTransaction("No reward specified.");
 
         // Build result first
-        var result = TransactionResult.Success(rewardData.Location);
+        var result = TransactionResult.Success();
 
         // Side effects only if successful
         if (result.Type == TransactionResultType.Success)

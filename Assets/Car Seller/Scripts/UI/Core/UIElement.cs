@@ -24,6 +24,7 @@ public enum UIElementType
     Text,
     Image,
     Button,
+    ButtonContainer,
     Spacer,
     CustomWidget, // for things like "wheel panel"
 }

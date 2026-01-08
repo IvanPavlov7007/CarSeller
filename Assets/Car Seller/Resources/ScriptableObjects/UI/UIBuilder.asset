@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RowHolderPrefab: {fileID: 6554290077517857664, guid: 767859f240441904e93127e36e4ee9dc, type: 3}
   PushButtonPrefab: {fileID: 5703972592506626508, guid: dcd7ed7ce2bca5e428f2a526f6f4b1e0, type: 3}
+  ContentButtonPrefab: {fileID: 5006124062260417542, guid: d9f441dbecd1f504794136df2a0f61af, type: 3}
   TextMeshProPrefab: {fileID: 7148976446734163188, guid: 0f36315d86c6929449240abce9b303b9, type: 3}
   ImagePrefab: {fileID: 8862690204797386788, guid: ffe6f62098fa8a949bc8b6692a3708e6, type: 3}
   VLayoutPrefab: {fileID: 0}

@@ -15,10 +15,10 @@ public class ExchangeHandler : TransactionHandler
         if (exchangeData == null)
             return TransactionResult.InvalidTransaction("Invalid data: expected ExchangeTransactionData.");
 
-        if (exchangeData.GivenCar == null)
+        if (exchangeData.FromPlayer == null)
             return TransactionResult.InvalidTransaction("No car specified to give in exchange.");
 
-        if (exchangeData.ReceivedCar == null)
+        if (exchangeData.ToPlayer == null)
             return TransactionResult.InvalidTransaction("No car specified to receive in exchange.");
 
         // Build result first
@@ -28,8 +28,8 @@ public class ExchangeHandler : TransactionHandler
         if (result.Type == TransactionResultType.Success)
         {
             G.Instance.PlayerManager.DeltaPlayerMoney(exchangeData.DeltaMoney);
-            G.Instance.ProductLocationService.SwapProducts(exchangeData.GivenCar,
-                exchangeData.ReceivedCar);
+            G.Instance.ProductLocationService.SwapProducts(exchangeData.FromPlayer,
+                exchangeData.ToPlayer);
         }
 
         return result;

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public static class CTX_Menu_Tools
 {
@@ -17,12 +15,12 @@ public static class CTX_Menu_Tools
             Style = "header"
         };
     }
-    public static UIElement Price(float price)
+    public static UIElement Price(float price, bool withSign = false)
     {
         return new UIElement
         {
             Type = UIElementType.Text,
-            Text = FormatPrice(price),
+            Text = withSign? FormatPriceWithSign(price) : FormatPrice(price),
             Style = "price"
         };
     }
@@ -30,6 +28,23 @@ public static class CTX_Menu_Tools
     static string FormatPrice(float price)
     {
         return price.ToString("C0", CultureInfo.CurrentCulture);
+    }
+
+    static string FormatPriceWithSign(float price)
+    {
+        string numbs = FormatPrice(Math.Abs(price));
+        if(price > 0)
+        {
+            return $"+{numbs}";
+        }
+        else if(price < 0)
+        {
+            return $"-{numbs}";
+        }
+        else
+        {
+            return numbs;
+        }
     }
 
     public static UIElement Description(string description)

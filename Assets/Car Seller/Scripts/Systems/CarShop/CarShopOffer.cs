@@ -2,21 +2,21 @@
 
 public class CarShopOffer : IOffer
 {
-    public Car ReceivedCar { get; private set; }
-    public Car GivenCar { get; private set; }
+    public Car fromPlayer { get; private set; }
+    public Car toPlayer { get; private set; }
 
     public float MoneyDelta;
 
     public bool Accepted { get; private set; } = false;
 
     public CarShopOffer(
-        Car receivedCar,
-        Car givenCar,
+        Car fromPlayer,
+        Car toPlayer,
         float moneyDelta
     )
     {
-        ReceivedCar = receivedCar;
-        GivenCar = givenCar;
+        this.fromPlayer = fromPlayer;
+        this.toPlayer = toPlayer;
         MoneyDelta = moneyDelta;
     }
     //TODO in the future add context to check if the offer can be accepted
@@ -25,8 +25,8 @@ public class CarShopOffer : IOffer
     {
         Debug.Assert(!Accepted);
         Debug.Assert(CanAccept(), "Cannot accept offer: car not available.");
-        var exchangeData = new ExchangeTransactionData(MoneyDelta,ReceivedCar, GivenCar);
-        Transaction transaction = new Transaction(TransactionType.Purchase, exchangeData);
+        var exchangeData = new ExchangeTransactionData(MoneyDelta,fromPlayer, toPlayer);
+        Transaction transaction = new Transaction(TransactionType.Exchange, exchangeData);
         Accepted = true;
         return transaction;
     }

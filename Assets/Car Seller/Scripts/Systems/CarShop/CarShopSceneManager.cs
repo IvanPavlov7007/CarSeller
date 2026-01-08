@@ -5,6 +5,11 @@ public class CarShopSceneManager : Singleton<CarShopSceneManager>
 {
     CarShopOfferProvider OfferProvider => G.Economy.CarShopOfferProvider;
 
+    private void Start()
+    {
+        updateOffers();
+    }
+
     private void OnEnable()
     {
         GameEvents.Instance.OnTransactionComplete += onTransactionComplete;
@@ -49,7 +54,24 @@ public class CarShopSceneManager : Singleton<CarShopSceneManager>
     void updateOffers()
     {
         var offers = OfferProvider.GetOffers(findCurrentCar(), 500f);
-        CarShopUIManager.Instance.UpdateOffers(offers);
+        CarShopUIManager.Instance.UpdateOffers(offers, onOfferClick);
+    }
+
+    void onOfferClick(CarShopOffer offer)
+    {
+        if (offer.CanAccept())
+        {
+            var transaction = offer.Accept();
+            var result = G.TransactionProcessor.Process(transaction);
+            if (result.Type != TransactionResultType.Success)
+            {
+                Debug.LogError($"Offer {offer} acceptance failed with result {result.Type}.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Offer {offer} cannot be accepted.");
+        }
     }
 
 
@@ -68,7 +90,7 @@ public class CarShopSceneManager : Singleton<CarShopSceneManager>
         }
         var exchangeData = eventData.Transaction.Data as ExchangeTransactionData;
 
-        OfferProvider.SwapCar(exchangeData.GivenCar, exchangeData.ReceivedCar);
+        OfferProvider.SwapCar(exchangeData.FromPlayer, exchangeData.ToPlayer);
         updateOffers();
     }
 }

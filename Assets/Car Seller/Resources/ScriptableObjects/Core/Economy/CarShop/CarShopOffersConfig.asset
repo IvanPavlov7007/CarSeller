@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a61e1d94928607042be306f29b294f52, type: 3}
+  m_Name: CarShopOffersConfig
+  m_EditorClassIdentifier: 
+  offerConfigs:
+  - carSpawnConfig: {fileID: 11400000, guid: fa632018e6fedf342bd37f3752faeefe, type: 2}
+  - carSpawnConfig: {fileID: 11400000, guid: 64d2c38260945da40a28ee737c861122, type: 2}
+  - carSpawnConfig: {fileID: 11400000, guid: bd5f23a474274ab4e931c051774ab2af, type: 2}
+  - carSpawnConfig: {fileID: 11400000, guid: 8923030a456d3784481913e7a715e458, type: 2}
+  - carSpawnConfig: {fileID: 11400000, guid: b5de8a5f3d9af334b9270410865efa20, type: 2}
+  - carSpawnConfig: {fileID: 11400000, guid: 2c34583e8cbdf104db8b2460be9410b7, type: 2}
+  - carSpawnConfig: {fileID: 11400000, guid: 81722c5ecf0b64343a29398aad8410b9, type: 2}
+  - carSpawnConfig: {fileID: 11400000, guid: 19c0585447331ff4691ff858c910d60d, type: 2}
+  - carSpawnConfig: {fileID: 11400000, guid: e51e33a8a3b38d545887a34f00c3fea8, type: 2}
+  - carSpawnConfig: {fileID: 11400000, guid: 10ec5900c58e48a46abe4311a4868600, type: 2}

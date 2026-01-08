@@ -12,6 +12,7 @@ public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IUIEl
     [Header("Prefabs")]
     public GameObject RowHolderPrefab;
     public GameObject PushButtonPrefab;
+    public GameObject ContentButtonPrefab;
     public GameObject TextMeshProPrefab;
     public GameObject ImagePrefab;
     public GameObject VLayoutPrefab;
@@ -42,6 +43,13 @@ public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IUIEl
                 return container;
             case UIElementType.Button:
                 return BuildButton(content, container);
+            case UIElementType.ButtonContainer:
+                var button = BuildContentButton(content, container);
+                foreach(var child in content.Children)
+                {
+                    Build(child, button);
+                }
+                return button;
             case UIElementType.Text:
                 return BuildText(content, container);
             case UIElementType.Image:
@@ -120,6 +128,23 @@ public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IUIEl
         RectTransform recT = buttonObj.GetComponent<RectTransform>();
         // Ensure button itself has adequate hit size via LayoutElement
         EnsureMinHeight(recT, MinButtonHeight, PrefferedButtonHeight);
+        return recT;
+    }
+
+    private RectTransform BuildContentButton(UIElement item, RectTransform container)
+    {
+        var buttonObj = GameObject.Instantiate(ContentButtonPrefab, container);
+
+        buttonObj.AddComponent<ButtonStateController>().
+             Initialize(item);
+
+        LayoutGroup group = buttonObj.AddComponent<VerticalLayoutGroup>();
+
+        group.padding = new RectOffset(8, 8, 8, 8);
+
+        RectTransform recT = buttonObj.GetComponent<RectTransform>();
+        // Ensure button itself has adequate hit size via LayoutElement
+        //EnsureMinHeight(recT, MinButtonHeight, PrefferedButtonHeight);
         return recT;
     }
 
