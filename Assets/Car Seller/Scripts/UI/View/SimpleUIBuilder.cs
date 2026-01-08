@@ -138,9 +138,10 @@ public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IUIEl
         buttonObj.AddComponent<ButtonStateController>().
              Initialize(item);
 
-        LayoutGroup group = buttonObj.AddComponent<VerticalLayoutGroup>();
+        VerticalLayoutGroup group = buttonObj.AddComponent<VerticalLayoutGroup>();
 
-        group.padding = new RectOffset(8, 8, 8, 8);
+        group.childAlignment = TextAnchor.MiddleCenter;
+        group.padding = new RectOffset(8, 8, 20, 8);
 
         RectTransform recT = buttonObj.GetComponent<RectTransform>();
         // Ensure button itself has adequate hit size via LayoutElement
@@ -150,46 +151,16 @@ public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IUIEl
 
     private RectTransform BuildImage(UIElement item, RectTransform container)
     {
-        // Parent object that will provide the mask and layout size
-        var maskObj = new GameObject("ImageMask", typeof(RectTransform), typeof(RectMask2D), typeof(MaskedImageFitter));
-        var maskRect = maskObj.GetComponent<RectTransform>();
-        maskRect.SetParent(container, false);
-
-        // Stretch horizontally in the row
-        maskRect.anchorMin = new Vector2(0f, 0.5f);
-        maskRect.anchorMax = new Vector2(1f, 0.5f);
-        maskRect.pivot = new Vector2(0.5f, 0.5f);
-        maskRect.anchoredPosition = Vector2.zero;
-
-        // Ensure minimum height for touch
-        EnsureMinHeight(maskRect, MinImageHeight);
-
-        // Horizontal band: width decides height (e.g. 4:3)
-        var aspect = maskObj.AddComponent<AspectRatioFitter>();
-        aspect.aspectMode = AspectRatioFitter.AspectMode.WidthControlsHeight;
-        aspect.aspectRatio = 4f / 3f; // desired mask aspect
-
-        // Actual image inside the mask – start centered
-        var imageObj = GameObject.Instantiate(ImagePrefab, maskRect);
+        
+        var imageObj = GameObject.Instantiate(ImagePrefab, container);
         var imageRect = imageObj.GetComponent<RectTransform>();
-        imageRect.anchorMin = new Vector2(0.5f, 0.5f);
-        imageRect.anchorMax = new Vector2(0.5f, 0.5f);
-        imageRect.pivot = new Vector2(0.5f, 0.5f);
-        imageRect.anchoredPosition = Vector2.zero;
-
         var image = imageObj.GetComponent<Image>();
         image.sprite = item.Image;
         image.type = Image.Type.Simple;
         image.preserveAspect = true;
-
-        // Configure fitter so it knows which image to size
-        var fitter = maskObj.GetComponent<MaskedImageFitter>();
-        var fitterImageField = typeof(MaskedImageFitter).GetField("image", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-        var fitterImageRectField = typeof(MaskedImageFitter).GetField("imageRect", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-        if (fitterImageField != null) fitterImageField.SetValue(fitter, image);
-        if (fitterImageRectField != null) fitterImageRectField.SetValue(fitter, imageRect);
-
-        return maskRect;
+        // Ensure minimum height for touch
+        EnsureMinHeight(imageRect, MinImageHeight, image.sprite.rect.height);
+        return imageRect;
     }
 
     private void EnsureMinHeight(RectTransform rowHolder, float minHeight = MinRowHeight, float prefferedHeight = -1f)

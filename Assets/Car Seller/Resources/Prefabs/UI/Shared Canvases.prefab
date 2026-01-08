@@ -99,8 +99,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -329,6 +329,7 @@ MonoBehaviour:
   MoneyEffectHeightOffset: 2
   MoneyWorldEffectPrefab: {fileID: 1772296823181975432, guid: c7fb91559ff12f94291e62bda2cc9aab, type: 3}
   MoneyUIEffectPrefab: {fileID: 7148976446734163188, guid: 0f36315d86c6929449240abce9b303b9, type: 3}
+  MoneyUIEffectHeightOffset: 100
 --- !u!1 &2822891348834384506
 GameObject:
   m_ObjectHideFlags: 0

@@ -223,11 +223,84 @@ public class IconBuilderManager : Singleton<IconBuilderManager>, IProductViewBui
         cam.clearFlags = prevClearFlags;
         cam.backgroundColor = prevBg;
 
-        // Create sprite
-        var sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), spritePixelsPerUnit);
+        // --- New: crop to minimal non-transparent rectangle ---
+        RectInt cropRect;
+        if (TryGetOpaqueBounds(tex, out cropRect))
+        {
+            int cropWidth = cropRect.width;
+            int cropHeight = cropRect.height;
+
+            var cropped = new Texture2D(cropWidth, cropHeight, TextureFormat.RGBA32, false, false);
+
+            // Copy pixels row by row (faster than GetPixels per texel)
+            for (int y = 0; y < cropHeight; y++)
+            {
+                var row = tex.GetPixels(cropRect.x, cropRect.y + y, cropWidth, 1);
+                cropped.SetPixels(0, y, cropWidth, 1, row);
+            }
+            cropped.Apply(false, false);
+
+            // Optionally destroy the original full-size texture to save memory
+            SafeDestroy(tex);
+            tex = cropped;
+        }
+
+        // Create sprite from (possibly) cropped texture
+        var sprite = Sprite.Create(
+            tex,
+            new Rect(0, 0, tex.width, tex.height),
+            new Vector2(0.5f, 0.5f),
+            spritePixelsPerUnit
+        );
         sprite.name = "IconSprite";
 
         return sprite;
+    }
+
+    /// <summary>
+    /// Finds the minimal rectangle that contains all pixels with alpha &gt; 0.
+    /// Returns false if the entire texture is fully transparent.
+    /// </summary>
+    private static bool TryGetOpaqueBounds(Texture2D tex, out RectInt rect)
+    {
+        int w = tex.width;
+        int h = tex.height;
+
+        int minX = w;
+        int minY = h;
+        int maxX = -1;
+        int maxY = -1;
+
+        var pixels = tex.GetPixels32(); // single allocation
+
+        for (int y = 0; y < h; y++)
+        {
+            int rowIndex = y * w;
+            for (int x = 0; x < w; x++)
+            {
+                Color32 c = pixels[rowIndex + x];
+                if (c.a == 0) continue;
+
+                if (x < minX) minX = x;
+                if (y < minY) minY = y;
+                if (x > maxX) maxX = x;
+                if (y > maxY) maxY = y;
+            }
+        }
+
+        if (maxX < 0 || maxY < 0)
+        {
+            rect = default;
+            return false; // fully transparent
+        }
+
+        rect = new RectInt(
+            minX,
+            minY,
+            (maxX - minX + 1),
+            (maxY - minY + 1)
+        );
+        return true;
     }
 
     private static void SafeDestroy(Object obj)

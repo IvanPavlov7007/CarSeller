@@ -190,7 +190,7 @@ public class ContextMenuManager : Singleton<ContextMenuManager>
             return;
 
         // First, ensure size is correct based on content
-        adjustContainerHeight(menu.ContentTransform);
+        //adjustContainerHeight(menu.ContentTransform);
         adjustViewRect(menu.RectTransform, menu.ContentTransform);
 
         // Then, update its position relative to the target

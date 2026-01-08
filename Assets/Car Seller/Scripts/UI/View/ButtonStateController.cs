@@ -2,16 +2,38 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ButtonStateController : MonoBehaviour, IPointerUpHandler
+public class ButtonStateController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     Button button;
     UIElement uIElement;
-    public bool Initialized{ get; private set; }
+    public bool Initialized { get; private set; }
     public bool Interactable => Initialized && uIElement.IsInteractable;
+
+    // Track pointer for distinguishing tap vs scroll/drag
+    private bool _pointerDown;
+    private Vector2 _pointerDownPos;
+    private const float DragThreshold = 10f; // pixels
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        _pointerDown = true;
+        _pointerDownPos = eventData.position;
+    }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if(!Interactable)
+        // If this pointer-up is part of a drag/scroll, ignore it
+        if (!_pointerDown)
+            return;
+
+        _pointerDown = false;
+
+        // Check if the finger moved too much (scroll/drag)
+        if (Vector2.Distance(_pointerDownPos, eventData.position) > DragThreshold)
+            return;
+
+        // Now treat it as a real tap
+        if (!Interactable)
             GlobalHintManager.Instance.ShowHint(uIElement.UnavailabilityReason);
     }
 
@@ -27,21 +49,14 @@ public class ButtonStateController : MonoBehaviour, IPointerUpHandler
         Initialized = true;
     }
 
-    //private void Update()
-    //{
-    //    if(!Initialized) return;
-    //    checkInteractabe();
-    //}
-
     void onClick()
     {
-        if(Interactable)
+        if (Interactable)
         {
             uIElement.OnClick();
             if (uIElement.closePopupOnClick)
             {
-                var popup =
-                GetComponentInParent<IClosable>();
+                var popup = GetComponentInParent<IClosable>();
                 if (popup != null)
                     popup.Close();
                 else
@@ -53,5 +68,5 @@ public class ButtonStateController : MonoBehaviour, IPointerUpHandler
 
 public interface IClosable
 {
-    public void Close();
+    void Close();
 }
