@@ -79,6 +79,7 @@ public class CityViewObjectBuilder : ScriptableObject
         carGO.AddComponent<ContentProvider>().Initialize(car);
         carGO.AddComponent<DragInteractable>().sortingOrder = 10;
         carGO.AddComponent<DragDisabler>();
+        carGO.AddComponent<SpeedProviderFromCar>().Initialize(car);
         carGO.AddComponent<MovingPoint>().Initialize(location);
         var sr = carGO.GetComponentInChildren<SpriteRenderer>();
         sr.sprite = car.CarFrame.runtimeConfig.Icon;

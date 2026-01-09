@@ -47,6 +47,7 @@ public class ButtonStateController : MonoBehaviour, IPointerDownHandler, IPointe
     {
         this.uIElement = uIElement;
         Initialized = true;
+        button.interactable = uIElement.IsInteractable;
     }
 
     void onClick()

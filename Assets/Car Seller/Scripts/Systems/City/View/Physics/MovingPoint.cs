@@ -5,18 +5,22 @@ using UnityEngine.Splines;
     
 public class MovingPoint : MonoBehaviour
 {
-    public static float maxSpeed = 2f;
+    //public static float maxSpeed = 2f;
 
     City.CityLocation mutableLocation;
     IDirectionProvider directionProvider;
+    ISpeedProvider speedProvider;
     Transform arrowRotationPoint;
     Transform body;
 
     private const float Epsilon = 1e-4f;
 
+    float currentSpeed = 0f;
+
     private void Awake()
     {
         directionProvider = GetComponent<IDirectionProvider>();
+        speedProvider = GetComponent<ISpeedProvider>();
         body = transform.GetChild(0);
         arrowRotationPoint = transform.GetChild(1);
     }
@@ -97,10 +101,18 @@ public class MovingPoint : MonoBehaviour
             t = 1f - t;
             chosenTangentDirection = -chosenTangentDirection;
             forward = !forward;
+            
+            //Reset speed
+            currentSpeed = 0f;
+        }
+        else
+        {
+            //Accelerate
+            currentSpeed = Mathf.MoveTowards(currentSpeed, speedProvider.Speed, speedProvider.Acceleration * Time.deltaTime);
         }
 
         //Luftlinie[de] direction we want to go
-        Vector2 nextStepInDir = inputDirection * Time.deltaTime * maxSpeed;
+        Vector2 nextStepInDir = inputDirection * Time.deltaTime * currentSpeed;
         float stepLength = nextStepInDir.magnitude;
         //Luftlinie[de] position of where we would be if there were no nodes
         Vector2 nextIdealPos = currentPosition + nextStepInDir;

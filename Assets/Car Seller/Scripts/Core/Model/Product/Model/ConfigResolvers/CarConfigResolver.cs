@@ -20,7 +20,7 @@ public class CarConfigResolver
             CarFrameRuntimeConfig = ResolveFrame(carBase, carVariant),
             SlotConfigs = new List<PartSlotRuntimeConfig>()
         };
-
+        // OWN VALUES
         // Base price
         if (carVariant != null && carVariant.OverrideBasePrice)
         {
@@ -29,6 +29,23 @@ public class CarConfigResolver
         else
             result.BasePrice = carBase.BasePrice;
 
+        // Speed
+        if (carVariant != null && carVariant.OverrideSpeed)
+        {
+            result.Speed = carVariant.Speed;
+        }
+        else
+            result.Speed = carBase.Speed;
+
+        // Acceleration
+        if (carVariant != null && carVariant.OverrideAcceleration)
+        {
+            result.Acceleration = carVariant.Acceleration;
+        }
+        else
+            result.Acceleration = carBase.Acceleration;
+
+        // COMPOSITION
         // Build pools
         var basePool = carBase.SlotConfigs != null
             ? new List<PartSlotBaseConfig>(carBase.SlotConfigs)

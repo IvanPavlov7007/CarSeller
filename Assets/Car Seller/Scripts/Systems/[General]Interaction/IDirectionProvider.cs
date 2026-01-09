@@ -11,3 +11,9 @@ public interface IActivatable
     public void Deactivate();
     public void SetActive(bool active);
 }
+
+public interface ISpeedProvider
+{
+    float Speed { get; }
+    float Acceleration { get; }
+}
