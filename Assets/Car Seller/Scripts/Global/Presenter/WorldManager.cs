@@ -5,7 +5,7 @@ public class WorldManager
 {
     //TODO register more things in the world registry
     World World => World.Instance;
-    
+
 
     // On bootstrap, create the initial cities and warehouses
     private void addWarehouse(City city, WarehouseConfig warehouseConfig)
@@ -14,40 +14,25 @@ public class WorldManager
 
         City.CityPosition pos;
 
-        if (warehouseConfig.Marker.IsValid)
+        if (warehouseConfig.Marker != null && warehouseConfig.Marker.IsValid)
         {
             var markerData = warehouseConfig.Marker.GetMarkerData(warehouseConfig);
 
             if (markerData != null)
             {
-                // WorldPoint markers remain unbound. Snap here if desired.
-                if (markerData.Anchor.Kind == CityGraphAsset.MarkerAnchorKind.WorldPoint)
-                {
-                    pos = city.GetClosestPosition(markerData.Anchor.WorldPoint);
-                }
-                else if (markerData.Anchor.Kind == CityGraphAsset.MarkerAnchorKind.Node)
-                {
-                    // If you prefer to ignore node-edge binding and still snap, you can still do closest:
-                    pos = city.GetClosestPosition(markerData.Anchor.WorldPoint);
-                }
-                else if (markerData.Anchor.Kind == CityGraphAsset.MarkerAnchorKind.Edge)
-                {
-                    // Edge anchors can be interpreted, but you can also snap anyway:
-                    pos = city.GetClosestPosition(markerData.Anchor.WorldPoint);
-                }
-                else
-                {
-                    pos = city.GetClosestPosition(warehouseConfig.warehouseClosestInitialPosition);
-                }
+                var anchor = markerData.Anchor;
+                //TODO differtiate based on anchor kind -> use node pos 
+                // if on node, edge pos if on edge, world point if world point
+                pos = city.GetClosestPosition(anchor.WorldPoint);
             }
             else
             {
-                // Marker id not found; fallback
                 pos = city.GetClosestPosition(warehouseConfig.warehouseClosestInitialPosition);
             }
         }
         else
         {
+            Debug.LogWarning($"WarehouseConfig '{warehouseConfig.name}' does not have a valid marker assigned. Falling back to closest position.");
             pos = city.GetClosestPosition(warehouseConfig.warehouseClosestInitialPosition);
         }
 

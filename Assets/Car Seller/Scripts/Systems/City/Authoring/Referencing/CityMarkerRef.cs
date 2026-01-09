@@ -18,7 +18,7 @@ public class CityMarkerRef
     public string MarkerId;
 
     [HideInInspector]
-    public bool IsValid;
+    public bool IsValid => !string.IsNullOrEmpty(MarkerId) && HasGraph;
 
     // --------- Runtime helpers ---------
 
