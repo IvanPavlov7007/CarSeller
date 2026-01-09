@@ -434,4 +434,6 @@ MonoBehaviour:
       Data: 
   Name: Mini
   BasePrice: 800
+  Speed: 1.8
+  Acceleration: 1
   CarFrameBaseConfig: {fileID: 11400000, guid: 458c8c1c3f4caf3459b5f8711348779e, type: 2}

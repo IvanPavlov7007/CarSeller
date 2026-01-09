@@ -16,9 +16,7 @@ public class WorldManager
 
         if (warehouseConfig.Marker.IsValid)
         {
-            // Read the baked marker from the selected graph
-            var graph = warehouseConfig.Marker.Graph;
-            var markerData = graph.Markers.Find(m => m.Id == warehouseConfig.Marker.MarkerId);
+            var markerData = warehouseConfig.Marker.GetMarkerData(warehouseConfig);
 
             if (markerData != null)
             {
