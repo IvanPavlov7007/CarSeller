@@ -3,6 +3,8 @@ using UnityEngine;
 using Pixelplacement;
 using System;
 
+public abstract class GameEventData { }
+
 public class GameEvents
 {
     public static GameEvents Instance = new GameEvents();

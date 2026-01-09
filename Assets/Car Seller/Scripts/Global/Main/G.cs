@@ -24,6 +24,9 @@ public sealed class G : Singleton<G>
     public GameObject CityRoot { get; set; }
 
     //REPRESENTATION
+    public MissionControllerBase MissionController = new MissionController();
+
+    public GlobalCreationService GlobalCreationService = new GlobalCreationService();
 
     public ProductManager ProductManager = new ProductManager();
     public ProductLocationService ProductLocationService = new ProductLocationService();
