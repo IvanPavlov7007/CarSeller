@@ -111,7 +111,10 @@ public class MissionRuntime
         EventBus.Emit(new FailMissionInternalEvent(this));
     }
     // Exception: called by MissionController to unlock mission
-    void Unlock()
+    /// <summary>
+    /// Should be called by MissionController(only!) to unlock the mission
+    /// </summary>
+    public void Unlock()
     {
         if (Status != MissionStatus.Locked)
         {

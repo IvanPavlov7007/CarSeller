@@ -24,7 +24,6 @@ public abstract class MissionControllerBase
 
     private void InitializeEventBus()
     {
-        eventBus = new MissionEventBus();
         // Subscribe to mission internal events
         // General mission events
         eventBus.Subscribe<StartMissionInternalEvent>(onStartMissionRequestEvent);
@@ -51,40 +50,62 @@ public abstract class MissionControllerBase
         return runtime;
     }
 
-    public void ForceUnlockMission(MissionConfig mission)
-    {
-        throw new NotImplementedException();
-    }
-
     public void UnlockMission(MissionConfig mission)
     {
-        // changing and setting conditions
-        throw new NotImplementedException();
+        var runtime = runtimes[mission];
+        runtime.Unlock();
+        // GameEvents.onMissionUnlocked?.Invoke(runtime);
     }
+
+
     // Mission Event Bus
-
-    void onStartMissionRequestEvent(StartMissionInternalEvent requestEvent)
+    //Internal Event Handlers
+    void onStartMissionRequestEvent(StartMissionInternalEvent e)
     {
+        executeMissionEffects(e.Mission.MissionStartEffects, createMissionEffectContext(e.Mission));
+        // GameEvents.onMissionStarted?.Invoke(requestEvent.Mission);
     }
-    void onCompleteMissionRequestEvent(CompleteMissionInternalEvent requestEvent)
+    void onCompleteMissionRequestEvent(CompleteMissionInternalEvent e)
     {
-
+        executeMissionEffects(e.Mission.MissionCompleteEffects, createMissionEffectContext(e.Mission));
+        // GameEvents.onMissionCompleted?.Invoke(requestEvent.Mission);
     }
-    void onFailMissionRequestEvent(FailMissionInternalEvent requestEvent)
+    void onFailMissionRequestEvent(FailMissionInternalEvent e)
     {
+        executeMissionEffects(e.Mission.MissionFailEffects, createMissionEffectContext(e.Mission));
+        // GameEvents.onMissionFailed?.Invoke(requestEvent.Mission);
     }
 
+    void executeMissionEffects(List<MissionEffect> effects, MissionEffectContext context)
+    {
+        foreach (var effect in effects)
+        {
+            effect.Apply(context);
+        }
+    }
+
+    MissionEffectContext createMissionEffectContext(MissionRuntime mission)
+    {
+        return new MissionEffectContext
+        {
+            Mission = mission,
+            EventBus = eventBus
+        };
+    }
+
+    // MissionEffects Event Handlers
     void onUnlockMissionRequestEvent(UnlockMissionRequestEvent requestEvent)
     {
         UnlockMission(requestEvent.toUnlock);
     }
 
-    void onSpawnTargetMissionRequestEvent(SpawnTargetMissionRequestEvent requestEvent)
-    {
-    }
+    protected abstract void onSpawnTargetMissionRequestEvent(SpawnTargetMissionRequestEvent requestEvent);
 
     // Game Events Funneling
+    #region globalGameEvents
 
+
+    // Game Events Funneling
     public void OnCityTargetReached(CityTargetReachedEvent targetReachedEvent)
     {
         updateMissionRuntimes(targetReachedEvent);
@@ -94,7 +115,15 @@ public abstract class MissionControllerBase
         updateMissionRuntimes(new TimePassEvent(deltaTime));
     }
 
-    //Game Events Handling
+
+
+    // Game Events Handling
+    //TODO: split into phases:
+    // 1 Evaluation - in MissionRuntime
+    // 2 Queue Resolutions - from MissionRuntime
+    // 3 Apply Resolutions - which might add new events to the queue
+    // (0) Evaluation of the next event in the more global queue,
+    //      that might have been added during resolution phase
     private void updateMissionRuntimes(GameEventData gameEventData)
     {
         foreach (var runtime in runtimes.Values)
@@ -102,4 +131,5 @@ public abstract class MissionControllerBase
             runtime.OnEvent(gameEventData);
         }
     }
+    #endregion
 }

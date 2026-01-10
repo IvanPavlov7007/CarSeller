@@ -13,29 +13,23 @@ public class MissionConfig : SerializedScriptableObject
 
     public CityMarkerRef MissionStartLocation;
 
-    [InlineEditor]
     public List<MissionCondition> StartConditions = new List<MissionCondition>();
-    [InlineEditor]
     public List<MissionCondition> FailConditions = new List<MissionCondition>();
-    [Required]
-    [InlineEditor]
     public List<MissionCondition> SuccessConditions = new List<MissionCondition>();
 
-    [InfoBox("Things for bringing content into the world for the duration of the mission. Important: those effects should be owned by mission runtimes and destroyed with the missions. ")]
-    [InlineEditor]
+    [PropertyTooltip("Things for bringing content into the world for the duration of the mission. Important: those effects should be owned by mission runtimes and destroyed with the missions. ")]
     public List<MissionEffect> MissionStartEffects = new List<MissionEffect>();
-    [InfoBox("Things to change in the <i>world</i> after finishing mission, like unlocking next missions.")]
-    [InlineEditor]
+    [PropertyTooltip("Things to change in the <i>world</i> after finishing mission, like unlocking next missions.")]
     public List<MissionEffect> MissionCompleteEffects = new List<MissionEffect>();
-    [InfoBox("Things to change in the <i>world</i> after failing mission, like locking retry for time or reputation loss.")]
-    [InlineEditor]
+    [PropertyTooltip("Things to change in the <i>world</i> after failing mission, like locking retry for time or reputation loss.")]
     public List<MissionEffect> MissionFailEffects = new List<MissionEffect>();
-    [InlineEditor]
     public List<RewardBundle> RewardBundles = new List<RewardBundle>();
 }
 
-//Checks for conditions, no control/creation
-public abstract class MissionCondition : SerializedScriptableObject
+/// <summary>
+/// Checks for conditions, no control/creation
+/// </summary>
+public abstract class MissionCondition
 {
     public abstract MissionConditionRuntime CreateRuntime(MissionRuntime missionRuntime);
     public abstract class MissionConditionRuntime
@@ -58,13 +52,13 @@ public struct MissionEffectContext
     public MissionEventBus EventBus;
 }
 
-public abstract class MissionEffect : SerializedScriptableObject
+public abstract class MissionEffect
 {
     public abstract void Apply(MissionEffectContext context);
 }
 
 //Minimal reward bundle structure
-public abstract class RewardBundle : SerializedScriptableObject
+public abstract class RewardBundle
 {
     public abstract Transaction CreateTransaction();
 }

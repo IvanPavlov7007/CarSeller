@@ -1,4 +1,7 @@
-﻿public class CurrencyRewardBundle : RewardBundle
+﻿using System;
+
+[Serializable]
+public class CurrencyRewardBundle : RewardBundle
 {
     public int amount;
     public override Transaction CreateTransaction()

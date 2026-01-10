@@ -1,6 +1,9 @@
-﻿public class ReachTargetCondition : MissionCondition
+﻿using System;
+
+[Serializable]
+public class ReachTargetCondition : MissionCondition
 {
-    public CityMarkerRef target;
+    public CityMarkerRef target = new CityMarkerRef();
 
     public override MissionConditionRuntime CreateRuntime(MissionRuntime missionRuntime)
     {
@@ -33,7 +36,7 @@
         }
     }
 }
-
+[Serializable]
 public class TimeElapsedCondition : MissionCondition
 {
     public float requiredTimeSeconds;
@@ -63,7 +66,6 @@ public class TimeElapsedCondition : MissionCondition
         }
     }
 }
-
 internal class TimePassEvent : GameEventData
 {
     public float DeltaTime;

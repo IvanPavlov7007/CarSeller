@@ -3,11 +3,11 @@
 /// Signalizing "intentions"
 /// </summary>
 public abstract class MissionInternalEvent {
-    public readonly MissionRuntime mission;
+    public readonly MissionRuntime Mission;
 
     protected MissionInternalEvent(MissionRuntime mission)
     {
-        this.mission = mission;
+        this.Mission = mission;
     }
 }
 public class UnlockMissionRequestEvent : MissionInternalEvent
