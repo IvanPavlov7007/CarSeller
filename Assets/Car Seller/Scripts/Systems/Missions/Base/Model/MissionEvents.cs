@@ -1,4 +1,8 @@
-﻿public abstract class MissionInternalEvent {
+﻿/// <summary>
+/// Class for communication with the mission controller over Event Bus.
+/// Signalizing "intentions"
+/// </summary>
+public abstract class MissionInternalEvent {
     public readonly MissionRuntime mission;
 
     protected MissionInternalEvent(MissionRuntime mission)

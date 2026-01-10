@@ -24,7 +24,6 @@ public sealed class G : Singleton<G>
     public GameObject CityRoot { get; set; }
 
     //REPRESENTATION
-    public MissionControllerBase MissionController = new MissionController();
 
     public GlobalCreationService GlobalCreationService = new GlobalCreationService();
 
@@ -46,6 +45,7 @@ public sealed class G : Singleton<G>
 
     //Interaction
     public IInteractionManager InteractionManager;
+    public MissionController MissionController;
 
     //VIEW
     //View builders

@@ -3,14 +3,24 @@ using System.Collections.Generic;
 
 public abstract class MissionControllerBase
 {
-    MissionEventBus eventBus = new MissionEventBus();
+    MissionEventBus eventBus;
     Dictionary<MissionConfig, MissionRuntime> runtimes;
 
 
     public MissionControllerBase(List<MissionConfig> configs)
+    : this(configs, new MissionEventBus())
     {
+    }
+
+    protected MissionControllerBase(List<MissionConfig> configs, MissionEventBus eventBus)
+    {
+        // Initialize Event Bus
+        this.eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
+        InitializeEventBus();
         InitializeRuntimes(configs);
     }
+    protected MissionEventBus EventBus => eventBus; // Expose for testing
+    protected IReadOnlyDictionary<MissionConfig, MissionRuntime> Runtimes => runtimes; // Expose for testing
 
     private void InitializeEventBus()
     {
@@ -24,7 +34,7 @@ public abstract class MissionControllerBase
         // Specific mission requests
         eventBus.Subscribe<UnlockMissionRequestEvent>(onUnlockMissionRequestEvent);
         eventBus.Subscribe<SpawnTargetMissionRequestEvent>(onSpawnTargetMissionRequestEvent);
-        
+
     }
 
     private void InitializeRuntimes(List<MissionConfig> configs)
@@ -35,15 +45,10 @@ public abstract class MissionControllerBase
             runtimes[config] = InitializeRuntime(config);
         }
     }
-
     private MissionRuntime InitializeRuntime(MissionConfig config)
     {
-        var runtime = new MissionRuntime(config);
-
-        foreach(var condition in config.StartConditions)
-        {
-            var conditionRuntime = condition.CreateRuntime(runtime);
-        }
+        var runtime = new MissionRuntime(config, eventBus);
+        return runtime;
     }
 
     public void ForceUnlockMission(MissionConfig mission)
@@ -61,12 +66,10 @@ public abstract class MissionControllerBase
     void onStartMissionRequestEvent(StartMissionInternalEvent requestEvent)
     {
     }
-
     void onCompleteMissionRequestEvent(CompleteMissionInternalEvent requestEvent)
     {
 
     }
-
     void onFailMissionRequestEvent(FailMissionInternalEvent requestEvent)
     {
     }
@@ -86,7 +89,6 @@ public abstract class MissionControllerBase
     {
         updateMissionRuntimes(targetReachedEvent);
     }
-
     public void Update(float deltaTime)
     {
         updateMissionRuntimes(new TimePassEvent(deltaTime));
@@ -97,8 +99,7 @@ public abstract class MissionControllerBase
     {
         foreach (var runtime in runtimes.Values)
         {
-            //TODO : Check and branch by mission status
-
             runtime.OnEvent(gameEventData);
         }
     }
+}

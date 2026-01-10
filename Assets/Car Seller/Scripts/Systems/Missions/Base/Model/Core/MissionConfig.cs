@@ -21,12 +21,15 @@ public class MissionConfig : SerializedScriptableObject
     [InlineEditor]
     public List<MissionCondition> SuccessConditions = new List<MissionCondition>();
 
+    [InfoBox("Things for bringing content into the world for the duration of the mission. Important: those effects should be owned by mission runtimes and destroyed with the missions. ")]
     [InlineEditor]
-    public List<MissionEffect> MissionStartEffect = new List<MissionEffect>();
+    public List<MissionEffect> MissionStartEffects = new List<MissionEffect>();
+    [InfoBox("Things to change in the <i>world</i> after finishing mission, like unlocking next missions.")]
     [InlineEditor]
-    public List<MissionEffect> MissionCompleteEffect = new List<MissionEffect>();
+    public List<MissionEffect> MissionCompleteEffects = new List<MissionEffect>();
+    [InfoBox("Things to change in the <i>world</i> after failing mission, like locking retry for time or reputation loss.")]
     [InlineEditor]
-    public List<MissionEffect> MissionFailEffect = new List<MissionEffect>();
+    public List<MissionEffect> MissionFailEffects = new List<MissionEffect>();
     [InlineEditor]
     public List<RewardBundle> RewardBundles = new List<RewardBundle>();
 }
