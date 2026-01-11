@@ -3,8 +3,6 @@ using UnityEngine;
 using Pixelplacement;
 using System;
 
-public abstract class GameEventData { }
-
 public class GameEvents
 {
     public static GameEvents Instance = new GameEvents();
@@ -21,6 +19,17 @@ public class GameEvents
         OnPlayerCancel = null;
         OnPlayerCaught = null;
         OnPlayerSucceed = null;
+        OnPlayerAccept = null;
+
+        OnLocatableStateChanged = null;
+        OnLocatableCreated = null;
+        OnLocatableDestroyed = null;
+        OnLocatableLocationChanged = null;
+        OnTargetReached = null;
+        OnPlayerPossessionLose = null;
+        OnPlayerPossessionAcquired = null;
+        OnPlayerMoneyChanged = null;
+        OnTransactionComplete = null;
     }
 
     public Action OnGamePaused;
@@ -37,8 +46,10 @@ public class GameEvents
     public Action<LocatableDestroyedEventData> OnLocatableDestroyed;
     public Action<LocatableLocationChangedEventData> OnLocatableLocationChanged;
 
-    public Action<PossesionChangeEventData> OnPlayerPossessionLose;
-    public Action<PossesionChangeEventData> OnPlayerPossessionAcquired;
+    public Action<CityTargetReachedEvent> OnTargetReached;
+
+    public Action<PossessionChangeEventData> OnPlayerPossessionLose;
+    public Action<PossessionChangeEventData> OnPlayerPossessionAcquired;
     public Action<PlayerMoneyChangeEventData> OnPlayerMoneyChanged;
 
     public Action<TransactionEventData> OnTransactionComplete;
@@ -47,6 +58,11 @@ public class GameEvents
     public Action<PlayerActionEventData> OnPlayerCancel;
     public Action<PlayerActionEventData> OnPlayerCaught;
     public Action<PlayerActionEventData> OnPlayerSucceed;
+    public Action<PlayerAcceptedEventData> OnPlayerAccept;
 
-    
+    // Mission Events from MissionController
+    public Action<MissionRuntime> onMissionUnlocked;
+    public Action<MissionRuntime> onMissionStarted;
+    public Action<MissionRuntime> onMissionCompleted;
+    public Action<MissionRuntime> onMissionFailed;
 }

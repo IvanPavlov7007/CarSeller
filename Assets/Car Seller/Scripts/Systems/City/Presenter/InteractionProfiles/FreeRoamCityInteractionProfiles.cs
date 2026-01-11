@@ -12,6 +12,11 @@ public sealed class FreeRoamCityContextMenuProfile : ICityContextMenuProfile
         }
 
         // For now, re-use generic CityObject representation or show nothing.
+        if(model is MissionLauncher launcher)
+        {
+            return CTX_Menu_Tools.MissionLauncherHint(launcher);
+        }
+
         if (model is CityObject cityObject)
         {
             return new UIElement
@@ -68,6 +73,17 @@ public sealed class FreeRoamCityTriggerProfile : ICityTriggerProfile
                 {
                     G.Instance.CityActionService.PutCarInsideWarehouse(car, warehouse);
                     G.Instance.GameFlowController.EnterWarehouse(warehouse);
+                }
+            );
+        }
+        if(trigger is CityObject cityObject)
+        {
+            return new TriggerAction
+            (
+                true,
+                () =>
+                {
+                    GameEvents.Instance.OnTargetReached?.Invoke(new CityTargetReachedEvent(cityObject));
                 }
             );
         }

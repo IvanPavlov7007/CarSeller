@@ -12,8 +12,8 @@ public class CityViewObjectBuilder : ScriptableObject
 
     [Header("UI Prefabs")]
     public GameObject pinUIPrefab;
-    public Sprite WarehouseIcon;
-    public Sprite BuyerIcon;
+    public PinStyle WarehousePinStyle;
+    public PinStyle BuyerPinStyle;
 
     CityUIBuilder CityUIBuilder = new CityUIBuilder();
 
@@ -24,11 +24,11 @@ public class CityViewObjectBuilder : ScriptableObject
             case Car car:
                 return buildCar(car);
             case Warehouse warehouse:
-                return buildWarehouse(warehouse);
-            case Buyer buyer:
-                return BuildBuyer(buyer);
-            case Collectable collectable:
+                return buildCityObject(warehouse);
+            case Collectable collectable: // TODO ACHTUNG!!! generalize, since Collectable is a CityObject
                 return BuildCollectable(collectable);
+            case CityObject co:
+                return buildCityObject(co);
             default:
                 Debug.LogError($"No builder for city object of type {cityObject.GetType().Name}");
                 return null;
@@ -50,20 +50,6 @@ public class CityViewObjectBuilder : ScriptableObject
         Instantiate(collectablePrefab, pos, Quaternion.identity, collectableGO.transform);
         return viewController;
 
-    }
-
-    public CityViewObjectController BuildBuyer(Buyer buyer)
-    {
-        var location = CityLocatorHelper.GetCityLocation(buyer);
-        GameObject buyerGO = Instantiate(triggerPrefab, location.CityPosition.WorldPosition, Quaternion.identity);
-        var viewController =
-            buyerGO.AddComponent<CityViewObjectController>().Initialize(buyer);
-        buyerGO.AddComponent<ContentProvider>().Initialize(buyer);
-        buyerGO.AddComponent<Interactable>();
-        buyerGO.AddComponent<Triggerable>();
-
-        CityUIBuilder.SetUpCityPin(viewController, pinUIPrefab, BuyerIcon);
-        return viewController;
     }
 
     public CityViewObjectController buildCar(Car car)
@@ -88,17 +74,38 @@ public class CityViewObjectBuilder : ScriptableObject
         return viewController;
     }
 
-    public CityViewObjectController buildWarehouse(Warehouse warehouse)
+
+    //TODO make warehouse a city object and generalize this method
+    public CityViewObjectController buildCityObject(ILocatable locatable)
     {
-        var location = CityLocatorHelper.GetCityLocation(warehouse);
+        var location = CityLocatorHelper.GetCityLocation(locatable);
         GameObject warehouseViewGO = Instantiate(triggerPrefab, location.CityPosition.WorldPosition,Quaternion.identity);
         var viewController =
-            warehouseViewGO.AddComponent<CityViewObjectController>().Initialize(warehouse);
+            warehouseViewGO.AddComponent<CityViewObjectController>().Initialize(locatable);
         warehouseViewGO.AddComponent<Interactable>();
-        warehouseViewGO.AddComponent<ContentProvider>().Initialize(warehouse);
+        warehouseViewGO.AddComponent<ContentProvider>().Initialize(locatable);
         warehouseViewGO.AddComponent<Triggerable>();
 
-        CityUIBuilder.SetUpCityPin(viewController, pinUIPrefab, WarehouseIcon);
+        PinStyle pinStyle = null;
+
+        if (locatable is CityObject cityObject)
+        {
+            pinStyle = cityObject.PinStyle;
+            if(cityObject is Buyer)
+            {
+                pinStyle = BuyerPinStyle;
+            }
+        }
+        else if (locatable is Warehouse)
+        {
+            pinStyle = WarehousePinStyle;
+        }
+
+
+        if (pinStyle != null)
+            CityUIBuilder.SetUpCityPin(viewController, pinUIPrefab, pinStyle);
+        else
+            Debug.LogWarning($"Couldn't resolve PinStyle for {locatable}.");
 
         return viewController;
     }

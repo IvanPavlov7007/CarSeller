@@ -18,3 +18,13 @@ public class SpawnTargetEffect : MissionEffect
         context.EventBus.Emit(new SpawnTargetMissionRequestEvent(context.Mission, targetMarker));
     }
 }
+
+[Serializable]
+public class SpawnMissionLauncherEffect : MissionEffect
+{
+    public MissionLauncherConfig launcherConfig = new MissionLauncherConfig();
+    public override void Apply(MissionEffectContext context)
+    {
+        context.EventBus.Emit(new SpawnMissionLauncherRequestEvent(context.Mission, launcherConfig));
+    }
+}

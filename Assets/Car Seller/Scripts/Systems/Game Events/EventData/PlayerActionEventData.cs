@@ -4,9 +4,9 @@
     Caught,
     Succeeded
 }
-
-public class PlayerActionEventData
+public class PlayerActionEventData : GameEventData
 {
+    
     public PlayerOutcome Outcome { get; private set; }
     public Warehouse Warehouse { get; private set; } // only set when Outcome == Succeeded
 
@@ -14,5 +14,15 @@ public class PlayerActionEventData
     {
         Outcome = outcome;
         Warehouse = warehouse;
+    }
+}
+
+public class PlayerAcceptedEventData : GameEventData
+{
+    //TODO evolve Accept into a general structure
+    public readonly MissionRuntime acceptedMission;
+    public PlayerAcceptedEventData(MissionRuntime mission)
+    {
+        acceptedMission = mission;
     }
 }

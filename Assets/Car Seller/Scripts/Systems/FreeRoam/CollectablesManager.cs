@@ -39,7 +39,7 @@ public class CollectablesManager : Singleton<CollectablesManager>
             Debug.LogWarning($"Collectable already exists at location {location}");
             return collectables[location];
         }
-        var collectable = new Collectable(location, "Collectable", money, additionalCallback: additionalCallback);
+        var collectable = new Collectable(location, "Collectable", money, null, additionalCallback: additionalCallback);
         collectable.OnCollectedAdditionalCallback += () => OnCollectableCollected(collectable);
         collectables.Add(location, collectable);
         return collectable;

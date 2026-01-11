@@ -1,4 +1,4 @@
-﻿public class TransactionEventData
+﻿public class TransactionEventData : GameEventData
 {
     public TransactionEventData(Transaction transaction, TransactionFeedbackLocation transactionFeedbackLocation)
     {

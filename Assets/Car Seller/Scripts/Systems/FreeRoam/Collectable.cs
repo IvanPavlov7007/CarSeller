@@ -3,8 +3,8 @@
 public class Collectable : CityObject
 {
     //TODO make this betteer
-    public Collectable(ILocation location, string name, float moneyAmount, IPossession[] possessions = null, Action additionalCallback = null)
-        : base(name, moneyAmount.ToString(), location)
+    public Collectable(ILocation location, string name, float moneyAmount, City.CityMarker cityMarker, IPossession[] possessions = null, Action additionalCallback = null)
+        : base(name, moneyAmount.ToString(), location, cityMarker)
     {
         this.possessions = possessions;
         MoneyAmount = moneyAmount;

@@ -15,7 +15,7 @@ public class PlayerManager
 
         if(Player.Possessions.Remove(possession))
         { 
-            GameEvents.Instance.OnPlayerPossessionLose?.Invoke(new PossesionChangeEventData(possession));
+            GameEvents.Instance.OnPlayerPossessionLose?.Invoke(new PossessionChangeEventData(possession));
             return true;
         }
         else
@@ -46,7 +46,7 @@ public class PlayerManager
 
     bool addRecursiveStoredPossessions(IPossession possession)
     {
-        GameEvents.Instance.OnPlayerPossessionAcquired?.Invoke(new PossesionChangeEventData(possession));
+        GameEvents.Instance.OnPlayerPossessionAcquired?.Invoke(new PossessionChangeEventData(possession));
         bool cumulative = true;
         if(possession is ILocationsHolder container)
         {

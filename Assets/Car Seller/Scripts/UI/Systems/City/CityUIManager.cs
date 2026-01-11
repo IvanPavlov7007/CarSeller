@@ -28,7 +28,7 @@ public class CityUIManager : Singleton<CityUIManager>
 
 public class CityUIBuilder
 {
-    public CityUIPin SetUpCityPin(CityViewObjectController cityViewObjectController, GameObject pinPrefab, Sprite icon)
+    public CityUIPin SetUpCityPin(CityViewObjectController cityViewObjectController, GameObject pinPrefab, PinStyle pinStyle)
     {
         Debug.Assert(cityViewObjectController != null);
         Debug.Assert(pinPrefab != null);

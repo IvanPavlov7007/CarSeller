@@ -38,6 +38,12 @@ public class ContextMenuManager : Singleton<ContextMenuManager>
         }
     }
 
+    // TODO make target ILocatable or other most general type in the project
+    public void CreateContextMenu(CityObject target, UIElement content)
+    {
+        gsdfgsdfh
+    }
+
     public void CreateContextMenu(GameObject target, UIElement content)
     {
         GameObject panel = Instantiate(popUpMenuPrefab, ContextMenuCanvas.Instance.Canvas.transform);

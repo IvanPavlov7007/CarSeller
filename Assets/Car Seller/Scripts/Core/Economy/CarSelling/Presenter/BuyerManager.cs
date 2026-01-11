@@ -13,7 +13,7 @@ public static class BuyerManager
         var randomBuyerMarker = G.City.GetRandomMarker("buyer", predicate: marker => marker.PositionOnGraph != null);
 
         var location = G.City.GetEmptyLocation(randomBuyerMarker.PositionOnGraph.Value);
-        Buyer buyer = new Buyer(car.Name + "_buyer", createInfoText(offer), location);
+        Buyer buyer = new Buyer(car.Name + "_buyer", createInfoText(offer), location, randomBuyerMarker);
         return buyer;
     }
 
@@ -25,7 +25,7 @@ public static class BuyerManager
 
 public class Buyer : CityObject
 {
-    public Buyer(string name, string infoText, ILocation location) : base(name, infoText, location)
+    public Buyer(string name, string infoText, ILocation location, City.CityMarker marker) : base(name, infoText, location, marker)
     {
     }
 }

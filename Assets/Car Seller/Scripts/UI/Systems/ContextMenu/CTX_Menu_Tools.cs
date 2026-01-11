@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
 
+/// <summary>
+/// Utility tools for building context menu UI elements.
+/// Collection of methods based on similar functionality
+/// ( to have implementation in one place and avoid code duplication ).
+/// </summary>
 public static class CTX_Menu_Tools
 {
     // General
@@ -197,5 +202,47 @@ public static class CTX_Menu_Tools
         return Price(G.Economy.ProductPriceCalculator.Calculate(car));
     }
 
-    
+    // Mission
+    public static UIElement MissionLauncherTrigger(MissionLauncher launcher)
+    {
+        var mission = launcher.MissionRuntime;
+        return new UIElement
+        {
+            Type = UIElementType.Container,
+            Children = new List<UIElement>()
+            {
+                Header(mission.Config.MissionId),
+                Description(launcher.Config.ctxDescription),
+                new UIElement
+                {
+                    Type = UIElementType.Button,
+                    Text = "Start",
+                    // TODO check that other conditions are also met
+                    IsInteractable = mission.Status == MissionStatus.Available,
+                    OnClick = () =>
+                    {
+                        GameEvents.Instance.OnPlayerAccept(new PlayerAcceptedEventData(mission));
+                    },
+                    closePopupOnClick = true,
+                    UnavailabilityReason = "Mission cannot be started"
+                }
+            }
+        };     
+    }
+
+    public static UIElement MissionLauncherHint(MissionLauncher launcher)
+    {
+        var mission = launcher.MissionRuntime;
+        return new UIElement
+        {
+            Type = UIElementType.Container,
+            Children = new List<UIElement>()
+            {
+                Header(mission.Config.MissionId),
+                Description(launcher.Config.ctxDescription),
+                Hint("Get here, to start the mission")
+            }
+        };
+    }
+
 }

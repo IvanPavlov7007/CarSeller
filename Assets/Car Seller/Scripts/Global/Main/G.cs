@@ -11,6 +11,7 @@ public sealed class G : Singleton<G>
     //MODEL
     public CityConfig CityConfig;
     public EconomyConfig EconomyConfig;
+    public WorldMissionsConfig WorldMissionsConfig;
 
     //References
     public static City City => World.Instance.City;
@@ -87,7 +88,7 @@ public sealed class G : Singleton<G>
 
     public void ResetGameState()
     {
-        WorldManager.InitializeWorld(CityConfig, EconomyConfig);
+        WorldManager.InitializeWorld(CityConfig, EconomyConfig, WorldMissionsConfig);
     }
 
 }

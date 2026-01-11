@@ -68,12 +68,13 @@ public class WorldManager
         World.WorldRegistry.Register<Warehouse>(warehouse,warehouseConfig);
     }
 
-    public void InitializeWorld(CityConfig cityConfig, EconomyConfig economyConfig)
+    public void InitializeWorld(CityConfig cityConfig, EconomyConfig economyConfig, WorldMissionsConfig worldMissionsConfig)
     {
         initializeCity(cityConfig);
         // Initialize economy after city so that economy can reference city objects if needed
         initializeEconomy(economyConfig);
         CarSpawnManager.NewCarsRotation();
+        initializeWorldMissions(worldMissionsConfig);
     }
 
     //1.
@@ -118,5 +119,15 @@ public class WorldManager
     private void initializeEconomy(EconomyConfig economyConfig)
     {
         World.Instance.Economy = new Economy(economyConfig);
+    }
+
+    private void initializeWorldMissions(WorldMissionsConfig worldMissionsConfig)
+    {
+        G.Instance.MissionController = new MissionController(worldMissionsConfig.allMissions);
+        // Unlock starting missions
+        foreach (var startingMission in worldMissionsConfig.startingMissions)
+        {
+            G.Instance.MissionController.UnlockMission(startingMission);
+        }
     }
 }

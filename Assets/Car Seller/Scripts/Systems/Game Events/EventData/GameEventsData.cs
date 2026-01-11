@@ -1,4 +1,5 @@
-﻿public class ProductCreatedEventData
+﻿public abstract class GameEventData { }
+public class ProductCreatedEventData : GameEventData
 {
     public Product Product { get; private set; }
     public ILocation Location { get; private set; }
@@ -9,7 +10,7 @@
     }
 }
 
-public class ProductDestroyedEventData
+public class ProductDestroyedEventData : GameEventData
 {
     public Product Product { get; private set; }
     public ProductDestroyedEventData(Product product)
@@ -18,7 +19,7 @@ public class ProductDestroyedEventData
     }
 }   
 
-public class ProductLocationChangedEventData
+public class ProductLocationChangedEventData : GameEventData
 {
     public ProductLocationChangedEventData(Product product, ILocation newLocation, ILocation oldLocation)
     {
@@ -32,7 +33,7 @@ public class ProductLocationChangedEventData
     public ILocation OldLocation { get; set; }
 }
 
-public class LocatableStateChangedEventData
+public class LocatableStateChangedEventData : GameEventData
 {
     public ILocatable Locatable { get; private set; }
     public LocatableStateChangedEventData(ILocatable locatable)
@@ -41,7 +42,7 @@ public class LocatableStateChangedEventData
     }
 }
 
-public class LocatableCreatedEventData
+public class LocatableCreatedEventData : GameEventData
 {
     public ILocatable Locatable { get; private set; }
     public ILocation Location { get; private set; }
@@ -52,7 +53,7 @@ public class LocatableCreatedEventData
     }
 }
 
-public class LocatableDestroyedEventData
+public class LocatableDestroyedEventData : GameEventData
 {
     public ILocatable Locatable { get; private set; }
     public LocatableDestroyedEventData(ILocatable locatable)
@@ -61,7 +62,7 @@ public class LocatableDestroyedEventData
     }
 }
 
-public class LocatableLocationChangedEventData
+public class LocatableLocationChangedEventData : GameEventData
 {
     public LocatableLocationChangedEventData(ILocatable locatable, ILocation newLocation, ILocation oldLocation)
     {
@@ -75,8 +76,8 @@ public class LocatableLocationChangedEventData
     public ILocation OldLocation { get; set; }
 }
 
-public class GameStateChangeEventData
-{
+public class GameStateChangeEventData : GameEventData
+{ 
     public GameState oldState { get; private set; }
     public GameState newState { get; private set; }
 
@@ -87,16 +88,16 @@ public class GameStateChangeEventData
     }
 }
 
-public class PossesionChangeEventData
+public class PossessionChangeEventData : GameEventData
 {
     public IPossession Possession { get; private set; }
-    public PossesionChangeEventData(IPossession possesion)
+    public PossessionChangeEventData(IPossession possession)
     {
-        Possession = possesion;
+        Possession = possession;
     }
 }
 
-public class PlayerMoneyChangeEventData
+public class PlayerMoneyChangeEventData : GameEventData
 {
     public PlayerMoneyChangeEventData(Player player, float oldMoney, float newMoney)
     {
@@ -109,4 +110,53 @@ public class PlayerMoneyChangeEventData
     public float OldMoney { get; private set; }
     public float NewMoney { get; private set; }
     
+}
+
+public class CityTargetReachedEvent : GameEventData
+{
+    public CityObject ReachedObject;
+
+    public CityTargetReachedEvent(CityObject reachedObject)
+    {
+        ReachedObject = reachedObject;
+    }
+}
+
+// Mission Global Events
+
+public class MissionUnlockedEvent : GameEventData
+{
+    public readonly MissionRuntime Mission;
+    public MissionUnlockedEvent(MissionRuntime mission)
+    {
+        Mission = mission;
+    }
+}
+
+public class  MissionStartedEvent : GameEventData
+{
+    public readonly MissionRuntime Mission;
+
+    public MissionStartedEvent(MissionRuntime mission)
+    {
+        Mission = mission;
+    }
+}
+
+public class MissionCompletedEvent : GameEventData
+{
+    public readonly MissionRuntime Mission;
+    public MissionCompletedEvent(MissionRuntime mission)
+    {
+        Mission = mission;
+    }
+}
+
+public class MissionFailedEvent : GameEventData
+{
+    public readonly MissionRuntime Mission;
+    public MissionFailedEvent(MissionRuntime mission)
+    {
+        Mission = mission;
+    }
 }

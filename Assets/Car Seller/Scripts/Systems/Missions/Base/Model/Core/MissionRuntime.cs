@@ -21,10 +21,10 @@ public class MissionRuntime
         new List<MissionCondition.MissionConditionRuntime>();
     public List<MissionCondition.MissionConditionRuntime> failureConditions =
         new List<MissionCondition.MissionConditionRuntime>();
-
-    public List<MissionEffect> MissionStartEffects => Config.MissionStartEffects;
-    public List<MissionEffect> MissionCompleteEffects => Config.MissionCompleteEffects;
-    public List<MissionEffect> MissionFailEffects => Config.MissionFailEffects;
+    public List<MissionEffect> UnlockEffects => Config.MissionUnlockEffects;
+    public List<MissionEffect> StartEffects => Config.MissionStartEffects;
+    public List<MissionEffect> CompleteEffects => Config.MissionCompleteEffects;
+    public List<MissionEffect> FailEffects => Config.MissionFailEffects;
 
     public List<RewardBundle> RewardBundles => Config.RewardBundles;
 
@@ -122,6 +122,7 @@ public class MissionRuntime
             return;
         }
         SetStatus(MissionStatus.Available);
+        EventBus.Emit(new UnlockMissionInternalEvent(this));
     }
 
     /// <summary>

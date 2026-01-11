@@ -5,13 +5,12 @@ public abstract class MissionControllerBase
 {
     MissionEventBus eventBus;
     Dictionary<MissionConfig, MissionRuntime> runtimes;
-
+    Queue<GameEventData> eventQueue = new Queue<GameEventData>();
 
     public MissionControllerBase(List<MissionConfig> configs)
     : this(configs, new MissionEventBus())
     {
     }
-
     protected MissionControllerBase(List<MissionConfig> configs, MissionEventBus eventBus)
     {
         // Initialize Event Bus
@@ -26,6 +25,7 @@ public abstract class MissionControllerBase
     {
         // Subscribe to mission internal events
         // General mission events
+        eventBus.Subscribe<UnlockMissionInternalEvent>(onUnlockMissionInternalEvent);
         eventBus.Subscribe<StartMissionInternalEvent>(onStartMissionRequestEvent);
         eventBus.Subscribe<CompleteMissionInternalEvent>(onCompleteMissionRequestEvent);
         eventBus.Subscribe<FailMissionInternalEvent>(onFailMissionRequestEvent);
@@ -33,9 +33,9 @@ public abstract class MissionControllerBase
         // Specific mission requests
         eventBus.Subscribe<UnlockMissionRequestEvent>(onUnlockMissionRequestEvent);
         eventBus.Subscribe<SpawnTargetMissionRequestEvent>(onSpawnTargetMissionRequestEvent);
+        eventBus.Subscribe<SpawnMissionLauncherRequestEvent>(onSpawnMissionLauncherRequestEvent);
 
     }
-
     private void InitializeRuntimes(List<MissionConfig> configs)
     {
         runtimes = new Dictionary<MissionConfig, MissionRuntime>();
@@ -49,31 +49,68 @@ public abstract class MissionControllerBase
         var runtime = new MissionRuntime(config, eventBus);
         return runtime;
     }
-
+    // Mission Control API
+    /// <summary>
+    /// Use this method to unlock a mission from outside the mission system.
+    /// </summary>
+    /// <param name="mission"></param>
     public void UnlockMission(MissionConfig mission)
     {
         var runtime = runtimes[mission];
         runtime.Unlock();
         // GameEvents.onMissionUnlocked?.Invoke(runtime);
     }
-
+    /// <summary>
+    /// Used to clean up mission-owned objects when mission status changes.
+    /// </summary>
+    /// <param name="mission"></param>
+    void CleanupMissionObjects(MissionRuntime mission)
+    {
+        var newStatus = mission.Status;
+        switch (newStatus)
+        {
+            case MissionStatus.Available:
+            case MissionStatus.Active:
+            case MissionStatus.Succeeded:
+            case MissionStatus.Failed:
+                CleanupMissionObjectsImp(mission);
+                break;
+            default:
+                break;
+        }
+    }
+    /// <summary>
+    /// Implementation of mission-owned object cleanup. Left to derived classes.
+    /// </summary>
+    /// <param name="mission"></param>
+    protected abstract void CleanupMissionObjectsImp(MissionRuntime mission);
 
     // Mission Event Bus
     //Internal Event Handlers
+
+    void onUnlockMissionInternalEvent(UnlockMissionInternalEvent e)
+    {
+        CleanupMissionObjects(e.Mission);
+        executeMissionEffects(e.Mission.UnlockEffects, createMissionEffectContext(e.Mission));
+        GameEvents.Instance.onMissionUnlocked?.Invoke(e.Mission);
+    }
     void onStartMissionRequestEvent(StartMissionInternalEvent e)
     {
-        executeMissionEffects(e.Mission.MissionStartEffects, createMissionEffectContext(e.Mission));
-        // GameEvents.onMissionStarted?.Invoke(requestEvent.Mission);
+        CleanupMissionObjects(e.Mission);
+        executeMissionEffects(e.Mission.StartEffects, createMissionEffectContext(e.Mission));
+        GameEvents.Instance.onMissionStarted?.Invoke(e.Mission);
     }
     void onCompleteMissionRequestEvent(CompleteMissionInternalEvent e)
     {
-        executeMissionEffects(e.Mission.MissionCompleteEffects, createMissionEffectContext(e.Mission));
-        // GameEvents.onMissionCompleted?.Invoke(requestEvent.Mission);
+        CleanupMissionObjects(e.Mission);
+        executeMissionEffects(e.Mission.CompleteEffects, createMissionEffectContext(e.Mission));
+        GameEvents.Instance.onMissionCompleted?.Invoke(e.Mission);
     }
     void onFailMissionRequestEvent(FailMissionInternalEvent e)
     {
-        executeMissionEffects(e.Mission.MissionFailEffects, createMissionEffectContext(e.Mission));
-        // GameEvents.onMissionFailed?.Invoke(requestEvent.Mission);
+        CleanupMissionObjects(e.Mission);
+        executeMissionEffects(e.Mission.FailEffects, createMissionEffectContext(e.Mission));
+        GameEvents.Instance.onMissionFailed?.Invoke(e.Mission);
     }
 
     void executeMissionEffects(List<MissionEffect> effects, MissionEffectContext context)
@@ -101,35 +138,48 @@ public abstract class MissionControllerBase
 
     protected abstract void onSpawnTargetMissionRequestEvent(SpawnTargetMissionRequestEvent requestEvent);
 
+    protected abstract void onSpawnMissionLauncherRequestEvent(SpawnMissionLauncherRequestEvent requestEvent);
+
     // Game Events Funneling
     #region globalGameEvents
 
-
     // Game Events Funneling
-    public void OnCityTargetReached(CityTargetReachedEvent targetReachedEvent)
+    public virtual void OnCityTargetReached(CityTargetReachedEvent targetReachedEvent)
     {
         updateMissionRuntimes(targetReachedEvent);
     }
-    public void Update(float deltaTime)
+    public virtual void OnUpdate(float deltaTime)
     {
         updateMissionRuntimes(new TimePassEvent(deltaTime));
     }
+    #endregion
+    protected void updateMissionRuntimes(GameEventData gameEventData)
+    {
+        eventQueue.Enqueue(gameEventData);
+        processEventQueue();
+    }
 
+    bool queueProcessing = false;
 
+    private void processEventQueue()
+    {
+        if (queueProcessing)
+            return;
+        queueProcessing = true;
+        while (eventQueue.Count > 0)
+        {
+            var gameEventData = eventQueue.Dequeue();
+            processSingleEvent(gameEventData);
+        }
+        queueProcessing = false;
+    }
 
-    // Game Events Handling
-    //TODO: split into phases:
-    // 1 Evaluation - in MissionRuntime
-    // 2 Queue Resolutions - from MissionRuntime
-    // 3 Apply Resolutions - which might add new events to the queue
-    // (0) Evaluation of the next event in the more global queue,
-    //      that might have been added during resolution phase
-    private void updateMissionRuntimes(GameEventData gameEventData)
+    private void processSingleEvent(GameEventData gameEventData)
     {
         foreach (var runtime in runtimes.Values)
         {
             runtime.OnEvent(gameEventData);
         }
     }
-    #endregion
+
 }
