@@ -245,4 +245,25 @@ public static class CTX_Menu_Tools
         };
     }
 
+    public static UIElement MissionCompletedInfo(MissionRuntime mission)
+    {
+        return new UIElement
+        {
+            Type = UIElementType.Container,
+            Children = new List<UIElement>()
+            {
+                Header($"Mission {mission.Config.MissionId} Completed!"),
+                new UIElement
+                {
+                    Type = UIElementType.Button,
+                    Text = "Great!",
+                    OnClick = () =>
+                    {
+                    },
+                    closePopupOnClick = true
+                }
+            }
+        };
+    }
+
 }

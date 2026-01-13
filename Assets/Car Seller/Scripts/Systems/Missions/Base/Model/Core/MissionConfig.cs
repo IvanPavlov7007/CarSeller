@@ -11,18 +11,21 @@ public class MissionConfig : SerializedScriptableObject
     public string MissionId;
     public string Description;
 
-    public List<MissionCondition> StartConditions = new List<MissionCondition>();
-    public List<MissionCondition> FailConditions = new List<MissionCondition>();
-    public List<MissionCondition> SuccessConditions = new List<MissionCondition>();
-
     [PropertyTooltip("Things for bringing content into the world for the duration of the mission. Important: those effects should be owned by mission runtimes and destroyed with the missions. ")]
     public List<MissionEffect> MissionUnlockEffects = new List<MissionEffect>();
+    public List<MissionCondition> StartConditions = new List<MissionCondition>();
+
     [PropertyTooltip("Things for bringing content into the world for the duration of the mission. Important: those effects should be owned by mission runtimes and destroyed with the missions. ")]
     public List<MissionEffect> MissionStartEffects = new List<MissionEffect>();
+
+    public List<MissionCondition> SuccessConditions = new List<MissionCondition>();
     [PropertyTooltip("Things to change in the <i>world</i> after finishing mission, like unlocking next missions.")]
     public List<MissionEffect> MissionCompleteEffects = new List<MissionEffect>();
+
+    public List<MissionCondition> FailConditions = new List<MissionCondition>();
     [PropertyTooltip("Things to change in the <i>world</i> after failing mission, like locking retry for time or reputation loss.")]
     public List<MissionEffect> MissionFailEffects = new List<MissionEffect>();
+
     public List<RewardBundle> RewardBundles = new List<RewardBundle>();
 }
 
@@ -77,8 +80,8 @@ public class MissionLauncherConfig
 [Serializable]
 public class PinStyle
 {
-    public Sprite icon;
-    public string text = "";
-    public Color textColor = Color.black;
-    public Color backgroundColor = Color.white;
+    public Sprite Icon;
+    public string Text = "";
+    public Color ForegroundColor = Color.black;
+    public Color BackgroundColor = Color.white;
 }

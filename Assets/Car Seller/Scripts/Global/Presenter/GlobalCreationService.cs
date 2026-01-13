@@ -20,7 +20,7 @@ public class GlobalCreationService
             mission.Config.MissionId,""
             , createLocationFromMarkerRef(config.cityMarkerRef, out var marker),
             marker,
-            config.pinStyle
+            config.pinStyle,
             mission,
             config
             );

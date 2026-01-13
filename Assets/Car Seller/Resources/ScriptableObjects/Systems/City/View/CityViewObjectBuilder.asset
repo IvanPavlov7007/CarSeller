@@ -16,5 +16,13 @@ MonoBehaviour:
   triggerPrefab: {fileID: 3249641557452852509, guid: 0c0aa54913aecec4fb91c821abe6984d, type: 3}
   collectablePrefab: {fileID: 622660547537409573, guid: 104c73e8bfeab2641abc1b96fd9bc8b2, type: 3}
   pinUIPrefab: {fileID: 3981913583320138012, guid: 4d0ca99fb5855a34bb681cb2280afe0b, type: 3}
-  WarehouseIcon: {fileID: 21300000, guid: cc82e0110be3916499cec5f5514e6741, type: 3}
-  BuyerIcon: {fileID: 21300000, guid: c1b5f65d87e95354b8d4c90ed54fbc65, type: 3}
+  WarehousePinStyle:
+    Icon: {fileID: 21300000, guid: cc82e0110be3916499cec5f5514e6741, type: 3}
+    Text: 
+    ForegroundColor: {r: 0, g: 0, b: 0, a: 1}
+    BackgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  BuyerPinStyle:
+    Icon: {fileID: 21300000, guid: c1b5f65d87e95354b8d4c90ed54fbc65, type: 3}
+    Text: 
+    ForegroundColor: {r: 0, g: 0, b: 0, a: 1}
+    BackgroundColor: {r: 1, g: 1, b: 1, a: 1}

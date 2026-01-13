@@ -123,6 +123,12 @@ public class WorldManager
 
     private void initializeWorldMissions(WorldMissionsConfig worldMissionsConfig)
     {
+        if(worldMissionsConfig == null)
+        {
+            Debug.LogWarning("WorldMissionsConfig is null. Skipping mission controller initialization.");
+            return;
+        }
+
         G.Instance.MissionController = new MissionController(worldMissionsConfig.allMissions);
         // Unlock starting missions
         foreach (var startingMission in worldMissionsConfig.startingMissions)

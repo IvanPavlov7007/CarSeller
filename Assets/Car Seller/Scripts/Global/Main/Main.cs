@@ -31,7 +31,7 @@ public class Main : Singleton<Main>
         var locations = G.City.QueryMarkers("cash")
             .Select(marker => G.City.GetEmptyLocation(marker.PositionOnGraph.Value) as ILocation).ToList();
 
-        CollectablesManager.Instance.Initialize(locations, 900f, null, 20);
+        //CollectablesManager.Instance.Initialize(locations, 900f, null, 20);
 
         tryEnterCarShop(car);
 

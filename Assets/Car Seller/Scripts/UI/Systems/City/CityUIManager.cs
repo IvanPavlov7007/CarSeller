@@ -32,11 +32,11 @@ public class CityUIBuilder
     {
         Debug.Assert(cityViewObjectController != null);
         Debug.Assert(pinPrefab != null);
-        Debug.Assert(icon != null);
+        Debug.Assert(pinStyle != null);
         Debug.Assert(CityUIManager.Instance != null);
 
         CityUIPin pinInstance = GameObject.Instantiate(pinPrefab, CityUIManager.Instance.Canvas.transform).AddComponent<CityUIPin>();
-        pinInstance.Initialize(cityViewObjectController, icon);
+        pinInstance.Initialize(cityViewObjectController, pinStyle);
         return pinInstance;
     }
 }

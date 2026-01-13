@@ -8,6 +8,7 @@ public class CityUIPinPositioner : MonoBehaviour
     public Transform target { get; private set; }
 
     public RectTransform IconRectTransform => iconTransform;
+    public RectTransform FrameRectTransform => frameTransform;
 
     public float screenEdgeMargin = 50f;
     public float targetOnScreenMargin = 50f;
@@ -15,6 +16,8 @@ public class CityUIPinPositioner : MonoBehaviour
 
     [SerializeField]
     RectTransform iconTransform;
+    [SerializeField]
+    RectTransform frameTransform;
     RectTransform rectTransform;
 
     Quaternion initialIconRotation;

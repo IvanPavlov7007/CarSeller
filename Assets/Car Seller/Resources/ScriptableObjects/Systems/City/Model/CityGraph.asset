@@ -2317,3 +2317,31 @@ MonoBehaviour:
       WorldPoint: {x: -1.51, y: -1.08}
     AuthorId: 765b38c9d72c461ebf8a3fdad5973d5c
     AuthorPath: CityAuthoringRoot/TestMoneyCollectables/CollectalbeMarker(Edge) (30)
+  - Id: launher_arrive_1
+    DisplayName: 
+    Tags: []
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -6.12, y: -3.91}
+    AuthorId: launher_arrive_1
+    AuthorPath: CityAuthoringRoot/Arrive Mission 1/Launcher
+  - Id: target_arrive_1
+    DisplayName: 
+    Tags: []
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 0.63, y: 1.85}
+    AuthorId: target_arrive_1
+    AuthorPath: CityAuthoringRoot/Arrive Mission 1/Target

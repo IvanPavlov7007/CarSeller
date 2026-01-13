@@ -112,50 +112,52 @@ public class PlayerMoneyChangeEventData : GameEventData
     
 }
 
-public class CityTargetReachedEvent : GameEventData
+public class CityTargetReachedEventData : GameEventData
 {
-    public CityObject ReachedObject;
+    public readonly CityObject ReachedObject;
+    public readonly TriggerContext TriggerContext;
 
-    public CityTargetReachedEvent(CityObject reachedObject)
+    public CityTargetReachedEventData(CityObject reachedObject, TriggerContext triggerContext)
     {
         ReachedObject = reachedObject;
+        TriggerContext = triggerContext;
     }
 }
 
 // Mission Global Events
 
-public class MissionUnlockedEvent : GameEventData
+public class MissionUnlockedEventData : GameEventData
 {
     public readonly MissionRuntime Mission;
-    public MissionUnlockedEvent(MissionRuntime mission)
+    public MissionUnlockedEventData(MissionRuntime mission)
     {
         Mission = mission;
     }
 }
 
-public class  MissionStartedEvent : GameEventData
+public class  MissionStartedEventData : GameEventData
 {
     public readonly MissionRuntime Mission;
 
-    public MissionStartedEvent(MissionRuntime mission)
+    public MissionStartedEventData(MissionRuntime mission)
     {
         Mission = mission;
     }
 }
 
-public class MissionCompletedEvent : GameEventData
+public class MissionCompletedEventData : GameEventData
 {
     public readonly MissionRuntime Mission;
-    public MissionCompletedEvent(MissionRuntime mission)
+    public MissionCompletedEventData(MissionRuntime mission)
     {
         Mission = mission;
     }
 }
 
-public class MissionFailedEvent : GameEventData
+public class MissionFailedEventData : GameEventData
 {
     public readonly MissionRuntime Mission;
-    public MissionFailedEvent(MissionRuntime mission)
+    public MissionFailedEventData(MissionRuntime mission)
     {
         Mission = mission;
     }

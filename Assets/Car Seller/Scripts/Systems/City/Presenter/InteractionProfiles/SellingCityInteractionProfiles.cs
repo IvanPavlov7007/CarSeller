@@ -66,12 +66,12 @@ public sealed class SellingCityContextMenuProfile : ICityContextMenuProfile
 
 public sealed class SellingCityTriggerProfile : ICityTriggerProfile
 {
-    public TriggerAction GenerateTriggerAction(object trigger, object triggerCause, GameState gameState)
+    public TriggerAction GenerateTriggerAction(TriggerContext ctx)
     {
-        var sellingState = gameState as SellingGameState;
+        var sellingState = ctx.GameState as SellingGameState;
         if (sellingState == null)
         {
-            Debug.LogError($"SellingCityTriggerProfile used with non-selling state {gameState?.GetType().Name}");
+            Debug.LogError($"SellingCityTriggerProfile used with non-selling state {ctx.GameState?.GetType().Name}");
             return new TriggerAction(false, null);
         }
 
@@ -79,8 +79,8 @@ public sealed class SellingCityTriggerProfile : ICityTriggerProfile
         Debug.Assert(sellingState.Buyer != null, "SellingCityTriggerProfile: Buyer is null");
 
         bool canProceed =
-            trigger as Buyer == sellingState.Buyer &&
-            triggerCause as Car == sellingState.SellingCar;
+            ctx.Trigger as Buyer == sellingState.Buyer &&
+            ctx.TriggerCause as Car == sellingState.SellingCar;
 
         System.Action action = null;
         if (canProceed)

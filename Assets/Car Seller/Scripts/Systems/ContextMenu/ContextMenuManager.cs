@@ -38,12 +38,8 @@ public class ContextMenuManager : Singleton<ContextMenuManager>
         }
     }
 
-    // TODO make target ILocatable or other most general type in the project
-    public void CreateContextMenu(CityObject target, UIElement content)
-    {
-        gsdfgsdfh
-    }
-
+    // TODO make target ILocatable or other most general model-type in the project
+    // If needed to find a view based on a model
     public void CreateContextMenu(GameObject target, UIElement content)
     {
         GameObject panel = Instantiate(popUpMenuPrefab, ContextMenuCanvas.Instance.Canvas.transform);
@@ -62,7 +58,7 @@ public class ContextMenuManager : Singleton<ContextMenuManager>
 
         // Create menu controller
         var ctxMenu = createContextMenu(panel, target.transform, content.blockingInput);
-        ctxMenu.Initialize(target.transform, contentRT);
+        ctxMenu.Initialize(target.transform, contentRT, closeMenu);
 
         UpdateContextMenu(ctxMenu);
     }
@@ -168,7 +164,6 @@ public class ContextMenuManager : Singleton<ContextMenuManager>
     private PopUpContextMenu createContextMenu(GameObject panel, Transform target, bool blocking)
     {
         var ctxMenu = panel.AddComponent<PopUpContextMenu>();
-        ctxMenu.Initialize(target, getContentTransform(panel));
         activeMenus.Add(ctxMenu);
         if (blocking)
             BlockUIManager.Instance.Block(ContextMenuCanvas.Instance.Canvas, ctxMenu.Close);

@@ -69,7 +69,8 @@ public class CityInteractionManager : IInteractionManager
         var triggerModel = trigger.Model;
         var causeModel = triggerCause != null ? triggerCause.Model : null;
 
-        var triggerAction = profile.GenerateTriggerAction(triggerModel, causeModel, gameState);
+        var triggerAction = profile.GenerateTriggerAction(
+            new TriggerContext(triggerModel, causeModel, gameState, trigger.gameObject,triggerCause.gameObject));
         if (triggerAction == null)
         {
             Debug.LogError("CityInteractionManager: TriggerAction is null");

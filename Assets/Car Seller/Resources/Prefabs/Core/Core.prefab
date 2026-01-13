@@ -223,6 +223,7 @@ Transform:
   - {fileID: 1787587102874665164}
   - {fileID: 2709094839571514640}
   - {fileID: 582605018508926142}
+  - {fileID: 7000847864511267440}
   - {fileID: 5709913536750373088}
   - {fileID: 6985368509500141688}
   - {fileID: 169558243832422243}
@@ -649,6 +650,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 1
+--- !u!1 &7153922937211846643
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7000847864511267440}
+  - component: {fileID: 4007420689769676421}
+  - component: {fileID: 3917223707451522572}
+  m_Layer: 0
+  m_Name: FixedContextMenuManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7000847864511267440
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7153922937211846643}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 3786126769609166702}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4007420689769676421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7153922937211846643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55938fb1577dd4ad3af7e994048c86f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3917223707451522572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7153922937211846643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f80f8413735c2b54888f9143befb941d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dontDestroyOnLoad: 0
+  fixedPopUpMenuPrefab: {fileID: 1448607247116826726, guid: 9534f3d911e21984c89040eb9fe3f72b, type: 3}
+  UIBuilder: {fileID: 11400000, guid: 9d960e958a906b7478173d9e9dcf1c93, type: 2}
 --- !u!1 &7399064851901602296
 GameObject:
   m_ObjectHideFlags: 0
@@ -1074,6 +1135,7 @@ MonoBehaviour:
   _dontDestroyOnLoad: 1
   CityConfig: {fileID: 11400000, guid: f69e8dc3adaa8b147938f1124e33966e, type: 2}
   EconomyConfig: {fileID: 11400000, guid: c06296a320d0174459eed86435f69a0f, type: 2}
+  WorldMissionsConfig: {fileID: 11400000, guid: 92161a9ed29d20640ac9350b1e20cfc8, type: 2}
   warehouseProductViewBuilder: {fileID: 11400000, guid: f89c79dee8c6ad946a82b44e4e94a0a2, type: 2}
   carPartViewBuilder: {fileID: 11400000, guid: 9280239a7aae48041bc89e3309ad1261, type: 2}
   cityViewObjectBuilder: {fileID: 11400000, guid: b8b2cb1796673254fbd1b5a05d793650, type: 2}

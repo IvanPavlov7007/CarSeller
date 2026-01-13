@@ -89,7 +89,7 @@ public sealed class NormalCityContextMenuProfile : ICityContextMenuProfile
 
 public sealed class NormalCityTriggerProfile : ICityTriggerProfile
 {
-    public TriggerAction GenerateTriggerAction(object trigger, object triggerCause, GameState gameState)
+    public TriggerAction GenerateTriggerAction(TriggerContext ctx)
     {
         Debug.LogWarning("NormalCityTriggerProfile: No trigger actions defined in normal city state");
         return new TriggerAction(false, null);

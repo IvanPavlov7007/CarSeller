@@ -37,16 +37,16 @@ public sealed class FreeRoamCityContextMenuProfile : ICityContextMenuProfile
 
 public sealed class FreeRoamCityTriggerProfile : ICityTriggerProfile
 {
-    public TriggerAction GenerateTriggerAction(object trigger, object triggerCause, GameState gameState)
+    public TriggerAction GenerateTriggerAction(TriggerContext ctx)
     {
-        FreeRoamGameState freeRoamGameState = gameState as FreeRoamGameState;
+        FreeRoamGameState freeRoamGameState = ctx.GameState as FreeRoamGameState;
         Debug.Assert(freeRoamGameState != null, "FreeRoamCityTriggerProfile: gameState is not FreeRoamGameState");
 
-        if (triggerCause != freeRoamGameState.FocusedCar)
+        if (ctx.TriggerCause != freeRoamGameState.FocusedCar)
             return new TriggerAction(false, null);
-        Car car = triggerCause as Car;
+        Car car = ctx.TriggerCause as Car;
 
-        if (trigger is Collectable collectable)
+        if (ctx.Trigger is Collectable collectable)
         {
             return new TriggerAction
             (
@@ -57,7 +57,7 @@ public sealed class FreeRoamCityTriggerProfile : ICityTriggerProfile
                 }
             );
         }
-        if (trigger is Warehouse warehouse)
+        if (ctx.Trigger is Warehouse warehouse)
         {
             // prevent instant re-entry after leaving warehouse ---
             if (!freeRoamGameState.CanEnterWarehouse(warehouse,car))
@@ -76,14 +76,14 @@ public sealed class FreeRoamCityTriggerProfile : ICityTriggerProfile
                 }
             );
         }
-        if(trigger is CityObject cityObject)
+        if(ctx.Trigger is CityObject cityObject)
         {
             return new TriggerAction
             (
                 true,
                 () =>
                 {
-                    GameEvents.Instance.OnTargetReached?.Invoke(new CityTargetReachedEvent(cityObject));
+                    GameEvents.Instance.OnTargetReached?.Invoke(new CityTargetReachedEventData(cityObject,ctx));
                 }
             );
         }

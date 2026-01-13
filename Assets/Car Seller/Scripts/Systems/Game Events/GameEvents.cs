@@ -46,7 +46,7 @@ public class GameEvents
     public Action<LocatableDestroyedEventData> OnLocatableDestroyed;
     public Action<LocatableLocationChangedEventData> OnLocatableLocationChanged;
 
-    public Action<CityTargetReachedEvent> OnTargetReached;
+    public Action<CityTargetReachedEventData> OnTargetReached;
 
     public Action<PossessionChangeEventData> OnPlayerPossessionLose;
     public Action<PossessionChangeEventData> OnPlayerPossessionAcquired;
@@ -61,8 +61,8 @@ public class GameEvents
     public Action<PlayerAcceptedEventData> OnPlayerAccept;
 
     // Mission Events from MissionController
-    public Action<MissionRuntime> onMissionUnlocked;
-    public Action<MissionRuntime> onMissionStarted;
-    public Action<MissionRuntime> onMissionCompleted;
-    public Action<MissionRuntime> onMissionFailed;
+    public Action<MissionUnlockedEventData> onMissionUnlocked;
+    public Action<MissionStartedEventData> onMissionStarted;
+    public Action<MissionCompletedEventData> onMissionCompleted;
+    public Action<MissionFailedEventData> onMissionFailed;
 }

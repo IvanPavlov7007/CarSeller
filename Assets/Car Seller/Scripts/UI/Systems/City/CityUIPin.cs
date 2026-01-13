@@ -1,5 +1,7 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 using UnityEngine.UI;
 
 public class CityUIPin : MonoBehaviour
@@ -14,14 +16,25 @@ public class CityUIPin : MonoBehaviour
         positioner = GetComponent<CityUIPinPositioner>();
     }
 
-    public void Initialize(CityViewObjectController cityViewObjectController, Sprite icon)
+    public void Initialize(CityViewObjectController cityViewObjectController, PinStyle pinStyle)
     {
         this.cityViewObjectController = cityViewObjectController;
         Camera cam = CityUIManager.Instance.Camera;
         Canvas canvas = CityUIManager.Instance.Canvas;
         positioner.Initialize(cam, canvas, cam.transform, cityViewObjectController.transform);
+
+        var txt = positioner.GetComponentInChildren<TextMeshProUGUI>();
+        txt.text = pinStyle.Text;
+        txt.color = pinStyle.ForegroundColor;
+        positioner.FrameRectTransform.GetComponent<Image>().color = pinStyle.BackgroundColor;
+        var iconImage = positioner.IconRectTransform.GetComponent<Image>();
+        iconImage.sprite = pinStyle.Icon;
+        if(pinStyle.Icon != null)
+            iconImage.color = pinStyle.ForegroundColor;
+        else
+            iconImage.color = Color.clear;
+
         gameObject.AddComponent<ViewStateChangerUI>().Initialize(cityViewObjectController);
-        positioner.IconRectTransform.GetComponent<Image>().sprite = icon;
 
         cityViewObjectController.OnDestroyed += handleObjectDestroyed;
         gameObject.GetComponentInChildren<Button>().onClick.AddListener(onClick);

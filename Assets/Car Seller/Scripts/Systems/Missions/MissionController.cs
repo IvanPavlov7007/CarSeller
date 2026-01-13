@@ -7,8 +7,7 @@ using UnityEngine;
 /// </summary>
 public class MissionController : MissionControllerBase
 {
-    Dictionary<MissionRuntime, HashSet<IDestroyable>> missionOwnedObjects
-    = new();
+    Dictionary<MissionRuntime, HashSet<IDestroyable>> missionOwnedObjects = new();
     MissionMonoBehaviourHelper monoBehaviourHelper;
 
     public MissionController(List<MissionConfig> configs) : base(configs)
@@ -20,18 +19,28 @@ public class MissionController : MissionControllerBase
 
     public void Enable()
     {
+        // Extension internal event handlers
         GameEvents.Instance.OnLocatableDestroyed += onLocatableDestroyed;
-        GameEvents.Instance.OnTargetReached += OnCityTargetReached;
         GameEvents.Instance.OnTargetReached += tryCheckIfMissionLauncherAndShowPopUp;
+        GameEvents.Instance.onMissionCompleted += showMissionCompletedInfo;
+        GameEvents.Instance.onMissionCompleted += rewardPlayerForMissionCompletion;
+
+        // External to mission event handlers
         monoBehaviourHelper.OnUpdateEvent += OnUpdate;
+        GameEvents.Instance.OnTargetReached += OnCityTargetReached;
+        GameEvents.Instance.OnPlayerAccept += OnPlayerAccepted;
     }
 
     public void Disable()
     {
         GameEvents.Instance.OnLocatableDestroyed -= onLocatableDestroyed;
-        GameEvents.Instance.OnTargetReached -= OnCityTargetReached;
         GameEvents.Instance.OnTargetReached -= tryCheckIfMissionLauncherAndShowPopUp;
+        GameEvents.Instance.onMissionCompleted -= showMissionCompletedInfo;
+        GameEvents.Instance.onMissionCompleted -= rewardPlayerForMissionCompletion;
+
         monoBehaviourHelper.OnUpdateEvent -= OnUpdate;
+        GameEvents.Instance.OnTargetReached -= OnCityTargetReached;
+        GameEvents.Instance.OnPlayerAccept -= OnPlayerAccepted;
     }
 
     // Internal functions
@@ -40,10 +49,17 @@ public class MissionController : MissionControllerBase
         if (!missionOwnedObjects.TryGetValue(mission, out var set))
             return;
 
-        foreach (var obj in set)
-            obj.Destroy();
+        // Work on a snapshot to avoid modification-during-iteration issues
+        var snapshot = new List<IDestroyable>(set);
 
+        foreach (var obj in snapshot)
+        {
+            obj.Destroy();
+        }
+
+        // Now clear and drop the reference
         set.Clear();
+        missionOwnedObjects.Remove(mission);
     }
 
     // Utility helpers functions
@@ -78,11 +94,11 @@ public class MissionController : MissionControllerBase
     }
 
     // External Event Handlers
-    void tryCheckIfMissionLauncherAndShowPopUp(CityTargetReachedEvent evt)
+    void tryCheckIfMissionLauncherAndShowPopUp(CityTargetReachedEventData evt)
     {
         if (evt.ReachedObject is MissionLauncher missionLauncher)
         {
-            ContextMenuManager.Instance.CreateContextMenu(missionLauncher, CTX_Menu_Tools.MissionLauncherTrigger(missionLauncher));
+            ContextMenuManager.Instance.CreateContextMenu(evt.TriggerContext.TriggerView, CTX_Menu_Tools.MissionLauncherTrigger(missionLauncher));
         }
     }
 
@@ -94,6 +110,25 @@ public class MissionController : MissionControllerBase
             {
                 if (kvp.Value.Remove(destroyable))
                     break;
+            }
+        }
+    }
+
+    void showMissionCompletedInfo(MissionCompletedEventData missionCompletedEvent)
+    {
+        FixedContextMenuManager.Instance.CreateContextMenu(CTX_Menu_Tools.MissionCompletedInfo(missionCompletedEvent.Mission));
+    }
+
+    void rewardPlayerForMissionCompletion(MissionCompletedEventData e)
+    {
+        var rewards = e.Mission.Config.RewardBundles;
+
+        foreach (var reward in rewards)
+        {
+            var result = G.TransactionProcessor.Process(reward.CreateTransaction());
+            if (result.Type != TransactionResultType.Success)
+            {
+                Debug.LogError($"Failed to process mission reward transaction: {result.Type}");
             }
         }
     }

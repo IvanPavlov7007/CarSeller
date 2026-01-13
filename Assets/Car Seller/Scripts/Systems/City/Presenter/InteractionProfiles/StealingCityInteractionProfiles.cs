@@ -87,23 +87,23 @@ public sealed class StealingCityContextMenuProfile : ICityContextMenuProfile
 
 public sealed class StealingCityTriggerProfile : ICityTriggerProfile
 {
-    public TriggerAction GenerateTriggerAction(object trigger, object triggerCause, GameState gameState)
+    public TriggerAction GenerateTriggerAction(TriggerContext ctx)
     {
-        var stealingState = gameState as StealingGameState;
+        var stealingState = ctx.GameState as StealingGameState;
         if (stealingState == null)
         {
-            Debug.LogError($"StealingCityTriggerProfile used with non-stealing state {gameState?.GetType().Name}");
+            Debug.LogError($"StealingCityTriggerProfile used with non-stealing state {ctx.GameState?.GetType().Name}");
             return new TriggerAction(false, null);
         }
 
-        var warehouse = trigger as Warehouse;
+        var warehouse = ctx.Trigger as Warehouse;
         Debug.Assert(warehouse != null, "StealingCityTriggerProfile: trigger is not Warehouse");
         Debug.Assert(stealingState.StealingCar != null, "StealingCityTriggerProfile: StealingCar is null");
 
         bool canProceed =
             G.Player.Owns(warehouse) &&
             warehouse.AvailableCarParkingSpots > 0 &&
-            triggerCause as Car == stealingState.StealingCar;
+            ctx.TriggerCause as Car == stealingState.StealingCar;
 
         System.Action action = null;
         if (canProceed)

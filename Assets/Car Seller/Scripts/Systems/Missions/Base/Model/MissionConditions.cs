@@ -33,7 +33,7 @@ public class ReachTargetCondition : MissionCondition
         }
         public override void OnEvent(GameEventData data)
         {
-            if (data is CityTargetReachedEvent e &&
+            if (data is CityTargetReachedEventData e &&
                 //e.OwnerMission == missionRuntime &&
                 e.ReachedObject.CityMarker == target)
             {

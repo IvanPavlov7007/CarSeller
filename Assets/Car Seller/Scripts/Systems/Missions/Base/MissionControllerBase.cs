@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Defines all logical operations for mission management and subscribes to all internal events
+/// </summary>
 public abstract class MissionControllerBase
 {
     MissionEventBus eventBus;
@@ -92,25 +95,25 @@ public abstract class MissionControllerBase
     {
         CleanupMissionObjects(e.Mission);
         executeMissionEffects(e.Mission.UnlockEffects, createMissionEffectContext(e.Mission));
-        GameEvents.Instance.onMissionUnlocked?.Invoke(e.Mission);
+        GameEvents.Instance.onMissionUnlocked?.Invoke(new MissionUnlockedEventData(e.Mission));
     }
     void onStartMissionRequestEvent(StartMissionInternalEvent e)
     {
         CleanupMissionObjects(e.Mission);
         executeMissionEffects(e.Mission.StartEffects, createMissionEffectContext(e.Mission));
-        GameEvents.Instance.onMissionStarted?.Invoke(e.Mission);
+        GameEvents.Instance.onMissionStarted?.Invoke(new MissionStartedEventData(e.Mission));
     }
     void onCompleteMissionRequestEvent(CompleteMissionInternalEvent e)
     {
         CleanupMissionObjects(e.Mission);
         executeMissionEffects(e.Mission.CompleteEffects, createMissionEffectContext(e.Mission));
-        GameEvents.Instance.onMissionCompleted?.Invoke(e.Mission);
+        GameEvents.Instance.onMissionCompleted?.Invoke(new MissionCompletedEventData(e.Mission));
     }
     void onFailMissionRequestEvent(FailMissionInternalEvent e)
     {
         CleanupMissionObjects(e.Mission);
         executeMissionEffects(e.Mission.FailEffects, createMissionEffectContext(e.Mission));
-        GameEvents.Instance.onMissionFailed?.Invoke(e.Mission);
+        GameEvents.Instance.onMissionFailed?.Invoke(new MissionFailedEventData(e.Mission));
     }
 
     void executeMissionEffects(List<MissionEffect> effects, MissionEffectContext context)
@@ -144,7 +147,13 @@ public abstract class MissionControllerBase
     #region globalGameEvents
 
     // Game Events Funneling
-    public virtual void OnCityTargetReached(CityTargetReachedEvent targetReachedEvent)
+
+    public virtual void OnPlayerAccepted(PlayerAcceptedEventData playerAcceptedEvent)
+    {
+        updateMissionRuntimes(playerAcceptedEvent);
+    }
+
+    public virtual void OnCityTargetReached(CityTargetReachedEventData targetReachedEvent)
     {
         updateMissionRuntimes(targetReachedEvent);
     }
