@@ -1,5 +1,4 @@
 ﻿using Sirenix.OdinInspector;
-using Sirenix.OdinValidator;
 using System;
 using System.Collections.Generic;
 using UnityEngine;

@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 257c7185be4cd6944a463c54787d0968, type: 3}
-  m_Name: Arrive at Mission Config
+  m_Name: Brrive at 1 Mission Config
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: e8443844d571cd340aa7644cd31551cb, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -36,7 +37,7 @@ MonoBehaviour:
       Data: 2|MissionLauncherConfig, Assembly-CSharp
     - Name: ctxDescription
       Entry: 1
-      Data: Start Mission
+      Data: Start Mission 1 BBBBBB
     - Name: pinStyle
       Entry: 7
       Data: 3|PinStyle, Assembly-CSharp
@@ -45,19 +46,19 @@ MonoBehaviour:
       Data: 
     - Name: Text
       Entry: 1
-      Data: A
+      Data: B
     - Name: ForegroundColor
       Entry: 7
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0.9339623
+      Data: 0.527990341
     - Name: 
       Entry: 4
-      Data: 0.720432758
+      Data: 0.885668457
     - Name: 
       Entry: 4
-      Data: 0.4273318
+      Data: 0.990566
     - Name: 
       Entry: 4
       Data: 1
@@ -69,13 +70,13 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0.8867924
+      Data: 0.0283464
     - Name: 
       Entry: 4
-      Data: 0.478193551
+      Data: 0.07716699
     - Name: 
       Entry: 4
-      Data: 0.004182993
+      Data: 0.46226418
     - Name: 
       Entry: 4
       Data: 1
@@ -93,7 +94,7 @@ MonoBehaviour:
       Data: 
     - Name: MarkerId
       Entry: 1
-      Data: launher_arrive_1
+      Data: launher_birive_1
     - Name: 
       Entry: 8
       Data: 
@@ -146,7 +147,7 @@ MonoBehaviour:
       Data: 
     - Name: MarkerId
       Entry: 1
-      Data: target_arrive_1
+      Data: target_birive_1
     - Name: 
       Entry: 8
       Data: 
@@ -177,7 +178,7 @@ MonoBehaviour:
       Data: 
     - Name: MarkerId
       Entry: 1
-      Data: target_arrive_1
+      Data: target_birive_1
     - Name: 
       Entry: 8
       Data: 
@@ -196,7 +197,16 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 14|UnlockMissionEffect, Assembly-CSharp
+    - Name: mission
+      Entry: 10
       Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -205,7 +215,7 @@ MonoBehaviour:
       Data: 
     - Name: FailConditions
       Entry: 7
-      Data: 14|System.Collections.Generic.List`1[[MissionCondition, Assembly-CSharp]],
+      Data: 15|System.Collections.Generic.List`1[[MissionCondition, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
@@ -218,7 +228,7 @@ MonoBehaviour:
       Data: 
     - Name: MissionFailEffects
       Entry: 7
-      Data: 15|System.Collections.Generic.List`1[[MissionEffect, Assembly-CSharp]],
+      Data: 16|System.Collections.Generic.List`1[[MissionEffect, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
@@ -231,14 +241,14 @@ MonoBehaviour:
       Data: 
     - Name: RewardBundles
       Entry: 7
-      Data: 16|System.Collections.Generic.List`1[[RewardBundle, Assembly-CSharp]],
+      Data: 17|System.Collections.Generic.List`1[[RewardBundle, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 17|CurrencyRewardBundle, Assembly-CSharp
+      Data: 18|CurrencyRewardBundle, Assembly-CSharp
     - Name: amount
       Entry: 3
       Data: 900
@@ -251,5 +261,5 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  MissionId: First Arrival
-  Description: Arrive at the first target location(Description)
+  MissionId: First Birrival
+  Description: Arrive at the target location(Description)

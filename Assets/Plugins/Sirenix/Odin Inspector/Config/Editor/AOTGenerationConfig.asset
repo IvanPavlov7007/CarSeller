@@ -16,4 +16,135 @@ MonoBehaviour:
   deleteDllAfterBuilds: 1
   AutomateForAllAOTPlatforms: 1
   automateForPlatforms: 0900000014000000
-  supportSerializedTypes: []
+  supportSerializedTypes:
+  - TypeName: System.Boolean, mscorlib
+    IsCustom: 0
+    Emit: 1
+  - TypeName: CityGraphAsset, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
+  - TypeName: CityMarkerRef, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
+  - TypeName: UnityEngine.Color, UnityEngine.CoreModule
+    IsCustom: 0
+    Emit: 1
+  - TypeName: CurrencyRewardBundle, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
+  - TypeName: EngineBaseConfig, ProductCore
+    IsCustom: 0
+    Emit: 1
+  - TypeName: EngineSlotBaseConfig, ProductCore
+    IsCustom: 0
+    Emit: 1
+  - TypeName: EngineSlotVariantConfig, ProductCore
+    IsCustom: 0
+    Emit: 1
+  - TypeName: EngineVariantConfig, ProductCore
+    IsCustom: 0
+    Emit: 1
+  - TypeName: System.Single, mscorlib
+    IsCustom: 0
+    Emit: 1
+  - TypeName: System.Int32, mscorlib
+    IsCustom: 0
+    Emit: 1
+  - TypeName: System.Collections.Generic.List`1[[MissionCondition, Assembly-CSharp]],
+      mscorlib
+    IsCustom: 0
+    Emit: 1
+  - TypeName: System.Collections.Generic.List`1[[MissionEffect, Assembly-CSharp]],
+      mscorlib
+    IsCustom: 0
+    Emit: 1
+  - TypeName: System.Collections.Generic.List`1[[PartSlotBaseConfig, ProductCore]],
+      mscorlib
+    IsCustom: 0
+    Emit: 1
+  - TypeName: System.Collections.Generic.List`1[[PartSlotVariantConfig, ProductCore]],
+      mscorlib
+    IsCustom: 0
+    Emit: 1
+  - TypeName: System.Collections.Generic.List`1[[RewardBundle, Assembly-CSharp]],
+      mscorlib
+    IsCustom: 0
+    Emit: 1
+  - TypeName: MissionCondition, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
+  - TypeName: MissionConfig, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
+  - TypeName: MissionEffect, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
+  - TypeName: MissionLauncherAcceptedCondition, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
+  - TypeName: MissionLauncherConfig, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
+  - TypeName: PartSlotBaseConfig, ProductCore
+    IsCustom: 0
+    Emit: 1
+  - TypeName: PartSlotData, ProductCore
+    IsCustom: 0
+    Emit: 1
+  - TypeName: PartSlotVariantConfig, ProductCore
+    IsCustom: 0
+    Emit: 1
+  - TypeName: PinStyle, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
+  - TypeName: ReachTargetCondition, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
+  - TypeName: RewardBundle, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
+  - TypeName: SpawnMissionLauncherEffect, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
+  - TypeName: SpawnTargetEffect, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
+  - TypeName: SpoilerBaseConfig, ProductCore
+    IsCustom: 0
+    Emit: 1
+  - TypeName: SpoilerSlotBaseConfig, ProductCore
+    IsCustom: 0
+    Emit: 1
+  - TypeName: SpoilerSlotVariantConfig, ProductCore
+    IsCustom: 0
+    Emit: 1
+  - TypeName: SpoilerVariantConfig, ProductCore
+    IsCustom: 0
+    Emit: 1
+  - TypeName: UnityEngine.Sprite, UnityEngine.CoreModule
+    IsCustom: 0
+    Emit: 1
+  - TypeName: System.String, mscorlib
+    IsCustom: 0
+    Emit: 1
+  - TypeName: UnlockMissionEffect, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
+  - TypeName: UnityEngine.Vector2, UnityEngine.CoreModule
+    IsCustom: 0
+    Emit: 1
+  - TypeName: UnityEngine.Vector3, UnityEngine.CoreModule
+    IsCustom: 0
+    Emit: 1
+  - TypeName: WheelBaseConfig, ProductCore
+    IsCustom: 0
+    Emit: 1
+  - TypeName: WheelSlotBaseConfig, ProductCore
+    IsCustom: 0
+    Emit: 1
+  - TypeName: WheelSlotVariantConfig, ProductCore
+    IsCustom: 0
+    Emit: 1
+  - TypeName: WheelVariantConfig, ProductCore
+    IsCustom: 0
+    Emit: 1

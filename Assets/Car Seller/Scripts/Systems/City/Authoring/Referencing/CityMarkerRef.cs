@@ -13,7 +13,11 @@ public class CityMarkerRef
     public CityGraphAsset Graph;
 
     [HorizontalGroup("Row")]
+#if UNITY_EDITOR
     [ShowInInspector, ValueDropdown(nameof(GetMarkerOptions))]
+#else
+    [ShowInInspector]
+#endif
     [LabelText("Marker"), LabelWidth(60)]
     public string MarkerId;
 

@@ -73,7 +73,6 @@ public class WorldManager
         initializeCity(cityConfig);
         // Initialize economy after city so that economy can reference city objects if needed
         initializeEconomy(economyConfig);
-        CarSpawnManager.NewCarsRotation();
         initializeWorldMissions(worldMissionsConfig);
     }
 

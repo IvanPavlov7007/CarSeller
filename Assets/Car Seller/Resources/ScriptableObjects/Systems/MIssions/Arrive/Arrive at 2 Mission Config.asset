@@ -1,0 +1,265 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 257c7185be4cd6944a463c54787d0968, type: 3}
+  m_Name: Arrive at 2 Mission Config
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 1d8cd90e8a734f644b821d960a0f19de, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: MissionUnlockEffects
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[MissionEffect, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|SpawnMissionLauncherEffect, Assembly-CSharp
+    - Name: launcherConfig
+      Entry: 7
+      Data: 2|MissionLauncherConfig, Assembly-CSharp
+    - Name: ctxDescription
+      Entry: 1
+      Data: Start Mission 2
+    - Name: pinStyle
+      Entry: 7
+      Data: 3|PinStyle, Assembly-CSharp
+    - Name: Icon
+      Entry: 6
+      Data: 
+    - Name: Text
+      Entry: 1
+      Data: A
+    - Name: ForegroundColor
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0.9339623
+    - Name: 
+      Entry: 4
+      Data: 0.720432758
+    - Name: 
+      Entry: 4
+      Data: 0.4273318
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: BackgroundColor
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0.8867924
+    - Name: 
+      Entry: 4
+      Data: 0.478193551
+    - Name: 
+      Entry: 4
+      Data: 0.004182993
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: cityMarkerRef
+      Entry: 7
+      Data: 4|CityMarkerRef, Assembly-CSharp
+    - Name: Graph
+      Entry: 6
+      Data: 
+    - Name: MarkerId
+      Entry: 1
+      Data: launher_arrive_2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: StartConditions
+      Entry: 7
+      Data: 5|System.Collections.Generic.List`1[[MissionCondition, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 6|MissionLauncherAcceptedCondition, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: MissionStartEffects
+      Entry: 7
+      Data: 7|System.Collections.Generic.List`1[[MissionEffect, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 8|SpawnTargetEffect, Assembly-CSharp
+    - Name: targetMarker
+      Entry: 7
+      Data: 9|CityMarkerRef, Assembly-CSharp
+    - Name: Graph
+      Entry: 6
+      Data: 
+    - Name: MarkerId
+      Entry: 1
+      Data: target_arrive_2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: SuccessConditions
+      Entry: 7
+      Data: 10|System.Collections.Generic.List`1[[MissionCondition, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 11|ReachTargetCondition, Assembly-CSharp
+    - Name: target
+      Entry: 7
+      Data: 12|CityMarkerRef, Assembly-CSharp
+    - Name: Graph
+      Entry: 6
+      Data: 
+    - Name: MarkerId
+      Entry: 1
+      Data: target_arrive_2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: MissionCompleteEffects
+      Entry: 7
+      Data: 13|System.Collections.Generic.List`1[[MissionEffect, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 14|UnlockMissionEffect, Assembly-CSharp
+    - Name: mission
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: FailConditions
+      Entry: 7
+      Data: 15|System.Collections.Generic.List`1[[MissionCondition, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: MissionFailEffects
+      Entry: 7
+      Data: 16|System.Collections.Generic.List`1[[MissionEffect, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: RewardBundles
+      Entry: 7
+      Data: 17|System.Collections.Generic.List`1[[RewardBundle, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 18|CurrencyRewardBundle, Assembly-CSharp
+    - Name: amount
+      Entry: 3
+      Data: 1200
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  MissionId: Second Arrival
+  Description: Arrive at the target location(Description)
