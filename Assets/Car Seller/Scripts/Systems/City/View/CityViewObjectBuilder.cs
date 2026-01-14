@@ -6,6 +6,7 @@ public class CityViewObjectBuilder : ScriptableObject
 {
     public GameObject carViewPrefab;
     public GameObject triggerPrefab;
+    public GameObject policeUnitPrefab;
 
     //pure view
     public GameObject collectablePrefab;
@@ -27,6 +28,8 @@ public class CityViewObjectBuilder : ScriptableObject
                 return buildCityObject(warehouse);
             case Collectable collectable: // TODO ACHTUNG!!! generalize, since Collectable is a CityObject
                 return BuildCollectable(collectable);
+            case PoliceUnit policeUnit: // TODO ACHTUNG!!! generalize, since PoliceUnit is a CityObject, but also moving
+                return buildPoliceUnit(policeUnit);
             case CityObject co:
                 return buildCityObject(co);
             default:
@@ -107,6 +110,24 @@ public class CityViewObjectBuilder : ScriptableObject
         else
             Debug.LogWarning($"Couldn't resolve PinStyle for {locatable}.");
 
+        return viewController;
+    }
+
+    public CityViewObjectController buildPoliceUnit(PoliceUnit policeUnit)
+    {
+        GameObject policeGO = Instantiate(policeUnitPrefab);
+
+        var location = CityLocatorHelper.GetCityLocation(policeUnit);
+
+        var viewController =
+            policeGO.AddComponent<CityViewObjectController>().Initialize(policeUnit);
+        var rigidbody2D = policeGO.AddComponent<Rigidbody2D>();
+        rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
+        policeGO.AddComponent<ContentProvider>().Initialize(policeUnit);
+        policeGO.AddComponent<Interactable>().sortingOrder = 12;
+        policeGO.AddComponent<MovingPointSimpleView>().Initialize(policeUnit.GraphMovement);
+        policeGO.AddComponent<PoliceSpotLightVisuals>().Intialize(policeUnit);
+        policeGO.AddComponent<ViewStateChanger>();
         return viewController;
     }
 }

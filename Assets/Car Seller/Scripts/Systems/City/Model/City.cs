@@ -248,6 +248,10 @@ public class City : ILocationsHolder
 
         public RoadNode Node { get; }
         public RoadEdge Edge { get; }
+        /// <summary>
+        /// A percentage [0..1] along the edge if Edge is not null.
+        /// From the 'From' node (0) to the 'To' node (1) if Forward is true,
+        /// </summary>
         public float Percentage { get; }
         public bool Forward { get; }
 

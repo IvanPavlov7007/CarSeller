@@ -171,55 +171,15 @@ public class MovingPoint : MonoBehaviour
         for (int i = 0; i < node.Outgoing.Count; i++)
         {
             var edge = node.Outgoing[i];
-            neighborsDirection[node.Outgoing.IndexOf(edge)] =
-                (edge, tanDirectionFromNodeAtEdge(node, edge, 0f, out _));
+            neighborsDirection[i] = (edge, edge.GetTangentFromNode(node, 0f, out _));
         }
         return neighborsDirection;
     }
 
     private Vector2 tanDirectionFromNodeAtEdge(RoadNode node, RoadEdge e, float percentage, out bool forward)
     {
-        Debug.Assert(e.From == node || e.To == node, "Edge is not connected to the given node.");
-        Debug.Assert(e.GetSpline() != null, "Edge spline is null.");
-        var spline = e.GetSpline();
-        forward = true;
-
-        // If this node is the 'From', leaving along t = percentage
-        if (node == e.From)
-        {
-            var tanLocal = SplineUtility.EvaluateTangent(spline, percentage);
-            var tanWorld3 = e.Container != null
-                ? e.Container.transform.TransformDirection((Vector3)tanLocal)
-                : (Vector3)tanLocal;
-            var outDir = ((Vector2)tanWorld3).normalized;
-            return outDir;
-        }
-        // If this node is the 'To', leaving along -tangent at t = 1 - percentage (requires bidirectional)
-        else if (node == e.To && e.Bidirectional)
-        {
-            forward = false;
-            var tanLocal = SplineUtility.EvaluateTangent(spline, 1f - percentage);
-            var tanWorld3 = e.Container != null
-                ? e.Container.transform.TransformDirection((Vector3)tanLocal)
-                : (Vector3)tanLocal;
-            var outDir = -((Vector2)tanWorld3).normalized;
-            return outDir;
-        }
-        else
-        {
-            // Provide detailed context: IDs may be null; include bidirectional state and endpoint relation.
-            string nodeId = node != null ? node.Id : "null";
-            string edgeId = e != null ? e.Id : "null";
-            bool isFrom = e != null && node == e.From;
-            bool isTo = e != null && node == e.To;
-            bool bidi = e != null && e.Bidirectional;
-
-            throw new System.InvalidOperationException(
-                $"Cannot compute tangent direction from node '{nodeId}' on edge '{edgeId}'. " +
-                $"Relationship: isFrom={isFrom}, isTo={isTo}, edgeBidirectional={bidi}. " +
-                $"If leaving from 'To' endpoint, the edge must be bidirectional."
-            );
-        }
+        // Thin wrapper kept for backwards compatibility / readability inside MovingPoint.
+        return e.GetTangentFromNode(node, percentage, out forward);
     }
 
     // Picks the best outgoing edge from a node based on desired direction.

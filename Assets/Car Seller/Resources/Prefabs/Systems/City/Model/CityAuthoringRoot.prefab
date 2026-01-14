@@ -542,6 +542,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 75eaa4a8031f412b91fb4fbee9cbe628
   StartLooksAway: 0
+--- !u!1 &61521117812070331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5299344432042809796}
+  - component: {fileID: 6547339643115234328}
+  m_Layer: 0
+  m_Name: CopSpawn (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5299344432042809796
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61521117812070331}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.01, y: 20.89, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 5059808087151268900}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6547339643115234328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61521117812070331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 2074d96a03144782bf43df619e763b5c
+  DisplayName: 
+  Tags:
+  - cop
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &81100099511058476
 GameObject:
   m_ObjectHideFlags: 0
@@ -2763,6 +2818,61 @@ MonoBehaviour:
   Edge: {fileID: 0}
   T: 0.5
   Forward: 1
+--- !u!1 &638335376292754582
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 910541955020922628}
+  - component: {fileID: 2307019011301111555}
+  m_Layer: 0
+  m_Name: CopSpawn (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &910541955020922628
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 638335376292754582}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.11, y: 5.13, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 5059808087151268900}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2307019011301111555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 638335376292754582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 2bee801b2f4f4251b2c1f1fbbeabd40c
+  DisplayName: 
+  Tags:
+  - cop
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &643150161394841978
 GameObject:
   m_ObjectHideFlags: 0
@@ -3214,6 +3324,61 @@ MonoBehaviour:
   RegionId: 1
   Radius: 0
   Kind: 1
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
+--- !u!1 &938916532555536756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1940404253572250094}
+  - component: {fileID: 9151165990840066857}
+  m_Layer: 0
+  m_Name: CopSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1940404253572250094
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 938916532555536756}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.4, y: -1.41, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 5059808087151268900}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9151165990840066857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 938916532555536756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 658f49a8fdff41e58d65370cfa582535
+  DisplayName: 
+  Tags:
+  - cop
+  RegionId: 
+  Radius: 0
+  Kind: 2
   Node: {fileID: 0}
   Edge: {fileID: 0}
   T: 0.5
@@ -10102,6 +10267,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 72d9d0e0ccb64a9783582ea8f87268d4
   StartLooksAway: 0
+--- !u!1 &2533737086865470006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5612878725264863432}
+  - component: {fileID: 3793849341977688448}
+  m_Layer: 0
+  m_Name: CopSpawn (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5612878725264863432
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2533737086865470006}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.18, y: 0.23, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 5059808087151268900}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3793849341977688448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2533737086865470006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 43ec0fe44409417f9cb49b6be9796c38
+  DisplayName: 
+  Tags:
+  - cop
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &2612493760552848283
 GameObject:
   m_ObjectHideFlags: 0
@@ -10150,6 +10370,61 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - cash
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
+--- !u!1 &2625949539565629749
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8077549293457997300}
+  - component: {fileID: 711646781514547114}
+  m_Layer: 0
+  m_Name: CopSpawn (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8077549293457997300
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2625949539565629749}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.93, y: 3.17, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 5059808087151268900}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &711646781514547114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2625949539565629749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 8fe02844fd114551ac03d8947fb798da
+  DisplayName: 
+  Tags:
+  - cop
   RegionId: 
   Radius: 0
   Kind: 2
@@ -12282,6 +12557,7 @@ Transform:
   - {fileID: 35142723813467202}
   - {fileID: 6084779090728521067}
   - {fileID: 4919995048075708858}
+  - {fileID: 5059808087151268900}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7092553036261487221
@@ -20971,6 +21247,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &4774094557031913729
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2915632554189606638}
+  - component: {fileID: 423819979178388714}
+  m_Layer: 0
+  m_Name: CopSpawn (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2915632554189606638
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4774094557031913729}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.4, y: 21.32, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 5059808087151268900}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &423819979178388714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4774094557031913729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 02b8a5894d834d46bd9282865d32013a
+  DisplayName: 
+  Tags:
+  - cop
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &4786952500296861633
 GameObject:
   m_ObjectHideFlags: 0
@@ -24081,6 +24412,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &5313466968711067778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6530992207779024503}
+  - component: {fileID: 5750644564218153680}
+  m_Layer: 0
+  m_Name: CopSpawn (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6530992207779024503
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5313466968711067778}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.32, y: 13.89, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 5059808087151268900}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5750644564218153680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5313466968711067778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 5392e554feee4cfe831d630d41868306
+  DisplayName: 
+  Tags:
+  - cop
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &5337085718906339627
 GameObject:
   m_ObjectHideFlags: 0
@@ -31199,6 +31585,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &6735347959228378143
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1403929034697607186}
+  - component: {fileID: 5799493626444098557}
+  m_Layer: 0
+  m_Name: CopSpawn (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1403929034697607186
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6735347959228378143}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.53, y: -2.24, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 5059808087151268900}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5799493626444098557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6735347959228378143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: fb0b885c85de4636a79f774ee984f80d
+  DisplayName: 
+  Tags:
+  - cop
+  RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &6754945357925475099
 GameObject:
   m_ObjectHideFlags: 0
@@ -32897,6 +33338,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: eaa8f2646df748ba8dd397569f1abfc6
   StartLooksAway: 0
+--- !u!1 &7087440910077412243
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5059808087151268900}
+  m_Layer: 0
+  m_Name: Cops
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5059808087151268900
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7087440910077412243}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 1940404253572250094}
+  - {fileID: 5612878725264863432}
+  - {fileID: 1403929034697607186}
+  - {fileID: 8077549293457997300}
+  - {fileID: 910541955020922628}
+  - {fileID: 6530992207779024503}
+  - {fileID: 5299344432042809796}
+  - {fileID: 2915632554189606638}
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7124050061482278427
 GameObject:
   m_ObjectHideFlags: 0

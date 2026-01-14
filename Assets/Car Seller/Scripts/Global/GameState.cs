@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class GameState
 {
-
+    public Car FocusedCar;
 }
 
 public class NeutralGameState : GameState
@@ -36,7 +36,6 @@ public class StealingGameState : GameState
 
 public class FreeRoamGameState : GameState
 {
-    public Car FocusedCar;
     bool _skipNextWarehouseEntry;
 
     public FreeRoamGameState(Car focusedCar)
