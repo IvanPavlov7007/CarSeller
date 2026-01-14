@@ -138,7 +138,7 @@ public class MissionLauncher : CityObject
 {
     public readonly MissionLauncherConfig Config;
     public readonly MissionRuntime MissionRuntime;
-    public MissionLauncher( string name, string infoText, ILocation location, City.CityMarker marker, PinStyle pinStyle, MissionRuntime missionRuntime, MissionLauncherConfig launcherConfig) : base(name, infoText, location, marker, pinStyle)
+    public MissionLauncher( string name, string infoText, ILocation location, City.CityMarker marker, PinStyle pinStyle, MissionRuntime missionRuntime, MissionLauncherConfig launcherConfig) : base(name, infoText, location, marker, pinStyle: pinStyle)
     {
         this.MissionRuntime = missionRuntime;
         this.Config = launcherConfig;

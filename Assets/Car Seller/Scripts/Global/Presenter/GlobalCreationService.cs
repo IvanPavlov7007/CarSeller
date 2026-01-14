@@ -10,7 +10,7 @@ public class GlobalCreationService
             "A generic city object.",
             createLocationFromMarkerRef(positionRef, out var marker),
             marker,
-            pinStyle
+            pinStyle: pinStyle
             );
     }
 

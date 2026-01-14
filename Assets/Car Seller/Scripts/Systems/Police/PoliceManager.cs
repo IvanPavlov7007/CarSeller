@@ -8,12 +8,11 @@ public class PoliceManager : Singleton<PoliceManager>
     PoliceAISystem aiSystem = new PoliceAISystem();
     PoliceAIStateMachine stateMachine;
 
-    List<PoliceUnit> policeUnits = new List<PoliceUnit>();
+    List<PoliceCityObject> policeUnits = new List<PoliceCityObject>();
     public SpotlightColors SpotlightColors;
+    public SliceVisionSettings SliceVisionSettings;
 
     public SpeedVarations policeSpeedVariations;
-    float visionRadius = 10f;
-    float visionAngle = 10f;
 
     bool active = false;
 
@@ -51,7 +50,7 @@ public class PoliceManager : Singleton<PoliceManager>
             policeUnits.Add(CreateUnit(location));
         }
 
-        stateMachine = new PoliceAIStateMachine(policeUnits.ToArray());
+        stateMachine = new PoliceAIStateMachine(policeUnits.Select(item=>item.Data as PoliceUnit).ToArray());
     }
 
 
@@ -64,11 +63,11 @@ public class PoliceManager : Singleton<PoliceManager>
         }
         policeUnits.Clear();
     }
-    private PoliceUnit CreateUnit(City.CityLocation location)
+    private PoliceCityObject CreateUnit(City.CityLocation location)
     {
-        return new PoliceUnit("Police Unit", "A police unit patrolling the city.",location,
-            null,policeSpeedVariations,
-            visionRadius,visionAngle,PersonalityTag.Blinky);
+        var data = new PoliceUnit(location,policeSpeedVariations,
+            SliceVisionSettings,PersonalityTag.Blinky);
+        return new PoliceCityObject("Police unit", "a police", location, null, data);
     }
 
     private void Update()
@@ -89,7 +88,7 @@ public class PoliceManager : Singleton<PoliceManager>
         // actually each unit updates itself as well
         foreach (var unit in policeUnits)
         {
-            unit.Update(deltaTime, aiSystem, stateMachine);
+            (unit.Data as PoliceUnit).Update(deltaTime, aiSystem, stateMachine);
         }
     }
 }

@@ -6,23 +6,37 @@ using UnityEngine;
 using CityPosition = City.CityPosition;
 using Random = UnityEngine.Random;
 
-public class PoliceUnit : CityObject, PoliceUnitAIData
+public class PoliceCityObject : CityObject
 {
+    public PoliceCityObject(string name, string infoText, ILocation location, City.CityMarker cityMarker, CityObjectData data, PinStyle pinStyle = null) : base(name, infoText, location, cityMarker, data, pinStyle)
+    {
+    }
+}
+
+public interface CityObjectData
+{
+
+}
+
+public class PoliceUnit : PoliceUnitAIData, CityObjectData
+{
+    public readonly City.CityLocation Location;
     public City.CityPosition CityPosition => Location.CityPosition;
     public Vector2 TargetPosition { get; set; }
     public IAIMovement Movement => GraphMovement;
     public IVision Vision => ConeVision;
     public PoliceUnitState State { get; set; }
     public PersonalityTag Personality{get; private set; }
-    public ConeVision ConeVision { get; private set; }
+    public SliceVision ConeVision { get; private set; }
     public GraphMovement GraphMovement { get; private set; }
 
-    public PoliceUnit(string name, string infoText, ILocation location, City.CityMarker cityMarker,
-        SpeedVarations speedVariations, float visionRadius, float visionAngle, PersonalityTag personality,
-        PinStyle pinStyle = null) : base(name, infoText, location, cityMarker, pinStyle)
+    public PoliceUnit(City.CityLocation location,
+        SpeedVarations speedVariations, SliceVisionSettings settings, 
+        PersonalityTag personality)
     {
+        Location = location;
         GraphMovement = new GraphMovement(this,speedVariations);
-        ConeVision = new ConeVision(this, visionRadius, visionAngle);
+        ConeVision = new SliceVision(this, settings);
         Personality = personality;
         randomizeInitialDirection();
     }
@@ -30,11 +44,14 @@ public class PoliceUnit : CityObject, PoliceUnitAIData
     private void randomizeInitialDirection()
     {
         var positionData = CityPosition;
-        if(positionData.Edge != null && positionData.Edge.Bidirectional && Random.value < 0.5f)
+        bool forward = positionData.Forward;
+        float t = positionData.Percentage;
+        if (positionData.Edge != null && positionData.Edge.Bidirectional && Random.value < 0.5f)
         {
-            positionData.Edge.Bidirectional = !positionData.Edge.Bidirectional;
+            forward = !forward;
+            t = 1f - t;
         }
-        Location.SetCityPosition(positionData);
+        Location.SetCityPosition(CityPosition.On(positionData.Edge,t, forward));
     }
 
     internal void Update(float deltaTime, PoliceAISystem aiSystem, PoliceAIStateMachine stateMachine)
@@ -84,8 +101,8 @@ public class PoliceUnit : CityObject, PoliceUnitAIData
         {
             stepLength -= length_a_to_b * (1f - t);
             a = (a == edge.From) ? edge.To : edge.From;
-            var newEdge = aiSystem.PickTurn(stateMachine, this, a, edge, stateMachine.SuspectLastSeenEdge);
-            if (newEdge == null)
+            edge = aiSystem.PickTurn(stateMachine, this, a, edge, stateMachine.SuspectLastSeenEdge);
+            if (edge == null)
             {
                 //No edge to proceed further, stop at the current node
                 stepLength = 0f;
@@ -94,7 +111,7 @@ public class PoliceUnit : CityObject, PoliceUnitAIData
 
             length_a_to_b = edge.Length;
             t = 0f;
-            forward = (newEdge.From == a);
+            forward = (edge.From == a);
         }
 
         if (edge == null)
@@ -121,7 +138,7 @@ public class GraphMovement : IAIMovement, ISpeedProvider
     public PoliceUnit Owner { get; set; }
     public GraphMovement(PoliceUnit owner, SpeedVarations speedVarations)
     {
-        SpeedVarations = speedVarations;
+        this.speedVariations = speedVarations;
         Owner = owner;
     }
 
@@ -137,22 +154,23 @@ public class GraphMovement : IAIMovement, ISpeedProvider
                 return up;
             }
             
-            var tangent = Owner.CityPosition.Edge.GetTangentFromNode(edge.From,
+            up = Owner.CityPosition.Edge.GetTangentFromNode(Owner.CityPosition.Forward? edge.From : edge.To,
                 Owner.CityPosition.Percentage, out bool forward);
-            return forward == Owner.CityPosition.Forward ? tangent : -tangent;
+            return up;
         }
     }
 
-    public SpeedVarations SpeedVarations { get; set; }
+    SpeedVarations speedVariations;
+    public SpeedVarations SpeedVariations => PoliceManager.Instance.policeSpeedVariations; //{ get{ return speedVarations; } set { speedVarations = value; } }
 
     public float Speed {
         get {         
             return TempoState switch
             {
-                TempoState.Slow => SpeedVarations.Slow,
-                TempoState.Medium => SpeedVarations.Medium,
-                TempoState.Fast => SpeedVarations.Fast,
-                _ => SpeedVarations.Medium,
+                TempoState.Slow => SpeedVariations.Slow,
+                TempoState.Medium => SpeedVariations.Medium,
+                TempoState.Fast => SpeedVariations.Fast,
+                _ => SpeedVariations.Medium,
             };
         }
     }
@@ -168,20 +186,26 @@ public struct SpeedVarations
     public float Fast;
 }
 
-public class ConeVision : IVision
+[Serializable]
+public struct SliceVisionSettings
 {
-    public readonly PoliceUnit Owner;
     public float Radius;
     /// <summary>
     /// Full cone angle in degrees.
     /// </summary>
     public float Angle;
+}
 
-    public ConeVision(PoliceUnit owner, float radius, float angle)
+public class SliceVision : IVision
+{
+    public readonly PoliceUnit Owner;
+    SliceVisionSettings settings;
+    public SliceVisionSettings Settings => PoliceManager.Instance.SliceVisionSettings; //{ get { return settings; } set { settings = value; } }
+
+    public SliceVision(PoliceUnit owner, SliceVisionSettings settings)
     {
         Owner = owner;
-        Radius = radius;
-        Angle = angle;
+        this.settings = settings;
     }
 
     public bool CanSeeTarget(City.CityPosition target)
@@ -195,7 +219,7 @@ public class ConeVision : IVision
 
         // 2. Distance check
         float distanceSqr = toTarget.sqrMagnitude;
-        float radiusSqr = Radius * Radius;
+        float radiusSqr = Settings.Radius * Settings.Radius;
         if (distanceSqr > radiusSqr)
             return false;
 
@@ -212,7 +236,7 @@ public class ConeVision : IVision
         float dot = Vector2.Dot(forward, dirToTarget);
 
         // Precompute cosine of half-angle
-        float halfAngleRad = (Angle * 0.5f) * Mathf.Deg2Rad;
+        float halfAngleRad = (Settings.Angle * 0.5f) * Mathf.Deg2Rad;
         float cosHalfAngle = Mathf.Cos(halfAngleRad);
 
         // If dot >= cos(halfAngle), target is inside the cone.

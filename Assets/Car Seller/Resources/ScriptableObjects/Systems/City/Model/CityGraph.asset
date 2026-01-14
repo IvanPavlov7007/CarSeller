@@ -14,1272 +14,1272 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PrefabRoot: {fileID: 3086309769972837672, guid: df5b4da92bb88df479ec8354e654d56d, type: 3}
   Nodes:
-  - Id: d0cbb68dca4949d9b5dc451dd8121c12
+  - Id: 8898b14669be40b6bccc4353502d903d
     Position: {x: -8.78, y: 1.58}
-  - Id: 422b520822464e2287b636b374e9198f
+  - Id: f92cc7bbc1f445d2a65ff8b361439671
     Position: {x: -9.84, y: 3.2}
-  - Id: 73dd530a8b0640e8a6dc7f00eb7c692a
+  - Id: f3a9eb80dd1641709e442adc37a560e3
     Position: {x: -9.11, y: 3.54}
-  - Id: 0955e35f4f1c441886d2fa0733df98ec
+  - Id: 84c855f0ed0448a5b4954ea0ed9f0fac
     Position: {x: -7.2, y: 3.08}
-  - Id: 1e77442bdd554b8997d84c71f65fc101
+  - Id: 36d1b9eb1e7142e0a696bd1fc2657d65
     Position: {x: -4.03, y: 4.7}
-  - Id: 75eaa4a8031f412b91fb4fbee9cbe628
+  - Id: 168e9bde91e849adb510674949cd777c
     Position: {x: -4.34, y: 5.3}
-  - Id: 1f2fe720ca164340987ce658b8d9f253
+  - Id: c5a83da4d87b4ed2898fb59af174bf4c
     Position: {x: -7.33, y: 3.79}
-  - Id: 155ce5abef92453aa833cff30a751a27
+  - Id: 2dcd9a317e61408dab5cb9f952d3fc9f
     Position: {x: -8.54, y: 2.47}
-  - Id: b58948c52ad14a46b542b5b546d69467
+  - Id: ca229bc7ade64ab9b05b794f6b95a0f5
     Position: {x: -3.52, y: 6.37}
-  - Id: 361f7aa8f5ea40e9b4b982186a86cb2b
+  - Id: 6530b5d315e44c499c28c92624dfe228
     Position: {x: -3.43, y: 5}
-  - Id: 37b0486e3df14311aa0311f5529efefb
+  - Id: 30935a516b92480d819822bb4d08cb0a
     Position: {x: -8.71, y: -0.1}
-  - Id: e6eeaeac440a4e5da98e3b18c417b35b
+  - Id: abe1a423f0a649b48a706e8ef33069ab
     Position: {x: -7.16, y: -0.13}
-  - Id: 2e3f5aac358f4e1791b8e5c1ea87c55f
+  - Id: 211d04712a544fe98e8282889ca1a37a
     Position: {x: -8.54, y: -3.88}
-  - Id: c4cdede98d314d2993c3196fd0db8d02
+  - Id: d8fa6c5ad5c0497b8f856b9c06303b27
     Position: {x: -7.13, y: -3.95}
-  - Id: d0b31accd4a1488395a2fb4bc7689403
+  - Id: b9aa6e225cd5470eb858703be2fa3264
     Position: {x: -7.1, y: -1.47}
-  - Id: 6a14b9ff485544cb8e11fd3c579b3e54
+  - Id: a6b4e438b430495ea5b9ad4ed0796588
     Position: {x: -7.07, y: -2.54}
-  - Id: b9a1712923ca4c6586d32264fc9b83d0
+  - Id: 52072bdb982243f0b197e2368bb6ff08
     Position: {x: -5.04, y: -2.64}
-  - Id: 8f40b33a114b4cad9165d4e2fd92fd1c
+  - Id: 1794f7edbaef4d85904924e2b027c985
     Position: {x: -5.17, y: -1.36}
-  - Id: 67f18bf2f8904f6da800ebd5d0d95c3f
+  - Id: ae2192cbe4f0402bbf62e1f02b948d16
     Position: {x: -5.17, y: -0.64}
-  - Id: 0d41c82776ad48fcac363897fdf36aae
+  - Id: 01ed0c17243448c18db0aeb9be678d7c
     Position: {x: -5.07, y: -1.95}
-  - Id: ceda395285ef47d8a9d3b42ad638e51e
+  - Id: 6ae91d8f12cd49f38a0850b240df1c82
     Position: {x: -3.25, y: -2.64}
-  - Id: dcd746eca3ce4854a79cd934c0dc7da0
+  - Id: 6e04be6b7b7e479e989129f56721cde7
     Position: {x: -3.32, y: -1.3}
-  - Id: 139d35ae7687479b87b7e2e075e9e01c
+  - Id: f3b1fb27a8b64a90b92a26cc6708c809
     Position: {x: -3.39, y: 0.11}
-  - Id: c62fa348252a46b1951729f819baf333
+  - Id: f271ecce9cba47cd8d21d12da44efa36
     Position: {x: -5.97, y: 0.14}
-  - Id: de3c907712b743bea03c6a548b8d0513
+  - Id: 78d0bd7f98304ee9aed28e70eb028a95
     Position: {x: -5.97, y: 1.32}
-  - Id: a0e7c48ccf954a5e959903fdc061443f
+  - Id: 71218bfa6f1741358457c15c2690bec7
     Position: {x: -1.98, y: 1.65}
-  - Id: 82035739d69045e190e9e228990540de
+  - Id: 50c41b49764449348f28de03f9900d9c
     Position: {x: -3.12, y: -4.06}
-  - Id: 72d9d0e0ccb64a9783582ea8f87268d4
+  - Id: 63b808a3d39740fdaad72d61ec58fb18
     Position: {x: -2.47, y: 4.57}
-  - Id: f43c3ebe2c16421aa85e93d04fac8996
+  - Id: b8c9c7d9c5f54b9bbb1642cc41b89453
     Position: {x: -1.03, y: 5.12}
-  - Id: df2f2e78f7874a44a28e7b7fcca613ea
+  - Id: 4f8794c3c033448ab33330c517091f14
     Position: {x: 5.11, y: 4.83}
-  - Id: 9271e5d02f9b4166833e3e8eadb2ea35
+  - Id: 19d925b0fa544d99bfa251c94d096ee0
     Position: {x: 2.79, y: 6.74}
-  - Id: 862573c8d0884adf8f260784e1a0c837
+  - Id: 1bc39fdccf01435b907a964fb5356a5b
     Position: {x: 9.54, y: 6.84}
-  - Id: 17a801f87bf146b1a05400ec82cc40b6
+  - Id: 92493233fb71466786b716241b451e97
     Position: {x: -2.51, y: 6.71}
-  - Id: 23058efc0613493e9e0dfb4199b57cf7
+  - Id: f6757b13df0b4c3ca59dc5dab0cbcd2f
     Position: {x: -2.51, y: 12.56}
-  - Id: f64b03e9cb3e420ba3f987b9c408b6e1
+  - Id: 78f31b6f60ee4e8aa31460e32781455c
     Position: {x: -1.23, y: 12.77}
-  - Id: f991175fdc4944f8be382e049d50f5df
+  - Id: 36a11057dd644e68b8caeebc276eb465
     Position: {x: 2.56, y: 15.94}
-  - Id: c610890499ec4e32bf66fa333868974e
+  - Id: 7f999382ce4f4527bf6f551f0558606a
     Position: {x: -1.53, y: 15.21}
-  - Id: 27e79699859b48779f99e240277a3c94
+  - Id: a1665be3e26542458a5b5f3e66edaabf
     Position: {x: 2.93, y: 12.85}
-  - Id: d01a47d594434ac59ec9f8ce18a97e22
+  - Id: cba74f17a10a49b6bf21caefe010e098
     Position: {x: 9.35, y: 13.3}
-  - Id: 36008a9bd6ed4cf2b205b73f952e8f4b
+  - Id: 7ae2e37096ac4944925f3bbdcff408a1
     Position: {x: 7.29, y: 18.08}
-  - Id: e10c22e04adb4beb8e6acea59be2a6d8
+  - Id: f6202a6f21744876a82fe99255ae65bc
     Position: {x: 2.02, y: 17.22}
-  - Id: dcde2ec604c84bd3bd0362ae2500b711
+  - Id: d762999642974e5ea27bbfede350f96b
     Position: {x: -2.47, y: 16.52}
-  - Id: 3fcc095d287a499fa9407f0cd5db42f4
+  - Id: e2e6e39319a54c989492db0f0c5b5357
     Position: {x: -2.92, y: 15.9}
-  - Id: 9c53910471f54b5f876ea08ef3db7324
+  - Id: d940c89291644e7c80fcbd7c8799637a
     Position: {x: -3.58, y: 16.89}
-  - Id: ed92b9e02bd1490ab87992bba6b1a1a9
+  - Id: 5943d091ef644309995a666a89d3e8f4
     Position: {x: -3.87, y: 16.31}
-  - Id: 728dde74752a45bf96d2798c4df7f766
+  - Id: af96fcbbc6ce4a4592f9e0d39610a89f
     Position: {x: -9.01, y: 14.92}
-  - Id: 6c7b874846ab47578999089a82146359
+  - Id: e7737617b4bb48b6b0aa3b7d33dcc92c
     Position: {x: -9.27, y: 15.6}
-  - Id: 1679c5615509475eb6f888db832cbf1b
+  - Id: db5c259d4a5e4c03a8f27e979e5d0143
     Position: {x: -11.75, y: 16.58}
-  - Id: 32e92e046730416cbdd1996a8c8fdefa
+  - Id: 3d4f16a5c41240549b8b12d43ef46558
     Position: {x: -9.61, y: 16.81}
-  - Id: 3492d6bf7b9547d3ab461b896ed4a3f4
+  - Id: d8798a3c094241b991695b097e0bdb73
     Position: {x: -8.93, y: 18.35}
-  - Id: 122231a818f546548b6ab8de57e1b3d3
+  - Id: 78b402af65064078a6860dbbb86a1db6
     Position: {x: -13.44, y: 20.19}
-  - Id: 9fc4b5723e2243bba80e99a9208961c6
+  - Id: df9be60a72464ad98bc0537c477aff45
     Position: {x: -13.89, y: 16.44}
-  - Id: eaa8f2646df748ba8dd397569f1abfc6
+  - Id: 3249a97ac40e4e0b90ea6e7bf12b33ea
     Position: {x: -14.27, y: 13.44}
-  - Id: b197a79a5e1a429481591533c65f2967
+  - Id: cafe027edc5b4aa78ff4e30d98531311
     Position: {x: -18.52, y: 12.05}
-  - Id: 380cfa2b3a28433b814335f458ff405f
+  - Id: 3f85e509411b49ae90cffa3e0ec93508
     Position: {x: -20.63, y: 11.38}
-  - Id: 9e8b280d203e4dc2bf160bc36e2d9d68
+  - Id: f0e0fce1532049eeb5d49360d34bdea0
     Position: {x: -18.14, y: 13.44}
-  - Id: 565a55c7080d46f9aa6bf54e5f9bf6eb
+  - Id: 2e6bdc1792bf44eca5f11d52d15b99f1
     Position: {x: -17.73, y: 15.39}
-  - Id: 4616004e26dd403989d7b7f7f9ee57b4
+  - Id: 2f4bfb5aa8fd472fa298cab12d8ee23b
     Position: {x: -15.78, y: 14.19}
-  - Id: 4b793e8950a24762b836b60490ee7a5a
+  - Id: cec14614ddd8494ba374c3c2cbe699a3
     Position: {x: -15.89, y: 15.09}
-  - Id: 1cb109c9932e4176b1779e56353f16a4
+  - Id: e6bd925216284cb5898053fa18bba119
     Position: {x: -17.54, y: 16.55}
-  - Id: 19ce7e36d4804af28164f5a33baca102
+  - Id: bc0949e648e941c7bedd91811faba4dc
     Position: {x: -16.45, y: 22.03}
-  - Id: 4552ad56d86c49eaa254567654a1d41e
+  - Id: 18d2e32046354ee29070cb04fdd027d3
     Position: {x: -16.9, y: 19.18}
-  - Id: f75c47f067e94db4917e526df3129970
+  - Id: cc0fc545e5cf4e34b7835df6ea59318e
     Position: {x: -13.78, y: 18.47}
-  - Id: 2746f8ef47b54da488ee7ba9265ee61a
+  - Id: 1ae7db10da2b4f1cba79be421a77ac73
     Position: {x: -7.96, y: 31.84}
-  - Id: 706b0b89a69142fdb9b601d8bd5adbc5
+  - Id: 0332132d40b74b43a645853ac88af397
     Position: {x: -9.12, y: 34.3}
-  - Id: 5d38353b1e314d9288ee1dcb4eaf3394
+  - Id: e65e8125714f444aa7d6dc99eead15c8
     Position: {x: -4.39, y: 25.77}
-  - Id: 134d3c210ebc4be481d6fca1d4eb20bc
+  - Id: 8d13854625fd4ca0aea48606118c2141
     Position: {x: 1.76, y: 28.52}
-  - Id: 5d1cdbd81fcd46d8a4c321a8d7f191d6
+  - Id: b47bfcab348e43cbb6c5fc2b244b1501
     Position: {x: 3.44, y: 25.12}
-  - Id: b6187c2366404df2addc1a15c4dbd077
+  - Id: ea9f892bcff14df79b5f53a369742e28
     Position: {x: -2.5, y: 22.74}
-  - Id: a89e156f595c4fbca81677f44a148d71
+  - Id: c004b6a2b2c54ad39c992ffec5b8be2c
     Position: {x: -0.2, y: 19.95}
-  - Id: 847642c60f2b49a483c7f23f857e51ef
+  - Id: cbeeb78baa7848519710d59840e57c55
     Position: {x: 4.72, y: 22.57}
-  - Id: b59ca7a274f84d0ab94283febd54575b
+  - Id: 7490eb06615d407185b39af08eb85ec1
     Position: {x: 13, y: 18.59}
-  - Id: bf4c13479dce43acbe60109d54cb2b54
+  - Id: b3c4c6fe9dab4da68f49dabfc11e8b91
     Position: {x: 9.73, y: 12.1}
-  - Id: 339e08f0ca52414f9f73e0823a67a784
+  - Id: 2cdbd177e6a244daaac57f9d3938c527
     Position: {x: 10.29, y: 10.41}
-  - Id: 775fd0034c624ca8b2f9917faeb7743e
+  - Id: f3455cdff36e4cc4adb8bfc8eaed493c
     Position: {x: 8.55, y: 11.84}
-  - Id: 247ed4617c354ea0ababc4f1203106e9
+  - Id: a13eeff3e59d4021911b2f2b01fd1995
     Position: {x: -11.7, y: 15.41}
-  - Id: 97b4f0d8068e4019b8b8948dd6a7012e
+  - Id: 9246e219fe024630a5245ae0c082ec27
     Position: {x: -11.7, y: 24.84}
-  - Id: 945533d225974f6a919897597b1060ea
+  - Id: 42dc1c7eeb364081af6bd9172be0bacd
     Position: {x: -9.69, y: 28.75}
-  - Id: d9525f447eb54645a8b42eae27b94d88
+  - Id: c9a941796f2746ee853e51abc636621f
     Position: {x: -12.31, y: 29.79}
-  - Id: b8cb178f303140508bd0e879ada554ea
+  - Id: 9f3722b4c9544798af20fb6f043cf3ab
     Position: {x: -14.24, y: 25.83}
-  - Id: f95c0c469cdc408eb330de890d9e8537
+  - Id: 2e061d3795464d9c8f9c0869676faaf9
     Position: {x: 5.33, y: 3.24}
-  - Id: c3d432ea783f4af28c3e9c4fefb39a25
+  - Id: fe8d27aed9204df59e11ebc84ce5bc45
     Position: {x: -2.31, y: 3.07}
-  - Id: fa22974d5e454c888a67162340dc1029
+  - Id: 3b521426015249f3bdcab09fc4ee9660
     Position: {x: 1.89, y: 3.24}
-  - Id: 1beaff78793a4be9a0c22354073a62c5
+  - Id: 0a73d58b5f3045fdbf38f05e1efe921a
     Position: {x: 1.82, y: 1.93}
-  - Id: 3488be294b0c41759eae503c55471790
+  - Id: 785a4b985585446d899605eb09daf2ad
     Position: {x: -0.45, y: 1.79}
-  - Id: 9e1c519b2d3d4b3f9286c75e934c0993
+  - Id: 7af799dc333144f597b38d674f1fddde
     Position: {x: 1.99, y: 0.55}
-  - Id: 7128098c427b48d0995eec7ab5098d99
+  - Id: 268e3e9da1dc4072ad541882a6632362
     Position: {x: 5.64, y: 0.45}
-  - Id: 494b79ecb0da49f999aade4d6369f16b
+  - Id: c56924da326b4ecd98b8c5af149fe909
     Position: {x: 4.2, y: 0.48}
-  - Id: 82f02da40cc049849b43bceffa76a767
+  - Id: 80aafcdad5774e6d84c85851722aef74
     Position: {x: 6.06, y: -4.16}
-  - Id: f1758ae0f4e64ad883ed43c6f8d59a0e
+  - Id: 044439e746e14cdebaeeea816ff75157
     Position: {x: 5.82, y: -1.34}
-  - Id: 20dc499bb50849cdbceb4ccb2edbeacd
+  - Id: 14218168df464a2aa33374036e4343f4
     Position: {x: 5.64, y: 2.3}
-  - Id: 68f9347c675e4e5e9614900c51eef01c
+  - Id: 426660fe54c744c8ad7d9ae95505a1dc
     Position: {x: 10.97, y: 2.33}
-  - Id: 3dd75991ebbb49999d5e9a3da495b84f
+  - Id: d160c848e7ed42a99b9334757d045aba
     Position: {x: 12.08, y: -1.26}
-  - Id: c52dc381e31644cc9adfc236189ace73
+  - Id: a6c3894ac8ed4d2e9bebdb7fc397222f
     Position: {x: 4.4, y: -1.33}
-  - Id: 9cd2438e1faf4314a84432f00a1b90d7
+  - Id: 315614545d5141c4b7917722b3043abf
     Position: {x: 3.04, y: -1.33}
-  - Id: 603a0d2ed77a474c9ddb791a9f9167a7
+  - Id: 5abf4bf002044047b6cf32e80f045236
     Position: {x: 3.04, y: -0.58}
-  - Id: cccd5cb04ec54560b6ef1be8398e02b1
+  - Id: 9f99cdfbf7a14ac69be894b4f12147ad
     Position: {x: 1.21, y: -0.76}
-  - Id: 7b2c8f9af914410f927ce91cac6a0e41
+  - Id: 018fff18acec4da3a4f08180037ab7eb
     Position: {x: 1.07, y: -1.44}
-  - Id: 042f761446cd4fe980b4ce9b3f5852e3
+  - Id: 3fe67cca381645b2b91432d7e0a5bceb
     Position: {x: -0.22, y: -2.95}
-  - Id: a60004311be94597809b2a784d9e5cb8
+  - Id: e297341770c1431a9b9855164d6440c0
     Position: {x: -0.36, y: -1.59}
-  - Id: de907eeb20db486bb464ee0740558365
+  - Id: d18a777b05724f8da129bbacfc3ebcb5
     Position: {x: -0.54, y: 0.23}
-  - Id: 9fe05e552a0b4189969eb37e4de9c494
+  - Id: d9c169433eb44f5d82b11ce9bd0b6b7b
     Position: {x: -2.099, y: 0.263}
-  - Id: 00a29faf4a6642b3baf29575c9b24dfd
+  - Id: 749a20f838374ce080b3dbd52830462e
     Position: {x: -1.864, y: 0.269}
-  - Id: 2cead1bb3f6346ba97166366bab7e0e1
+  - Id: d7315215a66f43e58f862884c99d92e9
     Position: {x: -1.629, y: 0.269}
-  - Id: 2200adc6cdf941b492dd74a25d850562
+  - Id: a65981182caa42a7b74eceb7cc6b660d
     Position: {x: -2.163, y: -4.07}
-  - Id: 9ae52e661ff848658e77c60caa15e26c
+  - Id: bda4a2e3ed8340cfb8726ab7b9e89953
     Position: {x: -1.923, y: -4.07}
-  - Id: 0933aa7f24034ce9865fa3c463b30bdf
+  - Id: c78fcc3babb14f3fa0dfc59ccade6095
     Position: {x: -1.708, y: -4.07}
-  - Id: 53bf10f8196445c1b55b7127389311ee
+  - Id: 56d875b329c841929cf252a29a00e2b5
     Position: {x: -0.36, y: -4.15}
-  - Id: 502113340e154a03b0c9883e26649345
+  - Id: 7316b2a01c8e4d6cabf93f75280de346
     Position: {x: 3.22, y: -2.85}
-  - Id: 7f077fbf22194564b19e08f48ab75522
+  - Id: 300e64d1795d486db0e5d5a1c9d1d03a
     Position: {x: 3.16, y: -2.2}
-  - Id: 13449421f0b34a6c9248736bb0646c29
+  - Id: d8be7579c717478c95483c8a1383ee8b
     Position: {x: 4.44, y: -2.93}
-  - Id: 00d5e64969c64434b4e447f503773f5c
+  - Id: 160e14d4e75248e78e478213ce45e3f7
     Position: {x: 4.62, y: -4.23}
-  - Id: d50dc0fd9bf54f1387ce493cbdc52da1
+  - Id: 903be0e118ef46a48475dad911866ccf
     Position: {x: -2.25, y: -11.16}
   Edges:
   - Id: 47488b8e38ac4c768c44aaf831d76804
-    FromNodeId: 73dd530a8b0640e8a6dc7f00eb7c692a
-    ToNodeId: 422b520822464e2287b636b374e9198f
+    FromNodeId: f3a9eb80dd1641709e442adc37a560e3
+    ToNodeId: f92cc7bbc1f445d2a65ff8b361439671
     Bidirectional: 1
     EdgeAuthorId: 47488b8e38ac4c768c44aaf831d76804
     EdgeAuthorPath: CityAuthoringRoot/Edge_b34bb001f3ab4c8bb09f824747fd3ca4_to_f18fb450ea0643b287a6ed737b2b4a82
     SplineIndex: 0
   - Id: ca13509f2333484aa0172a2ba4a6b89c
-    FromNodeId: 422b520822464e2287b636b374e9198f
-    ToNodeId: d0cbb68dca4949d9b5dc451dd8121c12
+    FromNodeId: f92cc7bbc1f445d2a65ff8b361439671
+    ToNodeId: 8898b14669be40b6bccc4353502d903d
     Bidirectional: 1
     EdgeAuthorId: ca13509f2333484aa0172a2ba4a6b89c
     EdgeAuthorPath: CityAuthoringRoot/Edge_f18fb450ea0643b287a6ed737b2b4a82_to_22796bbc73d5444a8a284deca3db0818
     SplineIndex: 0
   - Id: 3cabcc0611914cc4bd75c24fdadd3bda
-    FromNodeId: 0955e35f4f1c441886d2fa0733df98ec
-    ToNodeId: 1e77442bdd554b8997d84c71f65fc101
+    FromNodeId: 84c855f0ed0448a5b4954ea0ed9f0fac
+    ToNodeId: 36d1b9eb1e7142e0a696bd1fc2657d65
     Bidirectional: 1
     EdgeAuthorId: 3cabcc0611914cc4bd75c24fdadd3bda
     EdgeAuthorPath: CityAuthoringRoot/Edge_87b1177e84a44e9a8bc56af9af1fb42f_to_27e903d8a9424d79aff29cfbf70ca0b4
     SplineIndex: 0
   - Id: 65990012675c4196a3ff311e257958dd
-    FromNodeId: 73dd530a8b0640e8a6dc7f00eb7c692a
-    ToNodeId: 155ce5abef92453aa833cff30a751a27
+    FromNodeId: f3a9eb80dd1641709e442adc37a560e3
+    ToNodeId: 2dcd9a317e61408dab5cb9f952d3fc9f
     Bidirectional: 1
     EdgeAuthorId: 65990012675c4196a3ff311e257958dd
     EdgeAuthorPath: CityAuthoringRoot/Edge_b34bb001f3ab4c8bb09f824747fd3ca4_to_46db906c16ae4b5bb0770dcb73b0bd8c
     SplineIndex: 0
   - Id: d1eb3b2f69e0444a9d6a159f2e06e1ab
-    FromNodeId: 155ce5abef92453aa833cff30a751a27
-    ToNodeId: 0955e35f4f1c441886d2fa0733df98ec
+    FromNodeId: 2dcd9a317e61408dab5cb9f952d3fc9f
+    ToNodeId: 84c855f0ed0448a5b4954ea0ed9f0fac
     Bidirectional: 1
     EdgeAuthorId: d1eb3b2f69e0444a9d6a159f2e06e1ab
     EdgeAuthorPath: CityAuthoringRoot/Edge_46db906c16ae4b5bb0770dcb73b0bd8c_to_87b1177e84a44e9a8bc56af9af1fb42f
     SplineIndex: 0
   - Id: 4543069faac2443f8bef5021f3dcda0a
-    FromNodeId: 1f2fe720ca164340987ce658b8d9f253
-    ToNodeId: 0955e35f4f1c441886d2fa0733df98ec
+    FromNodeId: c5a83da4d87b4ed2898fb59af174bf4c
+    ToNodeId: 84c855f0ed0448a5b4954ea0ed9f0fac
     Bidirectional: 1
     EdgeAuthorId: 4543069faac2443f8bef5021f3dcda0a
     EdgeAuthorPath: CityAuthoringRoot/Edge_1be7dd7f25764077808ae2447d38a8de_to_87b1177e84a44e9a8bc56af9af1fb42f
     SplineIndex: 0
   - Id: 8e06aed374eb488a939f8e6e591e99f0
-    FromNodeId: 1f2fe720ca164340987ce658b8d9f253
-    ToNodeId: 75eaa4a8031f412b91fb4fbee9cbe628
+    FromNodeId: c5a83da4d87b4ed2898fb59af174bf4c
+    ToNodeId: 168e9bde91e849adb510674949cd777c
     Bidirectional: 1
     EdgeAuthorId: 8e06aed374eb488a939f8e6e591e99f0
     EdgeAuthorPath: CityAuthoringRoot/Edge_1be7dd7f25764077808ae2447d38a8de_to_acf07bddce7048be93e8615a2d0a33e9
     SplineIndex: 0
   - Id: 30075f09f162456db54804ddc192b743
-    FromNodeId: 75eaa4a8031f412b91fb4fbee9cbe628
-    ToNodeId: 1e77442bdd554b8997d84c71f65fc101
+    FromNodeId: 168e9bde91e849adb510674949cd777c
+    ToNodeId: 36d1b9eb1e7142e0a696bd1fc2657d65
     Bidirectional: 1
     EdgeAuthorId: 30075f09f162456db54804ddc192b743
     EdgeAuthorPath: CityAuthoringRoot/Edge_acf07bddce7048be93e8615a2d0a33e9_to_27e903d8a9424d79aff29cfbf70ca0b4
     SplineIndex: 0
   - Id: 86d8d268aeac4ff3b7acadf630c91d50
-    FromNodeId: 73dd530a8b0640e8a6dc7f00eb7c692a
-    ToNodeId: b58948c52ad14a46b542b5b546d69467
+    FromNodeId: f3a9eb80dd1641709e442adc37a560e3
+    ToNodeId: ca229bc7ade64ab9b05b794f6b95a0f5
     Bidirectional: 1
     EdgeAuthorId: 86d8d268aeac4ff3b7acadf630c91d50
     EdgeAuthorPath: CityAuthoringRoot/Edge_b34bb001f3ab4c8bb09f824747fd3ca4_to_fc1fbb3078384879aa94d64fceca69df
     SplineIndex: 0
   - Id: 3ba545aec1c648d8928f64e159a6fc40
-    FromNodeId: 1e77442bdd554b8997d84c71f65fc101
-    ToNodeId: 361f7aa8f5ea40e9b4b982186a86cb2b
+    FromNodeId: 36d1b9eb1e7142e0a696bd1fc2657d65
+    ToNodeId: 6530b5d315e44c499c28c92624dfe228
     Bidirectional: 1
     EdgeAuthorId: 3ba545aec1c648d8928f64e159a6fc40
     EdgeAuthorPath: CityAuthoringRoot/Edge_27e903d8a9424d79aff29cfbf70ca0b4_to_6f2a33e7f19a4f2b90409cc9498c0719
     SplineIndex: 0
   - Id: 62afd9820ded4b06808cc0051e9ce490
-    FromNodeId: 361f7aa8f5ea40e9b4b982186a86cb2b
-    ToNodeId: b58948c52ad14a46b542b5b546d69467
+    FromNodeId: 6530b5d315e44c499c28c92624dfe228
+    ToNodeId: ca229bc7ade64ab9b05b794f6b95a0f5
     Bidirectional: 1
     EdgeAuthorId: 62afd9820ded4b06808cc0051e9ce490
     EdgeAuthorPath: CityAuthoringRoot/Edge_6f2a33e7f19a4f2b90409cc9498c0719_to_fc1fbb3078384879aa94d64fceca69df
     SplineIndex: 0
   - Id: 81214e0528214530b71e4507949654c0
-    FromNodeId: b58948c52ad14a46b542b5b546d69467
-    ToNodeId: 17a801f87bf146b1a05400ec82cc40b6
+    FromNodeId: ca229bc7ade64ab9b05b794f6b95a0f5
+    ToNodeId: 92493233fb71466786b716241b451e97
     Bidirectional: 1
     EdgeAuthorId: 81214e0528214530b71e4507949654c0
     EdgeAuthorPath: CityAuthoringRoot/Edge_fc1fbb3078384879aa94d64fceca69df_to_f1c6dd38362743ae8a52db36425846ab
     SplineIndex: 0
   - Id: ed81228fbc5f4cfd91da528a8cb1f4a7
-    FromNodeId: d0cbb68dca4949d9b5dc451dd8121c12
-    ToNodeId: 72d9d0e0ccb64a9783582ea8f87268d4
+    FromNodeId: 8898b14669be40b6bccc4353502d903d
+    ToNodeId: 63b808a3d39740fdaad72d61ec58fb18
     Bidirectional: 1
     EdgeAuthorId: ed81228fbc5f4cfd91da528a8cb1f4a7
     EdgeAuthorPath: CityAuthoringRoot/Edge_22796bbc73d5444a8a284deca3db0818_to_cd35f23b249042ddb3cd34de5eeec32b
     SplineIndex: 0
   - Id: 0355547b0a724d9a8b3fcf0e174484ca
-    FromNodeId: 72d9d0e0ccb64a9783582ea8f87268d4
-    ToNodeId: f43c3ebe2c16421aa85e93d04fac8996
+    FromNodeId: 63b808a3d39740fdaad72d61ec58fb18
+    ToNodeId: b8c9c7d9c5f54b9bbb1642cc41b89453
     Bidirectional: 1
     EdgeAuthorId: 0355547b0a724d9a8b3fcf0e174484ca
     EdgeAuthorPath: CityAuthoringRoot/Edge_cd35f23b249042ddb3cd34de5eeec32b_to_81afd72221244a7db85e2d2112125d68
     SplineIndex: 0
   - Id: 9bf566f9a48048768e73fc685e800a18
-    FromNodeId: d0cbb68dca4949d9b5dc451dd8121c12
-    ToNodeId: 37b0486e3df14311aa0311f5529efefb
+    FromNodeId: 8898b14669be40b6bccc4353502d903d
+    ToNodeId: 30935a516b92480d819822bb4d08cb0a
     Bidirectional: 1
     EdgeAuthorId: 9bf566f9a48048768e73fc685e800a18
     EdgeAuthorPath: CityAuthoringRoot/Edge_22796bbc73d5444a8a284deca3db0818_to_8430030a000a4671929f33867c514362
     SplineIndex: 0
   - Id: 7e7c1d2244ee49a7b25a9f72feb78617
-    FromNodeId: 37b0486e3df14311aa0311f5529efefb
-    ToNodeId: 2e3f5aac358f4e1791b8e5c1ea87c55f
+    FromNodeId: 30935a516b92480d819822bb4d08cb0a
+    ToNodeId: 211d04712a544fe98e8282889ca1a37a
     Bidirectional: 1
     EdgeAuthorId: 7e7c1d2244ee49a7b25a9f72feb78617
     EdgeAuthorPath: CityAuthoringRoot/Edge_8430030a000a4671929f33867c514362_to_7818238064bd42f5a9b1033212de8265
     SplineIndex: 0
   - Id: 052f25eab9664821b7748e341e930788
-    FromNodeId: e6eeaeac440a4e5da98e3b18c417b35b
-    ToNodeId: 37b0486e3df14311aa0311f5529efefb
+    FromNodeId: abe1a423f0a649b48a706e8ef33069ab
+    ToNodeId: 30935a516b92480d819822bb4d08cb0a
     Bidirectional: 1
     EdgeAuthorId: 052f25eab9664821b7748e341e930788
     EdgeAuthorPath: CityAuthoringRoot/Edge_4e6ef70b04574e44ba50572f55049b32_to_8430030a000a4671929f33867c514362
     SplineIndex: 0
   - Id: 5f116747e99e46fdad4d63384307bc9e
-    FromNodeId: e6eeaeac440a4e5da98e3b18c417b35b
-    ToNodeId: c62fa348252a46b1951729f819baf333
+    FromNodeId: abe1a423f0a649b48a706e8ef33069ab
+    ToNodeId: f271ecce9cba47cd8d21d12da44efa36
     Bidirectional: 1
     EdgeAuthorId: 5f116747e99e46fdad4d63384307bc9e
     EdgeAuthorPath: CityAuthoringRoot/Edge_4e6ef70b04574e44ba50572f55049b32_to_dc8d7ef3263142c3ba53a2380a339161
     SplineIndex: 0
   - Id: d5ec5a16959a44a3a99404e3c2edee5c
-    FromNodeId: e6eeaeac440a4e5da98e3b18c417b35b
-    ToNodeId: d0b31accd4a1488395a2fb4bc7689403
+    FromNodeId: abe1a423f0a649b48a706e8ef33069ab
+    ToNodeId: b9aa6e225cd5470eb858703be2fa3264
     Bidirectional: 1
     EdgeAuthorId: d5ec5a16959a44a3a99404e3c2edee5c
     EdgeAuthorPath: CityAuthoringRoot/Edge_4e6ef70b04574e44ba50572f55049b32_to_5cae91a419384525b13aa084a9af405f
     SplineIndex: 0
   - Id: 610c0e8c8e1b4ac59f1b8575829b274a
-    FromNodeId: d0b31accd4a1488395a2fb4bc7689403
-    ToNodeId: 6a14b9ff485544cb8e11fd3c579b3e54
+    FromNodeId: b9aa6e225cd5470eb858703be2fa3264
+    ToNodeId: a6b4e438b430495ea5b9ad4ed0796588
     Bidirectional: 1
     EdgeAuthorId: 610c0e8c8e1b4ac59f1b8575829b274a
     EdgeAuthorPath: CityAuthoringRoot/Edge_5cae91a419384525b13aa084a9af405f_to_423a8db18f574df29c45b5545623f1b6
     SplineIndex: 0
   - Id: 3b7b6c2ce1e3444dbb761305da3c56ba
-    FromNodeId: 6a14b9ff485544cb8e11fd3c579b3e54
-    ToNodeId: c4cdede98d314d2993c3196fd0db8d02
+    FromNodeId: a6b4e438b430495ea5b9ad4ed0796588
+    ToNodeId: d8fa6c5ad5c0497b8f856b9c06303b27
     Bidirectional: 1
     EdgeAuthorId: 3b7b6c2ce1e3444dbb761305da3c56ba
     EdgeAuthorPath: CityAuthoringRoot/Edge_423a8db18f574df29c45b5545623f1b6_to_432f1aa6f42b486584c0df8b9acb87aa
     SplineIndex: 0
   - Id: edb08d3929cd45debb6f9642e5b6ffe4
-    FromNodeId: 2e3f5aac358f4e1791b8e5c1ea87c55f
-    ToNodeId: c4cdede98d314d2993c3196fd0db8d02
+    FromNodeId: 211d04712a544fe98e8282889ca1a37a
+    ToNodeId: d8fa6c5ad5c0497b8f856b9c06303b27
     Bidirectional: 1
     EdgeAuthorId: edb08d3929cd45debb6f9642e5b6ffe4
     EdgeAuthorPath: CityAuthoringRoot/Edge_7818238064bd42f5a9b1033212de8265_to_432f1aa6f42b486584c0df8b9acb87aa
     SplineIndex: 0
   - Id: 05f0790ca8d94f68ae7b26bb369265e3
-    FromNodeId: 6a14b9ff485544cb8e11fd3c579b3e54
-    ToNodeId: b9a1712923ca4c6586d32264fc9b83d0
+    FromNodeId: a6b4e438b430495ea5b9ad4ed0796588
+    ToNodeId: 52072bdb982243f0b197e2368bb6ff08
     Bidirectional: 1
     EdgeAuthorId: 05f0790ca8d94f68ae7b26bb369265e3
     EdgeAuthorPath: CityAuthoringRoot/Edge_423a8db18f574df29c45b5545623f1b6_to_a32c23c7c7614558a1bd1d388b46875e
     SplineIndex: 0
   - Id: 6ab735fe002d402f9f585866a42c99cb
-    FromNodeId: 0d41c82776ad48fcac363897fdf36aae
-    ToNodeId: b9a1712923ca4c6586d32264fc9b83d0
+    FromNodeId: 01ed0c17243448c18db0aeb9be678d7c
+    ToNodeId: 52072bdb982243f0b197e2368bb6ff08
     Bidirectional: 1
     EdgeAuthorId: 6ab735fe002d402f9f585866a42c99cb
     EdgeAuthorPath: CityAuthoringRoot/Edge_a41fd5988ead4da6ab8a6217e11e4774_to_a32c23c7c7614558a1bd1d388b46875e
     SplineIndex: 0
   - Id: caa6fcd654b74efda83c475e629d1157
-    FromNodeId: ceda395285ef47d8a9d3b42ad638e51e
-    ToNodeId: b9a1712923ca4c6586d32264fc9b83d0
+    FromNodeId: 6ae91d8f12cd49f38a0850b240df1c82
+    ToNodeId: 52072bdb982243f0b197e2368bb6ff08
     Bidirectional: 1
     EdgeAuthorId: caa6fcd654b74efda83c475e629d1157
     EdgeAuthorPath: CityAuthoringRoot/Edge_c82cefb9cf9c41d8886504846c1d965a_to_a32c23c7c7614558a1bd1d388b46875e
     SplineIndex: 0
   - Id: f44923248bf549829af4ed42528c2b58
-    FromNodeId: 8f40b33a114b4cad9165d4e2fd92fd1c
-    ToNodeId: 67f18bf2f8904f6da800ebd5d0d95c3f
+    FromNodeId: 1794f7edbaef4d85904924e2b027c985
+    ToNodeId: ae2192cbe4f0402bbf62e1f02b948d16
     Bidirectional: 1
     EdgeAuthorId: f44923248bf549829af4ed42528c2b58
     EdgeAuthorPath: CityAuthoringRoot/Edge_846de880f7504ade8172db534dbb579e_to_27f99ad3d869464c917e0ffca765c081
     SplineIndex: 0
   - Id: cfdbc931e6df43f2b2e127e506332fdf
-    FromNodeId: d0b31accd4a1488395a2fb4bc7689403
-    ToNodeId: 8f40b33a114b4cad9165d4e2fd92fd1c
+    FromNodeId: b9aa6e225cd5470eb858703be2fa3264
+    ToNodeId: 1794f7edbaef4d85904924e2b027c985
     Bidirectional: 1
     EdgeAuthorId: cfdbc931e6df43f2b2e127e506332fdf
     EdgeAuthorPath: CityAuthoringRoot/Edge_5cae91a419384525b13aa084a9af405f_to_846de880f7504ade8172db534dbb579e
     SplineIndex: 0
   - Id: 8b45c84a97e8437ea8927692991d1058
-    FromNodeId: de3c907712b743bea03c6a548b8d0513
-    ToNodeId: c62fa348252a46b1951729f819baf333
+    FromNodeId: 78d0bd7f98304ee9aed28e70eb028a95
+    ToNodeId: f271ecce9cba47cd8d21d12da44efa36
     Bidirectional: 1
     EdgeAuthorId: 8b45c84a97e8437ea8927692991d1058
     EdgeAuthorPath: CityAuthoringRoot/Edge_80ab0d1b65504e4d926cd3f6ee38ad28_to_dc8d7ef3263142c3ba53a2380a339161
     SplineIndex: 0
   - Id: 05310e057cdf4e84a275def1cd1d7c27
-    FromNodeId: a0e7c48ccf954a5e959903fdc061443f
-    ToNodeId: de3c907712b743bea03c6a548b8d0513
+    FromNodeId: 71218bfa6f1741358457c15c2690bec7
+    ToNodeId: 78d0bd7f98304ee9aed28e70eb028a95
     Bidirectional: 1
     EdgeAuthorId: 05310e057cdf4e84a275def1cd1d7c27
     EdgeAuthorPath: CityAuthoringRoot/Edge_d7e15a7ae9284cb89990d0bb65686b87_to_80ab0d1b65504e4d926cd3f6ee38ad28
     SplineIndex: 0
   - Id: 304217d160af4e92a4b2607104730a9b
-    FromNodeId: c3d432ea783f4af28c3e9c4fefb39a25
-    ToNodeId: a0e7c48ccf954a5e959903fdc061443f
+    FromNodeId: fe8d27aed9204df59e11ebc84ce5bc45
+    ToNodeId: 71218bfa6f1741358457c15c2690bec7
     Bidirectional: 1
     EdgeAuthorId: 304217d160af4e92a4b2607104730a9b
     EdgeAuthorPath: CityAuthoringRoot/Edge_33a1404ee8ee4a21bfc63958f42c8eda_to_d7e15a7ae9284cb89990d0bb65686b87
     SplineIndex: 0
   - Id: e59a1a44aa80451cba93293fc2496610
-    FromNodeId: 72d9d0e0ccb64a9783582ea8f87268d4
-    ToNodeId: c3d432ea783f4af28c3e9c4fefb39a25
+    FromNodeId: 63b808a3d39740fdaad72d61ec58fb18
+    ToNodeId: fe8d27aed9204df59e11ebc84ce5bc45
     Bidirectional: 1
     EdgeAuthorId: e59a1a44aa80451cba93293fc2496610
     EdgeAuthorPath: CityAuthoringRoot/Edge_cd35f23b249042ddb3cd34de5eeec32b_to_33a1404ee8ee4a21bfc63958f42c8eda
     SplineIndex: 0
   - Id: 84d3606793694eafb958a0f07efab88d
-    FromNodeId: fa22974d5e454c888a67162340dc1029
-    ToNodeId: c3d432ea783f4af28c3e9c4fefb39a25
+    FromNodeId: 3b521426015249f3bdcab09fc4ee9660
+    ToNodeId: fe8d27aed9204df59e11ebc84ce5bc45
     Bidirectional: 1
     EdgeAuthorId: 84d3606793694eafb958a0f07efab88d
     EdgeAuthorPath: CityAuthoringRoot/Edge_b35a2d9f621342ae85bf0e0dd915ab2f_to_33a1404ee8ee4a21bfc63958f42c8eda
     SplineIndex: 0
   - Id: 45d18f37af95404c96b32848043c7889
-    FromNodeId: fa22974d5e454c888a67162340dc1029
-    ToNodeId: f95c0c469cdc408eb330de890d9e8537
+    FromNodeId: 3b521426015249f3bdcab09fc4ee9660
+    ToNodeId: 2e061d3795464d9c8f9c0869676faaf9
     Bidirectional: 1
     EdgeAuthorId: 45d18f37af95404c96b32848043c7889
     EdgeAuthorPath: CityAuthoringRoot/Edge_b35a2d9f621342ae85bf0e0dd915ab2f_to_1e03aa4baee24f39ab548cbd3183fce3
     SplineIndex: 0
   - Id: c3e1f0fa71a4494c8a85a1d064c7bea5
-    FromNodeId: f95c0c469cdc408eb330de890d9e8537
-    ToNodeId: 20dc499bb50849cdbceb4ccb2edbeacd
+    FromNodeId: 2e061d3795464d9c8f9c0869676faaf9
+    ToNodeId: 14218168df464a2aa33374036e4343f4
     Bidirectional: 1
     EdgeAuthorId: c3e1f0fa71a4494c8a85a1d064c7bea5
     EdgeAuthorPath: CityAuthoringRoot/Edge_1e03aa4baee24f39ab548cbd3183fce3_to_b5a95f0a2b85424290f5a0de00f78dfe
     SplineIndex: 0
   - Id: e3be972d73724e4bbbf7754d82dcd0d2
-    FromNodeId: 68f9347c675e4e5e9614900c51eef01c
-    ToNodeId: 20dc499bb50849cdbceb4ccb2edbeacd
+    FromNodeId: 426660fe54c744c8ad7d9ae95505a1dc
+    ToNodeId: 14218168df464a2aa33374036e4343f4
     Bidirectional: 1
     EdgeAuthorId: e3be972d73724e4bbbf7754d82dcd0d2
     EdgeAuthorPath: CityAuthoringRoot/Edge_e1bbbe454c2b4db9967b242f4d0346d8_to_b5a95f0a2b85424290f5a0de00f78dfe
     SplineIndex: 0
   - Id: d441a5a7bb4046169e3ca839f99f9d33
-    FromNodeId: c62fa348252a46b1951729f819baf333
-    ToNodeId: 139d35ae7687479b87b7e2e075e9e01c
+    FromNodeId: f271ecce9cba47cd8d21d12da44efa36
+    ToNodeId: f3b1fb27a8b64a90b92a26cc6708c809
     Bidirectional: 1
     EdgeAuthorId: d441a5a7bb4046169e3ca839f99f9d33
     EdgeAuthorPath: CityAuthoringRoot/Edge_dc8d7ef3263142c3ba53a2380a339161_to_e30c8e30c95c4bafbd1b244ab0479a4f
     SplineIndex: 0
   - Id: 8910417c4fea41e6862e7cff3d1f7d39
-    FromNodeId: 3488be294b0c41759eae503c55471790
-    ToNodeId: 1beaff78793a4be9a0c22354073a62c5
+    FromNodeId: 785a4b985585446d899605eb09daf2ad
+    ToNodeId: 0a73d58b5f3045fdbf38f05e1efe921a
     Bidirectional: 1
     EdgeAuthorId: 8910417c4fea41e6862e7cff3d1f7d39
     EdgeAuthorPath: CityAuthoringRoot/Edge_309b0482a84741279a6f1bdd234cd2e6_to_03d94a9e87e44654a7e2efd3967d737a
     SplineIndex: 0
   - Id: 4fa0a6a868c04c168706857d17331ce6
-    FromNodeId: fa22974d5e454c888a67162340dc1029
-    ToNodeId: 1beaff78793a4be9a0c22354073a62c5
+    FromNodeId: 3b521426015249f3bdcab09fc4ee9660
+    ToNodeId: 0a73d58b5f3045fdbf38f05e1efe921a
     Bidirectional: 1
     EdgeAuthorId: 4fa0a6a868c04c168706857d17331ce6
     EdgeAuthorPath: CityAuthoringRoot/Edge_b35a2d9f621342ae85bf0e0dd915ab2f_to_03d94a9e87e44654a7e2efd3967d737a
     SplineIndex: 0
   - Id: 5e303f92c6d04efda58a79ea756d7f0f
-    FromNodeId: 1beaff78793a4be9a0c22354073a62c5
-    ToNodeId: 9e1c519b2d3d4b3f9286c75e934c0993
+    FromNodeId: 0a73d58b5f3045fdbf38f05e1efe921a
+    ToNodeId: 7af799dc333144f597b38d674f1fddde
     Bidirectional: 1
     EdgeAuthorId: 5e303f92c6d04efda58a79ea756d7f0f
     EdgeAuthorPath: CityAuthoringRoot/Edge_03d94a9e87e44654a7e2efd3967d737a_to_5c48897154bc4d178416c05b6f54d294
     SplineIndex: 0
   - Id: e1f1313db3cd4a7388410ceef443b153
-    FromNodeId: de907eeb20db486bb464ee0740558365
-    ToNodeId: 9e1c519b2d3d4b3f9286c75e934c0993
+    FromNodeId: d18a777b05724f8da129bbacfc3ebcb5
+    ToNodeId: 7af799dc333144f597b38d674f1fddde
     Bidirectional: 1
     EdgeAuthorId: e1f1313db3cd4a7388410ceef443b153
     EdgeAuthorPath: CityAuthoringRoot/Edge_2680947965cd41b784685a62b608e390_to_5c48897154bc4d178416c05b6f54d294
     SplineIndex: 0
   - Id: 5423158a38934799b3e9f05f47f0c624
-    FromNodeId: 9e1c519b2d3d4b3f9286c75e934c0993
-    ToNodeId: 494b79ecb0da49f999aade4d6369f16b
+    FromNodeId: 7af799dc333144f597b38d674f1fddde
+    ToNodeId: c56924da326b4ecd98b8c5af149fe909
     Bidirectional: 1
     EdgeAuthorId: 5423158a38934799b3e9f05f47f0c624
     EdgeAuthorPath: CityAuthoringRoot/Edge_5c48897154bc4d178416c05b6f54d294_to_8565203e26554a73a5f7d33ebc41da57
     SplineIndex: 0
   - Id: 971ae1c464b64043be89c4796f96532d
-    FromNodeId: 494b79ecb0da49f999aade4d6369f16b
-    ToNodeId: 7128098c427b48d0995eec7ab5098d99
+    FromNodeId: c56924da326b4ecd98b8c5af149fe909
+    ToNodeId: 268e3e9da1dc4072ad541882a6632362
     Bidirectional: 1
     EdgeAuthorId: 971ae1c464b64043be89c4796f96532d
     EdgeAuthorPath: CityAuthoringRoot/Edge_8565203e26554a73a5f7d33ebc41da57_to_5a4c439120e94caf8c57bc87adf4e6c8
     SplineIndex: 0
   - Id: 2a40dc0a181b4f7883c2cb5ca1b54f4b
-    FromNodeId: 20dc499bb50849cdbceb4ccb2edbeacd
-    ToNodeId: 7128098c427b48d0995eec7ab5098d99
+    FromNodeId: 14218168df464a2aa33374036e4343f4
+    ToNodeId: 268e3e9da1dc4072ad541882a6632362
     Bidirectional: 1
     EdgeAuthorId: 2a40dc0a181b4f7883c2cb5ca1b54f4b
     EdgeAuthorPath: CityAuthoringRoot/Edge_b5a95f0a2b85424290f5a0de00f78dfe_to_5a4c439120e94caf8c57bc87adf4e6c8
     SplineIndex: 0
   - Id: eb21035ac76d46a0939b171f934e703b
-    FromNodeId: f43c3ebe2c16421aa85e93d04fac8996
-    ToNodeId: 9271e5d02f9b4166833e3e8eadb2ea35
+    FromNodeId: b8c9c7d9c5f54b9bbb1642cc41b89453
+    ToNodeId: 19d925b0fa544d99bfa251c94d096ee0
     Bidirectional: 1
     EdgeAuthorId: eb21035ac76d46a0939b171f934e703b
     EdgeAuthorPath: CityAuthoringRoot/Edge_81afd72221244a7db85e2d2112125d68_to_cbfc45be5f10434b9084c90f250f1c5a
     SplineIndex: 0
   - Id: fbc8e4b11fa1407c9ceee699140dffb1
-    FromNodeId: f95c0c469cdc408eb330de890d9e8537
-    ToNodeId: df2f2e78f7874a44a28e7b7fcca613ea
+    FromNodeId: 2e061d3795464d9c8f9c0869676faaf9
+    ToNodeId: 4f8794c3c033448ab33330c517091f14
     Bidirectional: 1
     EdgeAuthorId: fbc8e4b11fa1407c9ceee699140dffb1
     EdgeAuthorPath: CityAuthoringRoot/Edge_1e03aa4baee24f39ab548cbd3183fce3_to_aa91e14a5f6343fb959c2c40b1ab349d
     SplineIndex: 0
   - Id: 5fe5ae943fd24aa693bb278615d35199
-    FromNodeId: f43c3ebe2c16421aa85e93d04fac8996
-    ToNodeId: df2f2e78f7874a44a28e7b7fcca613ea
+    FromNodeId: b8c9c7d9c5f54b9bbb1642cc41b89453
+    ToNodeId: 4f8794c3c033448ab33330c517091f14
     Bidirectional: 1
     EdgeAuthorId: 5fe5ae943fd24aa693bb278615d35199
     EdgeAuthorPath: CityAuthoringRoot/Edge_81afd72221244a7db85e2d2112125d68_to_aa91e14a5f6343fb959c2c40b1ab349d
     SplineIndex: 0
   - Id: 2e3dd34676d44d9abe0d15a2156048b9
-    FromNodeId: 9271e5d02f9b4166833e3e8eadb2ea35
-    ToNodeId: 862573c8d0884adf8f260784e1a0c837
+    FromNodeId: 19d925b0fa544d99bfa251c94d096ee0
+    ToNodeId: 1bc39fdccf01435b907a964fb5356a5b
     Bidirectional: 1
     EdgeAuthorId: 2e3dd34676d44d9abe0d15a2156048b9
     EdgeAuthorPath: CityAuthoringRoot/Edge_cbfc45be5f10434b9084c90f250f1c5a_to_cbd90dfdc55944cc95d7abd75c18a89d
     SplineIndex: 0
   - Id: a3131ff16d544fda8f49c57ab8618ac6
-    FromNodeId: 27e79699859b48779f99e240277a3c94
-    ToNodeId: 9271e5d02f9b4166833e3e8eadb2ea35
+    FromNodeId: a1665be3e26542458a5b5f3e66edaabf
+    ToNodeId: 19d925b0fa544d99bfa251c94d096ee0
     Bidirectional: 1
     EdgeAuthorId: a3131ff16d544fda8f49c57ab8618ac6
     EdgeAuthorPath: CityAuthoringRoot/Edge_2c2ff943f78a48b78208dd6e1e8ef00f_to_cbfc45be5f10434b9084c90f250f1c5a
     SplineIndex: 0
   - Id: 5d18cf8799ca4a0da7fec6aa48a7787f
-    FromNodeId: 17a801f87bf146b1a05400ec82cc40b6
-    ToNodeId: 72d9d0e0ccb64a9783582ea8f87268d4
+    FromNodeId: 92493233fb71466786b716241b451e97
+    ToNodeId: 63b808a3d39740fdaad72d61ec58fb18
     Bidirectional: 1
     EdgeAuthorId: 5d18cf8799ca4a0da7fec6aa48a7787f
     EdgeAuthorPath: CityAuthoringRoot/Edge_f1c6dd38362743ae8a52db36425846ab_to_cd35f23b249042ddb3cd34de5eeec32b
     SplineIndex: 0
   - Id: c4257d7102eb4ace904304b013348b53
-    FromNodeId: 23058efc0613493e9e0dfb4199b57cf7
-    ToNodeId: 17a801f87bf146b1a05400ec82cc40b6
+    FromNodeId: f6757b13df0b4c3ca59dc5dab0cbcd2f
+    ToNodeId: 92493233fb71466786b716241b451e97
     Bidirectional: 1
     EdgeAuthorId: c4257d7102eb4ace904304b013348b53
     EdgeAuthorPath: CityAuthoringRoot/Edge_30a5dbbeec1843abbf2c69cb56c21557_to_f1c6dd38362743ae8a52db36425846ab
     SplineIndex: 0
   - Id: df0fc8a799494f61a44cf8233fe38f92
-    FromNodeId: 23058efc0613493e9e0dfb4199b57cf7
-    ToNodeId: f64b03e9cb3e420ba3f987b9c408b6e1
+    FromNodeId: f6757b13df0b4c3ca59dc5dab0cbcd2f
+    ToNodeId: 78f31b6f60ee4e8aa31460e32781455c
     Bidirectional: 1
     EdgeAuthorId: df0fc8a799494f61a44cf8233fe38f92
     EdgeAuthorPath: CityAuthoringRoot/Edge_30a5dbbeec1843abbf2c69cb56c21557_to_bfe16e67a3af47948330c6bf721606a8
     SplineIndex: 0
   - Id: 535850a207a5439695790a88a3837a07
-    FromNodeId: f64b03e9cb3e420ba3f987b9c408b6e1
-    ToNodeId: 27e79699859b48779f99e240277a3c94
+    FromNodeId: 78f31b6f60ee4e8aa31460e32781455c
+    ToNodeId: a1665be3e26542458a5b5f3e66edaabf
     Bidirectional: 1
     EdgeAuthorId: 535850a207a5439695790a88a3837a07
     EdgeAuthorPath: CityAuthoringRoot/Edge_bfe16e67a3af47948330c6bf721606a8_to_2c2ff943f78a48b78208dd6e1e8ef00f
     SplineIndex: 0
   - Id: 1aca85aa601945138475be7dedba407f
-    FromNodeId: 8f40b33a114b4cad9165d4e2fd92fd1c
-    ToNodeId: dcd746eca3ce4854a79cd934c0dc7da0
+    FromNodeId: 1794f7edbaef4d85904924e2b027c985
+    ToNodeId: 6e04be6b7b7e479e989129f56721cde7
     Bidirectional: 1
     EdgeAuthorId: 1aca85aa601945138475be7dedba407f
     EdgeAuthorPath: CityAuthoringRoot/Edge_846de880f7504ade8172db534dbb579e_to_40085991ada94c8aad68595cc25c2618
     SplineIndex: 0
   - Id: 52968a8862cf456eb9e23edf1b45cac4
-    FromNodeId: c4cdede98d314d2993c3196fd0db8d02
-    ToNodeId: 82035739d69045e190e9e228990540de
+    FromNodeId: d8fa6c5ad5c0497b8f856b9c06303b27
+    ToNodeId: 50c41b49764449348f28de03f9900d9c
     Bidirectional: 1
     EdgeAuthorId: 52968a8862cf456eb9e23edf1b45cac4
     EdgeAuthorPath: CityAuthoringRoot/Edge_432f1aa6f42b486584c0df8b9acb87aa_to_4c53037ed91e4d04b27e1d697110ec0a
     SplineIndex: 0
   - Id: 5efa5b7f855d4abeb3c78f9826ae1577
-    FromNodeId: ceda395285ef47d8a9d3b42ad638e51e
-    ToNodeId: 82035739d69045e190e9e228990540de
+    FromNodeId: 6ae91d8f12cd49f38a0850b240df1c82
+    ToNodeId: 50c41b49764449348f28de03f9900d9c
     Bidirectional: 1
     EdgeAuthorId: 5efa5b7f855d4abeb3c78f9826ae1577
     EdgeAuthorPath: CityAuthoringRoot/Edge_c82cefb9cf9c41d8886504846c1d965a_to_4c53037ed91e4d04b27e1d697110ec0a
     SplineIndex: 0
   - Id: b11e12d5f1c54f7cb8d6316ea5b2dcca
-    FromNodeId: dcd746eca3ce4854a79cd934c0dc7da0
-    ToNodeId: ceda395285ef47d8a9d3b42ad638e51e
+    FromNodeId: 6e04be6b7b7e479e989129f56721cde7
+    ToNodeId: 6ae91d8f12cd49f38a0850b240df1c82
     Bidirectional: 1
     EdgeAuthorId: b11e12d5f1c54f7cb8d6316ea5b2dcca
     EdgeAuthorPath: CityAuthoringRoot/Edge_40085991ada94c8aad68595cc25c2618_to_c82cefb9cf9c41d8886504846c1d965a
     SplineIndex: 0
   - Id: 66e89cfd0e6f4a408e5130980f7464dc
-    FromNodeId: 139d35ae7687479b87b7e2e075e9e01c
-    ToNodeId: dcd746eca3ce4854a79cd934c0dc7da0
+    FromNodeId: f3b1fb27a8b64a90b92a26cc6708c809
+    ToNodeId: 6e04be6b7b7e479e989129f56721cde7
     Bidirectional: 1
     EdgeAuthorId: 66e89cfd0e6f4a408e5130980f7464dc
     EdgeAuthorPath: CityAuthoringRoot/Edge_e30c8e30c95c4bafbd1b244ab0479a4f_to_40085991ada94c8aad68595cc25c2618
     SplineIndex: 0
   - Id: 84f42f81465e456ea60ee5ac51c175ba
-    FromNodeId: a60004311be94597809b2a784d9e5cb8
-    ToNodeId: 042f761446cd4fe980b4ce9b3f5852e3
+    FromNodeId: e297341770c1431a9b9855164d6440c0
+    ToNodeId: 3fe67cca381645b2b91432d7e0a5bceb
     Bidirectional: 1
     EdgeAuthorId: 84f42f81465e456ea60ee5ac51c175ba
     EdgeAuthorPath: CityAuthoringRoot/Edge_c0b4a9a828f8478cb5d0627230b519cf_to_62fea20e12064cb5991f99a5fd7afa81
     SplineIndex: 0
   - Id: b4cd83020a5c40bc971a0d33d5482a11
-    FromNodeId: 9fe05e552a0b4189969eb37e4de9c494
-    ToNodeId: 2200adc6cdf941b492dd74a25d850562
+    FromNodeId: d9c169433eb44f5d82b11ce9bd0b6b7b
+    ToNodeId: a65981182caa42a7b74eceb7cc6b660d
     Bidirectional: 0
     EdgeAuthorId: b4cd83020a5c40bc971a0d33d5482a11
     EdgeAuthorPath: CityAuthoringRoot/Edge_35d342d2ca4c40b58e539c34828a3183_to_4fbde07319c04e6484395aa52b04f7f5
     SplineIndex: 0
   - Id: 7a890dc0b3fc454caacb3d0a27d671f3
-    FromNodeId: 53bf10f8196445c1b55b7127389311ee
-    ToNodeId: 042f761446cd4fe980b4ce9b3f5852e3
+    FromNodeId: 56d875b329c841929cf252a29a00e2b5
+    ToNodeId: 3fe67cca381645b2b91432d7e0a5bceb
     Bidirectional: 1
     EdgeAuthorId: 7a890dc0b3fc454caacb3d0a27d671f3
     EdgeAuthorPath: CityAuthoringRoot/Edge_071c51dbad8441dbb6205127660c783d_to_62fea20e12064cb5991f99a5fd7afa81
     SplineIndex: 0
   - Id: dc610bbf786443978452842cdd4764c1
-    FromNodeId: 53bf10f8196445c1b55b7127389311ee
-    ToNodeId: 00d5e64969c64434b4e447f503773f5c
+    FromNodeId: 56d875b329c841929cf252a29a00e2b5
+    ToNodeId: 160e14d4e75248e78e478213ce45e3f7
     Bidirectional: 1
     EdgeAuthorId: dc610bbf786443978452842cdd4764c1
     EdgeAuthorPath: CityAuthoringRoot/Edge_071c51dbad8441dbb6205127660c783d_to_67f5b01185a44fa78f568c3a67a04656
     SplineIndex: 0
   - Id: d9024d511a084ecda430f0ff8298e9e2
-    FromNodeId: 00d5e64969c64434b4e447f503773f5c
-    ToNodeId: 13449421f0b34a6c9248736bb0646c29
+    FromNodeId: 160e14d4e75248e78e478213ce45e3f7
+    ToNodeId: d8be7579c717478c95483c8a1383ee8b
     Bidirectional: 1
     EdgeAuthorId: d9024d511a084ecda430f0ff8298e9e2
     EdgeAuthorPath: CityAuthoringRoot/Edge_67f5b01185a44fa78f568c3a67a04656_to_c297221c4fc641fc9c0784079d5cc066
     SplineIndex: 0
   - Id: 51269c58afcf4f1b93268d30e963b8ab
-    FromNodeId: c52dc381e31644cc9adfc236189ace73
-    ToNodeId: 13449421f0b34a6c9248736bb0646c29
+    FromNodeId: a6c3894ac8ed4d2e9bebdb7fc397222f
+    ToNodeId: d8be7579c717478c95483c8a1383ee8b
     Bidirectional: 1
     EdgeAuthorId: 51269c58afcf4f1b93268d30e963b8ab
     EdgeAuthorPath: CityAuthoringRoot/Edge_40b8dc3c96d74918b683c0e9616bb949_to_c297221c4fc641fc9c0784079d5cc066
     SplineIndex: 0
   - Id: 37c44719cad942dc9e6fbb9a3caf980a
-    FromNodeId: 9cd2438e1faf4314a84432f00a1b90d7
-    ToNodeId: c52dc381e31644cc9adfc236189ace73
+    FromNodeId: 315614545d5141c4b7917722b3043abf
+    ToNodeId: a6c3894ac8ed4d2e9bebdb7fc397222f
     Bidirectional: 1
     EdgeAuthorId: 37c44719cad942dc9e6fbb9a3caf980a
     EdgeAuthorPath: CityAuthoringRoot/Edge_b019004d7c854cd89da23ba63f99f01e_to_40b8dc3c96d74918b683c0e9616bb949
     SplineIndex: 0
   - Id: 6edbccfdefac404aa1983db5bc01ab6d
-    FromNodeId: 9cd2438e1faf4314a84432f00a1b90d7
-    ToNodeId: 603a0d2ed77a474c9ddb791a9f9167a7
+    FromNodeId: 315614545d5141c4b7917722b3043abf
+    ToNodeId: 5abf4bf002044047b6cf32e80f045236
     Bidirectional: 1
     EdgeAuthorId: 6edbccfdefac404aa1983db5bc01ab6d
     EdgeAuthorPath: CityAuthoringRoot/Edge_b019004d7c854cd89da23ba63f99f01e_to_ad59c3dbe69a42209d328512db211293
     SplineIndex: 0
   - Id: 16f08962b2c34f33a7f03e28c48e4254
-    FromNodeId: cccd5cb04ec54560b6ef1be8398e02b1
-    ToNodeId: 7b2c8f9af914410f927ce91cac6a0e41
+    FromNodeId: 9f99cdfbf7a14ac69be894b4f12147ad
+    ToNodeId: 018fff18acec4da3a4f08180037ab7eb
     Bidirectional: 1
     EdgeAuthorId: 16f08962b2c34f33a7f03e28c48e4254
     EdgeAuthorPath: CityAuthoringRoot/Edge_0e596c9981924db890794d621165c545_to_502324701c824d50a900021bebab7e59
     SplineIndex: 0
   - Id: 07f3b108b0aa41fd9d6dc6d9e6c088d6
-    FromNodeId: a60004311be94597809b2a784d9e5cb8
-    ToNodeId: 7b2c8f9af914410f927ce91cac6a0e41
+    FromNodeId: e297341770c1431a9b9855164d6440c0
+    ToNodeId: 018fff18acec4da3a4f08180037ab7eb
     Bidirectional: 1
     EdgeAuthorId: 07f3b108b0aa41fd9d6dc6d9e6c088d6
     EdgeAuthorPath: CityAuthoringRoot/Edge_c0b4a9a828f8478cb5d0627230b519cf_to_502324701c824d50a900021bebab7e59
     SplineIndex: 0
   - Id: c8fc2866ec3844eebbd36063fb8ea46c
-    FromNodeId: 9cd2438e1faf4314a84432f00a1b90d7
-    ToNodeId: 7b2c8f9af914410f927ce91cac6a0e41
+    FromNodeId: 315614545d5141c4b7917722b3043abf
+    ToNodeId: 018fff18acec4da3a4f08180037ab7eb
     Bidirectional: 1
     EdgeAuthorId: c8fc2866ec3844eebbd36063fb8ea46c
     EdgeAuthorPath: CityAuthoringRoot/Edge_b019004d7c854cd89da23ba63f99f01e_to_502324701c824d50a900021bebab7e59
     SplineIndex: 0
   - Id: 2705b341f8924b0fa228b4e41036acaa
-    FromNodeId: 7f077fbf22194564b19e08f48ab75522
-    ToNodeId: 502113340e154a03b0c9883e26649345
+    FromNodeId: 300e64d1795d486db0e5d5a1c9d1d03a
+    ToNodeId: 7316b2a01c8e4d6cabf93f75280de346
     Bidirectional: 1
     EdgeAuthorId: 2705b341f8924b0fa228b4e41036acaa
     EdgeAuthorPath: CityAuthoringRoot/Edge_781292fb52e64383846bb8d08737eed8_to_39518779789a4e2d8341beb9e1e206e9
     SplineIndex: 0
   - Id: 6961da10c2d1437e9790c8f8ec441662
-    FromNodeId: 502113340e154a03b0c9883e26649345
-    ToNodeId: 13449421f0b34a6c9248736bb0646c29
+    FromNodeId: 7316b2a01c8e4d6cabf93f75280de346
+    ToNodeId: d8be7579c717478c95483c8a1383ee8b
     Bidirectional: 1
     EdgeAuthorId: 6961da10c2d1437e9790c8f8ec441662
     EdgeAuthorPath: CityAuthoringRoot/Edge_39518779789a4e2d8341beb9e1e206e9_to_c297221c4fc641fc9c0784079d5cc066
     SplineIndex: 0
   - Id: 664051e011c94421ba964f5b2563c9fc
-    FromNodeId: 042f761446cd4fe980b4ce9b3f5852e3
-    ToNodeId: 502113340e154a03b0c9883e26649345
+    FromNodeId: 3fe67cca381645b2b91432d7e0a5bceb
+    ToNodeId: 7316b2a01c8e4d6cabf93f75280de346
     Bidirectional: 1
     EdgeAuthorId: 664051e011c94421ba964f5b2563c9fc
     EdgeAuthorPath: CityAuthoringRoot/Edge_62fea20e12064cb5991f99a5fd7afa81_to_39518779789a4e2d8341beb9e1e206e9
     SplineIndex: 0
   - Id: 899549a9e4854f1e924100e499ccd0b4
-    FromNodeId: de907eeb20db486bb464ee0740558365
-    ToNodeId: a60004311be94597809b2a784d9e5cb8
+    FromNodeId: d18a777b05724f8da129bbacfc3ebcb5
+    ToNodeId: e297341770c1431a9b9855164d6440c0
     Bidirectional: 1
     EdgeAuthorId: 899549a9e4854f1e924100e499ccd0b4
     EdgeAuthorPath: CityAuthoringRoot/Edge_2680947965cd41b784685a62b608e390_to_c0b4a9a828f8478cb5d0627230b519cf
     SplineIndex: 0
   - Id: 67f3f46568f24b0abd3c1c8a7c8b0dd7
-    FromNodeId: 494b79ecb0da49f999aade4d6369f16b
-    ToNodeId: c52dc381e31644cc9adfc236189ace73
+    FromNodeId: c56924da326b4ecd98b8c5af149fe909
+    ToNodeId: a6c3894ac8ed4d2e9bebdb7fc397222f
     Bidirectional: 1
     EdgeAuthorId: 67f3f46568f24b0abd3c1c8a7c8b0dd7
     EdgeAuthorPath: CityAuthoringRoot/Edge_8565203e26554a73a5f7d33ebc41da57_to_40b8dc3c96d74918b683c0e9616bb949
     SplineIndex: 0
   - Id: ce00d817411f480e87190e6e2f1133f8
-    FromNodeId: 7128098c427b48d0995eec7ab5098d99
-    ToNodeId: f1758ae0f4e64ad883ed43c6f8d59a0e
+    FromNodeId: 268e3e9da1dc4072ad541882a6632362
+    ToNodeId: 044439e746e14cdebaeeea816ff75157
     Bidirectional: 1
     EdgeAuthorId: ce00d817411f480e87190e6e2f1133f8
     EdgeAuthorPath: CityAuthoringRoot/Edge_5a4c439120e94caf8c57bc87adf4e6c8_to_46f292a9a8a94af489be14e6c6fb8cd5
     SplineIndex: 0
   - Id: 33ba12006f744d5fa24ea21ce482db52
-    FromNodeId: f1758ae0f4e64ad883ed43c6f8d59a0e
-    ToNodeId: 82f02da40cc049849b43bceffa76a767
+    FromNodeId: 044439e746e14cdebaeeea816ff75157
+    ToNodeId: 80aafcdad5774e6d84c85851722aef74
     Bidirectional: 1
     EdgeAuthorId: 33ba12006f744d5fa24ea21ce482db52
     EdgeAuthorPath: CityAuthoringRoot/Edge_46f292a9a8a94af489be14e6c6fb8cd5_to_f02d7b566d9e4361bf6db98f20390901
     SplineIndex: 0
   - Id: 25bab0d3d55445c3bb83ee504cd4261c
-    FromNodeId: 00d5e64969c64434b4e447f503773f5c
-    ToNodeId: 82f02da40cc049849b43bceffa76a767
+    FromNodeId: 160e14d4e75248e78e478213ce45e3f7
+    ToNodeId: 80aafcdad5774e6d84c85851722aef74
     Bidirectional: 1
     EdgeAuthorId: 25bab0d3d55445c3bb83ee504cd4261c
     EdgeAuthorPath: CityAuthoringRoot/Edge_67f5b01185a44fa78f568c3a67a04656_to_f02d7b566d9e4361bf6db98f20390901
     SplineIndex: 0
   - Id: 9bd6f8b1c83b42b28084426392137f95
-    FromNodeId: f1758ae0f4e64ad883ed43c6f8d59a0e
-    ToNodeId: 3dd75991ebbb49999d5e9a3da495b84f
+    FromNodeId: 044439e746e14cdebaeeea816ff75157
+    ToNodeId: d160c848e7ed42a99b9334757d045aba
     Bidirectional: 1
     EdgeAuthorId: 9bd6f8b1c83b42b28084426392137f95
     EdgeAuthorPath: CityAuthoringRoot/Edge_46f292a9a8a94af489be14e6c6fb8cd5_to_3d995bce56f143cc80b39af60db36974
     SplineIndex: 0
   - Id: 20cbf4750a4744ad8bf6995b2157b84b
-    FromNodeId: f64b03e9cb3e420ba3f987b9c408b6e1
-    ToNodeId: c610890499ec4e32bf66fa333868974e
+    FromNodeId: 78f31b6f60ee4e8aa31460e32781455c
+    ToNodeId: 7f999382ce4f4527bf6f551f0558606a
     Bidirectional: 1
     EdgeAuthorId: 20cbf4750a4744ad8bf6995b2157b84b
     EdgeAuthorPath: CityAuthoringRoot/Edge_bfe16e67a3af47948330c6bf721606a8_to_58c33dcd537b4edab6b029a7a4cf8f8d
     SplineIndex: 0
   - Id: 9e7913d889604a2c94d8cd4bcb63c56d
-    FromNodeId: c610890499ec4e32bf66fa333868974e
-    ToNodeId: f991175fdc4944f8be382e049d50f5df
+    FromNodeId: 7f999382ce4f4527bf6f551f0558606a
+    ToNodeId: 36a11057dd644e68b8caeebc276eb465
     Bidirectional: 1
     EdgeAuthorId: 9e7913d889604a2c94d8cd4bcb63c56d
     EdgeAuthorPath: CityAuthoringRoot/Edge_58c33dcd537b4edab6b029a7a4cf8f8d_to_413d8e90ddd94757abbe5a66df69bc35
     SplineIndex: 0
   - Id: 4004a2a7bea64b0eb69240b49763311a
-    FromNodeId: 27e79699859b48779f99e240277a3c94
-    ToNodeId: f991175fdc4944f8be382e049d50f5df
+    FromNodeId: a1665be3e26542458a5b5f3e66edaabf
+    ToNodeId: 36a11057dd644e68b8caeebc276eb465
     Bidirectional: 1
     EdgeAuthorId: 4004a2a7bea64b0eb69240b49763311a
     EdgeAuthorPath: CityAuthoringRoot/Edge_2c2ff943f78a48b78208dd6e1e8ef00f_to_413d8e90ddd94757abbe5a66df69bc35
     SplineIndex: 0
   - Id: a78ade00314f4dfe856282914c4411a8
-    FromNodeId: 339e08f0ca52414f9f73e0823a67a784
-    ToNodeId: bf4c13479dce43acbe60109d54cb2b54
+    FromNodeId: 2cdbd177e6a244daaac57f9d3938c527
+    ToNodeId: b3c4c6fe9dab4da68f49dabfc11e8b91
     Bidirectional: 1
     EdgeAuthorId: a78ade00314f4dfe856282914c4411a8
     EdgeAuthorPath: CityAuthoringRoot/Edge_9200789e921e4cf29d09dc1c0291c1f8_to_9db2623189794a12bb72d63551136e56
     SplineIndex: 0
   - Id: db518c63defa4b65aa249b54f52a3937
-    FromNodeId: 775fd0034c624ca8b2f9917faeb7743e
-    ToNodeId: bf4c13479dce43acbe60109d54cb2b54
+    FromNodeId: f3455cdff36e4cc4adb8bfc8eaed493c
+    ToNodeId: b3c4c6fe9dab4da68f49dabfc11e8b91
     Bidirectional: 1
     EdgeAuthorId: db518c63defa4b65aa249b54f52a3937
     EdgeAuthorPath: CityAuthoringRoot/Edge_9bf3483ec98a49339148f5ae017afd23_to_9db2623189794a12bb72d63551136e56
     SplineIndex: 0
   - Id: eb3f71bbc9d44e70836ccdd1c4b94828
-    FromNodeId: d01a47d594434ac59ec9f8ce18a97e22
-    ToNodeId: bf4c13479dce43acbe60109d54cb2b54
+    FromNodeId: cba74f17a10a49b6bf21caefe010e098
+    ToNodeId: b3c4c6fe9dab4da68f49dabfc11e8b91
     Bidirectional: 1
     EdgeAuthorId: eb3f71bbc9d44e70836ccdd1c4b94828
     EdgeAuthorPath: CityAuthoringRoot/Edge_0117a592a3b04724aaf0128aef714eeb_to_9db2623189794a12bb72d63551136e56
     SplineIndex: 0
   - Id: ee3feb695e554ed6a1972cf68f045015
-    FromNodeId: d01a47d594434ac59ec9f8ce18a97e22
-    ToNodeId: 36008a9bd6ed4cf2b205b73f952e8f4b
+    FromNodeId: cba74f17a10a49b6bf21caefe010e098
+    ToNodeId: 7ae2e37096ac4944925f3bbdcff408a1
     Bidirectional: 1
     EdgeAuthorId: ee3feb695e554ed6a1972cf68f045015
     EdgeAuthorPath: CityAuthoringRoot/Edge_0117a592a3b04724aaf0128aef714eeb_to_b2ee73fbf0074f23857c585ce53a1aec
     SplineIndex: 0
   - Id: 7a2f5fb91adf49c8b45a681bb8fcaedf
-    FromNodeId: d01a47d594434ac59ec9f8ce18a97e22
-    ToNodeId: 27e79699859b48779f99e240277a3c94
+    FromNodeId: cba74f17a10a49b6bf21caefe010e098
+    ToNodeId: a1665be3e26542458a5b5f3e66edaabf
     Bidirectional: 1
     EdgeAuthorId: 7a2f5fb91adf49c8b45a681bb8fcaedf
     EdgeAuthorPath: CityAuthoringRoot/Edge_0117a592a3b04724aaf0128aef714eeb_to_2c2ff943f78a48b78208dd6e1e8ef00f
     SplineIndex: 0
   - Id: 5aedb0cd82594f26abd09d2d99c461d2
-    FromNodeId: b59ca7a274f84d0ab94283febd54575b
-    ToNodeId: 36008a9bd6ed4cf2b205b73f952e8f4b
+    FromNodeId: 7490eb06615d407185b39af08eb85ec1
+    ToNodeId: 7ae2e37096ac4944925f3bbdcff408a1
     Bidirectional: 1
     EdgeAuthorId: 5aedb0cd82594f26abd09d2d99c461d2
     EdgeAuthorPath: CityAuthoringRoot/Edge_907e6481215f4b1ab8062542921ffc2c_to_b2ee73fbf0074f23857c585ce53a1aec
     SplineIndex: 0
   - Id: dda371484e844425b47237e474d43a4f
-    FromNodeId: 847642c60f2b49a483c7f23f857e51ef
-    ToNodeId: 36008a9bd6ed4cf2b205b73f952e8f4b
+    FromNodeId: cbeeb78baa7848519710d59840e57c55
+    ToNodeId: 7ae2e37096ac4944925f3bbdcff408a1
     Bidirectional: 1
     EdgeAuthorId: dda371484e844425b47237e474d43a4f
     EdgeAuthorPath: CityAuthoringRoot/Edge_c3e341e31aaf490b8c6f6b8c31201607_to_b2ee73fbf0074f23857c585ce53a1aec
     SplineIndex: 0
   - Id: fe2698d8e2344802b39eedeca663558b
-    FromNodeId: 5d1cdbd81fcd46d8a4c321a8d7f191d6
-    ToNodeId: 847642c60f2b49a483c7f23f857e51ef
+    FromNodeId: b47bfcab348e43cbb6c5fc2b244b1501
+    ToNodeId: cbeeb78baa7848519710d59840e57c55
     Bidirectional: 1
     EdgeAuthorId: fe2698d8e2344802b39eedeca663558b
     EdgeAuthorPath: CityAuthoringRoot/Edge_f2a5bd0d9a644571ba559ad1fef93d26_to_c3e341e31aaf490b8c6f6b8c31201607
     SplineIndex: 0
   - Id: c64a0a4f0cdc40db9a1d620dc34c55cc
-    FromNodeId: 5d1cdbd81fcd46d8a4c321a8d7f191d6
-    ToNodeId: 134d3c210ebc4be481d6fca1d4eb20bc
+    FromNodeId: b47bfcab348e43cbb6c5fc2b244b1501
+    ToNodeId: 8d13854625fd4ca0aea48606118c2141
     Bidirectional: 1
     EdgeAuthorId: c64a0a4f0cdc40db9a1d620dc34c55cc
     EdgeAuthorPath: CityAuthoringRoot/Edge_f2a5bd0d9a644571ba559ad1fef93d26_to_d55005c8902a46a0b688a8943f2a94c8
     SplineIndex: 0
   - Id: f125258881594fb9a5222acbb9d5cd7d
-    FromNodeId: 134d3c210ebc4be481d6fca1d4eb20bc
-    ToNodeId: 5d38353b1e314d9288ee1dcb4eaf3394
+    FromNodeId: 8d13854625fd4ca0aea48606118c2141
+    ToNodeId: e65e8125714f444aa7d6dc99eead15c8
     Bidirectional: 1
     EdgeAuthorId: f125258881594fb9a5222acbb9d5cd7d
     EdgeAuthorPath: CityAuthoringRoot/Edge_d55005c8902a46a0b688a8943f2a94c8_to_bc576f9cea25423ab6df1aad7ffb6e93
     SplineIndex: 0
   - Id: 3da5ce82adc64b078c4d45ad25065f50
-    FromNodeId: b6187c2366404df2addc1a15c4dbd077
-    ToNodeId: 5d1cdbd81fcd46d8a4c321a8d7f191d6
+    FromNodeId: ea9f892bcff14df79b5f53a369742e28
+    ToNodeId: b47bfcab348e43cbb6c5fc2b244b1501
     Bidirectional: 1
     EdgeAuthorId: 3da5ce82adc64b078c4d45ad25065f50
     EdgeAuthorPath: CityAuthoringRoot/Edge_4900a5ec2e224cf58e0050ab223f555b_to_f2a5bd0d9a644571ba559ad1fef93d26
     SplineIndex: 0
   - Id: 302d349664df408fa5999c12ede83f90
-    FromNodeId: a89e156f595c4fbca81677f44a148d71
-    ToNodeId: 847642c60f2b49a483c7f23f857e51ef
+    FromNodeId: c004b6a2b2c54ad39c992ffec5b8be2c
+    ToNodeId: cbeeb78baa7848519710d59840e57c55
     Bidirectional: 1
     EdgeAuthorId: 302d349664df408fa5999c12ede83f90
     EdgeAuthorPath: CityAuthoringRoot/Edge_f13589acfe334b5ca9fca508a23aafb0_to_c3e341e31aaf490b8c6f6b8c31201607
     SplineIndex: 0
   - Id: 77ebb2832f2646bb8846e0518498abf3
-    FromNodeId: e10c22e04adb4beb8e6acea59be2a6d8
-    ToNodeId: 36008a9bd6ed4cf2b205b73f952e8f4b
+    FromNodeId: f6202a6f21744876a82fe99255ae65bc
+    ToNodeId: 7ae2e37096ac4944925f3bbdcff408a1
     Bidirectional: 1
     EdgeAuthorId: 77ebb2832f2646bb8846e0518498abf3
     EdgeAuthorPath: CityAuthoringRoot/Edge_b6c30da275bc4c85ba1e193d69f1b78f_to_b2ee73fbf0074f23857c585ce53a1aec
     SplineIndex: 0
   - Id: 7ccc17a1bdb14adda0f906841636a3e9
-    FromNodeId: e10c22e04adb4beb8e6acea59be2a6d8
-    ToNodeId: f991175fdc4944f8be382e049d50f5df
+    FromNodeId: f6202a6f21744876a82fe99255ae65bc
+    ToNodeId: 36a11057dd644e68b8caeebc276eb465
     Bidirectional: 1
     EdgeAuthorId: 7ccc17a1bdb14adda0f906841636a3e9
     EdgeAuthorPath: CityAuthoringRoot/Edge_b6c30da275bc4c85ba1e193d69f1b78f_to_413d8e90ddd94757abbe5a66df69bc35
     SplineIndex: 0
   - Id: 1a77df8e092c49eeb7b4a979746d98dd
-    FromNodeId: a89e156f595c4fbca81677f44a148d71
-    ToNodeId: e10c22e04adb4beb8e6acea59be2a6d8
+    FromNodeId: c004b6a2b2c54ad39c992ffec5b8be2c
+    ToNodeId: f6202a6f21744876a82fe99255ae65bc
     Bidirectional: 1
     EdgeAuthorId: 1a77df8e092c49eeb7b4a979746d98dd
     EdgeAuthorPath: CityAuthoringRoot/Edge_f13589acfe334b5ca9fca508a23aafb0_to_b6c30da275bc4c85ba1e193d69f1b78f
     SplineIndex: 0
   - Id: d6341b722159456782bbbdd9d8f7c43d
-    FromNodeId: a89e156f595c4fbca81677f44a148d71
-    ToNodeId: b6187c2366404df2addc1a15c4dbd077
+    FromNodeId: c004b6a2b2c54ad39c992ffec5b8be2c
+    ToNodeId: ea9f892bcff14df79b5f53a369742e28
     Bidirectional: 1
     EdgeAuthorId: d6341b722159456782bbbdd9d8f7c43d
     EdgeAuthorPath: CityAuthoringRoot/Edge_f13589acfe334b5ca9fca508a23aafb0_to_4900a5ec2e224cf58e0050ab223f555b
     SplineIndex: 0
   - Id: d7a6cd9f14844185aea678c57b1b83a3
-    FromNodeId: b6187c2366404df2addc1a15c4dbd077
-    ToNodeId: 5d38353b1e314d9288ee1dcb4eaf3394
+    FromNodeId: ea9f892bcff14df79b5f53a369742e28
+    ToNodeId: e65e8125714f444aa7d6dc99eead15c8
     Bidirectional: 1
     EdgeAuthorId: d7a6cd9f14844185aea678c57b1b83a3
     EdgeAuthorPath: CityAuthoringRoot/Edge_4900a5ec2e224cf58e0050ab223f555b_to_bc576f9cea25423ab6df1aad7ffb6e93
     SplineIndex: 0
   - Id: 67e5922e97b8422e8d6e70e1e1fe69e2
-    FromNodeId: 2746f8ef47b54da488ee7ba9265ee61a
-    ToNodeId: 5d38353b1e314d9288ee1dcb4eaf3394
+    FromNodeId: 1ae7db10da2b4f1cba79be421a77ac73
+    ToNodeId: e65e8125714f444aa7d6dc99eead15c8
     Bidirectional: 1
     EdgeAuthorId: 67e5922e97b8422e8d6e70e1e1fe69e2
     EdgeAuthorPath: CityAuthoringRoot/Edge_60d183b159e240ff824622c36fa39ef5_to_bc576f9cea25423ab6df1aad7ffb6e93
     SplineIndex: 0
   - Id: 58fce6d4041a4b339a95bd320d14dc33
-    FromNodeId: 945533d225974f6a919897597b1060ea
-    ToNodeId: 2746f8ef47b54da488ee7ba9265ee61a
+    FromNodeId: 42dc1c7eeb364081af6bd9172be0bacd
+    ToNodeId: 1ae7db10da2b4f1cba79be421a77ac73
     Bidirectional: 1
     EdgeAuthorId: 58fce6d4041a4b339a95bd320d14dc33
     EdgeAuthorPath: CityAuthoringRoot/Edge_34fcfbcba86647b1b2ee7163ebcffe1f_to_60d183b159e240ff824622c36fa39ef5
     SplineIndex: 0
   - Id: d54a726c3a6843bcab334f71b98389a6
-    FromNodeId: d9525f447eb54645a8b42eae27b94d88
-    ToNodeId: 945533d225974f6a919897597b1060ea
+    FromNodeId: c9a941796f2746ee853e51abc636621f
+    ToNodeId: 42dc1c7eeb364081af6bd9172be0bacd
     Bidirectional: 1
     EdgeAuthorId: d54a726c3a6843bcab334f71b98389a6
     EdgeAuthorPath: CityAuthoringRoot/Edge_90d3b3d26a994eb68203c853364f5c3f_to_34fcfbcba86647b1b2ee7163ebcffe1f
     SplineIndex: 0
   - Id: bb0c76cc71aa4f1b99c859f5851747ed
-    FromNodeId: b8cb178f303140508bd0e879ada554ea
-    ToNodeId: d9525f447eb54645a8b42eae27b94d88
+    FromNodeId: 9f3722b4c9544798af20fb6f043cf3ab
+    ToNodeId: c9a941796f2746ee853e51abc636621f
     Bidirectional: 1
     EdgeAuthorId: bb0c76cc71aa4f1b99c859f5851747ed
     EdgeAuthorPath: CityAuthoringRoot/Edge_099d47426d7b4a8d98e2d9c5ffb30fe4_to_90d3b3d26a994eb68203c853364f5c3f
     SplineIndex: 0
   - Id: a350f8d229a44498a7247489a4e74216
-    FromNodeId: b8cb178f303140508bd0e879ada554ea
-    ToNodeId: 97b4f0d8068e4019b8b8948dd6a7012e
+    FromNodeId: 9f3722b4c9544798af20fb6f043cf3ab
+    ToNodeId: 9246e219fe024630a5245ae0c082ec27
     Bidirectional: 1
     EdgeAuthorId: a350f8d229a44498a7247489a4e74216
     EdgeAuthorPath: CityAuthoringRoot/Edge_099d47426d7b4a8d98e2d9c5ffb30fe4_to_e19a1af164b74ebfa7bd67794d484c75
     SplineIndex: 0
   - Id: 1d89a3665f2c4a72a1a0e75e331eaa54
-    FromNodeId: 97b4f0d8068e4019b8b8948dd6a7012e
-    ToNodeId: 945533d225974f6a919897597b1060ea
+    FromNodeId: 9246e219fe024630a5245ae0c082ec27
+    ToNodeId: 42dc1c7eeb364081af6bd9172be0bacd
     Bidirectional: 1
     EdgeAuthorId: 1d89a3665f2c4a72a1a0e75e331eaa54
     EdgeAuthorPath: CityAuthoringRoot/Edge_e19a1af164b74ebfa7bd67794d484c75_to_34fcfbcba86647b1b2ee7163ebcffe1f
     SplineIndex: 0
   - Id: 01997480068e4f669dc1d152dc24fce5
-    FromNodeId: 97b4f0d8068e4019b8b8948dd6a7012e
-    ToNodeId: 122231a818f546548b6ab8de57e1b3d3
+    FromNodeId: 9246e219fe024630a5245ae0c082ec27
+    ToNodeId: 78b402af65064078a6860dbbb86a1db6
     Bidirectional: 1
     EdgeAuthorId: 01997480068e4f669dc1d152dc24fce5
     EdgeAuthorPath: CityAuthoringRoot/Edge_e19a1af164b74ebfa7bd67794d484c75_to_5890764695cc41c9961f51d17f11a9b0
     SplineIndex: 0
   - Id: 2628f1e3097b4edb94adbf87478d36d5
-    FromNodeId: 19ce7e36d4804af28164f5a33baca102
-    ToNodeId: 122231a818f546548b6ab8de57e1b3d3
+    FromNodeId: bc0949e648e941c7bedd91811faba4dc
+    ToNodeId: 78b402af65064078a6860dbbb86a1db6
     Bidirectional: 1
     EdgeAuthorId: 2628f1e3097b4edb94adbf87478d36d5
     EdgeAuthorPath: CityAuthoringRoot/Edge_fecf996d9eef4f6b820a508ad0b3b602_to_5890764695cc41c9961f51d17f11a9b0
     SplineIndex: 0
   - Id: 575d3e6fabcf4663b02a233e46b91c56
-    FromNodeId: 4552ad56d86c49eaa254567654a1d41e
-    ToNodeId: 19ce7e36d4804af28164f5a33baca102
+    FromNodeId: 18d2e32046354ee29070cb04fdd027d3
+    ToNodeId: bc0949e648e941c7bedd91811faba4dc
     Bidirectional: 1
     EdgeAuthorId: 575d3e6fabcf4663b02a233e46b91c56
     EdgeAuthorPath: CityAuthoringRoot/Edge_bb2e194a4d214b82a8470adeac58b42c_to_fecf996d9eef4f6b820a508ad0b3b602
     SplineIndex: 0
   - Id: 1127439e994a49479f76c395641e5a94
-    FromNodeId: f75c47f067e94db4917e526df3129970
-    ToNodeId: 122231a818f546548b6ab8de57e1b3d3
+    FromNodeId: cc0fc545e5cf4e34b7835df6ea59318e
+    ToNodeId: 78b402af65064078a6860dbbb86a1db6
     Bidirectional: 1
     EdgeAuthorId: 1127439e994a49479f76c395641e5a94
     EdgeAuthorPath: CityAuthoringRoot/Edge_5cedd993f8e7445aa59e49e7cdc7fb30_to_5890764695cc41c9961f51d17f11a9b0
     SplineIndex: 0
   - Id: 882958d525a14f81afd411ba43fa5bf0
-    FromNodeId: 4552ad56d86c49eaa254567654a1d41e
-    ToNodeId: f75c47f067e94db4917e526df3129970
+    FromNodeId: 18d2e32046354ee29070cb04fdd027d3
+    ToNodeId: cc0fc545e5cf4e34b7835df6ea59318e
     Bidirectional: 1
     EdgeAuthorId: 882958d525a14f81afd411ba43fa5bf0
     EdgeAuthorPath: CityAuthoringRoot/Edge_bb2e194a4d214b82a8470adeac58b42c_to_5cedd993f8e7445aa59e49e7cdc7fb30
     SplineIndex: 0
   - Id: 58cd8a231d694825aa80d14f75113c05
-    FromNodeId: 4552ad56d86c49eaa254567654a1d41e
-    ToNodeId: 1cb109c9932e4176b1779e56353f16a4
+    FromNodeId: 18d2e32046354ee29070cb04fdd027d3
+    ToNodeId: e6bd925216284cb5898053fa18bba119
     Bidirectional: 1
     EdgeAuthorId: 58cd8a231d694825aa80d14f75113c05
     EdgeAuthorPath: CityAuthoringRoot/Edge_bb2e194a4d214b82a8470adeac58b42c_to_ed7462fe7d9842f98815ab5d84cf5f03
     SplineIndex: 0
   - Id: bfe602cfa88744b78d847d182df69cc7
-    FromNodeId: 9fc4b5723e2243bba80e99a9208961c6
-    ToNodeId: f75c47f067e94db4917e526df3129970
+    FromNodeId: df9be60a72464ad98bc0537c477aff45
+    ToNodeId: cc0fc545e5cf4e34b7835df6ea59318e
     Bidirectional: 1
     EdgeAuthorId: bfe602cfa88744b78d847d182df69cc7
     EdgeAuthorPath: CityAuthoringRoot/Edge_b6af4a449e2f4d4db2e768816867404e_to_5cedd993f8e7445aa59e49e7cdc7fb30
     SplineIndex: 0
   - Id: a1e8ab653d8a4570b5c741afaeb88fff
-    FromNodeId: 1679c5615509475eb6f888db832cbf1b
-    ToNodeId: 9fc4b5723e2243bba80e99a9208961c6
+    FromNodeId: db5c259d4a5e4c03a8f27e979e5d0143
+    ToNodeId: df9be60a72464ad98bc0537c477aff45
     Bidirectional: 1
     EdgeAuthorId: a1e8ab653d8a4570b5c741afaeb88fff
     EdgeAuthorPath: CityAuthoringRoot/Edge_c33c6fc0e6964c3ba2a8e9b46af85d6a_to_b6af4a449e2f4d4db2e768816867404e
     SplineIndex: 0
   - Id: 9ef7ebdb997049aca924b0a106d2ee09
-    FromNodeId: 32e92e046730416cbdd1996a8c8fdefa
-    ToNodeId: 1679c5615509475eb6f888db832cbf1b
+    FromNodeId: 3d4f16a5c41240549b8b12d43ef46558
+    ToNodeId: db5c259d4a5e4c03a8f27e979e5d0143
     Bidirectional: 1
     EdgeAuthorId: 9ef7ebdb997049aca924b0a106d2ee09
     EdgeAuthorPath: CityAuthoringRoot/Edge_04cd05f218ea4c55a1c5527ea363824a_to_c33c6fc0e6964c3ba2a8e9b46af85d6a
     SplineIndex: 0
   - Id: f900665ecb7a48efaccd771410b3289f
-    FromNodeId: 3492d6bf7b9547d3ab461b896ed4a3f4
-    ToNodeId: 32e92e046730416cbdd1996a8c8fdefa
+    FromNodeId: d8798a3c094241b991695b097e0bdb73
+    ToNodeId: 3d4f16a5c41240549b8b12d43ef46558
     Bidirectional: 1
     EdgeAuthorId: f900665ecb7a48efaccd771410b3289f
     EdgeAuthorPath: CityAuthoringRoot/Edge_a57d9539b0a1402e9f39b3b5356d7b80_to_04cd05f218ea4c55a1c5527ea363824a
     SplineIndex: 0
   - Id: 8a94ad7cba244f479ce0807d27c5404d
-    FromNodeId: 3492d6bf7b9547d3ab461b896ed4a3f4
-    ToNodeId: 122231a818f546548b6ab8de57e1b3d3
+    FromNodeId: d8798a3c094241b991695b097e0bdb73
+    ToNodeId: 78b402af65064078a6860dbbb86a1db6
     Bidirectional: 1
     EdgeAuthorId: 8a94ad7cba244f479ce0807d27c5404d
     EdgeAuthorPath: CityAuthoringRoot/Edge_a57d9539b0a1402e9f39b3b5356d7b80_to_5890764695cc41c9961f51d17f11a9b0
     SplineIndex: 0
   - Id: ba76f28a9b98483da018ef5b8665cbf6
-    FromNodeId: 9fc4b5723e2243bba80e99a9208961c6
-    ToNodeId: 1cb109c9932e4176b1779e56353f16a4
+    FromNodeId: df9be60a72464ad98bc0537c477aff45
+    ToNodeId: e6bd925216284cb5898053fa18bba119
     Bidirectional: 1
     EdgeAuthorId: ba76f28a9b98483da018ef5b8665cbf6
     EdgeAuthorPath: CityAuthoringRoot/Edge_b6af4a449e2f4d4db2e768816867404e_to_ed7462fe7d9842f98815ab5d84cf5f03
     SplineIndex: 0
   - Id: 0da9f166f45044d7b40fbeb6b9f40600
-    FromNodeId: 1679c5615509475eb6f888db832cbf1b
-    ToNodeId: 247ed4617c354ea0ababc4f1203106e9
+    FromNodeId: db5c259d4a5e4c03a8f27e979e5d0143
+    ToNodeId: a13eeff3e59d4021911b2f2b01fd1995
     Bidirectional: 1
     EdgeAuthorId: 0da9f166f45044d7b40fbeb6b9f40600
     EdgeAuthorPath: CityAuthoringRoot/Edge_c33c6fc0e6964c3ba2a8e9b46af85d6a_to_4ad8194df0f9413d9781e40855eb3bda
     SplineIndex: 0
   - Id: 33466c05d4dd4cdeb647852791afaf35
-    FromNodeId: 6c7b874846ab47578999089a82146359
-    ToNodeId: 247ed4617c354ea0ababc4f1203106e9
+    FromNodeId: e7737617b4bb48b6b0aa3b7d33dcc92c
+    ToNodeId: a13eeff3e59d4021911b2f2b01fd1995
     Bidirectional: 1
     EdgeAuthorId: 33466c05d4dd4cdeb647852791afaf35
     EdgeAuthorPath: CityAuthoringRoot/Edge_49e58fe68dc64468a6725d802321595a_to_4ad8194df0f9413d9781e40855eb3bda
     SplineIndex: 0
   - Id: a5572c16c80c4887872a0c9e27d0c7a5
-    FromNodeId: 728dde74752a45bf96d2798c4df7f766
-    ToNodeId: 6c7b874846ab47578999089a82146359
+    FromNodeId: af96fcbbc6ce4a4592f9e0d39610a89f
+    ToNodeId: e7737617b4bb48b6b0aa3b7d33dcc92c
     Bidirectional: 1
     EdgeAuthorId: a5572c16c80c4887872a0c9e27d0c7a5
     EdgeAuthorPath: CityAuthoringRoot/Edge_89efe9cd6c6f43a7a1340a640586ea25_to_49e58fe68dc64468a6725d802321595a
     SplineIndex: 0
   - Id: 2413abf431ed40ecb8e59c829c6fef9b
-    FromNodeId: 9fc4b5723e2243bba80e99a9208961c6
-    ToNodeId: eaa8f2646df748ba8dd397569f1abfc6
+    FromNodeId: df9be60a72464ad98bc0537c477aff45
+    ToNodeId: 3249a97ac40e4e0b90ea6e7bf12b33ea
     Bidirectional: 1
     EdgeAuthorId: 2413abf431ed40ecb8e59c829c6fef9b
     EdgeAuthorPath: CityAuthoringRoot/Edge_b6af4a449e2f4d4db2e768816867404e_to_4b4934a3d8594842b978f67be73b19ad
     SplineIndex: 0
   - Id: 158219c5f29b470597cc6c884d9de788
-    FromNodeId: 4616004e26dd403989d7b7f7f9ee57b4
-    ToNodeId: 4b793e8950a24762b836b60490ee7a5a
+    FromNodeId: 2f4bfb5aa8fd472fa298cab12d8ee23b
+    ToNodeId: cec14614ddd8494ba374c3c2cbe699a3
     Bidirectional: 1
     EdgeAuthorId: 158219c5f29b470597cc6c884d9de788
     EdgeAuthorPath: CityAuthoringRoot/Edge_3c700b4ac3dd45eca4fe4ab5701935db_to_b3a0e6ecfd2a40dbadc84759111d0303
     SplineIndex: 0
   - Id: e875f281e5e7480aace486f4f79c35ec
-    FromNodeId: 565a55c7080d46f9aa6bf54e5f9bf6eb
-    ToNodeId: 1cb109c9932e4176b1779e56353f16a4
+    FromNodeId: 2e6bdc1792bf44eca5f11d52d15b99f1
+    ToNodeId: e6bd925216284cb5898053fa18bba119
     Bidirectional: 1
     EdgeAuthorId: e875f281e5e7480aace486f4f79c35ec
     EdgeAuthorPath: CityAuthoringRoot/Edge_5e8b285322044b9da65fe064091c83e2_to_ed7462fe7d9842f98815ab5d84cf5f03
     SplineIndex: 0
   - Id: d9139f6a3faf48dcb23014049073354f
-    FromNodeId: 565a55c7080d46f9aa6bf54e5f9bf6eb
-    ToNodeId: 4b793e8950a24762b836b60490ee7a5a
+    FromNodeId: 2e6bdc1792bf44eca5f11d52d15b99f1
+    ToNodeId: cec14614ddd8494ba374c3c2cbe699a3
     Bidirectional: 1
     EdgeAuthorId: d9139f6a3faf48dcb23014049073354f
     EdgeAuthorPath: CityAuthoringRoot/Edge_5e8b285322044b9da65fe064091c83e2_to_b3a0e6ecfd2a40dbadc84759111d0303
     SplineIndex: 0
   - Id: d1453b40dada49c3be1e350282715798
-    FromNodeId: 9e8b280d203e4dc2bf160bc36e2d9d68
-    ToNodeId: 4616004e26dd403989d7b7f7f9ee57b4
+    FromNodeId: f0e0fce1532049eeb5d49360d34bdea0
+    ToNodeId: 2f4bfb5aa8fd472fa298cab12d8ee23b
     Bidirectional: 1
     EdgeAuthorId: d1453b40dada49c3be1e350282715798
     EdgeAuthorPath: CityAuthoringRoot/Edge_afc93defc7cb4089a4c04585d2c43788_to_3c700b4ac3dd45eca4fe4ab5701935db
     SplineIndex: 0
   - Id: 0c83049123504d6cb14f14ce0de25fe8
-    FromNodeId: 9e8b280d203e4dc2bf160bc36e2d9d68
-    ToNodeId: 565a55c7080d46f9aa6bf54e5f9bf6eb
+    FromNodeId: f0e0fce1532049eeb5d49360d34bdea0
+    ToNodeId: 2e6bdc1792bf44eca5f11d52d15b99f1
     Bidirectional: 1
     EdgeAuthorId: 0c83049123504d6cb14f14ce0de25fe8
     EdgeAuthorPath: CityAuthoringRoot/Edge_afc93defc7cb4089a4c04585d2c43788_to_5e8b285322044b9da65fe064091c83e2
     SplineIndex: 0
   - Id: 964791a90045450cb2113fdb6494c04e
-    FromNodeId: b197a79a5e1a429481591533c65f2967
-    ToNodeId: 9e8b280d203e4dc2bf160bc36e2d9d68
+    FromNodeId: cafe027edc5b4aa78ff4e30d98531311
+    ToNodeId: f0e0fce1532049eeb5d49360d34bdea0
     Bidirectional: 1
     EdgeAuthorId: 964791a90045450cb2113fdb6494c04e
     EdgeAuthorPath: CityAuthoringRoot/Edge_7730aa4ed01843b0a2242c5302aa5e55_to_afc93defc7cb4089a4c04585d2c43788
     SplineIndex: 0
   - Id: eefba0b7853c4f8c8d99e1710093aad8
-    FromNodeId: b197a79a5e1a429481591533c65f2967
-    ToNodeId: eaa8f2646df748ba8dd397569f1abfc6
+    FromNodeId: cafe027edc5b4aa78ff4e30d98531311
+    ToNodeId: 3249a97ac40e4e0b90ea6e7bf12b33ea
     Bidirectional: 1
     EdgeAuthorId: eefba0b7853c4f8c8d99e1710093aad8
     EdgeAuthorPath: CityAuthoringRoot/Edge_7730aa4ed01843b0a2242c5302aa5e55_to_4b4934a3d8594842b978f67be73b19ad
     SplineIndex: 0
   - Id: 4ec69dd3de9c4687a8597a016d100dcb
-    FromNodeId: 728dde74752a45bf96d2798c4df7f766
-    ToNodeId: eaa8f2646df748ba8dd397569f1abfc6
+    FromNodeId: af96fcbbc6ce4a4592f9e0d39610a89f
+    ToNodeId: 3249a97ac40e4e0b90ea6e7bf12b33ea
     Bidirectional: 1
     EdgeAuthorId: 4ec69dd3de9c4687a8597a016d100dcb
     EdgeAuthorPath: CityAuthoringRoot/Edge_89efe9cd6c6f43a7a1340a640586ea25_to_4b4934a3d8594842b978f67be73b19ad
     SplineIndex: 0
   - Id: 59a27a76a2554e23a8396351f1e17934
-    FromNodeId: 6c7b874846ab47578999089a82146359
-    ToNodeId: 32e92e046730416cbdd1996a8c8fdefa
+    FromNodeId: e7737617b4bb48b6b0aa3b7d33dcc92c
+    ToNodeId: 3d4f16a5c41240549b8b12d43ef46558
     Bidirectional: 1
     EdgeAuthorId: 59a27a76a2554e23a8396351f1e17934
     EdgeAuthorPath: CityAuthoringRoot/Edge_49e58fe68dc64468a6725d802321595a_to_04cd05f218ea4c55a1c5527ea363824a
     SplineIndex: 0
   - Id: ebb01e109d4e40b2b9701b1550925354
-    FromNodeId: 728dde74752a45bf96d2798c4df7f766
-    ToNodeId: ed92b9e02bd1490ab87992bba6b1a1a9
+    FromNodeId: af96fcbbc6ce4a4592f9e0d39610a89f
+    ToNodeId: 5943d091ef644309995a666a89d3e8f4
     Bidirectional: 1
     EdgeAuthorId: ebb01e109d4e40b2b9701b1550925354
     EdgeAuthorPath: CityAuthoringRoot/Edge_89efe9cd6c6f43a7a1340a640586ea25_to_acf253b4687d424daf57942de5052761
     SplineIndex: 0
   - Id: d53fd1d0253e4d798452d5ae2036dd6c
-    FromNodeId: 3492d6bf7b9547d3ab461b896ed4a3f4
-    ToNodeId: 9c53910471f54b5f876ea08ef3db7324
+    FromNodeId: d8798a3c094241b991695b097e0bdb73
+    ToNodeId: d940c89291644e7c80fcbd7c8799637a
     Bidirectional: 1
     EdgeAuthorId: d53fd1d0253e4d798452d5ae2036dd6c
     EdgeAuthorPath: CityAuthoringRoot/Edge_a57d9539b0a1402e9f39b3b5356d7b80_to_5acacba8944f43d2bccb96b4dc09ba0e
     SplineIndex: 0
   - Id: 9ac2be04305645b497b2cdd74af40ad0
-    FromNodeId: 9c53910471f54b5f876ea08ef3db7324
-    ToNodeId: ed92b9e02bd1490ab87992bba6b1a1a9
+    FromNodeId: d940c89291644e7c80fcbd7c8799637a
+    ToNodeId: 5943d091ef644309995a666a89d3e8f4
     Bidirectional: 1
     EdgeAuthorId: 9ac2be04305645b497b2cdd74af40ad0
     EdgeAuthorPath: CityAuthoringRoot/Edge_5acacba8944f43d2bccb96b4dc09ba0e_to_acf253b4687d424daf57942de5052761
     SplineIndex: 0
   - Id: d689df6e0c584fcd9ce2c859c5793e2a
-    FromNodeId: 9c53910471f54b5f876ea08ef3db7324
-    ToNodeId: dcde2ec604c84bd3bd0362ae2500b711
+    FromNodeId: d940c89291644e7c80fcbd7c8799637a
+    ToNodeId: d762999642974e5ea27bbfede350f96b
     Bidirectional: 1
     EdgeAuthorId: d689df6e0c584fcd9ce2c859c5793e2a
     EdgeAuthorPath: CityAuthoringRoot/Edge_5acacba8944f43d2bccb96b4dc09ba0e_to_638f6332fa6a428b999a846921874878
     SplineIndex: 0
   - Id: 5cc8786131a94e0bbc5ed1f1ddeb0296
-    FromNodeId: 3fcc095d287a499fa9407f0cd5db42f4
-    ToNodeId: ed92b9e02bd1490ab87992bba6b1a1a9
+    FromNodeId: e2e6e39319a54c989492db0f0c5b5357
+    ToNodeId: 5943d091ef644309995a666a89d3e8f4
     Bidirectional: 1
     EdgeAuthorId: 5cc8786131a94e0bbc5ed1f1ddeb0296
     EdgeAuthorPath: CityAuthoringRoot/Edge_a648c0c41d404c1cb9324085934bc740_to_acf253b4687d424daf57942de5052761
     SplineIndex: 0
   - Id: da68ee8e7fb84d4480dca7b8c11d220e
-    FromNodeId: 3fcc095d287a499fa9407f0cd5db42f4
-    ToNodeId: dcde2ec604c84bd3bd0362ae2500b711
+    FromNodeId: e2e6e39319a54c989492db0f0c5b5357
+    ToNodeId: d762999642974e5ea27bbfede350f96b
     Bidirectional: 1
     EdgeAuthorId: da68ee8e7fb84d4480dca7b8c11d220e
     EdgeAuthorPath: CityAuthoringRoot/Edge_a648c0c41d404c1cb9324085934bc740_to_638f6332fa6a428b999a846921874878
     SplineIndex: 0
   - Id: ff4bd4dc83834249b3a46c3711c0e584
-    FromNodeId: dcde2ec604c84bd3bd0362ae2500b711
-    ToNodeId: e10c22e04adb4beb8e6acea59be2a6d8
+    FromNodeId: d762999642974e5ea27bbfede350f96b
+    ToNodeId: f6202a6f21744876a82fe99255ae65bc
     Bidirectional: 1
     EdgeAuthorId: ff4bd4dc83834249b3a46c3711c0e584
     EdgeAuthorPath: CityAuthoringRoot/Edge_638f6332fa6a428b999a846921874878_to_b6c30da275bc4c85ba1e193d69f1b78f
     SplineIndex: 0
   - Id: 3b0260c95e914c56aea93f699aacfff1
-    FromNodeId: 3fcc095d287a499fa9407f0cd5db42f4
-    ToNodeId: 23058efc0613493e9e0dfb4199b57cf7
+    FromNodeId: e2e6e39319a54c989492db0f0c5b5357
+    ToNodeId: f6757b13df0b4c3ca59dc5dab0cbcd2f
     Bidirectional: 1
     EdgeAuthorId: 3b0260c95e914c56aea93f699aacfff1
     EdgeAuthorPath: CityAuthoringRoot/Edge_a648c0c41d404c1cb9324085934bc740_to_30a5dbbeec1843abbf2c69cb56c21557
     SplineIndex: 0
   - Id: 8393ebdcba544a97b0c08330bf89e8d4
-    FromNodeId: 706b0b89a69142fdb9b601d8bd5adbc5
-    ToNodeId: 2746f8ef47b54da488ee7ba9265ee61a
+    FromNodeId: 0332132d40b74b43a645853ac88af397
+    ToNodeId: 1ae7db10da2b4f1cba79be421a77ac73
     Bidirectional: 1
     EdgeAuthorId: 8393ebdcba544a97b0c08330bf89e8d4
     EdgeAuthorPath: CityAuthoringRoot/Edge_ddb163e2d9764424ad1b3dcee8e9dd2e_to_60d183b159e240ff824622c36fa39ef5
     SplineIndex: 0
   - Id: 213d233eda6c4e71937c8fbe042136ec
-    FromNodeId: b197a79a5e1a429481591533c65f2967
-    ToNodeId: 380cfa2b3a28433b814335f458ff405f
+    FromNodeId: cafe027edc5b4aa78ff4e30d98531311
+    ToNodeId: 3f85e509411b49ae90cffa3e0ec93508
     Bidirectional: 1
     EdgeAuthorId: 213d233eda6c4e71937c8fbe042136ec
     EdgeAuthorPath: CityAuthoringRoot/Edge_7730aa4ed01843b0a2242c5302aa5e55_to_81c9afee83b14fdebf79358042941641
     SplineIndex: 0
   - Id: bf3b7592795843ab947bd7f280f6880f
-    FromNodeId: 0933aa7f24034ce9865fa3c463b30bdf
-    ToNodeId: 53bf10f8196445c1b55b7127389311ee
+    FromNodeId: c78fcc3babb14f3fa0dfc59ccade6095
+    ToNodeId: 56d875b329c841929cf252a29a00e2b5
     Bidirectional: 1
     EdgeAuthorId: bf3b7592795843ab947bd7f280f6880f
     EdgeAuthorPath: CityAuthoringRoot/Edge_0933aa7f24034ce9865fa3c463b30bdf_to_53bf10f8196445c1b55b7127389311ee
     SplineIndex: 0
   - Id: d268cd20dc61482788b97aab03d8a915
-    FromNodeId: 9ae52e661ff848658e77c60caa15e26c
-    ToNodeId: 0933aa7f24034ce9865fa3c463b30bdf
+    FromNodeId: bda4a2e3ed8340cfb8726ab7b9e89953
+    ToNodeId: c78fcc3babb14f3fa0dfc59ccade6095
     Bidirectional: 1
     EdgeAuthorId: d268cd20dc61482788b97aab03d8a915
     EdgeAuthorPath: CityAuthoringRoot/Edge_9ae52e661ff848658e77c60caa15e26c_to_0933aa7f24034ce9865fa3c463b30bdf
     SplineIndex: 0
   - Id: 90efea3326f44f03b561474407a78413
-    FromNodeId: 2200adc6cdf941b492dd74a25d850562
-    ToNodeId: 9ae52e661ff848658e77c60caa15e26c
+    FromNodeId: a65981182caa42a7b74eceb7cc6b660d
+    ToNodeId: bda4a2e3ed8340cfb8726ab7b9e89953
     Bidirectional: 1
     EdgeAuthorId: 90efea3326f44f03b561474407a78413
     EdgeAuthorPath: CityAuthoringRoot/Edge_2200adc6cdf941b492dd74a25d850562_to_9ae52e661ff848658e77c60caa15e26c
     SplineIndex: 0
   - Id: 1e14103d4d69431598b61ace3bee33eb
-    FromNodeId: 2200adc6cdf941b492dd74a25d850562
-    ToNodeId: 82035739d69045e190e9e228990540de
+    FromNodeId: a65981182caa42a7b74eceb7cc6b660d
+    ToNodeId: 50c41b49764449348f28de03f9900d9c
     Bidirectional: 1
     EdgeAuthorId: 1e14103d4d69431598b61ace3bee33eb
     EdgeAuthorPath: CityAuthoringRoot/Edge_2200adc6cdf941b492dd74a25d850562_to_82035739d69045e190e9e228990540de
     SplineIndex: 0
   - Id: 07f9419025f946c3bfa3c252613ee3cc
-    FromNodeId: 0933aa7f24034ce9865fa3c463b30bdf
-    ToNodeId: 2cead1bb3f6346ba97166366bab7e0e1
+    FromNodeId: c78fcc3babb14f3fa0dfc59ccade6095
+    ToNodeId: d7315215a66f43e58f862884c99d92e9
     Bidirectional: 0
     EdgeAuthorId: 07f9419025f946c3bfa3c252613ee3cc
     EdgeAuthorPath: CityAuthoringRoot/Edge_0933aa7f24034ce9865fa3c463b30bdf_to_2cead1bb3f6346ba97166366bab7e0e1
     SplineIndex: 0
   - Id: 77de08f72bed4c819e690f7c55295b2a
-    FromNodeId: 2cead1bb3f6346ba97166366bab7e0e1
-    ToNodeId: de907eeb20db486bb464ee0740558365
+    FromNodeId: d7315215a66f43e58f862884c99d92e9
+    ToNodeId: d18a777b05724f8da129bbacfc3ebcb5
     Bidirectional: 1
     EdgeAuthorId: 77de08f72bed4c819e690f7c55295b2a
     EdgeAuthorPath: CityAuthoringRoot/Edge_2cead1bb3f6346ba97166366bab7e0e1_to_de907eeb20db486bb464ee0740558365
     SplineIndex: 0
   - Id: 22b44f2a69bd4d67a6085b7ad78000bd
-    FromNodeId: 2cead1bb3f6346ba97166366bab7e0e1
-    ToNodeId: 00a29faf4a6642b3baf29575c9b24dfd
+    FromNodeId: d7315215a66f43e58f862884c99d92e9
+    ToNodeId: 749a20f838374ce080b3dbd52830462e
     Bidirectional: 1
     EdgeAuthorId: 22b44f2a69bd4d67a6085b7ad78000bd
     EdgeAuthorPath: CityAuthoringRoot/Edge_2cead1bb3f6346ba97166366bab7e0e1_to_00a29faf4a6642b3baf29575c9b24dfd
     SplineIndex: 0
   - Id: e62dd6f6d8ce4616a1935b083b68a4cb
-    FromNodeId: 9fe05e552a0b4189969eb37e4de9c494
-    ToNodeId: 00a29faf4a6642b3baf29575c9b24dfd
+    FromNodeId: d9c169433eb44f5d82b11ce9bd0b6b7b
+    ToNodeId: 749a20f838374ce080b3dbd52830462e
     Bidirectional: 1
     EdgeAuthorId: e62dd6f6d8ce4616a1935b083b68a4cb
     EdgeAuthorPath: CityAuthoringRoot/Edge_9fe05e552a0b4189969eb37e4de9c494_to_00a29faf4a6642b3baf29575c9b24dfd
     SplineIndex: 0
   - Id: 30b537252cdb40f8b4220e6a77f7201c
-    FromNodeId: a0e7c48ccf954a5e959903fdc061443f
-    ToNodeId: 00a29faf4a6642b3baf29575c9b24dfd
+    FromNodeId: 71218bfa6f1741358457c15c2690bec7
+    ToNodeId: 749a20f838374ce080b3dbd52830462e
     Bidirectional: 1
     EdgeAuthorId: 30b537252cdb40f8b4220e6a77f7201c
     EdgeAuthorPath: CityAuthoringRoot/Edge_a0e7c48ccf954a5e959903fdc061443f_to_00a29faf4a6642b3baf29575c9b24dfd
     SplineIndex: 0
   - Id: 115d70b25bef4fbfb6bc19b698b574e2
-    FromNodeId: 9ae52e661ff848658e77c60caa15e26c
-    ToNodeId: d50dc0fd9bf54f1387ce493cbdc52da1
+    FromNodeId: bda4a2e3ed8340cfb8726ab7b9e89953
+    ToNodeId: 903be0e118ef46a48475dad911866ccf
     Bidirectional: 1
     EdgeAuthorId: 115d70b25bef4fbfb6bc19b698b574e2
     EdgeAuthorPath: CityAuthoringRoot/Edge_9ae52e661ff848658e77c60caa15e26c_to_d50dc0fd9bf54f1387ce493cbdc52da1
     SplineIndex: 0
   - Id: 6c8c2fefd5444494851b90b2b39a2324
-    FromNodeId: 9fe05e552a0b4189969eb37e4de9c494
-    ToNodeId: 139d35ae7687479b87b7e2e075e9e01c
+    FromNodeId: d9c169433eb44f5d82b11ce9bd0b6b7b
+    ToNodeId: f3b1fb27a8b64a90b92a26cc6708c809
     Bidirectional: 1
     EdgeAuthorId: 6c8c2fefd5444494851b90b2b39a2324
     EdgeAuthorPath: CityAuthoringRoot/Edge_9fe05e552a0b4189969eb37e4de9c494_to_139d35ae7687479b87b7e2e075e9e01c
@@ -1292,7 +1292,7 @@ MonoBehaviour:
     Radius: 0
     Anchor:
       Kind: 1
-      NodeId: 0d41c82776ad48fcac363897fdf36aae
+      NodeId: 01ed0c17243448c18db0aeb9be678d7c
       T: 0
       Forward: 1
       EdgeId: 
@@ -2469,111 +2469,6 @@ MonoBehaviour:
       T: 0.5
       Forward: 1
       EdgeId: 
-      WorldPoint: {x: -4.4, y: -1.41}
+      WorldPoint: {x: 1.1, y: 1.73}
     AuthorId: 658f49a8fdff41e58d65370cfa582535
     AuthorPath: CityAuthoringRoot/Cops/CopSpawn
-  - Id: 43ec0fe44409417f9cb49b6be9796c38
-    DisplayName: 
-    Tags:
-    - cop
-    RegionId: 
-    Radius: 0
-    Anchor:
-      Kind: 2
-      NodeId: 
-      T: 0.5
-      Forward: 1
-      EdgeId: 
-      WorldPoint: {x: 0.18, y: 0.23}
-    AuthorId: 43ec0fe44409417f9cb49b6be9796c38
-    AuthorPath: CityAuthoringRoot/Cops/CopSpawn (1)
-  - Id: fb0b885c85de4636a79f774ee984f80d
-    DisplayName: 
-    Tags:
-    - cop
-    RegionId: 
-    Radius: 0
-    Anchor:
-      Kind: 2
-      NodeId: 
-      T: 0.5
-      Forward: 1
-      EdgeId: 
-      WorldPoint: {x: 4.53, y: -2.24}
-    AuthorId: fb0b885c85de4636a79f774ee984f80d
-    AuthorPath: CityAuthoringRoot/Cops/CopSpawn (2)
-  - Id: 8fe02844fd114551ac03d8947fb798da
-    DisplayName: 
-    Tags:
-    - cop
-    RegionId: 
-    Radius: 0
-    Anchor:
-      Kind: 2
-      NodeId: 
-      T: 0.5
-      Forward: 1
-      EdgeId: 
-      WorldPoint: {x: -0.93, y: 3.17}
-    AuthorId: 8fe02844fd114551ac03d8947fb798da
-    AuthorPath: CityAuthoringRoot/Cops/CopSpawn (3)
-  - Id: 2bee801b2f4f4251b2c1f1fbbeabd40c
-    DisplayName: 
-    Tags:
-    - cop
-    RegionId: 
-    Radius: 0
-    Anchor:
-      Kind: 2
-      NodeId: 
-      T: 0.5
-      Forward: 1
-      EdgeId: 
-      WorldPoint: {x: -6.11, y: 5.13}
-    AuthorId: 2bee801b2f4f4251b2c1f1fbbeabd40c
-    AuthorPath: CityAuthoringRoot/Cops/CopSpawn (4)
-  - Id: 5392e554feee4cfe831d630d41868306
-    DisplayName: 
-    Tags:
-    - cop
-    RegionId: 
-    Radius: 0
-    Anchor:
-      Kind: 2
-      NodeId: 
-      T: 0.5
-      Forward: 1
-      EdgeId: 
-      WorldPoint: {x: -12.32, y: 13.89}
-    AuthorId: 5392e554feee4cfe831d630d41868306
-    AuthorPath: CityAuthoringRoot/Cops/CopSpawn (5)
-  - Id: 2074d96a03144782bf43df619e763b5c
-    DisplayName: 
-    Tags:
-    - cop
-    RegionId: 
-    Radius: 0
-    Anchor:
-      Kind: 2
-      NodeId: 
-      T: 0.5
-      Forward: 1
-      EdgeId: 
-      WorldPoint: {x: -15.01, y: 20.89}
-    AuthorId: 2074d96a03144782bf43df619e763b5c
-    AuthorPath: CityAuthoringRoot/Cops/CopSpawn (6)
-  - Id: 02b8a5894d834d46bd9282865d32013a
-    DisplayName: 
-    Tags:
-    - cop
-    RegionId: 
-    Radius: 0
-    Anchor:
-      Kind: 2
-      NodeId: 
-      T: 0.5
-      Forward: 1
-      EdgeId: 
-      WorldPoint: {x: 2.4, y: 21.32}
-    AuthorId: 02b8a5894d834d46bd9282865d32013a
-    AuthorPath: CityAuthoringRoot/Cops/CopSpawn (7)

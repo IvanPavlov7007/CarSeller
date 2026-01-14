@@ -10,6 +10,10 @@ public class PoliceSpotLightVisuals : MonoBehaviour
     MeshRenderer meshRenderer;
     Mesh coneMesh;
 
+    [Header("Visuals")]
+    [Tooltip("Optional. If null, a simple material will be created at runtime.")]
+    [SerializeField] private Material coneMaterial;
+
     public void Intialize(PoliceUnit policeUnit)
     {
         this.policeUnit = policeUnit;
@@ -23,7 +27,45 @@ public class PoliceSpotLightVisuals : MonoBehaviour
         if (meshRenderer == null)
             meshRenderer = gameObject.AddComponent<MeshRenderer>();
 
+        // Ensure we have a valid material, otherwise Unity shows pink
+        EnsureMaterial();
+
         createVisualSlice();
+    }
+
+    private void EnsureMaterial()
+    {
+        // Prefer explicit serialized material if provided
+        if (coneMaterial != null)
+        {
+            meshRenderer.sharedMaterial = coneMaterial;
+            return;
+        }
+
+        // If meshRenderer already has a material assigned in the scene, keep it
+        if (meshRenderer.sharedMaterial != null)
+            return;
+
+        // Fallback: create a simple transparent material using a built‑in shader
+        var shader = Shader.Find("Sprites/Default");
+        if (shader == null)
+        {
+            shader = Shader.Find("Universal Render Pipeline/Unlit"); // if using URP
+        }
+
+        if (shader != null)
+        {
+            coneMaterial = new Material(shader)
+            {
+                color = new Color(1f, 1f, 1f, 0.3f) // default semi‑transparent
+            };
+            coneMaterial.name = "GeneratedPoliceConeMat";
+            meshRenderer.sharedMaterial = coneMaterial;
+        }
+        else
+        {
+            Debug.LogWarning("PoliceSpotLightVisuals: Could not find a suitable shader. Please assign a material manually.");
+        }
     }
 
     /// <summary>
@@ -34,14 +76,13 @@ public class PoliceSpotLightVisuals : MonoBehaviour
     {
         if (policeUnit == null || policeUnit.ConeVision == null) return;
 
-        float radius = policeUnit.ConeVision.Radius;
-        float angleDeg = policeUnit.ConeVision.Angle;
+        float radius = policeUnit.ConeVision.Settings.Radius;
+        float angleDeg = policeUnit.ConeVision.Settings.Angle;
         int segments = Mathf.Max(8, Mathf.RoundToInt(angleDeg / 5f)); // ~5° per segment
 
         coneMesh = new Mesh();
         coneMesh.name = "PoliceConeMesh";
 
-        // Vertices: center + arc points
         Vector3[] vertices = new Vector3[segments + 2];
         int[] triangles = new int[segments * 3];
 
@@ -56,14 +97,12 @@ public class PoliceSpotLightVisuals : MonoBehaviour
             float t = (float)i / segments;
             float ang = Mathf.Lerp(startAngle, endAngle, t);
 
-            // Cone is in local space, pointing along +Y (forward in this local 2D plane)
             float x = Mathf.Sin(ang) * radius;
             float y = Mathf.Cos(ang) * radius;
 
             vertices[i + 1] = new Vector3(x, y, 0);
         }
 
-        // Triangles: fan from center
         for (int i = 0; i < segments; i++)
         {
             int baseIndex = i * 3;
@@ -83,21 +122,6 @@ public class PoliceSpotLightVisuals : MonoBehaviour
     private void LateUpdate()
     {
         if (policeUnit == null || policeUnit.GraphMovement == null) return;
-
-        // Position this visual at the police unit's world position
-        // Assuming world is 2D in X‑Y and Z is constant.
-        var worldPos2D = policeUnit.CityPosition.WorldPosition;
-        transform.position = new Vector3(worldPos2D.x, worldPos2D.y, transform.position.z);
-
-        // Face it forward: GraphMovement.Up gives a 2D forward direction in world space.
-        Vector2 forward2D = policeUnit.GraphMovement.Up;
-        if (forward2D.sqrMagnitude > Mathf.Epsilon)
-        {
-            // Convert forward vector to angle around Z
-            float angleDeg = Mathf.Atan2(forward2D.x, forward2D.y) * Mathf.Rad2Deg;
-            // Our mesh is built pointing along +Y, so rotate around Z to match
-            transform.rotation = Quaternion.AngleAxis(angleDeg, Vector3.forward);
-        }
 
         // Optional: change color by police state
         if (meshRenderer != null && meshRenderer.sharedMaterial != null)

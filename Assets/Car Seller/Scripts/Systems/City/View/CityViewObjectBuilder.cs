@@ -28,7 +28,7 @@ public class CityViewObjectBuilder : ScriptableObject
                 return buildCityObject(warehouse);
             case Collectable collectable: // TODO ACHTUNG!!! generalize, since Collectable is a CityObject
                 return BuildCollectable(collectable);
-            case PoliceUnit policeUnit: // TODO ACHTUNG!!! generalize, since PoliceUnit is a CityObject, but also moving
+            case PoliceCityObject policeUnit: // TODO ACHTUNG!!! generalize, since PoliceUnit is a CityObject, but also moving
                 return buildPoliceUnit(policeUnit);
             case CityObject co:
                 return buildCityObject(co);
@@ -113,20 +113,23 @@ public class CityViewObjectBuilder : ScriptableObject
         return viewController;
     }
 
-    public CityViewObjectController buildPoliceUnit(PoliceUnit policeUnit)
+    public CityViewObjectController buildPoliceUnit(PoliceCityObject policeCityObject)
     {
+        var data = policeCityObject.Data as PoliceUnit;
+        //TODO fix the system: data and policeCityObject should be one object
+
         GameObject policeGO = Instantiate(policeUnitPrefab);
 
-        var location = CityLocatorHelper.GetCityLocation(policeUnit);
+        var location = CityLocatorHelper.GetCityLocation(policeCityObject);
 
         var viewController =
-            policeGO.AddComponent<CityViewObjectController>().Initialize(policeUnit);
+            policeGO.AddComponent<CityViewObjectController>().Initialize(policeCityObject);
         var rigidbody2D = policeGO.AddComponent<Rigidbody2D>();
         rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
-        policeGO.AddComponent<ContentProvider>().Initialize(policeUnit);
+        policeGO.AddComponent<ContentProvider>().Initialize(policeCityObject);
         policeGO.AddComponent<Interactable>().sortingOrder = 12;
-        policeGO.AddComponent<MovingPointSimpleView>().Initialize(policeUnit.GraphMovement);
-        policeGO.AddComponent<PoliceSpotLightVisuals>().Intialize(policeUnit);
+        policeGO.AddComponent<MovingPointSimpleView>().Initialize(data.GraphMovement);
+        policeGO.AddComponent<PoliceSpotLightVisuals>().Intialize(data);
         policeGO.AddComponent<ViewStateChanger>();
         return viewController;
     }

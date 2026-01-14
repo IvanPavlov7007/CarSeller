@@ -23,7 +23,7 @@ public static class CityGraphBaker
 
         var nodes = root.GetComponentsInChildren<RoadNodeAuthor>(true);
         var edges = root.GetComponentsInChildren<RoadEdgeAuthor>(true);
-        var markers = root.GetComponentsInChildren<CityMarkerAuthor>(true);
+        var markers = root.GetComponentsInChildren<CityMarkerAuthor>(false);
 
         foreach (var n in nodes)
         {

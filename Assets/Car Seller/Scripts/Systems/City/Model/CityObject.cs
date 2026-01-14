@@ -15,12 +15,15 @@ public class CityObject : ILocatable, IDestroyable
 
     public PinStyle PinStyle { get; set; }
 
-    public CityObject(string name, string infoText, ILocation location, City.CityMarker cityMarker, PinStyle pinStyle = null)
+    public object Data { get; set; }
+
+    public CityObject(string name, string infoText, ILocation location, City.CityMarker cityMarker, CityObjectData data = null, PinStyle pinStyle = null)
     {
         Name = name;
         InfoText = infoText;
-        this.CityMarker = cityMarker;
-        this.PinStyle = pinStyle;
+        CityMarker = cityMarker;
+        PinStyle = pinStyle;
+        Data = data;
 
         Debug.Assert(location != null);
         Debug.Assert(location is  City.CityLocation);
