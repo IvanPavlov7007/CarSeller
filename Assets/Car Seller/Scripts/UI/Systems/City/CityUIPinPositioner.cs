@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CityUIPinPositioner : MonoBehaviour
 {
@@ -12,19 +13,23 @@ public class CityUIPinPositioner : MonoBehaviour
 
     public float screenEdgeMargin = 50f;
     public float targetOnScreenMargin = 50f;
-    
+
+    CityUIPinDragHandler dragHandler;
+    Quaternion userRotation = Quaternion.identity;
 
     [SerializeField]
     RectTransform iconTransform;
     [SerializeField]
     RectTransform frameTransform;
     RectTransform rectTransform;
-
     Quaternion initialIconRotation;
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         initialIconRotation = iconTransform.rotation;
+        dragHandler = GetComponentInChildren<CityUIPinDragHandler>();
+        dragHandler.OnCustomDrag += OnDrag;
+        dragHandler.OnCustomBeginDrag += OnBeginDrag;
     }
 
     public void Initialize(Camera cam, Canvas canvas, Transform origin, Transform target)
@@ -72,6 +77,7 @@ public class CityUIPinPositioner : MonoBehaviour
             // Target off screen: clamp to screen edge
             Vector2 edgePoint = GetEdgePoint(directionToTarget, screenSize);
             screenPos = edgePoint - directionToTarget * screenEdgeMargin;
+            userRotation = Quaternion.identity; // reset user rotation when target is offscreen
         }
 
         // Convert screen position to canvas local position.
@@ -87,7 +93,7 @@ public class CityUIPinPositioner : MonoBehaviour
             out localPos);
 
         rectTransform.anchoredPosition = localPos;
-        rectTransform.up = -directionToTarget;
+        rectTransform.up = userRotation * - directionToTarget;
     }
 
     public static Vector2 worldScreenHalfSize(Camera cam)
@@ -143,6 +149,35 @@ public class CityUIPinPositioner : MonoBehaviour
 
         Vector2 edgeOffsetFromCenter = direction * tMax;
         return screenCenter + edgeOffsetFromCenter;
+    }
+
+    Vector2 previousDir;
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        previousDir = GetDirectionFromCenter(eventData.position);
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        Vector2 currentDir = GetDirectionFromCenter(eventData.position);
+
+        // angle between previous and current drag direction (signed around Z)
+        float deltaAngle = Vector2.SignedAngle(previousDir, currentDir);
+
+        userRotation *= Quaternion.Euler(0f, 0f, deltaAngle);
+
+        previousDir = currentDir;
+    }
+
+    Vector2 GetDirectionFromCenter(Vector2 screenPos)
+    {
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(
+            frameTransform,
+            screenPos,
+            cam,
+            out Vector3 worldPoint);
+        return (worldPoint - rectTransform.position).normalized;
     }
 
 }
