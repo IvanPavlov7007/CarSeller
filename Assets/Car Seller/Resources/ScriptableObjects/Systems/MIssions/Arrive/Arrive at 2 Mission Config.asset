@@ -37,7 +37,7 @@ MonoBehaviour:
       Data: 2|MissionLauncherConfig, Assembly-CSharp
     - Name: ctxDescription
       Entry: 1
-      Data: Start Mission 2
+      Data: Arrive at a chosen destination avoiding chase.
     - Name: pinStyle
       Entry: 7
       Data: 3|PinStyle, Assembly-CSharp
@@ -135,7 +135,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
       Data: 8|SpawnTargetEffect, Assembly-CSharp
@@ -155,6 +155,12 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 10|PoliceEffect, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -162,17 +168,17 @@ MonoBehaviour:
       Data: 
     - Name: SuccessConditions
       Entry: 7
-      Data: 10|System.Collections.Generic.List`1[[MissionCondition, Assembly-CSharp]],
+      Data: 11|System.Collections.Generic.List`1[[MissionCondition, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 11|ReachTargetCondition, Assembly-CSharp
+      Data: 12|ReachTargetCondition, Assembly-CSharp
     - Name: target
       Entry: 7
-      Data: 12|CityMarkerRef, Assembly-CSharp
+      Data: 13|CityMarkerRef, Assembly-CSharp
     - Name: Graph
       Entry: 6
       Data: 
@@ -193,14 +199,14 @@ MonoBehaviour:
       Data: 
     - Name: MissionCompleteEffects
       Entry: 7
-      Data: 13|System.Collections.Generic.List`1[[MissionEffect, Assembly-CSharp]],
+      Data: 14|System.Collections.Generic.List`1[[MissionEffect, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 14|UnlockMissionEffect, Assembly-CSharp
+      Data: 15|UnlockMissionEffect, Assembly-CSharp
     - Name: mission
       Entry: 10
       Data: 0
@@ -215,7 +221,7 @@ MonoBehaviour:
       Data: 
     - Name: FailConditions
       Entry: 7
-      Data: 15|System.Collections.Generic.List`1[[MissionCondition, Assembly-CSharp]],
+      Data: 16|System.Collections.Generic.List`1[[MissionCondition, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
@@ -228,14 +234,14 @@ MonoBehaviour:
       Data: 
     - Name: MissionFailEffects
       Entry: 7
-      Data: 16|System.Collections.Generic.List`1[[MissionEffect, Assembly-CSharp]],
+      Data: 17|System.Collections.Generic.List`1[[MissionEffect, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 17|ResetMissionEffect, Assembly-CSharp
+      Data: 18|ResetMissionEffect, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
@@ -247,14 +253,14 @@ MonoBehaviour:
       Data: 
     - Name: RewardBundles
       Entry: 7
-      Data: 18|System.Collections.Generic.List`1[[RewardBundle, Assembly-CSharp]],
+      Data: 19|System.Collections.Generic.List`1[[RewardBundle, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 19|CurrencyRewardBundle, Assembly-CSharp
+      Data: 20|CurrencyRewardBundle, Assembly-CSharp
     - Name: amount
       Entry: 3
       Data: 1200

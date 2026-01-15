@@ -37,7 +37,7 @@ MonoBehaviour:
       Data: 2|MissionLauncherConfig, Assembly-CSharp
     - Name: ctxDescription
       Entry: 1
-      Data: Start Mission 1 BBBBBB
+      Data: Collect as much money as you can during a time period.
     - Name: pinStyle
       Entry: 7
       Data: 3|PinStyle, Assembly-CSharp
@@ -138,19 +138,13 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 8|SpawnTargetEffect, Assembly-CSharp
-    - Name: targetMarker
-      Entry: 7
-      Data: 9|CityMarkerRef, Assembly-CSharp
-    - Name: Graph
-      Entry: 6
-      Data: 
-    - Name: MarkerId
-      Entry: 1
-      Data: target_birive_1
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 8|SpawnMoneyCollectablesEffect, Assembly-CSharp
+    - Name: reward
+      Entry: 4
+      Data: 50
+    - Name: count
+      Entry: 3
+      Data: 15
     - Name: 
       Entry: 8
       Data: 
@@ -162,26 +156,17 @@ MonoBehaviour:
       Data: 
     - Name: SuccessConditions
       Entry: 7
-      Data: 10|System.Collections.Generic.List`1[[MissionCondition, Assembly-CSharp]],
+      Data: 9|System.Collections.Generic.List`1[[MissionCondition, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 11|ReachTargetCondition, Assembly-CSharp
-    - Name: target
-      Entry: 7
-      Data: 12|CityMarkerRef, Assembly-CSharp
-    - Name: Graph
-      Entry: 6
-      Data: 
-    - Name: MarkerId
-      Entry: 1
-      Data: target_birive_1
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 10|TimeElapsedCondition, Assembly-CSharp
+    - Name: requiredTimeSeconds
+      Entry: 4
+      Data: 30
     - Name: 
       Entry: 8
       Data: 
@@ -193,14 +178,14 @@ MonoBehaviour:
       Data: 
     - Name: MissionCompleteEffects
       Entry: 7
-      Data: 13|System.Collections.Generic.List`1[[MissionEffect, Assembly-CSharp]],
+      Data: 11|System.Collections.Generic.List`1[[MissionEffect, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 14|UnlockMissionEffect, Assembly-CSharp
+      Data: 12|UnlockMissionEffect, Assembly-CSharp
     - Name: mission
       Entry: 10
       Data: 0
@@ -215,7 +200,7 @@ MonoBehaviour:
       Data: 
     - Name: FailConditions
       Entry: 7
-      Data: 15|System.Collections.Generic.List`1[[MissionCondition, Assembly-CSharp]],
+      Data: 13|System.Collections.Generic.List`1[[MissionCondition, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
@@ -228,14 +213,14 @@ MonoBehaviour:
       Data: 
     - Name: MissionFailEffects
       Entry: 7
-      Data: 16|System.Collections.Generic.List`1[[MissionEffect, Assembly-CSharp]],
+      Data: 14|System.Collections.Generic.List`1[[MissionEffect, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 17|ResetMissionEffect, Assembly-CSharp
+      Data: 15|ResetMissionEffect, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
@@ -247,17 +232,17 @@ MonoBehaviour:
       Data: 
     - Name: RewardBundles
       Entry: 7
-      Data: 18|System.Collections.Generic.List`1[[RewardBundle, Assembly-CSharp]],
+      Data: 16|System.Collections.Generic.List`1[[RewardBundle, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 19|CurrencyRewardBundle, Assembly-CSharp
+      Data: 17|CurrencyRewardBundle, Assembly-CSharp
     - Name: amount
       Entry: 3
-      Data: 900
+      Data: 100
     - Name: 
       Entry: 8
       Data: 
