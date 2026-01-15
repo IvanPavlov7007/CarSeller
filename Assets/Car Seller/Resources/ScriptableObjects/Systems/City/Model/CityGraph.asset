@@ -2472,3 +2472,108 @@ MonoBehaviour:
       WorldPoint: {x: 1.1, y: 1.73}
     AuthorId: 658f49a8fdff41e58d65370cfa582535
     AuthorPath: CityAuthoringRoot/Cops/CopSpawn
+  - Id: 43ec0fe44409417f9cb49b6be9796c38
+    DisplayName: 
+    Tags:
+    - cop
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 0.18, y: 0.23}
+    AuthorId: 43ec0fe44409417f9cb49b6be9796c38
+    AuthorPath: CityAuthoringRoot/Cops/CopSpawn (1)
+  - Id: fb0b885c85de4636a79f774ee984f80d
+    DisplayName: 
+    Tags:
+    - cop
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 4.53, y: -2.24}
+    AuthorId: fb0b885c85de4636a79f774ee984f80d
+    AuthorPath: CityAuthoringRoot/Cops/CopSpawn (2)
+  - Id: 8fe02844fd114551ac03d8947fb798da
+    DisplayName: 
+    Tags:
+    - cop
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -0.93, y: 3.17}
+    AuthorId: 8fe02844fd114551ac03d8947fb798da
+    AuthorPath: CityAuthoringRoot/Cops/CopSpawn (3)
+  - Id: 2bee801b2f4f4251b2c1f1fbbeabd40c
+    DisplayName: 
+    Tags:
+    - cop
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -6.11, y: 5.13}
+    AuthorId: 2bee801b2f4f4251b2c1f1fbbeabd40c
+    AuthorPath: CityAuthoringRoot/Cops/CopSpawn (4)
+  - Id: 5392e554feee4cfe831d630d41868306
+    DisplayName: 
+    Tags:
+    - cop
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -12.32, y: 13.89}
+    AuthorId: 5392e554feee4cfe831d630d41868306
+    AuthorPath: CityAuthoringRoot/Cops/CopSpawn (5)
+  - Id: 2074d96a03144782bf43df619e763b5c
+    DisplayName: 
+    Tags:
+    - cop
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -15.01, y: 20.89}
+    AuthorId: 2074d96a03144782bf43df619e763b5c
+    AuthorPath: CityAuthoringRoot/Cops/CopSpawn (6)
+  - Id: 02b8a5894d834d46bd9282865d32013a
+    DisplayName: 
+    Tags:
+    - cop
+    RegionId: 
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: 2.4, y: 21.32}
+    AuthorId: 02b8a5894d834d46bd9282865d32013a
+    AuthorPath: CityAuthoringRoot/Cops/CopSpawn (7)

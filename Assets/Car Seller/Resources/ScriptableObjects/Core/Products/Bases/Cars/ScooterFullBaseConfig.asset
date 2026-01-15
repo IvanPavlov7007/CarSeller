@@ -303,5 +303,5 @@ MonoBehaviour:
   Name: Scooter
   BasePrice: 500
   Speed: 1.6
-  Acceleration: 1.5
+  Acceleration: 1.8
   CarFrameBaseConfig: {fileID: 11400000, guid: f433a4c679feaa145bf58e41793fc89b, type: 2}

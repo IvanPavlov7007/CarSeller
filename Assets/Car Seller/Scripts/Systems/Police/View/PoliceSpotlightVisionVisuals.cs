@@ -1,8 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-public class PoliceSpotLightVisuals : MonoBehaviour
+public class PoliceSpotlightVisionVisuals : MonoBehaviour
 {
+    PoliceStateViewController policeStateViewController;
     PoliceUnit policeUnit;
     SpotlightColors spotlightColors => PoliceManager.Instance.SpotlightColors;
 
@@ -14,9 +15,11 @@ public class PoliceSpotLightVisuals : MonoBehaviour
     [Tooltip("Optional. If null, a simple material will be created at runtime.")]
     [SerializeField] private Material coneMaterial;
 
-    public void Intialize(PoliceUnit policeUnit)
+    public void Intialize(PoliceUnit policeUnit, PoliceStateViewController policeStateViewController)
     {
         this.policeUnit = policeUnit;
+        this.policeStateViewController = policeStateViewController;
+        policeStateViewController.OnStateChanged += stateUpdate;
 
         // Ensure we have required components
         meshFilter = GetComponent<MeshFilter>();
@@ -31,6 +34,8 @@ public class PoliceSpotLightVisuals : MonoBehaviour
         EnsureMaterial();
 
         createVisualSlice();
+
+        stateUpdate(policeStateViewController.currentState());
     }
 
     private void EnsureMaterial()
@@ -119,7 +124,7 @@ public class PoliceSpotLightVisuals : MonoBehaviour
         meshFilter.sharedMesh = coneMesh;
     }
 
-    private void LateUpdate()
+    private void stateUpdate(PoliceUnitState state)
     {
         if (policeUnit == null || policeUnit.GraphMovement == null) return;
 
@@ -127,7 +132,7 @@ public class PoliceSpotLightVisuals : MonoBehaviour
         if (meshRenderer != null && meshRenderer.sharedMaterial != null)
         {
             Color c = spotlightColors.idle;
-            switch (policeUnit.State)
+            switch (state)
             {
                 case PoliceUnitState.Chase:
                     c = spotlightColors.chase;

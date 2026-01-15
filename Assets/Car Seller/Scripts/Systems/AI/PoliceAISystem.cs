@@ -7,88 +7,91 @@ using CityPosition = City.CityPosition;
 using Random = UnityEngine.Random;
 public class PoliceAISystem
 {
-    public void UpdateState(PoliceAIStateMachine state)
+    public void UpdateState(PoliceAIContext state)
     {
         checkForSuspect(state);
         updateUnits(state);
     }
 
-    void checkForSuspect(PoliceAIStateMachine stateMachine)
+    void checkForSuspect(PoliceAIContext stateMachine)
     {
-        List<PoliceUnitAIData> unitsSeeingSuspect = new List<PoliceUnitAIData>();
-        List<PoliceUnitAIData> tryingToRelocateUnits = new List<PoliceUnitAIData>();
+        var unitsSeeingSuspect = new List<PoliceUnitAIData>();
+        var tryingToRelocateUnits = new List<PoliceUnitAIData>();
+        var lastSeenPositionReached = false;
 
-        foreach (var unit in stateMachine.policeUnits)
+        foreach (var unit in stateMachine.PoliceUnits)
         {
             if (unit.Vision.CanSeeTarget(stateMachine.SuspectRealPosition))
             {
                 unitsSeeingSuspect.Add(unit);
             }
         }
-        // If any unit can see the suspect, transition to Chase state
+
         if (unitsSeeingSuspect.Count > 0)
         {
-            foreach (var unit in stateMachine.policeUnits)
+            // Suspect visible: Chase/Backup
+            foreach (var unit in stateMachine.PoliceUnits)
             {
-                if (unitsSeeingSuspect.Contains(unit))
-                {
-                    unit.State = PoliceUnitState.Chase;
-                }
-                else
-                {
-                    unit.State = PoliceUnitState.Backup;
-                }
+                unit.State = unitsSeeingSuspect.Contains(unit)
+                    ? PoliceUnitState.Chase
+                    : PoliceUnitState.Backup;
             }
+
             updateLastSeenPosition(stateMachine, stateMachine.SuspectRealPosition);
+            stateMachine.State = PoliceAISystemState.Chase;
+            return;
+        }
+
+        // No one sees the suspect: TryRelocate / Calm handling
+        foreach (var unit in stateMachine.PoliceUnits)
+        {
+            switch (unit.State)
+            {
+                case PoliceUnitState.Chase:
+                case PoliceUnitState.Backup:
+                    unit.State = PoliceUnitState.TryRelocate;
+                    tryingToRelocateUnits.Add(unit);
+                    break;
+
+                case PoliceUnitState.TryRelocate:
+                    tryingToRelocateUnits.Add(unit);
+                    break;
+
+                case PoliceUnitState.Calm:
+                    break;
+
+                default:
+                    Debug.LogWarning("Unhandled PoliceUnitState in checkForSuspect: " + unit.State + " of " + unit);
+                    break;
+            }
+
+            if (stateMachine.SuspectLastSeenPosition.HasValue &&
+                unitPositionCheckedSuspectPosition(unit.CityPosition, stateMachine.SuspectLastSeenPosition.Value))
+            {
+                lastSeenPositionReached = true;
+            }
+        }
+
+        if (tryingToRelocateUnits.Count > 0 && !lastSeenPositionReached)
+        {
+            // Still trying to relocate around last seen position
             stateMachine.State = PoliceAISystemState.Chase;
         }
         else
         {
-            foreach (var unit in stateMachine.policeUnits)
-            {
-                switch (unit.State)
-                {
-                    case PoliceUnitState.Chase:
-                    case PoliceUnitState.Backup:
-                        unit.State = PoliceUnitState.TryRelocate;
-                        tryingToRelocateUnits.Add(unit);
-                        break;
-                    case PoliceUnitState.TryRelocate:
-                            tryingToRelocateUnits.Add(unit);
-                        break;
-                    case PoliceUnitState.Calm:
-                        break;
-                    default:
-                        Debug.LogWarning("Unhandled PoliceUnitState in checkForSuspect: " + unit.State + "of " + unit);
-                        break;
-                }
-                if (stateMachine.State == PoliceAISystemState.Chase &&
-                    unitPositionCheckedSuspectPosition(unit.CityPosition, stateMachine.SuspectLastSeenPosition.Value))
-                {
-                    // if unit has reached last seen position and no suspect has been spotted, go calm
-                    tryingToRelocateUnits.Clear();
-                    break;
-                }
-            }
+            // Gave up: suspect lost, calm down and seek again
+            resetLastSeenPosition(stateMachine);
+            stateMachine.State = PoliceAISystemState.Seek;
 
-            if (tryingToRelocateUnits.Count > 0)
+            foreach (var unit in stateMachine.PoliceUnits)
             {
-                stateMachine.State = PoliceAISystemState.Chase;
-            }
-            else
-            {
-                resetLastSeenPosition(stateMachine);
-                stateMachine.State = PoliceAISystemState.Seek;
-                foreach (var unit in stateMachine.policeUnits)
-                {
-                    unit.State = PoliceUnitState.Calm;
-                }
+                unit.State = PoliceUnitState.Calm;
             }
         }
     }
-    void updateUnits(PoliceAIStateMachine stateMachine)
+    void updateUnits(PoliceAIContext stateMachine)
     {
-        foreach(var unit in stateMachine.policeUnits)
+        foreach(var unit in stateMachine.PoliceUnits)
         {
             switch (unit.State)
             {
@@ -114,26 +117,21 @@ public class PoliceAISystem
 
     bool unitPositionCheckedSuspectPosition(CityPosition unitPosition, CityPosition suspectPosition)
     {
-        if(suspectPosition.Edge != null)
-        {
-            return unitPosition.Edge == suspectPosition.Edge;
-        }
-        else if(suspectPosition.Node != null)
-        {
-            // suspect position is on a node
-            return unitPosition.Node == suspectPosition.Node;
-        }
-        Debug.LogWarning("Suspect position is neither on an edge nor a node.");
-        return false;
+        const float reachedThreshold = 1.0f; // tune this
+
+        var unitPos = unitPosition.WorldPosition;
+        var suspectPos = suspectPosition.WorldPosition;
+
+        return Vector2.Distance(unitPos, suspectPos) <= reachedThreshold;
     }
 
-    private void updateUnitCalm(PoliceUnitAIData unit, PoliceAIStateMachine stateMachine)
+    private void updateUnitCalm(PoliceUnitAIData unit, PoliceAIContext stateMachine)
     {
         unit.Movement.TempoState = TempoState.Slow;
         unit.TargetPosition = null;
     }
 
-    private void updateUnitTryRelocate(PoliceUnitAIData unit, PoliceAIStateMachine stateMachine)
+    private void updateUnitTryRelocate(PoliceUnitAIData unit, PoliceAIContext stateMachine)
     {
         unit.Movement.TempoState = TempoState.Medium;
         var edge = stateMachine.SuspectLastSeenPosition?.Edge;
@@ -156,33 +154,33 @@ public class PoliceAISystem
         
     }
 
-    private void updateUnitBackup(PoliceUnitAIData unit, PoliceAIStateMachine stateMachine)
+    private void updateUnitBackup(PoliceUnitAIData unit, PoliceAIContext stateMachine)
     {
         //for now
         updateUnitCalm(unit, stateMachine);
     }
 
-    private void updateUnitChase(PoliceUnitAIData unit, PoliceAIStateMachine stateMachine)
+    private void updateUnitChase(PoliceUnitAIData unit, PoliceAIContext stateMachine)
     {
         unit.Movement.TempoState = TempoState.Fast;
         unit.TargetPosition = stateMachine.SuspectRealPosition.WorldPosition;
     }
 
-    private void updateLastSeenPosition(PoliceAIStateMachine stateMachine, CityPosition suspectPosition)
+    private void updateLastSeenPosition(PoliceAIContext stateMachine, CityPosition suspectPosition)
     {
         // Update the last seen edge based on the suspect's position
         // if suspect is on a node, equivalently set to null
         stateMachine.SuspectLastSeenPosition = suspectPosition;
     }
 
-    private void resetLastSeenPosition(PoliceAIStateMachine stateMachine)
+    private void resetLastSeenPosition(PoliceAIContext stateMachine)
     {
         stateMachine.SuspectLastSeenPosition = null;
     }
 
-    public TempoState OnEdge(PoliceAIStateMachine stateMachine, PoliceUnitAIData unit, RoadEdge edge)
+    public TempoState OnEdge(PoliceAIContext stateMachine, PoliceUnitAIData unit, RoadEdge edge)
     {
-        // for now, just return current tempo
+        // Extension point: adjust tempo based on edge characteristics, system state, personality, etc.
         return unit.Movement.TempoState;
     }
 
@@ -194,7 +192,7 @@ public class PoliceAISystem
     /// <param name="turnNode"></param>
     /// <param name="lastEdge"></param>
     /// <returns> preferred edge to go further, null to stay on the node</returns>
-    public RoadEdge PickTurn(PoliceAIStateMachine stateMachine, PoliceUnitAIData unit,
+    public RoadEdge PickTurn(PoliceAIContext stateMachine, PoliceUnitAIData unit,
         RoadNode turnNode, RoadEdge lastEdge)
     {
         Debug.Assert(stateMachine != null);
@@ -246,6 +244,11 @@ public class PoliceAISystem
             else
                 edgeDistances.Add((edge, distance));
         }
+        if (edgeDistances.Count == 0)
+        {
+            // No outgoing edges found; fallback
+            return lastEdge;
+        }
 
         edgeDistances.Sort((a, b) => a.Item2.CompareTo(b.Item2));
         if (lastEdge != null)
@@ -259,17 +262,17 @@ public class PoliceAISystem
 }
 
 
-public class PoliceAIStateMachine
+public class PoliceAIContext
 {
-    public PoliceUnitAIData[] policeUnits = new PoliceUnitAIData[0];
-    public CityPosition SuspectRealPosition;
-    public float CloseInDistance = 20f;
-    public CityPosition? SuspectLastSeenPosition { get; set; } // for suspect state
-    public PoliceAISystemState State;
+    public PoliceUnitAIData[] PoliceUnits { get; }
+    public CityPosition SuspectRealPosition { get; set; }
+    public float CloseInDistance { get; set; } = 20f;
+    public CityPosition? SuspectLastSeenPosition { get; set; }
+    public PoliceAISystemState State { get; set; }
 
-    public PoliceAIStateMachine(PoliceUnitAIData[] policeUnits)
+    public PoliceAIContext(PoliceUnitAIData[] policeUnits)
     {
-        this.policeUnits = policeUnits;
+        PoliceUnits = policeUnits ?? Array.Empty<PoliceUnitAIData>();
         State = PoliceAISystemState.Seek;
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class LightsVisuals : MonoBehaviour
+public class PoliceLightsVisuals : MonoBehaviour
 {
     [SerializeField]
     GameObject redLight;
@@ -13,9 +13,17 @@ public class LightsVisuals : MonoBehaviour
     [ShowInInspector]
     public bool LightsOn { get; private set; } = true;
 
-    const float lightSwitchInterval = 0.5f;
+    const float lightSwitchIntervalSlow = 0.5f;
+    const float lightSwitchIntervalFast = 0.3f;
+
+    float lightSwitchInterval =0.4f;
 
     Coroutine _lightsRoutine;
+
+    private void Awake()
+    {
+        lightSwitchInterval = Random.Range(lightSwitchIntervalSlow, lightSwitchIntervalFast);
+    }
 
     void OnEnable()
     {
@@ -83,6 +91,7 @@ public class LightsVisuals : MonoBehaviour
 
     IEnumerator LightsLoop()
     {
+        yield return new WaitForSeconds(Random.value * 0.4f);
         // Basic alternating flash between red and blue.
         while (LightsOn)
         {

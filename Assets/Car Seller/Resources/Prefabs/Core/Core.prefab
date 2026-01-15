@@ -193,8 +193,8 @@ MonoBehaviour:
     Angle: 30
   policeSpeedVariations:
     Slow: 0.5
-    Medium: 0.8
-    Fast: 1.2
+    Medium: 0.7
+    Fast: 0.9
 --- !u!1 &2903524728252451106
 GameObject:
   m_ObjectHideFlags: 0

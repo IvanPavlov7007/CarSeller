@@ -6,7 +6,7 @@ using UnityEngine;
 public class PoliceManager : Singleton<PoliceManager>
 {
     PoliceAISystem aiSystem = new PoliceAISystem();
-    PoliceAIStateMachine stateMachine;
+    PoliceAIContext stateMachine;
 
     List<PoliceCityObject> policeUnits = new List<PoliceCityObject>();
     public SpotlightColors SpotlightColors;
@@ -51,7 +51,7 @@ public class PoliceManager : Singleton<PoliceManager>
             policeUnits.Add(CreateUnit(location));
         }
 
-        stateMachine = new PoliceAIStateMachine(policeUnits.Select(item=>item.Data as PoliceUnit).ToArray());
+        stateMachine = new PoliceAIContext(policeUnits.Select(item=>item.Data as PoliceUnit).ToArray());
     }
 
 

@@ -54,7 +54,7 @@ public class PoliceUnit : PoliceUnitAIData, CityObjectData
         Location.SetCityPosition(CityPosition.On(positionData.Edge,t, forward));
     }
 
-    internal void Update(float deltaTime, PoliceAISystem aiSystem, PoliceAIStateMachine stateMachine)
+    internal void Update(float deltaTime, PoliceAISystem aiSystem, PoliceAIContext stateMachine)
     {
         var positionData = CityPosition;
         RoadNode a = positionData.Node;//Anchor node - node from which we move from
