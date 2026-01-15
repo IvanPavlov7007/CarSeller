@@ -45,18 +45,6 @@ public sealed class FreeRoamCityTriggerProfile : ICityTriggerProfile
         if (ctx.TriggerCause != freeRoamGameState.FocusedCar)
             return new TriggerAction(false, null);
         Car car = ctx.TriggerCause as Car;
-
-        if (ctx.Trigger is Collectable collectable)
-        {
-            return new TriggerAction
-            (
-                true,
-                () =>
-                {
-                    collectable.Collect();
-                }
-            );
-        }
         if (ctx.Trigger is Warehouse warehouse)
         {
             // prevent instant re-entry after leaving warehouse ---

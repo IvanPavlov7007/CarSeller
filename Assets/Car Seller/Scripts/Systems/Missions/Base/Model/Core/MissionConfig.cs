@@ -67,6 +67,7 @@ public abstract class MissionEffect
 public abstract class RewardBundle
 {
     public abstract Transaction CreateTransaction();
+    public abstract string GetRewardDescription();
 }
 
 [Serializable]
@@ -92,4 +93,9 @@ public class PinStyle
 public interface IResettable
 {
     void Reset();
+}
+
+public interface IExplainable
+{
+    string GetExplanation();
 }

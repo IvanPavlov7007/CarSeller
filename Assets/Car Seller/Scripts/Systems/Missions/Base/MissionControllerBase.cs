@@ -38,6 +38,7 @@ public abstract class MissionControllerBase
         eventBus.Subscribe<ResetMissionRequestEvent>(onMissionResetRequestEvent);
         eventBus.Subscribe<SpawnTargetMissionRequestEvent>(onSpawnTargetMissionRequestEvent);
         eventBus.Subscribe<SpawnMissionLauncherRequestEvent>(onSpawnMissionLauncherRequestEvent);
+        eventBus.Subscribe<SpawnMoneyCollectablesRequestEvent>(onSpawnMoneyCollectablesRequestEvent);
         eventBus.Subscribe<PoliceRequestEvent>(onPoliceRequestEvent);
 
     }
@@ -145,11 +146,12 @@ public abstract class MissionControllerBase
     {
         //TODO Be careful with resetting by overwriting the runtime. Consider preserving some state if needed
         // Check if we need to do any cleanup before resetting or is it possible to reset directly
-        runtimes[requestEvent.toReset].Reset();
+        runtimes[requestEvent.toReset] = new MissionRuntime(requestEvent.toReset, eventBus);
         runtimes[requestEvent.toReset].Unlock();
     }
     protected abstract void onSpawnTargetMissionRequestEvent(SpawnTargetMissionRequestEvent requestEvent);
     protected abstract void onSpawnMissionLauncherRequestEvent(SpawnMissionLauncherRequestEvent requestEvent);
+    protected abstract void onSpawnMoneyCollectablesRequestEvent(SpawnMoneyCollectablesRequestEvent requestEvent);
     protected abstract void onPoliceRequestEvent(PoliceRequestEvent requestEvent);
 
     // Game Events Funneling
@@ -198,7 +200,8 @@ public abstract class MissionControllerBase
 
     private void processSingleEvent(GameEventData gameEventData)
     {
-        foreach (var runtime in runtimes.Values)
+        var snapshotRuntimes = new List<MissionRuntime>(runtimes.Values);
+        foreach (var runtime in snapshotRuntimes)
         {
             runtime.OnEvent(gameEventData);
         }

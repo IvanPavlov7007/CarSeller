@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -102,7 +103,18 @@ public class MissionController : MissionControllerBase
                 requestEvent.Mission);
         registerMissionObject(requestEvent.Mission, missionLauncher);
     }
-
+    protected override void onSpawnMoneyCollectablesRequestEvent(SpawnMoneyCollectablesRequestEvent requestEvent)
+    {
+        var markers = G.City.QueryMarkers("cash");
+        var locations = markers.Select(a => (G.City.GetEmptyLocation(a.PositionOnGraph.Value),a)).ToArray();
+        locations.Shuffle();
+        for (int i = 0; i < requestEvent.count; i++)
+        {
+            var collectable = new Collectable { MoneyAmount = requestEvent.reward };
+            var co = new CollectableCityObject(collectable, locations[i].Item1, locations[i].a);
+            registerMissionObject(requestEvent.Mission, co);
+        }
+    }
     protected override void onPoliceRequestEvent(PoliceRequestEvent requestEvent)
     {
         var policeWrapper = new PoliceMissionWrapper();

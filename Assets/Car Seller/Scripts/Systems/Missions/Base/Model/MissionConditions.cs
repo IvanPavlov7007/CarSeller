@@ -96,7 +96,7 @@ public class TimeElapsedCondition : MissionCondition
     {
         return new TimeElapsedConditionRuntime(requiredTimeSeconds, missionRuntime);
     }
-    public class TimeElapsedConditionRuntime : MissionConditionRuntime
+    public class TimeElapsedConditionRuntime : MissionConditionRuntime, IExplainable
     {
         private float requiredTimeSeconds;
         private float elapsedTime = 0f;
@@ -121,6 +121,11 @@ public class TimeElapsedCondition : MissionCondition
         {
             elapsedTime = 0f;
         }
+
+        public string GetExplanation()
+        {
+            return "Time has run out";
+        }
     }
 }
 internal class TimePassEvent : GameEventData
@@ -139,7 +144,8 @@ public class BustedCondition : MissionCondition
     {
         return new BustedConditionRuntime(missionRuntime);
     }
-    public class BustedConditionRuntime : MissionConditionRuntime
+
+    public class BustedConditionRuntime : MissionConditionRuntime, IExplainable
     {
         private bool isBusted = false;
         public BustedConditionRuntime(MissionRuntime missionRuntime)
@@ -161,6 +167,11 @@ public class BustedCondition : MissionCondition
         public override void Reset()
         {
             isBusted = false;
+        }
+
+        public string GetExplanation()
+        {
+            return "Player got busted by cops";
         }
     }
 }

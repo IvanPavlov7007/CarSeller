@@ -26,7 +26,7 @@ public class CityViewObjectBuilder : ScriptableObject
                 return buildCar(car);
             case Warehouse warehouse:
                 return buildCityObject(warehouse);
-            case Collectable collectable: // TODO ACHTUNG!!! generalize, since Collectable is a CityObject
+            case CollectableCityObject collectable: // TODO ACHTUNG!!! generalize, since Collectable is a CityObject
                 return BuildCollectable(collectable);
             case PoliceCityObject policeUnit: // TODO ACHTUNG!!! generalize, since PoliceUnit is a CityObject, but also moving
                 return buildPoliceUnit(policeUnit);
@@ -38,7 +38,7 @@ public class CityViewObjectBuilder : ScriptableObject
         }
     }
 
-    public CityViewObjectController BuildCollectable(Collectable collectable)
+    public CityViewObjectController BuildCollectable(CollectableCityObject collectable)
     {
         var location = CityLocatorHelper.GetCityLocation(collectable);
         var pos = location.CityPosition.WorldPosition;

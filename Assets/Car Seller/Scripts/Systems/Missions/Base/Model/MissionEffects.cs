@@ -50,3 +50,15 @@ public class PoliceEffect : MissionEffect
     }
 }
 
+
+[Serializable]
+public class SpawnMoneyCollectablesEffect : MissionEffect
+{
+    public float reward = 50f;
+    public int count = 20;
+    public override void Apply(MissionEffectContext context)
+    {
+        context.EventBus.Emit(new SpawnMoneyCollectablesRequestEvent(context.Mission, reward, count));
+    }
+}
+

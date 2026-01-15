@@ -26,6 +26,15 @@ public class GlobalCreationService
             );
     }
 
+    public CollectableCityObject CreateCollectableCityObject(Collectable collectable, CityMarkerRef positionRef, PinStyle pinStyle)
+    {
+        return new CollectableCityObject(
+            collectable,
+            createLocationFromMarkerRef(positionRef, out var marker),
+            marker
+            );
+    }
+
     ILocation createLocationFromMarkerRef(CityMarkerRef markerRef, out City.CityMarker marker)
     {
         if (!G.City.TryGetMarker(markerRef.MarkerId, out marker))

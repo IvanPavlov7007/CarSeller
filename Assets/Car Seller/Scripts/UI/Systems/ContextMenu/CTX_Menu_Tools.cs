@@ -30,12 +30,12 @@ public static class CTX_Menu_Tools
         };
     }
 
-    static string FormatPrice(float price)
+    public static string FormatPrice(float price)
     {
         return price.ToString("C0", CultureInfo.CurrentCulture);
     }
 
-    static string FormatPriceWithSign(float price)
+    public static string FormatPriceWithSign(float price)
     {
         string numbs = FormatPrice(Math.Abs(price));
         if(price > 0)
@@ -247,12 +247,19 @@ public static class CTX_Menu_Tools
 
     public static UIElement MissionCompletedInfo(MissionRuntime mission)
     {
+        var rewardsText = "";
+        foreach(var rewardBundle in mission.RewardBundles)
+        {
+            rewardsText += $"- {rewardBundle.GetRewardDescription()}\n";
+        }
+
         return new UIElement
         {
             Type = UIElementType.Container,
             Children = new List<UIElement>()
             {
                 Header($"Mission {mission.Config.MissionId} Completed!"),
+                Description("Rewards:\n" + rewardsText),
                 new UIElement
                 {
                     Type = UIElementType.Button,
@@ -268,12 +275,29 @@ public static class CTX_Menu_Tools
 
     internal static UIElement MissionFailedInfo(MissionRuntime mission)
     {
+        var failureReasonsText = "";
+        foreach (var failureCondition in mission.failureConditions)
+        {
+            Debug.Log($"Checking failure condition: {failureCondition.GetType().Name}, IsSatisfied: {failureCondition.IsSatisfied()}");
+            if (failureCondition.IsSatisfied())
+            {
+                if (failureCondition is IExplainable expl)
+                {
+                    failureReasonsText += $"- {expl.GetExplanation()}\n";
+                }
+                else
+                {
+                    Debug.LogWarning($"Mission failure condition {failureCondition.GetType().Name} does not implement IExplainable, cannot get explanation text.");
+                }
+            }
+        }
         return new UIElement
         {
             Type = UIElementType.Container,
             Children = new List<UIElement>()
             {
                 Header($"Mission {mission.Config.MissionId} Failed!"),
+                Description("Failure reasons:\n" + failureReasonsText),
                 new UIElement
                 {
                     Type = UIElementType.Button,

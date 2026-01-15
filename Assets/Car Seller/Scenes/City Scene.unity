@@ -3647,6 +3647,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3917223707451522572, guid: 3bb751e67a1aa4b47a57aa37d0c30943, type: 3}
+      propertyPath: UsedContextMenuColor.a
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3917223707451522572, guid: 3bb751e67a1aa4b47a57aa37d0c30943, type: 3}
+      propertyPath: UsedContextMenuColor.b
+      value: 0.15686275
+      objectReference: {fileID: 0}
+    - target: {fileID: 3917223707451522572, guid: 3bb751e67a1aa4b47a57aa37d0c30943, type: 3}
+      propertyPath: UsedContextMenuColor.g
+      value: 0.15686275
+      objectReference: {fileID: 0}
+    - target: {fileID: 3917223707451522572, guid: 3bb751e67a1aa4b47a57aa37d0c30943, type: 3}
+      propertyPath: UsedContextMenuColor.r
+      value: 0.15686275
+      objectReference: {fileID: 0}
     - target: {fileID: 3976832298006422418, guid: 3bb751e67a1aa4b47a57aa37d0c30943, type: 3}
       propertyPath: MoneyWorldEffectPrefab
       value: 

@@ -13,11 +13,19 @@ public class FixedContextMenuManager : Singleton<FixedContextMenuManager>
     public SimpleUIBuilder UIBuilder;
     public HashSet<PopUpContextMenu> activeMenus = new HashSet<PopUpContextMenu>();
 
-
+    [Header("Context Menu Visuals")]
+    [SerializeField]
+    private Color UsedContextMenuColor = Color.white;
     public void CreateContextMenu(UIElement content)
     {
         GameObject panel = Instantiate(fixedPopUpMenuPrefab, FixedContextMenuCanvas.Instance.Canvas.transform);
         RectTransform panelTransform = panel.GetComponent<RectTransform>();
+        //Set panel color
+        var image = panelTransform.GetComponent<Image>();
+        if (image != null)
+        {
+            image.color = UsedContextMenuColor;
+        }
         var contentTransform = getContentTransform(panel);
         UIBuilder.Build(content, contentTransform);
         var menu = createContextMenu(panel, content.blockingInput);

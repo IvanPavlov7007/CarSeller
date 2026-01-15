@@ -195,6 +195,7 @@ MonoBehaviour:
     Slow: 0.5
     Medium: 0.7
     Fast: 0.9
+  stopDistanceToSuspect: 0.3
 --- !u!1 &2903524728252451106
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,6 +781,7 @@ MonoBehaviour:
   _dontDestroyOnLoad: 0
   fixedPopUpMenuPrefab: {fileID: 1448607247116826726, guid: 9534f3d911e21984c89040eb9fe3f72b, type: 3}
   UIBuilder: {fileID: 11400000, guid: 9d960e958a906b7478173d9e9dcf1c93, type: 2}
+  UsedContextMenuColor: {r: 0.7921569, g: 0.7921569, b: 0.7921569, a: 0.3882353}
 --- !u!1 &7399064851901602296
 GameObject:
   m_ObjectHideFlags: 0

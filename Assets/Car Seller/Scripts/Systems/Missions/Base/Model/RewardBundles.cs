@@ -9,4 +9,9 @@ public class CurrencyRewardBundle : RewardBundle
         var rewardData = new RewardTransactionData(amount, null);
         return new Transaction(TransactionType.Reward, rewardData);
     }
+
+    public override string GetRewardDescription()
+    {
+        return CTX_Menu_Tools.FormatPrice(amount);
+    }
 }

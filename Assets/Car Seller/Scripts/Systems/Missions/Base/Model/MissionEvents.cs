@@ -101,5 +101,17 @@ internal class ResetMissionRequestEvent : MissionInternalEvent
     }
 }
 
+public class SpawnMoneyCollectablesRequestEvent : SpawnTemporaryRequestEvent
+{
+    public readonly float reward;
+    public readonly int count;
+
+    public SpawnMoneyCollectablesRequestEvent(MissionRuntime mission, float reward, int count)
+        : base(mission)
+    {
+        this.reward = reward;
+        this.count = count;
+    }
+}
 
 

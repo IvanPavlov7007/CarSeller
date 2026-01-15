@@ -6,70 +6,34 @@ using UnityEngine;
 
 public class CollectablesManager : Singleton<CollectablesManager>
 {
-    Dictionary<ILocation, Collectable> collectables;
-    List<ILocation> allLocations;
-
-    int tooFew;
-    float money;
-    Action callback;
-
-    public void Initialize(List<ILocation> locations, float money, Action callback, int tooFew)
+    private void OnEnable()
     {
-        allLocations = new List<ILocation>();
-        allLocations.AddRange(locations);
-        collectables = new Dictionary<ILocation, Collectable>(locations.Count);
-        this.tooFew = tooFew;
-        this.money = money;
-        this.callback = callback;
-        Fill(allLocations);
+        GameEvents.Instance.OnTargetReached += onCityTargetReached;
     }
 
-    public void Fill(List<ILocation> locations)
+    private void OnDisable()
     {
-        foreach (var location in locations)
+        GameEvents.Instance.OnTargetReached -= onCityTargetReached;
+    }
+
+    void onCityTargetReached(CityTargetReachedEventData data)
+    {
+        if (data.ReachedObject is CollectableCityObject cityObject)
         {
-            CreateCollectable(location, money, callback);
+            collect(cityObject.Data as Collectable, cityObject);
+            cityObject.Destroy();
         }
     }
 
-    public Collectable CreateCollectable(ILocation location, float money, Action additionalCallback)
-    {
-        if(collectables.ContainsKey(location))
-        {
-            Debug.LogWarning($"Collectable already exists at location {location}");
-            return collectables[location];
-        }
-        var collectable = new Collectable(location, "Collectable", money, null, additionalCallback: additionalCallback);
-        collectable.OnCollectedAdditionalCallback += () => OnCollectableCollected(collectable);
-        collectables.Add(location, collectable);
-        return collectable;
-    }
 
-    void OnCollectableCollected(Collectable collectable)
+    //TODO make process possessions, actions and custom data as well in the future
+    void collect(Collectable collectable, CityObject cityObject)
     {
-        if (!collectables.ContainsKey(collectable.Location))
-        {
-            Debug.LogWarning("Collected collectable not found in manager.");
-            return;
-        }
-        collectables.Remove(collectable.Location);
-        
-        var transactionLocation = new TransactionFeedbackLocation(TransactionLocationType.WorldSpace, collectable.Location.CityPosition.WorldPosition);
+        var transactionLocation = new TransactionFeedbackLocation(TransactionLocationType.WorldSpace, cityObject.Location.CityPosition.WorldPosition);
         var rewardTransaction = new Transaction(
             TransactionType.Reward,
             new RewardTransactionData(collectable.MoneyAmount, null)
         );
         G.TransactionProcessor.Process(rewardTransaction, transactionLocation);
-
-        CheckTooFew();
-    }
-
-    void CheckTooFew()
-    {
-        if(collectables.Count <= tooFew)
-        {
-            var availableLocations = allLocations.Except(collectables.Keys).ToList();
-            Fill(availableLocations);
-        }
     }
 }
