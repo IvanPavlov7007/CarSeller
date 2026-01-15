@@ -143,6 +143,10 @@ public class GraphMovement : IAIMovement, ISpeedProvider
     }
 
     public TempoState TempoState { get; set; }
+
+    // NEW: cap imposed by AI for the current frame
+    public float MaxSpeedOverride { get; set; }
+
     Vector2 up = Vector2.up;
     public Vector2 Up
     {
@@ -153,27 +157,41 @@ public class GraphMovement : IAIMovement, ISpeedProvider
             {
                 return up;
             }
-            
-            up = Owner.CityPosition.Edge.GetTangentFromNode(Owner.CityPosition.Forward? edge.From : edge.To,
-                Owner.CityPosition.Percentage, out bool forward);
+
+            up = Owner.CityPosition.Edge.GetTangentFromNode(
+                Owner.CityPosition.Forward ? edge.From : edge.To,
+                Owner.CityPosition.Percentage,
+                out bool forward);
             return up;
         }
     }
 
-    SpeedVarations speedVariations;
-    public SpeedVarations SpeedVariations => PoliceManager.Instance.policeSpeedVariations; //{ get{ return speedVarations; } set { speedVarations = value; } }
+    public Vector2 ProvidedDirection => Up;
 
-    public float Speed {
-        get {         
-            return TempoState switch
+    SpeedVarations speedVariations;
+    public SpeedVarations SpeedVariations => PoliceManager.Instance.policeSpeedVariations;
+
+    public float Speed
+    {
+        get
+        {
+            float baseSpeed = TempoState switch
             {
-                TempoState.Slow => SpeedVariations.Slow,
+                TempoState.Hold   => 0f,
+                TempoState.Slow   => SpeedVariations.Slow,
                 TempoState.Medium => SpeedVariations.Medium,
-                TempoState.Fast => SpeedVariations.Fast,
-                _ => SpeedVariations.Medium,
+                TempoState.Fast   => SpeedVariations.Fast,
+                _                 => SpeedVariations.Medium,
             };
+
+            // If AI set a cap for this frame, apply it.
+            if (MaxSpeedOverride > 0f && MaxSpeedOverride < baseSpeed)
+                return MaxSpeedOverride;
+
+            return baseSpeed;
         }
     }
+
     //Currently ignored
     public float Acceleration { get; set; }
 }

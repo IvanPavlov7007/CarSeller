@@ -17,3 +17,13 @@ public interface ISpeedProvider
     float Speed { get; }
     float Acceleration { get; }
 }
+
+public interface ISpeedCap
+{
+    float MaxSpeedOverride { get; set; }
+}
+
+public interface IMovement : IDirectionProvider, ISpeedProvider
+{
+
+}

@@ -32,7 +32,7 @@ public class Main : Singleton<Main>
             .Select(marker => G.City.GetEmptyLocation(marker.PositionOnGraph.Value) as ILocation).ToList();
 
         //CollectablesManager.Instance.Initialize(locations, 900f, null, 20);
-        PoliceManager.Instance.CreatePolice();
+        //PoliceManager.Instance.CreatePolice();
         //tryEnterCarShop(car);
 
 

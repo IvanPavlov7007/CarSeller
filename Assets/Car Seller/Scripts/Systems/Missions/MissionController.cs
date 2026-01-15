@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -20,27 +21,35 @@ public class MissionController : MissionControllerBase
     public void Enable()
     {
         // Extension internal event handlers
-        GameEvents.Instance.OnLocatableDestroyed += onLocatableDestroyed;
         GameEvents.Instance.OnTargetReached += tryCheckIfMissionLauncherAndShowPopUp;
         GameEvents.Instance.onMissionCompleted += showMissionCompletedInfo;
         GameEvents.Instance.onMissionCompleted += rewardPlayerForMissionCompletion;
+        GameEvents.Instance.onMissionStarted += enterMissionStateOnMissionStart;
+        GameEvents.Instance.onMissionCompleted += exitMissionStateOnMissionCompleted;
+        GameEvents.Instance.onMissionFailed += exitMissionStateOnMissionFailed;
+        GameEvents.Instance.onMissionFailed += showMissionFailedInfo;
 
         // External to mission event handlers
         monoBehaviourHelper.OnUpdateEvent += OnUpdate;
         GameEvents.Instance.OnTargetReached += OnCityTargetReached;
         GameEvents.Instance.OnPlayerAccept += OnPlayerAccepted;
+        GameEvents.Instance.onPlayerBusted += OnPlayerBusted;
     }
 
     public void Disable()
     {
-        GameEvents.Instance.OnLocatableDestroyed -= onLocatableDestroyed;
         GameEvents.Instance.OnTargetReached -= tryCheckIfMissionLauncherAndShowPopUp;
         GameEvents.Instance.onMissionCompleted -= showMissionCompletedInfo;
         GameEvents.Instance.onMissionCompleted -= rewardPlayerForMissionCompletion;
+        GameEvents.Instance.onMissionStarted -= enterMissionStateOnMissionStart;
+        GameEvents.Instance.onMissionCompleted -= exitMissionStateOnMissionCompleted;
+        GameEvents.Instance.onMissionFailed -= exitMissionStateOnMissionFailed;
+        GameEvents.Instance.onMissionFailed -= showMissionFailedInfo;
 
         monoBehaviourHelper.OnUpdateEvent -= OnUpdate;
         GameEvents.Instance.OnTargetReached -= OnCityTargetReached;
         GameEvents.Instance.OnPlayerAccept -= OnPlayerAccepted;
+        GameEvents.Instance.onPlayerBusted -= OnPlayerBusted;
     }
 
     // Internal functions
@@ -72,6 +81,7 @@ public class MissionController : MissionControllerBase
             missionOwnedObjects[mission] = set;
         }
         set.Add(obj);
+        obj.onBeingDestroyed += onDestroyableDestroyed;
     }
 
     // Internal Event Handlers Overrides
@@ -93,6 +103,25 @@ public class MissionController : MissionControllerBase
         registerMissionObject(requestEvent.Mission, missionLauncher);
     }
 
+    protected override void onPoliceRequestEvent(PoliceRequestEvent requestEvent)
+    {
+        var policeWrapper = new PoliceMissionWrapper();
+        registerMissionObject(requestEvent.Mission, policeWrapper);
+    }
+    class PoliceMissionWrapper : IDestroyable
+    {
+        public event Action<IDestroyable> onBeingDestroyed;
+        public PoliceMissionWrapper()
+        {
+            PoliceManager.Instance.CreatePolice();
+        }
+        public void Destroy()
+        {
+            PoliceManager.Instance.ClearPolice();
+            onBeingDestroyed?.Invoke(this);
+        }
+    }
+
     // External Event Handlers
     void tryCheckIfMissionLauncherAndShowPopUp(CityTargetReachedEventData evt)
     {
@@ -102,21 +131,25 @@ public class MissionController : MissionControllerBase
         }
     }
 
-    void onLocatableDestroyed(LocatableDestroyedEventData data)
+    void onDestroyableDestroyed(IDestroyable destroyable)
     {
-        if(data.Locatable is IDestroyable destroyable)
+        Debug.Assert(destroyable != null);
+        foreach (var kvp in missionOwnedObjects)
         {
-            foreach (var kvp in missionOwnedObjects)
-            {
-                if (kvp.Value.Remove(destroyable))
-                    break;
-            }
+            if (kvp.Value.Remove(destroyable))
+                break;
         }
+        destroyable.onBeingDestroyed -= onDestroyableDestroyed;
     }
 
     void showMissionCompletedInfo(MissionCompletedEventData missionCompletedEvent)
     {
         FixedContextMenuManager.Instance.CreateContextMenu(CTX_Menu_Tools.MissionCompletedInfo(missionCompletedEvent.Mission));
+    }
+
+    void showMissionFailedInfo(MissionFailedEventData missionFailedEvent)
+    {
+        FixedContextMenuManager.Instance.CreateContextMenu(CTX_Menu_Tools.MissionFailedInfo(missionFailedEvent.Mission));
     }
 
     void rewardPlayerForMissionCompletion(MissionCompletedEventData e)
@@ -132,6 +165,24 @@ public class MissionController : MissionControllerBase
             }
         }
     }
+
+    #region GameState controlling
+    void enterMissionStateOnMissionStart(MissionStartedEventData e)
+    {
+        MissionGameState missionGameState = new MissionGameState(G.GameState.FocusedCar, e.Mission);
+        G.Instance.GameFlowController.SetGameState(missionGameState);
+    }
+    void exitMissionStateOnMissionCompleted(MissionCompletedEventData e)
+    {
+        FreeRoamGameState missionGameState = new FreeRoamGameState(G.GameState.FocusedCar);
+        G.Instance.GameFlowController.SetGameState(missionGameState);
+    }
+    void exitMissionStateOnMissionFailed(MissionFailedEventData e)
+    {
+        FreeRoamGameState missionGameState = new FreeRoamGameState(G.GameState.FocusedCar);
+        G.Instance.GameFlowController.SetGameState(missionGameState);
+    }
+    #endregion
 }
 
 public class MissionLauncher : CityObject

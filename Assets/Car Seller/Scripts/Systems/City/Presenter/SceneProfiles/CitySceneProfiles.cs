@@ -139,3 +139,34 @@ public sealed class FreeRoamCitySceneProfile : CitySceneProfile
         return base.GetObjectViewState(obj, gameState);
     }
 }
+
+public sealed class MissionCitySceneProfile : CitySceneProfile
+{
+    public override bool ShouldShow(object obj, GameState gameState)
+    {
+        var missionState = gameState as MissionGameState;
+        switch (obj)
+        {
+            case Warehouse:
+                    return false;
+            case MissionLauncher:
+                return false;
+            default:
+                return true;
+        }
+    }
+    public override CityObjectState GetObjectViewState(object obj, GameState gameState)
+    {
+        var missionState = gameState as MissionGameState;
+
+        if (obj is Car car)
+        {
+
+            bool isFocusedCar = car == missionState.FocusedCar;
+            ViewObjectVisualState visualState = isFocusedCar ? ViewObjectVisualState.Selected : ViewObjectVisualState.Normal;
+            return new CityObjectState(visualState, draggable: isFocusedCar, interactable: true);
+        }
+
+        return base.GetObjectViewState(obj, gameState);
+    }
+}

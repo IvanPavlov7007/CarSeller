@@ -9,6 +9,18 @@ public class UnlockMissionEffect : MissionEffect
         context.EventBus.Emit(new UnlockMissionRequestEvent(context.Mission, mission));
     }
 }
+
+[Serializable]
+public class ResetMissionEffect : MissionEffect
+{
+    public override void Apply(MissionEffectContext context)
+    {
+        context.EventBus.Emit(new ResetMissionRequestEvent(context.Mission, context.Mission.Config));
+    }
+}
+
+
+
 [Serializable]
 public class SpawnTargetEffect : MissionEffect
 {
@@ -28,3 +40,13 @@ public class SpawnMissionLauncherEffect : MissionEffect
         context.EventBus.Emit(new SpawnMissionLauncherRequestEvent(context.Mission, launcherConfig));
     }
 }
+
+[Serializable]
+public class PoliceEffect : MissionEffect
+{
+    public override void Apply(MissionEffectContext context)
+    {
+        context.EventBus.Emit(new PoliceRequestEvent(context.Mission));
+    }
+}
+

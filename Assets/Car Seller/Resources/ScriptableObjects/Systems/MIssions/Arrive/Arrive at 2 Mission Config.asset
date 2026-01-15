@@ -232,7 +232,13 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 0
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 17|ResetMissionEffect, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -241,14 +247,14 @@ MonoBehaviour:
       Data: 
     - Name: RewardBundles
       Entry: 7
-      Data: 17|System.Collections.Generic.List`1[[RewardBundle, Assembly-CSharp]],
+      Data: 18|System.Collections.Generic.List`1[[RewardBundle, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 18|CurrencyRewardBundle, Assembly-CSharp
+      Data: 19|CurrencyRewardBundle, Assembly-CSharp
     - Name: amount
       Entry: 3
       Data: 1200

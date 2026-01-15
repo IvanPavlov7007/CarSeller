@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GameFlowController
 {
-    public GameState GameState { get; private set; } = new NeutralGameState();
+    public GameState GameState { get; private set; } = new NeutralGameState(null);
     public GameSceneType currentSceneType { get; private set; }
 
     

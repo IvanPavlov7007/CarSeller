@@ -35,10 +35,13 @@ public abstract class MissionControllerBase
 
         // Specific mission requests
         eventBus.Subscribe<UnlockMissionRequestEvent>(onUnlockMissionRequestEvent);
+        eventBus.Subscribe<ResetMissionRequestEvent>(onMissionResetRequestEvent);
         eventBus.Subscribe<SpawnTargetMissionRequestEvent>(onSpawnTargetMissionRequestEvent);
         eventBus.Subscribe<SpawnMissionLauncherRequestEvent>(onSpawnMissionLauncherRequestEvent);
+        eventBus.Subscribe<PoliceRequestEvent>(onPoliceRequestEvent);
 
     }
+
     private void InitializeRuntimes(List<MissionConfig> configs)
     {
         runtimes = new Dictionary<MissionConfig, MissionRuntime>();
@@ -138,10 +141,16 @@ public abstract class MissionControllerBase
     {
         UnlockMission(requestEvent.toUnlock);
     }
-
+    void onMissionResetRequestEvent(ResetMissionRequestEvent requestEvent)
+    {
+        //TODO Be careful with resetting by overwriting the runtime. Consider preserving some state if needed
+        // Check if we need to do any cleanup before resetting or is it possible to reset directly
+        runtimes[requestEvent.toReset].Reset();
+        runtimes[requestEvent.toReset].Unlock();
+    }
     protected abstract void onSpawnTargetMissionRequestEvent(SpawnTargetMissionRequestEvent requestEvent);
-
     protected abstract void onSpawnMissionLauncherRequestEvent(SpawnMissionLauncherRequestEvent requestEvent);
+    protected abstract void onPoliceRequestEvent(PoliceRequestEvent requestEvent);
 
     // Game Events Funneling
     #region globalGameEvents
@@ -156,6 +165,10 @@ public abstract class MissionControllerBase
     public virtual void OnCityTargetReached(CityTargetReachedEventData targetReachedEvent)
     {
         updateMissionRuntimes(targetReachedEvent);
+    }
+    public virtual void OnPlayerBusted(PlayerBustedEventData playerBustedEventData)
+    {
+        updateMissionRuntimes(playerBustedEventData);
     }
     public virtual void OnUpdate(float deltaTime)
     {

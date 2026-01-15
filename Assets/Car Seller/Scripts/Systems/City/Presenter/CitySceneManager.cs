@@ -193,7 +193,8 @@ public sealed class CitySceneProfileRegistry
             { typeof(NeutralGameState), new NormalCitySceneProfile() },
             { typeof(StealingGameState), new StealingCitySceneProfile() },
             { typeof(SellingGameState), new SellingCitySceneProfile() },
-            { typeof(FreeRoamGameState), new FreeRoamCitySceneProfile() }
+            { typeof(FreeRoamGameState), new FreeRoamCitySceneProfile() },
+            {typeof(MissionGameState), new MissionCitySceneProfile() }
         };
     }
 

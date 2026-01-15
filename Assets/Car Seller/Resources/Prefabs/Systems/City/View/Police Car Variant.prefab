@@ -512,6 +512,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1525966684199748760, guid: 160474d917472894395e9318086cb3f4, type: 3}
+      propertyPath: m_Size.x
+      value: 0.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 1525966684199748760, guid: 160474d917472894395e9318086cb3f4, type: 3}
+      propertyPath: m_Size.y
+      value: 0.30964768
+      objectReference: {fileID: 0}
+    - target: {fileID: 1525966684199748760, guid: 160474d917472894395e9318086cb3f4, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.34777325
+      objectReference: {fileID: 0}
+    - target: {fileID: 1525966684199748760, guid: 160474d917472894395e9318086cb3f4, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2106114013966832350, guid: 160474d917472894395e9318086cb3f4, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -536,8 +552,37 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1192882429073954160, guid: 160474d917472894395e9318086cb3f4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8413330995317347153}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5467700784153380036, guid: 160474d917472894395e9318086cb3f4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6782348691460996527}
   m_SourcePrefab: {fileID: 100100000, guid: 160474d917472894395e9318086cb3f4, type: 3}
+--- !u!1 &1188611382781664584 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5467700784153380036, guid: 160474d917472894395e9318086cb3f4, type: 3}
+  m_PrefabInstance: {fileID: 6602249727788030348}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6782348691460996527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188611382781664584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a7ad954c9c59724d854b6a69f0bc101, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onStay:
+    m_PersistentCalls:
+      m_Calls: []
+  onExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &5409420300783422716 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1192882429073954160, guid: 160474d917472894395e9318086cb3f4, type: 3}

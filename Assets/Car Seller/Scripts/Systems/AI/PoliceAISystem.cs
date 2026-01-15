@@ -134,36 +134,61 @@ public class PoliceAISystem
     private void updateUnitTryRelocate(PoliceUnitAIData unit, PoliceAIContext stateMachine)
     {
         unit.Movement.TempoState = TempoState.Medium;
-        var edge = stateMachine.SuspectLastSeenPosition?.Edge;
-        var node = stateMachine.SuspectLastSeenPosition?.Node;
-        var unitPosWorld = unit.CityPosition.WorldPosition;
+        
+        unit.TargetPosition = stateMachine.SuspectLastSeenPosition.HasValue ?
+            stateMachine.SuspectLastSeenPosition.Value.WorldPosition :
+            null;
+
+    }
+    private Vector2 closestEdgeNode(CityPosition position, Vector2 unitPos)
+    {
+        var edge = position.Edge;
+        var node = position.Node;
         if (edge != null)
         {
-            var toToPosition = unitPosWorld - edge.To.Position;
-            var fromToPosition = unitPosWorld - edge.From.Position;
+            var toToPosition = unitPos - edge.To.Position;
+            var fromToPosition = unitPos - edge.From.Position;
 
-            unit.TargetPosition = toToPosition.sqrMagnitude < fromToPosition.sqrMagnitude ?
+            return toToPosition.sqrMagnitude < fromToPosition.sqrMagnitude ?
                 edge.To.Position :
                 edge.From.Position;
         }
         else if (node != null)
         {
-            unit.TargetPosition = node.Position;
+            return node.Position;
         }
-
-        
+        Debug.LogWarning("Position has no edge or node: " + position);
+        return Vector2.zero;
     }
 
     private void updateUnitBackup(PoliceUnitAIData unit, PoliceAIContext stateMachine)
     {
         //for now
-        updateUnitCalm(unit, stateMachine);
+        updateUnitChase(unit, stateMachine);
     }
 
     private void updateUnitChase(PoliceUnitAIData unit, PoliceAIContext stateMachine)
     {
-        unit.Movement.TempoState = TempoState.Fast;
         unit.TargetPosition = stateMachine.SuspectRealPosition.WorldPosition;
+
+        // Compute planar distance
+        Vector2 unitPos = unit.CityPosition.WorldPosition;
+        Vector2 suspectPos = stateMachine.SuspectRealPosition.WorldPosition;
+        float distance = Vector2.Distance(unitPos, suspectPos);
+        var movement = unit.Movement;
+
+        // Reset any previous frame's cap
+        movement.MaxSpeedOverride = -1f;
+
+        // If too close to suspect, stop to avoid overshooting and losing sight
+        if (distance <= stateMachine.StopDistance)
+        {
+            movement.TempoState = TempoState.Hold;
+            return;
+        }
+
+        // Otherwise, chase 
+        movement.TempoState = TempoState.Fast;
     }
 
     private void updateLastSeenPosition(PoliceAIContext stateMachine, CityPosition suspectPosition)
@@ -181,6 +206,8 @@ public class PoliceAISystem
     public TempoState OnEdge(PoliceAIContext stateMachine, PoliceUnitAIData unit, RoadEdge edge)
     {
         // Extension point: adjust tempo based on edge characteristics, system state, personality, etc.
+        
+        
         return unit.Movement.TempoState;
     }
 
@@ -266,7 +293,9 @@ public class PoliceAIContext
 {
     public PoliceUnitAIData[] PoliceUnits { get; }
     public CityPosition SuspectRealPosition { get; set; }
+    public IMovement SuspectRealMovement { get; set; }
     public float CloseInDistance { get; set; } = 20f;
+    public float StopDistance { get; set; }
     public CityPosition? SuspectLastSeenPosition { get; set; }
     public PoliceAISystemState State { get; set; }
 
@@ -293,7 +322,9 @@ public interface PoliceUnitAIData
     PersonalityTag Personality { get; }
 }
 
-public interface IAIMovement
+
+
+public interface IAIMovement : IMovement, ISpeedCap
 {
     bool TowardsTarget { get; set; }
     TempoState TempoState { get; set; }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// Base class for objects that only exist within the city environment.
@@ -16,6 +17,8 @@ public class CityObject : ILocatable, IDestroyable
     public PinStyle PinStyle { get; set; }
 
     public object Data { get; set; }
+
+    public event Action<IDestroyable> onBeingDestroyed;
 
     public CityObject(string name, string infoText, ILocation location, City.CityMarker cityMarker, CityObjectData data = null, PinStyle pinStyle = null)
     {
@@ -38,11 +41,13 @@ public class CityObject : ILocatable, IDestroyable
     public void Destroy()
     {
         Location.Detach();
+        onBeingDestroyed?.Invoke(this);
         GameEvents.Instance.OnLocatableDestroyed?.Invoke(new LocatableDestroyedEventData(this));
     }
 }
 
 public interface IDestroyable
 {
+    event Action<IDestroyable> onBeingDestroyed;
     void Destroy();
 }

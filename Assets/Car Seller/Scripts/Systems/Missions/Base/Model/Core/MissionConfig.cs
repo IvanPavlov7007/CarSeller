@@ -23,7 +23,10 @@ public class MissionConfig : SerializedScriptableObject
 
     public List<MissionCondition> FailConditions = new List<MissionCondition>();
     [PropertyTooltip("Things to change in the <i>world</i> after failing mission, like locking retry for time or reputation loss.")]
-    public List<MissionEffect> MissionFailEffects = new List<MissionEffect>();
+    public List<MissionEffect> MissionFailEffects = new List<MissionEffect>()
+    {
+        new ResetMissionEffect()
+    };
 
     public List<RewardBundle> RewardBundles = new List<RewardBundle>();
 }
@@ -34,7 +37,7 @@ public class MissionConfig : SerializedScriptableObject
 public abstract class MissionCondition
 {
     public abstract MissionConditionRuntime CreateRuntime(MissionRuntime missionRuntime);
-    public abstract class MissionConditionRuntime
+    public abstract class MissionConditionRuntime : IResettable
     {
         protected MissionRuntime missionRuntime;
 
@@ -45,6 +48,7 @@ public abstract class MissionCondition
 
         public abstract void OnEvent(GameEventData data);
         public abstract bool IsSatisfied();
+        public abstract void Reset();
     }
 }
 
@@ -83,4 +87,9 @@ public class PinStyle
     public string Text = "";
     public Color ForegroundColor = Color.black;
     public Color BackgroundColor = Color.white;
+}
+
+public interface IResettable
+{
+    void Reset();
 }

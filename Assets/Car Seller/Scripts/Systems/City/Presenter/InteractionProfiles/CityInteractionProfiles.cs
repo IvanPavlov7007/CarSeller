@@ -33,6 +33,7 @@ public sealed class CityContextMenuProfileRegistry
             { typeof(StealingGameState), new StealingCityContextMenuProfile() },
             { typeof(SellingGameState),  new SellingCityContextMenuProfile()  },
             { typeof(FreeRoamGameState), new FreeRoamCityContextMenuProfile() },
+            { typeof(MissionGameState),  new MissionCityContextMenuProfile()  },
         };
     }
 
@@ -70,6 +71,7 @@ public sealed class CityTriggerProfileRegistry
             { typeof(StealingGameState), new StealingCityTriggerProfile() },
             { typeof(SellingGameState),  new SellingCityTriggerProfile()  },
             { typeof(FreeRoamGameState), new FreeRoamCityTriggerProfile() },
+            { typeof(MissionGameState),  new MissionCityTriggerProfile()  },
         };
     }
 

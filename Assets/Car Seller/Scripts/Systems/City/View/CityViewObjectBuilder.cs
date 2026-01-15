@@ -127,13 +127,14 @@ public class CityViewObjectBuilder : ScriptableObject
         var rigidbody2D = policeGO.AddComponent<Rigidbody2D>();
         rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
         policeGO.AddComponent<ContentProvider>().Initialize(policeCityObject);
-        policeGO.AddComponent<Interactable>().sortingOrder = 12;
+        policeGO.AddComponent<Interactable>().sortingOrder = 9;
         policeGO.AddComponent<MovingPointSimpleView>().Initialize(data.GraphMovement);
         var policeViewController = policeGO.AddComponent<PoliceStateViewController>();
         policeViewController.Initialize(data);
         policeGO.AddComponent<PoliceSpotlightVisionVisuals>().Intialize(data, policeViewController);
         policeGO.AddComponent<PoliceLightsViewController>().Initialize(policeViewController, policeGO.GetComponentInChildren<PoliceLightsVisuals>());
         policeGO.AddComponent<ViewStateChanger>();
+        policeGO.AddComponent<Triggerable>();
         return viewController;
     }
 }

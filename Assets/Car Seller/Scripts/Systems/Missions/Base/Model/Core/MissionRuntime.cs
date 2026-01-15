@@ -125,6 +125,30 @@ public class MissionRuntime
         EventBus.Emit(new UnlockMissionInternalEvent(this));
     }
 
+    public void Reset()
+    {
+        if (Status == MissionStatus.Locked)
+        {
+            Debug.LogWarning($"Mission {this} is calling Reset(), while being locked");
+            return;
+        }
+        SetStatus(MissionStatus.Locked);
+        foreach (var c in startConditions)
+        {
+            c.Reset();
+        }
+        foreach (var c in successConditions)
+        {
+            c.Reset();
+        }
+        foreach (var c in failureConditions)
+        {
+            c.Reset();
+        }
+        // No event emitted on reset
+    }
+
+
     /// <summary>
     /// Dispatch event to conditions and check for completion
     /// </summary>

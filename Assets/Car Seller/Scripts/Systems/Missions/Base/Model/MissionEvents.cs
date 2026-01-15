@@ -72,6 +72,13 @@ public class SpawnMissionLauncherRequestEvent : SpawnTemporaryRequestEvent
     }
 }
 
+public class PoliceRequestEvent : SpawnTemporaryRequestEvent
+{
+    public PoliceRequestEvent(MissionRuntime mission) : base(mission)
+    {
+    }
+}
+
 public class UnlockMissionRequestEvent : MissionInternalEvent
 {
     public readonly MissionConfig toUnlock;
@@ -82,4 +89,17 @@ public class UnlockMissionRequestEvent : MissionInternalEvent
         this.toUnlock = toUnlock;
     }
 }
+
+internal class ResetMissionRequestEvent : MissionInternalEvent
+{
+    public readonly MissionConfig toReset;
+
+    public ResetMissionRequestEvent(MissionRuntime thisMission, MissionConfig toReset)
+        : base(thisMission)
+    {
+        this.toReset = toReset;
+    }
+}
+
+
 

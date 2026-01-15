@@ -45,6 +45,11 @@ public class ReachTargetCondition : MissionCondition
         {
             return isSatisfied;
         }
+
+        public override void Reset()
+        {
+            isSatisfied = false;
+        }
     }
 }
 
@@ -74,6 +79,11 @@ public class MissionLauncherAcceptedCondition : MissionCondition
         public override bool IsSatisfied()
         {
             return isSatisfied;
+        }
+
+        public override void Reset()
+        {
+            isSatisfied = false;
         }
     }
 }
@@ -106,6 +116,11 @@ public class TimeElapsedCondition : MissionCondition
         {
             return elapsedTime >= requiredTimeSeconds;
         }
+
+        public override void Reset()
+        {
+            elapsedTime = 0f;
+        }
     }
 }
 internal class TimePassEvent : GameEventData
@@ -115,5 +130,37 @@ internal class TimePassEvent : GameEventData
     public TimePassEvent(float deltaTime)
     {
         DeltaTime = deltaTime;
+    }
+}
+
+public class BustedCondition : MissionCondition
+{
+    public override MissionConditionRuntime CreateRuntime(MissionRuntime missionRuntime)
+    {
+        return new BustedConditionRuntime(missionRuntime);
+    }
+    public class BustedConditionRuntime : MissionConditionRuntime
+    {
+        private bool isBusted = false;
+        public BustedConditionRuntime(MissionRuntime missionRuntime)
+            : base(missionRuntime)
+        {
+        }
+        public override void OnEvent(GameEventData data)
+        {
+            if (data is PlayerBustedEventData)
+            {
+                isBusted = true;
+            }
+        }
+        public override bool IsSatisfied()
+        {
+            return isBusted;
+        }
+
+        public override void Reset()
+        {
+            isBusted = false;
+        }
     }
 }

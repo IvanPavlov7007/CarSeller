@@ -266,4 +266,24 @@ public static class CTX_Menu_Tools
         };
     }
 
+    internal static UIElement MissionFailedInfo(MissionRuntime mission)
+    {
+        return new UIElement
+        {
+            Type = UIElementType.Container,
+            Children = new List<UIElement>()
+            {
+                Header($"Mission {mission.Config.MissionId} Failed!"),
+                new UIElement
+                {
+                    Type = UIElementType.Button,
+                    Text = "Close",
+                    OnClick = () =>
+                    {
+                    },
+                    closePopupOnClick = true
+                }
+            }
+        };
+    }
 }

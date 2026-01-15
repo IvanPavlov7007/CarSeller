@@ -65,4 +65,6 @@ public class GameEvents
     public Action<MissionStartedEventData> onMissionStarted;
     public Action<MissionCompletedEventData> onMissionCompleted;
     public Action<MissionFailedEventData> onMissionFailed;
+
+    public Action<PlayerBustedEventData> onPlayerBusted;
 }

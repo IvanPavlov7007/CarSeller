@@ -14,11 +14,14 @@ public class PoliceManager : Singleton<PoliceManager>
 
     public SpeedVarations policeSpeedVariations;
 
+    public float stopDistanceToSuspect = 0.3f;
+
     bool active = false;
 
     City.CityPosition SuspectPosition
-    { get
     {
+        get
+        {
             if (G.GameState == null)
             {
                 Debug.LogWarning("GameState is null in PoliceManager.SuspectPosition");
@@ -34,8 +37,7 @@ public class PoliceManager : Singleton<PoliceManager>
             Debug.Assert(pos.Edge != null || pos.Node != null, $"SuspectPosition is invalid: edge and node are null");
             return location.CityPosition;
         }
-
-}
+    }
 
     
 
@@ -81,6 +83,7 @@ public class PoliceManager : Singleton<PoliceManager>
 
     void updateStateMachineData()
     {
+        stateMachine.StopDistance = stopDistanceToSuspect;
         stateMachine.SuspectRealPosition = SuspectPosition;
     }
 
@@ -90,6 +93,26 @@ public class PoliceManager : Singleton<PoliceManager>
         foreach (var unit in policeUnits)
         {
             (unit.Data as PoliceUnit).Update(deltaTime, aiSystem, stateMachine);
+        }
+    }
+
+
+    private void OnEnable()
+    {
+        GameEvents.Instance.OnTargetReached += onTriggerReached;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.Instance.OnTargetReached -= onTriggerReached;
+    }
+
+    void onTriggerReached(CityTargetReachedEventData data)
+    {
+        if(data.ReachedObject is PoliceCityObject policeUnit)
+        {
+            Debug.Assert(GameEvents.Instance.onPlayerBusted != null);
+            GameEvents.Instance.onPlayerBusted(new PlayerBustedEventData());
         }
     }
 }

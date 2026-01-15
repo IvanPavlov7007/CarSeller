@@ -26,3 +26,10 @@ public class PlayerAcceptedEventData : GameEventData
         acceptedMission = mission;
     }
 }
+
+public class PlayerBustedEventData : GameEventData
+{
+    public PlayerBustedEventData()
+    {
+    }
+}
