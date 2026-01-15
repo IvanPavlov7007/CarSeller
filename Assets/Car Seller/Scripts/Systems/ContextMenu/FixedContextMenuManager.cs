@@ -22,6 +22,7 @@ public class FixedContextMenuManager : Singleton<FixedContextMenuManager>
         UIBuilder.Build(content, contentTransform);
         var menu = createContextMenu(panel, content.blockingInput);
         menu.Initialize(null, contentTransform, OnMenuClose);
+        GameCursor.Instance.CancelCurrentInteraction();
     }
 
     private PopUpContextMenu createContextMenu(GameObject panel, bool blocking)

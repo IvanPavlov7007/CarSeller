@@ -373,4 +373,41 @@ public class GameCursor : Singleton<GameCursor>
 
         return hitInteracrable;
     }
+
+    public void CancelCurrentInteraction()
+    {
+        // If there is an active drag, end it properly
+        if (dragStarted && draggedInteractable != null)
+        {
+            endDrag();
+        }
+
+        // If there is an ongoing press/hold/select, end it
+        if (pressInteractable != null)
+        {
+            if (holdActive)
+            {
+                pressInteractable.CursorHoldEnd();
+                holdActive = false;
+            }
+
+            pressInteractable.CursorSelectEnd();
+        }
+
+        // Clear hover
+        if (currentInteractable != null)
+        {
+            currentInteractable.CursorExit();
+        }
+
+        // Reset internal state
+        currentInteractable = null;
+        draggedInteractable = null;
+        pressInteractable = null;
+
+        isPointerDown = false;
+        dragStarted = false;
+        holdActive = false;
+        pointerWasPressed = false;
+    }
 }
