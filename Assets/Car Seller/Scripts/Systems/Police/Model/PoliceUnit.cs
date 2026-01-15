@@ -22,7 +22,7 @@ public class PoliceUnit : PoliceUnitAIData, CityObjectData
 {
     public readonly City.CityLocation Location;
     public City.CityPosition CityPosition => Location.CityPosition;
-    public Vector2 TargetPosition { get; set; }
+    public Vector2? TargetPosition { get; set; }
     public IAIMovement Movement => GraphMovement;
     public IVision Vision => ConeVision;
     public PoliceUnitState State { get; set; }
@@ -67,7 +67,7 @@ public class PoliceUnit : PoliceUnitAIData, CityObjectData
         if (a != null)
         {
             //Check if there is an edge in the desired direction
-            edge = aiSystem.PickTurn(stateMachine, this, a, edge, stateMachine.SuspectLastSeenEdge);
+            edge = aiSystem.PickTurn(stateMachine, this, a, edge);
             
             if (edge != null)
             {
@@ -101,7 +101,7 @@ public class PoliceUnit : PoliceUnitAIData, CityObjectData
         {
             stepLength -= length_a_to_b * (1f - t);
             a = (a == edge.From) ? edge.To : edge.From;
-            edge = aiSystem.PickTurn(stateMachine, this, a, edge, stateMachine.SuspectLastSeenEdge);
+            edge = aiSystem.PickTurn(stateMachine, this, a, edge);
             if (edge == null)
             {
                 //No edge to proceed further, stop at the current node

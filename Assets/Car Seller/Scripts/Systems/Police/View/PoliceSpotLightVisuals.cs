@@ -132,7 +132,7 @@ public class PoliceSpotLightVisuals : MonoBehaviour
                 case PoliceUnitState.Chase:
                     c = spotlightColors.chase;
                     break;
-                case PoliceUnitState.Suspect:
+                case PoliceUnitState.TryRelocate:
                 case PoliceUnitState.Backup:
                     c = spotlightColors.alert;
                     break;

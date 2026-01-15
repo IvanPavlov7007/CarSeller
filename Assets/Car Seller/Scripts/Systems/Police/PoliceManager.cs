@@ -30,7 +30,8 @@ public class PoliceManager : Singleton<PoliceManager>
                 Debug.LogWarning("FocusedCar location is null in PoliceManager.SuspectPosition");
                 return default;
             }
-
+            var pos = location.CityPosition;
+            Debug.Assert(pos.Edge != null || pos.Node != null, $"SuspectPosition is invalid: edge and node are null");
             return location.CityPosition;
         }
 
@@ -74,13 +75,13 @@ public class PoliceManager : Singleton<PoliceManager>
     {
         if (!active) return;
         updateStateMachineData();
-        updateUnits(Time.deltaTime);
         aiSystem.UpdateState(stateMachine);
+        updateUnits(Time.deltaTime);
     }
 
     void updateStateMachineData()
     {
-        stateMachine.suspectRealPosition = SuspectPosition;
+        stateMachine.SuspectRealPosition = SuspectPosition;
     }
 
     void updateUnits(float deltaTime)
