@@ -17,6 +17,7 @@ public class GameFlowController
     [Serializable]
     public enum GameSceneType
     {
+        None,
         City,
         Warehouse
     }

@@ -1,6 +1,5 @@
 ﻿//TODO Maybe make police be more than just a city object in the future
 using System;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 
 using CityPosition = City.CityPosition;

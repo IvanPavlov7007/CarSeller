@@ -20,7 +20,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e8443844d571cd340aa7644cd31551cb, type: 2}
   startingMissions:
   - {fileID: 11400000, guid: 342cb0b2ba64d324aad726f97f8e1b60, type: 2}
-  - {fileID: 11400000, guid: 0276377204440d949b4ed568ac7996d4, type: 2}
   finishPinStyle:
     Icon: {fileID: 21300000, guid: c6b6a8280092c7942915153f369e50fd, type: 3}
     Text: 

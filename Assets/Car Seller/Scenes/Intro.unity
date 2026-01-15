@@ -450,7 +450,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 354068957612471122, guid: dcd7ed7ce2bca5e428f2a526f6f4b1e0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartGame
+      value: OpenCity
       objectReference: {fileID: 0}
     - target: {fileID: 354068957612471122, guid: dcd7ed7ce2bca5e428f2a526f6f4b1e0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

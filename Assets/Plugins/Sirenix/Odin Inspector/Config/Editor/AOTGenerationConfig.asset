@@ -20,6 +20,9 @@ MonoBehaviour:
   - TypeName: System.Boolean, mscorlib
     IsCustom: 0
     Emit: 1
+  - TypeName: BustedCondition, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
   - TypeName: CityGraphAsset, Assembly-CSharp
     IsCustom: 0
     Emit: 1
@@ -97,13 +100,22 @@ MonoBehaviour:
   - TypeName: PinStyle, Assembly-CSharp
     IsCustom: 0
     Emit: 1
+  - TypeName: PoliceEffect, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
   - TypeName: ReachTargetCondition, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
+  - TypeName: ResetMissionEffect, Assembly-CSharp
     IsCustom: 0
     Emit: 1
   - TypeName: RewardBundle, Assembly-CSharp
     IsCustom: 0
     Emit: 1
   - TypeName: SpawnMissionLauncherEffect, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
+  - TypeName: SpawnMoneyCollectablesEffect, Assembly-CSharp
     IsCustom: 0
     Emit: 1
   - TypeName: SpawnTargetEffect, Assembly-CSharp
@@ -125,6 +137,9 @@ MonoBehaviour:
     IsCustom: 0
     Emit: 1
   - TypeName: System.String, mscorlib
+    IsCustom: 0
+    Emit: 1
+  - TypeName: TimeElapsedCondition, Assembly-CSharp
     IsCustom: 0
     Emit: 1
   - TypeName: UnlockMissionEffect, Assembly-CSharp

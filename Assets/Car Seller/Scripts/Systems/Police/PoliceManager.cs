@@ -111,6 +111,7 @@ public class PoliceManager : Singleton<PoliceManager>
     {
         if(data.ReachedObject is PoliceCityObject policeUnit)
         {
+            Debug.Log("PoliceManager: Player busted by police!");
             Debug.Assert(GameEvents.Instance.onPlayerBusted != null);
             GameEvents.Instance.onPlayerBusted(new PlayerBustedEventData());
         }
