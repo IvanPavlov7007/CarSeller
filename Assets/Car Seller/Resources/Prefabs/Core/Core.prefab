@@ -1208,6 +1208,7 @@ MonoBehaviour:
   CityConfig: {fileID: 11400000, guid: f69e8dc3adaa8b147938f1124e33966e, type: 2}
   EconomyConfig: {fileID: 11400000, guid: c06296a320d0174459eed86435f69a0f, type: 2}
   WorldMissionsConfig: {fileID: 11400000, guid: 92161a9ed29d20640ac9350b1e20cfc8, type: 2}
-  warehouseProductViewBuilder: {fileID: 11400000, guid: f89c79dee8c6ad946a82b44e4e94a0a2, type: 2}
+  monolithWarehouseProductViewBuilder: {fileID: 11400000, guid: f89c79dee8c6ad946a82b44e4e94a0a2, type: 2}
+  physicalWarehouseProductViewBuilder: {fileID: 11400000, guid: 714191ac3dbb5f94695da48c3d1fd87a, type: 2}
   carPartViewBuilder: {fileID: 11400000, guid: 9280239a7aae48041bc89e3309ad1261, type: 2}
   cityViewObjectBuilder: {fileID: 11400000, guid: b8b2cb1796673254fbd1b5a05d793650, type: 2}

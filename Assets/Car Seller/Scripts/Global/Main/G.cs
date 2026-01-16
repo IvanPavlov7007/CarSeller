@@ -51,7 +51,8 @@ public sealed class G : Singleton<G>
     //VIEW
     //View builders
     //Warehouse
-    public WarehouseProductGameObjectBuilder warehouseProductViewBuilder;
+    public WarehouseProductGameObjectBuilder monolithWarehouseProductViewBuilder;
+    public WarehouseProductGameObjectBuilder physicalWarehouseProductViewBuilder;
     public CarPartGameObjectBuilder carPartViewBuilder;
 
     //City

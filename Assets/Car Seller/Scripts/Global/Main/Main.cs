@@ -33,7 +33,7 @@ public class Main : Singleton<Main>
 
         //CollectablesManager.Instance.Initialize(locations, 900f, null, 20);
         //PoliceManager.Instance.CreatePolice();
-        //tryEnterCarShop(car);
+        tryEnterCarShop(car);
 
 
         yield return null;

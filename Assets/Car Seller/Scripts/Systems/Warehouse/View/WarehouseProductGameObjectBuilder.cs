@@ -1,41 +1,27 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "WarehouseProductViewBuilder", menuName = "Configs/View/WarehouseProductViewBuilder")]
-public class WarehouseProductGameObjectBuilder : ScriptableObject, IProductViewBuilder<GameObject>
+public abstract class WarehouseProductGameObjectBuilder : ScriptableObject, IProductViewBuilder<GameObject>
 {
+    [Header("Common product view dependencies")]
     public CarPartGameObjectBuilder carPartViewBuilder;
-    IProductViewComponentBuilder<WarehouseProductView> productViewComponentBuilder = new WarehouseProductViewComponentBuilder();
 
-
+    [Tooltip("Generic rectangular prefab with SpriteRenderer + collider for basic products.")]
     public GameObject rectanglePrefab;
 
-    public GameObject BuildCar(Car car)
-    {
-        GameObject carGO = new GameObject(car.Name);
-        carGO.AddComponent<Rigidbody2D>();
+    // Shared view component builder for all warehouse product views
+    protected IProductViewComponentBuilder<WarehouseProductView> productViewComponentBuilder =
+        new WarehouseProductViewComponentBuilder();
 
-        var frameGO = car.CarFrame.GetRepresentation(carPartViewBuilder);
-        frameGO.transform.SetParent(carGO.transform);
-        frameGO.transform.localPosition = Vector3.zero;
+    #region Abstracts
 
-        foreach (var partLocation in car.carParts.Keys)
-        {
-            var slotData = partLocation.PartSlotRuntimeConfig.partSlotData;
-            CarPartViewPlacementHelper.BuildCarPartAtPosition(partLocation, carGO.transform,carPartViewBuilder);
-        }
+    public abstract GameObject BuildCar(Car car);
+    public abstract GameObject BuildCarFrame(CarFrame carFrame);
 
-        productViewComponentBuilder.BuildViewComponent(carGO, car);
+    #endregion
 
-        return carGO;
-    }
+    #region Default implementations for simple products
 
-    public GameObject BuildCarFrame(CarFrame carFrame)
-    {
-        Debug.LogError("WarehouseProductViewBuilder does not support building CarFrame views. " + carFrame.UniqueName);
-        return null;
-    }
-
-    public GameObject BuildEngine(Engine engine)
+    public virtual GameObject BuildEngine(Engine engine)
     {
         var go = Instantiate(rectanglePrefab);
         var sr = go.GetComponent<SpriteRenderer>();
@@ -47,7 +33,7 @@ public class WarehouseProductGameObjectBuilder : ScriptableObject, IProductViewB
         return go;
     }
 
-    public GameObject BuildSpoiler(Spoiler spoiler)
+    public virtual GameObject BuildSpoiler(Spoiler spoiler)
     {
         var go = Instantiate(rectanglePrefab);
         var sr = go.GetComponent<SpriteRenderer>();
@@ -61,7 +47,7 @@ public class WarehouseProductGameObjectBuilder : ScriptableObject, IProductViewB
         return go;
     }
 
-    public GameObject BuildWheel(Wheel wheel)
+    public virtual GameObject BuildWheel(Wheel wheel)
     {
         var go = Instantiate(rectanglePrefab);
         var sr = go.GetComponent<SpriteRenderer>();
@@ -75,6 +61,9 @@ public class WarehouseProductGameObjectBuilder : ScriptableObject, IProductViewB
         return go;
     }
 
+    #endregion
+
+    #region Shared Warehouse view component builder
 
     public class WarehouseProductViewComponentBuilder : IProductViewComponentBuilder<WarehouseProductView>
     {
@@ -83,9 +72,7 @@ public class WarehouseProductGameObjectBuilder : ScriptableObject, IProductViewB
             Debug.Assert(gameObject != null, "gameObject != null");
             Debug.Assert(product != null, "product != null");
 
-
             WarehouseProductView view;
-
             if (product is Car)
             {
                 view = gameObject.AddComponent<WarehouseCarView>();
@@ -94,16 +81,18 @@ public class WarehouseProductGameObjectBuilder : ScriptableObject, IProductViewB
             {
                 view = gameObject.AddComponent<WarehouseProductView>();
             }
+
             view.Initialize(product, G.Instance.ProductLocationService.GetProductLocation(product));
-            initializeAdditionalComponents(gameObject, product);
+            InitializeAdditionalComponents(gameObject, product);
             return view;
         }
 
         // Add any additional components based on product type if needed
-        private void initializeAdditionalComponents(GameObject gameObject, Product product)
+        private void InitializeAdditionalComponents(GameObject gameObject, Product product)
         {
             gameObject.AddComponent<DirectDragInteractable>();
             gameObject.AddComponent<ContentProvider>().Initialize(product);
+
             if (product is not Car)
             {
                 gameObject.AddComponent<DragCollisionDisabler>();
@@ -111,4 +100,6 @@ public class WarehouseProductGameObjectBuilder : ScriptableObject, IProductViewB
             }
         }
     }
+
+    #endregion
 }
