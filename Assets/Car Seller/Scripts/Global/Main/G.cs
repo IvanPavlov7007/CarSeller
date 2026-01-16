@@ -9,9 +9,13 @@ public sealed class G : Singleton<G>
 {
     //Use only for reading
     //MODEL
-    public CityConfig CityConfig;
-    public EconomyConfig EconomyConfig;
-    public WorldMissionsConfig WorldMissionsConfig;
+    public GameConfig GameConfig;
+
+
+    public static GameConfig Config => Instance.GameConfig;
+    public CityConfig CityConfig => GameConfig.CityConfig;
+    public EconomyConfig EconomyConfig => GameConfig.EconomyConfig;
+    public WorldMissionsConfig WorldMissionsConfig => GameConfig.WorldMissionsConfig;
 
     //References
     public static City City => World.Instance.City;

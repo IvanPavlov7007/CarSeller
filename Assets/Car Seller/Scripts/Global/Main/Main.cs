@@ -1,7 +1,15 @@
 ﻿using Pixelplacement;
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+
+[Serializable]
+public enum GameConfigMode
+{
+    CarShop,
+    CarSteal
+}
 
 public class Main : Singleton<Main>
 {
@@ -11,10 +19,43 @@ public class Main : Singleton<Main>
 
     private IEnumerator Start()
     {
-        yield return testRoamingState();
+        var config = G.Instance.GameConfig;
+        switch (config.GameConfigMode)
+        {
+            case GameConfigMode.CarShop:
+                yield return carShop();
+                break;
+            case GameConfigMode.CarSteal:
+                yield return carSteal();
+                break;
+            default:
+                break;
+        }
+        
+        yield return null;
     }
 
-    private IEnumerator testRoamingState()
+
+    private void Awake()
+    {
+        switch (G.Config.GameConfigMode)
+        {
+            case GameConfigMode.CarShop:
+                break;
+            case GameConfigMode.CarSteal:
+                CarSpawnManager.NewCarsRotation();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private IEnumerator carSteal()
+    {
+        yield return null;
+    }
+
+    private IEnumerator carShop()
     {
         Debug.Assert(carSpawnConfig != null, "CarSpawnConfig is not assigned in Main.");
         Debug.Assert(carSpawnPoint != null, "CarSpawnPoint is not assigned in Main.");

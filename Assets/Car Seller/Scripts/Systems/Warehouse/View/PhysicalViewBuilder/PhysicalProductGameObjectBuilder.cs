@@ -12,6 +12,7 @@ public class PhysicalProductGameObjectBuilder : WarehouseProductGameObjectBuilde
     public float wheelMotorMaxTorque = 0f;
     public float wheelDampingRatio = 0.5f;
     public float wheelFrequency = 5f;
+    public PhysicsMaterial2D wheelPhysicsMaterial;
 
     [Header("Layer settings")]
     [Tooltip("Layer index used for the assembled car (body + wheels).")]
@@ -109,6 +110,7 @@ public class PhysicalProductGameObjectBuilder : WarehouseProductGameObjectBuilde
             wheelRb = wheelGO.AddComponent<Rigidbody2D>();
         }
         wheelRb.mass = wheelMass;
+        wheelRb.sharedMaterial = wheelPhysicsMaterial;
 
         // Attach wheel to car with a WheelJoint2D
         var joint = wheelGO.AddComponent<WheelJoint2D>();

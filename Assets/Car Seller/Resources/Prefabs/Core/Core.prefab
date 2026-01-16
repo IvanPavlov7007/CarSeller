@@ -284,8 +284,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 6395515076168896260}
   - {fileID: 1954165389836885580}
+  - {fileID: 6395515076168896260}
   - {fileID: 7591298403264055895}
   - {fileID: 7733344110849816519}
   - {fileID: 5552873365360413264}
@@ -1205,9 +1205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 1
-  CityConfig: {fileID: 11400000, guid: f69e8dc3adaa8b147938f1124e33966e, type: 2}
-  EconomyConfig: {fileID: 11400000, guid: c06296a320d0174459eed86435f69a0f, type: 2}
-  WorldMissionsConfig: {fileID: 11400000, guid: 92161a9ed29d20640ac9350b1e20cfc8, type: 2}
+  GameConfig: {fileID: 11400000, guid: 45ccca8489c494348bd4349a41678607, type: 2}
   monolithWarehouseProductViewBuilder: {fileID: 11400000, guid: f89c79dee8c6ad946a82b44e4e94a0a2, type: 2}
   physicalWarehouseProductViewBuilder: {fileID: 11400000, guid: 714191ac3dbb5f94695da48c3d1fd87a, type: 2}
   carPartViewBuilder: {fileID: 11400000, guid: 9280239a7aae48041bc89e3309ad1261, type: 2}

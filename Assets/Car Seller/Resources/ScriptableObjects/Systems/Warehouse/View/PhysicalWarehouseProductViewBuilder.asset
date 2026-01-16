@@ -21,3 +21,5 @@ MonoBehaviour:
   wheelMotorMaxTorque: 0
   wheelDampingRatio: 0.5
   wheelFrequency: 30
+  wheelPhysicsMaterial: {fileID: 6200000, guid: 1846ae1a5f8d9e84caa25e425b6dea5d, type: 2}
+  carLayer: 0
