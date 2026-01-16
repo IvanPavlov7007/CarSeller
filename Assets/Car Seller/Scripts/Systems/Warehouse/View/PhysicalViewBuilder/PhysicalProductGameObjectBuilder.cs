@@ -41,45 +41,13 @@ public class PhysicalProductGameObjectBuilder : WarehouseProductGameObjectBuilde
         // BUILD PHYSICAL PARTS
         foreach (var partLocation in car.carParts.Keys)
         {
-            var slotData = partLocation.PartSlotRuntimeConfig.partSlotData;
-
-            // If not occupied, skip
-            if (slotData.Hidden || partLocation.Occupant == null)
-                continue;
-
-            if (partLocation.Occupant is Wheel wheelProduct)
-            {
-                // First build & place the wheel using the shared helper
-                var wheelGO = CarPartViewPlacementHelper.BuildCarPartAtPosition(
-                    partLocation,
-                    carGO.transform,
-                    carPartViewBuilder);
-
-                if (wheelGO != null)
-                {
-                    SetLayerRecursively(wheelGO, carLayer);
-                    SetupPhysicalWheel(wheelGO, wheelProduct, partLocation, carRb, carColliders);
-                }
-            }
-            else
-            {
-                // Non-wheel parts use the same helper for placement
-                var partGO = CarPartViewPlacementHelper.BuildCarPartAtPosition(
-                    partLocation,
-                    carGO.transform,
-                    carPartViewBuilder);
-
-                if (partGO != null)
-                {
-                    SetLayerRecursively(partGO, carLayer);
-                    // keep colliders for later ignore-collision setup if needed
-                    carColliders.AddRange(partGO.GetComponentsInChildren<Collider2D>());
-                }
-            }
+            AttachPartInternal(carGO.transform, carRb, carColliders, partLocation);
         }
 
         // Attach warehouse-level view/drag logic to the whole car (not to individual parts)
-        productViewComponentBuilder.BuildViewComponent(carGO, car);
+        var view = productViewComponentBuilder.BuildViewComponent(carGO, car) as WarehouseCarView;
+        // Make sure the view knows which builder created it
+        view?.SetBuilder(this);
 
         return carGO;
     }
@@ -88,6 +56,71 @@ public class PhysicalProductGameObjectBuilder : WarehouseProductGameObjectBuilde
     {
         Debug.LogError("PhysicalProductGameObjectBuilder does not support building standalone CarFrame views. " + carFrame.UniqueName);
         return null;
+    }
+
+    /// <summary>
+    /// Called by WarehouseCarView when a part is attached at runtime.
+    /// Ensures behavior matches BuildCar (physics, no extra views on parts, etc.).
+    /// </summary>
+    public void AttachPartToCarView(WarehouseCarView carView, Car.CarPartLocation partLocation)
+    {
+        if (carView == null || carView.car == null) return;
+
+        var carGO = carView.gameObject;
+        var carRb = carGO.GetComponent<Rigidbody2D>();
+        if (carRb == null)
+        {
+            Debug.LogError("Physical car view has no Rigidbody2D on root.");
+            return;
+        }
+
+        // collect all existing colliders for proper ignore-collision setup
+        var carColliders = new List<Collider2D>();
+        carColliders.AddRange(carGO.GetComponentsInChildren<Collider2D>());
+
+        AttachPartInternal(carGO.transform, carRb, carColliders, partLocation);
+    }
+
+    private void AttachPartInternal(
+        Transform carTransform,
+        Rigidbody2D carRb,
+        List<Collider2D> carColliders,
+        Car.CarPartLocation partLocation)
+    {
+        var slotData = partLocation.PartSlotRuntimeConfig.partSlotData;
+
+        // If not occupied, skip
+        if (slotData.Hidden || partLocation.Occupant == null)
+            return;
+
+        if (partLocation.Occupant is Wheel wheelProduct)
+        {
+            // First build & place the wheel using the shared helper
+            var wheelGO = CarPartViewPlacementHelper.BuildCarPartAtPosition(
+                partLocation,
+                carTransform,
+                carPartViewBuilder);
+
+            if (wheelGO != null)
+            {
+                SetLayerRecursively(wheelGO, carLayer);
+                SetupPhysicalWheel(wheelGO, wheelProduct, partLocation, carRb, carColliders);
+            }
+        }
+        else
+        {
+            // Non-wheel parts use the same helper for placement
+            var partGO = CarPartViewPlacementHelper.BuildCarPartAtPosition(
+                partLocation,
+                carTransform,
+                carPartViewBuilder);
+
+            if (partGO != null)
+            {
+                SetLayerRecursively(partGO, carLayer);
+                carColliders.AddRange(partGO.GetComponentsInChildren<Collider2D>());
+            }
+        }
     }
 
     /// <summary>
