@@ -18,6 +18,17 @@ public class PhysicalProductGameObjectBuilder : WarehouseProductGameObjectBuilde
     [Tooltip("Layer index used for the assembled car (body + wheels).")]
     public int carLayer = 0; // set this in the inspector to e.g. a 'Car' layer
 
+    [Header("Spring motor settings")] public bool enableSpringMotor = false;
+    public float springMotorStiffness = 5f;
+    public float springMotorMaxEnergy = 50f;
+    public float springMotorDischargeRate = 10f;
+    public float springMotorMaxTorque = 50f;
+    [Tooltip("Layer mask for what counts as ground.")]
+    public LayerMask groundLayerMask;
+    [Tooltip("Distance to raycast below the wheel center to detect ground.")]
+    public float groundCheckDistance = 0.25f;
+
+
     public override GameObject BuildCar(Car car)
     {
         // Root for the physical car
@@ -159,38 +170,60 @@ public class PhysicalProductGameObjectBuilder : WarehouseProductGameObjectBuilde
         suspension.frequency = wheelFrequency;
         joint.suspension = suspension;
 
-        joint.useMotor = enableWheelMotor;
-        if (enableWheelMotor)
+        // Disable built-in motor if using spring motor
+        if (enableSpringMotor)
         {
-            var motor = joint.motor;
-            motor.motorSpeed = wheelMotorSpeed;
-            motor.maxMotorTorque = wheelMotorMaxTorque;
-            joint.motor = motor;
+            joint.useMotor = false;
+        }
+        else
+        {
+            joint.useMotor = enableWheelMotor;
+            if (enableWheelMotor)
+            {
+                var motor = joint.motor;
+                motor.motorSpeed = wheelMotorSpeed;
+                motor.maxMotorTorque = wheelMotorMaxTorque;
+                joint.motor = motor;
+            }
         }
 
         // ----- COLLISION FILTERING -----
-        // Get all colliders on this wheel
         var wheelColliders = wheelGO.GetComponentsInChildren<Collider2D>();
         foreach (var wCol in wheelColliders)
         {
             if (wCol == null) continue;
 
-            // Ignore collisions between this wheel and all other colliders in the same car
             foreach (var cCol in carColliders)
             {
                 if (cCol == null || cCol == wCol) continue;
                 Physics2D.IgnoreCollision(wCol, cCol, true);
             }
 
-            // Also add wheel's own colliders to the carColliders list so
-            // subsequent wheels can ignore them too.
             if (!carColliders.Contains(wCol))
                 carColliders.Add(wCol);
+        }
+
+        // Attach spring motor component if enabled
+        if (enableSpringMotor)
+        {
+            var springMotor = wheelGO.GetComponent<WheelSpringMotor2D>();
+            if (springMotor == null)
+            {
+                springMotor = wheelGO.AddComponent<WheelSpringMotor2D>();
+            }
+
+            springMotor.springStiffness = springMotorStiffness;
+            springMotor.maxEnergy = springMotorMaxEnergy;
+            springMotor.dischargeRate = springMotorDischargeRate;
+            springMotor.maxTorque = springMotorMaxTorque;
+            springMotor.groundLayerMask = groundLayerMask;
+            springMotor.groundCheckDistance = groundCheckDistance;
         }
 
         // IMPORTANT: no productViewComponentBuilder.BuildViewComponent here,
         // wheels visually/semantically belong to the car in the warehouse.
     }
+
 
     private void SetLayerRecursively(GameObject go, int layer)
     {
