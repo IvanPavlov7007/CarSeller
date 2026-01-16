@@ -7,12 +7,13 @@ public class CityUIPinPositioner : MonoBehaviour
     public Canvas canvas { get; private set; }
     public Transform origin { get; private set; }
     public Transform target { get; private set; }
-
     public RectTransform IconRectTransform => iconTransform;
     public RectTransform FrameRectTransform => frameTransform;
 
     public float screenEdgeMargin = 50f;
     public float targetOnScreenMargin = 50f;
+
+    public bool IsDragging { get; private set; }
 
     CityUIPinDragHandler dragHandler;
     Quaternion userRotation = Quaternion.identity;
@@ -23,13 +24,19 @@ public class CityUIPinPositioner : MonoBehaviour
     RectTransform frameTransform;
     RectTransform rectTransform;
     Quaternion initialIconRotation;
+
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         initialIconRotation = iconTransform.rotation;
         dragHandler = GetComponentInChildren<CityUIPinDragHandler>();
-        dragHandler.OnCustomDrag += OnDrag;
-        dragHandler.OnCustomBeginDrag += OnBeginDrag;
+
+        if (dragHandler != null)
+        {
+            dragHandler.OnCustomDrag += OnDrag;
+            dragHandler.OnCustomBeginDrag += OnBeginDrag;
+            dragHandler.OnCustomEndDrag += OnEndDrag;
+        }
     }
 
     public void Initialize(Camera cam, Canvas canvas, Transform origin, Transform target)
@@ -93,7 +100,7 @@ public class CityUIPinPositioner : MonoBehaviour
             out localPos);
 
         rectTransform.anchoredPosition = localPos;
-        rectTransform.up = userRotation * - directionToTarget;
+        rectTransform.up = userRotation * -directionToTarget;
     }
 
     public static Vector2 worldScreenHalfSize(Camera cam)
@@ -152,6 +159,8 @@ public class CityUIPinPositioner : MonoBehaviour
     }
 
     Vector2 previousDir;
+    Quaternion dragRotation;
+    const float dragThreshold = 1f;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -167,7 +176,18 @@ public class CityUIPinPositioner : MonoBehaviour
 
         userRotation *= Quaternion.Euler(0f, 0f, deltaAngle);
 
+        // accumulate drag rotation for drag threshold check
+        dragRotation = Quaternion.Euler(0f, 0f, deltaAngle);
+        if(Mathf.Abs(dragRotation.eulerAngles.z) > dragThreshold)
+            IsDragging = true;
+
         previousDir = currentDir;
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        IsDragging = false;
+        dragRotation = Quaternion.identity;
     }
 
     Vector2 GetDirectionFromCenter(Vector2 screenPos)
@@ -179,5 +199,4 @@ public class CityUIPinPositioner : MonoBehaviour
             out Vector3 worldPoint);
         return (worldPoint - rectTransform.position).normalized;
     }
-
 }

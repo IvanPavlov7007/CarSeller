@@ -55,6 +55,8 @@ public class CityUIPin : MonoBehaviour
     private void onClick()
     {
         Debug.Assert(interactable != null, "CityUIPin: No Interactable component found on the CityViewObjectController.");
+        if(positioner.IsDragging)
+            return;
         interactable?.CursorClick();
     }
 
