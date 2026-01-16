@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef69532a2ce800d489631b8f8ee9f912, type: 3}
   m_Name: '[CarShop]PlayerStartStateConfig'
   m_EditorClassIdentifier: 
-  initialMoney: 0
+  initialMoney: 10000
   ownWarehouses:
   - {fileID: 11400000, guid: a67fc9d79f0ce4141af102bbcb775bc8, type: 2}

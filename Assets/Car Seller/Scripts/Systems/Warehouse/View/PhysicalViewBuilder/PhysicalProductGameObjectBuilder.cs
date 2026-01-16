@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "PhysicalProductViewBuilder", menuName = "Configs/View/PhysicalProductViewBuilder")]
 public class PhysicalProductGameObjectBuilder : WarehouseProductGameObjectBuilder
@@ -12,10 +13,16 @@ public class PhysicalProductGameObjectBuilder : WarehouseProductGameObjectBuilde
     public float wheelDampingRatio = 0.5f;
     public float wheelFrequency = 5f;
 
+    [Header("Layer settings")]
+    [Tooltip("Layer index used for the assembled car (body + wheels).")]
+    public int carLayer = 0; // set this in the inspector to e.g. a 'Car' layer
+
     public override GameObject BuildCar(Car car)
     {
         // Root for the physical car
         var carGO = new GameObject(car.Name);
+        carGO.layer = carLayer;
+
         var carRb = carGO.AddComponent<Rigidbody2D>();
         carRb.mass = carMass;
 
@@ -24,6 +31,11 @@ public class PhysicalProductGameObjectBuilder : WarehouseProductGameObjectBuilde
         frameGO.transform.SetParent(carGO.transform, worldPositionStays: false);
         frameGO.transform.localPosition = Vector3.zero;
         frameGO.transform.localRotation = Quaternion.identity;
+        SetLayerRecursively(frameGO, carLayer);
+
+        // cache all colliders on the car body hierarchy for later ignore-collision setup
+        var carColliders = new List<Collider2D>();
+        carColliders.AddRange(carGO.GetComponentsInChildren<Collider2D>());
 
         // BUILD PHYSICAL PARTS
         foreach (var partLocation in car.carParts.Keys)
@@ -44,16 +56,24 @@ public class PhysicalProductGameObjectBuilder : WarehouseProductGameObjectBuilde
 
                 if (wheelGO != null)
                 {
-                    SetupPhysicalWheel(wheelGO, wheelProduct, partLocation, carRb);
+                    SetLayerRecursively(wheelGO, carLayer);
+                    SetupPhysicalWheel(wheelGO, wheelProduct, partLocation, carRb, carColliders);
                 }
             }
             else
             {
                 // Non-wheel parts use the same helper for placement
-                CarPartViewPlacementHelper.BuildCarPartAtPosition(
+                var partGO = CarPartViewPlacementHelper.BuildCarPartAtPosition(
                     partLocation,
                     carGO.transform,
                     carPartViewBuilder);
+
+                if (partGO != null)
+                {
+                    SetLayerRecursively(partGO, carLayer);
+                    // keep colliders for later ignore-collision setup if needed
+                    carColliders.AddRange(partGO.GetComponentsInChildren<Collider2D>());
+                }
             }
         }
 
@@ -71,13 +91,14 @@ public class PhysicalProductGameObjectBuilder : WarehouseProductGameObjectBuilde
 
     /// <summary>
     /// Adds physics and joints to an already built wheel GameObject.
-    /// The wheel is assumed to be correctly parented and positioned by CarPartViewPlacementHelper.
+    /// Also makes the wheel ignore collisions with other colliders in the same car.
     /// </summary>
     private void SetupPhysicalWheel(
         GameObject wheelGO,
         Wheel wheel,
         Car.CarPartLocation partLocation,
-        Rigidbody2D carRb)
+        Rigidbody2D carRb,
+        List<Collider2D> carColliders)
     {
         var slotData = partLocation.PartSlotRuntimeConfig.partSlotData;
 
@@ -112,7 +133,38 @@ public class PhysicalProductGameObjectBuilder : WarehouseProductGameObjectBuilde
             joint.motor = motor;
         }
 
+        // ----- COLLISION FILTERING -----
+        // Get all colliders on this wheel
+        var wheelColliders = wheelGO.GetComponentsInChildren<Collider2D>();
+        foreach (var wCol in wheelColliders)
+        {
+            if (wCol == null) continue;
+
+            // Ignore collisions between this wheel and all other colliders in the same car
+            foreach (var cCol in carColliders)
+            {
+                if (cCol == null || cCol == wCol) continue;
+                Physics2D.IgnoreCollision(wCol, cCol, true);
+            }
+
+            // Also add wheel's own colliders to the carColliders list so
+            // subsequent wheels can ignore them too.
+            if (!carColliders.Contains(wCol))
+                carColliders.Add(wCol);
+        }
+
         // IMPORTANT: no productViewComponentBuilder.BuildViewComponent here,
         // wheels visually/semantically belong to the car in the warehouse.
+    }
+
+    private void SetLayerRecursively(GameObject go, int layer)
+    {
+        if (go == null) return;
+        go.layer = layer;
+        foreach (Transform child in go.transform)
+        {
+            if (child == null) continue;
+            SetLayerRecursively(child.gameObject, layer);
+        }
     }
 }

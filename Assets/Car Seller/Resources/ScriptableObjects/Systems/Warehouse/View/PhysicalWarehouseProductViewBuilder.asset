@@ -20,4 +20,4 @@ MonoBehaviour:
   wheelMotorSpeed: 0
   wheelMotorMaxTorque: 0
   wheelDampingRatio: 0.5
-  wheelFrequency: 5
+  wheelFrequency: 30
