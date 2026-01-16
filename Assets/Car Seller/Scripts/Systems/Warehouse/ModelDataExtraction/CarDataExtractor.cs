@@ -99,31 +99,44 @@ public class CarDataExtractor : MonoBehaviour
     [Button]
     public void SaveThisObjectToConfig()
     {
-        if (carBaseConfig == null)
+        if (carBaseConfig == null) { Debug.LogError("CarBaseConfig is not assigned."); return; }
+        // Record for undo first:
+        Undo.RecordObject(carBaseConfig, "Save Car Base Config");
+        if (carBaseConfig.CarFrameBaseConfig != null)
         {
-            Debug.LogError("CarBaseConfig is not assigned.");
-            return;
+            Undo.RecordObject(carBaseConfig.CarFrameBaseConfig, "Save Car Frame Config");
         }
 
-        if(windshieldSpriteRenderer != null)
+        if (windshieldSpriteRenderer != null && carBaseConfig.CarFrameBaseConfig != null)
         {
             carBaseConfig.CarFrameBaseConfig.WindshieldColor = windshieldSpriteRenderer.color;
         }
-        if(frameSpriteRenderer != null)
+        if (frameSpriteRenderer != null && carBaseConfig.CarFrameBaseConfig != null)
         {
             carBaseConfig.CarFrameBaseConfig.FrameColor = frameSpriteRenderer.color;
         }
 
-        foreach(var slotConfig in carBaseConfig.SlotConfigs)
+        foreach (var slotConfig in carBaseConfig.SlotConfigs)
         {
             if (slotsMap.TryGetValue(slotConfig, out var slotTransform))
             {
+
                 slotConfig.partSlotData.LocalPosition = slotTransform.localPosition;
                 slotConfig.partSlotData.LocalRotation = slotTransform.localRotation.eulerAngles;
                 slotConfig.partSlotData.LocalScale = slotTransform.localScale;
             }
         }
 
+        // Explicitly mark assets dirty so Unity knows to serialize them:
+        EditorUtility.SetDirty(carBaseConfig);
+        if (carBaseConfig.CarFrameBaseConfig != null)
+        {
+            EditorUtility.SetDirty(carBaseConfig.CarFrameBaseConfig);
+        }
+
+
+        // Optional but useful to avoid losing work on editor close:
+        AssetDatabase.SaveAssets();
     }
 #endif
 }
