@@ -35,18 +35,28 @@ public class Main : Singleton<Main>
         yield return null;
     }
 
-
-    private void Awake()
+    public void OnCityInitialize()
     {
-        switch (G.Config.GameConfigMode)
+        if(G.Config.GameConfigMode == GameConfigMode.CarSteal)
+            CarSpawnManager.CheckAndRefill();
+    }
+
+
+    //Defined and used in G 
+    public class InstantMain
+    {
+        public void AfterWorldInitialize()
         {
-            case GameConfigMode.CarShop:
-                break;
-            case GameConfigMode.CarSteal:
-                CarSpawnManager.NewCarsRotation();
-                break;
-            default:
-                break;
+            switch (G.Config.GameConfigMode)
+            {
+                case GameConfigMode.CarShop:
+                    break;
+                case GameConfigMode.CarSteal:
+                    CarSpawnManager.NewCarsRotation();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -74,7 +84,7 @@ public class Main : Singleton<Main>
 
         //CollectablesManager.Instance.Initialize(locations, 900f, null, 20);
         //PoliceManager.Instance.CreatePolice();
-        tryEnterCarShop(car);
+        //tryEnterCarShop(car);
 
 
         yield return null;

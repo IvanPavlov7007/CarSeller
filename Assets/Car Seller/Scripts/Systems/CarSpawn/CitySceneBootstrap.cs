@@ -4,6 +4,6 @@ public static class CitySceneBootstrap
 {
     public static void Execute()
     {
-        CarSpawnManager.CheckAndRefill();
+        Main.Instance.OnCityInitialize();
     }
 }

@@ -23,11 +23,12 @@ MonoBehaviour:
   wheelFrequency: 30
   wheelPhysicsMaterial: {fileID: 6200000, guid: 1846ae1a5f8d9e84caa25e425b6dea5d, type: 2}
   carLayer: 0
-  enableSpringMotor: 1
+  enableSpringMotor: 0
   springMotorStiffness: 1
-  springMotorMaxEnergy: 2
-  springMotorDischargeRate: 1
+  springMotorMaxEnergy: 5
+  springMotorDischargeRate: 0.7
   springMotorMaxTorque: 0.5
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 256
+  groundCheckDistance: 0.25

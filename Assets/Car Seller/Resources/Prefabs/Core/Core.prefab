@@ -1205,7 +1205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 1
-  GameConfig: {fileID: 11400000, guid: 45ccca8489c494348bd4349a41678607, type: 2}
+  GameConfig: {fileID: 11400000, guid: cb4a3b6edc77d504a8dd455ad5d89d9b, type: 2}
   monolithWarehouseProductViewBuilder: {fileID: 11400000, guid: f89c79dee8c6ad946a82b44e4e94a0a2, type: 2}
   physicalWarehouseProductViewBuilder: {fileID: 11400000, guid: 714191ac3dbb5f94695da48c3d1fd87a, type: 2}
   carPartViewBuilder: {fileID: 11400000, guid: 9280239a7aae48041bc89e3309ad1261, type: 2}

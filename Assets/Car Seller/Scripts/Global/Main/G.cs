@@ -44,6 +44,7 @@ public sealed class G : Singleton<G>
 
     public PlayerManager PlayerManager = new PlayerManager();
     
+    public Main.InstantMain InstantMain = new Main.InstantMain();
 
     //City
     public CityActionService CityActionService = new CityActionService();
@@ -73,7 +74,7 @@ public sealed class G : Singleton<G>
 
         GameEvents.Instance.Reset();
         ResetGameState();
-
+        InstantMain.AfterWorldInitialize();
         TryInitializeLogic();
     }
 
