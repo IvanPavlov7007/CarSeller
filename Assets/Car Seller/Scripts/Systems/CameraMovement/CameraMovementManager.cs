@@ -1,12 +1,14 @@
 ﻿using Pixelplacement;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.Cinemachine;
 
 public class CameraMovementManager : Singleton<CameraMovementManager>
 {
     [Header("References")]
     public Transform cameraTarget;
     public GameObject camConfiner; // GameObject holding the 2D collider used by CinemachineConfiner2D
+    public CinemachineCamera virtualCamera;
 
     [Header("Drag Settings")]
     [Tooltip("Enable/disable camera dragging.")]
@@ -33,12 +35,65 @@ public class CameraMovementManager : Singleton<CameraMovementManager>
     [Range(0f, 1f)]
     public float followStrength = 0.25f;
 
+    [Header("Zoom")]
+    [Tooltip("Enable/disable zoom input (wheel/pinch).")]
+    public bool enableZoom = true;
+    [Tooltip("Min orthographic size (zoomed in).")]
+    public float minOrthoSize = 3.5f;
+    [Tooltip("Max orthographic size (zoomed out).")]
+    public float maxOrthoSize = 14f;
+    [Tooltip("Mouse wheel zoom speed (orthographic size units per wheel step).")]
+    public float wheelZoomSpeed = 1.25f;
+    [Tooltip("Pinch zoom speed multiplier.")]
+    public float pinchZoomSpeed = 0.02f;
+    [Tooltip("Zoom smoothing. Higher = snappier.")]
+    public float zoomSmoothing = 12f;
+
+    [Header("Game Zoom Bias")]
+    [Tooltip("Optional: automatically zoom out based on an externally provided 0..1 value (e.g., speed normalized).")]
+    public bool enableGameZoomBias = false;
+    [Range(0f, 1f)]
+    [Tooltip("How much the game bias can push you toward max zoom out.")]
+    public float gameZoomBiasStrength = 0.5f;
+
     Camera cam => Camera.main;
 
     // Drag state
     bool _isDragging;
     Vector2 _lastPointerScreenPos;
     Vector3 _pendingTargetPos; // desired target position when using inertia
+
+    // Zoom state
+    float _userZoomT; // 0..1 => lerp(minOrthoSize, maxOrthoSize)
+    float _gameZoom01; // 0..1 externally set (speed etc)
+
+    // Scripted camera control
+    Transform _forcedFollowTarget;
+    Vector3? _forcedWorldPosition;
+    int _forceToken;
+    float _forceBlend; // 0..1 for “how much override is applied”
+
+    void Awake()
+    {
+        // If not assigned, try to find a vcam in scene (safe fallback).
+        if (virtualCamera == null)
+            virtualCamera = FindAnyObjectByType<CinemachineCamera>();
+
+        // Initialize zoom from vcam lens (NOT Camera.main).
+        if (virtualCamera != null && virtualCamera.Lens.Orthographic)
+        {
+            float s = Mathf.Clamp(virtualCamera.Lens.OrthographicSize, minOrthoSize, maxOrthoSize);
+            _userZoomT = Mathf.InverseLerp(minOrthoSize, maxOrthoSize, s);
+        }
+        else if (cam != null && cam.orthographic)
+        {
+            float s = Mathf.Clamp(cam.orthographicSize, minOrthoSize, maxOrthoSize);
+            _userZoomT = Mathf.InverseLerp(minOrthoSize, maxOrthoSize, s);
+        }
+
+        if (cameraTarget != null)
+            _pendingTargetPos = cameraTarget.position;
+    }
 
     void Update()
     {
@@ -47,7 +102,6 @@ public class CameraMovementManager : Singleton<CameraMovementManager>
         var cursor = GameCursor.Instance;
         Interactable dragged = cursor != null ? cursor.draggedInteractable : null;
 
-        // If we are dragging a MovingPoint, bias the camera toward it.
         if (followDraggedMovingPoint && dragged != null)
         {
             var movingPoint = dragged.GetComponent<MovingPoint>();
@@ -57,10 +111,241 @@ public class CameraMovementManager : Singleton<CameraMovementManager>
             }
         }
 
-        // Dragging the camera with pointer is disabled while GameCursor is interacting.
-        if (!enableDrag) return;
+        ApplyScriptedPosition();
 
-        HandlePointerPan(cursor);
+        // Dragging the camera with pointer is disabled while GameCursor is interacting.
+        if (enableDrag)
+        {
+            HandlePointerPan(cursor);
+        }
+
+        if (enableZoom)
+        {
+            HandleZoomInput();
+        }
+
+        ApplyZoom();
+    }
+
+    void HandleZoomInput()
+    {
+        // Block zoom when pointer is over UI.
+        if (blockDragOverUI)
+        {
+            Vector2 pointerPos;
+            if (Touchscreen.current?.primaryTouch != null)
+                pointerPos = Touchscreen.current.primaryTouch.position.ReadValue();
+            else if (Mouse.current != null)
+                pointerPos = Mouse.current.position.ReadValue();
+            else
+                pointerPos = default;
+
+            if (IsPointerOverUI(pointerPos)) return;
+        }
+
+        if (Mouse.current != null)
+        {
+            float wheel = Mouse.current.scroll.ReadValue().y;
+            if (Mathf.Abs(wheel) > 0.01f)
+            {
+                float deltaT = -wheel * (wheelZoomSpeed / Mathf.Max(0.01f, (maxOrthoSize - minOrthoSize))) * 0.1f;
+                _userZoomT = Mathf.Clamp01(_userZoomT + deltaT);
+            }
+        }
+
+        if (Touchscreen.current != null)
+        {
+            var t0 = Touchscreen.current.touches.Count > 0 ? Touchscreen.current.touches[0] : null;
+            var t1 = Touchscreen.current.touches.Count > 1 ? Touchscreen.current.touches[1] : null;
+
+            if (t0 != null && t1 != null && t0.press.isPressed && t1.press.isPressed)
+            {
+                Vector2 p0 = t0.position.ReadValue();
+                Vector2 p1 = t1.position.ReadValue();
+
+                Vector2 p0Prev = p0 - t0.delta.ReadValue();
+                Vector2 p1Prev = p1 - t1.delta.ReadValue();
+
+                float prevDist = Vector2.Distance(p0Prev, p1Prev);
+                float currDist = Vector2.Distance(p0, p1);
+
+                float d = currDist - prevDist;
+                if (Mathf.Abs(d) > 0.01f)
+                {
+                    float deltaT = -d * pinchZoomSpeed;
+                    _userZoomT = Mathf.Clamp01(_userZoomT + deltaT);
+                }
+            }
+        }
+    }
+
+    void ApplyZoom()
+    {
+        // Compute biased zoom.
+        float biasedT = _userZoomT;
+        if (enableGameZoomBias)
+        {
+            float push = Mathf.Clamp01(_gameZoom01) * gameZoomBiasStrength;
+            biasedT = Mathf.Lerp(_userZoomT, 1f, push);
+        }
+
+        float targetSize = Mathf.Lerp(minOrthoSize, maxOrthoSize, biasedT);
+        targetSize = Mathf.Clamp(targetSize, minOrthoSize, maxOrthoSize);
+
+        // Apply to Cinemachine vcam lens (authoritative in Cinemachine setups).
+        if (virtualCamera != null && virtualCamera.Lens.Orthographic)
+        {
+            float current = virtualCamera.Lens.OrthographicSize;
+            float smooth = 1f - Mathf.Exp(-zoomSmoothing * Time.unscaledDeltaTime);
+            virtualCamera.Lens.OrthographicSize = Mathf.Lerp(current, targetSize, smooth);
+            return;
+        }
+
+        // Fallback if you ever run without Cinemachine.
+        if (cam != null && cam.orthographic)
+        {
+            float current = cam.orthographicSize;
+            float smooth = 1f - Mathf.Exp(-zoomSmoothing * Time.unscaledDeltaTime);
+            cam.orthographicSize = Mathf.Lerp(current, targetSize, smooth);
+        }
+    }
+
+    public void SetGameZoom01(float zoom01)
+    {
+        _gameZoom01 = Mathf.Clamp01(zoom01);
+    }
+
+    float GetCurrentOrthoSize()
+    {
+        if (virtualCamera != null && virtualCamera.Lens.Orthographic)
+            return virtualCamera.Lens.OrthographicSize;
+
+        if (cam != null && cam.orthographic)
+            return cam.orthographicSize;
+
+        return 5f;
+    }
+
+    Vector2 GetCameraHalfExtentsWorld()
+    {
+        // Important: use the size that actually drives the picture.
+        float halfHeight = GetCurrentOrthoSize();
+        float halfWidth = halfHeight * (cam != null ? cam.aspect : 1f);
+        return new Vector2(halfWidth, halfHeight);
+    }
+
+    void ApplyScriptedPosition()
+    {
+        if (_forcedFollowTarget == null && _forcedWorldPosition == null)
+        {
+            _forceBlend = Mathf.MoveTowards(_forceBlend, 0f, Time.unscaledDeltaTime * 6f);
+            return;
+        }
+
+        _forceBlend = Mathf.MoveTowards(_forceBlend, 1f, Time.unscaledDeltaTime * 6f);
+
+        Vector3 desired;
+        if (_forcedFollowTarget != null) desired = _forcedFollowTarget.position;
+        else desired = _forcedWorldPosition.Value;
+
+        desired = ClampToConfinerShrunk(desired);
+
+        _pendingTargetPos = Vector3.Lerp(_pendingTargetPos, desired, _forceBlend);
+
+        if (useInertia)
+        {
+            cameraTarget.position = Vector3.Lerp(
+                cameraTarget.position,
+                _pendingTargetPos,
+                1f - Mathf.Pow(1f - inertiaLerp, Time.unscaledDeltaTime * 60f));
+        }
+        else
+        {
+            cameraTarget.position = _pendingTargetPos;
+        }
+    }
+
+    public int AcquireFocus(Vector3 worldPosition)
+    {
+        _forceToken++;
+        _forcedFollowTarget = null;
+        _forcedWorldPosition = worldPosition;
+        return _forceToken;
+    }
+
+    public int AcquireFollow(Transform target)
+    {
+        _forceToken++;
+        _forcedFollowTarget = target;
+        _forcedWorldPosition = null;
+        return _forceToken;
+    }
+
+    public void Release(int token)
+    {
+        if (token != _forceToken) return;
+        _forcedFollowTarget = null;
+        _forcedWorldPosition = null;
+    }
+
+    // Accurate world conversion for orthographic: project onto the plane of the camera target (its z)
+    Vector3 ScreenToWorldOnTargetPlane(Vector2 screenPos)
+    {
+        float zDistanceFromCamera = cameraTarget.position.z - cam.transform.position.z;
+        return cam.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, zDistanceFromCamera));
+    }
+
+    Vector3 ClampToConfinerShrunk(Vector3 desired)
+    {
+        if (camConfiner == null) return desired;
+
+        var col2d = camConfiner.GetComponent<Collider2D>();
+        if (col2d == null)
+        {
+            var col3d = camConfiner.GetComponent<Collider>();
+            if (col3d == null) return desired;
+
+            Bounds b3 = col3d.bounds;
+            Vector2 halfExtents = GetCameraHalfExtentsWorld();
+            float minX = b3.min.x + halfExtents.x;
+            float maxX = b3.max.x - halfExtents.x;
+            float minY = b3.min.y + halfExtents.y;
+            float maxY = b3.max.y - halfExtents.y;
+            desired.x = Mathf.Clamp(desired.x, minX, maxX);
+            desired.y = Mathf.Clamp(desired.y, minY, maxY);
+            return desired;
+        }
+
+        Bounds b = col2d.bounds;
+        Vector2 half = GetCameraHalfExtentsWorld();
+
+        float minX2 = b.min.x + half.x;
+        float maxX2 = b.max.x - half.x;
+        float minY2 = b.min.y + half.y;
+        float maxY2 = b.max.y - half.y;
+
+        if (minX2 > maxX2) desired.x = b.center.x;
+        else desired.x = Mathf.Clamp(desired.x, minX2, maxX2);
+
+        if (minY2 > maxY2) desired.y = b.center.y;
+        else desired.y = Mathf.Clamp(desired.y, minY2, maxY2);
+
+        return desired;
+    }
+
+    // Basic UI check without depending on GameCursor internals
+    bool IsPointerOverUI(Vector2 screenPosition)
+    {
+        if (UnityEngine.EventSystems.EventSystem.current == null) return false;
+        var eventData = new UnityEngine.EventSystems.PointerEventData(UnityEngine.EventSystems.EventSystem.current)
+        {
+            position = screenPosition
+        };
+        var results = new System.Collections.Generic.List<UnityEngine.EventSystems.RaycastResult>();
+        UnityEngine.EventSystems.EventSystem.current.RaycastAll(eventData, results);
+        bool over = results.Count > 0;
+        results.Clear();
+        return over;
     }
 
     void HandlePointerPan(GameCursor cursor)
@@ -145,6 +430,10 @@ public class CameraMovementManager : Singleton<CameraMovementManager>
             // Clamp desired to confiner with camera half-extents considered
             desired = ClampToConfinerShrunk(desired);
 
+            // If scripted control is active, reduce manual pan impact.
+            float manualStrength = 1f - Mathf.Clamp01(_forceBlend);
+            desired = Vector3.Lerp(_pendingTargetPos, desired, manualStrength);
+
             // Commit desired (either instantly or via inertia)
             if (useInertia)
             {
@@ -190,85 +479,5 @@ public class CameraMovementManager : Singleton<CameraMovementManager>
         {
             cameraTarget.position = desired;
         }
-    }
-
-    // Accurate world conversion for orthographic: project onto the plane of the camera target (its z)
-    Vector3 ScreenToWorldOnTargetPlane(Vector2 screenPos)
-    {
-        float zDistanceFromCamera = cameraTarget.position.z - cam.transform.position.z;
-        return cam.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, zDistanceFromCamera));
-    }
-
-    // Shrink confiner bounds by camera half-extents so the camera can actually move even if the target starts near edges.
-    Vector3 ClampToConfinerShrunk(Vector3 desired)
-    {
-        if (camConfiner == null) return desired;
-
-        var col2d = camConfiner.GetComponent<Collider2D>();
-        if (col2d == null)
-        {
-            // Fallback to 3D bounds if present
-            var col3d = camConfiner.GetComponent<Collider>();
-            if (col3d == null) return desired;
-
-            Bounds b3 = col3d.bounds;
-            Vector2 halfExtents = GetCameraHalfExtentsWorld();
-            float minX = b3.min.x + halfExtents.x;
-            float maxX = b3.max.x - halfExtents.x;
-            float minY = b3.min.y + halfExtents.y;
-            float maxY = b3.max.y - halfExtents.y;
-            desired.x = Mathf.Clamp(desired.x, minX, maxX);
-            desired.y = Mathf.Clamp(desired.y, minY, maxY);
-            return desired;
-        }
-
-        Bounds b = col2d.bounds;
-        Vector2 half = GetCameraHalfExtentsWorld();
-
-        // If bounds are smaller than camera view, keep target at center of bounds
-        float minX2 = b.min.x + half.x;
-        float maxX2 = b.max.x - half.x;
-        float minY2 = b.min.y + half.y;
-        float maxY2 = b.max.y - half.y;
-
-        if (minX2 > maxX2) desired.x = b.center.x;
-        else desired.x = Mathf.Clamp(desired.x, minX2, maxX2);
-
-        if (minY2 > maxY2) desired.y = b.center.y;
-        else desired.y = Mathf.Clamp(desired.y, minY2, maxY2);
-
-        return desired;
-    }
-
-    // Camera half extents in world units for orthographic camera
-    Vector2 GetCameraHalfExtentsWorld()
-    {
-        if (!cam.orthographic)
-        {
-            // Approximate by projecting screen corners to target plane
-            Vector3 c = ScreenToWorldOnTargetPlane(new Vector2(cam.pixelWidth * 0.5f, cam.pixelHeight * 0.5f));
-            Vector3 r = ScreenToWorldOnTargetPlane(new Vector2(cam.pixelWidth, cam.pixelHeight * 0.5f));
-            Vector3 t = ScreenToWorldOnTargetPlane(new Vector2(cam.pixelWidth * 0.5f, cam.pixelHeight));
-            return new Vector2(Mathf.Abs(r.x - c.x), Mathf.Abs(t.y - c.y));
-        }
-
-        float halfHeight = cam.orthographicSize;
-        float halfWidth = halfHeight * cam.aspect;
-        return new Vector2(halfWidth, halfHeight);
-    }
-
-    // Basic UI check without depending on GameCursor internals
-    bool IsPointerOverUI(Vector2 screenPosition)
-    {
-        if (UnityEngine.EventSystems.EventSystem.current == null) return false;
-        var eventData = new UnityEngine.EventSystems.PointerEventData(UnityEngine.EventSystems.EventSystem.current)
-        {
-            position = screenPosition
-        };
-        var results = new System.Collections.Generic.List<UnityEngine.EventSystems.RaycastResult>();
-        UnityEngine.EventSystems.EventSystem.current.RaycastAll(eventData, results);
-        bool over = results.Count > 0;
-        results.Clear();
-        return over;
     }
 }
