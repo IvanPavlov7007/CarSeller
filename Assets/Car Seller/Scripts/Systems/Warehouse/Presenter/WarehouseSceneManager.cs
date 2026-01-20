@@ -7,7 +7,6 @@ using UnityEngine;
 /// Loads and manages warehouse in the warehouse scene
 /// Listens when to create product views and creates them in the scene
 /// </summary>
-//[ExecuteAlways]
 public class WarehouseSceneManager : Singleton<WarehouseSceneManager>
 {
     public static Warehouse SceneWarehouseModel { get; set; }
@@ -16,7 +15,8 @@ public class WarehouseSceneManager : Singleton<WarehouseSceneManager>
 
     private void Awake()
     {
-        if(SceneWarehouseModel == null)
+        GameEvents.Instance.OnSceneOpened?.Invoke(new SceneOpenedEventData(GameFlowController.GameSceneType.Warehouse));
+        if (SceneWarehouseModel == null)
         {
             Debug.LogError("Warehouse instance is not set in the WarehouseSceneManager");
             return;

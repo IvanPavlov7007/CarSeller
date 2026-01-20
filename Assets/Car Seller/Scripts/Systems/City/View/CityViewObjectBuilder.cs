@@ -73,7 +73,10 @@ public class CityViewObjectBuilder : ScriptableObject
         var sr = carGO.GetComponentInChildren<SpriteRenderer>();
         sr.sprite = car.CarFrame.runtimeConfig.Icon;
         sr.color = car.CarFrame.runtimeConfig.FrameColor;
-        carGO.AddComponent<ViewStateChanger>();
+        carGO.AddComponent<SelectableVisuals>();
+
+        // This one must be after SelectableVisuals to catch selection changes
+        carGO.AddComponent<ViewVisualStateChanger>();
         return viewController;
     }
 
@@ -133,7 +136,7 @@ public class CityViewObjectBuilder : ScriptableObject
         policeViewController.Initialize(data);
         policeGO.AddComponent<PoliceSpotlightVisionVisuals>().Intialize(data, policeViewController);
         policeGO.AddComponent<PoliceLightsViewController>().Initialize(policeViewController, policeGO.GetComponentInChildren<PoliceLightsVisuals>());
-        policeGO.AddComponent<ViewStateChanger>();
+        policeGO.AddComponent<ViewVisualStateChanger>();
         policeGO.AddComponent<Triggerable>();
         return viewController;
     }

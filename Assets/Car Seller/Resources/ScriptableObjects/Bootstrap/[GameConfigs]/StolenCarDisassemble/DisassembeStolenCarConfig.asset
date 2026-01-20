@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70f7218baa2d3de45977d2104aa8f14c, type: 3}
+  m_Name: DisassembeStolenCarConfig
+  m_EditorClassIdentifier: 
+  GameConfigMode: 2
+  CityConfig: {fileID: 11400000, guid: 95dc65d7ac69b1c4584b5e8473caf178, type: 2}
+  EconomyConfig: {fileID: 11400000, guid: 254e34cb4e01cca429baa46ab5f0f0c0, type: 2}
+  WorldMissionsConfig: {fileID: 11400000, guid: 92161a9ed29d20640ac9350b1e20cfc8, type: 2}

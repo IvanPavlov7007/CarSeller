@@ -10,6 +10,15 @@ public class ProductCreatedEventData : GameEventData
     }
 }
 
+public class SceneOpenedEventData : GameEventData
+{
+    public readonly GameFlowController.GameSceneType SceneType;
+    public SceneOpenedEventData(GameFlowController.GameSceneType sceneType)
+    {
+        SceneType = sceneType;
+    }
+}
+
 public class ProductDestroyedEventData : GameEventData
 {
     public Product Product { get; private set; }

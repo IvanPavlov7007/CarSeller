@@ -30,12 +30,20 @@ public class GameEvents
         OnPlayerPossessionAcquired = null;
         OnPlayerMoneyChanged = null;
         OnTransactionComplete = null;
+
+        onMissionUnlocked = null;
+        onMissionStarted = null;
+        onMissionCompleted = null;
+        onMissionFailed = null;
+
+        onPlayerBusted = null;
     }
 
     public Action OnGamePaused;
     public Action OnGameUnpaused;
 
     public Action<GameStateChangeEventData> OnGameStateChanged;
+    public Action<SceneOpenedEventData> OnSceneOpened;
 
     public Action<ProductLocationChangedEventData> OnProductLocationChanged;
     public Action<ProductCreatedEventData> OnProductCreated;

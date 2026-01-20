@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ViewStateChanger : MonoBehaviour
+public class ViewVisualStateChanger : MonoBehaviour
 {
     [SerializeField, Range(0.2f, 1f)]
     private float disabledBrightnessMultiplier = 0.6f;

@@ -8,7 +8,8 @@ using UnityEngine;
 public enum GameConfigMode
 {
     CarShop,
-    CarSteal
+    CarSteal,
+    DisassembleStolenCars
 }
 
 public class Main : Singleton<Main>
@@ -28,6 +29,9 @@ public class Main : Singleton<Main>
             case GameConfigMode.CarSteal:
                 yield return carSteal();
                 break;
+            case GameConfigMode.DisassembleStolenCars:
+                yield return disassembleStolenCarsMode();
+                break;
             default:
                 break;
         }
@@ -37,8 +41,19 @@ public class Main : Singleton<Main>
 
     public void OnCityInitialize()
     {
-        if(G.Config.GameConfigMode == GameConfigMode.CarSteal)
-            CarSpawnManager.CheckAndRefill();
+        switch (G.Config.GameConfigMode)
+        {
+            case GameConfigMode.CarShop:
+                break;
+            case GameConfigMode.CarSteal:
+                CarSpawnManager.CheckAndRefill();
+                break;
+            case GameConfigMode.DisassembleStolenCars:
+                CarSpawnManager.CheckAndRefill();
+                break;
+            default:
+                break;
+        }
     }
 
 
@@ -54,6 +69,9 @@ public class Main : Singleton<Main>
                 case GameConfigMode.CarSteal:
                     CarSpawnManager.NewCarsRotation();
                     break;
+                case GameConfigMode.DisassembleStolenCars:
+                    CarSpawnManager.NewCarsRotation();
+                    break;
                 default:
                     break;
             }
@@ -62,6 +80,24 @@ public class Main : Singleton<Main>
 
     private IEnumerator carSteal()
     {
+        yield return null;
+    }
+
+    private IEnumerator disassembleStolenCarsMode()
+    {
+        Debug.Assert(carSpawnConfig != null, "CarSpawnConfig is not assigned in Main.");
+        Debug.Assert(carSpawnPoint != null, "CarSpawnPoint is not assigned in Main.");
+
+        if (carSpawnConfig == null || carSpawnPoint == null)
+            yield break;
+
+        var location = G.City.GetEmptyLocation(G.City.GetClosestPosition(carSpawnPoint.position));
+        var car = carSpawnConfig.GenerateCar(location);
+
+        var roamingState = new FreeRoamGameState(car);
+        G.Instance.GameFlowController.SetGameState(roamingState);
+
+
         yield return null;
     }
 
@@ -78,9 +114,6 @@ public class Main : Singleton<Main>
 
         var roamingState = new FreeRoamGameState(car);
         G.Instance.GameFlowController.SetGameState(roamingState);
-
-        var locations = G.City.QueryMarkers("cash")
-            .Select(marker => G.City.GetEmptyLocation(marker.PositionOnGraph.Value) as ILocation).ToList();
 
         //CollectablesManager.Instance.Initialize(locations, 900f, null, 20);
         //PoliceManager.Instance.CreatePolice();

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73c4d6b02ee88104d9ed6b3d121064e7, type: 3}
+  m_Name: CarSelectionSettings
+  m_EditorClassIdentifier: 
+  selectionRingColor: {r: 0, g: 1, b: 0, a: 0.78039217}
+  selectionRingScaleMultiplier: 1
+  selectionRingHeightOffset: 0.1
+  sortingOrder: 4
+  selectionRingPrefab: {fileID: 6629855009665736187, guid: f760583703482554ab1c386f80e9aa74, type: 3}

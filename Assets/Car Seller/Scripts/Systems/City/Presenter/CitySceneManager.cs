@@ -22,7 +22,8 @@ public class CitySceneManager : Singleton<CitySceneManager>
 
     private void Awake()
     {
-        CitySceneBootstrap.Execute();
+        GameEvents.Instance.OnSceneOpened?.Invoke(new SceneOpenedEventData(GameFlowController.GameSceneType.City));
+        CitySceneBootstrap.Execute();//TODO: use events instead
         currentProfile = profileRegistry.Get(G.GameState);
         initializeCity();
         G.Instance.CityRoot.SetActive(true);
