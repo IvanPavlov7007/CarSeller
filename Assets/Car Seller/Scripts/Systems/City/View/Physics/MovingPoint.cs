@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Splines;
     
-public class MovingPoint : MonoBehaviour
+public class MovingPoint : MonoBehaviour, IMovement
 {
-    //public static float maxSpeed = 2f;
+    /// <summary>
+    /// Velocity direction provided by the movement system.
+    /// </summary>
+    public Vector2 ProvidedDirection => currentDirection;
+    public float Speed => currentSpeed;
+    public float Acceleration { get; private set; }
 
     City.CityLocation mutableLocation;
     IDirectionProvider directionProvider;
@@ -16,6 +21,7 @@ public class MovingPoint : MonoBehaviour
     private const float Epsilon = 1e-4f;
 
     float currentSpeed = 0f;
+    Vector2 currentDirection = Vector2.up;
 
     private void Awake()
     {
@@ -31,6 +37,12 @@ public class MovingPoint : MonoBehaviour
 
     // TODO for cayote: check that all of the returns properly handle it
     void LateUpdate()
+    {
+        processMovement();
+        body.up = currentDirection;
+    }
+
+    private void processMovement()
     {
         Vector2 inputDirection = Vector2.ClampMagnitude(directionProvider.ProvidedDirection, 1f);
         Vector2 inputDirectionN = inputDirection.sqrMagnitude > Epsilon ? inputDirection.normalized : Vector2.zero;
@@ -49,7 +61,7 @@ public class MovingPoint : MonoBehaviour
         bool forward = positionData.Forward;
         float t = positionData.Percentage;
         Vector2 chosenTangentDirection;
-        
+
 
         //First check if we exactly on a node
         if (a != null)
@@ -57,10 +69,11 @@ public class MovingPoint : MonoBehaviour
             //Check if there is an edge in the desired direction
             if (TryPickEdgeFromNode(a, inputDirectionN, out edge, out chosenTangentDirection))
             {
-                //Check if no neighbour in that direction
-                if (Vector2.Dot(chosenTangentDirection, inputDirectionN) < 0f)
+                //Check if no neighbor in that direction
+                if (Vector2.Dot(chosenTangentDirection, inputDirectionN) < -0.2f)
                 {
-                    body.up = chosenTangentDirection;
+                    currentSpeed = 0f;
+                    // don't change direction if we can't move
                     return;
                 }
                 //We have an edge to go to
@@ -69,6 +82,8 @@ public class MovingPoint : MonoBehaviour
             }
             else
             {
+                currentSpeed = 0f;
+                // don't change direction if we can't move
                 return; // No edge to go to
             }
         }
@@ -101,7 +116,7 @@ public class MovingPoint : MonoBehaviour
             t = 1f - t;
             chosenTangentDirection = -chosenTangentDirection;
             forward = !forward;
-            
+
             //Reset speed
             currentSpeed = 0f;
         }
@@ -160,7 +175,7 @@ public class MovingPoint : MonoBehaviour
             positionData = City.CityPosition.On(edge, t, forward);
         }
         mutableLocation.SetCityPosition(positionData);
-        body.up = chosenTangentDirection;
+        currentDirection = chosenTangentDirection;
         transform.position = positionData.WorldPosition;
     }
 

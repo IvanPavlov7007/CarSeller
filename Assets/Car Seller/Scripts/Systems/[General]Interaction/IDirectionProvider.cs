@@ -25,5 +25,5 @@ public interface ISpeedCap
 
 public interface IMovement : IDirectionProvider, ISpeedProvider
 {
-
+    Vector2 Velocity => ProvidedDirection * Speed;
 }
