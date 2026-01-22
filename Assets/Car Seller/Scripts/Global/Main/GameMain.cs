@@ -1,8 +1,11 @@
 ﻿using Pixelplacement;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using static GameFlowController;
 
 [Serializable]
 public enum GameConfigMode
@@ -12,11 +15,93 @@ public enum GameConfigMode
     DisassembleStolenCars
 }
 
-public class Main : Singleton<Main>
+//TODO use strategy pattern to avoid large switch statements in resolvers
+// Apply dictionaries or reflection where possible
+
+/// <summary>
+/// GameMains are the highest level game controllers, initializing world and game logic according to the selected game mode
+/// don't talk to them from anywhere else!
+/// </summary>
+public abstract partial class GameMain
 {
+    static GameMain Instance;
+
+    SceneMainResolver sceneMainResolver = new SceneMainResolver();
+
     [SerializeField] SimpleCarSpawnConfig carSpawnConfig;
     [SerializeField] Transform carSpawnPoint;
     [SerializeField] WarehouseConfig carshopWarehouseConfig;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Main()
+    {
+        GameMainResolover gameResolver = new GameMainResolover();
+        Instance = gameResolver.Resolve(GameMainConfig.Instance.GameConfig);
+        Instance.Initialize();
+        SceneManager.sceneLoaded += Instance.onSceneLoaded;
+    }
+
+    public virtual void Initialize()
+    {
+        ResetStaticState();
+        InitializeWorld();
+        InitializeLogic();
+    }
+
+    public virtual void ResetStaticState() 
+    {
+        GameEvents.Instance.Reset();
+        G.Initialize(GameMainConfig.Instance.ViewBuilders);
+    }
+    public virtual void InitializeWorld() 
+    {
+        var Config = GameMainConfig.Instance.GameConfig;
+        G.WorldManager.InitializeWorld(Config.CityConfig, Config.EconomyConfig, Config.WorldMissionsConfig);
+    }
+    public virtual void InitializeLogic() 
+    {
+
+    }
+
+    void onSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        var entryPoint = SceneEntrancePoint.Instance;
+        var sceneMain = sceneMainResolver.Resolve(entryPoint);
+
+        sceneMain.InitializeSceneView();
+        sceneMain.InitializeSceneLogic();
+    }
+
+    
+
+    public class CitySceneMain : ISceneMain
+    {
+        public void InitializeSceneView()
+        {
+            //City view initialization logic here
+        }
+        public void InitializeSceneLogic()
+        {
+
+        }
+    }
+
+    public class WarehouseSceneMain : ISceneMain
+    {
+        private Warehouse warehouse;
+        public WarehouseSceneMain(Warehouse warehouse)
+        {
+            this.warehouse = warehouse;
+        }
+        public void InitializeSceneView()
+        {
+            //Warehouse view initialization logic here
+        }
+        public void InitializeSceneLogic()
+        {
+            //Warehouse logic initialization here
+        }
+    }
 
     private IEnumerator Start()
     {

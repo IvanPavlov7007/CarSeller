@@ -49,19 +49,19 @@ public class WorldManager
             {
                 case CarBaseConfig carBaseConfig:
                     CarVariantConfig carVariantConfig = productToSpawn.productVariantConfig as CarVariantConfig;
-                    G.Instance.ProductManager.CreateCar(carBaseConfig, carVariantConfig, insideWarehouseLocation);
+                    G.ProductManager.CreateCar(carBaseConfig, carVariantConfig, insideWarehouseLocation);
                     break;
                 case WheelBaseConfig wheelBaseConfig:
                     WheelVariantConfig wheelVariantConfig = productToSpawn.productVariantConfig as WheelVariantConfig;
-                    G.Instance.ProductManager.CreateWheel(wheelBaseConfig, wheelVariantConfig, insideWarehouseLocation);
+                    G.ProductManager.CreateWheel(wheelBaseConfig, wheelVariantConfig, insideWarehouseLocation);
                     break;
                 case EngineBaseConfig engineBaseConfig:
                     EngineVariantConfig engineVariantConfig = productToSpawn.productVariantConfig as EngineVariantConfig;
-                    G.Instance.ProductManager.CreateEngine(engineBaseConfig, engineVariantConfig, insideWarehouseLocation);
+                    G.ProductManager.CreateEngine(engineBaseConfig, engineVariantConfig, insideWarehouseLocation);
                     break;
                 case SpoilerBaseConfig spoilerBaseConfig:
                     SpoilerVariantConfig spoilerVariantConfig = productToSpawn.productVariantConfig as SpoilerVariantConfig;
-                    G.Instance.ProductManager.CreateSpoiler(spoilerBaseConfig, spoilerVariantConfig, insideWarehouseLocation);
+                    G.ProductManager.CreateSpoiler(spoilerBaseConfig, spoilerVariantConfig, insideWarehouseLocation);
                     break;
             }
         }
@@ -81,12 +81,12 @@ public class WorldManager
     {
         World.Reset();
 
-        if (G.Instance.CityRoot == null)
+        if (G.CityRoot == null)
         {
-            G.Instance.CityRoot = GameObject.Instantiate(cityConfig.CityGraph.PrefabRoot);
-            G.Instance.CityRoot.SetActive(false);
+            G.CityRoot = GameObject.Instantiate(cityConfig.CityGraph.PrefabRoot);
+            G.CityRoot.SetActive(false);
         }
-        World.Instance.City = new City(cityConfig, G.Instance.CityRoot.transform);
+        World.Instance.City = new City(cityConfig, G.CityRoot.transform);
         foreach (var warehouseConfig in cityConfig.warehouseConfigs)
         {
             addWarehouse(World.Instance.City, warehouseConfig);
@@ -105,7 +105,7 @@ public class WorldManager
             {
                 case CarBaseConfig carBaseConfig:
                     CarVariantConfig carVariantConfig = productToSpawn.productVariantConfig as CarVariantConfig;
-                    G.Instance.ProductManager.CreateCar(carBaseConfig, carVariantConfig, outsideLocation);
+                    G.ProductManager.CreateCar(carBaseConfig, carVariantConfig, outsideLocation);
                     break;
                 default:
                     Debug.LogError($"Only cars can be spawned outside the warehouse. Tried to spawn {productToSpawn.productBaseConfig}.");
@@ -128,11 +128,11 @@ public class WorldManager
             return;
         }
 
-        G.Instance.MissionController = new MissionController(worldMissionsConfig.allMissions);
+        G.MissionController = new MissionController(worldMissionsConfig.allMissions);
         // Unlock starting missions
         foreach (var startingMission in worldMissionsConfig.startingMissions)
         {
-            G.Instance.MissionController.UnlockMission(startingMission);
+            G.MissionController.UnlockMission(startingMission);
         }
     }
 }

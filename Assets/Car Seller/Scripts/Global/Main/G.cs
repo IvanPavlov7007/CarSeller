@@ -3,68 +3,74 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Global services locator
+/// global services locator
 /// </summary>
-public sealed class G : Singleton<G>
+public static class G
 {
-    //Use only for reading
-    //MODEL
-    public GameConfig GameConfig;
 
-
-    public static GameConfig Config => Instance.GameConfig;
-    public CityConfig CityConfig => GameConfig.CityConfig;
-    public EconomyConfig EconomyConfig => GameConfig.EconomyConfig;
-    public WorldMissionsConfig WorldMissionsConfig => GameConfig.WorldMissionsConfig;
+    public static GameConfig Config => GameMainConfig.Instance.GameConfig;
+    public static CityConfig CityConfig => Config.CityConfig;
+    public static EconomyConfig EconomyConfig => Config.EconomyConfig;
+    public static WorldMissionsConfig WorldMissionsConfig => Config.WorldMissionsConfig;
 
     //References
     public static City City => World.Instance.City;
     public static Economy Economy => World.Instance.Economy;
     public static Player Player => World.Instance.Economy.Player;
-    public static GameState GameState => Instance.GameFlowController.GameState;
+    public static GameState GameState => GameFlowController.GameState;
 
     public static TransactionProcessor TransactionProcessor => Economy.TransactionProcessor;
 
     //MODEL AND VIEW MIXED (SORRY)
-    public GameObject CityRoot { get; set; }
+    public static GameObject CityRoot { get; set; }
 
     //REPRESENTATION
 
-    public GlobalCreationService GlobalCreationService = new GlobalCreationService();
+    public static GlobalCreationService GlobalCreationService = new GlobalCreationService();
 
-    public ProductManager ProductManager = new ProductManager();
-    public ProductLocationService ProductLocationService = new ProductLocationService();
+    public static ProductManager ProductManager = new ProductManager();
+    public static ProductLocationService ProductLocationService = new ProductLocationService();
 
-    public GameFlowManager GameFlowManager;
-    public GameFlowController GameFlowController = new GameFlowController();
+    public static GameFlowManager GameFlowManager;
+    public static GameFlowController GameFlowController = new GameFlowController();
 
-    public WorldManager WorldManager = new WorldManager();
+    public static WorldManager WorldManager = new WorldManager();
 
-    public CarMechanicService CarMechanicService;
+    public static CarMechanicService CarMechanicService;
 
-    public PlayerManager PlayerManager = new PlayerManager();
+    public static PlayerManager PlayerManager = new PlayerManager();
     
-    public Main.InstantMain InstantMain = new Main.InstantMain();
+    public static GameMain.InstantMain InstantMain = new GameMain.InstantMain();
 
     //City
-    public CityActionService CityActionService = new CityActionService();
+    public static CityActionService CityActionService = new CityActionService();
 
     //Interaction
-    public IInteractionManager InteractionManager;
-    public MissionController MissionController;
+    public static IInteractionManager InteractionManager;
+    public static MissionController MissionController;
 
     //VIEW
     //View builders
     //Warehouse
-    public WarehouseProductGameObjectBuilder warehouseProductViewBuilder => physicalWarehouseProductViewBuilder;
+    public static WarehouseProductGameObjectBuilder warehouseProductViewBuilder => physicalWarehouseProductViewBuilder;
 
-    public WarehouseProductGameObjectBuilder monolithWarehouseProductViewBuilder;
-    public WarehouseProductGameObjectBuilder physicalWarehouseProductViewBuilder;
-    public CarPartGameObjectBuilder carPartViewBuilder;
+    public static MonolithProductGameObjectBuilder monolithWarehouseProductViewBuilder => viewBuildersConfig.monolithWarehouseProductViewBuilder;
+    public static PhysicalProductGameObjectBuilder physicalWarehouseProductViewBuilder => viewBuildersConfig.physicalWarehouseProductViewBuilder;
+    public static CarPartGameObjectBuilder carPartViewBuilder => viewBuildersConfig.carPartViewBuilder;
 
     //City
-    public CityViewObjectBuilder cityViewObjectBuilder;
-    public CityViewStreetsBuilder cityViewStreetsBuilder = new CityViewStreetsBuilder();
+    public static CityViewObjectBuilder cityViewObjectBuilder => viewBuildersConfig.cityViewObjectBuilder;
+    public static CityViewStreetsBuilder cityViewStreetsBuilder = new CityViewStreetsBuilder();
+
+    static ViewBuildersConfig viewBuildersConfig;
+
+    public static void Initialize( ViewBuildersConfig handlersConfig)
+    {
+        viewBuildersConfig = handlersConfig;
+
+        GameFlowManager = new GameFlowManager();
+        CarMechanicService = new CarMechanicService();
+    }
 
     protected override void OnRegistration()
     {
@@ -77,11 +83,9 @@ public sealed class G : Singleton<G>
         InstantMain.AfterWorldInitialize();
         TryInitializeLogic();
     }
-
-    private void Initialize()
+    public void ResetGameState()
     {
-        GameFlowManager = new GameFlowManager();
-        CarMechanicService = new CarMechanicService();
+        WorldManager.InitializeWorld(CityConfig, EconomyConfig, WorldMissionsConfig);
     }
 
     /// <summary>
@@ -93,10 +97,4 @@ public sealed class G : Singleton<G>
         if(sceneEntrancePoint != null)
             GameFlowController.Initialize(sceneEntrancePoint);
     }
-
-    public void ResetGameState()
-    {
-        WorldManager.InitializeWorld(CityConfig, EconomyConfig, WorldMissionsConfig);
-    }
-
 }

@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using Pixelplacement;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneEntrancePoint : MonoBehaviour
+public sealed class SceneEntrancePoint : Singleton<SceneEntrancePoint>
 {
     public GameFlowController.GameSceneType gameSceneType;
     public string specificName()
