@@ -9,20 +9,9 @@ using UnityEngine;
 /// </summary>
 public class WarehouseSceneManager : Singleton<WarehouseSceneManager>
 {
-    public static Warehouse SceneWarehouseModel { get; set; }
+    static Warehouse CurrentWarehouse => G.GameFlowController.CurrentWarehouse;
 
     public Transform emptyPosition;
-
-    private void Awake()
-    {
-        GameEvents.Instance.OnSceneOpened?.Invoke(new SceneOpenedEventData(GameFlowController.GameSceneType.Warehouse));
-        if (SceneWarehouseModel == null)
-        {
-            Debug.LogError("Warehouse instance is not set in the WarehouseSceneManager");
-            return;
-        }
-        initializeWarehouse();
-    }
 
     private void OnEnable()
     {
@@ -40,25 +29,25 @@ public class WarehouseSceneManager : Singleton<WarehouseSceneManager>
     {
         if (emptyPosition != null)
         {
-            SceneWarehouseModel.emptyProductLocation = new Warehouse.DimensionalPositionData
+            CurrentWarehouse.emptyProductLocation = new Warehouse.DimensionalPositionData
             { LocalPosition = emptyPosition.localPosition, LocalRotation = emptyPosition.localEulerAngles };
         }
         else
         {
-            SceneWarehouseModel.emptyProductLocation = new Warehouse.DimensionalPositionData
+            CurrentWarehouse.emptyProductLocation = new Warehouse.DimensionalPositionData
             { LocalPosition = Vector3.up * 4f, LocalRotation = Vector3.zero };
         }
         
     }
 
-    void initializeWarehouse()
+    public void InitializeWarehouse()
     {
-        if (SceneWarehouseModel == null)
+        if (CurrentWarehouse == null)
         {
             Debug.LogWarning("Warehouse instance is not set");
             return;
         }
-        foreach (var location in SceneWarehouseModel.productLocations)
+        foreach (var location in CurrentWarehouse.productLocations)
         {
             Debug.Assert(location.Product != null, "Product at the location is null");
 
@@ -68,13 +57,13 @@ public class WarehouseSceneManager : Singleton<WarehouseSceneManager>
 
     void onNewProductCreated(ProductCreatedEventData data)
     {
-        var location = G.Instance.ProductLocationService.GetProductLocation(data.Product);
-        if (SceneWarehouseModel == null)
+        var location = G.ProductLocationService.GetProductLocation(data.Product);
+        if (CurrentWarehouse == null)
         {
             Debug.LogError("Warehouse instance is not set");
             return;
         }
-        if (location.Holder == SceneWarehouseModel)
+        if (location.Holder == CurrentWarehouse)
         {
             buildProductView(data.Product, location);
         }
@@ -82,9 +71,9 @@ public class WarehouseSceneManager : Singleton<WarehouseSceneManager>
 
     void onProductLocationChanged(ProductLocationChangedEventData data)
     {
-        Debug.Assert(SceneWarehouseModel != null, "Warehouse instance is not set");
+        Debug.Assert(CurrentWarehouse != null, "Warehouse instance is not set");
 
-        if (data.NewLocation?.Holder == SceneWarehouseModel)
+        if (data.NewLocation?.Holder == CurrentWarehouse)
         {
             buildProductView(data.Product, data.NewLocation);
         }
@@ -93,7 +82,7 @@ public class WarehouseSceneManager : Singleton<WarehouseSceneManager>
 
     void buildProductView(Product product, ILocation location)
     {
-        var productViewGO = product.GetRepresentation(G.Instance.warehouseProductViewBuilder);
+        var productViewGO = product.GetRepresentation(G.warehouseProductViewBuilder);
         var transform = productViewGO.transform;
 
         transform.SetParent(this.transform);

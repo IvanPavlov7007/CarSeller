@@ -11,9 +11,9 @@ using UnityEngine.SceneManagement;
 public class GameFlowController
 {
     public GameState GameState { get; private set; } = new NeutralGameState(null);
-    public GameSceneType currentSceneType { get; private set; }
+    public GameSceneType CurrentSceneType { get; private set; }
+    public Warehouse CurrentWarehouse { get; private set; }
 
-    
     [Serializable]
     public enum GameSceneType
     {
@@ -33,66 +33,30 @@ public class GameFlowController
     }
 
     #endregion
-
-    /*
-     * Game Logic Initialization - 2 ways:
-     * 
-     * 1) EnterWarehouse(..) or GetToTheCity(..) load respective logics automatically. 
-     * Used for initialization from a not involved point like Intro Scene
-     * 
-     * 2) Initialize(..) When the game starts directly in a specific game scene
-     * 
-     */
     public void EnterWarehouse(Warehouse warehouse)
     {
-        if(currentSceneType == GameSceneType.Warehouse && WarehouseSceneManager.SceneWarehouseModel == warehouse)
+        if(CurrentSceneType == GameSceneType.Warehouse && CurrentWarehouse == warehouse)
             return;
-        setWarehouse(warehouse);
         SceneManager.LoadScene(warehouse.Config.Name);
     }
 
     public void GetToTheCity()
     {
-        if(currentSceneType == GameSceneType.City)
+        if(CurrentSceneType == GameSceneType.City)
             return;
-        setCity();
         SceneManager.LoadScene(World.Instance.City.Config.SceneToLoad);
     }
 
-    /// <summary>
-    /// is called by G
-    /// </summary>
-    /// <param name="sceneEntrancePoint"></param>
-    internal void Initialize(SceneEntrancePoint sceneEntrancePoint)
+    public void SetWarehouse(Warehouse warehouse)
     {
-        Debug.Assert(sceneEntrancePoint != null);
-
-        switch (sceneEntrancePoint.gameSceneType)
-        {
-            case GameSceneType.City:
-                setCity();
-                break;
-            case GameSceneType.Warehouse:
-                var name = sceneEntrancePoint.specificName();
-                var warehouse = World.Instance.WorldRegistry.GetByName<Warehouse>(name);
-                Debug.Assert(warehouse != null, $"GameFlowController.Initialize: Warehouse with id {name} not found!");
-                setWarehouse(warehouse);
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+        CurrentSceneType = GameSceneType.Warehouse;
+        CurrentWarehouse = warehouse;
+        G.InteractionManager = new WarehouseInteractionManager();
     }
 
-    private void setWarehouse(Warehouse warehouse)
+    public void SetCity()
     {
-        currentSceneType = GameSceneType.Warehouse;
-        WarehouseSceneManager.SceneWarehouseModel = warehouse;
-        G.Instance.InteractionManager = new WarehouseInteractionManager();
-    }
-
-    private void setCity()
-    {
-        currentSceneType = GameSceneType.City;
-        G.Instance.InteractionManager = new CityInteractionManager();
+        CurrentSceneType = GameSceneType.City;
+        G.InteractionManager = new CityInteractionManager();
     }
 }

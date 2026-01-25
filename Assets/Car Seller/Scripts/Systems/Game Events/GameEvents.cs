@@ -43,7 +43,6 @@ public class GameEvents
     public Action OnGameUnpaused;
 
     public Action<GameStateChangeEventData> OnGameStateChanged;
-    public Action<SceneOpenedEventData> OnSceneOpened;
 
     public Action<ProductLocationChangedEventData> OnProductLocationChanged;
     public Action<ProductCreatedEventData> OnProductCreated;

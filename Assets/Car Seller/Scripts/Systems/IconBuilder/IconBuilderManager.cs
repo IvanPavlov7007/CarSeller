@@ -26,7 +26,7 @@ public class IconBuilderManager : Singleton<IconBuilderManager>, IProductViewBui
     [Tooltip("If true and the camera is orthographic, the object will be auto-scaled to fit the view with padding.")]
     [SerializeField] private bool fitToView = true;
 
-    WarehouseProductGameObjectBuilder gameObjectBuilder => G.Instance.monolithWarehouseProductViewBuilder;
+    WarehouseProductGameObjectBuilder gameObjectBuilder => G.monolithWarehouseProductViewBuilder;
 
     RenderTexture _rt;
 

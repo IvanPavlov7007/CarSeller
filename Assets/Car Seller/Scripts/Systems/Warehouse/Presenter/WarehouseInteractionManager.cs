@@ -96,7 +96,7 @@ public class WarehouseInteractionManager : IInteractionManager
 
     private void attachProductToCar(Product product, Car.CarPartLocation slot)
     {
-        if (!G.Instance.ProductLocationService.MoveProduct(product, slot))
+        if (!G.ProductLocationService.MoveProduct(product, slot))
         {
             Debug.LogWarning(
                 $"Failed to attach product {draggedProduct.Name} to car slot {slot.PartSlotRuntimeConfig}");

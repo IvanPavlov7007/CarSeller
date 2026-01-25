@@ -10,7 +10,7 @@ public class InteractionController : Singleton<InteractionController>
     public List<Interactable> interactables = new List<Interactable>();
     public List<ITriggerable> triggerables = new List<ITriggerable>();
 
-    IInteractionManager interactionManager => G.Instance.InteractionManager;
+    IInteractionManager interactionManager => G.InteractionManager;
     
     public void RegisterInteractable(Interactable interactable)
     {

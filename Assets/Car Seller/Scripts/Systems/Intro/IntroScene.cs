@@ -16,7 +16,7 @@ public class IntroScene : SerializedMonoBehaviour
             Type = UIElementType.Button,
             OnClick = () =>
             {
-                G.Instance.GameFlowController.EnterWarehouse((Warehouse)
+                G.GameFlowController.EnterWarehouse((Warehouse)
                     World.Instance.City.Locations.Keys.First(x => x.GetType() == typeof(Warehouse)));
             },
             Text = "Start game"

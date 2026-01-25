@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 public class GameFlowManager : RoutinedObject
 {
-
-    G G=> G.Instance;
     GameFlowController GameFlowController => G.GameFlowController;
 
     public GameFlowManager() : base()
@@ -32,7 +30,7 @@ public class GameFlowManager : RoutinedObject
 
     private IEnumerator SellingSequence(CarSellOffer offer)
     {
-        Debug.Assert(G.GameFlowController.currentSceneType == GameFlowController.GameSceneType.Warehouse);
+        Debug.Assert(G.GameFlowController.CurrentSceneType == GameFlowController.GameSceneType.Warehouse);
 
         var car = offer.Car;
         var warehouse = CityLocatorHelper.GetWarehouse(car);

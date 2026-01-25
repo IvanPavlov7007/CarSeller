@@ -7,4 +7,6 @@ public class GameConfig : ScriptableObject
     public CityConfig CityConfig;
     public EconomyConfig EconomyConfig;
     public WorldMissionsConfig WorldMissionsConfig;
+    [Header("Game Modes Data")]
+    public ScriptableObject GameModeData;
 }

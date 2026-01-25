@@ -82,7 +82,7 @@ public abstract class WarehouseProductGameObjectBuilder : ScriptableObject, IPro
                 view = gameObject.AddComponent<WarehouseProductView>();
             }
 
-            view.Initialize(product, G.Instance.ProductLocationService.GetProductLocation(product));
+            view.Initialize(product, G.ProductLocationService.GetProductLocation(product));
             InitializeAdditionalComponents(gameObject, product);
             return view;
         }

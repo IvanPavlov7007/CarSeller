@@ -122,7 +122,7 @@ public static class CarSpawnManager
 
     private static Car generateCar(City.CityLocation location, CarSpawnConfig.CarSpawnEntry carSpawnEntry)
     {
-        Car car = G.Instance.ProductManager.CreateCar(
+        Car car = G.ProductManager.CreateCar(
                     carSpawnEntry.CarBaseConfig,
                     carSpawnEntry.CarVariantConfig,
                     location);
@@ -135,7 +135,7 @@ public static class CarSpawnManager
         {
             //TODO check that the are no leftovers in some registries
 
-            G.Instance.ProductManager.DeleteProduct(car);
+            G.ProductManager.DeleteProduct(car);
         }
         temporaryCars.Clear();
         usedMarkers.Clear();

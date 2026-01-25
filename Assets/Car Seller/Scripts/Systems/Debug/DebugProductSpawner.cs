@@ -19,38 +19,40 @@ public class DebugProductSpawner : MonoBehaviour
     public CarFrameBaseConfig carFrameBaseConfig;
     public CarFrameVariantConfig carFrameVariantConfig;
 
+    static Warehouse CurrentWarehouse => G.GameFlowController.CurrentWarehouse;
+
     [Button]
     public void SpawnCar()
     {
-        G.Instance.ProductManager.CreateCar(
+        G.ProductManager.CreateCar(
             carBaseConfig,
             carVariantConfig,
-            WarehouseSceneManager.SceneWarehouseModel.GetEmptyLocation() );
+           CurrentWarehouse.GetEmptyLocation() );
     }
 
     [Button]
     public void SpawnWheel()
     {
-        G.Instance.ProductManager.CreateWheel(
+        G.ProductManager.CreateWheel(
             wheelBaseConfig,
             wheelVariantConfig,
-           WarehouseSceneManager.SceneWarehouseModel.GetEmptyLocation() );
+           CurrentWarehouse.GetEmptyLocation() );
     }
     [Button]
     public void SpawnEngine()
     {
-        G.Instance.ProductManager.CreateEngine(
+        G.ProductManager.CreateEngine(
             engineBaseConfig,
             engineVariantConfig,
-            WarehouseSceneManager.SceneWarehouseModel.GetEmptyLocation() );
+            CurrentWarehouse.GetEmptyLocation() );
     }
     [Button]
     public void SpawnSpoiler()
     {
-        G.Instance.ProductManager.CreateSpoiler(
+        G.ProductManager.CreateSpoiler(
             spoilerBaseConfig,
             spoilerVariantConfig,
-            WarehouseSceneManager.SceneWarehouseModel.GetEmptyLocation() );
+            CurrentWarehouse.GetEmptyLocation() );
     }
 
 }

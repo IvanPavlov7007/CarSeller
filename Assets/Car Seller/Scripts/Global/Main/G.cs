@@ -39,8 +39,6 @@ public static class G
     public static CarMechanicService CarMechanicService;
 
     public static PlayerManager PlayerManager = new PlayerManager();
-    
-    public static GameMain.InstantMain InstantMain = new GameMain.InstantMain();
 
     //City
     public static CityActionService CityActionService = new CityActionService();
@@ -70,31 +68,5 @@ public static class G
 
         GameFlowManager = new GameFlowManager();
         CarMechanicService = new CarMechanicService();
-    }
-
-    protected override void OnRegistration()
-    {
-        base.OnRegistration();
-
-        Initialize();
-
-        GameEvents.Instance.Reset();
-        ResetGameState();
-        InstantMain.AfterWorldInitialize();
-        TryInitializeLogic();
-    }
-    public void ResetGameState()
-    {
-        WorldManager.InitializeWorld(CityConfig, EconomyConfig, WorldMissionsConfig);
-    }
-
-    /// <summary>
-    /// If the game starts directly in a specific scene, initialize the logic accordingly
-    /// </summary>
-    private void TryInitializeLogic()
-    {
-        SceneEntrancePoint sceneEntrancePoint = FindAnyObjectByType<SceneEntrancePoint>();
-        if(sceneEntrancePoint != null)
-            GameFlowController.Initialize(sceneEntrancePoint);
     }
 }

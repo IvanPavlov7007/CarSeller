@@ -49,12 +49,12 @@ public class SellHandler : TransactionHandler
 
         if (result.Type == TransactionResultType.Success)
         {
-            G.Instance.PlayerManager.AddPlayerMoney(sellData.Price);
+            G.PlayerManager.AddPlayerMoney(sellData.Price);
             // Please move that to the dedicated ownership system
             // SellHandler should only handle the game logic
-            G.Instance.PlayerManager.RemovePossession(car);
+            G.PlayerManager.RemovePossession(car);
             CarSpawnManager.ReleaseCar(car);
-            G.Instance.ProductManager.DeleteProduct(car);
+            G.ProductManager.DeleteProduct(car);
         }
         return result;
     }

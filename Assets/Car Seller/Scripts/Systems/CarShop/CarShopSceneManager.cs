@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class CarShopSceneManager : Singleton<CarShopSceneManager>
 {
-    CarShopOfferProvider OfferProvider => G.Economy.CarShopOfferProvider;
+    static CarShopOfferProvider OfferProvider => G.Economy.CarShopOfferProvider;
+    static Warehouse CurrentWarehouse => G.GameFlowController.CurrentWarehouse;
 
     private void Start()
     {
@@ -23,7 +24,7 @@ public class CarShopSceneManager : Singleton<CarShopSceneManager>
 
     public void ExitCarShop()
     {
-        var warehouse = WarehouseSceneManager.SceneWarehouseModel;
+        var warehouse = CurrentWarehouse;
         var state = G.GameState as FreeRoamGameState;
         if (state == null)
         {
@@ -36,12 +37,12 @@ public class CarShopSceneManager : Singleton<CarShopSceneManager>
         //TODO maybe move this into CarMechanicService or make common for all states and exits
         state.FocusedCar = car;
         state.NotifyExitedWarehouse();
-        G.Instance.CarMechanicService.RideCarFromWarehouse(car, warehouse);
+        G.CarMechanicService.RideCarFromWarehouse(car, warehouse);
     }
 
     Car findCurrentCar()
     {
-        var warehouse = WarehouseSceneManager.SceneWarehouseModel;
+        var warehouse = CurrentWarehouse;
         var cars = warehouse.GetCars();
         if (cars.Count == 0)
         {

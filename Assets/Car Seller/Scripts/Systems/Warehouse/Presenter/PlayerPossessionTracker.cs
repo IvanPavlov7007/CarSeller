@@ -42,7 +42,7 @@ public class PlayerPossessionTracker : Singleton<PlayerPossessionTracker>
         Debug.Assert(data.Location != null, "LocatableCreatedEventData has null Location.");
         if (isPlayerOwner(data.Location))
         {
-            G.Instance.PlayerManager.AddPossession(data.Locatable as IPossession);
+            G.PlayerManager.AddPossession(data.Locatable as IPossession);
         }
     }
 

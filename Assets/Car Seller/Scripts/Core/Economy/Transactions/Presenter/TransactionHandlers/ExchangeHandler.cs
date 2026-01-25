@@ -27,8 +27,8 @@ public class ExchangeHandler : TransactionHandler
         // Side effects only if successful
         if (result.Type == TransactionResultType.Success)
         {
-            G.Instance.PlayerManager.DeltaPlayerMoney(exchangeData.DeltaMoney);
-            G.Instance.ProductLocationService.SwapProducts(exchangeData.FromPlayer,
+            G.PlayerManager.DeltaPlayerMoney(exchangeData.DeltaMoney);
+            G.ProductLocationService.SwapProducts(exchangeData.FromPlayer,
                 exchangeData.ToPlayer);
         }
 

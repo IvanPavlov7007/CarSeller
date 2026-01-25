@@ -54,7 +54,7 @@ public sealed class NormalCityContextMenuProfile : ICityContextMenuProfile
                         Type = UIElementType.Button,
                         Text = "Steal",
                         IsInteractable = true,
-                        OnClick = () => G.Instance.GameFlowManager.StealCar(car)
+                        OnClick = () => G.GameFlowManager.StealCar(car)
                     }
                 }).ToList()
         };
@@ -75,7 +75,7 @@ public sealed class NormalCityContextMenuProfile : ICityContextMenuProfile
             {
                 Type = UIElementType.Button,
                 Text = "Enter",
-                OnClick = () => G.Instance.GameFlowController.EnterWarehouse(warehouse),
+                OnClick = () => G.GameFlowController.EnterWarehouse(warehouse),
             });
         }
 

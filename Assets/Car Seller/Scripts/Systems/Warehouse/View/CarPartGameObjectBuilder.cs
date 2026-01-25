@@ -60,7 +60,7 @@ public class CarPartGameObjectBuilder : ScriptableObject, IProductViewBuilder<Ga
         spoilerSpriteRenderer.sprite = spoiler.runtimeConfig.Sprite;
         spoilerSpriteRenderer.sortingOrder--;
 
-        var slotLocation = G.Instance.ProductLocationService.GetProductLocation(spoiler) as Car.CarPartLocation;
+        var slotLocation = G.ProductLocationService.GetProductLocation(spoiler) as Car.CarPartLocation;
         var data = slotLocation.PartSlotRuntimeConfig.partSlotData;
 
         // Apply slot positioning data
@@ -83,7 +83,7 @@ public class CarPartGameObjectBuilder : ScriptableObject, IProductViewBuilder<Ga
         var wheelSpriteRenderer = wheelGO.GetComponent<SpriteRenderer>();
         wheelSpriteRenderer.color = wheel.runtimeConfig.Color;
 
-        var slotLocation = G.Instance.ProductLocationService.GetProductLocation(wheel) as Car.CarPartLocation;
+        var slotLocation = G.ProductLocationService.GetProductLocation(wheel) as Car.CarPartLocation;
         var chosenSprite = slotLocation.PartSlotRuntimeConfig.partSlotData.facingBackwards ?
             wheel.runtimeConfig.BackSideViewSprite : wheel.runtimeConfig.FrontSideViewSprite;
         var data = slotLocation.PartSlotRuntimeConfig.partSlotData;
@@ -110,7 +110,7 @@ public class CarPartGameObjectBuilder : ScriptableObject, IProductViewBuilder<Ga
             Debug.Assert(gameObject!= null, "Cannot build view component on null game object for product: " + product.UniqueName);
 
             var controller = gameObject.AddComponent<ProductView>();
-            controller.Initialize(product, G.Instance.ProductLocationService.GetProductLocation(product));
+            controller.Initialize(product, G.ProductLocationService.GetProductLocation(product));
             return controller;
         }
     }

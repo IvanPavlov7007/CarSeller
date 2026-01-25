@@ -16,7 +16,7 @@ public static class CityLocatorHelper
 
     public static Warehouse GetWarehouse(Car car)
     {
-        var warehouse = G.Instance.ProductLocationService.GetProductLocation(car).Holder as Warehouse;
+        var warehouse = G.ProductLocationService.GetProductLocation(car).Holder as Warehouse;
         if (warehouse == null)
         {
             Debug.LogWarning("Car is not located in any warehouse.");

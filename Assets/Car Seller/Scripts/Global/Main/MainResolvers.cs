@@ -4,7 +4,7 @@ using static GameFlowController;
 
 public abstract partial class GameMain
 {
-    public sealed class GameMainResolover
+    public sealed class GameMainResolver
     {
         public GameMain Resolve(GameConfig gameConfig)
         {
@@ -17,7 +17,7 @@ public abstract partial class GameMain
                 case GameConfigMode.DisassembleStolenCars:
                     return new DisassembleStolenCarsGameMain();
                 default:
-                    Debug.LogError("GameMainReslover.Resolve: Unsupported GameConfigMode!");
+                    Debug.LogError("GameMainResolver.Resolve: Unsupported GameConfigMode!");
                     return null;
             }
         }
@@ -32,13 +32,8 @@ public abstract partial class GameMain
             {
                 case GameSceneType.City:
                     return new CitySceneMain();
-                    break;
                 case GameSceneType.Warehouse:
-                    var name = sceneEntrancePoint.specificName();
-                    var warehouse = World.Instance.WorldRegistry.GetByName<Warehouse>(name);
-                    Debug.Assert(warehouse != null, $"GameFlowController.Initialize: Warehouse with id {name} not found!");
-                    setWarehouse(warehouse);
-                    break;
+                    return new WarehouseSceneMain(sceneEntrancePoint);
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -48,6 +43,6 @@ public abstract partial class GameMain
 
 public interface ISceneMain
 {
-    void InitializeSceneView();
-    void InitializeSceneLogic();
+    void Enter();
+    void Exit();
 }

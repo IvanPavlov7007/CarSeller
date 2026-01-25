@@ -59,8 +59,8 @@ public sealed class FreeRoamCityTriggerProfile : ICityTriggerProfile
                 true,
                 () =>
                 {
-                    G.Instance.CityActionService.PutCarInsideWarehouse(car, warehouse);
-                    G.Instance.GameFlowController.EnterWarehouse(warehouse);
+                    G.CityActionService.PutCarInsideWarehouse(car, warehouse);
+                    G.GameFlowController.EnterWarehouse(warehouse);
                 }
             );
         }

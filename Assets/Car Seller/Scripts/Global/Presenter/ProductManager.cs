@@ -15,11 +15,11 @@ public class ProductManager
         
         attachProductToLocation(car, location);
 
-        G.Instance.ProductLocationService.RegisterProductLocation(car, location);
+        G.ProductLocationService.RegisterProductLocation(car, location);
         foreach(var locations in car.GetNonEmptyProductLocations())
         {
             //not rising events here
-            G.Instance.ProductLocationService.RegisterProductLocation(locations.Occupant as Product, locations);
+            G.ProductLocationService.RegisterProductLocation(locations.Occupant as Product, locations);
         }
 
         raiseEvents(car, location);
@@ -33,7 +33,7 @@ public class ProductManager
 
         attachProductToLocation(wheel, location);
 
-        G.Instance.ProductLocationService.RegisterProductLocation(wheel, location);
+        G.ProductLocationService.RegisterProductLocation(wheel, location);
         raiseEvents(wheel, location);
         return wheel;
     }
@@ -45,7 +45,7 @@ public class ProductManager
         
         attachProductToLocation(engine, location);
 
-        G.Instance.ProductLocationService.RegisterProductLocation(engine, location);
+        G.ProductLocationService.RegisterProductLocation(engine, location);
         raiseEvents(engine, location);
         return engine;
     }
@@ -57,7 +57,7 @@ public class ProductManager
 
         attachProductToLocation(spoiler, location);
 
-        G.Instance.ProductLocationService.RegisterProductLocation(spoiler, location);
+        G.ProductLocationService.RegisterProductLocation(spoiler, location);
         raiseEvents(spoiler, location);
         return spoiler;
     }
@@ -89,7 +89,7 @@ public class ProductManager
     /// <param name="product"></param>
     public void DeleteProduct(Product product)
     {
-        var location = G.Instance.ProductLocationService.GetProductLocation(product);
+        var location = G.ProductLocationService.GetProductLocation(product);
         Debug.Assert(location != null, $"Trying to delete product {product.Name} that has no location.");
         location.Detach();
         //TODO remove ownerships/registrations, but the best way to do is to have those systems handle this by themselves

@@ -90,15 +90,15 @@ public class MissionController : MissionControllerBase
     SpawnTargetMissionRequestEvent request)
     {
         
-        var obj = G.Instance.GlobalCreationService
-            .CreateCityObject(request.TargetMarker, G.Instance.WorldMissionsConfig.finishPinStyle); // TODO FIX this backwards reference!!!!
+        var obj = G.GlobalCreationService
+            .CreateCityObject(request.TargetMarker, G.WorldMissionsConfig.finishPinStyle); // TODO FIX this backwards reference!!!!
 
         registerMissionObject(request.Mission, obj);
     }
 
     protected override void onSpawnMissionLauncherRequestEvent(SpawnMissionLauncherRequestEvent requestEvent)
     {
-        var missionLauncher = G.Instance.GlobalCreationService.CreateMissionLauncher(
+        var missionLauncher = G.GlobalCreationService.CreateMissionLauncher(
                 requestEvent.LauncherConfig,
                 requestEvent.Mission);
         registerMissionObject(requestEvent.Mission, missionLauncher);
@@ -182,17 +182,17 @@ public class MissionController : MissionControllerBase
     void enterMissionStateOnMissionStart(MissionStartedEventData e)
     {
         MissionGameState missionGameState = new MissionGameState(G.GameState.FocusedCar, e.Mission);
-        G.Instance.GameFlowController.SetGameState(missionGameState);
+        G.GameFlowController.SetGameState(missionGameState);
     }
     void exitMissionStateOnMissionCompleted(MissionCompletedEventData e)
     {
         FreeRoamGameState missionGameState = new FreeRoamGameState(G.GameState.FocusedCar);
-        G.Instance.GameFlowController.SetGameState(missionGameState);
+        G.GameFlowController.SetGameState(missionGameState);
     }
     void exitMissionStateOnMissionFailed(MissionFailedEventData e)
     {
         FreeRoamGameState missionGameState = new FreeRoamGameState(G.GameState.FocusedCar);
-        G.Instance.GameFlowController.SetGameState(missionGameState);
+        G.GameFlowController.SetGameState(missionGameState);
     }
     #endregion
 }

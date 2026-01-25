@@ -9,9 +9,11 @@ public class CarMechanicService : RoutinedObject
 {
     readonly Dictionary<Car, Coroutine> coroutinesOnCars = new Dictionary<Car, Coroutine>();
 
-    public void DisassembleCar(Warehouse warehouse, Car car)
+    public void DisassembleCar(Car car)
     {
         Debug.Assert(car != null, "Car cannot be null when disassembling.");
+
+        Warehouse warehouse = CityLocatorHelper.GetWarehouse(car);
 
         if (coroutinesOnCars.ContainsKey(car))
         {
@@ -33,10 +35,10 @@ public class CarMechanicService : RoutinedObject
         {
             partRemovals.Add(() =>
             {
-                var location = G.Instance.ProductLocationService.GetProductLocation(part);
+                var location = G.ProductLocationService.GetProductLocation(part);
                 if (location != null)
                 {
-                    G.Instance.ProductLocationService.MoveProduct(part, warehouse.GetEmptyLocation());
+                    G.ProductLocationService.MoveProduct(part, warehouse.GetEmptyLocation());
                 }
             });
         }
@@ -84,11 +86,11 @@ public class CarMechanicService : RoutinedObject
             () =>
             {
                 var city = World.Instance.City;
-                G.Instance.ProductLocationService.MoveProduct(car, city.GetEmptyLocation(
+                G.ProductLocationService.MoveProduct(car, city.GetEmptyLocation(
                     CityLocatorHelper.GetCityLocation(sceneWarehouseModel).CityPosition
                 ));
             },
-            () => G.Instance.GameFlowController.GetToTheCity()
+            () => G.GameFlowController.GetToTheCity()
         };
 
         var coroutine = StartRoutine(carCoroutine(car, actions, 0.2f));

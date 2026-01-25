@@ -70,6 +70,7 @@ public class WorldManager
 
     public void InitializeWorld(CityConfig cityConfig, EconomyConfig economyConfig, WorldMissionsConfig worldMissionsConfig)
     {
+        World.Reset();
         initializeCity(cityConfig);
         // Initialize economy after city so that economy can reference city objects if needed
         initializeEconomy(economyConfig);
@@ -79,8 +80,6 @@ public class WorldManager
     //1.
     private void initializeCity(CityConfig cityConfig)
     {
-        World.Reset();
-
         if (G.CityRoot == null)
         {
             G.CityRoot = GameObject.Instantiate(cityConfig.CityGraph.PrefabRoot);

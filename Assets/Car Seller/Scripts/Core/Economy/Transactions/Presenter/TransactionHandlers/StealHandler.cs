@@ -17,9 +17,9 @@
         TransactionResult result;
 
         CarSpawnManager.ReleaseCar(car);
-        G.Instance.PlayerManager.AddPossession(car);
+        G.PlayerManager.AddPossession(car);
 
-        if (G.Instance.CityActionService.PutCarInsideWarehouse(car, targetWarehouse))
+        if (G.CityActionService.PutCarInsideWarehouse(car, targetWarehouse))
         {
             result = TransactionResult.Success();
         }

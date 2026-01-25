@@ -20,14 +20,12 @@ public class CitySceneManager : Singleton<CitySceneManager>
 
     Dictionary<ILocatable, CityViewObjectController> builtObjectsViews = new Dictionary<ILocatable, CityViewObjectController>();
 
-    private void Awake()
+    public void SetCurrentProfile(GameState state)
     {
-        GameEvents.Instance.OnSceneOpened?.Invoke(new SceneOpenedEventData(GameFlowController.GameSceneType.City));
-        CitySceneBootstrap.Execute();//TODO: use events instead
-        currentProfile = profileRegistry.Get(G.GameState);
-        initializeCity();
-        G.Instance.CityRoot.SetActive(true);
+        currentProfile = profileRegistry.Get(state);
     }
+
+
     private void OnEnable()
     {
         GameEvents.Instance.OnLocatableCreated += onNewLocatableCreated;
@@ -46,12 +44,9 @@ public class CitySceneManager : Singleton<CitySceneManager>
         GameEvents.Instance.OnLocatableStateChanged -= onLocatableStateChanged;
 
         GameEvents.Instance.OnGameStateChanged -= onGameStateChanged;
-
-        if (G.Instance.CityRoot != null)
-            G.Instance.CityRoot.SetActive(false);
     }
 
-    void initializeCity()
+    public void InitializeCity()
     {
         if (City == null)
         {
@@ -64,7 +59,7 @@ public class CitySceneManager : Singleton<CitySceneManager>
 
     private void initializeMap()
     {
-        G.Instance.cityViewStreetsBuilder.BuildStreets(City);
+        G.cityViewStreetsBuilder.BuildStreets(City);
     }
 
     private void registerNewView(ILocatable locatable, CityViewObjectController view)
@@ -171,7 +166,7 @@ public class CitySceneManager : Singleton<CitySceneManager>
         else
         {
 
-            CityViewObjectController view = G.Instance.cityViewObjectBuilder.BuildObject(locatable);
+            CityViewObjectController view = G.cityViewObjectBuilder.BuildObject(locatable);
             view.SetViewState(visualState);
             registerNewView(locatable, view);
         }

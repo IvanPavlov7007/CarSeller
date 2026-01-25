@@ -42,7 +42,7 @@ public sealed class NeutralWarehouseContextMenuProfile : IWarehouseContextMenuPr
                 IsInteractable = car.IsComplete(),
                 OnClick = () =>
                 {
-                    G.Instance.GameFlowManager.SellCar(
+                    G.GameFlowManager.SellCar(
                         G.Economy.CarSellOfferProvider.GetOfferByCar(car));
                 },
                 UnavailabilityReason = "Some car part's are missing"
@@ -51,11 +51,10 @@ public sealed class NeutralWarehouseContextMenuProfile : IWarehouseContextMenuPr
             {
                 Type = UIElementType.Button,
                 Text = "Disassemble",
-                IsInteractable = G.Instance.CarMechanicService.CanDisassembleCar(car),
+                IsInteractable = G.CarMechanicService.CanDisassembleCar(car),
                 OnClick = () =>
                 {
-                    G.Instance.CarMechanicService.DisassembleCar(
-                        WarehouseSceneManager.SceneWarehouseModel, car);
+                    G.CarMechanicService.DisassembleCar(car);
                 },
                 UnavailabilityReason = "Car has nothing to disassemble"
             });

@@ -2,18 +2,17 @@
 using Pixelplacement;
 using System.Collections;
 
-public class EnsureCameraPositionOnStart : Singleton<EnsureCameraPositionOnStart>
+public static class CameraHelper
 {
-    IEnumerator Start()
+    public static void SetCurrentPositionAtCar()
     {
-        yield return new WaitForEndOfFrame();
         var car = G.GameState.FocusedCar;
         var location = CityLocatorHelper.GetCityLocation(car);
-        Debug.Log($"Ensuring camera position on start for car {car.Name} at location {location?.CityPosition}");
+        Debug.Assert(CameraMovementManager.Instance != null);
         CameraMovementManager.Instance?.Teleport(getCityLocationPosition(location));
     }
 
-    private Vector2 getCityLocationPosition(City.CityLocation cityLocation)
+    private static Vector2 getCityLocationPosition(City.CityLocation cityLocation)
     {
         if(cityLocation != null)
         {

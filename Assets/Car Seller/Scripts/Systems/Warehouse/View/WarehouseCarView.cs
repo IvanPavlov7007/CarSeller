@@ -35,7 +35,7 @@ public class WarehouseCarView : WarehouseProductView
         // Default to global builder if none is set explicitly
         if (builder == null)
         {
-            builder = G.Instance.warehouseProductViewBuilder;
+            builder = G.warehouseProductViewBuilder;
         }
     }
 
@@ -73,7 +73,7 @@ public class WarehouseCarView : WarehouseProductView
             CarPartViewPlacementHelper.BuildCarPartAtPosition(
                 partLocation,
                 transform,
-                G.Instance.carPartViewBuilder);
+                G.carPartViewBuilder);
             return;
         }
 

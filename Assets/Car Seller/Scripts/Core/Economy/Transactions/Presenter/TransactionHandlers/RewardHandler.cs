@@ -33,10 +33,10 @@ public class RewardHandler : TransactionHandler
         if (result.Type == TransactionResultType.Success)
         {
             if (rewardData.Price > 0f)
-                G.Instance.PlayerManager.AddPlayerMoney(rewardData.Price);
+                G.PlayerManager.AddPlayerMoney(rewardData.Price);
 
             if (rewardData.Items != null && rewardData.Items.Length > 0)
-                G.Instance.PlayerManager.AddPossessions(rewardData.Items);
+                G.PlayerManager.AddPossessions(rewardData.Items);
         }
 
         return result;

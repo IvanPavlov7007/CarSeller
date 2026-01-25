@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473cdafa491da3346a0c597bdca93a6f, type: 3}
+  m_Name: GameMainConfig
+  m_EditorClassIdentifier: 
+  GameConfig: {fileID: 11400000, guid: cb4a3b6edc77d504a8dd455ad5d89d9b, type: 2}
+  ViewBuilders:
+    monolithWarehouseProductViewBuilder: {fileID: 11400000, guid: f89c79dee8c6ad946a82b44e4e94a0a2, type: 2}
+    physicalWarehouseProductViewBuilder: {fileID: 11400000, guid: 714191ac3dbb5f94695da48c3d1fd87a, type: 2}
+    carPartViewBuilder: {fileID: 11400000, guid: 9280239a7aae48041bc89e3309ad1261, type: 2}
+    cityViewObjectBuilder: {fileID: 11400000, guid: b8b2cb1796673254fbd1b5a05d793650, type: 2}
