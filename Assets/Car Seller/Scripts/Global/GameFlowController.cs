@@ -40,7 +40,7 @@ public class GameFlowController
         SceneManager.LoadScene(warehouse.Config.Name);
     }
 
-    public void GetToTheCity()
+    public void EnterCity()
     {
         if(CurrentSceneType == GameSceneType.City)
             return;

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: DisassembeStolenCarConfig
   m_EditorClassIdentifier: 
   GameConfigMode: 2
-  CityConfig: {fileID: 11400000, guid: 95dc65d7ac69b1c4584b5e8473caf178, type: 2}
+  CityConfig: {fileID: 11400000, guid: 365f4d838f000674b9891038e28cbdf9, type: 2}
   EconomyConfig: {fileID: 11400000, guid: 254e34cb4e01cca429baa46ab5f0f0c0, type: 2}
   WorldMissionsConfig: {fileID: 11400000, guid: 92161a9ed29d20640ac9350b1e20cfc8, type: 2}
+  GameModeData: {fileID: 0}

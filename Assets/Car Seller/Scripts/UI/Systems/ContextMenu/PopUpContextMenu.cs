@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PopUpContextMenu : MonoBehaviour, IClosable
 {
@@ -8,7 +7,7 @@ public class PopUpContextMenu : MonoBehaviour, IClosable
     public RectTransform ContentTransform { get; private set; }
     public Transform TargetTransform { get; private set; }
 
-    private event Action<PopUpContextMenu> OnClose;
+    public event Action<PopUpContextMenu> Closed;
 
     private void Awake()
     {
@@ -19,11 +18,13 @@ public class PopUpContextMenu : MonoBehaviour, IClosable
     {
         TargetTransform = targetTransform;
         ContentTransform = contentTransform;
-        OnClose += onClose;
+
+        if (onClose != null)
+            Closed += onClose;
     }
 
     public void Close()
     {
-        OnClose?.Invoke(this);
+        Closed?.Invoke(this);
     }
 }

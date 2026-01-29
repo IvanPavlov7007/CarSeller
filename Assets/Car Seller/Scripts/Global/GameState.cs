@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class GameState
 {
     public Car FocusedCar;
+    public WarehouseInteractor interactor;
 
     public GameState(Car focusedCar)
     {

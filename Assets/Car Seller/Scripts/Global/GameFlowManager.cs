@@ -77,7 +77,7 @@ public class GameFlowManager : RoutinedObject
     {
         // Enter stealing state and move to the city/map
         GameFlowController.SetGameState(new StealingGameState(car));
-        GameFlowController.GetToTheCity();
+        GameFlowController.EnterCity();
 
         // Wait for player outcome via events
         yield return AwaitPlayerOutcome(

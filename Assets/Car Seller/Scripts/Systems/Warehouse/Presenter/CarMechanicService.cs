@@ -49,15 +49,7 @@ public class CarMechanicService : RoutinedObject
 
     public bool CanDisassembleCar(Car car)
     {
-        Debug.Assert(car != null, "Car cannot be null when checking if it can be disassembled.");
-        foreach (var location in car.carParts.Keys)
-        {
-            if (location.Occupant != null)
-            {
-                return true;
-            }
-        }
-        return false;
+        return GameRules.CarCanBeDisassembled.Check(car);
     }
 
     IEnumerator carCoroutine(Car car, List<Action> actions, float period)
@@ -85,12 +77,9 @@ public class CarMechanicService : RoutinedObject
         {
             () =>
             {
-                var city = World.Instance.City;
-                G.ProductLocationService.MoveProduct(car, city.GetEmptyLocation(
-                    CityLocatorHelper.GetCityLocation(sceneWarehouseModel).CityPosition
-                ));
+                G.CityActionService.PutCarOutsideWarehouse(car, sceneWarehouseModel);
             },
-            () => G.GameFlowController.GetToTheCity()
+            () => G.GameFlowController.EnterCity()
         };
 
         var coroutine = StartRoutine(carCoroutine(car, actions, 0.2f));

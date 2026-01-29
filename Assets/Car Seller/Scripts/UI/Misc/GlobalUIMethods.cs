@@ -5,7 +5,16 @@ public class GlobalUIMethods : MonoBehaviour
 {
     public void OpenCity()
     {
-        G.GameFlowController.GetToTheCity();
+        var car = G.GameState.FocusedCar;
+        if (car == null || !CityLocatorHelper.IsInCity(car))
+        {
+            car =
+            CityLocatorHelper.GetClosestCar(G.GameFlowController.CurrentWarehouse, out _);
+        }
+
+        G.GameState.FocusedCar = car;
+
+        G.GameFlowController.EnterCity();
     }
 
     public void StartGame()

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using NUnit.Framework.Constraints;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Reflection;
 using UnityEngine;
 
 /// <summary>
@@ -77,7 +79,7 @@ public static class CTX_Menu_Tools
         return new UIElement
         {
             Type = UIElementType.Image,
-            Image = iconSprite
+            Image = iconSprite,
         };
     }
 
@@ -308,6 +310,66 @@ public static class CTX_Menu_Tools
                     closePopupOnClick = true
                 }
             }
+        };
+    }
+
+    // Confirmation Data
+
+    public static UIElement PutCarInsideWarehoseConfirmation(PutCarInWarehouseOffer offer, Action onAccept, Action onCancel)
+    {
+        return new UIElement { 
+            Type = UIElementType.Container, Children = new List<UIElement>() {
+                Description("Do you want to put your car inside warehouse?"),
+                new UIElement { 
+                    Type = UIElementType.Button, Text = "Yes",
+                    OnClick = onAccept, closePopupOnClick = true }, 
+                new UIElement { 
+                    Type = UIElementType.Button, Text = "No",
+                    OnClick = onCancel, closePopupOnClick = true }, }, 
+        };
+    }
+
+    public static UIElement StripCarInsideWarehoseConfirmation(WarehouseStripCarOffer offer, Action onAccept, Action onCancel)
+    {
+        return new UIElement
+        {
+            Type = UIElementType.Container,
+            Children = new List<UIElement>() {
+                Description("Do you want to strip this car in your warehouse?\n"),
+                new UIElement {
+                    Type = UIElementType.Button, Text = "Yes",
+                    OnClick = onAccept, closePopupOnClick = true },
+                new UIElement {
+                    Type = UIElementType.Button, Text = "No",
+                    OnClick = onCancel, closePopupOnClick = true }, },
+        };
+    }
+
+    public static UIElement StipReslutsClaim(IReadOnlyList<Product> strippedProducts)
+    {
+        var children = new List<UIElement>()
+        {
+            Header("Scavaged parts:"),
+        };
+
+        foreach (var product in strippedProducts)
+        {
+            children.Add(Image(IconBuilderHelper.BuildProdutSpite(product)));
+        }
+
+        children.Add(new UIElement()
+        {
+            Type = UIElementType.Button,
+            Text = "Claim",
+            closePopupOnClick = true,
+            OnClick = () => { }
+
+        });
+
+        return new UIElement
+        {
+            Type = UIElementType.Container,
+            Children = children
         };
     }
 }

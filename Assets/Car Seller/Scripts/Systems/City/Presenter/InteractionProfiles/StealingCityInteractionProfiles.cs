@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
+[Obsolete]
 public sealed class StealingCityContextMenuProfile : ICityContextMenuProfile
 {
     public UIElement GenerateContent(object model, GameState gameState)
@@ -85,6 +87,7 @@ public sealed class StealingCityContextMenuProfile : ICityContextMenuProfile
     }
 }
 
+[Obsolete]
 public sealed class StealingCityTriggerProfile : ICityTriggerProfile
 {
     public TriggerAction GenerateTriggerAction(TriggerContext ctx)

@@ -57,11 +57,13 @@ public sealed class FreeRoamCityTriggerProfile : ICityTriggerProfile
             return new TriggerAction
             (
                 true,
-                () =>
-                {
-                    G.CityActionService.PutCarInsideWarehouse(car, warehouse);
-                    G.GameFlowController.EnterWarehouse(warehouse);
-                }
+                () => { G.ProcessRunner.Run(new WarehouseEnterProcess(car, warehouse)); }
+
+                // for migration of CarShop
+                //{
+                //    G.CityActionService.PutCarInsideWarehouse(car, warehouse);
+                //    G.GameFlowController.EnterWarehouse(warehouse);
+                //}
             );
         }
         if(ctx.Trigger is CityObject cityObject)

@@ -19,7 +19,10 @@ public static class G
     public static Player Player => World.Instance.Economy.Player;
     public static GameState GameState => GameFlowController.GameState;
 
-    public static TransactionProcessor TransactionProcessor => Economy.TransactionProcessor;
+    public static TransactionProcessor TransactionProcessor;
+    public static ProcessRunner ProcessRunner;
+
+    public static ICarWarehousePolicy CarWarehousePolicy;
 
     //MODEL AND VIEW MIXED (SORRY)
     public static GameObject CityRoot { get; set; }
@@ -39,6 +42,8 @@ public static class G
     public static CarMechanicService CarMechanicService;
 
     public static PlayerManager PlayerManager = new PlayerManager();
+
+    public static CarStripper CarStripper = new CarStripper();
 
     //City
     public static CityActionService CityActionService = new CityActionService();
@@ -66,7 +71,29 @@ public static class G
     {
         viewBuildersConfig = handlersConfig;
 
+        initializeTransactionProcessor();
+
+
+        CarWarehousePolicy = new CarIntoWarehousePolicy();
         GameFlowManager = new GameFlowManager();
         CarMechanicService = new CarMechanicService();
+        ProcessRunner = new ProcessRunner();
+    }
+
+    private static void initializeTransactionProcessor()
+    {
+        TransactionProcessor = new TransactionProcessor(new Dictionary<TransactionType, ITransactionHandler>
+        {
+            { TransactionType.Purchase, new PurchaseHandler() },
+            { TransactionType.Sell, new SellHandler() },
+            { TransactionType.Reward, new RewardHandler() },
+            { TransactionType.Lose, new LoseHandler() },
+            { TransactionType.Confiscate, new ConfiscateHandler() },
+            { TransactionType.Steal, new StealHandler()   },
+            { TransactionType.Exchange, new ExchangeHandler() },
+            {TransactionType.StripCar, new StripCarHandler() },
+            {TransactionType.PullCarFromWarehouse, new PullCarFromWarehouseHandler() },
+            {TransactionType.PutCarInWarehouse, new PutCarInWarehouseHandler() },
+        });
     }
 }

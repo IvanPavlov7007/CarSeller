@@ -1,7 +1,5 @@
 ﻿using Pixelplacement;
-using System;
 using System.Collections.Generic;
-using Unity;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,21 +14,27 @@ public class FixedContextMenuManager : Singleton<FixedContextMenuManager>
     [Header("Context Menu Visuals")]
     [SerializeField]
     private Color UsedContextMenuColor = Color.white;
-    public void CreateContextMenu(UIElement content)
+
+    public PopUpContextMenu CreateContextMenu(UIElement content)
     {
         GameObject panel = Instantiate(fixedPopUpMenuPrefab, FixedContextMenuCanvas.Instance.Canvas.transform);
         RectTransform panelTransform = panel.GetComponent<RectTransform>();
-        //Set panel color
+
+        // Set panel color
         var image = panelTransform.GetComponent<Image>();
         if (image != null)
         {
             image.color = UsedContextMenuColor;
         }
+
         var contentTransform = getContentTransform(panel);
         UIBuilder.Build(content, contentTransform);
+
         var menu = createContextMenu(panel, content.blockingInput);
         menu.Initialize(null, contentTransform, OnMenuClose);
+
         GameCursor.Instance.CancelCurrentInteraction();
+        return menu;
     }
 
     private PopUpContextMenu createContextMenu(GameObject panel, bool blocking)

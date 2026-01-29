@@ -22,7 +22,7 @@ public sealed class WarehouseContextMenuProfileRegistry
             // You can add more later if needed:
             // { typeof(StealingGameState), new StealingWarehouseContextMenuProfile() },
             // { typeof(SellingGameState),  new SellingWarehouseContextMenuProfile() },
-            // { typeof(FreeRoamGameState), new FreeRoamWarehouseContextMenuProfile() },
+            { typeof(FreeRoamGameState), new FreeRoamWarehouseContextMenuProfile() },
         };
     }
 

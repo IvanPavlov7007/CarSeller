@@ -29,7 +29,7 @@ public class PlayerPossessionTracker : Singleton<PlayerPossessionTracker>
 
     private void onLocatableLocationChanged(LocatableLocationChangedEventData data)
     {
-
+        
     }
 
     private void onLocatableDestroyed(LocatableDestroyedEventData data)

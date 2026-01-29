@@ -16,32 +16,14 @@ public class Economy
     public CarShopOfferProvider CarShopOfferProvider;
 
     public ProductPriceCalculator ProductPriceCalculator = new ProductPriceCalculator();
-    public TransactionProcessor TransactionProcessor { get; private set; }
 
     public Economy(EconomyConfig config)
     {
         Config = config;
         Player = new Player();
-        initializeTransactionProcessor();
         initializePlayerStartState();
         initializeWarehouseOffers();
         initializeCarShopOfferProvider();
-    }
-
-   
-
-    private void initializeTransactionProcessor()
-    {
-        TransactionProcessor = new TransactionProcessor(new Dictionary<TransactionType, ITransactionHandler>
-        {
-            { TransactionType.Purchase, new PurchaseHandler() },
-            { TransactionType.Sell, new SellHandler() },
-            { TransactionType.Reward, new RewardHandler() },
-            { TransactionType.Lose, new LoseHandler() },
-            { TransactionType.Confiscate, new ConfiscateHandler() },
-            { TransactionType.Steal, new StealHandler()   },
-            { TransactionType.Exchange, new ExchangeHandler() }
-        });
     }
 
     private void initializePlayerStartState()

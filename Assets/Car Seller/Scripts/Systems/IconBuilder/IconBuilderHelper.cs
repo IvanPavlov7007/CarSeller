@@ -1,29 +1,41 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 public static class IconBuilderHelper
 {
+    [Obsolete]
     public static Sprite BuildCarSprite(Car car)
     {
-        return IconBuilderManager.Instance.BuildCar(car);
+        return BuildProdutSpite(car);
     }
-
+    [Obsolete]
     public static Sprite BuildCarFrameSprite(CarFrame carFrame)
     {
-        return IconBuilderManager.Instance.BuildCarFrame(carFrame);
+        return BuildProdutSpite(carFrame);
     }
-
+    [Obsolete]
     public static Sprite BuildWheelSprite(Wheel wheel)
     {
-        return wheel.runtimeConfig.FrontSideViewSprite;
+        return BuildProdutSpite(wheel);
     }
-
+    [Obsolete]
     public static Sprite BuildSpoilerSprite(Spoiler spoiler)
     {
-        return spoiler.runtimeConfig.Sprite;
+        return BuildProdutSpite(spoiler);
     }
-
+    [Obsolete]
     public static Sprite BuildEngineSprite(Engine engine)
     {
-        return engine.runtimeConfig.Sprite;
+        return BuildProdutSpite(engine);
+    }
+
+    public static Sprite BuildProdutSpite(Product product)
+    {
+        if (product == null)
+            return null;
+
+        // Use the visitor implementation on Product to pick the right BuildX method.
+        // IconBuilderManager implements IProductViewBuilder<Sprite>.
+        return product.GetRepresentation(IconBuilderManager.Instance);
     }
 }

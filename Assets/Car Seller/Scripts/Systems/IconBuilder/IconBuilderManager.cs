@@ -45,20 +45,17 @@ public class IconBuilderManager : Singleton<IconBuilderManager>, IProductViewBui
 
     public Sprite BuildEngine(Engine engine)
     {
-        var go = gameObjectBuilder.BuildEngine(engine);
-        return BuildIconFromGameObject(go);
+        return engine.runtimeConfig.Sprite;
     }
 
     public Sprite BuildSpoiler(Spoiler spoiler)
     {
-        var go = gameObjectBuilder.BuildSpoiler(spoiler);
-        return BuildIconFromGameObject(go);
+        return spoiler.runtimeConfig.Sprite;
     }
 
     public Sprite BuildWheel(Wheel wheel)
     {
-        var go = gameObjectBuilder.BuildWheel(wheel);
-        return BuildIconFromGameObject(go);
+        return wheel.runtimeConfig.FrontSideViewSprite;
     }
 
     // Core flow: stage -> frame -> render -> cleanup
