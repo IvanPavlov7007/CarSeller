@@ -15,11 +15,11 @@ public class ProductManager
         
         attachProductToLocation(car, location);
 
-        G.ProductLocationService.RegisterProductLocation(car, location);
+        G.ProductLifetimeService.RegisterProduct(car, location);
         foreach(var locations in car.GetNonEmptyProductLocations())
         {
             //not rising events here
-            G.ProductLocationService.RegisterProductLocation(locations.Occupant as Product, locations);
+            G.ProductLifetimeService.RegisterProduct(locations.Occupant as Product, locations);
         }
 
         raiseEvents(car, location);
@@ -33,7 +33,7 @@ public class ProductManager
 
         attachProductToLocation(wheel, location);
 
-        G.ProductLocationService.RegisterProductLocation(wheel, location);
+        G.ProductLifetimeService.RegisterProduct(wheel, location);
         raiseEvents(wheel, location);
         return wheel;
     }
@@ -45,7 +45,7 @@ public class ProductManager
         
         attachProductToLocation(engine, location);
 
-        G.ProductLocationService.RegisterProductLocation(engine, location);
+        G.ProductLifetimeService.RegisterProduct(engine, location);
         raiseEvents(engine, location);
         return engine;
     }
@@ -57,7 +57,7 @@ public class ProductManager
 
         attachProductToLocation(spoiler, location);
 
-        G.ProductLocationService.RegisterProductLocation(spoiler, location);
+        G.ProductLifetimeService.RegisterProduct(spoiler, location);
         raiseEvents(spoiler, location);
         return spoiler;
     }
@@ -80,24 +80,4 @@ public class ProductManager
             Debug.LogError($"Failed to place product {product.Name} at location {location}");
         }
     }
-
-    //TODO: OWNERSHIP system should handle ownership removal on deletion
-
-    /// <summary>
-    /// Removing references to a product and notifying the system that it has been destroyed.
-    /// </summary>
-    /// <param name="product"></param>
-    public void DeleteProduct(Product product)
-    {
-        var location = G.ProductLocationService.GetProductLocation(product);
-        Debug.Assert(location != null, $"Trying to delete product {product.Name} that has no location.");
-        location.Detach();
-        //TODO remove ownerships/registrations, but the best way to do is to have those systems handle this by themselves
-
-        Debug.Assert(product != null, "Trying to delete a null product.");
-        GameEvents.Instance.OnProductDestroyed?.Invoke(new ProductDestroyedEventData(product));
-        Debug.Assert(product is ILocatable);
-        GameEvents.Instance.OnLocatableDestroyed?.Invoke(new LocatableDestroyedEventData(product));
-    }
-
 }

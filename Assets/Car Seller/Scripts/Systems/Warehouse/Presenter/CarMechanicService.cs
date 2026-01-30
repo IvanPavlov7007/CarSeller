@@ -35,10 +35,10 @@ public class CarMechanicService : RoutinedObject
         {
             partRemovals.Add(() =>
             {
-                var location = G.ProductLocationService.GetProductLocation(part);
+                var location = G.ProductLifetimeService.GetProductLocation(part);
                 if (location != null)
                 {
-                    G.ProductLocationService.MoveProduct(part, warehouse.GetEmptyLocation());
+                    G.ProductLifetimeService.MoveProduct(part, warehouse.GetEmptyLocation());
                 }
             });
         }

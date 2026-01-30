@@ -7,13 +7,13 @@ public class CityActionService
         var location = warehouse.GetEmptyLocation();
         if (location == null)
             return false;
-        return G.ProductLocationService.MoveProduct(car, location);
+        return G.ProductLifetimeService.MoveProduct(car, location);
     }
 
     public bool PutCarOutsideWarehouse(Car car, Warehouse warehouse)
     {
         var city = World.Instance.City;
-        return G.ProductLocationService.MoveProduct(car, city.GetEmptyLocation(
+        return G.ProductLifetimeService.MoveProduct(car, city.GetEmptyLocation(
             CityLocatorHelper.GetCityLocation(warehouse).CityPosition
         ));
     }

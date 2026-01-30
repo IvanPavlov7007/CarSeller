@@ -25,9 +25,10 @@ public class GameEvents
         OnLocatableCreated = null;
         OnLocatableDestroyed = null;
         OnLocatableLocationChanged = null;
+
+        OnOwnershipChanged = null;
+
         OnTargetReached = null;
-        OnPlayerPossessionLose = null;
-        OnPlayerPossessionAcquired = null;
         OnPlayerMoneyChanged = null;
         OnTransactionComplete = null;
 
@@ -53,10 +54,9 @@ public class GameEvents
     public Action<LocatableDestroyedEventData> OnLocatableDestroyed;
     public Action<LocatableLocationChangedEventData> OnLocatableLocationChanged;
 
-    public Action<CityTargetReachedEventData> OnTargetReached;
+    public Action<OwnershipChangedEventData> OnOwnershipChanged;
 
-    public Action<PossessionChangeEventData> OnPlayerPossessionLose;
-    public Action<PossessionChangeEventData> OnPlayerPossessionAcquired;
+    public Action<CityTargetReachedEventData> OnTargetReached;
     public Action<PlayerMoneyChangeEventData> OnPlayerMoneyChanged;
 
     public Action<TransactionEventData> OnTransactionComplete;

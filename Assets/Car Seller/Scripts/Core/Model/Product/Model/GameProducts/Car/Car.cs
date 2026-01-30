@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-public sealed class Car : Product, ILocationsHolder
+public sealed class Car : Product, IOwnershipContainer, ILocationsHolder
 {
     public CarRuntimeConfig runtimeConfig { get; private set; }
     public Dictionary<CarPartLocation, PartSlotRuntimeConfig> carParts { get; private set; }
@@ -13,6 +13,9 @@ public sealed class Car : Product, ILocationsHolder
     public override string Name => runtimeConfig.Name;
 
     public override float BasePrice => runtimeConfig.BasePrice;
+
+    public OwnershipResolution OwnershipResolution => OwnershipResolution.Container;
+    public IOwnable GetOwnerOfContainer() => this;
 
     public Car(CarRuntimeConfig runtimeConfig)
     {

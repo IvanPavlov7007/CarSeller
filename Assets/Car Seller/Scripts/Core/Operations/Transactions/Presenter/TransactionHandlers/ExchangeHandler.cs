@@ -28,7 +28,7 @@ public class ExchangeHandler : TransactionHandler
         if (result.Type == TransactionResultType.Success)
         {
             G.PlayerManager.DeltaPlayerMoney(exchangeData.DeltaMoney);
-            G.ProductLocationService.SwapProducts(exchangeData.FromPlayer,
+            G.ProductLifetimeService.SwapProducts(exchangeData.FromPlayer,
                 exchangeData.ToPlayer);
         }
 

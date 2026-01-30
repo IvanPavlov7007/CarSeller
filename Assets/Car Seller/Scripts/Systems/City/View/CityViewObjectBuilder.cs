@@ -59,7 +59,7 @@ public class CityViewObjectBuilder : ScriptableObject
     {
         GameObject carGO = Instantiate(carViewPrefab);
         
-        var location = G.ProductLocationService.GetProductLocation(car) as City.CityLocation;
+        var location = G.ProductLifetimeService.GetProductLocation(car) as City.CityLocation;
 
         var viewController = 
             carGO.AddComponent<CityViewObjectController>().Initialize(car);

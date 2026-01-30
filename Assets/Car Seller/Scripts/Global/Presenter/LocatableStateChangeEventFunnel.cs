@@ -18,7 +18,7 @@ public class LocatableStateChangeEventFunnel : Singleton<LocatableStateChangeEve
         GameEvents.Instance.OnPlayerPossessionAcquired -= OnLocatableAcquired;
     }
 
-    private void OnLocatableAcquired(PossessionChangeEventData data)
+    private void OnLocatableAcquired(OwnershipChangedEventData data)
     {
         GameEvents.Instance.OnLocatableStateChanged?.Invoke(new LocatableStateChangedEventData(data.Possession as ILocatable));
     }

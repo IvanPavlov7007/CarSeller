@@ -51,7 +51,8 @@ public class PurchaseHandler : TransactionHandler
         if (result.Type == TransactionResultType.Success)
         {
             G.PlayerManager.SubtractPlayerMoney(purchaseData.Price);
-            G.PlayerManager.AddPossessions(purchaseData.Items);
+            PurchaseResolver resolver = new PurchaseResolver();
+            resolver.ResolvePurchase(purchaseData.Items);
         }
         return result;
     }

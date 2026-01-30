@@ -27,7 +27,7 @@ public class WarehouseOffer : IOffer
 
         IsAccepted = true;
 
-        var purchaseData = new PurchaseTransactionData(Price, new IPossession[1] { Warehouse});
+        var purchaseData = new PurchaseTransactionData(Price, new IOwnable[1] { Warehouse});
         Transaction transaction = new Transaction(TransactionType.Purchase, purchaseData);
 
         provider.OfferAccepted(this);

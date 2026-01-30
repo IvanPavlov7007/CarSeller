@@ -46,8 +46,3 @@ public class CityObject : ILocatable, IDestroyable
     }
 }
 
-public interface IDestroyable
-{
-    event Action<IDestroyable> onBeingDestroyed;
-    void Destroy();
-}

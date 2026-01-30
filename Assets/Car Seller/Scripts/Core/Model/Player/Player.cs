@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Player
+public class Player : OwnableBase
 {
     public float Money { get; private set; }
 
@@ -10,11 +9,10 @@ public class Player
         Debug.Assert(newAmount >= 0, "Player money cannot be negative.");
         Money = newAmount;
     }
-    public bool Owns(IPossession possession)
-    {
-        return Possessions.Contains(possession);
-    }
 
-    internal HashSet<IPossession> Possessions { get; private set; } = new HashSet<IPossession>();
+    public bool Owns(IOwnable ownable)
+    {
+        return ownable != null && ReferenceEquals(ownable.Owner, this);
+    }
 }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 //TODO in the future, make the Ownership system as suggested by GPT
 // - ownership based on containment graph
 
-
+[Obsolete]
 /// <summary>
 /// Unfinished system to track player possessions based on locatable events. Please apply suggestion above.
 /// </summary>
@@ -42,12 +42,13 @@ public class PlayerPossessionTracker : Singleton<PlayerPossessionTracker>
         Debug.Assert(data.Location != null, "LocatableCreatedEventData has null Location.");
         if (isPlayerOwner(data.Location))
         {
-            G.PlayerManager.AddPossession(data.Locatable as IPossession);
+            //G.PlayerManager.AddPossession(data.Locatable as IPossession);
         }
     }
 
     private bool isPlayerOwner(ILocation location)
     {
-        return G.Player.Owns(location as IPossession);
+        throw new NotImplementedException();
+        //return G.Player.Owns(location as IPossession);
     }
 }

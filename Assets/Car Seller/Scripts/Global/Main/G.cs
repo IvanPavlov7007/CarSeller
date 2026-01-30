@@ -32,7 +32,7 @@ public static class G
     public static GlobalCreationService GlobalCreationService = new GlobalCreationService();
 
     public static ProductManager ProductManager = new ProductManager();
-    public static ProductLocationService ProductLocationService = new ProductLocationService();
+    public static ProductLifetimeService ProductLifetimeService = new ProductLifetimeService();
 
     public static GameFlowManager GameFlowManager;
     public static GameFlowController GameFlowController = new GameFlowController();

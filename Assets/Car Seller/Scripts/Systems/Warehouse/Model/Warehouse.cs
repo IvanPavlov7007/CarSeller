@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Warehouse : ILocationsHolder, ILocatable, IPossession, IRegisterable
+public class Warehouse : OwnableBase, IOwnershipContainer, ILocationsHolder, ILocatable, IRegisterable
 {
     public WarehouseConfig Config;
     public DimensionalPositionData emptyProductLocation { get; set; }
@@ -18,6 +18,11 @@ public class Warehouse : ILocationsHolder, ILocatable, IPossession, IRegisterabl
     public SuppliesList suppliesList;
     public int OverallCarParkingSpots => Config.CarParkingSpots;
     public int AvailableCarParkingSpots => OverallCarParkingSpots - productLocations.FindAll(p => p.Product is Car).Count;
+
+    public OwnershipResolution OwnershipResolution => OwnershipResolution.OwnerOfContainerIfNull;
+    public IOwnable GetOwnerOfContainer() => this.Owner;
+
+
     public Warehouse(WarehouseConfig config)
     {
         this.Config = config;

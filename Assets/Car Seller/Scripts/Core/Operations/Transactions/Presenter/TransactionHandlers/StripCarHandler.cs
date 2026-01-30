@@ -47,7 +47,7 @@ public class StripCarHandler : TransactionHandler
     {
         foreach (var product in strippedParts)
         {
-            if(!G.ProductLocationService.MoveProduct(product, warehouse.GetEmptyLocation()))
+            if(!G.ProductLifetimeService.MoveProduct(product, warehouse.GetEmptyLocation()))
             {
                 return false;
             }

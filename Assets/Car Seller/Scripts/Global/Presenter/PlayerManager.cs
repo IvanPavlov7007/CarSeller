@@ -1,63 +1,21 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager
 {
-    Player Player => World.Instance.Economy.Player;
+    private Player Player => World.Instance.Economy.Player;
+    private Dictionary<IOwnable, HashSet<IOwnable>> ownerships => World.Instance.ownerships;
 
-    public bool RemovePossession(IPossession possession)
+    public bool PlayerOwns(IOwnable item)
     {
-        if(!Player.Possessions.Contains(possession))
-        {
-            Debug.LogWarning("Player does not own this possession.");
-            return false;
-        }
-
-        if(Player.Possessions.Remove(possession))
-        { 
-            GameEvents.Instance.OnPlayerPossessionLose?.Invoke(new PossessionChangeEventData(possession));
-            return true;
-        }
-        else
-        {
-            Debug.LogWarning("Failed to remove possession from player.");
-            return false;
-        }
+        return Player.Owns(item);
     }
 
-    public bool AddPossession(IPossession possession)
+    public IReadOnlyCollection<IOwnable> GetPlayerOwnedItems()
     {
-        if (Player.Possessions.Contains(possession))
-        {
-            Debug.LogWarning("Player already owns this possession.");
-            return false;
-        }
-        if (Player.Possessions.Add(possession))
-        {
-            //TODO instead of having manager, make the ownership system, that checks things like this
-            return addRecursiveStoredPossessions(possession);
-        }
-        else
-        {
-            Debug.LogWarning("Failed to add possession to player.");
-            return false;
-        }
-    }
-
-    bool addRecursiveStoredPossessions(IPossession possession)
-    {
-        GameEvents.Instance.OnPlayerPossessionAcquired?.Invoke(new PossessionChangeEventData(possession));
-        bool cumulative = true;
-        if(possession is ILocationsHolder container)
-        {
-            foreach (var location in container.GetLocations())
-            {
-                if(location.Occupant is IPossession childPossession)
-                    cumulative &= AddPossession(childPossession);
-            }
-        }
-
-        return cumulative;
+        if (ownerships.TryGetValue(Player, out var set))
+            return set;
+        return System.Array.Empty<IOwnable>();
     }
 
     public float SetPlayerMoney(float amount)
@@ -68,34 +26,8 @@ public class PlayerManager
         return Player.Money;
     }
 
-    public float DeltaPlayerMoney(float delta)
-    {
-        return SetPlayerMoney(Player.Money + delta);
-    }
-
-    public float AddPlayerMoney(float amount)
-    {
-        return SetPlayerMoney(Player.Money + amount);
-    }
-
-    public float SubtractPlayerMoney(float amount)
-    {
-        return SetPlayerMoney(Player.Money - amount);
-    }
-
-    public void RegisterPlayerPossession(IPossession possession)
-    {
-        Debug.Assert(possession != null, "Possession cannot be null when registering to player.");
-        Debug.Assert(!Player.Possessions.Contains(possession), $"Possession {possession.Name} is already registered to player.");
-        Player.Possessions.Add(possession);
-    }
-
-    internal void AddPossessions(IPossession[] items)
-    {
-        foreach (var item in items)
-        {
-            AddPossession(item);
-        }
-    }
+    public float DeltaPlayerMoney(float delta) => SetPlayerMoney(Player.Money + delta);
+    public float AddPlayerMoney(float amount) => SetPlayerMoney(Player.Money + amount);
+    public float SubtractPlayerMoney(float amount) => SetPlayerMoney(Player.Money - amount);
 }
 

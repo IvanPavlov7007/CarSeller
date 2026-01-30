@@ -97,12 +97,17 @@ public class GameStateChangeEventData : GameEventData
     }
 }
 
-public class PossessionChangeEventData : GameEventData
+public class OwnershipChangedEventData : GameEventData
 {
-    public IPossession Possession { get; private set; }
-    public PossessionChangeEventData(IPossession possession)
+    public readonly IOwnable Item;
+    public readonly IOwnable OldOwner;
+    public readonly IOwnable NewOwner;
+
+    public OwnershipChangedEventData(IOwnable item, IOwnable oldOwner, IOwnable newOwner)
     {
-        Possession = possession;
+        Item = item;
+        OldOwner = oldOwner;
+        NewOwner = newOwner;
     }
 }
 

@@ -67,7 +67,7 @@ public sealed class StrippingProcess
     {
         foreach (var part in toStrip)
         {
-            if (!G.ProductLocationService.MoveProduct(part, World.Instance.HiddenSpace.GetEmptyLocation()))
+            if (!G.ProductLifetimeService.MoveProduct(part, World.Instance.HiddenSpace.GetEmptyLocation()))
             {
                 Debug.LogError($"Failed to strip part {part.Name} (ID: {part.Id})");
             }
