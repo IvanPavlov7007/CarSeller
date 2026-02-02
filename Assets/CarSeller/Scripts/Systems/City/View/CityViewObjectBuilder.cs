@@ -18,30 +18,38 @@ public class CityViewObjectBuilder : ScriptableObject
 
     CityUIBuilder CityUIBuilder = new CityUIBuilder();
 
-    public CityViewObjectController BuildObject(object cityObject)
+    public CityViewObjectController BuildObject(CityEntity entity)
     {
-        switch(cityObject)
+        if (entity == null)
+        {
+            Debug.LogError("CityEntity is null");
+            return null;
+        }
+
+        switch (entity.Subject)
         {
             case Car car:
-                return buildCar(car);
-            case Warehouse warehouse:
-                return buildCityObject(warehouse);
-            case CollectableCityObject collectable: // TODO ACHTUNG!!! generalize, since Collectable is a CityObject
-                return BuildCollectable(collectable);
-            case PoliceCityObject policeUnit: // TODO ACHTUNG!!! generalize, since PoliceUnit is a CityObject, but also moving
-                return buildPoliceUnit(policeUnit);
-            case CityObject co:
-                return buildCityObject(co);
+                return buildCar(car, entity.Position);
+
+            case CollectableConfig collectable:
+                return buildCollectable(collectable, entity.Position);
+
+            case PoliceUnit policeUnit:
+                return buildPoliceUnit(policeUnit, entity.Position);
+
+            case ILocatable locatable:
+                return buildCityObject(locatable, entity.Position);
+
             default:
-                Debug.LogError($"No builder for city object of type {cityObject.GetType().Name}");
+                Debug.LogError($"No builder for city object of type {entity.Subject.GetType().Name}");
                 return null;
         }
     }
 
-    public CityViewObjectController BuildCollectable(CollectableCityObject collectable)
+    public CityViewObjectController buildCollectable(CollectableConfig collectable, CityPosition position)
     {
         var location = CityLocatorHelper.GetCityLocation(collectable);
-        var pos = location.CityPosition.WorldPosition;
+        var pos = location.Position.WorldPosition;
 
         GameObject collectableGO = Instantiate(triggerPrefab, pos, Quaternion.identity);
         var viewController =
@@ -55,7 +63,7 @@ public class CityViewObjectBuilder : ScriptableObject
 
     }
 
-    public CityViewObjectController buildCar(Car car)
+    public CityViewObjectController buildCar(Car car, CityPosition position)
     {
         GameObject carGO = Instantiate(carViewPrefab);
         
@@ -82,10 +90,10 @@ public class CityViewObjectBuilder : ScriptableObject
 
 
     //TODO make warehouse a city object and generalize this method
-    public CityViewObjectController buildCityObject(ILocatable locatable)
+    public CityViewObjectController buildCityObject(ILocatable locatable, CityPosition position)
     {
         var location = CityLocatorHelper.GetCityLocation(locatable);
-        GameObject warehouseViewGO = Instantiate(triggerPrefab, location.CityPosition.WorldPosition,Quaternion.identity);
+        GameObject warehouseViewGO = Instantiate(triggerPrefab, location.Position.WorldPosition,Quaternion.identity);
         var viewController =
             warehouseViewGO.AddComponent<CityViewObjectController>().Initialize(locatable);
         warehouseViewGO.AddComponent<Interactable>();
@@ -116,7 +124,7 @@ public class CityViewObjectBuilder : ScriptableObject
         return viewController;
     }
 
-    public CityViewObjectController buildPoliceUnit(PoliceCityObject policeCityObject)
+    public CityViewObjectController buildPoliceUnit(PoliceCityObject policeCityObject, CityPosition position)
     {
         var data = policeCityObject.Data as PoliceUnit;
         //TODO fix the system: data and policeCityObject should be one object

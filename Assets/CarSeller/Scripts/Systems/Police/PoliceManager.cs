@@ -33,9 +33,9 @@ public class PoliceManager : Singleton<PoliceManager>
                 Debug.LogWarning("FocusedCar location is null in PoliceManager.SuspectPosition");
                 return default;
             }
-            var pos = location.CityPosition;
+            var pos = location.Position;
             Debug.Assert(pos.Edge != null || pos.Node != null, $"SuspectPosition is invalid: edge and node are null");
-            return location.CityPosition;
+            return location.Position;
         }
     }
 

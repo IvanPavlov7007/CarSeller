@@ -51,6 +51,8 @@ public static class G
     public static CarStripper CarStripper = new CarStripper();
 
     //City
+    
+    public static CityEntityLifetimeService CityEntityLifetimeService = new CityEntityLifetimeService();
     public static CityActionService CityActionService = new CityActionService();
 
     public static WarehouseEntryCooldownService WarehouseEntryCooldownService = new WarehouseEntryCooldownService();

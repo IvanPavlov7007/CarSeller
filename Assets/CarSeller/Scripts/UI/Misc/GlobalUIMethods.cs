@@ -27,6 +27,6 @@ public class GlobalUIMethods : MonoBehaviour
     public void StartGame()
     {
         G.GameFlowController.EnterWarehouse((Warehouse)
-                    World.Instance.City.Locations.Keys.First(x => x.GetType() == typeof(Warehouse)));
+                    World.Instance.City.Entities.Keys.First(x => x.GetType() == typeof(Warehouse)));
     }
 }

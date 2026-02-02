@@ -22,7 +22,7 @@ public class GameEvents
         OnPlayerAccept = null;
 
         OnLocatableStateChanged = null;
-        OnLocatableCreated = null;
+        OnLocatableRegistered = null;
         OnLocatableDestroyed = null;
         OnLocatableLocationChanged = null;
 
@@ -50,7 +50,7 @@ public class GameEvents
     public Action<ProductDestroyedEventData> OnProductDestroyed;
 
     public Action<LocatableStateChangedEventData> OnLocatableStateChanged;
-    public Action<LocatableCreatedEventData> OnLocatableCreated;
+    public Action<LocatableCreatedEventData> OnLocatableRegistered;
     public Action<LocatableDestroyedEventData> OnLocatableDestroyed;
     public Action<LocatableLocationChangedEventData> OnLocatableLocationChanged;
 

@@ -1,26 +1,12 @@
 ﻿//TODO Maybe make police be more than just a city object in the future
 using System;
 using UnityEngine;
-
-using CityPosition = City.CityPosition;
 using Random = UnityEngine.Random;
 
-public class PoliceCityObject : CityObject
-{
-    public PoliceCityObject(string name, string infoText, ILocation location, City.CityMarker cityMarker, CityObjectData data, PinStyle pinStyle = null) : base(name, infoText, location, cityMarker, data, pinStyle)
-    {
-    }
-}
-
-public interface CityObjectData
-{
-
-}
-
-public class PoliceUnit : PoliceUnitAIData, CityObjectData
+public class PoliceUnit : PoliceUnitAIData
 {
     public readonly City.CityLocation Location;
-    public City.CityPosition CityPosition => Location.CityPosition;
+    public CityPosition CityPosition => Location.Position;
     public Vector2? TargetPosition { get; set; }
     public IAIMovement Movement => GraphMovement;
     public IVision Vision => ConeVision;

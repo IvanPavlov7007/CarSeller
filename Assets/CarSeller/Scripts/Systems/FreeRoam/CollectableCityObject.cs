@@ -1,22 +1,23 @@
 ﻿using System;
 
-public class CollectableCityObject : CityObject
+public class Collectable : ILocatable
 {
-    //TODO make this betteer
-    public CollectableCityObject(Collectable collectable, ILocation location, City.CityMarker cityMarker)
-        : base(collectable.Name, collectable.InfoText, location, cityMarker, collectable)
+    public CollectableConfig Config { get; set; }
+    public Collectable(CollectableConfig config)
     {
+        Config = config;
     }
-    
+
+    public float MoneyAmount => Config.MoneyAmount;
+    public IOwnable[] items { get; set; }
+    public event Action OnCollectedAdditionalCallback;
+
 }
+
 [Serializable]
-public class Collectable : CityObjectData
+public class CollectableConfig
 {
     public string InfoText { get; set; } = "Collectable Info";
     public string Name { get; set; } = "Collectable";
-    public IOwnable[] possessions { get; set; }
     public float MoneyAmount { get; set; }
-    public event Action OnCollectedAdditionalCallback;
-    // please don't put here meta data related to city object system to avoid circular dependencies
-    public object customData { get; set; }
 }

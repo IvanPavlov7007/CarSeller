@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Decorator stripping policy that ensures at least one product is stripped.
+/// </summary>
 public sealed class EnsureAtLeastOneStrippedPolicy : IStrippingPolicy
 {
     private readonly IStrippingPolicy _inner;

@@ -18,18 +18,18 @@ public class CollectablesManager : Singleton<CollectablesManager>
 
     void onCityTargetReached(CityTargetReachedEventData data)
     {
-        if (data.ReachedObject is CollectableCityObject cityObject)
+        if (data.ReachedObject.Subject is Collectable collectable)
         {
-            collect(cityObject.Data as Collectable, cityObject);
-            cityObject.Destroy();
+            collect(collectable, data.ReachedObject);
+            City.EntityLifetimeService.Destroy(collectable);
         }
     }
 
 
     //TODO make process possessions, actions and custom data as well in the future
-    void collect(Collectable collectable, CityObject cityObject)
+    void collect(Collectable collectable, CityEntity cityEntity)
     {
-        var transactionLocation = new TransactionFeedbackLocation(TransactionLocationType.WorldSpace, cityObject.Location.CityPosition.WorldPosition);
+        var transactionLocation = new TransactionFeedbackLocation(TransactionLocationType.WorldSpace, cityEntity.Position.WorldPosition);
         var rewardTransaction = new Transaction(
             TransactionType.Reward,
             new RewardTransactionData(collectable.MoneyAmount, null)

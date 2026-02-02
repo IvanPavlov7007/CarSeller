@@ -51,7 +51,7 @@ public class MovingPoint : MonoBehaviour, IMovement
         arrowRotationPoint.rotation = Quaternion.Lerp(arrowRotationPoint.rotation, Quaternion.FromToRotation(Vector2.up, inputDirection.normalized), lerpV);
         arrowRotationPoint.localScale = new Vector3(1f, Mathf.Lerp(arrowRotationPoint.localScale.y, Mathf.Clamp01(inputDirection.magnitude), lerpV), 1f);
 
-        var positionData = mutableLocation.CityPosition;
+        var positionData = mutableLocation.Position;
 
         Vector2 currentPosition = positionData.WorldPosition;
 

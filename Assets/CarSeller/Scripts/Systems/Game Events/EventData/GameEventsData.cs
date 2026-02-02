@@ -128,10 +128,10 @@ public class PlayerMoneyChangeEventData : GameEventData
 
 public class CityTargetReachedEventData : GameEventData
 {
-    public readonly CityObject ReachedObject;
+    public readonly CityEntity ReachedObject;
     public readonly TriggerContext TriggerContext;
 
-    public CityTargetReachedEventData(CityObject reachedObject, TriggerContext triggerContext)
+    public CityTargetReachedEventData(CityEntity reachedObject, TriggerContext triggerContext)
     {
         ReachedObject = reachedObject;
         TriggerContext = triggerContext;

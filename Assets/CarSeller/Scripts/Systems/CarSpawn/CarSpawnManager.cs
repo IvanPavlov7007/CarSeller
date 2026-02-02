@@ -150,7 +150,7 @@ public class CarSpawnManager
         foreach (var car in temporaryCars)
         {
             // TODO check that the are no leftovers in some registries
-            G.ProductLifetimeService.DeleteProduct(car);
+            G.ProductLifetimeService.DestroyProduct(car);
         }
         temporaryCars.Clear();
         usedMarkers.Clear();

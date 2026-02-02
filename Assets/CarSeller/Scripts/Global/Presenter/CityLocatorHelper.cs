@@ -11,7 +11,7 @@ public static class CityLocatorHelper
 {
     public static bool IsInCity(ILocatable locatable)
     {
-        return G.City.Locations.ContainsKey(locatable);
+        return G.City.Entities.ContainsKey(locatable);
     }
 
     public static Warehouse GetWarehouse(Car car)
@@ -34,7 +34,7 @@ public static class CityLocatorHelper
         var warehouse = GetWarehouse(car);
         if (warehouse == null)
         {
-            return G.City.Locations[car];
+            return G.City.Entities[car];
         }
         return GetCityLocation(warehouse);
     }
@@ -44,14 +44,14 @@ public static class CityLocatorHelper
 
 
         var city = World.Instance.City;
-        Debug.Assert(city.Locations.ContainsKey(car), "CityInteractionManager: Car position not found in city positions");
-        Vector2 carPosition = city.Locations[car].CityPosition.WorldPosition;
+        Debug.Assert(city.Entities.ContainsKey(car), "CityInteractionManager: Car position not found in city positions");
+        Vector2 carPosition = city.Entities[car].CityPosition.WorldPosition;
         Dictionary<Warehouse, float> warehouseDistances = new Dictionary<Warehouse, float>();
-        foreach (var obj in city.Locations.Keys)
+        foreach (var obj in city.Entities.Keys)
         {
             if (obj is not Warehouse)
                 continue;
-            var warehousePosition = city.Locations[obj].CityPosition.WorldPosition;
+            var warehousePosition = city.Entities[obj].CityPosition.WorldPosition;
             warehouseDistances.Add(obj as Warehouse, Vector2.Distance(warehousePosition, carPosition));
         }
         warehouseDistances = warehouseDistances.OrderBy(kv => kv.Value).ToDictionary(kv => kv.Key, kv => kv.Value);
@@ -62,13 +62,13 @@ public static class CityLocatorHelper
     public static Car GetClosestCar(Warehouse warehouse, out float distance)
     {
         var city = World.Instance.City;
-        Vector2 warehousePosition = city.Locations[warehouse].CityPosition.WorldPosition;
+        Vector2 warehousePosition = city.Entities[warehouse].CityPosition.WorldPosition;
         Dictionary<Car, float> carDistances = new Dictionary<Car, float>();
-        foreach (var obj in city.Locations.Keys)
+        foreach (var obj in city.Entities.Keys)
         {
             if (obj is not Car)
                 continue;
-            var carPosition = city.Locations[obj].CityPosition.WorldPosition;
+            var carPosition = city.Entities[obj].CityPosition.WorldPosition;
             carDistances.Add(obj as Car, Vector2.Distance(carPosition, warehousePosition));
         }
 
@@ -85,6 +85,6 @@ public static class CityLocatorHelper
 
     public static City.CityLocation GetCityLocation(ILocatable locatable)
     {
-        return G.City.Locations[locatable];
+        return G.City.Entities[locatable];
     }
 }

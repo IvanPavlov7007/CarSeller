@@ -50,7 +50,7 @@ public class SellHandler : TransactionHandler
         if (result.Type == TransactionResultType.Success)
         {
             G.PlayerManager.AddPlayerMoney(sellData.Price);
-            G.ProductLifetimeService.DeleteProduct(car);
+            G.ProductLifetimeService.DestroyProduct(car);
         }
         return result;
     }

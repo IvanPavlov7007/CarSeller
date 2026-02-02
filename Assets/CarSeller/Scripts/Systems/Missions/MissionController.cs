@@ -110,7 +110,7 @@ public class MissionController : MissionControllerBase
         locations.Shuffle();
         for (int i = 0; i < requestEvent.count; i++)
         {
-            var collectable = new Collectable { MoneyAmount = requestEvent.reward };
+            var collectable = new CollectableConfig { MoneyAmount = requestEvent.reward };
             var co = new CollectableCityObject(collectable, locations[i].Item1, locations[i].a);
             registerMissionObject(requestEvent.Mission, co);
         }

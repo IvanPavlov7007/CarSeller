@@ -17,7 +17,7 @@ public class IntroScene : SerializedMonoBehaviour
             OnClick = () =>
             {
                 G.GameFlowController.EnterWarehouse((Warehouse)
-                    World.Instance.City.Locations.Keys.First(x => x.GetType() == typeof(Warehouse)));
+                    World.Instance.City.Entities.Keys.First(x => x.GetType() == typeof(Warehouse)));
             },
             Text = "Start game"
         };

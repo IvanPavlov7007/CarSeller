@@ -78,11 +78,15 @@ public sealed class StrippingProcess
     {
         foreach (var part in toDestroy)
         {
-            G.ProductLifetimeService.DeleteProduct(part);
+            G.ProductLifetimeService.DestroyProduct(part);
         }
     }
 }
 
+/// <summary>
+/// Can be used to determine whether a product can be stripped or not.
+/// Decorator policies can be used to modify behavior.
+/// </summary>
 public interface IStrippingPolicy
 {
     bool CanStrip(Product product, IStrippingContext context);

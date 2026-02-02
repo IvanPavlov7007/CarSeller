@@ -26,7 +26,7 @@ public class GlobalCreationService
             );
     }
 
-    public CollectableCityObject CreateCollectableCityObject(Collectable collectable, CityMarkerRef positionRef, PinStyle pinStyle)
+    public CollectableCityObject CreateCollectableCityObject(CollectableConfig collectable, CityMarkerRef positionRef, PinStyle pinStyle)
     {
         return new CollectableCityObject(
             collectable,

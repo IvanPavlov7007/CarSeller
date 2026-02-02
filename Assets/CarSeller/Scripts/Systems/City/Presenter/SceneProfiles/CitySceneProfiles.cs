@@ -19,9 +19,9 @@ public struct CityObjectState
 
 public abstract class CitySceneProfile
 {
-    public abstract bool ShouldShow(object obj, GameState gameState);
+    public abstract bool ShouldShow(CityEntity obj, GameState gameState);
 
-    public virtual CityObjectState GetObjectViewState(object obj, GameState gameState)
+    public virtual CityObjectState GetObjectViewState(CityEntity obj, GameState gameState)
     {
         return CityObjectState.Default;
     }
@@ -33,14 +33,14 @@ public abstract class CitySceneProfile
 
 public sealed class NormalCitySceneProfile : CitySceneProfile
 {
-    public override bool ShouldShow(object obj, GameState gameState)
+    public override bool ShouldShow(CityEntity obj, GameState gameState)
     {
         return true;
     }
 
-    public override CityObjectState GetObjectViewState(object obj, GameState gameState)
+    public override CityObjectState GetObjectViewState(CityEntity obj, GameState gameState)
     {
-        switch (obj)
+        switch (obj.Subject)
         {
             // disable dragging for cars in normal profile
             case Car car:
@@ -53,14 +53,14 @@ public sealed class NormalCitySceneProfile : CitySceneProfile
 
 public sealed class StealingCitySceneProfile : CitySceneProfile
 {
-    public override bool ShouldShow(object obj, GameState gameState)
+    public override bool ShouldShow(CityEntity obj, GameState gameState)
     {
         Debug.Assert(gameState is StealingGameState, "StealingCitySceneProfile: gameState is not StealingGameState");
         var stealingState = gameState as StealingGameState;
 
 
         //TODO add police
-        switch (obj)
+        switch (obj.Subject)
         {
             case Car car:
                 return car == stealingState.StealingCar;
@@ -74,9 +74,9 @@ public sealed class StealingCitySceneProfile : CitySceneProfile
         }
     }
 
-    public override CityObjectState GetObjectViewState(object obj, GameState gameState)
+    public override CityObjectState GetObjectViewState(CityEntity obj, GameState gameState)
     {
-        switch (obj)
+        switch (obj.Subject)
         {
             case Warehouse warehouse:
                 {
@@ -96,11 +96,11 @@ public sealed class StealingCitySceneProfile : CitySceneProfile
 
 public sealed class SellingCitySceneProfile : CitySceneProfile
 {
-    public override bool ShouldShow(object obj, GameState gameState)
+    public override bool ShouldShow(CityEntity obj, GameState gameState)
     {
         Debug.Assert(gameState is SellingGameState, "SellingCitySceneProfile: gameState is not SellingGameState");
         var sellingState = gameState as SellingGameState;
-        switch (obj)
+        switch (obj.Subject)
         {
             case Car car:
                 return car == sellingState.SellingCar;
@@ -119,16 +119,16 @@ public sealed class SellingCitySceneProfile : CitySceneProfile
 
 public sealed class FreeRoamCitySceneProfile : CitySceneProfile
 {
-    public override bool ShouldShow(object obj, GameState gameState)
+    public override bool ShouldShow(CityEntity obj, GameState gameState)
     {
         return true;
     }
 
-    public override CityObjectState GetObjectViewState(object obj, GameState gameState)
+    public override CityObjectState GetObjectViewState(CityEntity obj, GameState gameState)
     {
         var freeRoamState = gameState as FreeRoamGameState;
 
-        if (obj is Car car)
+        if (obj.Subject is Car car)
         {
 
             bool isFocusedCar = car == freeRoamState.FocusedCar;
@@ -142,10 +142,10 @@ public sealed class FreeRoamCitySceneProfile : CitySceneProfile
 
 public sealed class MissionCitySceneProfile : CitySceneProfile
 {
-    public override bool ShouldShow(object obj, GameState gameState)
+    public override bool ShouldShow(CityEntity obj, GameState gameState)
     {
         var missionState = gameState as MissionGameState;
-        switch (obj)
+        switch (obj.Subject)
         {
             case Warehouse:
                     return false;
@@ -155,11 +155,11 @@ public sealed class MissionCitySceneProfile : CitySceneProfile
                 return true;
         }
     }
-    public override CityObjectState GetObjectViewState(object obj, GameState gameState)
+    public override CityObjectState GetObjectViewState(CityEntity obj, GameState gameState)
     {
         var missionState = gameState as MissionGameState;
 
-        if (obj is Car car)
+        if (obj.Subject is Car car)
         {
 
             bool isFocusedCar = car == missionState.FocusedCar;

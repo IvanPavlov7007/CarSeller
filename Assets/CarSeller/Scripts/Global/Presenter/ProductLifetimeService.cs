@@ -49,7 +49,7 @@ public class ProductLifetimeService
         return true;
     }
 
-    public void DeleteProduct(Product product)
+    public void DestroyProduct(Product product)
     {
         var location = GetProductLocation(product);
         Debug.Assert(location != null, $"Trying to delete product {product?.Name} that has no location.");

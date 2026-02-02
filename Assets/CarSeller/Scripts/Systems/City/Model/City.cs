@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Splines;
+using static UnityEditor.FilePathAttribute;
 
 public class City : ILocationsHolder
 {
     public CityConfig Config;
-    public Dictionary<ILocatable, CityLocation> Locations { get; private set; } = new();
-    private readonly List<ILocation> locations = new();
+    internal Dictionary<ILocatable, CityEntity> Entities { get; private set; } = new();
     public INodesNetwork nodesNet { get; private set; } // Legacy grid (optional)
 
     public IReadOnlyList<RoadNode> Nodes => _nodes;
@@ -16,6 +16,9 @@ public class City : ILocationsHolder
 
     private readonly List<RoadNode> _nodes = new();
     private readonly List<RoadEdge> _edges = new();
+
+    private CityEntityLifetimeService lifetimeService;
+    public static CityEntityLifetimeService EntityLifetimeService => G.City.lifetimeService;
 
     // MARKERS RUNTIME
     public sealed class CityMarker
@@ -141,9 +144,14 @@ public class City : ILocationsHolder
         // Markers are finalized after edges' containers are resolved in CityGraphLoader.
         InitializeMarkers(Array.Empty<CityMarker>());
     }
+    public ILocation[] GetLocations() => Entities.Select(x=>x.Value).ToArray();
 
-    public CityLocation GetEmptyLocation(CityPosition position) => new CityLocation(this, position);
-    public ILocation[] GetLocations() => locations.ToArray();
+    public bool TryGetEntity(ILocatable locatable, out CityEntity entity)
+    {
+        return Entities.TryGetValue(locatable, out entity);
+    }
+
+    public IReadOnlyDictionary<ILocatable,CityEntity> GetEntities() => Entities;
 
     internal CityPosition GetClosestPosition(Vector2 worldPosition)
     {
@@ -218,116 +226,189 @@ public class City : ILocationsHolder
         return default;
     }
 
-    public readonly struct CityPosition
+    
+}
+
+/// <summary>
+/// 
+/// 1 to 1 relationship between a locatable entity and its position in the city
+/// Should live as long as having an attached locatable
+/// 
+/// </summary>
+public sealed class CityEntity : ILocation
+{
+    
+    public CityPosition Position { get; set; }
+    public ILocatable Subject;
+
+    City City;
+
+    internal CityEntity(City city, ILocatable subject, CityPosition initialCityPosition)
     {
-        public CityPosition(RoadNode atNode)
-        {
-            Debug.Assert(atNode != null, "CityPosition.At requires a non-null node.");
-            Node = atNode;
-            Edge = null;
-            Percentage = 0f;
-            Forward = true;
-        }
-
-        public CityPosition(RoadEdge edge, float t, bool forward = true)
-        {
-            Debug.Assert(edge != null, "CityPosition.On requires a non-null edge.");
-            var spline = edge?.GetSpline();
-            Debug.Assert(spline != null, "CityPosition.On requires an edge with a valid SplineContainer/Spline.");
-            Debug.Assert(t >= 0f && t <= 1f, "CityPosition.On percentage t must be in [0,1].");
-            if (!forward)
-            {
-                Debug.Assert(edge.Bidirectional, "Reverse traversal requested but edge is not bidirectional.");
-            }
-
-            Node = null;
-            Edge = edge;
-            Percentage = Mathf.Clamp01(t);
-            Forward = forward;
-        }
-
-        public RoadNode Node { get; }
-        public RoadEdge Edge { get; }
-        /// <summary>
-        /// A percentage [0..1] along the edge if Edge is not null.
-        /// From the 'From' node (0) to the 'To' node (1) if Forward is true,
-        /// </summary>
-        public float Percentage { get; }
-        public bool Forward { get; }
-
-        public Vector2 WorldPosition
-        {
-            get
-            {
-                if (Edge == null)
-                {
-                    Debug.Assert(Node != null, "CityPosition must have either Node or Edge.");
-                    return Node.Position;
-                }
-                return SpecificWorldPositionOnEdge(Percentage);
-            }
-        }
-
-        public Vector2 SpecificWorldPositionOnEdge(float t)
-        {
-            Debug.Assert(Edge != null, "SpecificWorldPositionOnEdge can only be used for edge positions.");
-            Debug.Assert(t >= 0f && t <= 1f, "SpecificWorldPositionOnEdge t must be in [0,1].");
-            var spline = Edge.GetSpline();
-            Debug.Assert(spline != null, "SpecificWorldPositionOnEdge: Edge spline is missing.");
-            var localPos = SplineUtility.EvaluatePosition(spline, Forward? t : 1f - t);
-            var worldPos = Edge.Container != null
-                ? Edge.Container.transform.TransformPoint((Vector3)localPos)
-                : (Vector3)localPos;
-            return new Vector2(worldPos.x, worldPos.y);
-        }
-
-        public CityPosition WithPercentage(float t)
-        {
-            Debug.Assert(Edge != null, "WithPercentage can only be used for edge positions.");
-            Debug.Assert(t >= 0f && t <= 1f, "WithPercentage t must be in [0,1].");
-            return new CityPosition(Edge, t, Forward);
-        }
-
-        public static CityPosition At(RoadNode node) => new CityPosition(node);
-        public static CityPosition On(RoadEdge edge, float t, bool forward = true) => new CityPosition(edge, t, forward);
+        City = city;
+        Position = initialCityPosition;
+        Attach(subject);
     }
 
-    public class CityLocation : ILocation
+    internal CityEntity(City city, CityPosition initialCityPosition)
     {
-        public CityPosition CityPosition { get; private set; }
-        public City City { get; private set; }
-        public ILocatable Occupant { get; private set; }
+        City = city;
+        Position = initialCityPosition;
+    }
 
-        public CityLocation(City city, CityPosition initialCityPosition, ILocatable initialOccupant = null)
-        {
-            City = city;
-            CityPosition = initialCityPosition;
-            City.locations.Add(this);
-            if (initialOccupant != null) Attach(initialOccupant);
-        }
+    // ILocation implementation
+    // Don't use from outside except for CityLifetimeService
+    public ILocatable Occupant => Subject;
+    public ILocationsHolder Holder => City;
+    public bool Attach(ILocatable locatable)
+    {
+        Debug.Assert(locatable != null, "Locatable to attach cannot be null");
+        if (Subject != null || locatable == null) return false;
+        
+        Subject = locatable;
+        City.Entities[locatable] = this;
 
-        public void SetCityPosition(CityPosition newPosition)
-        {
-            CityPosition = newPosition;
-        }
-
-        public ILocationsHolder Holder => City;
-
-        public bool Attach(ILocatable locatable)
-        {
-            Debug.Assert(locatable != null, "Locatable to attach cannot be null");
-            if (Occupant != null || locatable == null) return false;
-            Occupant = locatable;
-            City.Locations[locatable] = this;
-            return true;
-        }
-
-        public void Detach()
-        {
-            if (Occupant == null) return;
-            City.Locations.Remove(Occupant);
-            Occupant = null;
-        }
+        return true;
+    }
+    public void Detach()
+    {
+        if (Subject == null) return;
+        City.Entities.Remove(Subject);
+        Subject = null;
     }
 }
 
+public readonly struct CityPosition
+{
+    CityPosition(RoadNode atNode)
+    {
+        Debug.Assert(atNode != null, "CityPosition.At requires a non-null node.");
+        Node = atNode;
+        Edge = null;
+        Percentage = 0f;
+        Forward = true;
+    }
+
+    CityPosition(RoadEdge edge, float t, bool forward = true)
+    {
+        Debug.Assert(edge != null, "CityPosition.On requires a non-null edge.");
+        var spline = edge?.GetSpline();
+        Debug.Assert(spline != null, "CityPosition.On requires an edge with a valid SplineContainer/Spline.");
+        Debug.Assert(t >= 0f && t <= 1f, "CityPosition.On percentage t must be in [0,1].");
+        if (!forward)
+        {
+            Debug.Assert(edge.Bidirectional, "Reverse traversal requested but edge is not bidirectional.");
+        }
+
+        Node = null;
+        Edge = edge;
+        Percentage = Mathf.Clamp01(t);
+        Forward = forward;
+    }
+
+    public RoadNode Node { get; }
+    public RoadEdge Edge { get; }
+    /// <summary>
+    /// A percentage [0..1] along the edge if Edge is not null.
+    /// From the 'From' node (0) to the 'To' node (1) if Forward is true,
+    /// </summary>
+    public float Percentage { get; }
+    public bool Forward { get; }
+
+    public Vector2 WorldPosition
+    {
+        get
+        {
+            if (Edge == null)
+            {
+                Debug.Assert(Node != null, "CityPosition must have either Node or Edge.");
+                return Node.Position;
+            }
+            return SpecificWorldPositionOnEdge(Percentage);
+        }
+    }
+
+    public Vector2 SpecificWorldPositionOnEdge(float t)
+    {
+        Debug.Assert(Edge != null, "SpecificWorldPositionOnEdge can only be used for edge positions.");
+        Debug.Assert(t >= 0f && t <= 1f, "SpecificWorldPositionOnEdge t must be in [0,1].");
+        var spline = Edge.GetSpline();
+        Debug.Assert(spline != null, "SpecificWorldPositionOnEdge: Edge spline is missing.");
+        var localPos = SplineUtility.EvaluatePosition(spline, Forward ? t : 1f - t);
+        var worldPos = Edge.Container != null
+            ? Edge.Container.transform.TransformPoint((Vector3)localPos)
+            : (Vector3)localPos;
+        return new Vector2(worldPos.x, worldPos.y);
+    }
+
+    public CityPosition WithPercentage(float t)
+    {
+        Debug.Assert(Edge != null, "WithPercentage can only be used for edge positions.");
+        Debug.Assert(t >= 0f && t <= 1f, "WithPercentage t must be in [0,1].");
+        return new CityPosition(Edge, t, Forward);
+    }
+
+    public static CityPosition At(RoadNode node) => new CityPosition(node);
+    public static CityPosition On(RoadEdge edge, float t, bool forward = true) => new CityPosition(edge, t, forward);
+}
+
+public class CityEntityLifetimeService
+{
+    public bool TryCreate(ILocatable subject, CityPosition position, out CityEntity entity)
+    {
+        Debug.Assert(subject != null);
+
+        if (G.City.TryGetEntity(subject, out entity))
+        {
+            Debug.LogError($"City-only locatable {subject} is already in city.");
+            return false;
+        }
+
+        entity = new CityEntity(G.City, subject, position);
+        G.City.Entities[subject] = entity;
+        GameEvents.Instance.OnLocatableRegistered?.Invoke(new LocatableCreatedEventData(subject, entity));
+
+        return true;
+    }
+
+    public bool TryMoveToCity(Product product, CityPosition position, out CityEntity entity)
+    {
+        Debug.Assert(product != null);
+
+        if (G.City.TryGetEntity(product, out entity))
+        {
+            Debug.LogError($"City-only locatable {product} is already in city.");
+            entity = G.City.Entities[product];
+            return false;
+        }
+
+        entity = new CityEntity(G.City, position);
+        G.City.Entities[product] = entity;
+        return G.ProductLifetimeService.MoveProduct(product, entity);
+    }
+
+    public void Destroy(ILocatable anyLocatable)
+    {
+        switch (anyLocatable)
+        {
+            case Product p:
+                G.ProductLifetimeService.DestroyProduct(p);
+                if(!removeEntity(p)) 
+                    Debug.LogError($"Failed to remove city entity for locatable {anyLocatable}");
+                break;
+            default:
+                if(!removeEntity(anyLocatable)) 
+                    Debug.LogError($"Failed to remove city entity for locatable {anyLocatable}");
+                GameEvents.Instance.OnLocatableDestroyed?.Invoke(new LocatableDestroyedEventData(anyLocatable));
+                break;
+        }
+    }
+
+    bool removeEntity(ILocatable locatable)
+    {
+        Debug.Assert(locatable != null);
+        if (locatable == null) 
+            return false;
+        return G.City.Entities.Remove(locatable);
+    }
+}

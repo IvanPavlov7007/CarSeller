@@ -65,7 +65,7 @@ public class ProductManager
     private void raiseEvents(Product product, ILocation location)
     {
         GameEvents.Instance.OnProductCreated?.Invoke(new ProductCreatedEventData(product, location));
-        GameEvents.Instance.OnLocatableCreated?.Invoke(new LocatableCreatedEventData(product as ILocatable, location));
+        GameEvents.Instance.OnLocatableRegistered?.Invoke(new LocatableCreatedEventData(product as ILocatable, location));
     }
 
     /// <summary>

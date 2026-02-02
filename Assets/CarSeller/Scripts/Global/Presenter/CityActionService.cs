@@ -14,7 +14,7 @@ public class CityActionService
     {
         var city = World.Instance.City;
         return G.ProductLifetimeService.MoveProduct(car, city.GetEmptyLocation(
-            CityLocatorHelper.GetCityLocation(warehouse).CityPosition
+            CityLocatorHelper.GetCityLocation(warehouse).Position
         ));
     }
 }

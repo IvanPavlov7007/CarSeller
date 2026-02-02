@@ -7,9 +7,7 @@ using UnityEngine;
 /// <summary>
 /// Managers that loads and manages city in the city scene
 /// Set ups and changes states( visuals, interactive) of city views based on the game state
-/// Creates and destroys views for locatables in the city
-/// 
-/// ACHTUNG: Don't use ProductView, since it handles it's own destruction
+/// Creates and destroys views for city entities
 /// </summary>
 public class CitySceneManager : Singleton<CitySceneManager>
 {
@@ -18,7 +16,7 @@ public class CitySceneManager : Singleton<CitySceneManager>
     CitySceneProfileRegistry profileRegistry = new CitySceneProfileRegistry();
     CitySceneProfile currentProfile;
 
-    Dictionary<ILocatable, CityViewObjectController> builtObjectsViews = new Dictionary<ILocatable, CityViewObjectController>();
+    Dictionary<CityEntity, CityViewObjectController> builtObjectsViews = new Dictionary<CityEntity, CityViewObjectController>();
 
     public void SetCurrentProfile(GameState state)
     {
@@ -28,7 +26,7 @@ public class CitySceneManager : Singleton<CitySceneManager>
 
     private void OnEnable()
     {
-        GameEvents.Instance.OnLocatableCreated += onNewLocatableCreated;
+        GameEvents.Instance.OnLocatableRegistered += onNewLocatableCreated;
         GameEvents.Instance.OnLocatableLocationChanged += onLocatableLocationChanged;
         GameEvents.Instance.OnLocatableDestroyed += onLocatableDestroyed;
         GameEvents.Instance.OnOwnershipChanged += onOwnershipChanged;
@@ -38,7 +36,7 @@ public class CitySceneManager : Singleton<CitySceneManager>
 
     private void OnDisable()
     {
-        GameEvents.Instance.OnLocatableCreated -= onNewLocatableCreated;
+        GameEvents.Instance.OnLocatableRegistered -= onNewLocatableCreated;
         GameEvents.Instance.OnLocatableLocationChanged -= onLocatableLocationChanged;
         GameEvents.Instance.OnLocatableDestroyed -= onLocatableDestroyed;
         GameEvents.Instance.OnOwnershipChanged -= onOwnershipChanged;
@@ -62,17 +60,17 @@ public class CitySceneManager : Singleton<CitySceneManager>
         G.cityViewStreetsBuilder.BuildStreets(City);
     }
 
-    private void registerNewView(ILocatable locatable, CityViewObjectController view)
+    private void registerNewView(CityEntity entity, CityViewObjectController view)
     {
-        builtObjectsViews[locatable] = view;
+        builtObjectsViews[entity] = view;
     }
 
-    private void clearView(ILocatable locatable)
+    private void clearView(CityEntity entity)
     {
-        if (builtObjectsViews.TryGetValue(locatable, out var view))
+        if (builtObjectsViews.TryGetValue(entity, out var view))
         {
             Destroy(view.gameObject);
-            builtObjectsViews.Remove(locatable);
+            builtObjectsViews.Remove(entity);
         }
     }
 
@@ -94,12 +92,19 @@ public class CitySceneManager : Singleton<CitySceneManager>
 
         if (data.OldLocation.Holder == City)
         {
-            clearView(data.Locatable);
+            if (G.City.TryGetEntity(data.Locatable, out var entity))
+            {
+                clearView(entity);
+            }
+
         }
 
         if (data.NewLocation.Holder == City)
         {
-            applyProfileToObject(data.Locatable);
+            if (G.City.TryGetEntity(data.Locatable, out var entity))
+            {
+                applyProfileToObject(entity);
+            }
         }
     }
 
@@ -107,13 +112,19 @@ public class CitySceneManager : Singleton<CitySceneManager>
     {
         if (data.Location.Holder == City)
         {
-            applyProfileToObject(data.Locatable);
+            if (G.City.TryGetEntity(data.Locatable, out var entity))
+            {
+                applyProfileToObject(entity);
+            }
         }
     }
 
     private void onLocatableDestroyed(LocatableDestroyedEventData data)
     {
-        clearView(data.Locatable);
+        if (G.City.TryGetEntity(data.Locatable, out var entity))
+        {
+            clearView(entity);
+        }
     }
 
     private void onGameStateChanged(GameStateChangeEventData data)
@@ -130,37 +141,37 @@ public class CitySceneManager : Singleton<CitySceneManager>
         if (data.Item is not ILocatable locatable)
             return;
 
-        if ( CityLocatorHelper.IsInCity(locatable))
+        if ( City.TryGetEntity(locatable, out var entity))
         {
-            applyProfileToObject(locatable);
+            applyProfileToObject(entity);
         }
     }
 
     private void rebuildSceneForState(GameState state)
     {
         // rebuild views based on the current profile
-        foreach (var product in City.Locations.Keys)
+        foreach (var entity in City.GetEntities().Values)
         {
-            applyProfileToObject(product, state);
+            applyProfileToObject(entity, state);
         }
     }
 
-    private void applyProfileToObject(ILocatable locatable, GameState state)
+    private void applyProfileToObject(CityEntity entity, GameState state)
     {
         Debug.Assert(currentProfile != null);
         Debug.Assert(state != null);
-        Debug.Assert(locatable != null);
+        Debug.Assert(entity != null);
 
         // if rebuilding only partial views, check if the view exists
-        if (!currentProfile.ShouldShow(locatable, state))
+        if (!currentProfile.ShouldShow(entity, state))
         {
-            clearView(locatable);
+            clearView(entity);
             return;
         }
 
-        var visualState = currentProfile.GetObjectViewState(locatable, state);
+        var visualState = currentProfile.GetObjectViewState(entity, state);
 
-        if (builtObjectsViews.TryGetValue(locatable, out var existingView))
+        if (builtObjectsViews.TryGetValue(entity, out var existingView))
         {
             // update existing view
             existingView.SetViewState(visualState);
@@ -169,15 +180,15 @@ public class CitySceneManager : Singleton<CitySceneManager>
         else
         {
 
-            CityViewObjectController view = G.cityViewObjectBuilder.BuildObject(locatable);
+            CityViewObjectController view = G.cityViewObjectBuilder.BuildObject(entity);
             view.SetViewState(visualState);
-            registerNewView(locatable, view);
+            registerNewView(entity, view);
         }
     }
 
-    private void applyProfileToObject(ILocatable locatable)
+    private void applyProfileToObject(CityEntity entity)
     {
-        applyProfileToObject(locatable, G.GameState);
+        applyProfileToObject(entity, G.GameState);
     }
 }
 
@@ -193,7 +204,7 @@ public sealed class CitySceneProfileRegistry
             { typeof(StealingGameState), new StealingCitySceneProfile() },
             { typeof(SellingGameState), new SellingCitySceneProfile() },
             { typeof(FreeRoamGameState), new FreeRoamCitySceneProfile() },
-            {typeof(MissionGameState), new MissionCitySceneProfile() }
+            { typeof(MissionGameState), new MissionCitySceneProfile() }
         };
     }
 

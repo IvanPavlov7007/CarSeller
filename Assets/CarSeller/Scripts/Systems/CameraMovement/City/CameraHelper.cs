@@ -16,7 +16,7 @@ public static class CameraHelper
     {
         if(cityLocation != null)
         {
-            return cityLocation.CityPosition.WorldPosition;
+            return cityLocation.Position.WorldPosition;
         }
         Debug.LogError("CityLocation is null in ViewEnsure");
         return Vector2.zero;

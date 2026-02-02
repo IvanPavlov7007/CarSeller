@@ -13,7 +13,7 @@ public class PlayerPossessionTracker : Singleton<PlayerPossessionTracker>
 {
     private void OnEnable()
     {
-        GameEvents.Instance.OnLocatableCreated += onLocatableCreated;
+        GameEvents.Instance.OnLocatableRegistered += onLocatableCreated;
         GameEvents.Instance.OnLocatableDestroyed += onLocatableDestroyed;
         GameEvents.Instance.OnLocatableLocationChanged += onLocatableLocationChanged;
         // Never put GameEvents.Instance.OnLocatableStateChanged
@@ -22,7 +22,7 @@ public class PlayerPossessionTracker : Singleton<PlayerPossessionTracker>
 
     private void OnDisable()
     {
-        GameEvents.Instance.OnLocatableCreated -= onLocatableCreated;
+        GameEvents.Instance.OnLocatableRegistered -= onLocatableCreated;
         GameEvents.Instance.OnLocatableDestroyed -= onLocatableDestroyed;
         GameEvents.Instance.OnLocatableLocationChanged -= onLocatableLocationChanged;
     }
