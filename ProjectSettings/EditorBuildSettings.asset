@@ -6,22 +6,22 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Car Seller/Scenes/Intro.unity
+    path: Assets/CarSeller/Scenes/Intro.unity
     guid: 03cfb165d0cc43e459fb07d460315286
   - enabled: 1
-    path: Assets/Car Seller/Scenes/Car Shop.unity
+    path: Assets/CarSeller/Scenes/Car Shop.unity
     guid: 6021a2cbfd496fd47b99f8a92d028157
   - enabled: 1
-    path: Assets/Car Seller/Scenes/City Scene.unity
+    path: Assets/CarSeller/Scenes/City Scene.unity
     guid: 3355f202a2687b441ba7e32fd7cfdbeb
   - enabled: 1
-    path: Assets/Car Seller/Scenes/Warehouse South.unity
+    path: Assets/CarSeller/Scenes/Warehouse South.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Car Seller/Scenes/Warehouse South Second.unity
+    path: Assets/CarSeller/Scenes/Warehouse South Second.unity
     guid: fac5be789fd0bcf48809833684fdf714
   - enabled: 1
-    path: Assets/Car Seller/Scenes/Warehouse North.unity
+    path: Assets/CarSeller/Scenes/Warehouse North.unity
     guid: 0f6ab2fb07c76fe48b726a2321db4820
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

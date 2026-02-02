@@ -2,7 +2,8 @@
 using UnityEngine;
 
 // A tiny host MonoBehaviour to run coroutines. You cannot AddComponent<MonoBehaviour> directly.
-public class RoutineHost : MonoBehaviour { }
+public class RoutineHost : MonoBehaviour {
+}
 
 /// <summary>
 /// A base class for objects that need to run coroutines.
