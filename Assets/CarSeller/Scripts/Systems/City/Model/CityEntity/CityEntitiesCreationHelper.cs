@@ -1,0 +1,110 @@
+﻿using Pixelplacement;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.WSA;
+using static UnityEngine.Rendering.DebugUI.MessageBox;
+
+//Configuration class for creating city entities
+
+//TODO either creating car or moving car should use this also. Make the causes also a fixed code source
+
+/// <summary>
+/// Design:
+/// There are 2 types that define city entities:
+/// 1) (high level) CityEntitiesCreationHelper - helper tools for city entities that created in the city,
+///     employs CityEntityLifetimeService
+/// 2) (low level) CityEntityLifetimeService - used when moving products into the city
+///     [Maybe there should be a defined service that decides how their entities are created?]
+/// </summary>
+public static class CityEntitiesCreationHelper
+{
+    
+
+    public static CityEntity CreateBuyer(Buyer buyer, CityPosition position)
+    {
+        return CreateTriggerInteractable(buyer, position,
+            new PinStyleAspect(G.cityViewObjectBuilder.BuyerPinStyle));
+    }
+
+    public static CityEntity CreateMissionLauncher(MissionLauncher missionLauncher)
+    {
+        var config = missionLauncher.Config;
+        var marker = config.cityMarkerRef.GetMarker();
+        return CreateTriggerInteractable(missionLauncher, marker.PositionOnGraph.Value,
+            new PinStyleAspect(config.pinStyle),
+            new MarkerReferenceAspect(marker));
+    }
+
+    public static CityEntity CreateWarehouse(Warehouse warehouse, CityPosition position)
+    {
+        return CreateTriggerInteractable(warehouse, position, new PinStyleAspect(G.cityViewObjectBuilder.WarehousePinStyle));
+    }
+
+    public static CityEntity CreatePinnedMarkerReferencedTriggerInteractable(ILocatable locatable, CityPosition position, PinStyle pinStyle, CityMarkerRef markerRef)
+    {
+        return CreateTriggerInteractable(locatable, position,
+            new PinStyleAspect(pinStyle),
+            new MarkerReferenceAspect(markerRef.GetMarker()));
+    }
+
+    public static CityEntity CreateTriggerInteractable(ILocatable locatable, CityPosition position, params CityEntityAspect[] additionalAspects)
+    {
+        var aspects = new List<CityEntityAspect>
+        {
+            new InteractableAspect(5),
+            new TriggerableAspect(),
+        };
+        aspects.AddRange(additionalAspects);
+
+        if (City.EntityLifetimeService.TryCreate(locatable, position, out CityEntity entity, aspects.ToArray()))
+        {
+            return entity;
+        }
+        Debug.LogError("Failed to create police unit entity");
+        return null;
+    }
+
+    public static CityEntity CreatePoliceUnit(PoliceUnit policeUnit, CityPosition position)
+    {
+        if (City.EntityLifetimeService.TryCreate(policeUnit, position, out CityEntity entity,
+            new CityEntityAspect[]{
+                new RigidbodyAspect(),
+                new InteractableAspect(9),
+                new TriggerableAspect(),
+                new PoliceUnitAspect(),
+                }))
+        {
+            return entity;
+        }
+        Debug.LogError("Failed to create police unit entity");
+        return null;
+    }
+
+    public static CityEntity CreateNewCar(CarBaseConfig baseConfig, CarVariantConfig variantConfig, CityPosition position)
+    {
+        // 1) creating via product Manager, hack for now
+        var hidden = World.Instance.HiddenSpace.GetEmptyLocation();
+        var car = G.ProductManager.CreateCar(baseConfig, variantConfig, hidden);
+
+        // 2) moving into city
+        return MoveInExistingCar(car, position);
+    }
+
+    public static CityEntity MoveInExistingCar(Car car, CityPosition position)
+    {
+        if (City.EntityLifetimeService.TryMoveToCity(car, position, out CityEntity entity, carAspects))
+        {
+            return entity;
+        }
+        Debug.LogError("Failed to move in existing car entity");
+        return null;
+    }
+
+    static CityEntityAspect[] carAspects = new CityEntityAspect[]
+    {
+        new RigidbodyAspect(),
+        new DragInteractableAspect(10),
+        new CarAspect(),
+    };
+}

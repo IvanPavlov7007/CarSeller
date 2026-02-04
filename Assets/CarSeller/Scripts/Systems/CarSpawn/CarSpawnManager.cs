@@ -115,8 +115,13 @@ public class CarSpawnManager
         {
             var carSpawnEntry = carSpawnEntries[i];
             var randomMarker = markers[i];
-            var location = G.City.GetEmptyLocation(randomMarker.PositionOnGraph.Value);
-            var car = generateCar(location, carSpawnEntry);
+
+            if(randomMarker.PositionOnGraph == null)
+            {
+                Debug.LogWarning($"Marker {randomMarker.Id} has no position on graph, skipping car spawn.");
+                continue;
+            }
+            var car = generateCar(randomMarker.PositionOnGraph.Value, carSpawnEntry);
 
             temporaryCars.Add(car);
             usedMarkers.Add(car, randomMarker);
@@ -128,21 +133,26 @@ public class CarSpawnManager
         foreach (var marker in markers)
         {
             var carSpawnEntry = carSpawnConfig.GetWeightedRandomCarForRegion(marker.RegionId);
-            var location = G.City.GetEmptyLocation(marker.PositionOnGraph.Value);
-            var car = generateCar(location, carSpawnEntry);
+
+            if (marker.PositionOnGraph == null)
+            {
+                Debug.LogWarning($"Marker {marker.Id} has no position on graph, skipping car spawn.");
+                continue;
+            }
+            var car = generateCar(marker.PositionOnGraph.Value, carSpawnEntry);
 
             temporaryCars.Add(car);
             usedMarkers.Add(car, marker);
         }
     }
 
-    Car generateCar(City.CityLocation location, CarSpawnConfig.CarSpawnEntry carSpawnEntry)
+    Car generateCar(CityPosition position, CarSpawnConfig.CarSpawnEntry carSpawnEntry)
     {
-        Car car = G.ProductManager.CreateCar(
+        var entity = CityEntitiesCreationHelper.CreateNewCar(
             carSpawnEntry.CarBaseConfig,
             carSpawnEntry.CarVariantConfig,
-            location);
-        return car;
+            position);
+        return entity.Subject as Car;
     }
 
     void RemoveTemporaryCars()

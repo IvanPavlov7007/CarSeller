@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 public class PoliceManager : Singleton<PoliceManager>
 {
     PoliceAISystem aiSystem = new PoliceAISystem();
     PoliceAIContext stateMachine;
 
-    List<PoliceCityObject> policeUnits = new List<PoliceCityObject>();
+    List<PoliceUnit> policeUnits = new List<PoliceUnit>();
     public SpotlightColors SpotlightColors;
     public SliceVisionSettings SliceVisionSettings;
 
@@ -18,7 +19,7 @@ public class PoliceManager : Singleton<PoliceManager>
 
     bool active = false;
 
-    City.CityPosition SuspectPosition
+    CityPosition SuspectPosition
     {
         get
         {
@@ -45,15 +46,12 @@ public class PoliceManager : Singleton<PoliceManager>
     {
         active = true;
 
-        var markers = G.City.QueryMarkers("cop");
-        var locations = markers.Select(m => G.City.GetEmptyLocation(m.PositionOnGraph.Value)).ToList();
-
-        foreach (var location in locations)
+        foreach (var marker in G.City.QueryMarkers("cop"))
         {
-            policeUnits.Add(CreateUnit(location));
+            CreatePoliceEntity(marker);
         }
 
-        stateMachine = new PoliceAIContext(policeUnits.Select(item=>item.Data as PoliceUnit).ToArray());
+        stateMachine = new PoliceAIContext(policeUnits.ToArray());
     }
 
 
@@ -66,11 +64,55 @@ public class PoliceManager : Singleton<PoliceManager>
         }
         policeUnits.Clear();
     }
-    private PoliceCityObject CreateUnit(City.CityLocation location)
+
+    private CityEntity CreatePoliceEntity(City.CityMarker marker)
     {
-        var data = new PoliceUnit(location,policeSpeedVariations,
-            SliceVisionSettings,PersonalityTag.Blinky);
-        return new PoliceCityObject("Police unit", "a police", location, null, data);
+        if (!tryGetMarkerPosition(marker, out var position))
+            return null;
+
+        var unit = CreateUnit();
+
+        if (!tryCreatePoliceEntity(marker, unit, position, out var entity))
+            return null;
+
+        registerUnit(unit, entity);
+        return entity;
+    }
+    private bool tryGetMarkerPosition(City.CityMarker marker, out CityPosition position)
+    {
+        var markerPosition = marker.PositionOnGraph;
+        if (markerPosition == null)
+        {
+            Debug.LogWarning($"Police marker {marker.Id} has no position on graph, skipping");
+            position = default;
+            return false;
+        }
+
+        position = markerPosition.Value;
+        return true;
+    }
+    private bool tryCreatePoliceEntity(City.CityMarker marker, PoliceUnit unit, CityPosition position, out CityEntity entity)
+    {
+        entity = CityEntitiesCreationHelper.CreatePoliceUnit(unit, position);
+        if (entity == null)
+        {
+            Debug.LogWarning($"Failed to create police unit entity for marker {marker.Id}, skipping");
+            return false;
+        }
+
+        return true;
+    }
+    private void registerUnit(PoliceUnit unit, CityEntity entity)
+    {
+        unit.Initialize(entity);
+        policeUnits.Add(unit);
+    }
+    private PoliceUnit CreateUnit()
+    {
+        return new PoliceUnit(
+            policeSpeedVariations,
+            SliceVisionSettings,
+            PersonalityTag.Blinky);
     }
 
     private void Update()
@@ -92,7 +134,7 @@ public class PoliceManager : Singleton<PoliceManager>
         // actually each unit updates itself as well
         foreach (var unit in policeUnits)
         {
-            (unit.Data as PoliceUnit).Update(deltaTime, aiSystem, stateMachine);
+            unit.Update(deltaTime, aiSystem, stateMachine);
         }
     }
 
@@ -109,7 +151,7 @@ public class PoliceManager : Singleton<PoliceManager>
 
     void onTriggerReached(CityTargetReachedEventData data)
     {
-        if(data.ReachedObject is PoliceCityObject policeUnit)
+        if(data.ReachedObject.Subject is PoliceUnit policeUnit)
         {
             Debug.Log("PoliceManager: Player busted by police!");
             Debug.Assert(GameEvents.Instance.onPlayerBusted != null);

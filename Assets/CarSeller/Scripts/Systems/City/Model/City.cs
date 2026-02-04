@@ -17,7 +17,7 @@ public class City : ILocationsHolder
     private readonly List<RoadNode> _nodes = new();
     private readonly List<RoadEdge> _edges = new();
 
-    private CityEntityLifetimeService lifetimeService;
+    private CityEntityLifetimeService lifetimeService = new CityEntityLifetimeService();
     public static CityEntityLifetimeService EntityLifetimeService => G.City.lifetimeService;
 
     // MARKERS RUNTIME
@@ -229,54 +229,6 @@ public class City : ILocationsHolder
     
 }
 
-/// <summary>
-/// 
-/// 1 to 1 relationship between a locatable entity and its position in the city
-/// Should live as long as having an attached locatable
-/// 
-/// </summary>
-public sealed class CityEntity : ILocation
-{
-    
-    public CityPosition Position { get; set; }
-    public ILocatable Subject;
-
-    City City;
-
-    internal CityEntity(City city, ILocatable subject, CityPosition initialCityPosition)
-    {
-        City = city;
-        Position = initialCityPosition;
-        Attach(subject);
-    }
-
-    internal CityEntity(City city, CityPosition initialCityPosition)
-    {
-        City = city;
-        Position = initialCityPosition;
-    }
-
-    // ILocation implementation
-    // Don't use from outside except for CityLifetimeService
-    public ILocatable Occupant => Subject;
-    public ILocationsHolder Holder => City;
-    public bool Attach(ILocatable locatable)
-    {
-        Debug.Assert(locatable != null, "Locatable to attach cannot be null");
-        if (Subject != null || locatable == null) return false;
-        
-        Subject = locatable;
-        City.Entities[locatable] = this;
-
-        return true;
-    }
-    public void Detach()
-    {
-        if (Subject == null) return;
-        City.Entities.Remove(Subject);
-        Subject = null;
-    }
-}
 
 public readonly struct CityPosition
 {
@@ -350,65 +302,4 @@ public readonly struct CityPosition
 
     public static CityPosition At(RoadNode node) => new CityPosition(node);
     public static CityPosition On(RoadEdge edge, float t, bool forward = true) => new CityPosition(edge, t, forward);
-}
-
-public class CityEntityLifetimeService
-{
-    public bool TryCreate(ILocatable subject, CityPosition position, out CityEntity entity)
-    {
-        Debug.Assert(subject != null);
-
-        if (G.City.TryGetEntity(subject, out entity))
-        {
-            Debug.LogError($"City-only locatable {subject} is already in city.");
-            return false;
-        }
-
-        entity = new CityEntity(G.City, subject, position);
-        G.City.Entities[subject] = entity;
-        GameEvents.Instance.OnLocatableRegistered?.Invoke(new LocatableCreatedEventData(subject, entity));
-
-        return true;
-    }
-
-    public bool TryMoveToCity(Product product, CityPosition position, out CityEntity entity)
-    {
-        Debug.Assert(product != null);
-
-        if (G.City.TryGetEntity(product, out entity))
-        {
-            Debug.LogError($"City-only locatable {product} is already in city.");
-            entity = G.City.Entities[product];
-            return false;
-        }
-
-        entity = new CityEntity(G.City, position);
-        G.City.Entities[product] = entity;
-        return G.ProductLifetimeService.MoveProduct(product, entity);
-    }
-
-    public void Destroy(ILocatable anyLocatable)
-    {
-        switch (anyLocatable)
-        {
-            case Product p:
-                G.ProductLifetimeService.DestroyProduct(p);
-                if(!removeEntity(p)) 
-                    Debug.LogError($"Failed to remove city entity for locatable {anyLocatable}");
-                break;
-            default:
-                if(!removeEntity(anyLocatable)) 
-                    Debug.LogError($"Failed to remove city entity for locatable {anyLocatable}");
-                GameEvents.Instance.OnLocatableDestroyed?.Invoke(new LocatableDestroyedEventData(anyLocatable));
-                break;
-        }
-    }
-
-    bool removeEntity(ILocatable locatable)
-    {
-        Debug.Assert(locatable != null);
-        if (locatable == null) 
-            return false;
-        return G.City.Entities.Remove(locatable);
-    }
 }

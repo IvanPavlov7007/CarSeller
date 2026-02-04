@@ -12,9 +12,9 @@ public class CityActionService
 
     public bool PutCarOutsideWarehouse(Car car, Warehouse warehouse)
     {
-        var city = World.Instance.City;
-        return G.ProductLifetimeService.MoveProduct(car, city.GetEmptyLocation(
+        return CityEntitiesCreationHelper.MoveInExistingCar(
+            car,
             CityLocatorHelper.GetCityLocation(warehouse).Position
-        ));
+            ) != null;
     }
 }

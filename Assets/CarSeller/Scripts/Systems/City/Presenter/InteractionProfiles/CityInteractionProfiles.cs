@@ -6,7 +6,7 @@ public interface ICityContextMenuProfile
     /// <summary>
     /// Build context menu for a clicked city model in a given game state.
     /// </summary>
-    UIElement GenerateContent(object model, GameState gameState);
+    UIElement GenerateContent(CityEntity model, GameState gameState);
 }
 
 public interface ICityTriggerProfile

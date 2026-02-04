@@ -12,7 +12,7 @@ public class MovingPoint : MonoBehaviour, IMovement
     public float Speed => currentSpeed;
     public float Acceleration { get; private set; }
 
-    City.CityLocation mutableLocation;
+    ICityPositionable cityPositionable;
     IDirectionProvider directionProvider;
     ISpeedProvider speedProvider;
     Transform arrowRotationPoint;
@@ -31,7 +31,7 @@ public class MovingPoint : MonoBehaviour, IMovement
         arrowRotationPoint = transform.GetChild(1);
     }
 
-    public void Initialize(City.CityLocation mutableLocation) { this.mutableLocation = mutableLocation; }
+    public void Initialize(ICityPositionable cityPositionable) { this.cityPositionable = cityPositionable; }
 
 
 
@@ -51,7 +51,7 @@ public class MovingPoint : MonoBehaviour, IMovement
         arrowRotationPoint.rotation = Quaternion.Lerp(arrowRotationPoint.rotation, Quaternion.FromToRotation(Vector2.up, inputDirection.normalized), lerpV);
         arrowRotationPoint.localScale = new Vector3(1f, Mathf.Lerp(arrowRotationPoint.localScale.y, Mathf.Clamp01(inputDirection.magnitude), lerpV), 1f);
 
-        var positionData = mutableLocation.Position;
+        var positionData = cityPositionable.Position;
 
         Vector2 currentPosition = positionData.WorldPosition;
 
@@ -166,15 +166,15 @@ public class MovingPoint : MonoBehaviour, IMovement
         if (edge == null)
         {
             //We have reached the end of the line, stop at node A
-            positionData = City.CityPosition.At(a);
+            positionData = CityPosition.At(a);
         }
         else
         {
             t = (t * length_a_to_b + stepLength) / length_a_to_b;
 
-            positionData = City.CityPosition.On(edge, t, forward);
+            positionData = CityPosition.On(edge, t, forward);
         }
-        mutableLocation.SetCityPosition(positionData);
+        cityPositionable.Position = positionData;
         currentDirection = chosenTangentDirection;
         transform.position = positionData.WorldPosition;
     }

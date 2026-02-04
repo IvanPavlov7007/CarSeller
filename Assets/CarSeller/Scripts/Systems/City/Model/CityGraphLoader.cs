@@ -74,7 +74,7 @@ public static class CityGraphLoader
                     case CityGraphAsset.MarkerAnchorKind.Node:
                         if (!string.IsNullOrEmpty(m.Anchor.NodeId) && nodeById.TryGetValue(m.Anchor.NodeId, out var node))
                         {
-                            cm.PositionOnGraph = City.CityPosition.At(node);
+                            cm.PositionOnGraph = CityPosition.At(node);
                         }
                         else
                         {
@@ -82,7 +82,7 @@ public static class CityGraphLoader
                             var nearestNode = FindNearestNode(city, refWorld);
                             if (nearestNode != null)
                             {
-                                cm.PositionOnGraph = City.CityPosition.At(nearestNode);
+                                cm.PositionOnGraph = CityPosition.At(nearestNode);
                             }
                             else
                             {
@@ -97,14 +97,14 @@ public static class CityGraphLoader
                         {
                             var t = Mathf.Clamp01(m.Anchor.T);
                             bool forward = m.Anchor.Forward || !edgeFromId.Bidirectional ? true : m.Anchor.Forward;
-                            cm.PositionOnGraph = City.CityPosition.On(edgeFromId, t, forward);
+                            cm.PositionOnGraph = CityPosition.On(edgeFromId, t, forward);
                         }
                         else
                         {
                             // Snap to nearest edge using reference world point
                             if (TryFindClosestEdge(city, refWorld, out var bestEdge, out var bestT))
                             {
-                                cm.PositionOnGraph = City.CityPosition.On(bestEdge, bestT, true);
+                                cm.PositionOnGraph = CityPosition.On(bestEdge, bestT, true);
                             }
                             else
                             {

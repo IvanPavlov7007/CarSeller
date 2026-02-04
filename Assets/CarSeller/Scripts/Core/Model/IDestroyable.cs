@@ -11,4 +11,5 @@ public interface IDestroyable : IDestroyTracker
 public interface IDestroyTracker
 {
     event Action<IDestroyable> onBeingDestroyed;
+    void NotifyDestroyed();
 }

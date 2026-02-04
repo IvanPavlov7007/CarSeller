@@ -11,12 +11,16 @@ public interface IProductViewComponentBuilder<TProductView> where TProductView :
 /// It destroys itself when the product is moved to a different location or destroyed.
 /// Handles its own destruction
 /// </summary>
-public class ProductView : MonoBehaviour
+public class ProductView : MonoBehaviour, ModelProvider
 {
     public Product Product { get; private set; }
     public ILocation RepresentedProductLocation { get; private set; }
 
     public bool Initialized { get; private set; } = false;
+
+    public CityEntity CityEntity => null;
+    public ILocatable Locatable => Product;
+    public GameObject ViewGameObject => gameObject;
 
     public virtual void Initialize(Product product, ILocation representedProductLocation)
     {

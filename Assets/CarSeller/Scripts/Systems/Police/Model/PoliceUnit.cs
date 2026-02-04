@@ -3,10 +3,10 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class PoliceUnit : PoliceUnitAIData
+public class PoliceUnit : CityDestroyable, IPoliceUnitAIData, ILocatable
 {
-    public readonly City.CityLocation Location;
-    public CityPosition CityPosition => Location.Position;
+    public ICityPositionable CityPositionable;
+    public CityPosition CityPosition => CityPositionable.Position;
     public Vector2? TargetPosition { get; set; }
     public IAIMovement Movement => GraphMovement;
     public IVision Vision => ConeVision;
@@ -15,15 +15,25 @@ public class PoliceUnit : PoliceUnitAIData
     public SliceVision ConeVision { get; private set; }
     public GraphMovement GraphMovement { get; private set; }
 
-    public PoliceUnit(City.CityLocation location,
-        SpeedVarations speedVariations, SliceVisionSettings settings, 
+    public PoliceUnit(SpeedVarations speedVariations, SliceVisionSettings settings, 
         PersonalityTag personality)
     {
-        Location = location;
         GraphMovement = new GraphMovement(this,speedVariations);
         ConeVision = new SliceVision(this, settings);
         Personality = personality;
         randomizeInitialDirection();
+    }
+
+    /// <summary>
+    /// Currently must be called right after construction.
+    /// 
+    /// TODO refactor to avoid this requirement.
+    /// Probably Merge with CityEntity by making this a component of CityEntity.
+    /// </summary>
+    /// <param name="cityEntity"></param>
+    public void Initialize(CityEntity cityEntity)
+    {
+        CityPositionable = cityEntity;
     }
 
     private void randomizeInitialDirection()
@@ -36,7 +46,7 @@ public class PoliceUnit : PoliceUnitAIData
             forward = !forward;
             t = 1f - t;
         }
-        Location.SetCityPosition(CityPosition.On(positionData.Edge,t, forward));
+        CityPositionable.Position = CityPosition.On(positionData.Edge,t, forward);
     }
 
     internal void Update(float deltaTime, PoliceAISystem aiSystem, PoliceAIContext stateMachine)
@@ -110,10 +120,8 @@ public class PoliceUnit : PoliceUnitAIData
 
             positionData = CityPosition.On(edge, t, forward);
         }
-        Location.SetCityPosition(positionData);
+        CityPositionable.Position = positionData;
     }
-
-
 }
 
 public class GraphMovement : IAIMovement, ISpeedProvider
@@ -211,7 +219,7 @@ public class SliceVision : IVision
         this.settings = settings;
     }
 
-    public bool CanSeeTarget(City.CityPosition target)
+    public bool CanSeeTarget(CityPosition target)
     {
         var ownerPos = Owner.CityPosition.WorldPosition;
         var ownerUp = Owner.GraphMovement.Up;

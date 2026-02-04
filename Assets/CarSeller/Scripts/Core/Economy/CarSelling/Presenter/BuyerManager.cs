@@ -12,8 +12,15 @@ public static class BuyerManager
 
         var randomBuyerMarker = G.City.GetRandomMarker("buyer", predicate: marker => marker.PositionOnGraph != null);
 
-        var location = G.City.GetEmptyLocation(randomBuyerMarker.PositionOnGraph.Value);
-        Buyer buyer = new Buyer(car.Name + "_buyer", createInfoText(offer), location, randomBuyerMarker);
+        if(randomBuyerMarker == null)
+        {
+            Debug.LogError("No valid buyer marker found in the city.");
+            return null;
+        }
+
+        var pos = randomBuyerMarker.PositionOnGraph.Value;
+        Buyer buyer = new Buyer(car.Name + "_buyer", createInfoText(offer));
+        CityEntitiesCreationHelper.CreateBuyer(buyer, pos);
         return buyer;
     }
 
@@ -23,9 +30,13 @@ public static class BuyerManager
     }
 }
 
-public class Buyer : CityObject
+public class Buyer : CityDestroyable, ILocatable
 {
-    public Buyer(string name, string infoText, ILocation location, City.CityMarker marker) : base(name, infoText, location, marker)
+    public readonly string Name;
+    public readonly string InfoText;
+    public Buyer(string name, string infoText)
     {
+        this.Name = name;
+        this.InfoText = infoText;
     }
 }

@@ -1,7 +1,9 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Linq;
-using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 [Serializable, InlineProperty]
 public class CityMarkerRef
@@ -84,6 +86,29 @@ public class CityMarkerRef
         return list;
     }
 #endif
+
+    public City.CityMarker GetMarker()
+    {
+        Debug.Assert(IsValid, "CityMarkerRef is not valid.");
+        if (G.City.TryGetMarker(MarkerId, out var marker))
+        {
+            return marker;
+        }
+        Debug.LogError($"CityMarkerRef: Marker with ID '{MarkerId}' not found in graph.");
+        return default;
+    }
+
+    public CityPosition GetCityPosition()
+    {
+        Debug.Assert(IsValid, "CityMarkerRef is not valid.");
+        var pos = GetMarker().PositionOnGraph;
+        if(pos == null)
+        {
+            Debug.LogError($"CityMarkerRef: Marker with ID '{MarkerId}' does not have a valid position on graph.");
+            return default;
+        }
+        return pos.Value;
+    }
 }
 public static class CityMarkerRefDefaults
 {

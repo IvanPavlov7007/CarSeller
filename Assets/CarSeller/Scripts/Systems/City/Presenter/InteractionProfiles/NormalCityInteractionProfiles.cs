@@ -4,7 +4,7 @@ using UnityEngine;
 
 public sealed class NormalCityContextMenuProfile : ICityContextMenuProfile
 {
-    public UIElement GenerateContent(object model, GameState gameState)
+    public UIElement GenerateContent(CityEntity model, GameState gameState)
     {
         var neutralState = gameState as NeutralGameState;
         if (neutralState == null)
@@ -13,31 +13,16 @@ public sealed class NormalCityContextMenuProfile : ICityContextMenuProfile
             return null;
         }
 
-        switch (model)
+        switch (model.Subject)
         {
             case Car car:
                 return generateNormalCarContent(neutralState, car);
             case Warehouse warehouse:
                 return generateNormalWarehouseContent(neutralState, warehouse);
-            case CityObject cityObject:
-                return generateGenericCityObjectContent(cityObject);
             default:
                 Debug.LogError($"NormalCityContextMenuProfile: Unsupported model type {model.GetType()}");
                 return null;
         }
-    }
-
-    private UIElement generateGenericCityObjectContent(CityObject cityObject)
-    {
-        return new UIElement
-        {
-            Type = UIElementType.Container,
-            Children = new List<UIElement>
-            {
-                CTX_Menu_Tools.Header(cityObject.Name),
-                CTX_Menu_Tools.Description(cityObject.InfoText),
-            }
-        };
     }
 
     private UIElement generateNormalCarContent(NeutralGameState neutralGameState, Car car)

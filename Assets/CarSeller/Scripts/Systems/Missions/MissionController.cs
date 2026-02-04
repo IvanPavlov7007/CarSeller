@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sirenix.Windows.Beta;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -89,41 +90,45 @@ public class MissionController : MissionControllerBase
     protected override void onSpawnTargetMissionRequestEvent(
     SpawnTargetMissionRequestEvent request)
     {
-        
-        var obj = G.GlobalCreationService
-            .CreateCityObject(request.TargetMarker, G.WorldMissionsConfig.finishPinStyle); // TODO FIX this backwards reference!!!!
-
-        registerMissionObject(request.Mission, obj);
+        var target = new CityDestroyable();
+        if(CityEntitiesCreationHelper.CreatePinnedMarkerReferencedTriggerInteractable(
+            target,
+            request.TargetMarker.GetCityPosition(),
+            G.WorldMissionsConfig.finishPinStyle,
+            request.TargetMarker) != null)
+            registerMissionObject(request.Mission, target);
     }
 
     protected override void onSpawnMissionLauncherRequestEvent(SpawnMissionLauncherRequestEvent requestEvent)
     {
-        var missionLauncher = G.GlobalCreationService.CreateMissionLauncher(
-                requestEvent.LauncherConfig,
-                requestEvent.Mission);
-        registerMissionObject(requestEvent.Mission, missionLauncher);
+        var missionLauncher = new MissionLauncher(requestEvent.Mission, requestEvent.LauncherConfig);
+        if(CityEntitiesCreationHelper.CreateMissionLauncher(missionLauncher) != null)
+            registerMissionObject(requestEvent.Mission, missionLauncher);
     }
     protected override void onSpawnMoneyCollectablesRequestEvent(SpawnMoneyCollectablesRequestEvent requestEvent)
     {
         var markers = G.City.QueryMarkers("cash");
-        var locations = markers.Select(a => (G.City.GetEmptyLocation(a.PositionOnGraph.Value),a)).ToArray();
-        locations.Shuffle();
+        var positions = markers.Select(a => a.PositionOnGraph.Value).ToArray();
+        positions.Shuffle();
         for (int i = 0; i < requestEvent.count; i++)
         {
-            var collectable = new CollectableConfig { MoneyAmount = requestEvent.reward };
-            var co = new CollectableCityObject(collectable, locations[i].Item1, locations[i].a);
-            registerMissionObject(requestEvent.Mission, co);
+            var collectable = new Collectable(new CollectableConfig { MoneyAmount = requestEvent.reward });
+            if(CityEntitiesCreationHelper.CreateTriggerInteractable(
+                collectable,
+                positions[i % positions.Length]) 
+                != null)
+            registerMissionObject(requestEvent.Mission, collectable);
         }
     }
     protected override void onPoliceRequestEvent(PoliceRequestEvent requestEvent)
     {
-        var policeWrapper = new PoliceMissionWrapper();
-        registerMissionObject(requestEvent.Mission, policeWrapper);
+        var policeDuringMission = new PoliceMissionLifetimeWrapper();
+        registerMissionObject(requestEvent.Mission, policeDuringMission);
     }
-    class PoliceMissionWrapper : IDestroyable
+    class PoliceMissionLifetimeWrapper : IDestroyable
     {
         public event Action<IDestroyable> onBeingDestroyed;
-        public PoliceMissionWrapper()
+        public PoliceMissionLifetimeWrapper()
         {
             PoliceManager.Instance.CreatePolice();
         }
@@ -132,12 +137,17 @@ public class MissionController : MissionControllerBase
             PoliceManager.Instance.ClearPolice();
             onBeingDestroyed?.Invoke(this);
         }
+
+        public void NotifyDestroyed()
+        {
+            Debug.LogWarning("PoliceMissionWrapper: NotifyDestroyed called directly, which should not happen.");
+        }
     }
 
     // External Event Handlers
     void tryCheckIfMissionLauncherAndShowPopUp(CityTargetReachedEventData evt)
     {
-        if (evt.ReachedObject is MissionLauncher missionLauncher)
+        if (evt.ReachedObject.Subject is MissionLauncher missionLauncher)
         {
             ContextMenuManager.Instance.CreateContextMenu(evt.TriggerContext.TriggerView, CTX_Menu_Tools.MissionLauncherTrigger(missionLauncher));
         }
@@ -197,13 +207,28 @@ public class MissionController : MissionControllerBase
     #endregion
 }
 
-public class MissionLauncher : CityObject
+//potential problem: if mission target's CityEntity is destroyed outside of mission cleanup,
+//mission controller won't be notified
+public class MissionLauncher : CityDestroyable
 {
     public readonly MissionLauncherConfig Config;
     public readonly MissionRuntime MissionRuntime;
-    public MissionLauncher( string name, string infoText, ILocation location, City.CityMarker marker, PinStyle pinStyle, MissionRuntime missionRuntime, MissionLauncherConfig launcherConfig) : base(name, infoText, location, marker, pinStyle: pinStyle)
+    public MissionLauncher( MissionRuntime missionRuntime, MissionLauncherConfig launcherConfig)
     {
         this.MissionRuntime = missionRuntime;
         this.Config = launcherConfig;
+    }
+}
+
+public class CityDestroyable : IDestroyable, ILocatable
+{
+    public event Action<IDestroyable> onBeingDestroyed;
+    public void Destroy()
+    {
+        City.EntityLifetimeService.Destroy(this);
+    }
+    public void NotifyDestroyed()
+    {
+        onBeingDestroyed?.Invoke(this);
     }
 }

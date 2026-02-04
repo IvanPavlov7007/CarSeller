@@ -113,9 +113,9 @@ public class WarehouseInteractionManager : IInteractionManager
         }
     }
 
-    public void OnTriggerEntered(ContentProvider trigger, ContentProvider triggerCause)
+    public void OnTriggerEntered(ModelProvider trigger, ModelProvider triggerCause)
     {
-        Debug.LogWarning($"WarehouseInteractionManager: OnTriggerEntered is not implemented, objects {trigger?.Model} and {triggerCause?.Model}");
+        Debug.LogWarning($"WarehouseInteractionManager: OnTriggerEntered is not implemented, objects {trigger?.CityEntity} and {triggerCause?.CityEntity}");
     }
 
     // NOTE: the old inner WarehouseContextMenuContentProfile is now moved

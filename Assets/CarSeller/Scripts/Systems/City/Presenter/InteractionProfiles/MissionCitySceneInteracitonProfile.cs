@@ -3,7 +3,7 @@ using static GameManager;
 
 public sealed class MissionCityContextMenuProfile : ICityContextMenuProfile
 {
-    public UIElement GenerateContent(object model, GameState gameState)
+    public UIElement GenerateContent(CityEntity model, GameState gameState)
     {
         var missionGameState = gameState as MissionGameState;
         if (missionGameState == null)
@@ -12,21 +12,7 @@ public sealed class MissionCityContextMenuProfile : ICityContextMenuProfile
             return null;
         }
 
-        // For now, re-use generic CityObject representation or show nothing.
-        if (model is CityObject cityObject)
-        {
-            return new UIElement
-            {
-                Type = UIElementType.Container,
-                Children = new System.Collections.Generic.List<UIElement>
-                {
-                    CTX_Menu_Tools.Header(cityObject.Name),
-                    CTX_Menu_Tools.Description(cityObject.InfoText),
-                }
-            };
-        }
-
-        Debug.LogWarning($"{this}: No context menu defined for model type {model.GetType()}");
+        Debug.LogWarning($"{this}: No context menu defined for model type {model.Subject.GetType()}");
         return null;
     }
 }
@@ -45,14 +31,14 @@ public sealed class MissionCityTriggerProfile : ICityTriggerProfile
             return new TriggerAction(false, null);
         Car car = ctx.TriggerCause as Car;
 
-        if (ctx.Trigger is CityObject cityObject)
+        if (ctx.Trigger is CityEntity cityEntity)
         {
             return new TriggerAction
             (
                 true,
                 () =>
                 {
-                    GameEvents.Instance.OnTargetReached?.Invoke(new CityTargetReachedEventData(cityObject, ctx));
+                    GameEvents.Instance.OnTargetReached?.Invoke(new CityTargetReachedEventData(cityEntity, ctx));
                 }
             );
         }

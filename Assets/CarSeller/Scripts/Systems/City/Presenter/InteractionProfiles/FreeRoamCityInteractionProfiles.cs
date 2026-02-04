@@ -4,7 +4,7 @@ using UnityEngine;
 
 public sealed class FreeRoamCityContextMenuProfile : ICityContextMenuProfile
 {
-    public UIElement GenerateContent(object model, GameState gameState)
+    public UIElement GenerateContent(CityEntity model, GameState gameState)
     {
         var freeRoam = gameState as FreeRoamGameState;
         if (freeRoam == null)
@@ -14,25 +14,12 @@ public sealed class FreeRoamCityContextMenuProfile : ICityContextMenuProfile
         }
 
         // For now, re-use generic CityObject representation or show nothing.
-        if(model is MissionLauncher launcher)
+        if(model.Subject is MissionLauncher launcher)
         {
             return CTX_Menu_Tools.MissionLauncherHint(launcher);
         }
 
-        if (model is CityObject cityObject)
-        {
-            return new UIElement
-            {
-                Type = UIElementType.Container,
-                Children = new System.Collections.Generic.List<UIElement>
-                {
-                    CTX_Menu_Tools.Header(cityObject.Name),
-                    CTX_Menu_Tools.Description(cityObject.InfoText),
-                }
-            };
-        }
-
-        if (model is Car car)
+        if (model.Subject is Car car)
         {
             List<UIElement> elements = CTX_Menu_Tools.CarBaseInfoElements(car);
 
@@ -59,7 +46,7 @@ public sealed class FreeRoamCityContextMenuProfile : ICityContextMenuProfile
             };
         }
 
-        if (model is Warehouse warehouse)
+        if (model.Subject is Warehouse warehouse)
         {
             var warehouseOffer = G.Economy.WarehouseOfferProvider.GetOfferForWarehouse(warehouse);
 
@@ -85,7 +72,7 @@ public sealed class FreeRoamCityContextMenuProfile : ICityContextMenuProfile
             };
         }
 
-        Debug.LogWarning($"FreeRoamCityContextMenuProfile: No context menu defined for model type {model.GetType()}");
+        Debug.LogWarning($"FreeRoamCityContextMenuProfile: No context menu defined for model type {model.Subject.GetType()}");
         return null;
     }
 }
@@ -117,14 +104,14 @@ public sealed class FreeRoamCityTriggerProfile : ICityTriggerProfile
                 //}
             );
         }
-        if(ctx.Trigger is CityObject cityObject)
+        if(ctx.Trigger is CityEntity cityEntity)
         {
             return new TriggerAction
             (
                 true,
                 () =>
                 {
-                    GameEvents.Instance.OnTargetReached?.Invoke(new CityTargetReachedEventData(cityObject,ctx));
+                    GameEvents.Instance.OnTargetReached?.Invoke(new CityTargetReachedEventData(cityEntity,ctx));
                 }
             );
         }

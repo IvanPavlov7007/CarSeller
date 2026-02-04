@@ -3,7 +3,7 @@ using UnityEngine;
 
 public sealed class SellingCityContextMenuProfile : ICityContextMenuProfile
 {
-    public UIElement GenerateContent(object model, GameState gameState)
+    public UIElement GenerateContent(CityEntity model, GameState gameState)
     {
         var sellingState = gameState as SellingGameState;
         if (sellingState == null)
@@ -12,33 +12,17 @@ public sealed class SellingCityContextMenuProfile : ICityContextMenuProfile
             return null;
         }
 
-        switch (model)
+        switch (model.Subject)
         {
             case Car car:
                 return generateSellingCarContent(sellingState, car);
             case Warehouse warehouse:
                 return generateSellingWarehouseContent(sellingState, warehouse);
-            case CityObject cityObject:
-                return generateGenericCityObjectContent(cityObject);
             default:
-                Debug.LogError($"SellingCityContextMenuProfile: Unsupported model type {model.GetType()}");
+                Debug.LogError($"SellingCityContextMenuProfile: Unsupported model type {model.Subject.GetType()}");
                 return null;
         }
     }
-
-    private UIElement generateGenericCityObjectContent(CityObject cityObject)
-    {
-        return new UIElement
-        {
-            Type = UIElementType.Container,
-            Children = new List<UIElement>
-            {
-                CTX_Menu_Tools.Header(cityObject.Name),
-                CTX_Menu_Tools.Description(cityObject.InfoText),
-            }
-        };
-    }
-
     private UIElement generateSellingWarehouseContent(SellingGameState sellingState, Warehouse warehouse)
     {
         var elementsList = CTX_Menu_Tools.WarehouseBaseInfoElements(warehouse);

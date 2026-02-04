@@ -32,8 +32,6 @@ public static class G
 
     //REPRESENTATION
 
-    public static GlobalCreationService GlobalCreationService = new GlobalCreationService();
-
     public static ProductManager ProductManager = new ProductManager();
 
     public static ProductLifetimeService ProductLifetimeService = new ProductLifetimeService();

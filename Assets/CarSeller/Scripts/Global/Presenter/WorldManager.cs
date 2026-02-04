@@ -12,7 +12,7 @@ public class WorldManager
     {
         Warehouse warehouse = new Warehouse(warehouseConfig);
 
-        City.CityPosition pos;
+        CityPosition pos;
 
         if (warehouseConfig.Marker != null && warehouseConfig.Marker.IsValid)
         {
@@ -36,8 +36,8 @@ public class WorldManager
             pos = city.GetClosestPosition(warehouseConfig.warehouseClosestInitialPosition);
         }
 
-        city.GetEmptyLocation(pos).Attach(warehouse);
         initializeWarehouse(warehouse, warehouseConfig);
+        CityEntitiesCreationHelper.CreateWarehouse(warehouse, pos);
     }
 
     private void initializeWarehouse(Warehouse warehouse, WarehouseConfig warehouseConfig)
@@ -98,13 +98,15 @@ public class WorldManager
     {
         foreach (var productToSpawn in cityConfig.initialProductsToSpawn)
         {
-            City.CityPosition randomOutsidePosition = city.GetRandomPosition();
-            ILocation outsideLocation = city.GetEmptyLocation(randomOutsidePosition);
+            CityPosition randomOutsidePosition = city.GetRandomPosition();
             switch (productToSpawn.productBaseConfig)
             {
                 case CarBaseConfig carBaseConfig:
                     CarVariantConfig carVariantConfig = productToSpawn.productVariantConfig as CarVariantConfig;
-                    G.ProductManager.CreateCar(carBaseConfig, carVariantConfig, outsideLocation);
+                    CityEntitiesCreationHelper.CreateNewCar(
+                        carBaseConfig,
+                        carVariantConfig,
+                        randomOutsidePosition);
                     break;
                 default:
                     Debug.LogError($"Only cars can be spawned outside the warehouse. Tried to spawn {productToSpawn.productBaseConfig}.");

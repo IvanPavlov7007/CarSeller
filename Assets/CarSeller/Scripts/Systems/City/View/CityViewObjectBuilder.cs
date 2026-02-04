@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using UnityEngine;
+using static UnityEngine.Rendering.GPUSort;
 
 [CreateAssetMenu(fileName = "CityViewObjectBuilder", menuName = "Configs/View/CityViewObjectBuilder")]
 public class CityViewObjectBuilder : ScriptableObject
@@ -29,16 +30,16 @@ public class CityViewObjectBuilder : ScriptableObject
         switch (entity.Subject)
         {
             case Car car:
-                return buildCar(car, entity.Position);
+                return buildCar(car, entity, entity.Position);
 
-            case CollectableConfig collectable:
-                return buildCollectable(collectable, entity.Position);
+            case Collectable collectable:
+                return buildCollectable(collectable, entity, entity.Position);
 
             case PoliceUnit policeUnit:
-                return buildPoliceUnit(policeUnit, entity.Position);
+                return buildPoliceUnit(policeUnit, entity, entity.Position);
 
             case ILocatable locatable:
-                return buildCityObject(locatable, entity.Position);
+                return buildGeneric(entity, entity.Position);
 
             default:
                 Debug.LogError($"No builder for city object of type {entity.Subject.GetType().Name}");
@@ -46,106 +47,105 @@ public class CityViewObjectBuilder : ScriptableObject
         }
     }
 
-    public CityViewObjectController buildCollectable(CollectableConfig collectable, CityPosition position)
+    CityViewObjectController initializeViewController(GameObject go, CityEntity cityEntity)
     {
-        var location = CityLocatorHelper.GetCityLocation(collectable);
-        var pos = location.Position.WorldPosition;
-
-        GameObject collectableGO = Instantiate(triggerPrefab, pos, Quaternion.identity);
         var viewController =
-            collectableGO.AddComponent<CityViewObjectController>().Initialize(collectable);
-        collectableGO.AddComponent<ContentProvider>().Initialize(collectable);
-        collectableGO.AddComponent<Interactable>();
-        collectableGO.AddComponent<Triggerable>();
-
-        Instantiate(collectablePrefab, pos, Quaternion.identity, collectableGO.transform);
+            go.AddComponent<CityViewObjectController>().Initialize(cityEntity);
         return viewController;
-
     }
 
-    public CityViewObjectController buildCar(Car car, CityPosition position)
+    public CityViewObjectController buildCollectable(Collectable collectable, CityEntity entity, CityPosition position)
     {
-        GameObject carGO = Instantiate(carViewPrefab);
+        var worldPos = position.WorldPosition;
+
+        GameObject collectableGO = Instantiate(triggerPrefab, worldPos, Quaternion.identity);
+        Instantiate(collectablePrefab, worldPos, Quaternion.identity, collectableGO.transform);
         
-        var location = G.ProductLifetimeService.GetProductLocation(car) as City.CityLocation;
+        var viewController = initializeViewController(collectableGO, entity);
+        initializeAspects(collectableGO, viewController, entity);
+        return viewController;
+    }
 
-        var viewController = 
-            carGO.AddComponent<CityViewObjectController>().Initialize(car);
-        var rigidbody2D = carGO.AddComponent<Rigidbody2D>();
-        rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
-        carGO.AddComponent<ContentProvider>().Initialize(car);
-        carGO.AddComponent<DragInteractable>().sortingOrder = 10;
-        carGO.AddComponent<DragDisabler>();
-        carGO.AddComponent<SpeedProviderFromCar>().Initialize(car);
-        carGO.AddComponent<MovingPoint>().Initialize(location);
-        var sr = carGO.GetComponentInChildren<SpriteRenderer>();
-        sr.sprite = car.CarFrame.runtimeConfig.Icon;
-        sr.color = car.CarFrame.runtimeConfig.FrameColor;
-        carGO.AddComponent<SelectableVisuals>();
+    public CityViewObjectController buildCar(Car car, CityEntity entity, CityPosition position)
+    {
+        GameObject carGO = Instantiate(carViewPrefab, position.WorldPosition,Quaternion.identity);
 
+        var viewController = initializeViewController(carGO, entity);
+        initializeAspects(carGO, viewController, entity);
         // This one must be after SelectableVisuals to catch selection changes
         carGO.AddComponent<ViewVisualStateChanger>();
         return viewController;
     }
 
-
-    //TODO make warehouse a city object and generalize this method
-    public CityViewObjectController buildCityObject(ILocatable locatable, CityPosition position)
+    public CityViewObjectController buildGeneric(CityEntity entity, CityPosition position)
     {
-        var location = CityLocatorHelper.GetCityLocation(locatable);
-        GameObject warehouseViewGO = Instantiate(triggerPrefab, location.Position.WorldPosition,Quaternion.identity);
-        var viewController =
-            warehouseViewGO.AddComponent<CityViewObjectController>().Initialize(locatable);
-        warehouseViewGO.AddComponent<Interactable>();
-        warehouseViewGO.AddComponent<ContentProvider>().Initialize(locatable);
-        warehouseViewGO.AddComponent<Triggerable>();
-
-        PinStyle pinStyle = null;
-
-        if (locatable is CityObject cityObject)
-        {
-            pinStyle = cityObject.PinStyle;
-            if(cityObject is Buyer)
-            {
-                pinStyle = BuyerPinStyle;
-            }
-        }
-        else if (locatable is Warehouse)
-        {
-            pinStyle = WarehousePinStyle;
-        }
-
-
-        if (pinStyle != null)
-            CityUIBuilder.SetUpCityPin(viewController, pinUIPrefab, pinStyle);
-        else
-            Debug.LogWarning($"Couldn't resolve PinStyle for {locatable}.");
-
+        GameObject triggerGO = Instantiate(triggerPrefab, position.WorldPosition,Quaternion.identity);
+        var viewController = initializeViewController(triggerGO, entity);
+        initializeAspects(triggerGO, viewController, entity);
         return viewController;
     }
 
-    public CityViewObjectController buildPoliceUnit(PoliceCityObject policeCityObject, CityPosition position)
+    public CityViewObjectController buildPoliceUnit(PoliceUnit policeUnit, CityEntity entity, CityPosition position)
     {
-        var data = policeCityObject.Data as PoliceUnit;
-        //TODO fix the system: data and policeCityObject should be one object
+        GameObject policeGO = Instantiate(policeUnitPrefab, position.WorldPosition,Quaternion.identity);
 
-        GameObject policeGO = Instantiate(policeUnitPrefab);
-
-        var location = CityLocatorHelper.GetCityLocation(policeCityObject);
-
-        var viewController =
-            policeGO.AddComponent<CityViewObjectController>().Initialize(policeCityObject);
-        var rigidbody2D = policeGO.AddComponent<Rigidbody2D>();
-        rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
-        policeGO.AddComponent<ContentProvider>().Initialize(policeCityObject);
-        policeGO.AddComponent<Interactable>().sortingOrder = 9;
-        policeGO.AddComponent<MovingPointSimpleView>().Initialize(data.GraphMovement);
-        var policeViewController = policeGO.AddComponent<PoliceStateViewController>();
-        policeViewController.Initialize(data);
-        policeGO.AddComponent<PoliceSpotlightVisionVisuals>().Intialize(data, policeViewController);
-        policeGO.AddComponent<PoliceLightsViewController>().Initialize(policeViewController, policeGO.GetComponentInChildren<PoliceLightsVisuals>());
+        var viewController = initializeViewController(policeGO, entity);
+        initializeAspects(policeGO, viewController, entity);
         policeGO.AddComponent<ViewVisualStateChanger>();
-        policeGO.AddComponent<Triggerable>();
         return viewController;
+    }
+
+    void initializeAspects(GameObject go, CityViewObjectController viewController, CityEntity entity)
+    {
+        foreach (var aspect in entity.Aspects)
+        {
+            initializeAspect(go, viewController, entity, aspect);
+        }
+    }
+
+    void initializeAspect(GameObject go, CityViewObjectController viewController, CityEntity entity, CityEntityAspect aspect)
+    {
+        switch (aspect)
+        {
+            case PinStyleAspect pinStyleAspect:
+                CityUIBuilder.SetUpCityPin(
+                    viewController,
+                    pinUIPrefab,
+                    pinStyleAspect.Style);
+                break;
+            case TriggerableAspect triggerableAspect:
+                go.AddComponent<Triggerable>();
+                break;
+            case DragInteractableAspect dragInteractableAspect:
+                var dragInteractable = go.AddComponent<DragInteractable>();
+                dragInteractable.sortingOrder = dragInteractableAspect.SortingOrder;
+                go.AddComponent<DragDisabler>();
+                break;
+            case InteractableAspect interactableAspect:
+                var interactable = go.AddComponent<Interactable>();
+                interactable.sortingOrder = interactableAspect.SortingOrder;
+                break;
+            case CarAspect carAspect:
+                Car car = entity.Subject as Car;
+                go.AddComponent<SpeedProviderFromCar>().Initialize(car);
+                go.AddComponent<MovingPoint>().Initialize(entity);
+                var sr = go.GetComponentInChildren<SpriteRenderer>();
+                sr.sprite = car.CarFrame.runtimeConfig.Icon;
+                sr.color = car.CarFrame.runtimeConfig.FrameColor;
+                go.AddComponent<SelectableVisuals>();
+                break;
+            case PoliceUnitAspect policeUnitAspect:
+                var unit = entity.Subject as PoliceUnit;
+                go.AddComponent<MovingPointSimpleView>().Initialize(unit.GraphMovement);
+                var policeViewController = go.AddComponent<PoliceStateViewController>();
+                policeViewController.Initialize(unit);
+                go.AddComponent<PoliceSpotlightVisionVisuals>().Intialize(unit, policeViewController);
+                go.AddComponent<PoliceLightsViewController>().Initialize(policeViewController, go.GetComponentInChildren<PoliceLightsVisuals>());
+                break;
+            case RigidbodyAspect rigidbodyAspect:
+                var rigidbody2D = go.AddComponent<Rigidbody2D>();
+                rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
+                break;
+        }
     }
 }

@@ -14,9 +14,12 @@ public class CarShopGameMain : GameMain
         Debug.Assert(gameConfig.GameModeData is CarShopGameModeData);
         modeData = (CarShopGameModeData)gameConfig.GameModeData;
 
+        var spawnConfig = modeData.carSpawnConfig;
+        CityEntitiesCreationHelper.CreateNewCar(
+            spawnConfig.CarBaseConfig,
+            spawnConfig.CarVariantConfig,
+            G.City.GetClosestPosition(modeData.carSpawnPoint));
 
-        var location = G.City.GetEmptyLocation(G.City.GetClosestPosition(modeData.carSpawnPoint));
-        car = modeData.carSpawnConfig.GenerateCar(location);
     }
     public override void InitializeLogic(GameConfig gameConfig)
     {

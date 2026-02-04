@@ -91,7 +91,6 @@ public abstract class WarehouseProductGameObjectBuilder : ScriptableObject, IPro
         private void InitializeAdditionalComponents(GameObject gameObject, Product product)
         {
             gameObject.AddComponent<DirectDragInteractable>();
-            gameObject.AddComponent<ContentProvider>().Initialize(product);
 
             if (product is not Car)
             {

@@ -29,14 +29,14 @@ public class CityInteractionManager : IInteractionManager
             return;
         }
 
-        var contentProvider = interactable.GetComponent<ContentProvider>();
+        var contentProvider = interactable.GetComponent<ModelProvider>();
         if (contentProvider == null)
         {
             Debug.LogError("CityInteractionManager: Interactable has no ContentProvider, cannot build menu");
             return;
         }
 
-        var model = contentProvider.Model;
+        var model = contentProvider.CityEntity;
         if (model == null)
         {
             Debug.LogError("CityInteractionManager: ContentProvider.Model is null");
@@ -50,7 +50,7 @@ public class CityInteractionManager : IInteractionManager
         }
     }
 
-    public void OnTriggerEntered(ContentProvider trigger, ContentProvider triggerCause)
+    public void OnTriggerEntered(ModelProvider trigger, ModelProvider triggerCause)
     {
         var gameState = G.GameState;
         var profile = _triggerRegistry.Get(gameState);
@@ -66,11 +66,11 @@ public class CityInteractionManager : IInteractionManager
             return;
         }
 
-        var triggerModel = trigger.Model;
-        var causeModel = triggerCause != null ? triggerCause.Model : null;
+        var triggerModel = trigger.CityEntity;
+        var causeModel = triggerCause != null ? triggerCause.CityEntity : null;
 
         var triggerAction = profile.GenerateTriggerAction(
-            new TriggerContext(triggerModel, causeModel, gameState, trigger.gameObject,triggerCause.gameObject));
+            new TriggerContext(triggerModel, causeModel, gameState, trigger.ViewGameObject,triggerCause.ViewGameObject));
         if (triggerAction == null)
         {
             Debug.LogError("CityInteractionManager: TriggerAction is null");

@@ -7,16 +7,16 @@ public static class CameraHelper
     public static void SetCurrentPositionAtCar()
     {
         var car = G.GameState.FocusedCar;
-        var location = CityLocatorHelper.GetCityLocation(car);
+        var cityEntity = CityLocatorHelper.GetCityLocation(car);
         Debug.Assert(CameraMovementManager.Instance != null);
-        CameraMovementManager.Instance?.Teleport(getCityLocationPosition(location));
+        CameraMovementManager.Instance?.Teleport(cityEntity.Position.WorldPosition);
     }
 
-    private static Vector2 getCityLocationPosition(City.CityLocation cityLocation)
+    private static Vector2 getCityLocationPosition(CityEntity cityEntity)
     {
-        if(cityLocation != null)
+        if(cityEntity != null)
         {
-            return cityLocation.Position.WorldPosition;
+            return cityEntity.Position.WorldPosition;
         }
         Debug.LogError("CityLocation is null in ViewEnsure");
         return Vector2.zero;

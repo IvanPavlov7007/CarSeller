@@ -34,11 +34,21 @@ public class ReachTargetCondition : MissionCondition
         public override void OnEvent(GameEventData data)
         {
             if (data is CityTargetReachedEventData e &&
-                //e.OwnerMission == missionRuntime &&
-                e.ReachedObject.CityMarker == target)
+                hasAspect(e.ReachedObject, out MarkerReferenceAspect aspect)
+                && aspect.CityMarker == target)
             {
                 isSatisfied = true;
             }
+        }
+
+        private bool hasAspect(CityEntity reachedEntity, out MarkerReferenceAspect aspect)
+        {
+            aspect = null;
+            var aspects = reachedEntity.GetAspects<MarkerReferenceAspect>();
+            if (aspects.Length == 0)
+                return false;
+            aspect = aspects[0];
+            return true;
         }
 
         public override bool IsSatisfied()

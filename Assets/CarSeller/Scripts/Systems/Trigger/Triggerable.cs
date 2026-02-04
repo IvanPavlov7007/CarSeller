@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class Triggerable : MonoBehaviour, ITriggerable
 {
-    public event Action<ContentProvider, ContentProvider> OnTriggerEntered;
+    public event Action<ModelProvider, ModelProvider> OnTriggerEntered;
     CustomTrigger2D CustomTrigger2D;
-    ContentProvider contentProvider;
+    ModelProvider contentProvider;
 
     private void Awake()
     {
         CustomTrigger2D = GetComponentInChildren<CustomTrigger2D>();
-        contentProvider = GetComponent<ContentProvider>();
+        contentProvider = GetComponent<ModelProvider>();
         if (CustomTrigger2D == null)
             Debug.LogError("No CustomTrigger2D Provided to this " + gameObject.name);
     }
@@ -29,7 +29,7 @@ public class Triggerable : MonoBehaviour, ITriggerable
 
     private void OnTriggered(Collider2D collision)
     {
-        ContentProvider triggerCause = collision.GetComponentInParent<ContentProvider>();
+        ModelProvider triggerCause = collision.GetComponentInParent<ModelProvider>();
         Debug.Assert(triggerCause != null);
         if(triggerCause != null)
             OnTriggerEntered?.Invoke(contentProvider, triggerCause);
@@ -39,5 +39,5 @@ public class Triggerable : MonoBehaviour, ITriggerable
 
 public interface ITriggerable
 {
-    public event Action<ContentProvider, ContentProvider> OnTriggerEntered;
+    public event Action<ModelProvider, ModelProvider> OnTriggerEntered;
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class Collectable : ILocatable
+public class Collectable : CityDestroyable
 {
     public CollectableConfig Config { get; set; }
     public Collectable(CollectableConfig config)
