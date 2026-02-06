@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class GameState
 {
     public Car FocusedCar { get; }
+    public PlayerFigure PlayerFigure { get; }
 
     protected GameState(Car focusedCar)
     {

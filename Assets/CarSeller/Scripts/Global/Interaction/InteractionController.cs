@@ -66,7 +66,7 @@ public class InteractionController : Singleton<InteractionController>
 
     void OnDragEnd(Interactable interactable)
     {
-        interactionManager.OnDragEnd(interactable); 
+        interactionManager.OnDragEnd(interactable);
     }
 
     void OnTriggerEntered(ModelProvider trigger, ModelProvider triggerCause)

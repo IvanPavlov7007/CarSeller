@@ -129,6 +129,7 @@ public class CityViewObjectBuilder : ScriptableObject
                 Car car = entity.Subject as Car;
                 go.AddComponent<SpeedProviderFromCar>().Initialize(car);
                 go.AddComponent<MovingPoint>().Initialize(entity);
+                go.AddComponent<TriggerCausable>();
                 var sr = go.GetComponentInChildren<SpriteRenderer>();
                 sr.sprite = car.CarFrame.runtimeConfig.Icon;
                 sr.color = car.CarFrame.runtimeConfig.FrameColor;

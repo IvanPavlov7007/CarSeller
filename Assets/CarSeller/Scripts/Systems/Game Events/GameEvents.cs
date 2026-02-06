@@ -56,6 +56,7 @@ public class GameEvents
 
     public Action<OwnershipChangedEventData> OnOwnershipChanged;
 
+    public Action<CityTargetReachedEventData> OnTargetReachDragEnded;
     public Action<CityTargetReachedEventData> OnTargetReached;
     public Action<PlayerMoneyChangeEventData> OnPlayerMoneyChanged;
 

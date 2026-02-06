@@ -415,11 +415,20 @@ public class GameCursor : Singleton<GameCursor>
         return hitInteracrable;
     }
 
-    public void CancelCurrentInteraction()
+    public void CancelCurrentInteraction(bool invokeDragEnd = true)
     {
         if (dragStarted && draggedInteractable != null)
         {
-            endDrag();
+            if (invokeDragEnd)
+            {
+                endDrag(); // will call draggedInteractable.DragEnd()
+            }
+            else
+            {
+                // Silent cancel: do NOT call DragEnd again.
+                draggedInteractable = null;
+                dragStarted = false;
+            }
         }
 
         // If there is an ongoing press/hold/select, end it

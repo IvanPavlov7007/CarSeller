@@ -33,7 +33,7 @@ public class FixedContextMenuManager : Singleton<FixedContextMenuManager>
         var menu = createContextMenu(panel, content.blockingInput);
         menu.Initialize(null, contentTransform, OnMenuClose);
 
-        GameCursor.Instance.CancelCurrentInteraction();
+        GameCursor.Instance.CancelCurrentInteraction(invokeDragEnd: false);
         return menu;
     }
 

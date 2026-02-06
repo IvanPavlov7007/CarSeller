@@ -89,7 +89,7 @@ public sealed class FreeRoamCityTriggerProfile : ICityTriggerProfile
         if (ctx.TriggerCause.Subject != freeRoamGameState.FocusedCar)
             return new TriggerAction(false, null);
         Car car = ctx.TriggerCause.Subject as Car;
-        if (ctx.Trigger.Subject is Warehouse warehouse)
+        if (ctx.Kind == TriggerContext.TriggerKind.DragEnd && ctx.Trigger.Subject is Warehouse warehouse)
         {
             if (!G.WarehouseEntryCooldownService.CanEnterWarehouse(car,warehouse))
                 return new TriggerAction(false, null);
@@ -113,7 +113,18 @@ public sealed class FreeRoamCityTriggerProfile : ICityTriggerProfile
                 true,
                 () =>
                 {
-                    GameEvents.Instance.OnTargetReached?.Invoke(new CityTargetReachedEventData(cityEntity,ctx));
+                    switch (ctx.Kind)
+                    {
+                        case TriggerContext.TriggerKind.Enter:
+                            GameEvents.Instance.OnTargetReached?.Invoke(new CityTargetReachedEventData(cityEntity, ctx));
+                            break;
+                        case TriggerContext.TriggerKind.DragEnd:
+                            GameEvents.Instance.OnTargetReachDragEnded?.Invoke(new CityTargetReachedEventData(cityEntity, ctx));
+                            break;
+                        default:
+                            break;
+                    }
+                    
                 }
             );
         }

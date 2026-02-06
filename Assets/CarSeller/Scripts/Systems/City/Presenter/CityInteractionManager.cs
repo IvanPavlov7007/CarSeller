@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// Manager that handles logic of interactions in the city scene,
@@ -11,7 +12,71 @@ public class CityInteractionManager : IInteractionManager
 
     public void OnDragEnd(Interactable interactable)
     {
-        // Not used in city at the moment.
+        if (interactable == null)
+            return;
+
+        var gameState = G.GameState;
+        var profile = _triggerRegistry.Get(gameState);
+        if (profile == null)
+        {
+            Debug.LogError("CityInteractionManager: No trigger profile available for current game state");
+            return;
+        }
+
+        // We need a ModelProvider for the dragged object to act as triggerCause.
+        var triggerCause = interactable.GetComponent<ModelProvider>();
+        if (triggerCause == null)
+        {
+            // Not all interactables are necessarily city entities.
+            return;
+        }
+
+        var triggerables = collidingTriggerables(interactable);
+
+        for (int i = 0; i < triggerables.Count; i++)
+        {
+            var triggerable = triggerables[i];
+            if (triggerable == null)
+                continue;
+
+            // Try to resolve the trigger's ModelProvider from the collider that was hit.
+            var trigger = triggerable.GetComponentInParent<ModelProvider>();
+            if (trigger == null)
+                continue;
+
+            // Ignore self-drop.
+            if (ReferenceEquals(trigger, triggerCause))
+                continue;
+
+            Debug.Log($"CityInteractionManager: Triggering action on drag end for trigger {trigger.CityEntity} caused by {triggerCause.CityEntity}");
+
+            var triggerAction = profile.GenerateTriggerAction(
+                new TriggerContext(
+                    trigger.CityEntity,
+                    triggerCause.CityEntity,
+                    gameState,
+                    trigger.ViewGameObject,
+                    triggerCause.ViewGameObject,
+                    TriggerContext.TriggerKind.DragEnd));
+
+
+            if (triggerAction == null)
+                continue;
+
+            if (!triggerAction.CanProceed)
+                continue;
+            
+            triggerAction.Action?.Invoke();
+            return; // fire only one trigger on drop
+        }
+    }
+
+    private IReadOnlyList<Triggerable> collidingTriggerables(Interactable interactable)
+    {
+        var triggerCausable = interactable.GetComponent<TriggerCausable>();
+        if (triggerCausable == null)
+            return new List<Triggerable>();
+        return triggerCausable.CurrentTriggerables;
     }
 
     public void OnDragStart(Interactable interactable)
@@ -70,7 +135,13 @@ public class CityInteractionManager : IInteractionManager
         var causeModel = triggerCause != null ? triggerCause.CityEntity : null;
 
         var triggerAction = profile.GenerateTriggerAction(
-            new TriggerContext(triggerModel, causeModel, gameState, trigger.ViewGameObject,triggerCause.ViewGameObject));
+            new TriggerContext(
+                triggerModel,
+                causeModel,
+                gameState,
+                trigger.ViewGameObject,
+                triggerCause != null ? triggerCause.ViewGameObject : null,
+                TriggerContext.TriggerKind.Enter));
         if (triggerAction == null)
         {
             Debug.LogError("CityInteractionManager: TriggerAction is null");

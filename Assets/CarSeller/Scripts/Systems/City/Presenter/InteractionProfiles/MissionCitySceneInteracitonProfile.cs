@@ -38,7 +38,18 @@ public sealed class MissionCityTriggerProfile : ICityTriggerProfile
                 true,
                 () =>
                 {
-                    GameEvents.Instance.OnTargetReached?.Invoke(new CityTargetReachedEventData(cityEntity, ctx));
+                    switch (ctx.Kind)
+                    {
+                        case TriggerContext.TriggerKind.Enter:
+                            GameEvents.Instance.OnTargetReached?.Invoke(new CityTargetReachedEventData(cityEntity, ctx));
+                            break;
+                        case TriggerContext.TriggerKind.DragEnd:
+                            GameEvents.Instance.OnTargetReachDragEnded?.Invoke(new CityTargetReachedEventData(cityEntity, ctx));
+                            break;
+                        default:
+                            break;
+                    }
+
                 }
             );
         }

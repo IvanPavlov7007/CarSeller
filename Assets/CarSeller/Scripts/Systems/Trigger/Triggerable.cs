@@ -18,6 +18,8 @@ public class Triggerable : MonoBehaviour, ITriggerable
     private void OnEnable()
     {
         CustomTrigger2D?.onEnter.AddListener(OnTriggered);
+        CustomTrigger2D?.onExit.AddListener(OnTriggerExited);
+        CustomTrigger2D.onStay.AddListener(OnTriggerStayed);
         InteractionController.Instance.RegisterTriggerable(this);
     }
 
@@ -25,14 +27,37 @@ public class Triggerable : MonoBehaviour, ITriggerable
     {
         InteractionController.Instance.UnregisterTriggerable(this);
         CustomTrigger2D?.onEnter.RemoveListener(OnTriggered);
+        CustomTrigger2D?.onExit.RemoveListener(OnTriggerExited);
+        CustomTrigger2D.onStay.RemoveListener(OnTriggerStayed);
+    }
+
+    private void OnTriggerStayed(Collider2D collider)
+    {
+        TryRegisterTriggerCausable(collider);
     }
 
     private void OnTriggered(Collider2D collision)
     {
+        TryRegisterTriggerCausable(collision);
+
         ModelProvider triggerCause = collision.GetComponentInParent<ModelProvider>();
         Debug.Assert(triggerCause != null);
         if (triggerCause != null)
             OnTriggerEntered?.Invoke(contentProvider, triggerCause);
+    }
+
+    private void TryRegisterTriggerCausable(Collider2D collision)
+    {
+        TriggerCausable triggerCause = collision.GetComponentInParent<TriggerCausable>();
+        if (triggerCause != null)
+            triggerCause.AddTriggerable(this);
+    }
+
+    private void OnTriggerExited(Collider2D other)
+    {
+        TriggerCausable triggerCause = other.GetComponentInParent<TriggerCausable>();
+        if (triggerCause != null)
+            triggerCause.RemoveTriggerable(this);
     }
 }
 

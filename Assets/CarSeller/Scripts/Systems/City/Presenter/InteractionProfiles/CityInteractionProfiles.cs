@@ -96,19 +96,27 @@ public sealed class CityTriggerProfileRegistry
 
 public class TriggerContext
 {
+    public enum TriggerKind
+    {
+        Enter,
+        DragEnd
+    }
+
     public CityEntity Trigger { get; private set; }
     public CityEntity TriggerCause { get; private set; }
     public GameObject TriggerView { get; set; }
     public GameObject TriggerCauseView { get; set; }
     public GameState GameState { get; set; }
+    public TriggerKind Kind { get; private set; }
 
-    public TriggerContext(CityEntity trigger, CityEntity triggerCause, GameState gameState, GameObject triggerView, GameObject triggerCauseView)
+    public TriggerContext(CityEntity trigger, CityEntity triggerCause, GameState gameState, GameObject triggerView, GameObject triggerCauseView, TriggerKind kind = TriggerKind.Enter)
     {
         Trigger = trigger;
         TriggerCause = triggerCause;
         GameState = gameState;
         TriggerView = triggerView;
         TriggerCauseView = triggerCauseView;
+        Kind = kind;
     }
 }
 

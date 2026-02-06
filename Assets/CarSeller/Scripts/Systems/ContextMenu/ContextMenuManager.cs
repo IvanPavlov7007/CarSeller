@@ -61,7 +61,7 @@ public class ContextMenuManager : Singleton<ContextMenuManager>
         ctxMenu.Initialize(target.transform, contentRT, closeMenu);
 
         UpdateContextMenu(ctxMenu);
-        GameCursor.Instance.CancelCurrentInteraction();
+        GameCursor.Instance.CancelCurrentInteraction(invokeDragEnd: false);
     }
 
     private RectTransform getContentTransform(GameObject panel)

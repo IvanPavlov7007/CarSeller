@@ -23,7 +23,7 @@ public class MissionController : MissionControllerBase
     public void Enable()
     {
         // Extension internal event handlers
-        GameEvents.Instance.OnTargetReached += tryCheckIfMissionLauncherAndShowPopUp;
+        GameEvents.Instance.OnTargetReachDragEnded += tryCheckIfMissionLauncherAndShowPopUp;
         GameEvents.Instance.onMissionCompleted += showMissionCompletedInfo;
         GameEvents.Instance.onMissionCompleted += rewardPlayerForMissionCompletion;
         GameEvents.Instance.onMissionStarted += enterMissionStateOnMissionStart;
@@ -33,14 +33,14 @@ public class MissionController : MissionControllerBase
 
         // External to mission event handlers
         monoBehaviourHelper.OnUpdateEvent += OnUpdate;
-        GameEvents.Instance.OnTargetReached += OnCityTargetReached;
+        GameEvents.Instance.OnTargetReachDragEnded += OnCityTargetReached;
         GameEvents.Instance.OnPlayerAccept += OnPlayerAccepted;
         GameEvents.Instance.onPlayerBusted += OnPlayerBusted;
     }
 
     public void Disable()
     {
-        GameEvents.Instance.OnTargetReached -= tryCheckIfMissionLauncherAndShowPopUp;
+        GameEvents.Instance.OnTargetReachDragEnded -= tryCheckIfMissionLauncherAndShowPopUp;
         GameEvents.Instance.onMissionCompleted -= showMissionCompletedInfo;
         GameEvents.Instance.onMissionCompleted -= rewardPlayerForMissionCompletion;
         GameEvents.Instance.onMissionStarted -= enterMissionStateOnMissionStart;
@@ -49,7 +49,7 @@ public class MissionController : MissionControllerBase
         GameEvents.Instance.onMissionFailed -= showMissionFailedInfo;
 
         monoBehaviourHelper.OnUpdateEvent -= OnUpdate;
-        GameEvents.Instance.OnTargetReached -= OnCityTargetReached;
+        GameEvents.Instance.OnTargetReachDragEnded -= OnCityTargetReached;
         GameEvents.Instance.OnPlayerAccept -= OnPlayerAccepted;
         GameEvents.Instance.onPlayerBusted -= OnPlayerBusted;
     }
