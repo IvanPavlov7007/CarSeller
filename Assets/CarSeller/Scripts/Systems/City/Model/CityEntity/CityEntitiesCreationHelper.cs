@@ -69,7 +69,7 @@ public static class CityEntitiesCreationHelper
         if (City.EntityLifetimeService.TryCreate(policeUnit, position, out CityEntity entity,
             new CityEntityAspect[]{
                 new RigidbodyAspect(),
-                new InteractableAspect(9),
+                new InteractableAspect(0),
                 new TriggerableAspect(),
                 new PoliceUnitAspect(),
                 }))
@@ -116,15 +116,16 @@ public static class CityEntitiesCreationHelper
     static CityEntityAspect[] carAspects = new CityEntityAspect[]
     {
         new RigidbodyAspect(),
-        new DragInteractableAspect(10),
+        new DragInteractableAspect(1),
         new TriggerableAspect(),
+        new TriggerCausableAspect(),
         new CarAspect(),
     };
 
     static CityEntityAspect[] playerFigureAspects = new CityEntityAspect[]
     {
         new RigidbodyAspect(),
-        new DragInteractableAspect(10),
+        new DragInteractableAspect(1),
         new PlayerFigureAspect(),
         new TriggerCausableAspect(),
     };

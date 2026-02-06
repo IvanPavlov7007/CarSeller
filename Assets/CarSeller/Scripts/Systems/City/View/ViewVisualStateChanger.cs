@@ -6,8 +6,15 @@ public class ViewVisualStateChanger : MonoBehaviour
     [SerializeField, Range(0.2f, 1f)]
     private float disabledBrightnessMultiplier = 0.6f;
 
+    [Header("Sorting")]
+    [SerializeField]
+    private int selectedSortingOrderIncrease = 5;
+
     private CityViewObjectController cityViewObjectController;
+
     private readonly Dictionary<SpriteRenderer, Color> originalColors = new Dictionary<SpriteRenderer, Color>();
+    private readonly Dictionary<SpriteRenderer, int> originalSortingOrders = new Dictionary<SpriteRenderer, int>();
+
     private SpriteRenderer[] spriteRenderers;
 
     private void Awake()
@@ -54,17 +61,31 @@ public class ViewVisualStateChanger : MonoBehaviour
         {
             RestoreOriginalColors();
         }
+
+        if (state == ViewObjectVisualState.Selected)
+        {
+            ApplySelectedSortingOrder();
+        }
+        else
+        {
+            RestoreOriginalSortingOrder();
+        }
     }
 
     private void CacheRenderersAndColors()
     {
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
+
         originalColors.Clear();
+        originalSortingOrders.Clear();
+
         for (int i = 0; i < spriteRenderers.Length; i++)
         {
             var sr = spriteRenderers[i];
             if (sr == null) continue;
+
             originalColors[sr] = sr.color;
+            originalSortingOrders[sr] = sr.sortingOrder;
         }
     }
 
@@ -90,6 +111,30 @@ public class ViewVisualStateChanger : MonoBehaviour
 
             var orig = originalColors[sr];
             sr.color = ToGrayscale(orig, disabledBrightnessMultiplier);
+        }
+    }
+
+    private void ApplySelectedSortingOrder()
+    {
+        for (int i = 0; i < spriteRenderers.Length; i++)
+        {
+            var sr = spriteRenderers[i];
+            if (sr == null) continue;
+
+            // Ensure we have the original saved (covers late-added renderers).
+            if (!originalSortingOrders.ContainsKey(sr))
+                originalSortingOrders[sr] = sr.sortingOrder;
+
+            sr.sortingOrder = originalSortingOrders[sr] + selectedSortingOrderIncrease;
+        }
+    }
+
+    private void RestoreOriginalSortingOrder()
+    {
+        foreach (var kvp in originalSortingOrders)
+        {
+            if (kvp.Key == null) continue;
+            kvp.Key.sortingOrder = kvp.Value;
         }
     }
 

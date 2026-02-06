@@ -128,12 +128,19 @@ public sealed class FreeRoamCitySceneProfile : CitySceneProfile
     {
         var freeRoamState = gameState as FreeRoamGameState;
 
-        if (obj.Subject is Car car)
-        {
+        var controlled = freeRoamState.PlayerFigure != null
+            ? (ILocatable)freeRoamState.PlayerFigure
+            : freeRoamState.FocusedCar;
 
-            bool isFocusedCar = car == freeRoamState.FocusedCar;
-            ViewObjectVisualState visualState = isFocusedCar ? ViewObjectVisualState.Selected : ViewObjectVisualState.Normal;
-            return new CityObjectState(visualState, draggable: isFocusedCar, interactable: true);
+        if (controlled != null && obj.Subject == controlled)
+        {
+            return new CityObjectState(ViewObjectVisualState.Selected, draggable: true, interactable: true);
+        }
+
+        // Cars are still interactable, but not draggable unless controlled
+        if (obj.Subject is Car)
+        {
+            return new CityObjectState(ViewObjectVisualState.Normal, draggable: false, interactable: true);
         }
 
         return base.GetObjectViewState(obj, gameState);

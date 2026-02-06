@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
@@ -342,6 +343,22 @@ public static class CTX_Menu_Tools
                 new UIElement {
                     Type = UIElementType.Button, Text = "No",
                     OnClick = onCancel, closePopupOnClick = true }, },
+        };
+    }
+
+    public static UIElement EnterWarehouseOnFoot(Warehouse warehouse, Action onAccept, Action onCancel)
+    {
+        return new UIElement
+        {
+            Type = UIElementType.Container,
+            Children = WarehouseBaseInfoElements(warehouse).Concat(new List<UIElement>() {
+                Description("Do you want to enter?"),
+                new UIElement {
+                    Type = UIElementType.Button, Text = "Yes",
+                    OnClick = onAccept, closePopupOnClick = true },
+                new UIElement {
+                    Type = UIElementType.Button, Text = "No",
+                    OnClick = onCancel, closePopupOnClick = true }, }).ToList(),
         };
     }
 

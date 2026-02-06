@@ -141,17 +141,18 @@ public class CityViewObjectBuilder : ScriptableObject
             case DragInteractableAspect dragInteractableAspect:
                 var dragInteractable = go.AddComponent<DragInteractable>();
                 dragInteractable.sortingOrder = dragInteractableAspect.SortingOrder;
+                go.AddComponent<InteractableOrderOnSelect>();
                 go.AddComponent<DragDisabler>();
                 break;
             case InteractableAspect interactableAspect:
                 var interactable = go.AddComponent<Interactable>();
                 interactable.sortingOrder = interactableAspect.SortingOrder;
+                go.AddComponent<InteractableOrderOnSelect>();
                 break;
             case CarAspect carAspect:
                 Car car = entity.Subject as Car;
                 go.AddComponent<SpeedProviderFromCar>().Initialize(car);
                 go.AddComponent<MovingPoint>().Initialize(entity);
-                go.AddComponent<TriggerCausable>();
                 var sr = go.GetComponentInChildren<SpriteRenderer>();
                 sr.sprite = car.CarFrame.runtimeConfig.Icon;
                 sr.color = car.CarFrame.runtimeConfig.FrameColor;

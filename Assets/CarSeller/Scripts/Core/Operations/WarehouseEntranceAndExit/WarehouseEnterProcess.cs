@@ -5,6 +5,7 @@ using UnityEngine;
 public class WarehouseEnterProcess : IProcess
 {
     public readonly Car Car;
+    public readonly PlayerFigure PlayerFigure;
     public readonly Warehouse Warehouse;
 
     public WarehouseEnterProcess(Car car, Warehouse warehouse)
@@ -13,8 +14,21 @@ public class WarehouseEnterProcess : IProcess
         Warehouse = warehouse;
     }
 
+    public WarehouseEnterProcess(PlayerFigure playerFigure, Warehouse warehouse)
+    {
+        PlayerFigure = playerFigure;
+        Warehouse = warehouse;
+    }
+
     public IEnumerator Run()
     {
+        if (PlayerFigure != null)
+        {
+            // Figure entrance: just enter WH and remove figure.
+            yield return enterWHOnFoot();
+            yield break;
+        }
+
         var offer = G.CarWarehousePolicy.Resolve(Car, Warehouse, new OperationContext());
         switch (offer)
         {
@@ -29,6 +43,28 @@ public class WarehouseEnterProcess : IProcess
                 break;
         }
         yield break;
+    }
+
+    IEnumerator enterWHOnFoot()
+    {
+        // asking for confirmation to enter on foot
+        bool done = false; bool accepted = false;
+        var element = CTX_Menu_Tools.EnterWarehouseOnFoot(
+        Warehouse,
+        onAccept: () => { accepted = true; done = true; },
+        onCancel: () => { done = true; });
+
+        var menu = FixedContextMenuManager.Instance.CreateContextMenu(element);
+
+        // If the menu closes for any other reason (e.g., blocker close), also proceed.
+        menu.Closed += _ => done = true;
+        yield return new WaitUntil(() => done);
+        if (!accepted)
+            yield break;
+        // confirmed -> enter warehouse on foot
+        City.EntityLifetimeService.Destroy(PlayerFigure);
+        G.GameFlowController.EnterWarehouse(Warehouse);
+
     }
 
     IEnumerator puttingWholeCar(PutCarInWarehouseOffer carOffer)
@@ -88,7 +124,6 @@ public class WarehouseEnterProcess : IProcess
             Debug.LogError("Failed to strip car inside warehouse: " + stripResult.Type);
             yield break;
         }
-        
 
         //open results window with claim button
         var stripData = stripTransaction.Data as StripCarTransactionData;
@@ -112,8 +147,6 @@ public class WarehouseEnterProcess : IProcess
             {
                 GlobalHintManager.Instance.ShowHint("Couldn't store care base: no place available");
             }
-        } 
-
-        
+        }
     }
 }

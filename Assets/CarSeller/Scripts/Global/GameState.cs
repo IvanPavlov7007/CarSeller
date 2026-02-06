@@ -6,6 +6,11 @@ public abstract class GameState
     public Car FocusedCar { get; }
     public PlayerFigure PlayerFigure { get; }
 
+    public bool IsControlledByPlayer(ILocatable locatable)
+    {
+        return locatable == PlayerFigure || locatable == FocusedCar;
+    }
+
     protected GameState(Car focusedCar, PlayerFigure playerFigure = null)
     {
         FocusedCar = focusedCar;

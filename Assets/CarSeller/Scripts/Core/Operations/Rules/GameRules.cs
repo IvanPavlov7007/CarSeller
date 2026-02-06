@@ -1,10 +1,13 @@
-﻿public static class GameRules
+﻿using System.Diagnostics;
+
+public static class GameRules
 {
     public static readonly WarehouseCanStoreCar WarehouseCanStoreCar = new WarehouseCanStoreCar();
     public static readonly WarehouseCanStripCar WarehouseCanStripCar = new WarehouseCanStripCar();
     public static readonly CanRideOutCar CanRideOutCar = new CanRideOutCar();
     public static readonly CarBelongsToPlayer CarBelongsToPlayer = new CarBelongsToPlayer();
     public static readonly CarCanBeDisassembled CarCanBeDisassembled = new CarCanBeDisassembled();
+    public static readonly ModelControlledByPlayer ModelControlledByPlayer = new ModelControlledByPlayer();
 }
 
 public class CarBelongsToPlayer
@@ -90,5 +93,17 @@ public class WarehouseCanReceivePart
 
         //TODO check if warehouse has capacity for part
         return true;
+    }
+}
+
+public class ModelControlledByPlayer
+{
+    public bool Check(ILocatable model)
+    {
+        var state = G.GameState;
+        Debug.Assert(state != null, "GameState is null");
+        Debug.Assert(model != null, "Model is null");
+
+        return state.IsControlledByPlayer(model);
     }
 }
