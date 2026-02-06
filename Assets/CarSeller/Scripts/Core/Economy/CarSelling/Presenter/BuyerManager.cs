@@ -8,7 +8,7 @@ public static class BuyerManager
     {
         Warehouse warehouse = CityLocatorHelper.GetWarehouse(car);
         Debug.Assert(warehouse != null, "Warehouse should not be null when creating a buyer.");
-        var warehouseLocation = CityLocatorHelper.GetCityLocation(warehouse);
+        var warehouseLocation = CityLocatorHelper.GetCityEntity(warehouse);
 
         var randomBuyerMarker = G.City.GetRandomMarker("buyer", predicate: marker => marker.PositionOnGraph != null);
 

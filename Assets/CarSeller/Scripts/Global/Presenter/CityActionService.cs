@@ -6,7 +6,7 @@ public class CityActionService
     {
         return CityEntitiesCreationHelper.MoveInExistingCar(
             car,
-            CityLocatorHelper.GetCityLocation(warehouse).Position
+            CityLocatorHelper.GetCityEntity(warehouse).Position
             ) != null;
     }
 }

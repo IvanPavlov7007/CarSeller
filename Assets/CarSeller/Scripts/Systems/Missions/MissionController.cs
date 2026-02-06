@@ -191,17 +191,17 @@ public class MissionController : MissionControllerBase
     #region GameState controlling
     void enterMissionStateOnMissionStart(MissionStartedEventData e)
     {
-        MissionGameState missionGameState = new MissionGameState(G.GameState.FocusedCar, e.Mission);
+        MissionGameState missionGameState = new MissionGameState(G.GameState.FocusedCar, e.Mission, G.GameState.PlayerFigure);
         G.GameFlowController.SetGameState(missionGameState);
     }
     void exitMissionStateOnMissionCompleted(MissionCompletedEventData e)
     {
-        FreeRoamGameState missionGameState = new FreeRoamGameState(G.GameState.FocusedCar);
+        FreeRoamGameState missionGameState = new FreeRoamGameState(G.GameState.FocusedCar, G.GameState.PlayerFigure);
         G.GameFlowController.SetGameState(missionGameState);
     }
     void exitMissionStateOnMissionFailed(MissionFailedEventData e)
     {
-        FreeRoamGameState missionGameState = new FreeRoamGameState(G.GameState.FocusedCar);
+        FreeRoamGameState missionGameState = new FreeRoamGameState(G.GameState.FocusedCar, G.GameState.PlayerFigure);
         G.GameFlowController.SetGameState(missionGameState);
     }
     #endregion

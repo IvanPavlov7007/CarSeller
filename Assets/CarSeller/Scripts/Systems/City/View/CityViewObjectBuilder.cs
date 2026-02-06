@@ -6,6 +6,7 @@ using static UnityEngine.Rendering.GPUSort;
 public class CityViewObjectBuilder : ScriptableObject
 {
     public GameObject carViewPrefab;
+    public GameObject playerFigureViewPrefab;
     public GameObject triggerPrefab;
     public GameObject policeUnitPrefab;
 
@@ -31,6 +32,9 @@ public class CityViewObjectBuilder : ScriptableObject
         {
             case Car car:
                 return buildCar(car, entity, entity.Position);
+
+            case PlayerFigure playerFigure:
+                return buildPlayerFigure(playerFigure, entity, entity.Position);
 
             case Collectable collectable:
                 return buildCollectable(collectable, entity, entity.Position);
@@ -60,7 +64,7 @@ public class CityViewObjectBuilder : ScriptableObject
 
         GameObject collectableGO = Instantiate(triggerPrefab, worldPos, Quaternion.identity);
         Instantiate(collectablePrefab, worldPos, Quaternion.identity, collectableGO.transform);
-        
+
         var viewController = initializeViewController(collectableGO, entity);
         initializeAspects(collectableGO, viewController, entity);
         return viewController;
@@ -68,7 +72,7 @@ public class CityViewObjectBuilder : ScriptableObject
 
     public CityViewObjectController buildCar(Car car, CityEntity entity, CityPosition position)
     {
-        GameObject carGO = Instantiate(carViewPrefab, position.WorldPosition,Quaternion.identity);
+        GameObject carGO = Instantiate(carViewPrefab, position.WorldPosition, Quaternion.identity);
 
         var viewController = initializeViewController(carGO, entity);
         initializeAspects(carGO, viewController, entity);
@@ -77,9 +81,24 @@ public class CityViewObjectBuilder : ScriptableObject
         return viewController;
     }
 
+    public CityViewObjectController buildPlayerFigure(PlayerFigure playerFigure, CityEntity entity, CityPosition position)
+    {
+        if (playerFigureViewPrefab == null)
+        {
+            Debug.LogError("CityViewObjectBuilder: playerFigureViewPrefab is not assigned");
+            return null;
+        }
+
+        GameObject go = Instantiate(playerFigureViewPrefab, position.WorldPosition, Quaternion.identity);
+        var viewController = initializeViewController(go, entity);
+        initializeAspects(go, viewController, entity);
+        go.AddComponent<ViewVisualStateChanger>();
+        return viewController;
+    }
+
     public CityViewObjectController buildGeneric(CityEntity entity, CityPosition position)
     {
-        GameObject triggerGO = Instantiate(triggerPrefab, position.WorldPosition,Quaternion.identity);
+        GameObject triggerGO = Instantiate(triggerPrefab, position.WorldPosition, Quaternion.identity);
         var viewController = initializeViewController(triggerGO, entity);
         initializeAspects(triggerGO, viewController, entity);
         return viewController;
@@ -87,7 +106,7 @@ public class CityViewObjectBuilder : ScriptableObject
 
     public CityViewObjectController buildPoliceUnit(PoliceUnit policeUnit, CityEntity entity, CityPosition position)
     {
-        GameObject policeGO = Instantiate(policeUnitPrefab, position.WorldPosition,Quaternion.identity);
+        GameObject policeGO = Instantiate(policeUnitPrefab, position.WorldPosition, Quaternion.identity);
 
         var viewController = initializeViewController(policeGO, entity);
         initializeAspects(policeGO, viewController, entity);
@@ -116,6 +135,9 @@ public class CityViewObjectBuilder : ScriptableObject
             case TriggerableAspect triggerableAspect:
                 go.AddComponent<Triggerable>();
                 break;
+            case TriggerCausableAspect triggerCausableAspect:
+                go.AddComponent<TriggerCausable>();
+                break;
             case DragInteractableAspect dragInteractableAspect:
                 var dragInteractable = go.AddComponent<DragInteractable>();
                 dragInteractable.sortingOrder = dragInteractableAspect.SortingOrder;
@@ -133,6 +155,13 @@ public class CityViewObjectBuilder : ScriptableObject
                 var sr = go.GetComponentInChildren<SpriteRenderer>();
                 sr.sprite = car.CarFrame.runtimeConfig.Icon;
                 sr.color = car.CarFrame.runtimeConfig.FrameColor;
+                go.AddComponent<SelectableVisuals>();
+                break;
+            case PlayerFigureAspect playerFigureAspect:
+                var figure = entity.Subject as PlayerFigure;
+                go.AddComponent<PlayerFigureSpeedProvider>().Initialize(figure);
+                go.AddComponent<MovingPoint>().Initialize(entity);
+                // TriggerCausable is added via TriggerCausableAspect
                 go.AddComponent<SelectableVisuals>();
                 break;
             case PoliceUnitAspect policeUnitAspect:

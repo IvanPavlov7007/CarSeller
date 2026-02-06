@@ -14,7 +14,7 @@ public sealed class FreeRoamCityContextMenuProfile : ICityContextMenuProfile
         }
 
         // For now, re-use generic CityObject representation or show nothing.
-        if(model.Subject is MissionLauncher launcher)
+        if (model.Subject is MissionLauncher launcher)
         {
             return CTX_Menu_Tools.MissionLauncherHint(launcher);
         }
@@ -86,27 +86,41 @@ public sealed class FreeRoamCityTriggerProfile : ICityTriggerProfile
 
         Debug.Log($"FreeRoamCityTriggerProfile: Triggered by {ctx.TriggerCause?.GetType().Name} on {ctx.Trigger?.GetType().Name}");
 
+        // PlayerFigure flow: if a player figure is controlled, it is the only thing that can trigger city actions.
+        if (freeRoamGameState.PlayerFigure != null)
+        {
+            if (ctx.TriggerCause.Subject != freeRoamGameState.PlayerFigure)
+                return new TriggerAction(false, null);
+
+            if (ctx.Kind == TriggerContext.TriggerKind.DragEnd && ctx.Trigger.Subject is Car car)
+            {
+                return new TriggerAction(true, () =>
+                {
+                    G.GameFlowController.TryDriveIntoCarFromPlayerFigure(car, out _);
+                    CameraHelper.SetCurrentPositionAtCar();
+                });
+            }
+
+            return new TriggerAction(false, null);
+        }
+
+        // Car flow (existing)
         if (ctx.TriggerCause.Subject != freeRoamGameState.FocusedCar)
             return new TriggerAction(false, null);
-        Car car = ctx.TriggerCause.Subject as Car;
+        Car focusedCar = ctx.TriggerCause.Subject as Car;
+
         if (ctx.Kind == TriggerContext.TriggerKind.DragEnd && ctx.Trigger.Subject is Warehouse warehouse)
         {
-            if (!G.WarehouseEntryCooldownService.CanEnterWarehouse(car,warehouse))
+            if (!G.WarehouseEntryCooldownService.CanEnterWarehouse(focusedCar, warehouse))
                 return new TriggerAction(false, null);
 
             return new TriggerAction
             (
                 true,
-                () => { G.ProcessRunner.Run(new WarehouseEnterProcess(car, warehouse)); }
-
-                // for migration of CarShop
-                //{
-                //    G.CityActionService.PutCarInsideWarehouse(car, warehouse);
-                //    G.GameFlowController.EnterWarehouse(warehouse);
-                //}
+                () => { G.ProcessRunner.Run(new WarehouseEnterProcess(focusedCar, warehouse)); }
             );
         }
-        if(ctx.Trigger is CityEntity cityEntity)
+        if (ctx.Trigger is CityEntity cityEntity)
         {
             return new TriggerAction
             (
@@ -124,7 +138,7 @@ public sealed class FreeRoamCityTriggerProfile : ICityTriggerProfile
                         default:
                             break;
                     }
-                    
+
                 }
             );
         }

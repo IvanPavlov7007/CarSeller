@@ -19,7 +19,6 @@ using static UnityEngine.Rendering.DebugUI.MessageBox;
 /// </summary>
 public static class CityEntitiesCreationHelper
 {
-    
 
     public static CityEntity CreateBuyer(Buyer buyer, CityPosition position)
     {
@@ -101,10 +100,32 @@ public static class CityEntitiesCreationHelper
         return null;
     }
 
+    public static CityEntity CreatePlayerFigure(PlayerFigure playerFigure, CityPosition position)
+    {
+        Debug.Assert(playerFigure != null);
+
+        if (City.EntityLifetimeService.TryCreate(playerFigure, position, out CityEntity entity, playerFigureAspects))
+        {
+            return entity;
+        }
+
+        Debug.LogError("Failed to create player figure entity");
+        return null;
+    }
+
     static CityEntityAspect[] carAspects = new CityEntityAspect[]
     {
         new RigidbodyAspect(),
         new DragInteractableAspect(10),
+        new TriggerableAspect(),
         new CarAspect(),
+    };
+
+    static CityEntityAspect[] playerFigureAspects = new CityEntityAspect[]
+    {
+        new RigidbodyAspect(),
+        new DragInteractableAspect(10),
+        new PlayerFigureAspect(),
+        new TriggerCausableAspect(),
     };
 }

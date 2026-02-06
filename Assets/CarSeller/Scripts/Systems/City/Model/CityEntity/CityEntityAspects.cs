@@ -45,6 +45,14 @@ public sealed class CarAspect : CityEntityAspect
 {
 }
 
+public sealed class PlayerFigureAspect : CityEntityAspect
+{
+}
+
+public sealed class TriggerCausableAspect : CityEntityAspect
+{
+}
+
 public sealed class PoliceUnitAspect : CityEntityAspect
 {
 }

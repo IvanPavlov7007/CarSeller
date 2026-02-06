@@ -62,7 +62,7 @@ public class GameFlowManager : RoutinedObject
                 Transaction sellingTransaction = offer.Accept();
 
                 var feedbackLocation = new TransactionFeedbackLocation(TransactionLocationType.WorldSpace,
-                CityLocatorHelper.GetCityLocation(car).Position.WorldPosition);
+                CityLocatorHelper.GetCityEntity(car).Position.WorldPosition);
                 var result = G.TransactionProcessor.Process(sellingTransaction, feedbackLocation);
                 if(result.Type != TransactionResultType.Success)
                 {
@@ -98,7 +98,7 @@ public class GameFlowManager : RoutinedObject
                 Debug.Assert(car != null, "StealingSequence: car is null on succeed.");
 
                 var location = new TransactionFeedbackLocation(TransactionLocationType.WorldSpace,
-                    CityLocatorHelper.GetCityLocation(car).Position.WorldPosition);
+                    CityLocatorHelper.GetCityEntity(car).Position.WorldPosition);
                 G.TransactionProcessor.Process(
                     new Transaction(TransactionType.Steal, new StealTransactionData(car, warehouse)),
                     location

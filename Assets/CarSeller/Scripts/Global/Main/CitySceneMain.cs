@@ -10,7 +10,12 @@ public abstract partial class GameMain
             CitySceneManager.Instance.SetCurrentProfile((G.GameState));
             CitySceneManager.Instance.InitializeCity();
             setRootActive(true);
-            CameraHelper.SetCurrentPositionAtCar();
+
+            if (G.GameState != null && G.GameState.PlayerFigure != null)
+                CameraHelper.SetCurrentPositionAtPlayerFigure();
+            else
+                CameraHelper.SetCurrentPositionAtCar();
+
             Run.After(0.2f, ()=> G.WarehouseEntryCooldownService.Reset());
         }
 

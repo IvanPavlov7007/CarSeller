@@ -5,8 +5,22 @@ public class GlobalUIMethods : MonoBehaviour
 {
     public void OpenCity()
     {
-        hackPickRandomCar();
+        //hackPickRandomCar();
+        hackCreatePlayerFigure();
         G.GameFlowController.EnterCity();
+    }
+
+    private void hackCreatePlayerFigure()
+    {
+        Warehouse warehouse = G.GameFlowController.CurrentWarehouse;
+        if(warehouse == null)
+            warehouse = (Warehouse)
+            World.Instance.City.Entities.Keys.First(x => x.GetType() == typeof(Warehouse));
+        var figure = new PlayerFigure();
+        CityEntitiesCreationHelper.CreatePlayerFigure(figure,
+            CityLocatorHelper.GetCityEntity(warehouse).Position);
+        G.GameFlowController.TryControlPlayerFigure(figure, out _);
+
     }
 
     /// <summary>

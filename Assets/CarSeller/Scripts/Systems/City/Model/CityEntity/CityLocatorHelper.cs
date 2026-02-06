@@ -68,7 +68,7 @@ public static class CityLocatorHelper
         return carDistances.First().Key;
     }
 
-    public static CityEntity GetCityLocation(ILocatable locatable)
+    public static CityEntity GetCityEntity(ILocatable locatable)
     {
         return G.City.Entities[locatable];
     }
