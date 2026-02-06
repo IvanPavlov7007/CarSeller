@@ -1,0 +1,35 @@
+﻿using Pixelplacement;
+using UnityEngine;
+
+public class DynamicCanvasGroups : Singleton<DynamicCanvasGroups>
+{
+    [SerializeField]
+    CanvasGroup[] canvasGroups;
+    private void Awake()
+    {
+        if(canvasGroups == null || canvasGroups.Length == 0)
+            canvasGroups = GetComponentsInChildren<CanvasGroup>();
+    }
+    public void SetAlpha(float alpha)
+    {
+        foreach (var cg in canvasGroups)
+        {
+            cg.alpha = alpha;
+        }
+    }
+    public void SetInteractable(bool interactable)
+    {
+        foreach (var cg in canvasGroups)
+        {
+            cg.interactable = interactable;
+        }
+    }
+    public void SetBlocksRaycasts(bool blocksRaycasts)
+    {
+        Debug.Log($"Setting blocks raycasts to {blocksRaycasts} for {canvasGroups.Length} canvas groups.");
+        foreach (var cg in canvasGroups)
+        {
+            cg.blocksRaycasts = blocksRaycasts;
+        }
+    }
+}

@@ -149,9 +149,9 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1336095299}
-  - {fileID: 1553937669}
   - {fileID: 1565593396}
   - {fileID: 1830023062}
+  - {fileID: 1553937669}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &292584980
@@ -2404,6 +2404,7 @@ GameObject:
   - component: {fileID: 1553937670}
   - component: {fileID: 1553937674}
   - component: {fileID: 1553937673}
+  - component: {fileID: 1553937675}
   m_Layer: 5
   m_Name: Dynamic Canvas -  City
   m_TagString: Untagged
@@ -2491,7 +2492,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!114 &1553937673
 MonoBehaviour:
@@ -2518,6 +2519,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55938fb1577dd4ad3af7e994048c86f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &1553937675
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1553937668}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1565001130
 GameObject:
   m_ObjectHideFlags: 0

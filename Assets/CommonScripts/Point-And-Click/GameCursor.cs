@@ -87,18 +87,57 @@ public class GameCursor : Singleton<GameCursor>
         return scheme.IndexOf("touch", StringComparison.OrdinalIgnoreCase) >= 0;
     }
 
-    // Returns true if the given screen position is over any UI element.
-    private bool IsPointerOverUI(Vector2 screenPosition)
+    private static int GetCanvasSortingOrder(Canvas canvas)
     {
-        if (EventSystem.current == null) return false;
+        if (canvas == null) return int.MinValue;
 
-        var eventData = new PointerEventData(EventSystem.current)
-        {
-            position = screenPosition
-        };
+        // For ScreenSpaceOverlay, sortingOrder is the meaningful value.
+        // For other modes, sortingOrder is still used (plus sortingLayer), but this keeps it simple and deterministic.
+        return canvas.sortingOrder;
+    }
+
+    private static int GetTopmostUISortingOrder(Vector2 screenPosition)
+    {
+        if (EventSystem.current == null) return int.MinValue;
+
+        var eventData = new PointerEventData(EventSystem.current) { position = screenPosition };
         var results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, results);
-        return results.Count > 0;
+
+        int topOrder = int.MinValue;
+
+        for (int i = 0; i < results.Count; i++)
+        {
+            var go = results[i].gameObject;
+            if (go == null) continue;
+
+            // Closest canvas in parents is the canvas controlling the draw order.
+            var canvas = go.GetComponentInParent<Canvas>();
+            if (canvas == null) continue;
+
+            int order = GetCanvasSortingOrder(canvas);
+            if (order > topOrder)
+            {
+                topOrder = order;
+            }
+        }
+
+        return topOrder;
+    }
+
+    private bool ShouldSuppressWorldInputDueToUI(Vector2 screenPosition, Interactable hoveredInteractable)
+    {
+        int topUiOrder = GetTopmostUISortingOrder(screenPosition);
+        if (topUiOrder == int.MinValue)
+            return false; // no UI hit
+
+        // If there is no hovered interactable, UI always wins.
+        if (hoveredInteractable == null)
+            return true;
+
+        // Only suppress world input if UI is on top of (or equal to) the interactable.
+        // If interactable has higher "sortingOrder", it should receive input even if pointer is over UI.
+        return topUiOrder >= hoveredInteractable.sortingOrder;
     }
 
     private void HandlePointerInput()
@@ -135,8 +174,13 @@ public class GameCursor : Singleton<GameCursor>
 
         lastScreenPosition = pointerPosition;
 
-        // If pointer is over UI, suppress interactions and clear hover.
-        if (IsPointerOverUI(lastScreenPosition))
+        Vector2 worldPosition = ScreenToWorld(lastScreenPosition);
+
+        // Determine hovered interactable first (needed to decide UI suppression based on sorting order).
+        currentInteractable = updateCurrentInteractable(currentInteractable, worldPosition, interactableLayers);
+
+        // If pointer is over UI whose canvas order is >= hovered interactable, suppress world interactions.
+        if (ShouldSuppressWorldInputDueToUI(lastScreenPosition, currentInteractable))
         {
             if (currentInteractable != null)
             {
@@ -181,9 +225,6 @@ public class GameCursor : Singleton<GameCursor>
             pointerWasPressed = pointerPressed;
             return;
         }
-
-        Vector2 worldPosition = ScreenToWorld(lastScreenPosition);
-        currentInteractable = updateCurrentInteractable(currentInteractable, worldPosition, interactableLayers);
 
         // Press start
         if (pointerPressedThisFrame)
@@ -376,7 +417,6 @@ public class GameCursor : Singleton<GameCursor>
 
     public void CancelCurrentInteraction()
     {
-        // If there is an active drag, end it properly
         if (dragStarted && draggedInteractable != null)
         {
             endDrag();

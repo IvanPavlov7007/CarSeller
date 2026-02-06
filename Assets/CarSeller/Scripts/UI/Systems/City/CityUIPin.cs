@@ -42,8 +42,12 @@ public class CityUIPin : MonoBehaviour
 
     private void OnDisable()
     {
+        if (cityViewObjectController != null)
         cityViewObjectController.OnDestroyed -= handleObjectDestroyed;
-        gameObject.GetComponentInChildren<Button>().onClick.AddListener(onClick);
+
+        var btn = gameObject.GetComponentInChildren<Button>();
+        if (btn != null)
+            btn.onClick.RemoveListener(onClick);
     }
 
     private void handleObjectDestroyed()
