@@ -100,7 +100,7 @@ public static class G
             { TransactionType.Exchange, new ExchangeHandler() },
             {TransactionType.StripCar, new StripCarHandler() },
             {TransactionType.PullCarFromWarehouse, new PullCarFromWarehouseHandler() },
-            {TransactionType.PutCarInWarehouse, new PutCarInWarehouseHandler() },
+            {TransactionType.PutProductsInWarehouse, new PutProductsInWarehouseHandler() },
         });
     }
 }

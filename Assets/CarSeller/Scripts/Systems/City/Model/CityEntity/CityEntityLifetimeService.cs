@@ -14,7 +14,7 @@ public class CityEntityLifetimeService
             return false;
         }
 
-        entity = new CityEntity(G.City, subject, position);
+        entity = new CityEntity(G.City, subject, position, aspects);
         G.City.Entities[subject] = entity;
         GameEvents.Instance.OnLocatableRegistered?.Invoke(new LocatableCreatedEventData(subject, entity));
 
@@ -32,7 +32,7 @@ public class CityEntityLifetimeService
             return false;
         }
 
-        entity = new CityEntity(G.City, position);
+        entity = new CityEntity(G.City, position, aspects);
         G.City.Entities[product] = entity;
         return G.ProductLifetimeService.MoveProduct(product, entity);
     }
@@ -65,15 +65,16 @@ public class CityEntityLifetimeService
                     break;
 
                 default:
+                    // calling this first because some destroy trackers might rely on the entity still being in the city (e.g., for position info)
+                    GameEvents.Instance.OnLocatableDestroyed?.Invoke(new LocatableDestroyedEventData(anyLocatable));
                     if (!removeEntity(anyLocatable))
                         Debug.LogError($"Failed to remove city entity for locatable {anyLocatable}");
-
-                    GameEvents.Instance.OnLocatableDestroyed?.Invoke(new LocatableDestroyedEventData(anyLocatable));
                     break;
             }
         }
         finally
         {
+            Debug.Log($"{anyLocatable} is being destroyed");
             _destroyInProgress.Remove(anyLocatable);
         }
     }

@@ -29,17 +29,27 @@ public sealed class CityEntity : ILocation, ICityPositionable
         return aspects.OfType<T>().ToArray();
     }
 
-    internal CityEntity(City city, ILocatable subject, CityPosition initialCityPosition)
+    internal CityEntity(City city, ILocatable subject, CityPosition initialCityPosition, ICollection<CityEntityAspect> aspects)
     {
         City = city;
         Position = initialCityPosition;
         Attach(subject);
+        AddAspects(aspects);
     }
 
-    internal CityEntity(City city, CityPosition initialCityPosition)
+    internal CityEntity(City city, CityPosition initialCityPosition, ICollection<CityEntityAspect> aspects)
     {
         City = city;
         Position = initialCityPosition;
+        AddAspects(aspects);
+    }
+
+    private void AddAspects(ICollection<CityEntityAspect> aspectsToAdd)
+    {
+        foreach (var aspect in aspectsToAdd)
+        {
+            aspects.Add(aspect);
+        }
     }
 
     // ILocation implementation

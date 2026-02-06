@@ -84,14 +84,14 @@ public sealed class StealingCityTriggerProfile : ICityTriggerProfile
             return new TriggerAction(false, null);
         }
 
-        var warehouse = ctx.Trigger as Warehouse;
+        var warehouse = ctx.Trigger.Subject as Warehouse;
         Debug.Assert(warehouse != null, "StealingCityTriggerProfile: trigger is not Warehouse");
         Debug.Assert(stealingState.StealingCar != null, "StealingCityTriggerProfile: StealingCar is null");
 
         bool canProceed =
             G.Player.Owns(warehouse) &&
             warehouse.AvailableCarParkingSpots > 0 &&
-            ctx.TriggerCause as Car == stealingState.StealingCar;
+            ctx.TriggerCause.Subject as Car == stealingState.StealingCar;
 
         System.Action action = null;
         if (canProceed)

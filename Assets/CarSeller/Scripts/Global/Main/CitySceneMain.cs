@@ -11,6 +11,7 @@ public abstract partial class GameMain
             CitySceneManager.Instance.InitializeCity();
             setRootActive(true);
             CameraHelper.SetCurrentPositionAtCar();
+            Run.After(0.2f, ()=> G.WarehouseEntryCooldownService.Reset());
         }
 
         public void Exit()

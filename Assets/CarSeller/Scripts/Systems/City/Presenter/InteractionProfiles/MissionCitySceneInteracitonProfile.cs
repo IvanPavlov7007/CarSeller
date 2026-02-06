@@ -27,9 +27,9 @@ public sealed class MissionCityTriggerProfile : ICityTriggerProfile
             Debug.LogError($"{this} used with wrong {ctx.GameState?.GetType().Name}");
             return new TriggerAction(false, null);
         }
-        if (ctx.TriggerCause != missionGameState.FocusedCar)
+        if (ctx.TriggerCause.Subject != missionGameState.FocusedCar)
             return new TriggerAction(false, null);
-        Car car = ctx.TriggerCause as Car;
+        Car car = ctx.TriggerCause.Subject as Car;
 
         if (ctx.Trigger is CityEntity cityEntity)
         {

@@ -1,13 +1,14 @@
 ﻿public class CarIntoWarehousePolicy : ICarWarehousePolicy
 {
     public readonly IStrippingPolicy productStrippingPolicy = 
-        new EnsureAtLeastOneStrippedPolicy(ProbabilityBasedStrippingPolicy.Create01(0.3f));
+        new EnsureAtLeastOneStrippedPolicy(ProbabilityBasedStrippingPolicy.Create01(1f));
 
     public IOffer Resolve(Car car, Warehouse warehouse, OperationContext ctx)
     {
-        if (GameRules.WarehouseCanStoreCar.Check(car,warehouse))
+        if (GameRules.CarBelongsToPlayer.Check(car))
         {
-            return new PutCarInWarehouseOffer(car, warehouse);
+            if(GameRules.WarehouseCanStoreCar.Check(car, warehouse))
+                return new PutCarInWarehouseOffer(car, warehouse);
         }
         else if (GameRules.WarehouseCanStripCar.Check(car,warehouse))
         {

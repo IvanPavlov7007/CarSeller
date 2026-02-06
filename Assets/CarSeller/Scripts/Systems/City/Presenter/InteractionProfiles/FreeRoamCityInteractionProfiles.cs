@@ -84,10 +84,12 @@ public sealed class FreeRoamCityTriggerProfile : ICityTriggerProfile
         FreeRoamGameState freeRoamGameState = ctx.GameState as FreeRoamGameState;
         Debug.Assert(freeRoamGameState != null, "FreeRoamCityTriggerProfile: gameState is not FreeRoamGameState");
 
-        if (ctx.TriggerCause != freeRoamGameState.FocusedCar)
+        Debug.Log($"FreeRoamCityTriggerProfile: Triggered by {ctx.TriggerCause?.GetType().Name} on {ctx.Trigger?.GetType().Name}");
+
+        if (ctx.TriggerCause.Subject != freeRoamGameState.FocusedCar)
             return new TriggerAction(false, null);
-        Car car = ctx.TriggerCause as Car;
-        if (ctx.Trigger is Warehouse warehouse)
+        Car car = ctx.TriggerCause.Subject as Car;
+        if (ctx.Trigger.Subject is Warehouse warehouse)
         {
             if (!G.WarehouseEntryCooldownService.CanEnterWarehouse(car,warehouse))
                 return new TriggerAction(false, null);

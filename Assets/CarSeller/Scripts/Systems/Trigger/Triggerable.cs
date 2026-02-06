@@ -31,7 +31,7 @@ public class Triggerable : MonoBehaviour, ITriggerable
     {
         ModelProvider triggerCause = collision.GetComponentInParent<ModelProvider>();
         Debug.Assert(triggerCause != null);
-        if(triggerCause != null)
+        if (triggerCause != null)
             OnTriggerEntered?.Invoke(contentProvider, triggerCause);
     }
 }

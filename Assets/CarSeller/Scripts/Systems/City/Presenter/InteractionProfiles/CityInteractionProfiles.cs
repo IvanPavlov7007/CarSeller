@@ -96,13 +96,13 @@ public sealed class CityTriggerProfileRegistry
 
 public class TriggerContext
 {
-    public object Trigger { get; private set; }
-    public object TriggerCause { get; private set; }
+    public CityEntity Trigger { get; private set; }
+    public CityEntity TriggerCause { get; private set; }
     public GameObject TriggerView { get; set; }
     public GameObject TriggerCauseView { get; set; }
     public GameState GameState { get; set; }
 
-    public TriggerContext(object trigger, object triggerCause, GameState gameState, GameObject triggerView, GameObject triggerCauseView)
+    public TriggerContext(CityEntity trigger, CityEntity triggerCause, GameState gameState, GameObject triggerView, GameObject triggerCauseView)
     {
         Trigger = trigger;
         TriggerCause = triggerCause;

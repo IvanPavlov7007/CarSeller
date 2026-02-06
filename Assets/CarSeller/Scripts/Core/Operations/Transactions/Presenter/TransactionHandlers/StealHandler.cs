@@ -16,23 +16,16 @@
         
         TransactionResult result;
 
-        if (G.CityActionService.PutCarInsideWarehouse(car, targetWarehouse))
+        var putInsideResult = WarehouseActionsHelper.TryPutProductsInsideWarehouse(targetWarehouse, car);
+
+        if (putInsideResult.putInsideProducts.Count > 0)
         {
             result = TransactionResult.Success();
         }
         else // couldn't find space in the warehouse
         {
-            result = new TransactionResult(TransactionResultType.Failure, data: new WarehousePlacingFailureData(targetWarehouse));
+            result = new TransactionResult(TransactionResultType.Failure, data: new WarehousePlacingResultData(putInsideResult,targetWarehouse));
         }
         return result;
-    }
-}
-
-public class WarehousePlacingFailureData : ITransactionResultData
-{
-    public Warehouse warehouse;
-    public WarehousePlacingFailureData(Warehouse warehouse)
-    {
-        this.warehouse = warehouse;
     }
 }

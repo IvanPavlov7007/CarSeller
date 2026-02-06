@@ -21,7 +21,6 @@ public class PoliceUnit : CityDestroyable, IPoliceUnitAIData, ILocatable
         GraphMovement = new GraphMovement(this,speedVariations);
         ConeVision = new SliceVision(this, settings);
         Personality = personality;
-        randomizeInitialDirection();
     }
 
     /// <summary>
@@ -34,6 +33,7 @@ public class PoliceUnit : CityDestroyable, IPoliceUnitAIData, ILocatable
     public void Initialize(CityEntity cityEntity)
     {
         CityPositionable = cityEntity;
+        randomizeInitialDirection();
     }
 
     private void randomizeInitialDirection()

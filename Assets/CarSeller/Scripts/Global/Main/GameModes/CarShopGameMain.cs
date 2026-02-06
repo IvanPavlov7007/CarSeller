@@ -54,12 +54,16 @@ public class CarShopGameMain : GameMain
             Debug.LogError("CarShop warehouse not found in WorldRegistry.");
             return;
         }
-        if (G.CityActionService.PutCarInsideWarehouse
-            (car, carShopWarehouse))
+
+        var result = G.TransactionProcessor.Process(new Transaction(
+            TransactionType.PutProductsInWarehouse,
+            new PutProductsInWarehouseTransactionData(carShopWarehouse, car)));
+
+        if (result.Type == TransactionResultType.Success)
         {
             G.GameFlowController.EnterWarehouse(carShopWarehouse);
         }
         else
-            Debug.LogError("Failed to put car inside carshop warehouse.");
+            Debug.LogError("Failed to put car inside carshop warehouse: " + result);
     }
 }

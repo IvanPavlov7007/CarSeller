@@ -31,7 +31,7 @@ public enum TransactionType
     Exchange,
 
     StripCar,
-    PutCarInWarehouse,
+    PutProductsInWarehouse,
     PullCarFromWarehouse,
 }
 

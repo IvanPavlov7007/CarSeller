@@ -14,7 +14,7 @@ public class StripCarHandler : TransactionHandler
         var stripCarData = transaction.Data as StripCarTransactionData;
         if (stripCarData == null)
             return TransactionResult.InvalidTransaction("Invalid data: expected StripCarTransactionData.");
-        if(stripCarData.TargetWarehouse == null)
+        if(stripCarData.TargetProductsHolder == null)
             return TransactionResult.InvalidTransaction("Invalid data: TargetWarehouse is null.");
         if(stripCarData.Car == null)
             return TransactionResult.InvalidTransaction("Invalid data: CarToStrip is null.");
@@ -25,44 +25,24 @@ public class StripCarHandler : TransactionHandler
         var process = stripCarData.StrippingProcess;
         process.Strip();
 
-        if (!addStrippedParts(process.StrippedParts, stripCarData.TargetWarehouse,out StripResultData stripResultData))
-        {
-            return new TransactionResult(TransactionResultType.Failure, data: new WarehousePlacingFailureData(stripCarData.TargetWarehouse));
-        }
+        var resultData = new StripResultData(addStrippedParts(process.StrippedParts, stripCarData.TargetProductsHolder));
 
         // Build result first
-        var result = TransactionResult.Success(stripResultData);
+        var result = TransactionResult.Success(resultData);
         return result;
     }
 
-    private bool addStrippedParts(IReadOnlyList<Product> strippedParts, Warehouse warehouse, out StripResultData stripResultData)
+    private ProductsPutInsideResult addStrippedParts(IReadOnlyList<Product> strippedParts, ITargetProductsHolder targetProductsHolder)
     {
-        stripResultData = new StripResultData();
-
-        foreach (var product in strippedParts)
-        {
-            //first check if there is space in the warehouse
-            //for now only for cars
-            if(product is Car)
-            {
-                if(warehouse.AvailableCarParkingSpots <= 0)
-                {
-                    stripResultData.carSkipped = true;
-                    continue;
-                }
-            }
-
-            if (!G.ProductLifetimeService.MoveProduct(product, warehouse.GetEmptyLocation()))
-            {
-                return false;
-            }
-        }
-        return true;
+        return targetProductsHolder.PutProducts(strippedParts);
     }
 }
 
 public class StripResultData : ITransactionResultData
 {
-    public bool carSkipped = false;
-
+    public readonly ProductsPutInsideResult PutInsideResult;
+    public StripResultData(ProductsPutInsideResult putInsideResult)
+    {
+        PutInsideResult = putInsideResult;
+    }
 }

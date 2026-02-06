@@ -3,11 +3,11 @@
     public static readonly WarehouseCanStoreCar WarehouseCanStoreCar = new WarehouseCanStoreCar();
     public static readonly WarehouseCanStripCar WarehouseCanStripCar = new WarehouseCanStripCar();
     public static readonly CanRideOutCar CanRideOutCar = new CanRideOutCar();
-    public static readonly CarCanBeStored CarCanBeStored = new CarCanBeStored();
+    public static readonly CarBelongsToPlayer CarBelongsToPlayer = new CarBelongsToPlayer();
     public static readonly CarCanBeDisassembled CarCanBeDisassembled = new CarCanBeDisassembled();
 }
 
-public class CarCanBeStored
+public class CarBelongsToPlayer
 {
     public bool Check(Car car)
     {
@@ -61,7 +61,7 @@ public class WarehouseCanStoreCar : CarWarehouseRule
             return false;
 
         //TODO check if wh have capacity and if car is storable
-        return GameRules.CarCanBeStored.Check(car) && warehouse.AvailableCarParkingSpots > 0;
+        return warehouse.AvailableCarParkingSpots > 0;
     }
 }
 

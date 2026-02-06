@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class WarehouseEnterProcess : IProcess
@@ -79,31 +80,40 @@ public class WarehouseEnterProcess : IProcess
         yield return new WaitUntil(() => G.GameFlowController.CurrentSceneType == GameFlowController.GameSceneType.Warehouse);
         yield return new WaitForSeconds(0.2f);
 
-        var transaction = stripOffer.Accept();
+        var stripTransaction = stripOffer.Accept();
+
+        var stripResult = G.TransactionProcessor.Process(stripTransaction);
+        if (stripResult.Type != TransactionResultType.Success)
+        {
+            Debug.LogError("Failed to strip car inside warehouse: " + stripResult.Type);
+            yield break;
+        }
+        
 
         //open results window with claim button
-        var stripData = transaction.Data as StripCarTransactionData;
+        var stripData = stripTransaction.Data as StripCarTransactionData;
         element = CTX_Menu_Tools.StipReslutsClaim(stripData.StrippingProcess.StrippedParts);
         menu = FixedContextMenuManager.Instance.CreateContextMenu(element);
         done = false;
         menu.Closed += _ => done = true;
         yield return new WaitUntil(() => done);
+        //on claim put things inside
 
-        var result = G.TransactionProcessor.Process(transaction);
-        if (result.Type != TransactionResultType.Success)
+        var putTransaction = new Transaction(TransactionType.PutProductsInWarehouse,
+            new PutProductsInWarehouseTransactionData(Warehouse,
+                stripData.StrippingProcess.StrippedParts.ToArray()
+            ));
+        var putResult = G.TransactionProcessor.Process(putTransaction);
+
+        if (putResult.Data is WarehousePlacingResultData placingData)
         {
-            Debug.LogError("Failed to strip car inside warehouse: " + result.Type);
-            yield break;
-        }
-        if(result.Data is StripResultData stripResultData)
-        {
-            Debug.Log("Stripping completed. Car skipped: " + stripResultData.carSkipped);
-            if (stripResultData.carSkipped)
+            Debug.Log("Products placed inside warehouse: " + placingData.PuttingResult.skippedProducts.Count);
+            if (placingData.PuttingResult.CarsSkipped)
             {
                 GlobalHintManager.Instance.ShowHint("Couldn't store care base: no place available");
             }
-        }
+        } 
 
-        //on claim put things inside
+        
     }
 }

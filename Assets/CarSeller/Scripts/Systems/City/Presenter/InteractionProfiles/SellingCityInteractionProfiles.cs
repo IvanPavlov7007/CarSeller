@@ -63,8 +63,8 @@ public sealed class SellingCityTriggerProfile : ICityTriggerProfile
         Debug.Assert(sellingState.Buyer != null, "SellingCityTriggerProfile: Buyer is null");
 
         bool canProceed =
-            ctx.Trigger as Buyer == sellingState.Buyer &&
-            ctx.TriggerCause as Car == sellingState.SellingCar;
+            ctx.Trigger.Subject as Buyer == sellingState.Buyer &&
+            ctx.TriggerCause.Subject as Car == sellingState.SellingCar;
 
         System.Action action = null;
         if (canProceed)

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 //Most of the time a car only exits one warehouse,
 //but it’s still valid that during weird flows you could arm multiple:
@@ -14,6 +15,7 @@ public sealed class WarehouseEntryCooldownService
 
     public bool CanEnterWarehouse(Car car, Warehouse warehouse)
     {
+        Debug.Log($"Checking if car {car?.Name} can enter warehouse {warehouse?.Name}.");
         if (car == null || warehouse == null)
             return false;
 
@@ -26,7 +28,7 @@ public sealed class WarehouseEntryCooldownService
         // cleanup
         if (warehouses.Count == 0)
             _skipNextEntryForCarAndWarehouse.Remove(car);
-
+        Debug.Log($"Allowing entry of warehouse {warehouse.Name} for car {car.Name} after skipping one entry.");
         return false;
     }
 
@@ -42,6 +44,8 @@ public sealed class WarehouseEntryCooldownService
         }
 
         warehouses.Add(warehouse);
+
+        Debug.Log($"Notified exit of warehouse {warehouse.Name} for car {car.Name}. Will skip next entry.");
     }
 
     public void Clear(Car car, Warehouse warehouse)
