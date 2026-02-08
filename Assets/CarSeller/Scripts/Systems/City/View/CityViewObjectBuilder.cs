@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using UnityEngine;
 using static UnityEngine.Rendering.GPUSort;
+using System.Linq;
 
 [CreateAssetMenu(fileName = "CityViewObjectBuilder", menuName = "Configs/View/CityViewObjectBuilder")]
 public class CityViewObjectBuilder : ScriptableObject
@@ -119,6 +120,13 @@ public class CityViewObjectBuilder : ScriptableObject
         foreach (var aspect in entity.Aspects)
         {
             initializeAspect(go, viewController, entity, aspect);
+        }
+
+        // If this entity is distance-scaled by vision, attach the scaler once.
+        if (entity.Aspects != null && entity.Aspects.OfType<VisionDistanceScaleAspect>().Any())
+        {
+            if (go.GetComponent<VisionDistanceScaler>() == null)
+                go.AddComponent<VisionDistanceScaler>();
         }
     }
 

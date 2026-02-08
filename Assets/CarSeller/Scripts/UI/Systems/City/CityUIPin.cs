@@ -36,6 +36,10 @@ public class CityUIPin : MonoBehaviour
 
         gameObject.AddComponent<ViewStateChangerUI>().Initialize(cityViewObjectController);
 
+        // New: mirror vision scaling onto the UI pin.
+        if (gameObject.GetComponent<VisionPinScaler>() == null)
+            gameObject.AddComponent<VisionPinScaler>();
+
         cityViewObjectController.OnDestroyed += handleObjectDestroyed;
         gameObject.GetComponentInChildren<Button>().onClick.AddListener(onClick);
     }

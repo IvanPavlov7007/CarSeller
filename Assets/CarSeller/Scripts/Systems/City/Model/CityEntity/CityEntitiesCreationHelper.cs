@@ -120,6 +120,7 @@ public static class CityEntitiesCreationHelper
         new TriggerableAspect(),
         new TriggerCausableAspect(),
         new CarAspect(),
+new VisionDistanceScaleAspect()
     };
 
     static CityEntityAspect[] playerFigureAspects = new CityEntityAspect[]
@@ -128,5 +129,6 @@ public static class CityEntitiesCreationHelper
         new DragInteractableAspect(1),
         new PlayerFigureAspect(),
         new TriggerCausableAspect(),
+new VisionDistanceScaleAspect()
     };
 }
