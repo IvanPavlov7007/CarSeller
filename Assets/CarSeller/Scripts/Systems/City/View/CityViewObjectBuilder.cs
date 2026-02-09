@@ -20,6 +20,7 @@ public class CityViewObjectBuilder : ScriptableObject
     public PinStyle BuyerPinStyle;
 
     CityUIBuilder CityUIBuilder = new CityUIBuilder();
+    private AspectsViewBuilder _aspectsViewBuilder;
 
     public CityViewObjectController BuildObject(CityEntity entity)
     {
@@ -117,6 +118,10 @@ public class CityViewObjectBuilder : ScriptableObject
 
     void initializeAspects(GameObject go, CityViewObjectController viewController, CityEntity entity)
     {
+        // Keep one builder instance per builder asset.
+        // Note: views dictionary is managed by CitySceneManager; for now this builder instance just applies initial aspects.
+        // Dynamic updates are handled by an instance created by CitySceneManager.
+
         foreach (var aspect in entity.Aspects)
         {
             initializeAspect(go, viewController, entity, aspect);

@@ -49,7 +49,21 @@ public sealed class CityEntity : ILocation, ICityPositionable
         foreach (var aspect in aspectsToAdd)
         {
             aspects.Add(aspect);
+            if (aspect is CityEntityAspectBase b)
+                b.Entity = this;
         }
+    }
+
+    internal bool TryAddAspectInternal(CityEntityAspect aspect)
+    {
+        if (aspect == null) return false;
+        return aspects.Add(aspect);
+    }
+
+    internal bool TryRemoveAspectInternal(CityEntityAspect aspect)
+    {
+        if (aspect == null) return false;
+        return aspects.Remove(aspect);
     }
 
     // ILocation implementation

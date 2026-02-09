@@ -1,6 +1,7 @@
 ﻿using Pixelplacement;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.WSA;
 using static UnityEngine.Rendering.DebugUI.MessageBox;
@@ -53,6 +54,7 @@ public static class CityEntitiesCreationHelper
         {
             new InteractableAspect(5),
             new TriggerableAspect(),
+            new VisionDistanceScaleAspect(),
         };
         aspects.AddRange(additionalAspects);
 
@@ -120,7 +122,7 @@ public static class CityEntitiesCreationHelper
         new TriggerableAspect(),
         new TriggerCausableAspect(),
         new CarAspect(),
-new VisionDistanceScaleAspect()
+        new VisionDistanceScaleAspect()
     };
 
     static CityEntityAspect[] playerFigureAspects = new CityEntityAspect[]
@@ -129,6 +131,6 @@ new VisionDistanceScaleAspect()
         new DragInteractableAspect(1),
         new PlayerFigureAspect(),
         new TriggerCausableAspect(),
-new VisionDistanceScaleAspect()
+        new VisionDistanceScaleAspect()
     };
 }

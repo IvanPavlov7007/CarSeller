@@ -46,7 +46,7 @@ public sealed class VisionDistanceScaler : MonoBehaviour
         if (!TryResolveAspect() || _aspect.Disable)
             return;
 
-        var fog = VisualFogOfWarManager.Instance;
+        var fog = CityFogRenderer.Instance;
         if (fog == null)
         {
             ApplyVisibility(visible: true);
@@ -55,14 +55,14 @@ public sealed class VisionDistanceScaler : MonoBehaviour
 
         Vector2 myPos = _controller.CityEntity.Position.WorldPosition;
 
-        if (!fog.TryGetNearestCenter(myPos, out var center))
+        if (!G.CityVision.TryGetNearestCenter(myPos, out var centerEntity, out var centerAspect) || centerAspect?.Config == null)
         {
             ApplyVisibility(visible: false);
             return;
         }
 
-        float dist = Vector2.Distance(myPos, center.Position);
-        var cfg = center.Config;
+        float dist = Vector2.Distance(myPos, centerEntity.Position.WorldPosition);
+        var cfg = centerAspect.Config;
 
         if (cfg.HideBeyondMax && dist > cfg.VisionMax)
         {

@@ -6,7 +6,7 @@ using UnityEngine;
 /// The fog will reveal an area around it with the given radius.
 /// Also provides the distance scaling configuration applied to other entities.
 /// </summary>
-public sealed class VisionCenterAspect : CityEntityAspect
+public sealed class VisionCenterAspect : CityEntityAspectBase
 {
     public readonly VisionConfig Config;
 
@@ -25,7 +25,7 @@ public sealed class VisionCenterAspect : CityEntityAspect
 /// Enables scaling / fading with distance to the nearest vision center.
 /// The scaling curve/ranges are taken from the nearest vision center's <see cref="VisionCenterAspect"/>.
 /// </summary>
-public sealed class VisionDistanceScaleAspect : CityEntityAspect
+public sealed class VisionDistanceScaleAspect : CityEntityAspectBase
 {
     /// <summary>
     /// When true, this entity is always rendered at its base scale and never hidden.

@@ -2,7 +2,16 @@
 
 public interface CityEntityAspect { }
 
-public sealed class MarkerReferenceAspect : CityEntityAspect
+/// <summary>
+/// Base class for aspects that need to know which CityEntity they belong to.
+/// The reference is assigned by `CityEntityAspectsService` when the aspect is added.
+/// </summary>
+public abstract class CityEntityAspectBase : CityEntityAspect
+{
+    public CityEntity Entity { get; internal set; }
+}
+
+public sealed class MarkerReferenceAspect : CityEntityAspectBase
 {
     public readonly City.CityMarker CityMarker;
 
@@ -11,7 +20,7 @@ public sealed class MarkerReferenceAspect : CityEntityAspect
         CityMarker = cityMarker;
     }
 }
-public sealed class PinStyleAspect : CityEntityAspect
+public sealed class PinStyleAspect : CityEntityAspectBase
 {
     public readonly PinStyle Style;
 
@@ -20,11 +29,11 @@ public sealed class PinStyleAspect : CityEntityAspect
         Style = style ?? throw new ArgumentNullException(nameof(style));
     }
 }
-public sealed class TriggerableAspect : CityEntityAspect
+public sealed class TriggerableAspect : CityEntityAspectBase
 {
 }
 
-public class InteractableAspect : CityEntityAspect
+public class InteractableAspect : CityEntityAspectBase
 {
     public readonly int SortingOrder;
 
@@ -41,23 +50,23 @@ public sealed class DragInteractableAspect : InteractableAspect
     }
 }
 
-public sealed class CarAspect : CityEntityAspect
+public sealed class CarAspect : CityEntityAspectBase
 {
 }
 
-public sealed class PlayerFigureAspect : CityEntityAspect
+public sealed class PlayerFigureAspect : CityEntityAspectBase
 {
 }
 
-public sealed class TriggerCausableAspect : CityEntityAspect
+public sealed class TriggerCausableAspect : CityEntityAspectBase
 {
 }
 
-public sealed class PoliceUnitAspect : CityEntityAspect
+public sealed class PoliceUnitAspect : CityEntityAspectBase
 {
 }
 
-public sealed class RigidbodyAspect : CityEntityAspect
+public sealed class RigidbodyAspect : CityEntityAspectBase
 {
 
 }

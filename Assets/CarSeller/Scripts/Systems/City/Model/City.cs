@@ -19,7 +19,7 @@ public class City : ILocationsHolder
 
     private CityEntityLifetimeService lifetimeService = new CityEntityLifetimeService();
     public static CityEntityLifetimeService EntityLifetimeService => G.City.lifetimeService;
-
+    public static CityEntityAspectsService AspectsService => G.CityEntityAspectsService;
     // MARKERS RUNTIME
     public sealed class CityMarker
     {
