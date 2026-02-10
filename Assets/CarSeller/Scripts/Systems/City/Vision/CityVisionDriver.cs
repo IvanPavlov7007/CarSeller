@@ -41,8 +41,17 @@ public sealed class CityVisionDriver : Singleton<CityVisionDriver>
 
     private void Refresh()
     {
-        if (G.City == null || G.GameState == null)
+        if (G.City == null)
         {
+            Debug.LogWarning("CityVisionDriver: G.City is null; clearing vision center");
+            ClearCurrentCenter();
+            G.CityVision.RebuildFromCity(G.City);
+            return;
+        }
+
+        if (G.GameState == null)
+        {
+            Debug.LogWarning("CityVisionDriver: G.GameState is null; clearing vision center");
             ClearCurrentCenter();
             G.CityVision.RebuildFromCity(G.City);
             return;
@@ -54,6 +63,7 @@ public sealed class CityVisionDriver : Singleton<CityVisionDriver>
 
         if (target == null)
         {
+            Debug.LogWarning("CityVisionDriver: No controlled locatable (FocusedCar/PlayerFigure); clearing vision center");
             ClearCurrentCenter();
             G.CityVision.RebuildFromCity(G.City);
             return;
@@ -61,6 +71,7 @@ public sealed class CityVisionDriver : Singleton<CityVisionDriver>
 
         if (!G.City.TryGetEntity(target, out var entity) || entity == null)
         {
+            Debug.LogWarning($"CityVisionDriver: Controlled locatable {target} has no CityEntity; clearing vision center");
             ClearCurrentCenter();
             G.CityVision.RebuildFromCity(G.City);
             return;
@@ -68,7 +79,6 @@ public sealed class CityVisionDriver : Singleton<CityVisionDriver>
 
         if (_currentCenterEntity == entity)
         {
-            // Still recompute centers set in service.
             G.CityVision.RebuildFromCity(G.City);
             return;
         }
@@ -76,9 +86,15 @@ public sealed class CityVisionDriver : Singleton<CityVisionDriver>
         ClearCurrentCenter();
 
         var cfg = target is PlayerFigure ? defaultPlayerFigureVision : defaultFocusedCarVision;
-        G.CityEntityAspectsService.TryAddAspect(entity, new VisionCenterAspect(cfg));
-        _currentCenterEntity = entity;
+        bool added = G.CityEntityAspectsService.TryAddAspect(entity, new VisionCenterAspect(cfg));
+        if (!added)
+        {
+            Debug.LogWarning($"CityVisionDriver: Failed to add VisionCenterAspect to {entity.Subject}");
+            G.CityVision.RebuildFromCity(G.City);
+            return;
+        }
 
+        _currentCenterEntity = entity;
         G.CityVision.RebuildFromCity(G.City);
     }
 

@@ -39,8 +39,8 @@ public sealed class CityFogRenderer : Singleton<CityFogRenderer>
     private void OnEnable()
     {
         // Aspect event-driven updates.
-        G.CityEntityAspectsService.OnAspectAdded += OnAspectAdded;
-        G.CityEntityAspectsService.OnAspectRemoved += OnAspectRemoved;
+        G.CityEntityAspectsService.SubscribeAdded<VisionCenterAspect>(OnVisionCenterAdded);
+        G.CityEntityAspectsService.SubscribeRemoved<VisionCenterAspect>(OnVisionCenterRemoved);
 
         GameEvents.Instance.OnLocatableDestroyed += OnLocatableDestroyed;
         GameEvents.Instance.OnLocatableLocationChanged += OnLocatableLocationChanged;
@@ -54,8 +54,8 @@ public sealed class CityFogRenderer : Singleton<CityFogRenderer>
     {
         if (G.CityEntityAspectsService != null)
         {
-            G.CityEntityAspectsService.OnAspectAdded -= OnAspectAdded;
-            G.CityEntityAspectsService.OnAspectRemoved -= OnAspectRemoved;
+            G.CityEntityAspectsService.UnsubscribeAdded<VisionCenterAspect>(OnVisionCenterAdded);
+            G.CityEntityAspectsService.UnsubscribeRemoved<VisionCenterAspect>(OnVisionCenterRemoved);
         }
 
         if (GameEvents.Instance != null)
@@ -72,17 +72,8 @@ public sealed class CityFogRenderer : Singleton<CityFogRenderer>
         UpdateMasksAndCenters();
     }
 
-    private void OnAspectAdded(CityEntityAspectAddedEventData e)
-    {
-        if (e?.Entity == null) return;
-        if (e.Aspect is VisionCenterAspect) Rebuild();
-    }
-
-    private void OnAspectRemoved(CityEntityAspectRemovedEventData e)
-    {
-        if (e?.Entity == null) return;
-        if (e.Aspect is VisionCenterAspect) Rebuild();
-    }
+    private void OnVisionCenterAdded(CityEntity entity, VisionCenterAspect aspect) => Rebuild();
+    private void OnVisionCenterRemoved(CityEntity entity, VisionCenterAspect aspect) => Rebuild();
 
     private void OnLocatableDestroyed(LocatableDestroyedEventData data) => Rebuild();
     private void OnLocatableLocationChanged(LocatableLocationChangedEventData data) => Rebuild();
@@ -112,7 +103,12 @@ public sealed class CityFogRenderer : Singleton<CityFogRenderer>
 
     private void EnsureMask(CityEntity entity)
     {
-        if (entity == null) return;
+        if (entity == null)
+        {
+            Debug.LogWarning("CityFogRenderer.EnsureMask called with null entity");
+            return;
+        }
+
         if (_circleMasks.ContainsKey(entity)) return;
 
         if (CircleMaskPrefab == null)
@@ -174,7 +170,12 @@ public sealed class CityFogRenderer : Singleton<CityFogRenderer>
             if (entity == null || go == null) continue;
 
             var center = entity.Aspects?.OfType<VisionCenterAspect>().FirstOrDefault();
-            if (center == null || center.Config == null) continue;
+            if (center == null || center.Config == null)
+            {
+                Debug.LogWarning($"CityFogRenderer: Entity {entity.Subject} has a mask but no VisionCenterAspect/Config. Removing mask.");
+                RemoveMask(entity);
+                continue;
+            }
 
             var pos = entity.Position.WorldPosition;
 

@@ -6,8 +6,6 @@ using UnityEngine;
 /// <summary>
 /// Bridges CityEntity aspects to view representation.
 /// Listens to `G.CityEntityAspectsService` and applies/removes view-side components.
-/// 
-/// This is intentionally lightweight and can be used by `CityViewObjectBuilder` for initial setup.
 /// </summary>
 public sealed class AspectsViewBuilder
 {
@@ -17,40 +15,47 @@ public sealed class AspectsViewBuilder
     {
         _views = views ?? throw new ArgumentNullException(nameof(views));
 
-        // Subscribe once.
-        G.CityEntityAspectsService.OnAspectAdded -= OnAspectAdded;
-        G.CityEntityAspectsService.OnAspectRemoved -= OnAspectRemoved;
-        G.CityEntityAspectsService.OnAspectAdded += OnAspectAdded;
-        G.CityEntityAspectsService.OnAspectRemoved += OnAspectRemoved;
+        Debug.Assert(G.CityEntityAspectsService != null, "AspectsViewBuilder: G.CityEntityAspectsService is null");
+
+        // Subscribe to typed aspect notifications.
+        G.CityEntityAspectsService.SubscribeAdded<VisionDistanceScaleAspect>(OnVisionDistanceScaleAdded);
+        G.CityEntityAspectsService.SubscribeRemoved<VisionDistanceScaleAspect>(OnVisionDistanceScaleRemoved);
+
+        // If later we need pin reactions, subscribe to PinStyleAspect as well.
     }
 
     public void ApplyAllExistingAspects(CityEntity entity, CityViewObjectController view)
     {
-        if (entity == null || view == null) return;
+        if (entity == null || view == null)
+        {
+            Debug.LogWarning("AspectsViewBuilder.ApplyAllExistingAspects called with nulls");
+            return;
+        }
 
         foreach (var a in entity.Aspects)
             ApplyAspect(view.gameObject, view, entity, a);
 
-        // Post-pass: attach derived components that depend on presence of aspects.
         EnsureDerivedComponents(view.gameObject, entity);
     }
 
-    private void OnAspectAdded(CityEntityAspectAddedEventData e)
-    {
-        if (e?.Entity == null) return;
-        if (!_views.TryGetValue(e.Entity, out var view) || view == null) return;
+    // (typed aspect callbacks are registered in the constructor)
 
-        ApplyAspect(view.gameObject, view, e.Entity, e.Aspect);
-        EnsureDerivedComponents(view.gameObject, e.Entity);
+    private void OnVisionDistanceScaleAdded(CityEntity entity, VisionDistanceScaleAspect aspect)
+    {
+        if (entity == null) return;
+        if (!_views.TryGetValue(entity, out var view) || view == null) return;
+
+        ApplyAspect(view.gameObject, view, entity, aspect);
+        EnsureDerivedComponents(view.gameObject, entity);
     }
 
-    private void OnAspectRemoved(CityEntityAspectRemovedEventData e)
+    private void OnVisionDistanceScaleRemoved(CityEntity entity, VisionDistanceScaleAspect aspect)
     {
-        if (e?.Entity == null) return;
-        if (!_views.TryGetValue(e.Entity, out var view) || view == null) return;
+        if (entity == null) return;
+        if (!_views.TryGetValue(entity, out var view) || view == null) return;
 
-        RemoveAspectView(view.gameObject, view, e.Entity, e.Aspect);
-        EnsureDerivedComponents(view.gameObject, e.Entity);
+        RemoveAspectView(view.gameObject, view, entity, aspect);
+        EnsureDerivedComponents(view.gameObject, entity);
     }
 
     private static void ApplyAspect(GameObject go, CityViewObjectController view, CityEntity entity, CityEntityAspect aspect)
@@ -64,11 +69,8 @@ public sealed class AspectsViewBuilder
                     go.AddComponent<VisionDistanceScaler>();
                 break;
 
-            case PinStyleAspect:
-                // Pin UI objects are created via CityUIBuilder, but we want to ensure they react to vision as well.
-                // The VisionPinScaler component is attached on the pin instance (CityUIPin.Initialize),
-                // so here we just ensure derived requirements will be satisfied.
-                break;
+            // PinStyleAspect visual representation is created by CityViewObjectBuilder.
+            // Pin-side Vision scaling is handled by `VisionPinScaler` attached to the pin prefab instance.
         }
     }
 
@@ -103,31 +105,9 @@ public sealed class AspectsViewBuilder
             if (scaler != null) UnityEngine.Object.Destroy(scaler);
         }
 
-        // If entity has pins and is vision-scaled, ensure its pin has scaler support by adding a CanvasGroup
-        // (VisionPinScaler will drive alpha if present).
-        bool hasPins = entity.Aspects != null && entity.Aspects.OfType<PinStyleAspect>().Any();
-        if (hasPins && needsDistanceScale)
-        {
-            var pins = UnityEngine.Object.FindObjectsByType<CityUIPin>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-            for (int i = 0; i < pins.Length; i++)
-            {
-                var pin = pins[i];
-                if (pin == null) continue;
-
-                // Match by view controller reference
-                var provider = pin.GetComponentInParent<CityUIPin>();
-                if (provider == null) continue;
-
-                // CityUIPin already caches controller internally; we cannot access it, so match by target transform.
-                var pos = pin.GetComponent<CityUIPinPositioner>();
-                if (pos == null || pos.target != go.transform) continue;
-
-                if (pin.GetComponent<VisionPinScaler>() == null)
-                    pin.gameObject.AddComponent<VisionPinScaler>();
-
-                if (pin.GetComponent<CanvasGroup>() == null)
-                    pin.gameObject.AddComponent<CanvasGroup>();
-            }
-        }
+        // No pin searching here.
+        // Pins are separate objects; they attach `VisionPinScaler` at creation time in `CityUIPin.Initialize()`.
+        // When aspects change dynamically, the correct solution is to have pin instances subscribe to aspect events,
+        // or to track pins by CityEntity in a registry (future improvement).
     }
 }

@@ -21,21 +21,25 @@ public sealed class CityVisionService
 
         if (_aspects != null)
         {
-            _aspects.OnAspectAdded += OnAspectAdded;
-            _aspects.OnAspectRemoved += OnAspectRemoved;
+            _aspects.SubscribeAdded<VisionCenterAspect>(OnVisionCenterAdded);
+            _aspects.SubscribeRemoved<VisionCenterAspect>(OnVisionCenterRemoved);
+        }
+        else
+        {
+            Debug.LogWarning("CityVisionService: AspectsService is null; vision centers won't be tracked via events.");
         }
     }
 
-    private void OnAspectAdded(CityEntityAspectAddedEventData e)
+    private void OnVisionCenterAdded(CityEntity entity, VisionCenterAspect aspect)
     {
-        if (e?.Entity == null) return;
-        if (e.Aspect is VisionCenterAspect) _centers.Add(e.Entity);
+        if (entity == null) return;
+        _centers.Add(entity);
     }
 
-    private void OnAspectRemoved(CityEntityAspectRemovedEventData e)
+    private void OnVisionCenterRemoved(CityEntity entity, VisionCenterAspect aspect)
     {
-        if (e?.Entity == null) return;
-        if (e.Aspect is VisionCenterAspect) _centers.Remove(e.Entity);
+        if (entity == null) return;
+        _centers.Remove(entity);
     }
 
     public void RebuildFromCity(City city)
