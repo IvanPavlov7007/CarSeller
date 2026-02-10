@@ -17,7 +17,7 @@ public class AcquisitionResolver
         {
             case Warehouse warehouse:
                 // When purchasing a warehouse, set its owner to the player.
-                purchasedItem.SetOwner(G.Player);
+                G.OwnershipService.TransferOwnership(warehouse, G.Player);
                 break;
 
             case Car car:
