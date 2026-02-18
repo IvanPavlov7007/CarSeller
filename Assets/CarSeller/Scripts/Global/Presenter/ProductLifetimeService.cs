@@ -6,12 +6,12 @@
 public class ProductLifetimeService
 {
     private readonly ProductLocationService locationService = new ProductLocationService();
-    private readonly OwnershipResolutionService ownershipService = new OwnershipResolutionService();
+    OwnershipResolutionService ownershipService => G.OwnershipService;
 
     public void RegisterProduct(Product product, ILocation location)
     {
         locationService.RegisterProductLocation(product, location);
-        ownershipService.RegisterProduct(product);
+        ownershipService.RegisterOwnable(product);
         ownershipService.tryResolveOwnership(product, location);
     }
 

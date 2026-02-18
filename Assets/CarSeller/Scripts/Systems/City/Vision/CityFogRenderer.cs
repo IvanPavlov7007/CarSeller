@@ -38,24 +38,27 @@ public sealed class CityFogRenderer : Singleton<CityFogRenderer>
 
     private void OnEnable()
     {
-        // Aspect event-driven updates.
-        G.CityEntityAspectsService.SubscribeAdded<VisionCenterAspect>(OnVisionCenterAdded);
-        G.CityEntityAspectsService.SubscribeRemoved<VisionCenterAspect>(OnVisionCenterRemoved);
+        if (G.CityVision == null)
+        {
+            Debug.LogError("CityFogRenderer: G.CityVision is null");
+            return;
+        }
+
+        G.CityVision.OnCenterAdded += OnCenterChanged;
+        G.CityVision.OnCenterRemoved += OnCenterChanged;
 
         GameEvents.Instance.OnLocatableDestroyed += OnLocatableDestroyed;
         GameEvents.Instance.OnLocatableLocationChanged += OnLocatableLocationChanged;
 
-        // Initial sync.
-        G.CityVision.RebuildFromCity(G.City);
         Rebuild();
     }
 
     private void OnDisable()
     {
-        if (G.CityEntityAspectsService != null)
+        if (G.CityVision != null)
         {
-            G.CityEntityAspectsService.UnsubscribeAdded<VisionCenterAspect>(OnVisionCenterAdded);
-            G.CityEntityAspectsService.UnsubscribeRemoved<VisionCenterAspect>(OnVisionCenterRemoved);
+            G.CityVision.OnCenterAdded -= OnCenterChanged;
+            G.CityVision.OnCenterRemoved -= OnCenterChanged;
         }
 
         if (GameEvents.Instance != null)
@@ -72,8 +75,7 @@ public sealed class CityFogRenderer : Singleton<CityFogRenderer>
         UpdateMasksAndCenters();
     }
 
-    private void OnVisionCenterAdded(CityEntity entity, VisionCenterAspect aspect) => Rebuild();
-    private void OnVisionCenterRemoved(CityEntity entity, VisionCenterAspect aspect) => Rebuild();
+    private void OnCenterChanged(CityEntity entity) => Rebuild();
 
     private void OnLocatableDestroyed(LocatableDestroyedEventData data) => Rebuild();
     private void OnLocatableLocationChanged(LocatableLocationChangedEventData data) => Rebuild();
@@ -86,15 +88,19 @@ public sealed class CityFogRenderer : Singleton<CityFogRenderer>
             return;
         }
 
-        // Use CityVision as the authoritative source.
+        if (G.CityVision == null)
+        {
+            Debug.LogError("CityFogRenderer.Rebuild: G.CityVision is null");
+            ClearAllMasks();
+            return;
+        }
+
         var centers = G.CityVision.Centers.Where(e => e != null).ToList();
 
-        // Remove missing.
         var toRemove = _circleMasks.Keys.Where(e => !centers.Contains(e)).ToList();
         for (int i = 0; i < toRemove.Count; i++)
             RemoveMask(toRemove[i]);
 
-        // Ensure existing.
         for (int i = 0; i < centers.Count; i++)
             EnsureMask(centers[i]);
 

@@ -6,7 +6,7 @@ public class WorldManager
     //TODO register more things in the world registry
     World World => World.Instance;
 
-
+    //TODO extract into a specific creation service
     // On bootstrap, create the initial cities and warehouses
     private void addWarehouse(City city, WarehouseConfig warehouseConfig)
     {
@@ -35,8 +35,9 @@ public class WorldManager
             Debug.LogWarning($"WarehouseConfig '{warehouseConfig.name}' does not have a valid marker assigned. Falling back to closest position.");
             pos = city.GetClosestPosition(warehouseConfig.warehouseClosestInitialPosition);
         }
-
+        //TODO extract into a specific creation service
         initializeWarehouse(warehouse, warehouseConfig);
+        G.OwnershipService.RegisterOwnable(warehouse);
         CityEntitiesCreationHelper.CreateWarehouse(warehouse, pos);
     }
 
@@ -86,11 +87,13 @@ public class WorldManager
             G.CityRoot.SetActive(false);
         }
         World.Instance.City = new City(cityConfig, G.CityRoot.transform);
+
+        
         foreach (var warehouseConfig in cityConfig.warehouseConfigs)
         {
+            //TODO extract into a specific creation service
             addWarehouse(World.Instance.City, warehouseConfig);
         }
-        //spawnProductsInCity(World.Instance.City, cityConfig);
     }
 
     [Obsolete("Spawning products in city is deprecated")]

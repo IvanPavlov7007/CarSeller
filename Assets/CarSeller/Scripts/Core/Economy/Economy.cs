@@ -7,7 +7,7 @@ public class Economy
 {
     public EconomyConfig Config { get; private set; }
 
-    public Player Player;
+    
 
     public WarehouseOfferProvider WarehouseOfferProvider;
 
@@ -19,10 +19,11 @@ public class Economy
 
     public CarSpawnManager CarSpawnManager = new CarSpawnManager();
 
+    public Player Player => G.Player;
+
     public Economy(EconomyConfig config)
     {
         Config = config;
-        Player = new Player();
         initializePlayerStartState();
         initializeWarehouseOffers();
         initializeCarShopOfferProvider();
@@ -42,7 +43,7 @@ public class Economy
 
             // Transfer ownership to player
             // Note: products inside the warehouse remain not owned
-            G.ProductLifetimeService.TransferOwnership(warehouse, Player);
+            G.OwnershipService.TransferOwnership(warehouse, Player);
         }
     }
 

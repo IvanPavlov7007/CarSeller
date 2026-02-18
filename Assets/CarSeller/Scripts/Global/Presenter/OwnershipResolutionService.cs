@@ -1,21 +1,26 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Shouldn't be called directly unless
+/// 
+/// 1) for Transfer of ownership outside of placement (e.g. player buying/selling a warehouse, or stealing a car from someone else)
+/// 
+/// 2) by a specific service that 
+/// creates specific things like ProductLifetimeService
+/// </summary>
 public class OwnershipResolutionService
 {
     private Dictionary<IOwnable, HashSet<IOwnable>> ownerships => World.Instance.ownerships;
 
-    public void RegisterProduct(OwnableBase ownable)
+    public void RegisterOwnable(OwnableBase ownable)
     {
         Debug.Assert(ownable != null);
 
-        // Avoid double-subscribing if RegisterProduct is called multiple times.
-        ownable.OnOwnerChanged -= onOwnerChanged;
-        ownable.OnOwnerChanged += onOwnerChanged;
-
         // Ensure current owner relationship exists in the index.
         // (Useful if you load saved games / spawn with pre-set owners.)
-        onOwnerChanged(null, ownable.Owner, ownable);
+        ApplyOwnershipChange(null, ownable.Owner, ownable);
     }
 
     public bool tryResolveOwnership(IMutableOwnable ownable, ILocation location)
@@ -42,16 +47,16 @@ public class OwnershipResolutionService
         switch (container.OwnershipResolution)
         {
             case OwnershipResolution.Container:
-                item.SetOwner(container as IOwnable);
+                SetOwner(item, container as IOwnable);
                 break;
 
             case OwnershipResolution.OwnerOfContainerIfNull:
                 if (item.Owner == null)
-                    item.SetOwner(container.GetOwnerOfContainer());
+                    SetOwner(item, container.GetOwnerOfContainer());
                 break;
 
             case OwnershipResolution.Clear:
-                item.SetOwner(null);
+                SetOwner(item, null);
                 break;
 
             case OwnershipResolution.None:
@@ -63,16 +68,27 @@ public class OwnershipResolutionService
     public void TransferOwnership(IMutableOwnable item, IOwnable newOwner)
     {
         Debug.Assert(item != null);
-        item.SetOwner(newOwner);
+        Debug.Assert(newOwner != null);
+        SetOwner(item, newOwner);
     }
 
     public void ResolveOnRemoval(IMutableOwnable item)
     {
         Debug.Assert(item != null);
-        item.SetOwner(null);
+        SetOwner(item, null);
     }
 
-    private void onOwnerChanged(IOwnable oldOwner, IOwnable newOwner, IOwnable item)
+    private void SetOwner(IMutableOwnable item, IOwnable newOwner)
+    {
+        var oldOwner = item.Owner;
+        if (ReferenceEquals(oldOwner, newOwner))
+            return;
+
+        item.SetOwner(newOwner);
+        ApplyOwnershipChange(oldOwner, newOwner, item);
+    }
+
+    private void ApplyOwnershipChange(IOwnable oldOwner, IOwnable newOwner, IOwnable item)
     {
         if (ReferenceEquals(oldOwner, newOwner))
             return;
@@ -94,15 +110,6 @@ public class OwnershipResolutionService
             newSet.Add(item);
         }
 
-        // Optional: add a new GameEvent that UI can listen to instead of "Possession acquired".
         GameEvents.Instance.OnOwnershipChanged?.Invoke(new OwnershipChangedEventData(item, oldOwner, newOwner));
-    }
-}
-
-public class OwnershipService
-{
-    public void TransferOwnership(IMutableOwnable item, IOwnable newOwner)
-    {
-        G.ProductLifetimeService.TransferOwnership(item, newOwner);
     }
 }

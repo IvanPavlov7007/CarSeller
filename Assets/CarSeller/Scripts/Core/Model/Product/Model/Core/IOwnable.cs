@@ -14,18 +14,12 @@ public abstract class OwnableBase : IMutableOwnable
 {
     public IOwnable Owner { get; private set; }
 
-    public event Action<IOwnable,IOwnable,IOwnable> OnOwnerChanged;
-    // (oldOwner, newOwner, this)
-
     public void SetOwner(IOwnable newOwner)
     {
         if (Owner == newOwner)
             return;
 
-        var oldOwner = Owner;
         Owner = newOwner;
-
-        OnOwnerChanged?.Invoke(oldOwner, newOwner,this);
     }
 }
 

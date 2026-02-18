@@ -16,7 +16,7 @@ public static class G
     //References
     public static City City => World.Instance.City;
     public static Economy Economy => World.Instance.Economy;
-    public static Player Player => World.Instance.Economy.Player;
+    public static Player Player => World.Instance.Player;
     public static GameState GameState => GameFlowController.GameState;
 
     public static TransactionProcessor TransactionProcessor;
@@ -35,7 +35,7 @@ public static class G
     public static ProductManager ProductManager = new ProductManager();
 
     public static ProductLifetimeService ProductLifetimeService = new ProductLifetimeService();
-    public static OwnershipService OwnershipService = new OwnershipService();
+    public static OwnershipResolutionService OwnershipService = new OwnershipResolutionService();
 
     public static GameFlowManager GameFlowManager;
     public static GameFlowController GameFlowController = new GameFlowController();
@@ -55,7 +55,7 @@ public static class G
 
     // New: runtime aspect mutations + vision orchestration
     public static CityEntityAspectsService CityEntityAspectsService = new CityEntityAspectsService();
-    public static CityVisionService CityVision = new CityVisionService(CityEntityAspectsService);
+    public static CityVision CityVision = new CityVision(CityEntityAspectsService);
 
     public static WarehouseEntryCooldownService WarehouseEntryCooldownService = new WarehouseEntryCooldownService();
 
@@ -83,7 +83,7 @@ public static class G
         viewBuildersConfig = handlersConfig;
 
         initializeTransactionProcessor();
-
+        CityVision?.Initialize();
 
         CarWarehousePolicy = new CarIntoWarehousePolicy();
         GameFlowManager = new GameFlowManager();

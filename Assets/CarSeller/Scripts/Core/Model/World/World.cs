@@ -11,6 +11,7 @@ public class World
     public Dictionary<Product, ILocation> productLocations = new Dictionary<Product, ILocation>();
     public Dictionary<ILocatable, ILocation> allLocations = new Dictionary<ILocatable, ILocation>();
     internal Dictionary<IOwnable, HashSet<IOwnable>> ownerships = new Dictionary<IOwnable, HashSet<IOwnable>>();
+    public Player Player = new Player();
     public City City;
     public Economy Economy;
 
