@@ -57,7 +57,8 @@ public class CarShopGameMain : GameMain
 
         var result = G.TransactionProcessor.Process(new Transaction(
             TransactionType.PutProductsInWarehouse,
-            new PutProductsInWarehouseTransactionData(carShopWarehouse, car)));
+            new PutProductsInHolderTransactionData(new WarehouseHolderAdapter(carShopWarehouse),
+            car)));
 
         if (result.Type == TransactionResultType.Success)
         {

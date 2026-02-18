@@ -135,12 +135,12 @@ public class WarehouseEnterProcess : IProcess
         //on claim put things inside
 
         var putTransaction = new Transaction(TransactionType.PutProductsInWarehouse,
-            new PutProductsInWarehouseTransactionData(Warehouse,
+            new PutProductsInHolderTransactionData(new WarehouseHolderAdapter(Warehouse),
                 stripData.StrippingProcess.StrippedParts.ToArray()
             ));
         var putResult = G.TransactionProcessor.Process(putTransaction);
 
-        if (putResult.Data is WarehousePlacingResultData placingData)
+        if (putResult.Data is ProductsPlacingResultData placingData)
         {
             Debug.Log("Products placed inside warehouse: " + placingData.PuttingResult.skippedProducts.Count);
             if (placingData.PuttingResult.CarsSkipped)

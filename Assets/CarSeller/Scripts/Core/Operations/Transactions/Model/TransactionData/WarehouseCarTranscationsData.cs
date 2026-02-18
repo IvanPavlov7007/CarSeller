@@ -64,15 +64,3 @@ public class PullCarFromWarehouseTransactionData : ITransactionData
         SourceWarehouse = sourceWarehouse;
     }
 }
-
-public class PutProductsInWarehouseTransactionData : ITransactionData
-{
-    public readonly Product[] Products;
-    public readonly Warehouse TargetWarehouse;
-
-    public PutProductsInWarehouseTransactionData(Warehouse targetWarehouse, params Product[] products)
-    {
-        Products = products;
-        TargetWarehouse = targetWarehouse;
-    }
-}

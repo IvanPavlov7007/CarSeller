@@ -1,4 +1,7 @@
-﻿public class StealHandler : ITransactionHandler
+﻿using System;
+
+[Obsolete("Since it's uses WarehouseActionsHelper directly, which is job of PutProductsInHolderHandler")]
+public class StealHandler : ITransactionHandler
 {
     public bool CanHandle(Transaction transaction) => transaction.Type == TransactionType.Steal;
 
@@ -24,7 +27,8 @@
         }
         else // couldn't find space in the warehouse
         {
-            result = new TransactionResult(TransactionResultType.Failure, data: new WarehousePlacingResultData(putInsideResult,targetWarehouse));
+            result = new TransactionResult(TransactionResultType.Failure, 
+                data: new ProductsPlacingResultData(putInsideResult));
         }
         return result;
     }

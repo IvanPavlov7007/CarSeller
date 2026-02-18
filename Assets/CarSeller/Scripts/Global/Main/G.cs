@@ -104,7 +104,7 @@ public static class G
             { TransactionType.Exchange, new ExchangeHandler() },
             {TransactionType.StripCar, new StripCarHandler() },
             {TransactionType.PullCarFromWarehouse, new PullCarFromWarehouseHandler() },
-            {TransactionType.PutProductsInWarehouse, new PutProductsInWarehouseHandler() },
+            {TransactionType.PutProductsInWarehouse, new PutProductsInHolderHandler() },
         });
     }
 }
