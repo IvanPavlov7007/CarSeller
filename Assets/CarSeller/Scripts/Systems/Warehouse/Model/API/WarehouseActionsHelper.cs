@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
+//Question is, is it more useful to have use this helper, which is currently called by TransactionHandlers
+// or should the helper be using TransactionHandlers instead?
+
 public static class WarehouseActionsHelper
 {
     public static ProductsPutInsideResult TryPutProductsInsideWarehouse(Warehouse warehouse, params Product[] products)
