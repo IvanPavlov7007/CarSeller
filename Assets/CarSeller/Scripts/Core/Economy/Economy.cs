@@ -7,8 +7,6 @@ public class Economy
 {
     public EconomyConfig Config { get; private set; }
 
-    
-
     public WarehouseOfferProvider WarehouseOfferProvider;
 
     public CarSellOneTimeOfferProvider CarSellOfferProvider = new CarSellOneTimeOfferProvider();
@@ -19,18 +17,21 @@ public class Economy
 
     public CarSpawnManager CarSpawnManager = new CarSpawnManager();
 
-    public Player Player => G.Player;
+    public Player Player;
+    public PersonalVehicles PersonalVehicles;
 
     public Economy(EconomyConfig config)
     {
         Config = config;
-        initializePlayerStartState();
+        initializePlayer();
         initializeWarehouseOffers();
         initializeCarShopOfferProvider();
     }
 
-    private void initializePlayerStartState()
+    private void initializePlayer()
     {
+        Player = new Player();
+
         Player.ChangeMoney(Config.PlayerStartState.initialMoney);
         foreach (var warehouseConfig in Config.PlayerStartState.ownWarehouses)
         {
@@ -45,6 +46,21 @@ public class Economy
             // Note: products inside the warehouse remain not owned
             G.OwnershipService.TransferOwnership(warehouse, Player);
         }
+        initializePersonalVehicles(Config.PlayerStartState);
+    }
+
+    private void initializePersonalVehicles(PlayerStartState data)
+    {
+        Debug.Assert(data.ownedCars.Count <= data.maxOwnedCars, $"Number of owned cars ({data.ownedCars.Count}) exceeds the maximum allowed ({data.maxOwnedCars}).");
+        PersonalVehicles = new PersonalVehicles(data.maxOwnedCars);
+        var locations = PersonalVehicles.GetLocations();
+        for(int i = 0; i < data.ownedCars.Count; i++)
+        {
+            var carSpawnConfig = data.ownedCars[i];
+            var location = locations[i];
+            var car = carSpawnConfig.GenerateCar(location);
+        }
+        PersonalVehicles.SetPrimaryVehicle(data.initialPrimeVehicleIndex);
     }
 
     private void initializeCarShopOfferProvider()

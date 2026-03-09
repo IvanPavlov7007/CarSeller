@@ -7,11 +7,11 @@ public class World
     public WorldRegistry WorldRegistry{ get; private set; } = new WorldRegistry();
 
     public HiddenSpace HiddenSpace = new HiddenSpace();
+
     // TODO is it also kind of a registry? Should it be moved to WorldRegistry?
     public Dictionary<Product, ILocation> productLocations = new Dictionary<Product, ILocation>();
     public Dictionary<ILocatable, ILocation> allLocations = new Dictionary<ILocatable, ILocation>();
     internal Dictionary<IOwnable, HashSet<IOwnable>> ownerships = new Dictionary<IOwnable, HashSet<IOwnable>>();
-    public Player Player = new Player();
     public City City;
     public Economy Economy;
 
@@ -23,6 +23,8 @@ public class World
         return Instance;
     }
 }
+
+
 
 /// <summary>
 /// A place for things that exist in the world, but are not stored in a city/warehouse/etc.

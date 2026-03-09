@@ -15,4 +15,11 @@ public class CarBaseConfig : SerializedScriptableObject, IBaseConfig
     [ShowInInspector]
     [OdinSerialize]
     public List<PartSlotBaseConfig> SlotConfigs = new List<PartSlotBaseConfig>();
+
+    [BoxGroup("Simplified params")]
+    public CarColor Color;
+    [BoxGroup("Simplified params")]
+    public CarType Type;
+    [BoxGroup("Simplified params")]
+    public CarRarity Rarity;
 }

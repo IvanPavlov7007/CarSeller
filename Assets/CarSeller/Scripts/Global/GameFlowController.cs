@@ -26,6 +26,7 @@ public class GameFlowController
     #region GameState
     public void SetGameState(GameState newState)
     {
+        Debug.Assert(newState != null, "GameState cannot be set to null");
         var oldState = GameState;
         GameState = newState;
         Debug.Log($"GameFlowController: Game state changed from {oldState.GetType().Name} to {newState.GetType().Name}");

@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-public sealed class Car : Product, IOwnershipContainer, ILocationsHolder
+public sealed class Car : Product, IOwnershipContainer, ILocationsHolder, ISimplifiedCarModel
 {
     public CarRuntimeConfig runtimeConfig { get; private set; }
     public Dictionary<CarPartLocation, PartSlotRuntimeConfig> carParts { get; private set; }
@@ -16,6 +16,13 @@ public sealed class Car : Product, IOwnershipContainer, ILocationsHolder
 
     public OwnershipResolution OwnershipResolution => OwnershipResolution.Container;
     public IOwnable GetOwnerOfContainer() => this;
+
+    #region ISimplifiedCarModel implementation
+    public CarColor Color => runtimeConfig.Color;
+    public CarType Type => runtimeConfig.Type;
+    public CarRarity Rarity => runtimeConfig.Rarity;
+    #endregion
+
 
     public Car(CarRuntimeConfig runtimeConfig)
     {

@@ -16,6 +16,8 @@ public abstract partial class GameMain
                     return new CarStealGameMain();
                 case GameConfigMode.DisassembleStolenCars:
                     return new DisassembleStolenCarsGameMain();
+                case GameConfigMode.SimplifiedGameplay:
+                    return new SimplifiedGameplayMain();
                 default:
                     Debug.LogError("GameMainResolver.Resolve: Unsupported GameConfigMode!");
                     return null;

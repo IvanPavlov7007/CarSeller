@@ -38,6 +38,8 @@ public class GameEvents
         onMissionFailed = null;
 
         onPlayerBusted = null;
+
+        onPrimaryVehicleChanged = null;
     }
 
     public Action OnGamePaused;
@@ -75,4 +77,7 @@ public class GameEvents
     public Action<MissionFailedEventData> onMissionFailed;
 
     public Action<PlayerBustedEventData> onPlayerBusted;
+
+    // Player Interaction Events
+    public Action<Car> onPrimaryVehicleChanged;
 }

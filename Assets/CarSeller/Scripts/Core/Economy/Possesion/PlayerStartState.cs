@@ -7,4 +7,8 @@ public class PlayerStartState : ScriptableObject
 {
     public float initialMoney = 0f;
     public List<WarehouseConfig> ownWarehouses;
+    [Header("Cars")]
+    public int maxOwnedCars = 10;
+    public int initialPrimeVehicleIndex = 0;
+    public List<SimpleCarSpawnConfig> ownedCars;
 }

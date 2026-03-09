@@ -16,7 +16,8 @@ public static class G
     //References
     public static City City => World.Instance.City;
     public static Economy Economy => World.Instance.Economy;
-    public static Player Player => World.Instance.Player;
+    public static Player Player => Economy.Player;
+    public static PersonalVehicles PersonalVehicles => Economy.PersonalVehicles;
     public static GameState GameState => GameFlowController.GameState;
 
     public static TransactionProcessor TransactionProcessor;
@@ -62,6 +63,7 @@ public static class G
     //Interaction
     public static IInteractionManager InteractionManager;
     public static MissionController MissionController;
+    public static VehicleController VehicleController;
 
     //VIEW
     //View builders
@@ -86,6 +88,7 @@ public static class G
         CityVision?.Initialize();
 
         CarWarehousePolicy = new CarIntoWarehousePolicy();
+        VehicleController = new VehicleController();
         GameFlowManager = new GameFlowManager();
         CarMechanicService = new CarMechanicService();
         ProcessRunner = new ProcessRunner();

@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,4 +14,8 @@ public class CarRuntimeConfig : IRuntimeConfig
     public float Acceleration;
     public CarFrameRuntimeConfig CarFrameRuntimeConfig;
     public List<PartSlotRuntimeConfig> SlotConfigs;
+
+    public CarColor Color;
+    public CarType Type;
+    public CarRarity Rarity;
 }
