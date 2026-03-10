@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -18,7 +19,6 @@ public class Economy
     public CarSpawnManager CarSpawnManager = new CarSpawnManager();
 
     public Player Player;
-    public PersonalVehicles PersonalVehicles;
 
     public Economy(EconomyConfig config)
     {
@@ -33,7 +33,13 @@ public class Economy
         Player = new Player();
 
         Player.ChangeMoney(Config.PlayerStartState.initialMoney);
-        foreach (var warehouseConfig in Config.PlayerStartState.ownWarehouses)
+        initializeInitialWarehousePossessions(Config.PlayerStartState.ownWarehouses);
+        
+    }
+
+    private void initializeInitialWarehousePossessions(List<WarehouseConfig> configs)
+    {
+        foreach (var warehouseConfig in configs)
         {
             var registryList = World.Instance.WorldRegistry.GetByConfig<Warehouse>(warehouseConfig);
             Debug.Assert(registryList != null, $"No warehouses found for config {warehouseConfig}.");
@@ -46,23 +52,7 @@ public class Economy
             // Note: products inside the warehouse remain not owned
             G.OwnershipService.TransferOwnership(warehouse, Player);
         }
-        initializePersonalVehicles(Config.PlayerStartState);
     }
-
-    private void initializePersonalVehicles(PlayerStartState data)
-    {
-        Debug.Assert(data.ownedCars.Count <= data.maxOwnedCars, $"Number of owned cars ({data.ownedCars.Count}) exceeds the maximum allowed ({data.maxOwnedCars}).");
-        PersonalVehicles = new PersonalVehicles(data.maxOwnedCars);
-        var locations = PersonalVehicles.GetLocations();
-        for(int i = 0; i < data.ownedCars.Count; i++)
-        {
-            var carSpawnConfig = data.ownedCars[i];
-            var location = locations[i];
-            var car = carSpawnConfig.GenerateCar(location);
-        }
-        PersonalVehicles.SetPrimaryVehicle(data.initialPrimeVehicleIndex);
-    }
-
     private void initializeCarShopOfferProvider()
     {
         if(Config.CarShopOffersConfig == null)

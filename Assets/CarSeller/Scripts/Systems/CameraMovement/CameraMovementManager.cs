@@ -212,16 +212,11 @@ public class CameraMovementManager : Singleton<CameraMovementManager>
 
     public void Teleport(Vector2 worldPosition)
     {
-        Debug.Log("CameraMovementManager.Teleport called");
         if (cameraTarget == null) return;
 
         var desired = ClampToConfinerShrunk(new Vector3(worldPosition.x, worldPosition.y, cameraTarget.position.z));
         cameraTarget.position = desired;
         _pendingTargetPos = desired;
-
-        // log all 3 vectors
-        Debug.Log($"CameraMovementManager.Teleport: worldPosition={worldPosition}, desired={desired}, cameraTarget.position={cameraTarget.position}");
-
         // Critical for Cinemachine: prevents damping/interpolation from the previous frame.
         if (virtualCamera != null)
             virtualCamera.PreviousStateIsValid = false;

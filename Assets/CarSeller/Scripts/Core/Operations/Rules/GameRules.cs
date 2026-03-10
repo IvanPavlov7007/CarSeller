@@ -5,6 +5,7 @@ public static class GameRules
     public static readonly WarehouseCanStoreCar WarehouseCanStoreCar = new WarehouseCanStoreCar();
     public static readonly WarehouseCanStripCar WarehouseCanStripCar = new WarehouseCanStripCar();
     public static readonly CanRideOutCar CanRideOutCar = new CanRideOutCar();
+    public static readonly CarCanBeExited carCanBeExited = new CarCanBeExited();
     public static readonly CarBelongsToPlayer CarBelongsToPlayer = new CarBelongsToPlayer();
     public static readonly CarCanBeDisassembled CarCanBeDisassembled = new CarCanBeDisassembled();
     public static readonly ModelControlledByPlayer ModelControlledByPlayer = new ModelControlledByPlayer();
@@ -104,6 +105,17 @@ public class ModelControlledByPlayer
         Debug.Assert(state != null, "GameState is null");
         Debug.Assert(model != null, "Model is null");
 
-        return state.IsControlledByPlayer(model);
+        return G.VehicleController.CurrentCar == model;
+    }
+}
+
+public class CarCanBeExited
+{
+    public bool Check(Car car)
+    {
+        if(car == null)
+            return false;
+        bool isCurrentCar = G.VehicleController.CurrentCar == car;
+        return isCurrentCar && !G.VehicleController.IsInPrimaryVehicle;
     }
 }

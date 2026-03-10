@@ -28,7 +28,7 @@ public class PoliceManager : Singleton<PoliceManager>
                 Debug.LogWarning("GameState is null in PoliceManager.SuspectPosition");
                 return default;
             }
-            var location = CityLocatorHelper.GetCityEntity(G.GameState.FocusedCar);
+            var location = G.VehicleController.CurrentVehicleEntity;
             if (location == null)
             {
                 Debug.LogWarning("FocusedCar location is null in PoliceManager.SuspectPosition");

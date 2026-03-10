@@ -32,9 +32,12 @@ public class CitySceneManager : Singleton<CitySceneManager>
         GameEvents.Instance.OnLocatableLocationChanged += onLocatableLocationChanged;
         GameEvents.Instance.OnLocatableDestroyed += onLocatableDestroyed;
         GameEvents.Instance.OnOwnershipChanged += onOwnershipChanged;
+        GameEvents.Instance.onVehicleControlStateChanged += onVehicleControlStateChanged;
 
         GameEvents.Instance.OnGameStateChanged += onGameStateChanged;
     }
+
+    
 
     private void OnDisable()
     {
@@ -42,6 +45,7 @@ public class CitySceneManager : Singleton<CitySceneManager>
         GameEvents.Instance.OnLocatableLocationChanged -= onLocatableLocationChanged;
         GameEvents.Instance.OnLocatableDestroyed -= onLocatableDestroyed;
         GameEvents.Instance.OnOwnershipChanged -= onOwnershipChanged;
+        GameEvents.Instance.onVehicleControlStateChanged -= onVehicleControlStateChanged;
 
         GameEvents.Instance.OnGameStateChanged -= onGameStateChanged;
     }
@@ -87,6 +91,14 @@ public class CitySceneManager : Singleton<CitySceneManager>
             Destroy(view.gameObject);
         }
         builtObjectsViews.Clear();
+    }
+
+    private void onVehicleControlStateChanged(VehicleControlStateChangedEventData data)
+    {
+        var oldCar = data.OldState?.CurrentCityEntity;
+        var newCar = data.NewState?.CurrentCityEntity;
+        applyProfileToObject(oldCar);
+        applyProfileToObject(newCar);
     }
 
     private void onLocatableLocationChanged(LocatableLocationChangedEventData data)

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public struct CityObjectState
 {
@@ -35,7 +36,7 @@ public sealed class NormalCitySceneProfile : CitySceneProfile
 {
     public override bool ShouldShow(CityEntity obj, GameState gameState)
     {
-        return true;
+        return obj.IsValid();
     }
 
     public override CityObjectState GetObjectViewState(CityEntity obj, GameState gameState)
@@ -51,6 +52,7 @@ public sealed class NormalCitySceneProfile : CitySceneProfile
     }
 }
 
+[Obsolete]
 public sealed class StealingCitySceneProfile : CitySceneProfile
 {
     public override bool ShouldShow(CityEntity obj, GameState gameState)
@@ -93,7 +95,7 @@ public sealed class StealingCitySceneProfile : CitySceneProfile
         }
     }
 }
-
+[Obsolete]
 public sealed class SellingCitySceneProfile : CitySceneProfile
 {
     public override bool ShouldShow(CityEntity obj, GameState gameState)
@@ -121,18 +123,14 @@ public sealed class FreeRoamCitySceneProfile : CitySceneProfile
 {
     public override bool ShouldShow(CityEntity obj, GameState gameState)
     {
-        return true;
+        return obj.IsValid();
     }
 
     public override CityObjectState GetObjectViewState(CityEntity obj, GameState gameState)
     {
-        var freeRoamState = gameState as FreeRoamGameState;
+        var controlledCar = G.VehicleController.CurrentCar;
 
-        var controlled = freeRoamState.PlayerFigure != null
-            ? (ILocatable)freeRoamState.PlayerFigure
-            : freeRoamState.FocusedCar;
-
-        if (controlled != null && obj.Subject == controlled)
+        if (controlledCar != null && obj.Subject == controlledCar)
         {
             return new CityObjectState(ViewObjectVisualState.Selected, draggable: true, interactable: true);
         }
@@ -151,6 +149,8 @@ public sealed class MissionCitySceneProfile : CitySceneProfile
 {
     public override bool ShouldShow(CityEntity obj, GameState gameState)
     {
+        if(!obj.IsValid())
+            return false;
         var missionState = gameState as MissionGameState;
         switch (obj.Subject)
         {
@@ -169,7 +169,7 @@ public sealed class MissionCitySceneProfile : CitySceneProfile
         if (obj.Subject is Car car)
         {
 
-            bool isFocusedCar = car == missionState.FocusedCar;
+            bool isFocusedCar = car == G.VehicleController.CurrentCar;
             ViewObjectVisualState visualState = isFocusedCar ? ViewObjectVisualState.Selected : ViewObjectVisualState.Normal;
             return new CityObjectState(visualState, draggable: isFocusedCar, interactable: true);
         }

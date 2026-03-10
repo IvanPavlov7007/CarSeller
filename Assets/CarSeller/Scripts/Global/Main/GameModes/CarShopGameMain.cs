@@ -25,7 +25,7 @@ public class CarShopGameMain : GameMain
     {
         base.InitializeLogic(gameConfig);
 
-        var roamingState = new FreeRoamGameState(car);
+        var roamingState = new FreeRoamGameState();
         G.GameFlowController.SetGameState(roamingState);
     }
 

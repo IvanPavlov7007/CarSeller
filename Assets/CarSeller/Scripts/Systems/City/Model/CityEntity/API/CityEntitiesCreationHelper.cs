@@ -41,6 +41,11 @@ public static class CityEntitiesCreationHelper
         return CreateTriggerInteractable(warehouse, position, new PinStyleAspect(G.cityViewObjectBuilder.WarehousePinStyle));
     }
 
+    public static CityEntity CreateCarStashWarehouse(CarStashWarehouse carStashWarehouse, CityPosition position)
+    {
+        return CreateTriggerInteractable(carStashWarehouse, position, new PinStyleAspect(G.cityViewObjectBuilder.CarStashWarehousePinStyle));
+    }
+
     public static CityEntity CreatePinnedMarkerReferencedTriggerInteractable(ILocatable locatable, CityPosition position, PinStyle pinStyle, CityMarkerRef markerRef)
     {
         return CreateTriggerInteractable(locatable, position,

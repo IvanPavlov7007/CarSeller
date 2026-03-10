@@ -13,6 +13,7 @@ public class CityConfig : ScriptableObject
     public CityGraphAsset CityGraph;
 
     public WarehouseConfig[] warehouseConfigs;
+    public CarStashWarehouseConfig[] carStashWarehouseConfigs;
     public SimpleProductSpawnConfig[] initialProductsToSpawn;
 
     

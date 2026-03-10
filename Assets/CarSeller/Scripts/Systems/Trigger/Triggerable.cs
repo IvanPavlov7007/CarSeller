@@ -38,11 +38,9 @@ public class Triggerable : MonoBehaviour, ITriggerable
 
     private void OnTriggered(Collider2D collision)
     {
-        Debug.Log("Triggerable " + gameObject.name + " was triggered by " + collision.gameObject.name);
         TryRegisterTriggerCausable(collision);
 
         ModelProvider triggerCause = collision.GetComponentInParent<ModelProvider>();
-        Debug.Assert(triggerCause != null);
         if (triggerCause != null)
             OnTriggerEntered?.Invoke(contentProvider, triggerCause);
     }

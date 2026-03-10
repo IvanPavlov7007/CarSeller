@@ -11,11 +11,11 @@
     {
         base.InitializeLogic(gameConfig);
 
-        var car =
-            CityLocatorHelper.GetClosestCar(World.Instance.WorldRegistry.GetByConfig<Warehouse>(gameConfig.CityConfig.warehouseConfigs[0])[0], out _);
-
-        var roamingState = new FreeRoamGameState(car);
+        var roamingState = new FreeRoamGameState();
         G.GameFlowController.SetGameState(roamingState);
+
+        G.VehicleController.Initialize(gameConfig.VehicleControllerConfig);
+        G.CityVision.Initialize();
     }
 
     public override void AfterSceneLoad(ISceneMain sceneMain)
@@ -33,9 +33,5 @@
         if (firstLoaded)
             return;
         firstLoaded = true;
-
-        //CollectablesManager.Instance.Initialize(locations, 900f, null, 20);
-        //PoliceManager.Instance.CreatePolice();
-        //tryEnterCarShop(car);
     }
 }

@@ -9,22 +9,31 @@ public class VehicleControlUI : Singleton<VehicleControlUI>
     private void OnEnable()
     {
         Debug.Assert(G.VehicleController != null);
-
-        G.VehicleController.OnCurrentVehicleChanged += OnCurrentVehicleChanged;
-        G.VehicleController.OnPrimaryVehicleChanged += OnPrimaryVehicleChanged;
-
-        G.VehicleController.Sync();
+        GameEvents.Instance.onVehicleControlStateChanged += OnVehicleStateChanged;
+        Redraw(G.VehicleController.CurrentState);
     }
 
     private void OnDisable()
     {
         Debug.Assert(G.VehicleController != null);
 
-        G.VehicleController.OnCurrentVehicleChanged -= OnCurrentVehicleChanged;
-        G.VehicleController.OnPrimaryVehicleChanged -= OnPrimaryVehicleChanged;
+        GameEvents.Instance.onVehicleControlStateChanged -= OnVehicleStateChanged;
     }
 
-    private void OnCurrentVehicleChanged(Car newCurrentVehicle, Car primaryVehicle)
+    void Redraw(VehicleController.VehicleControlState state)
+    {
+        var primaryVehicle = G.VehicleController.PrimaryCar;
+        var currentVehicle = state.Car;
+        RedrawCurrent(currentVehicle, primaryVehicle);
+        RedrawPrimary(primaryVehicle);
+    }
+
+    private void OnVehicleStateChanged(VehicleControlStateChangedEventData data)
+    {
+        Redraw(data.NewState);
+    }
+
+    private void RedrawCurrent(Car newCurrentVehicle, Car primaryVehicle)
     {
         if (CurrentVehicleButton != null)
         {
@@ -37,10 +46,13 @@ public class VehicleControlUI : Singleton<VehicleControlUI>
         }
     }
 
-    private void OnPrimaryVehicleChanged(Car newPrimaryVehicle)
+    private void RedrawPrimary(Car newPrimaryVehicle)
     {
         if (PrimaryVehicleButton != null)
+        {
             PrimaryVehicleButton.SetVehicleImage(GetCarImage(newPrimaryVehicle));
+            PrimaryVehicleButton.MakeInteractable();
+        }
     }
 
     private static Sprite GetCarImage(Car car)

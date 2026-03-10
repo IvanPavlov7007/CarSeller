@@ -35,35 +35,21 @@ public class NormalCityContextMenuProfile : ICityContextMenuProfile
         {
             List<UIElement> elements = CTX_Menu_Tools.CarBaseInfoElements(car);
 
-            // If PlayerFigure is controlled, we can't "Drive" from context menu; show hint to get in.
-            if (gameState.PlayerFigure != null)
+            if (GameRules.carCanBeExited.Check(car))
             {
-                elements.Add(CTX_Menu_Tools.Hint("Drag yourself onto the car to get in"));
-            }
-            else
-            {
-                bool isAlreadyFocused = car == gameState.FocusedCar;
-
-                // Exit button only for the current car: spawn/transfer control to player figure at car position.
-                if (isAlreadyFocused)
+                elements.Add(new UIElement
                 {
-                    elements.Add(new UIElement
+                    Type = UIElementType.Button,
+                    Text = "Exit",
+                    IsInteractable = true,
+                    OnClick = () =>
                     {
-                        Type = UIElementType.Button,
-                        Text = "Exit",
-                        IsInteractable = true,
-                        OnClick = () =>
-                        {
-                            // Put a figure at car position and control it.
-                            var pos = CityLocatorHelper.GetCityEntity(car).Position;
-                            var figure = new PlayerFigure();
-                            CityEntitiesCreationHelper.CreatePlayerFigure(figure, pos);
-                            G.GameFlowController.TryControlPlayerFigure(figure, out _);
-                        },
-                        closePopupOnClick = true
-                    });
-                }
+                        G.VehicleController.ExitWorldVehicle();
+                    },
+                    closePopupOnClick = true
+                });
             }
+            
 
             return new UIElement
             {
@@ -109,7 +95,7 @@ public class NormalCityTriggerProfile : ICityTriggerProfile
         Debug.Assert(gameState != null, "NormalCityTriggerProfile: gameState is not set");
 
         // Determine who is controlled right now (figure has priority if present).
-        ILocatable actor = gameState.PlayerFigure != null ? (ILocatable)gameState.PlayerFigure : gameState.FocusedCar;
+        ILocatable actor = G.VehicleController.CurrentCar;
         if (actor == null)
             return new TriggerAction(false, null);
 
@@ -117,14 +103,13 @@ public class NormalCityTriggerProfile : ICityTriggerProfile
         if (ctx.TriggerCause.Subject != actor)
             return new TriggerAction(false, null);
 
-        Debug.Log($"NormalCityTriggerProfile: Triggered by {ctx.TriggerCause?.GetType().Name} on {ctx.Trigger?.GetType().Name}");
 
         // PlayerFigure -> Car drag end: get into car
-        if (gameState.PlayerFigure != null && ctx.Kind == TriggerContext.TriggerKind.DragEnd && ctx.Trigger.Subject is Car dragTargetCar)
+        if (ctx.Kind == TriggerContext.TriggerKind.DragEnd && ctx.Trigger.Subject is Car dragTargetCar)
         {
             return new TriggerAction(true, () =>
             {
-                G.GameFlowController.TryDriveIntoCarFromPlayerFigure(dragTargetCar, out _);
+                G.VehicleController.DriveWorldVehicle(ctx.Trigger);
                 CameraHelper.SetCurrentPositionAtCar();
             });
         }
@@ -145,6 +130,12 @@ public class NormalCityTriggerProfile : ICityTriggerProfile
             {
                 return new TriggerAction(true, () => { G.ProcessRunner.Run(new WarehouseEnterProcess(figure, warehouse)); });
             }
+        }
+
+        if (ctx.Kind == TriggerContext.TriggerKind.DragEnd && ctx.Trigger.Subject is CarStashWarehouse carStashWarehouse)
+        {
+            return new TriggerAction(true, () => 
+            { G.ProcessRunner.Run(new CarStashProcess(ctx.TriggerCause, carStashWarehouse)); });
         }
 
         // Generic city target reached events (figure should also trigger them)

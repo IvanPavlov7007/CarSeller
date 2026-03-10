@@ -72,7 +72,7 @@ public class GameFlowManager : RoutinedObject
         );
 
         buyer.Destroy();
-        GameFlowController.SetGameState(new NeutralGameState(null));
+        GameFlowController.SetGameState(new NeutralGameState());
     }
 
     private IEnumerator StealingSequence(Car car)
@@ -105,7 +105,7 @@ public class GameFlowManager : RoutinedObject
                 );
             }
         );
-        GameFlowController.SetGameState(new NeutralGameState(null));
+        GameFlowController.SetGameState(new NeutralGameState());
     }
 
     private IEnumerator AwaitPlayerOutcome(System.Action onCanceled, System.Action onCaught, System.Action<Warehouse> onSucceed)

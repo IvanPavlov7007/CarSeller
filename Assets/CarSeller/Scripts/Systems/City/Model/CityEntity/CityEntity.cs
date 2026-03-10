@@ -29,6 +29,11 @@ public sealed class CityEntity : ILocation, ICityPositionable
         return aspects.OfType<T>().ToArray();
     }
 
+    public bool IsValid()
+    {
+        return Subject != null;
+    }
+
     internal CityEntity(City city, ILocatable subject, CityPosition initialCityPosition, ICollection<CityEntityAspect> aspects)
     {
         City = city;
@@ -67,7 +72,7 @@ public sealed class CityEntity : ILocation, ICityPositionable
     }
 
     // ILocation implementation
-    // Don't use from outside except for CityLifetimeService
+    // Don't use from outside except for CityEntityLifetimeService
     public ILocatable Occupant => Subject;
     public ILocationsHolder Holder => City;
     public bool Attach(ILocatable locatable)

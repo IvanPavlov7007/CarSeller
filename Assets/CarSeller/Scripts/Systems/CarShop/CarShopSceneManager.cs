@@ -35,10 +35,8 @@ public class CarShopSceneManager : Singleton<CarShopSceneManager>
         var car = findCurrentCar();
 
         //TODO maybe move this into CarMechanicService or make common for all states and exits
-        if (!G.GameFlowController.TryDriveCar(car, out string reason))
-        {
-            Debug.LogError($"ExitCarShop: Cannot drive car {car}. Reason: {reason}");
-        }
+        //depends on whenver its Primary car or world car
+        throw new System.NotImplementedException("Implement car exit animation and transition to city");
         G.WarehouseEntryCooldownService.NotifyExitedWarehouse(car,warehouse);
         G.CarMechanicService.RideCarFromWarehouse(car, warehouse);
     }

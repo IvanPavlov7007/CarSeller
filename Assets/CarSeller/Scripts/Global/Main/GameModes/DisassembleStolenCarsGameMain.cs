@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 
+[Obsolete]
 public class DisassembleStolenCarsGameMain : GameMain
 {
     bool firstLoaded = false;
@@ -18,7 +20,7 @@ public class DisassembleStolenCarsGameMain : GameMain
         var car =
             CityLocatorHelper.GetClosestCar(World.Instance.WorldRegistry.GetByConfig<Warehouse>(gameConfig.CityConfig.warehouseConfigs[0])[0], out _);
 
-        var roamingState = new FreeRoamGameState(car);
+        var roamingState = new FreeRoamGameState();
         G.GameFlowController.SetGameState(roamingState);
     }
 

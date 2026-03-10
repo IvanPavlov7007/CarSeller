@@ -138,41 +138,13 @@ public class CityTargetReachedEventData : GameEventData
     }
 }
 
-// Mission Global Events
-
-public class MissionUnlockedEventData : GameEventData
+public class VehicleControlStateChangedEventData : GameEventData
 {
-    public readonly MissionRuntime Mission;
-    public MissionUnlockedEventData(MissionRuntime mission)
+    public readonly VehicleController.VehicleControlState OldState;
+    public readonly VehicleController.VehicleControlState NewState;
+    public VehicleControlStateChangedEventData(VehicleController.VehicleControlState oldState, VehicleController.VehicleControlState newState)
     {
-        Mission = mission;
-    }
-}
-
-public class  MissionStartedEventData : GameEventData
-{
-    public readonly MissionRuntime Mission;
-
-    public MissionStartedEventData(MissionRuntime mission)
-    {
-        Mission = mission;
-    }
-}
-
-public class MissionCompletedEventData : GameEventData
-{
-    public readonly MissionRuntime Mission;
-    public MissionCompletedEventData(MissionRuntime mission)
-    {
-        Mission = mission;
-    }
-}
-
-public class MissionFailedEventData : GameEventData
-{
-    public readonly MissionRuntime Mission;
-    public MissionFailedEventData(MissionRuntime mission)
-    {
-        Mission = mission;
+        OldState = oldState;
+        NewState = newState;
     }
 }

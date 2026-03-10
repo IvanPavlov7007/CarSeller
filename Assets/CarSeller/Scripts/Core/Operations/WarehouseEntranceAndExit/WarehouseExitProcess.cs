@@ -29,10 +29,8 @@ public class WarehouseExitProcess : IProcess
             Debug.LogError("Failed to pull car from warehouse: " + result.Type);
         }
         yield return new WaitForSeconds(0.2f);
-        if (!G.GameFlowController.TryDriveCar(car, out string reason))
-        {
-            Debug.LogWarning("Cannot drive car after exiting warehouse: " + reason);
-        }
+        //depends on whenver its Primary car or world car
+        throw new System.NotImplementedException("Implement car exit animation and transition to city");
         G.WarehouseEntryCooldownService.NotifyExitedWarehouse(car,warehouse);
         G.GameFlowController.EnterCity();
     }

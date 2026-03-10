@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using static UnityEditor.FilePathAttribute;
 
 [CreateAssetMenu(fileName = "SimpleCarSpawnConfig", menuName = "Configs/Spawn/CarSpawnConfig")]
 public class SimpleCarSpawnConfig : ScriptableObject
@@ -12,6 +13,15 @@ public class SimpleCarSpawnConfig : ScriptableObject
                     CarBaseConfig,
                     CarVariantConfig,
                     location);
+        return car;
+    }
+
+    public Car GenerateCarHidden()
+    {
+        Car car = G.ProductManager.CreateCar(
+                    CarBaseConfig,
+                    CarVariantConfig,
+                    World.Instance.HiddenSpace.GetEmptyLocation());
         return car;
     }
 }

@@ -48,7 +48,6 @@ public class CityInteractionManager : IInteractionManager
             if (ReferenceEquals(trigger, triggerCause))
                 continue;
 
-            Debug.Log($"CityInteractionManager: Triggering action on drag end for trigger {trigger.CityEntity} caused by {triggerCause.CityEntity}");
 
             var triggerAction = profile.GenerateTriggerAction(
                 new TriggerContext(

@@ -17,7 +17,6 @@ public static class G
     public static City City => World.Instance.City;
     public static Economy Economy => World.Instance.Economy;
     public static Player Player => Economy.Player;
-    public static PersonalVehicles PersonalVehicles => Economy.PersonalVehicles;
     public static GameState GameState => GameFlowController.GameState;
 
     public static TransactionProcessor TransactionProcessor;
@@ -85,7 +84,6 @@ public static class G
         viewBuildersConfig = handlersConfig;
 
         initializeTransactionProcessor();
-        CityVision?.Initialize();
 
         CarWarehousePolicy = new CarIntoWarehousePolicy();
         VehicleController = new VehicleController();

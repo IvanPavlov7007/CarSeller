@@ -39,7 +39,7 @@ public class GameEvents
 
         onPlayerBusted = null;
 
-        onPrimaryVehicleChanged = null;
+        onVehicleControlStateChanged = null;
     }
 
     public Action OnGamePaused;
@@ -79,5 +79,5 @@ public class GameEvents
     public Action<PlayerBustedEventData> onPlayerBusted;
 
     // Player Interaction Events
-    public Action<Car> onPrimaryVehicleChanged;
+    public Action<VehicleControlStateChangedEventData> onVehicleControlStateChanged;
 }

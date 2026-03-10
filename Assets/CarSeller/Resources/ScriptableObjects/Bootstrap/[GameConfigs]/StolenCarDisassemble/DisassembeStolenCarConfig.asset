@@ -16,4 +16,5 @@ MonoBehaviour:
   CityConfig: {fileID: 11400000, guid: 365f4d838f000674b9891038e28cbdf9, type: 2}
   EconomyConfig: {fileID: 11400000, guid: 254e34cb4e01cca429baa46ab5f0f0c0, type: 2}
   WorldMissionsConfig: {fileID: 11400000, guid: 92161a9ed29d20640ac9350b1e20cfc8, type: 2}
+  VehicleControllerConfig: {fileID: 11400000, guid: c79b068de97451c4287245e557fdd87e, type: 2}
   GameModeData: {fileID: 0}

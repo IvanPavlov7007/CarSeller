@@ -17,10 +17,10 @@ public class CityViewObjectBuilder : ScriptableObject
     [Header("UI Prefabs")]
     public GameObject pinUIPrefab;
     public PinStyle WarehousePinStyle;
+    public PinStyle CarStashWarehousePinStyle;
     public PinStyle BuyerPinStyle;
 
     CityUIBuilder CityUIBuilder = new CityUIBuilder();
-    private AspectsViewBuilder _aspectsViewBuilder;
 
     public CityViewObjectController BuildObject(CityEntity entity)
     {

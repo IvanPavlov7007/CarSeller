@@ -13,7 +13,8 @@ public enum GameConfigMode
 {
     CarShop,
     CarSteal,
-    DisassembleStolenCars
+    DisassembleStolenCars,
+    SimplifiedGameplay
 }
 
 //TODO use strategy pattern to avoid large switch statements in resolvers

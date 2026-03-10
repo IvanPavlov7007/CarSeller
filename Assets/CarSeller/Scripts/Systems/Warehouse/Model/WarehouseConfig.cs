@@ -21,6 +21,7 @@ public class WarehouseConfig : SerializedScriptableObject
     public Vector2 warehouseClosestInitialPosition;
 
     public SimpleProductSpawnConfig[] initialProductsToSpawn;
+    public SimpleCarSpawnConfig[] initialCarsToSpawn;
 }
 
 [Serializable]

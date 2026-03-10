@@ -9,8 +9,8 @@ public class VehicleButtonUI : MonoBehaviour
 
     readonly Color interactableColor = new Color(1f, 1f, 1f, 1f);
     readonly Color nonInteractableColor = new Color(1f, 1f, 1f, 0.5f);
-    readonly Color interactableBackgroundColor = new Color(0f, 1f, 0f, 0.5f);
-    readonly Color nonInteractableBackgroundColor = new Color(0f, 0f, 0f, 0.25f);
+    readonly Color interactableBackgroundColor = new Color(1f, 1f, 1f, 0.5f);
+    readonly Color nonInteractableBackgroundColor = new Color(0.5f, 0.5f, 0.5f, 0.25f);
 
     public void MakeInteractable()
     {

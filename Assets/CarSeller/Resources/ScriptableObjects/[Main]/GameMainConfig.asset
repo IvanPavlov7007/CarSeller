@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 473cdafa491da3346a0c597bdca93a6f, type: 3}
   m_Name: GameMainConfig
   m_EditorClassIdentifier: 
-  GameConfig: {fileID: 11400000, guid: 39e45c93c4bf34342b2899e1879f577b, type: 2}
+  GameConfig: {fileID: 11400000, guid: 2e8935d5072b3a7438f4fa8e8d4b2a4d, type: 2}
   ViewBuilders:
     monolithWarehouseProductViewBuilder: {fileID: 11400000, guid: f89c79dee8c6ad946a82b44e4e94a0a2, type: 2}
     physicalWarehouseProductViewBuilder: {fileID: 11400000, guid: 714191ac3dbb5f94695da48c3d1fd87a, type: 2}

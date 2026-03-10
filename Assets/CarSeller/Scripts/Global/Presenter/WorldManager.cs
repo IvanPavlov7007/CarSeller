@@ -94,6 +94,23 @@ public class WorldManager
             //TODO extract into a specific creation service
             addWarehouse(World.Instance.City, warehouseConfig);
         }
+
+        initializeCarStashWarehouses(cityConfig.carStashWarehouseConfigs);
+    }
+
+    private void initializeCarStashWarehouses(CarStashWarehouseConfig[] carStashWarehouseConfigs)
+    {
+        foreach (var carStashWarehouseConfig in carStashWarehouseConfigs)
+        {
+            addCarStashWarehouse(World.Instance.City, carStashWarehouseConfig);
+        }
+    }
+
+    private void addCarStashWarehouse(City city, CarStashWarehouseConfig carStashWarehouseConfig)
+    {
+        CarStashWarehouse carStashWarehouse = new CarStashWarehouse(carStashWarehouseConfig);
+        var pos = carStashWarehouseConfig.Marker.GetCityPosition();
+        CityEntitiesCreationHelper.CreateCarStashWarehouse(carStashWarehouse, pos);
     }
 
     [Obsolete("Spawning products in city is deprecated")]

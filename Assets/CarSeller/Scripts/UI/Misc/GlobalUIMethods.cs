@@ -1,15 +1,15 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 
 public class GlobalUIMethods : MonoBehaviour
 {
     public void OpenCity()
     {
-        //hackPickRandomCar();
-        hackCreatePlayerFigure();
         G.GameFlowController.EnterCity();
     }
 
+    [Obsolete]
     private void hackCreatePlayerFigure()
     {
         Warehouse warehouse = G.GameFlowController.CurrentWarehouse;
@@ -19,23 +19,19 @@ public class GlobalUIMethods : MonoBehaviour
         var figure = new PlayerFigure();
         CityEntitiesCreationHelper.CreatePlayerFigure(figure,
             CityLocatorHelper.GetCityEntity(warehouse).Position);
-        G.GameFlowController.TryControlPlayerFigure(figure, out _);
+        //G.GameFlowController.TryControlPlayerFigure(figure, out _);
 
     }
 
+    [Obsolete]
     /// <summary>
     /// Don't use this method in production code!
     /// </summary>
     private void hackPickRandomCar()
     {
-        var car = G.GameState.FocusedCar;
-        if (car == null || !CityLocatorHelper.IsInCity(car))
-        {
-            car =
-            CityLocatorHelper.GetClosestCar(G.GameFlowController.CurrentWarehouse, out _);
-        }
-
-        G.GameFlowController.TryDriveCar(car, out _);
+            var car = CityLocatorHelper.GetCityEntity(
+            CityLocatorHelper.GetClosestCar(G.GameFlowController.CurrentWarehouse, out _));
+        G.VehicleController.DriveWorldVehicle(car);
     }
 
     public void StartGame()
