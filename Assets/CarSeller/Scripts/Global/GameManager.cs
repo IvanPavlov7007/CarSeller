@@ -21,7 +21,9 @@ public class GameManager : Singleton<GameManager>
     {
         UIInputController.Instance.onPaused += () => Pause(true);
         UIInputController.Instance.onResumed += () => Pause(false);
+#if UNITY_EDITOR
         PlayerInputController.Instance.restarted += () => ResetGame();
+#endif
     }
 
     public void Pause(bool pause)

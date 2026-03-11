@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Unity.VisualScripting;
@@ -34,6 +35,17 @@ public class PrimaryVehicleManager
         PrimaryVehicle.Hide();
     }
 
+    public void SwapPrimaryVehicle(PersonalVehicle nextVechilce)
+    {
+        SetPrimaryVehicle(nextVechilce);
+    }
+
+    private void SetPrimaryVehicle(PersonalVehicle nextVechilce)
+    {
+        Debug.Assert(PersonalVehiclesList.OwnedVehicles.Contains(nextVechilce));
+        PrimaryVehicle = nextVechilce;
+    }
+
     void SetPrimaryVehicle(Car car)
     {
         var foundLocation = PersonalVehiclesList.OwnedVehicles.FindIndex(x => x.Car == car);
@@ -56,11 +68,15 @@ public class PrimaryVehicleManager
 
 public class PersonalVehiclesList
 {
-    public int MaxCount { get; private set; }
     public List<PersonalVehicle> OwnedVehicles { get; private set; }
-    public PersonalVehiclesList(IReadOnlyList<PersonalVehicle> initialVehicles, int maxCount)
+    public PersonalVehiclesList(IReadOnlyList<PersonalVehicle> initialVehicles)
     {
         OwnedVehicles = new List<PersonalVehicle>(initialVehicles);
+    }
+
+    public void UpdateList (IReadOnlyList<PersonalVehicle> newVehicles)
+    {
+        OwnedVehicles = new List<PersonalVehicle>(newVehicles);
     }
 }
 
@@ -71,9 +87,20 @@ public class PersonalVehicle
     public bool IsDeployed => CityEntity != null;
     private PersonalVehicle(){}
 
+    [Obsolete]
     public static PersonalVehicle CreateNew(SimpleCarSpawnConfig spawnConfig)
     {
         var car = spawnConfig.GenerateCarHidden();
+        return new PersonalVehicle
+        {
+            Car = car,
+            CityEntity = null,
+        };
+    }
+
+    public static PersonalVehicle CreateNew(SimplifiedCarIdentifier simplifiedCarIdentifier)
+    {
+        var car = G.SimplifiedCarsManager.CreateCarHidden(simplifiedCarIdentifier);
         return new PersonalVehicle
         {
             Car = car,

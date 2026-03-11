@@ -1,11 +1,14 @@
 ﻿public class SimplifiedGameplayMain : GameMain
 {
     bool firstLoaded = false;
+    PersonalVehicleShop shop;
+
     public override void InitializeWorld(GameConfig gameConfig)
     {
         base.InitializeWorld(gameConfig);
         G.CarSpawnManager.SubscribeToEvents();
         G.CarSpawnManager.NewCarsRotation();
+        createShop(gameConfig.VehicleControllerConfig.vehicleShopConfig);
     }
     public override void InitializeLogic(GameConfig gameConfig)
     {
@@ -14,8 +17,15 @@
         var roamingState = new FreeRoamGameState();
         G.GameFlowController.SetGameState(roamingState);
 
-        G.VehicleController.Initialize(gameConfig.VehicleControllerConfig);
+        G.VehicleController.Initialize(gameConfig.VehicleControllerConfig, shop.PersonalVehiclesList);
         G.CityVision.Initialize();
+    }
+
+    private void createShop(VehicleShopConfig config)
+    {
+        shop = new PersonalVehicleShop(config);
+        var pos = config.Marker.GetCityPosition();
+        CityEntitiesCreationHelper.CreatePersonalVehicleShop(shop, pos);
     }
 
     public override void AfterSceneLoad(ISceneMain sceneMain)

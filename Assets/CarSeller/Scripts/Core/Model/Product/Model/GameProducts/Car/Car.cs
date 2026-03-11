@@ -23,7 +23,6 @@ public sealed class Car : Product, IOwnershipContainer, ILocationsHolder, ISimpl
     public CarRarity Rarity => runtimeConfig.Rarity;
     #endregion
 
-
     public Car(CarRuntimeConfig runtimeConfig)
     {
         this.runtimeConfig = runtimeConfig;

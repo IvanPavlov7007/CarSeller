@@ -18,6 +18,7 @@ public class CityViewObjectBuilder : ScriptableObject
     public GameObject pinUIPrefab;
     public PinStyle WarehousePinStyle;
     public PinStyle CarStashWarehousePinStyle;
+    public PinStyle PersonalVehicleShopPinStyle;
     public PinStyle BuyerPinStyle;
 
     CityUIBuilder CityUIBuilder = new CityUIBuilder();

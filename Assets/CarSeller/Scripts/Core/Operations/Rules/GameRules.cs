@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 
+// TODO sort out not used anymore
 public static class GameRules
 {
     public static readonly WarehouseCanStoreCar WarehouseCanStoreCar = new WarehouseCanStoreCar();
@@ -9,6 +10,7 @@ public static class GameRules
     public static readonly CarBelongsToPlayer CarBelongsToPlayer = new CarBelongsToPlayer();
     public static readonly CarCanBeDisassembled CarCanBeDisassembled = new CarCanBeDisassembled();
     public static readonly ModelControlledByPlayer ModelControlledByPlayer = new ModelControlledByPlayer();
+    public static readonly CanBePurchased CanBePurchased = new CanBePurchased();
 }
 
 public class CarBelongsToPlayer
@@ -117,5 +119,13 @@ public class CarCanBeExited
             return false;
         bool isCurrentCar = G.VehicleController.CurrentCar == car;
         return isCurrentCar && !G.VehicleController.IsInPrimaryVehicle;
+    }
+}
+
+public class CanBePurchased
+{
+    public bool Check(IPurchasable purchasable)
+    {
+        return G.Player.Money >= purchasable.Price && purchasable.IsAvailable;
     }
 }

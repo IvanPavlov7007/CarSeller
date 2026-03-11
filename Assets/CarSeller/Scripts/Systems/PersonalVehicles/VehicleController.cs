@@ -14,11 +14,12 @@ public sealed class VehicleController
     private PersonalVehiclesList PersonalVehicles;
     private PrimaryVehicleManager PrimaryVehicleManager;
 
-    public void Initialize(VehicleControllerConfig config)
+    public void Initialize(VehicleControllerConfig config, PersonalVehiclesList list)
     {
+        Debug.Assert(list != null, "PersonalVehiclesList cannot be null");
         Debug.Assert(config != null, "VehicleControllerConfig cannot be null");
-        
-        initializePersonalVehicles(config);
+
+        PersonalVehicles = list;
         initializePrimaryVehicleManager(config.initialPrimeVehicleIndex);
 
         initializeStateAsPrimaryVehicleControlState(config);
@@ -31,14 +32,14 @@ public sealed class VehicleController
         ChangeState(new PrimaryVehicleControlState(initialEntity,this));
     }
 
+    [Obsolete]
     private void initializePersonalVehicles(VehicleControllerConfig data)
     {
         Debug.Assert(data.ownedCars != null, "Owned cars list cannot be null");
         Debug.Assert(data.ownedCars.Count <= data.maxOwnedCars,
             $"Number of owned cars ({data.ownedCars.Count}) exceeds the maximum allowed ({data.maxOwnedCars}).");
         
-        PersonalVehicles = new PersonalVehiclesList(createInitialPersonalVehicles(data.ownedCars),
-            data.maxOwnedCars);
+        PersonalVehicles = new PersonalVehiclesList(createInitialPersonalVehicles(data.ownedCars));
     }
 
     private List<PersonalVehicle> createInitialPersonalVehicles(List<SimpleCarSpawnConfig> carConfigs)
@@ -71,6 +72,12 @@ public sealed class VehicleController
         CurrentState.ExitVehicle();
     }
 
+    public void SwapPrimaryVehicle(PersonalVehicle personalVehicle)
+    {
+        CurrentState.SwapPrimaryVehicle(personalVehicle);
+    }
+
+
     void SetPrimaryVehicleState(CityEntity vehicleEntity)
     {
         ChangeState(new PrimaryVehicleControlState(vehicleEntity, this));
@@ -91,6 +98,7 @@ public sealed class VehicleController
         Debug.Log($"VehicleController: State changed from {oldState?.GetType().Name ?? "null"} to {newState.GetType().Name}");
     }
 
+    
     public abstract class VehicleControlState
     {
         public readonly CityEntity CurrentCityEntity;
@@ -109,6 +117,8 @@ public sealed class VehicleController
             var entity = Context.PrimaryVehicleManager.DeployPrimaryVehicle(cityPosition);
             Context.SetPrimaryVehicleState(entity);
         }
+
+        abstract internal void SwapPrimaryVehicle(PersonalVehicle personalVehicle);
 
         abstract internal void EnterVehicle(CityEntity vehicleEntity);
         abstract internal void ExitVehicle();
@@ -130,6 +140,14 @@ public sealed class VehicleController
         {
             throw new UnityException($"Prohibited Exit try: Primary Vehicle {Car}");
         }
+
+        internal override void SwapPrimaryVehicle(PersonalVehicle personalVehicle)
+        {
+            Context.PrimaryVehicleManager.HidePrimaryVehicle();
+            Context.PrimaryVehicleManager.SwapPrimaryVehicle(personalVehicle);
+            var entity = Context.PrimaryVehicleManager.DeployPrimaryVehicle(CurrentCityEntity.Position);
+            Context.SetPrimaryVehicleState(entity);
+        }
     }
 
     public class WorldVehicleControlState : VehicleControlState
@@ -148,6 +166,12 @@ public sealed class VehicleController
             var currentPosition = CurrentCityEntity.Position;
             var deployEntity = Context.PrimaryVehicleManager.DeployPrimaryVehicle(currentPosition);
             Context.SetPrimaryVehicleState(deployEntity);
+        }
+
+        internal override void SwapPrimaryVehicle(PersonalVehicle personalVehicle)
+        {
+            Context.PrimaryVehicleManager.SwapPrimaryVehicle(personalVehicle);
+            Context.SetWorldVehicleState(CurrentCityEntity);
         }
     }
 }

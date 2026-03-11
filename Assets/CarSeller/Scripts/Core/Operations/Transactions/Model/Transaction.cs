@@ -2,18 +2,10 @@
 
 public class Transaction
 {
-    public Transaction(TransactionType type, ITransactionData data)
-    {
-        Type = type;
-        Data = data;
-    }
-
-    public void FinalizeResult(TransactionResult result)
+    internal void FinalizeResult(TransactionResult result)
     {
         Result = result;
     }
-    public TransactionType Type { get; private set; }
-    public ITransactionData Data { get; private set; }
     public TransactionResult Result { get; private set; }
 }
 

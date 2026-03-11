@@ -55,3 +55,27 @@ public class ProductPriceCalculator
         return wheel.BasePrice;
     }
 }
+
+public static class ProductPriceCalculatorExtensions
+{
+    public static float CalculatePrice(this Product product)
+    {
+        var calculator = G.Economy.ProductPriceCalculator;
+        switch (product)
+        {
+            case Car car:
+                return calculator.Calculate(car);
+            case CarFrame carFrame:
+                return calculator.Calculate(carFrame);
+            case Engine engine:
+                return calculator.Calculate(engine);
+            case Wheel wheel:
+                return calculator.Calculate(wheel);
+            case Spoiler spoiler:
+                return calculator.Calculate(spoiler);
+            default:
+                Debug.LogWarning("Unknown product type for price calculation.");
+                return 0;
+        }
+    }
+}

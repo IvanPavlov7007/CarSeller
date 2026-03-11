@@ -98,6 +98,7 @@ public class WorldManager
         initializeCarStashWarehouses(cityConfig.carStashWarehouseConfigs);
     }
 
+    //TODO make this more organic, don't just duplicate the warehouse code, extract commonalities
     private void initializeCarStashWarehouses(CarStashWarehouseConfig[] carStashWarehouseConfigs)
     {
         foreach (var carStashWarehouseConfig in carStashWarehouseConfigs)

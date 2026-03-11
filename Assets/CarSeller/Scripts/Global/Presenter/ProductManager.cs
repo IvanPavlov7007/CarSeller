@@ -11,17 +11,20 @@ public class ProductManager
     public Car CreateCar(CarBaseConfig baseConfig, CarVariantConfig variantConfig, ILocation location)
     {
         CarRuntimeConfig runtimeConfig = carResolver.Resolve(baseConfig, variantConfig);
-        Car car = productBuilder.BuildCar(runtimeConfig);
+        return CreateCar(runtimeConfig, location);
+    }
+
+    public Car CreateCar(CarRuntimeConfig config, ILocation location)
+    {
+        Car car = productBuilder.BuildCar(config);
         
         attachProductToLocation(car, location);
-
         G.ProductLifetimeService.RegisterProduct(car, location);
         foreach(var locations in car.GetNonEmptyProductLocations())
         {
             //not rising events here
             G.ProductLifetimeService.RegisterProduct(locations.Occupant as Product, locations);
         }
-
         raiseEvents(car, location);
         return car;
     }

@@ -48,8 +48,10 @@ public static class G
 
     public static CarStripper CarStripper = new CarStripper();
 
+    public static SimplifiedCarsManager SimplifiedCarsManager = new SimplifiedCarsManager();
+
     //City
-    
+
     public static CityEntityLifetimeService CityEntityLifetimeService = new CityEntityLifetimeService();
     public static CityActionService CityActionService = new CityActionService();
 
@@ -77,6 +79,8 @@ public static class G
     public static CityViewObjectBuilder cityViewObjectBuilder => viewBuildersConfig.cityViewObjectBuilder;
     public static CityViewStreetsBuilder cityViewStreetsBuilder = new CityViewStreetsBuilder();
 
+    public static SimplifiedCarsCreationBuilder SimplifiedCarsCreationBuilder => viewBuildersConfig.simplifiedCarsCreationBuilder;
+
     static ViewBuildersConfig viewBuildersConfig;
 
     public static void Initialize( ViewBuildersConfig handlersConfig)
@@ -85,6 +89,7 @@ public static class G
 
         initializeTransactionProcessor();
 
+        SimplifiedCarsCreationBuilder.Initialize();
         CarWarehousePolicy = new CarIntoWarehousePolicy();
         VehicleController = new VehicleController();
         GameFlowManager = new GameFlowManager();
