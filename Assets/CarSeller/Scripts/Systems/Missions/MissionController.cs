@@ -52,6 +52,8 @@ public class MissionController : MissionControllerBase
         GameEvents.Instance.OnTargetReachDragEnded -= OnCityTargetReached;
         GameEvents.Instance.OnPlayerAccept -= OnPlayerAccepted;
         GameEvents.Instance.onPlayerBusted -= OnPlayerBusted;
+
+        GameObject.Destroy(monoBehaviourHelper.gameObject);
     }
 
     // Internal functions

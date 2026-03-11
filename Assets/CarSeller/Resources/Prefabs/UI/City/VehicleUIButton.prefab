@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7629651231239904577, guid: 55d3aad15d0bc434d81c60946ecdb2e9, type: 3}
       propertyPath: m_Name
-      value: ButtonWithImage Variant
+      value: VehicleUIButton
       objectReference: {fileID: 0}
     - target: {fileID: 9091230251219355818, guid: 55d3aad15d0bc434d81c60946ecdb2e9, type: 3}
       propertyPath: m_Pivot.x

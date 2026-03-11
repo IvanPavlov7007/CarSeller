@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -34,17 +35,36 @@ public abstract partial class GameMain
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Main()
     {
+        if (Instance != null)
+            Instance.Destroy();
+
         GameMainResolver gameResolver = new GameMainResolver();
         Instance = gameResolver.Resolve(GameMainConfig.Instance.GameConfig);
         Instance.Initialize(GameMainConfig.Instance.GameConfig);
-        SceneManager.sceneLoaded += Instance.onSceneLoaded;
     }
 
     public virtual void Initialize(GameConfig gameConfig)
     {
         ResetStaticState();
+        ResetData(gameConfig);
+        SceneManager.sceneLoaded += onSceneLoaded;
+    }
+
+    public void ResetData(GameConfig gameConfig)
+    {
         InitializeWorld(gameConfig);
         InitializeLogic(gameConfig);
+    }
+
+    public static void GameReset()
+    {
+        Instance.ResetData(GameMainConfig.Instance.GameConfig);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public virtual void Destroy()
+    {
+        SceneManager.sceneLoaded -= onSceneLoaded;
     }
 
     public virtual void ResetStaticState() 

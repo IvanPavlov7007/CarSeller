@@ -8,6 +8,7 @@ public class PlayerInputController : Singleton<PlayerInputController>
 {
     public event Action crouched;
     public event Action jumped;
+    public event Action restarted;
 
     public void OnSprint(InputValue inputValue)
     {
@@ -23,5 +24,10 @@ public class PlayerInputController : Singleton<PlayerInputController>
     public void OnJump(InputValue inputValue)
     {
         jumped?.Invoke();
+    }
+
+    public void OnRestart(InputValue inputValue)
+    {
+        restarted?.Invoke();
     }
 }

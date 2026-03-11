@@ -2,6 +2,7 @@
 using UnityEngine;
 using Pixelplacement;
 using System;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Currently in the background of GameFlowManager, probably should merge
@@ -20,6 +21,7 @@ public class GameManager : Singleton<GameManager>
     {
         UIInputController.Instance.onPaused += () => Pause(true);
         UIInputController.Instance.onResumed += () => Pause(false);
+        PlayerInputController.Instance.restarted += () => ResetGame();
     }
 
     public void Pause(bool pause)
@@ -61,7 +63,8 @@ public class GameManager : Singleton<GameManager>
 
     public void ResetGame()
     {
-        // delete the save data, reset the whole game from the beginning
+        Debug.Log("Resetting game...");
+        GameMain.GameReset();
     }
 
     void changeTime()

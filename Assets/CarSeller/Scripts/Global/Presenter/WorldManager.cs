@@ -149,11 +149,22 @@ public class WorldManager
             return;
         }
 
+        clearMissions();
+
         G.MissionController = new MissionController(worldMissionsConfig.allMissions);
         // Unlock starting missions
         foreach (var startingMission in worldMissionsConfig.startingMissions)
         {
             G.MissionController.UnlockMission(startingMission);
+        }
+    }
+
+    private void clearMissions()
+    {
+        if(G.MissionController != null)
+        {
+            G.MissionController.Disable();
+            G.MissionController = null;
         }
     }
 }

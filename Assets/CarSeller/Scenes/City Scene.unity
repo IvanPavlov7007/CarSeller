@@ -205,7 +205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8735283685065126293, guid: b6aaa0122515e264f8b8049987c645f8, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8735283685065126293, guid: b6aaa0122515e264f8b8049987c645f8, type: 3}
       propertyPath: m_AnchorMin.x
@@ -213,15 +213,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8735283685065126293, guid: b6aaa0122515e264f8b8049987c645f8, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8735283685065126293, guid: b6aaa0122515e264f8b8049987c645f8, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 400
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8735283685065126293, guid: b6aaa0122515e264f8b8049987c645f8, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 200
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8735283685065126293, guid: b6aaa0122515e264f8b8049987c645f8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -253,11 +253,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8735283685065126293, guid: b6aaa0122515e264f8b8049987c645f8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 250
+      value: 125
       objectReference: {fileID: 0}
     - target: {fileID: 8735283685065126293, guid: b6aaa0122515e264f8b8049987c645f8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 150
+      value: -75
       objectReference: {fileID: 0}
     - target: {fileID: 8735283685065126293, guid: b6aaa0122515e264f8b8049987c645f8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2510,7 +2510,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8735283685065126293, guid: b6aaa0122515e264f8b8049987c645f8, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8735283685065126293, guid: b6aaa0122515e264f8b8049987c645f8, type: 3}
       propertyPath: m_AnchorMin.x
@@ -2518,15 +2518,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8735283685065126293, guid: b6aaa0122515e264f8b8049987c645f8, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8735283685065126293, guid: b6aaa0122515e264f8b8049987c645f8, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 400
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8735283685065126293, guid: b6aaa0122515e264f8b8049987c645f8, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 200
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8735283685065126293, guid: b6aaa0122515e264f8b8049987c645f8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2558,11 +2558,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8735283685065126293, guid: b6aaa0122515e264f8b8049987c645f8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 250
+      value: 357
       objectReference: {fileID: 0}
     - target: {fileID: 8735283685065126293, guid: b6aaa0122515e264f8b8049987c645f8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 400
+      value: -75
       objectReference: {fileID: 0}
     - target: {fileID: 8735283685065126293, guid: b6aaa0122515e264f8b8049987c645f8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4183,6 +4183,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3031981107713804398, guid: 3bb751e67a1aa4b47a57aa37d0c30943, type: 3}
+      propertyPath: _dontDestroyOnLoad
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3303562401181090476, guid: 3bb751e67a1aa4b47a57aa37d0c30943, type: 3}
       propertyPath: m_Name
       value: Core
