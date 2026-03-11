@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: VehicleControllerConfig
   m_EditorClassIdentifier: 
   initialPosition: {x: 0, y: 0}
-  maxOwnedCars: 10
   initialPrimeVehicleIndex: 0
+  vehicleShopConfig: {fileID: 11400000, guid: e2cca005be8f62644aee43ec6dd5434e, type: 2}
+  maxOwnedCars: 10
   ownedCars:
   - {fileID: 11400000, guid: 19c0585447331ff4691ff858c910d60d, type: 2}
   - {fileID: 11400000, guid: a352ec21d783a704b93c597c55ec9a79, type: 2}

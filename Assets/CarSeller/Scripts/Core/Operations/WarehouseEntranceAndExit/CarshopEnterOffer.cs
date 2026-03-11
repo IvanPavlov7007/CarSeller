@@ -15,9 +15,8 @@ public class CarshopEnterOffer : AcceptOnceOffer
     {
         Debug.Assert(CanAccept());
         IsAccepted = true;
-        return new Transaction(TransactionType.PutProductsInWarehouse, 
-            new PutProductsInHolderTransactionData(
-                new WarehouseHolderAdapter(warehouse), car));
+        return new PutProductsInHolderTransaction(
+                new WarehouseHolderAdapter(warehouse), car);
     }
 
     public override bool CanAccept()

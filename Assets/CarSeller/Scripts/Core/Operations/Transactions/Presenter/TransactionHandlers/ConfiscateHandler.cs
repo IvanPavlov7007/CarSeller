@@ -1,12 +1,3 @@
-﻿public class ConfiscateHandler : TransactionHandler
+﻿public class ConfiscateHandler
 {
-    public override bool CanHandle(Transaction transaction)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override TransactionResult Handle(Transaction transaction)
-    {
-        throw new System.NotImplementedException();
-    }
 }

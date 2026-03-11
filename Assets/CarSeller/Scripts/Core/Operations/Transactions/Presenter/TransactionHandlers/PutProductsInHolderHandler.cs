@@ -1,15 +1,12 @@
-﻿public class PutProductsInHolderHandler : TransactionHandler
+﻿using UnityEngine;
+
+public class PutProductsInHolderHandler : TransactionHandler<PutProductsInHolderTransaction>
 {
-    public override bool CanHandle(Transaction transaction) => transaction.Type == TransactionType.PutProductsInWarehouse;
-    public override TransactionResult Handle(Transaction transaction)
+    public override TransactionResult Handle(PutProductsInHolderTransaction transaction)
     {
-        var data = transaction.Data as PutProductsInHolderTransactionData;
-        if (data == null)
-        {
-            return TransactionResult.InvalidTransaction("Invalid data for put car in warehouse transaction.");
-        }
-        var products = data.Products;
-        var targetHolder = data.TargetHolder;
+        Debug.Assert(transaction != null, "transaction is null");
+        var products = transaction.Products;
+        var targetHolder = transaction.TargetHolder;
         
         var resultData = new ProductsPlacingResultData(targetHolder.PutProducts(products));
         TransactionResult result;

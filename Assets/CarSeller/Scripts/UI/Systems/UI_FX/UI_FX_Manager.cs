@@ -21,29 +21,25 @@ public class UI_FX_Manager : Singleton<UI_FX_Manager>
             return;
         }
 
-        switch (transaction.Type)
+        switch (transaction)
         {
-            case TransactionType.Purchase:
+            case PurchaseTransaction:
                 // TODO: add purchase-specific FX if needed
                 break;
 
-            case TransactionType.Steal:
+            case StealTransaction:
                 // TODO: add steal-specific FX if needed
                 break;
 
-            case TransactionType.Sell:
+            case SellTransaction sellData:
                 {
-                    var transactionData = transaction.Data as SellTransactionData;
-                    if (transactionData != null)
-                        playMoneyEffect(transactionData.Price, data.TransactionFeedbackLocation);
+                    playMoneyEffect(sellData.Price, data.TransactionFeedbackLocation);
                     break;
                 }
 
-            case TransactionType.Reward:
+            case RewardTransaction rewardData:
                 {
-                    var transactionData = transaction.Data as RewardTransactionData;
-                    if (transactionData != null)
-                        playMoneyEffect(transactionData.Price, data.TransactionFeedbackLocation);
+                    playMoneyEffect(rewardData.Price, data.TransactionFeedbackLocation);
                     break;
                 }
 

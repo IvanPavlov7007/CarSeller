@@ -43,7 +43,7 @@ public abstract class StashSessionDisplayer
         var container = new UIElement()
         {
             Type = UIElementType.Container,
-            Style = "Grid",
+            Style = "grid",
             Children = new List<UIElement>()
         };
         if(ShownSlots.Count == 0)
@@ -78,6 +78,7 @@ public abstract class StashSessionDisplayer
             Children = new List<UIElement>()
             {
                 CTX_Menu_Tools.CarIcon(slot.Car),
+                CTX_Menu_Tools.CarRarityText(slot.Car),
                 CTX_Menu_Tools.Header("Deploy")
             }
         };
@@ -120,6 +121,7 @@ public abstract class StashSessionDisplayer
             Children = new List<UIElement>()
             {
                 CTX_Menu_Tools.CarIcon(slot.Car),
+                CTX_Menu_Tools.CarRarityText(slot.Car),
                 CTX_Menu_Tools.Header("Swap")
             }
         };

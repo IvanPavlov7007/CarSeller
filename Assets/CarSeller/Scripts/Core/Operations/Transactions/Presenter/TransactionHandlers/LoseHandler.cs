@@ -1,12 +1,3 @@
-﻿public class LoseHandler : TransactionHandler
+﻿public class LoseHandler
 {
-    public override bool CanHandle(Transaction transaction)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override TransactionResult Handle(Transaction transaction)
-    {
-        throw new System.NotImplementedException();
-    }
 }

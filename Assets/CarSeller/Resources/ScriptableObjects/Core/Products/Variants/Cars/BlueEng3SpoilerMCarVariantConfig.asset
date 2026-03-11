@@ -92,4 +92,16 @@ MonoBehaviour:
       Entry: 8
       Data: 
   baseFallbackConfig: {fileID: 0}
+  OverrideBasePrice: 0
+  BasePrice: 0
+  OverrideSpeed: 0
+  Speed: 0
+  OverrideAcceleration: 0
+  Acceleration: 0
   carFrameRuntimeConfig: {fileID: 11400000, guid: ab40992943a11f2479bd16d83c825292, type: 2}
+  OverrideColor: 1
+  Color: 2
+  OverrideType: 0
+  Type: 0
+  OverrideRarity: 0
+  Rarity: 0

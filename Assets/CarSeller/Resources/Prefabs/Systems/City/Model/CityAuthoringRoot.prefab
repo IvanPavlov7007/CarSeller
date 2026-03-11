@@ -11010,6 +11010,60 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &2818043981372939135
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6747569048990115243}
+  - component: {fileID: 4339326347202999305}
+  m_Layer: 0
+  m_Name: CarShopMarker
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6747569048990115243
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2818043981372939135}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.15, y: 0.37, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4339326347202999305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2818043981372939135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: personalCarShop
+  DisplayName: 
+  Tags: []
+  RegionId: south
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &2851393971292478671
 GameObject:
   m_ObjectHideFlags: 0
@@ -12508,6 +12562,7 @@ Transform:
   - {fileID: 7985287927518370470}
   - {fileID: 7232854506046464391}
   - {fileID: 9182494016429064224}
+  - {fileID: 6747569048990115243}
   - {fileID: 325899974334231779}
   - {fileID: 7188931246996942824}
   - {fileID: 5502221091689671450}

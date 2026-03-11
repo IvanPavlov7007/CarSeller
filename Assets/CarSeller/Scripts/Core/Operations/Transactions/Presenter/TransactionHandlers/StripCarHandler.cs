@@ -1,31 +1,20 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class StripCarHandler : TransactionHandler
+public class StripCarHandler : TransactionHandler<StripCarTransaction>
 {
-    public override bool CanHandle(Transaction transaction) => transaction.Type == TransactionType.StripCar;
-    public override TransactionResult Handle(Transaction transaction)
+    public override TransactionResult Handle(StripCarTransaction transaction)
     {
-        // Programming error if the processor routed a non-strip car transaction here.
-        Debug.Assert(transaction != null && transaction.Type == TransactionType.StripCar,
-            "StripCarHandler received a non-strip car transaction.");
-        if (transaction == null || transaction.Type != TransactionType.StripCar)
-            return TransactionResult.InvalidTransaction("Invalid transaction: expected StripCar.");
-        var stripCarData = transaction.Data as StripCarTransactionData;
-        if (stripCarData == null)
-            return TransactionResult.InvalidTransaction("Invalid data: expected StripCarTransactionData.");
-        if(stripCarData.TargetProductsHolder == null)
-            return TransactionResult.InvalidTransaction("Invalid data: TargetWarehouse is null.");
-        if(stripCarData.Car == null)
-            return TransactionResult.InvalidTransaction("Invalid data: CarToStrip is null.");
-        if(stripCarData.StrippingProcess == null)
-            return TransactionResult.InvalidTransaction("Invalid data: StrippingProcess is null.");
+        Debug.Assert(transaction != null, "Transaction is null.");
+        Debug.Assert(transaction.Car != null, "Car is null.");
+        Debug.Assert(transaction.TargetProductsHolder != null, "TargetProductsHolder is null.");
+        Debug.Assert(transaction.StrippingProcess != null, "StrippingProcess is null.");
 
 
-        var process = stripCarData.StrippingProcess;
+        var process = transaction.StrippingProcess;
         process.Strip();
 
-        var resultData = new StripResultData(addStrippedParts(process.StrippedParts, stripCarData.TargetProductsHolder));
+        var resultData = new StripResultData(addStrippedParts(process.StrippedParts, transaction.TargetProductsHolder));
 
         // Build result first
         var result = TransactionResult.Success(resultData);

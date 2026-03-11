@@ -21,9 +21,8 @@ public class WarehouseExitProcess : IProcess
         Debug.Assert(GameRules.CanRideOutCar.Check(car, warehouse),
             "GameRules.CanRideOutCar.Check(car, warehouse)");
 
-        var result = G.TransactionProcessor.Process(new Transaction(
-            TransactionType.PullCarFromWarehouse, new PullCarFromWarehouseTransactionData(
-                car, warehouse)));
+        var result = G.TransactionProcessor.Process(new PullCarFromWarehouseTransaction(
+                car, warehouse));
         if (result.Type != TransactionResultType.Success)
         {
             Debug.LogError("Failed to pull car from warehouse: " + result.Type);

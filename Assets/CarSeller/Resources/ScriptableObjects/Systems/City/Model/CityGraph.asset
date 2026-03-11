@@ -1299,6 +1299,20 @@ MonoBehaviour:
       WorldPoint: {x: -5.013, y: -1.862}
     AuthorId: s_wh_1
     AuthorPath: CityAuthoringRoot/SouthWarehouseMarker
+  - Id: personalCarShop
+    DisplayName: 
+    Tags: []
+    RegionId: south
+    Radius: 0
+    Anchor:
+      Kind: 2
+      NodeId: 
+      T: 0.5
+      Forward: 1
+      EdgeId: 
+      WorldPoint: {x: -1.15, y: 0.37}
+    AuthorId: personalCarShop
+    AuthorPath: CityAuthoringRoot/CarShopMarker
   - Id: s_wh_2
     DisplayName: 
     Tags: []

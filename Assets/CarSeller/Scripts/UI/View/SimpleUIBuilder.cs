@@ -36,11 +36,13 @@ public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IUIEl
         switch (content.Type)
         {
             case UIElementType.Container:
+                var subContainer = container;//BuildContainer(content, container);
                 foreach (var child in content.Children)
                 {
-                    Build(child, container);
+                    Debug.Log($"Building child of type {child.Type} in container with style {content.Style}");
+                    Build(child, subContainer);
                 }
-                return container;
+                return subContainer;
             case UIElementType.Button:
                 return BuildButton(content, container);
             case UIElementType.ButtonContainer:
@@ -129,6 +131,34 @@ public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IUIEl
         // Ensure button itself has adequate hit size via LayoutElement
         EnsureMinHeight(recT, MinButtonHeight, PrefferedButtonHeight);
         return recT;
+    }
+
+    // Build container
+    private RectTransform BuildContainer(UIElement item, RectTransform container)
+    {
+        GameObject layoutObj;
+        switch (item.Style)
+        {
+            case "vertical":
+                layoutObj = GameObject.Instantiate(VLayoutPrefab, container);
+                break;
+            case "horizontal":
+                layoutObj = GameObject.Instantiate(HLayoutPrefab, container);
+                break;
+            case "grid":
+                layoutObj = new GameObject();
+                layoutObj.AddComponent<RectTransform>().parent = container;
+                var el = layoutObj.AddComponent<LayoutElement>();
+
+                var grid = layoutObj.AddComponent<GridLayoutGroup>();
+                grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+                grid.constraintCount = 2;
+                break;
+            default:
+                layoutObj = GameObject.Instantiate(VLayoutPrefab, container);
+                break;
+        }
+        return layoutObj.GetComponent<RectTransform>();
     }
 
     private RectTransform BuildContentButton(UIElement item, RectTransform container)

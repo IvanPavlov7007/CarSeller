@@ -8,25 +8,6 @@ public class Transaction
     }
     public TransactionResult Result { get; private set; }
 }
-
-
-public interface ITransactionData { }
-
-public enum TransactionType
-{
-    Purchase,
-    Steal,
-    Sell,
-    Reward,
-    Lose,
-    Confiscate,
-    Exchange,
-
-    StripCar,
-    PutProductsInWarehouse,
-    PullCarFromWarehouse,
-}
-
 public class TransactionResult
 {
     public TransactionResultType Type { get; private set; }

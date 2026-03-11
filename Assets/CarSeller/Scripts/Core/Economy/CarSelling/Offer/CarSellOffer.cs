@@ -34,9 +34,7 @@ public class CarSellOffer : IOffer
         Debug.Assert(CanAccept(), "Cannot accept offer: car not delivered.");
 
         FinalRewardPrice = CalculatePrice();
-        var sellData = new SellTransactionData(Car, FinalRewardPrice);
-
-        Transaction transaction = new Transaction(TransactionType.Sell, sellData);
+        Transaction transaction = new SellTransaction(Car, FinalRewardPrice);
 
         Accepted = true;
 

@@ -99,18 +99,18 @@ public static class G
 
     private static void initializeTransactionProcessor()
     {
-        TransactionProcessor = new TransactionProcessor(new Dictionary<TransactionType, ITransactionHandler>
+        TransactionProcessor = new TransactionProcessor(new Dictionary<System.Type, ITransactionHandler>
         {
-            { TransactionType.Purchase, new PurchaseHandler() },
-            { TransactionType.Sell, new SellHandler() },
-            { TransactionType.Reward, new RewardHandler() },
-            { TransactionType.Lose, new LoseHandler() },
-            { TransactionType.Confiscate, new ConfiscateHandler() },
-            { TransactionType.Steal, new StealHandler()   },
-            { TransactionType.Exchange, new ExchangeHandler() },
-            {TransactionType.StripCar, new StripCarHandler() },
-            {TransactionType.PullCarFromWarehouse, new PullCarFromWarehouseHandler() },
-            {TransactionType.PutProductsInWarehouse, new PutProductsInHolderHandler() },
+            { typeof(PurchaseTransaction), new PurchaseHandler() },
+            { typeof(SellTransaction), new SellHandler() },
+            { typeof(RewardTransaction), new RewardHandler() },
+            //{ TransactionType.Lose, new LoseHandler() },
+            //{ TransactionType.Confiscate, new ConfiscateHandler() },
+            //{ TransactionType.Steal, new StealHandler()   },
+            //{ TransactionType.Exchange, new ExchangeHandler() },
+            { typeof(StripCarTransaction), new StripCarHandler() },
+            { typeof(PullCarFromWarehouseTransaction), new PullCarFromWarehouseHandler() },
+            { typeof(PutProductsInHolderTransaction), new PutProductsInHolderHandler() },
         });
     }
 }

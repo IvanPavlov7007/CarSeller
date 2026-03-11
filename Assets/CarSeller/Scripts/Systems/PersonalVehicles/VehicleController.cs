@@ -9,10 +9,14 @@ public sealed class VehicleController
     public Car PrimaryCar => PrimaryVehicleManager.PrimaryVehicle.Car;
     public CityEntity CurrentVehicleEntity => CurrentState.CurrentCityEntity;
     public Car CurrentCar => CurrentState.Car;
+    internal PersonalVehicle CurrentPrimaryVehicle => PrimaryVehicleManager.PrimaryVehicle;
+
     public bool IsInPrimaryVehicle => CurrentState is PrimaryVehicleControlState;
 
     private PersonalVehiclesList PersonalVehicles;
     private PrimaryVehicleManager PrimaryVehicleManager;
+
+    internal PersonalVehiclesList GetPersonalVehiclesList() => PersonalVehicles;
 
     public void Initialize(VehicleControllerConfig config, PersonalVehiclesList list)
     {

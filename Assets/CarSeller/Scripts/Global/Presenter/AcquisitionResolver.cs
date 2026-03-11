@@ -1,13 +1,22 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AcquisitionResolver
 {
-    public void Resolve(IMutableOwnable[] purchasedItems)
+    //public void Resolve(IMutableOwnable[] purchasedItems)
+    //{
+    //    foreach (var item in purchasedItems)
+    //    {
+    //        Resolve(item);
+    //    }
+    //}
+
+    public void Resolve(IReadOnlyList<IPurchasable> purchasables)
     {
-        foreach (var item in purchasedItems)
+        foreach(var purchasable in purchasables)
         {
-            Resolve(item);
+            purchasable.CompletePurchase();
         }
     }
 

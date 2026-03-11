@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TransactionProcessor
 {
-    Dictionary<TransactionType, ITransactionHandler> Handlers { get; set; }
+    Dictionary<Type, ITransactionHandler> Handlers { get; set; }
 
-    public TransactionProcessor(Dictionary<TransactionType, ITransactionHandler> handlers)
+    public TransactionProcessor(Dictionary<Type, ITransactionHandler> handlers)
     {
         Handlers = handlers;
     }
-
 
     /// <summary>
     /// Finds handler for the transaction, executes, saves result, and triggers transaction complete event.
@@ -33,23 +33,34 @@ public class TransactionProcessor
         TransactionResult result;
 
         if (Handlers != null &&
-            Handlers.TryGetValue(transaction.Type, out var handler) &&
-            handler != null &&
-            handler.CanHandle(transaction))
+            Handlers.TryGetValue(transaction.GetType(), out var handler))
         {
-            result = handler.Handle(transaction)
-                     ?? TransactionResult.InvalidTransaction("Handler returned null result.");
+            result = handle(transaction, handler);
         }
         else
         {
             result = TransactionResult.InvalidTransaction(
-                $"No handler found for transaction type {transaction.Type}");
+                $"No handler found for transaction type {transaction.GetType()}");
         }
 
         transaction.FinalizeResult(result);
         GameEvents.Instance.OnTransactionComplete(new TransactionEventData(transaction, location));
 
         return result;
+    }
+
+    private TransactionResult handle(Transaction transaction, ITransactionHandler handler)
+    {
+        try
+        {
+            return handler.Handle(transaction)
+                   ?? TransactionResult.InvalidTransaction("Handler returned null result.");
+        }
+        catch(Exception ex)
+        {
+            Debug.LogError($"Exception while processing transaction of type {transaction.GetType()}: {ex}");
+            return TransactionResult.InvalidTransaction("An error occurred while processing the transaction.");
+        }
     }
 
     public TransactionResult Process(Transaction transaction)

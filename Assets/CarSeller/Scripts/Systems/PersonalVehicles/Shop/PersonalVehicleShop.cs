@@ -96,12 +96,17 @@ public class PersonalVehicleShopEntry : IPurchasable
 
     public void CompletePurchase()
     {
-        Unlock();
+        UnlockAndUpdateShop();
     }
 
     internal void Unlock()
     {
         unlocked = true;
+    }
+
+    void UnlockAndUpdateShop()
+    {
+        Unlock();
         shop.UpdateList();
     }
 
@@ -141,7 +146,7 @@ public class PersonalVehicleShopController
         var container = new UIElement()
         {
             Type = UIElementType.Container,
-            Style = "Grid",
+            Style = "grid",
             Children = new List<UIElement>()
         };
 
@@ -151,10 +156,10 @@ public class PersonalVehicleShopController
 
     private void populateContainerWithSlots(UIElement container, IReadOnlyList<PersonalVehicleShopEntry> AvailableShopEntries)
     {
-        var children = new List<UIElement>();
+        var children = container.Children;
         foreach (var item in AvailableShopEntries)
         {
-            if(item.IsUnlocked)
+            if (item.IsUnlocked)
             {
                 children.Add(ownedEntry(item));
             }
@@ -174,6 +179,7 @@ public class PersonalVehicleShopController
             Children = new List<UIElement>()
             {
                 CTX_Menu_Tools.CarIcon(entry.PersonalVehicle.Car),
+                CTX_Menu_Tools.CarRarityText(entry.PersonalVehicle.Car),
                 CTX_Menu_Tools.Header("Purchased")
             }
         };
@@ -190,6 +196,7 @@ public class PersonalVehicleShopController
             Children = new List<UIElement>()
             {
                 CTX_Menu_Tools.CarIcon(entry.PersonalVehicle.Car),
+                CTX_Menu_Tools.CarRarityText(entry.PersonalVehicle.Car),
                 CTX_Menu_Tools.Header($"Price: {entry.Price}")
             }
         };
@@ -220,7 +227,7 @@ public class PersonalVehicleShopController
 
 }
 
-public class PurchaseTransaction
+public class PurchaseTransaction : Transaction
 {
     public PurchaseTransaction(float price, params IPurchasable[] purchases)
     {

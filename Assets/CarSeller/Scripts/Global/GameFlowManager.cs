@@ -99,10 +99,7 @@ public class GameFlowManager : RoutinedObject
 
                 var location = new TransactionFeedbackLocation(TransactionLocationType.WorldSpace,
                     CityLocatorHelper.GetCityEntity(car).Position.WorldPosition);
-                G.TransactionProcessor.Process(
-                    new Transaction(TransactionType.Steal, new StealTransactionData(car, warehouse)),
-                    location
-                );
+                G.TransactionProcessor.Process(new StealTransaction(car, warehouse));
             }
         );
         GameFlowController.SetGameState(new NeutralGameState());

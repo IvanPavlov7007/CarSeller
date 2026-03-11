@@ -15,9 +15,8 @@ public class PutCarInWarehouseOffer : AcceptOnceOffer
     {
         Debug.Assert(CanAccept());
         IsAccepted = true;
-        return new Transaction(TransactionType.PutProductsInWarehouse, 
-            new PutProductsInHolderTransactionData(
-                new WarehouseHolderAdapter(warehouse),car));
+        return new PutProductsInHolderTransaction(
+                new WarehouseHolderAdapter(warehouse),car);
     }
 
     public override bool CanAccept()
@@ -35,7 +34,7 @@ public class WarehousePullCarOffer : AcceptOnceOffer
     {
         Debug.Assert(CanAccept());
         IsAccepted = true;
-        return new Transaction(TransactionType.PullCarFromWarehouse, new PullCarFromWarehouseTransactionData(car, warehouse));
+        return new PullCarFromWarehouseTransaction(car, warehouse);
     }
 
     public override bool CanAccept()
@@ -62,9 +61,9 @@ public class WarehouseStripCarOffer : AcceptOnceOffer
         Debug.Assert(CanAccept());
         IsAccepted = true;
         StrippingProcess strippingProcess = G.CarStripper.Strip(car, strippingPolicy);
-        return new Transaction(TransactionType.StripCar, new StripCarTransactionData(
+        return new StripCarTransaction(
             car, new HiddenSpaceHolderAdapter(),
-            strippingProcess));
+            strippingProcess);
     }
 
     public override bool CanAccept()

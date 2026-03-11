@@ -27,11 +27,11 @@ public class WarehouseOffer : IOffer
 
         IsAccepted = true;
 
-        var purchaseData = new PurchaseTransactionData(Price, new IMutableOwnable[1] { Warehouse});
-        Transaction transaction = new Transaction(TransactionType.Purchase, purchaseData);
+        throw new System.NotImplementedException("Transaction creation not implemented yet.");
+        //var purchaseData = new PurchaseTransactionData(Price, new IMutableOwnable[1] { Warehouse});
+        //Transaction transaction = new Transaction(TransactionType.Purchase, purchaseData);
 
         provider.OfferAccepted(this);
-        return transaction;
     }
 
     public bool CanAccept()

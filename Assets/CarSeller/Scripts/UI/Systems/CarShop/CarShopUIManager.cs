@@ -47,6 +47,7 @@ public class CarShopUIManager : Singleton<CarShopUIManager>
             Children = new List<UIElement>()
             {
                 CTX_Menu_Tools.CarIcon(carToPlayer),
+                CTX_Menu_Tools.CarRarityText(carToPlayer),
                 CTX_Menu_Tools.Price(offer.MoneyDelta, true)
             }
         };

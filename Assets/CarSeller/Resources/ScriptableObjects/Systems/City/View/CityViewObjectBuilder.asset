@@ -28,6 +28,11 @@ MonoBehaviour:
     Text: 
     ForegroundColor: {r: 0, g: 0, b: 0, a: 1}
     BackgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  PersonalVehicleShopPinStyle:
+    Icon: {fileID: 21300000, guid: dbc1f9bdb6dbe49459565104b745304b, type: 3}
+    Text: 
+    ForegroundColor: {r: 0, g: 0, b: 0, a: 1}
+    BackgroundColor: {r: 1, g: 1, b: 1, a: 1}
   BuyerPinStyle:
     Icon: {fileID: 21300000, guid: c1b5f65d87e95354b8d4c90ed54fbc65, type: 3}
     Text: 

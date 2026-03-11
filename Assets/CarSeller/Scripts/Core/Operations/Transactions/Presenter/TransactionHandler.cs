@@ -1,11 +1,14 @@
-﻿public abstract class TransactionHandler : ITransactionHandler
+﻿public interface ITransactionHandler
 {
-    public abstract bool CanHandle(Transaction transaction);
-    public abstract TransactionResult Handle(Transaction transaction);
+    TransactionResult Handle(Transaction transaction);
 }
 
-public interface ITransactionHandler
+public abstract class TransactionHandler<T> : ITransactionHandler where T : Transaction
 {
-    bool CanHandle(Transaction transaction);
-    TransactionResult Handle(Transaction transaction);
+    public abstract TransactionResult Handle(T transaction);
+
+    TransactionResult ITransactionHandler.Handle(Transaction transaction)
+    {
+        return Handle((T)transaction);
+    }
 }

@@ -81,7 +81,7 @@ public class CarShopSceneManager : Singleton<CarShopSceneManager>
     {
         Debug.Assert(eventData != null, "onTransactionComplete received null eventData.");
         Debug.Assert(eventData.Transaction != null, "onTransactionComplete received null Transaction.");
-        if (eventData.Transaction.Type != TransactionType.Exchange)
+        if (eventData.Transaction is not ExchangeTransaction)
         {
             return;
         }
@@ -90,7 +90,7 @@ public class CarShopSceneManager : Singleton<CarShopSceneManager>
             Debug.LogError("onTransactionComplete: Exchange transaction failed with result " + eventData.Transaction.Result.Type);
             return;
         }
-        var exchangeData = eventData.Transaction.Data as ExchangeTransactionData;
+        var exchangeData = eventData.Transaction as ExchangeTransaction;
 
         OfferProvider.SwapCar(exchangeData.FromPlayer, exchangeData.ToPlayer);
         updateOffers();

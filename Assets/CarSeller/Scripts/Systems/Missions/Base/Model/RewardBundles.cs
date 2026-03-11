@@ -6,8 +6,7 @@ public class CurrencyRewardBundle : RewardBundle
     public int amount;
     public override Transaction CreateTransaction()
     {
-        var rewardData = new RewardTransactionData(amount, null);
-        return new Transaction(TransactionType.Reward, rewardData);
+        return new RewardTransaction(amount, null);
     }
 
     public override string GetRewardDescription()

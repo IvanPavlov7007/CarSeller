@@ -30,10 +30,7 @@ public class CollectablesManager : Singleton<CollectablesManager>
     void collect(Collectable collectable, CityEntity cityEntity)
     {
         var transactionLocation = new TransactionFeedbackLocation(TransactionLocationType.WorldSpace, cityEntity.Position.WorldPosition);
-        var rewardTransaction = new Transaction(
-            TransactionType.Reward,
-            new RewardTransactionData(collectable.MoneyAmount, null)
-        );
+        var rewardTransaction = new RewardTransaction(collectable.MoneyAmount, null);
         G.TransactionProcessor.Process(rewardTransaction, transactionLocation);
     }
 }

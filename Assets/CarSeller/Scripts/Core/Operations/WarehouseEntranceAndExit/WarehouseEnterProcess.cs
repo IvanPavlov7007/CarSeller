@@ -126,7 +126,7 @@ public class WarehouseEnterProcess : IProcess
         }
 
         //open results window with claim button
-        var stripData = stripTransaction.Data as StripCarTransactionData;
+        var stripData = stripTransaction as StripCarTransaction;
         element = CTX_Menu_Tools.StipReslutsClaim(stripData.StrippingProcess.StrippedParts);
         menu = FixedContextMenuManager.Instance.CreateContextMenu(element);
         done = false;
@@ -134,10 +134,9 @@ public class WarehouseEnterProcess : IProcess
         yield return new WaitUntil(() => done);
         //on claim put things inside
 
-        var putTransaction = new Transaction(TransactionType.PutProductsInWarehouse,
-            new PutProductsInHolderTransactionData(new WarehouseHolderAdapter(Warehouse),
+        var putTransaction = new PutProductsInHolderTransaction(new WarehouseHolderAdapter(Warehouse),
                 stripData.StrippingProcess.StrippedParts.ToArray()
-            ));
+            );
         var putResult = G.TransactionProcessor.Process(putTransaction);
 
         if (putResult.Data is ProductsPlacingResultData placingData)

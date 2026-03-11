@@ -54,7 +54,11 @@ public class ButtonStateController : MonoBehaviour, IPointerDownHandler, IPointe
     {
         if (Interactable)
         {
-            uIElement.OnClick();
+            if (uIElement.OnClick == null)
+                Debug.LogWarning("No onClick action defined for this ui element " + uIElement);
+            else
+                uIElement.OnClick.Invoke();
+
             if (uIElement.closePopupOnClick)
             {
                 var popup = GetComponentInParent<IClosable>();

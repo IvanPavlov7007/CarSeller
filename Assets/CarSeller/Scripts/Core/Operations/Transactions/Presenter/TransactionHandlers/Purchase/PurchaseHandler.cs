@@ -1,58 +1,17 @@
 ﻿using UnityEngine;
 
-public class PurchaseHandler : TransactionHandler
+public class PurchaseHandler : TransactionHandler<PurchaseTransaction>
 {
-    // CanHandle should only indicate whether this handler is responsible for the transaction type.
-    public override bool CanHandle(Transaction transaction) => transaction.Type == TransactionType.Purchase;
-
-    public override TransactionResult Handle(Transaction transaction)
+    public override TransactionResult Handle(PurchaseTransaction transaction)
     {
-        // Programming error if the processor routed a non-purchase transaction here.
-        Debug.Assert(transaction != null && transaction.Type == TransactionType.Purchase,
-            "PurchaseHandler received a non-purchase transaction.");
-
-        TransactionResult result = null;
-
-        if (transaction == null || transaction.Type != TransactionType.Purchase)
-        {
-            result = TransactionResult.InvalidTransaction("Invalid transaction: expected Purchase.");
-        }
-
-        var purchaseData = transaction?.Data as PurchaseTransactionData;
-        if (result == null && purchaseData == null)
-        {
-            result = TransactionResult.InvalidTransaction("Invalid data: expected PurchaseTransactionData.");
-        }
-
+        Debug.Assert(transaction != null, "PurchaseHandler.Handle: transaction is null.");
+        Debug.Assert(transaction.Purchases != null && transaction.Purchases.Count > 0, "PurchaseHandler.Handle: transaction purchases list is null or empty.");
         var player = World.Instance.Economy.Player;
-        if (result == null && player == null)
-        {
-            result = TransactionResult.InvalidTransaction("Player not found.");
-        }
+        Debug.Assert(player != null, "PurchaseHandler.Handle: Player is null.");
 
-        if (result == null && purchaseData.Price > player.Money)
-        {
-            result = TransactionResult.InvalidTransaction(
-                "Insufficient funds: price " + purchaseData.Price + ", available " + player.Money + ".");
-        }
+        G.PlayerManager.SubtractPlayerMoney(transaction.Price);
+        G.AcquisitionResolver.Resolve(transaction.Purchases);
 
-        if (result == null && purchaseData.Items == null)
-        {
-            result = TransactionResult.InvalidTransaction("No items specified for purchase.");
-        }
-
-        // TODO: check if items are available in the world for purchase
-
-        if (result == null)
-        {
-            result = TransactionResult.Success();
-        }
-
-        if (result.Type == TransactionResultType.Success)
-        {
-            G.PlayerManager.SubtractPlayerMoney(purchaseData.Price);
-            G.AcquisitionResolver.Resolve(purchaseData.Items);
-        }
-        return result;
+        return TransactionResult.Success();
     }
 }

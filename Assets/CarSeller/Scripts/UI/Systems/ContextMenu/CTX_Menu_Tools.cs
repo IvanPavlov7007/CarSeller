@@ -23,6 +23,25 @@ public static class CTX_Menu_Tools
             Style = "header"
         };
     }
+
+    public static UIElement CarRarityText(Car car)
+    {
+        return Header(GetColoredRarityText(car.Rarity.ToString(), car.Rarity));
+    }
+
+    static string GetColoredRarityText(string text, CarRarity rarity)
+    {
+        string colorHex = rarity switch
+        {
+            CarRarity.Common => "#FFFFFF",
+            CarRarity.Rare => "#0070DD",
+            CarRarity.Epic => "#A335EE",
+            CarRarity.Legendary => "#FF8000",
+            _ => "#FFFFFF"
+        };
+        return $"<color={colorHex}>{text}</color>";
+    }
+
     public static UIElement Price(float price, bool withSign = false)
     {
         return new UIElement
@@ -148,6 +167,7 @@ public static class CTX_Menu_Tools
         {
             Header(car.Name),
             CarIcon(car),
+            CarRarityText(car),
             CarPrice(car),
             //CarStats(car)
         };

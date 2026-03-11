@@ -6,6 +6,16 @@ public class VehicleControlUI : Singleton<VehicleControlUI>
     public VehicleButtonUI CurrentVehicleButton;
     public VehicleButtonUI PrimaryVehicleButton;
 
+    private void Awake()
+    {
+        PrimaryVehicleButton.button.onClick.AddListener(onPrimaryClick);
+    }
+
+    private void onPrimaryClick()
+    {
+        G.ProcessRunner.Run(new SelectPrimaryVehicleProcess());
+    }
+
     private void OnEnable()
     {
         Debug.Assert(G.VehicleController != null);

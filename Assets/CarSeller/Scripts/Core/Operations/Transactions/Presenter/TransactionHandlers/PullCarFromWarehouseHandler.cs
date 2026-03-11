@@ -1,26 +1,23 @@
-﻿public class PullCarFromWarehouseHandler : TransactionHandler
-{
-    public override bool CanHandle(Transaction transaction) => transaction.Type == TransactionType.PullCarFromWarehouse;
+﻿using UnityEngine;
 
-    public override TransactionResult Handle(Transaction transaction)
+public class PullCarFromWarehouseHandler : TransactionHandler<PullCarFromWarehouseTransaction>
+{
+    public override TransactionResult Handle(PullCarFromWarehouseTransaction transaction)
     {
-        var data = transaction.Data as PullCarFromWarehouseTransactionData;
-        if (data == null)
-            return TransactionResult.InvalidTransaction("Invalid data for pull car from warehouse transaction.");
-        if (data.Car == null)
-            return TransactionResult.InvalidTransaction("Invalid car for pull car from warehouse transaction");
-        if (data.SourceWarehouse == null)
-            return TransactionResult.InvalidTransaction("No source warehouse for car pulling from warehouse");
+        Debug.Assert(transaction != null, "PullCarFromWarehouseTransaction is null");
+        Debug.Assert(transaction.Car != null, "Car in PullCarFromWarehouseTransaction is null");
+        Debug.Assert(transaction.SourceWarehouse != null, "SourceWarehouse in PullCarFromWarehouseTransaction is null");
 
         TransactionResult result;
 
-        if (G.CityActionService.PutCarOutsideWarehouse(data.Car, data.SourceWarehouse))
+        if (G.CityActionService.PutCarOutsideWarehouse(transaction.Car, transaction.SourceWarehouse))
         {
             result = TransactionResult.Success();
         }
         else // couldn't put out of the warehouse
         {
-            result = new TransactionResult(TransactionResultType.Failure, data: new PuttingCarOutsideFailureData(data.Car));
+            result = new TransactionResult(TransactionResultType.Failure, 
+                data: new PuttingCarOutsideFailureData(transaction.Car));
         }
         return result;
 
