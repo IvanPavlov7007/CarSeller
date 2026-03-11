@@ -4098,7 +4098,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2133522198}
   - component: {fileID: 2133522197}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: fogTexture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4146,9 +4146,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingLayerID: -2117633137
+  m_SortingLayer: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.7529412}
   m_FlipX: 0

@@ -196,7 +196,7 @@ public sealed class CityFogRenderer : Singleton<CityFogRenderer>
             go.transform.localScale = new Vector3(diameter, diameter, 1f);
 
             var mask = go.GetComponent<SpriteMask>();
-            if (mask != null) mask.isCustomRangeActive = false;
+            //if (mask != null) mask.isCustomRangeActive = false;
         }
     }
 }
