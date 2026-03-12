@@ -516,7 +516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cebbed697742a4348a060f83d1136537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dontDestroyOnLoad: 0
+  _dontDestroyOnLoad: 1
   playerInput: {fileID: 3274467777851302457}
 --- !u!114 &6301276450697998284
 MonoBehaviour:

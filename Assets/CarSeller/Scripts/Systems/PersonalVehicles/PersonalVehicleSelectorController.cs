@@ -11,19 +11,16 @@ public class PersonalVehicleSelectorController
         PersonalVehiclesList = personalVehiclesList;
         OnRefresh += refreshedCallback;
     }
-    public UIElement CreateMenuUIContent()
+    public Widget CreateMenuUIContent()
     {
-        UIElement container = new UIElement
-        {
-            Type = UIElementType.Container,
-            Style = "grid",
-            Children = new List<UIElement>()
-        };
+        Widget container = new DoubleRowChoicePanelWidget(
+            "Your Personal Vehicles",
+            "Select the primary vehicle.");
         populateVehicleSelectionContainer(container, G.VehicleController.CurrentPrimaryVehicle);
         return container;
     }
 
-    void populateVehicleSelectionContainer(UIElement container, PersonalVehicle currentVehicle)
+    void populateVehicleSelectionContainer(Widget container, PersonalVehicle currentVehicle)
     {
         foreach(var vehicle in PersonalVehiclesList.OwnedVehicles)
         {
@@ -38,37 +35,19 @@ public class PersonalVehicleSelectorController
         }
     }
 
-    UIElement selectedVehicleUIContent(PersonalVehicle vehicle)
+    Widget selectedVehicleUIContent(PersonalVehicle vehicle)
     {
-        return new UIElement()
-        {
-            Type = UIElementType.ButtonContainer,
-            closePopupOnClick = true,
-            Children = new List<UIElement>()
-            {
-                CTX_Menu_Tools.CarIcon(vehicle.Car),
-                CTX_Menu_Tools.CarRarityText(vehicle.Car),
-                CTX_Menu_Tools.Header("SELECTED")
-            }
-        };
+        return new PrimarySelectionCarButtonWidget(vehicle.Car,
+            PrimarySelectionCarButtonWidget.SelectionState.Selected, null);
     }
 
-    UIElement availableVehicleUIContent(PersonalVehicle vehicle)
+    Widget availableVehicleUIContent(PersonalVehicle vehicle)
     {
-        return new UIElement()
-        {
-            Type = UIElementType.ButtonContainer,
-            closePopupOnClick = true,
-            OnClick = () =>
+        return new PrimarySelectionCarButtonWidget(vehicle.Car,
+            PrimarySelectionCarButtonWidget.SelectionState.Available, () =>
             {
                 G.VehicleController.SwapPrimaryVehicle(vehicle);
                 OnRefresh?.Invoke();
-            },
-            Children = new List<UIElement>()
-            {
-                CTX_Menu_Tools.CarIcon(vehicle.Car),
-                CTX_Menu_Tools.CarRarityText(vehicle.Car),
-            }
-        };
+            });
     }
 }

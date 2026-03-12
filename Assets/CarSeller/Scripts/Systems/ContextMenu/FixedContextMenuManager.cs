@@ -37,6 +37,17 @@ public class FixedContextMenuManager : Singleton<FixedContextMenuManager>
         return menu;
     }
 
+    public PopUpContextMenu CreateContextMenu(Widget widget)
+    {
+        RectTransform view = UIBuilder.Build(widget, FixedContextMenuCanvas.Instance.Canvas.transform);
+
+        var menu = createContextMenu(view.gameObject, widget.BlockingInput);
+        menu.Initialize(null, view, OnMenuClose);
+
+        GameCursor.Instance.CancelCurrentInteraction(invokeDragEnd: false);
+        return menu;
+    }
+
     private PopUpContextMenu createContextMenu(GameObject panel, bool blocking)
     {
         var ctxMenu = panel.AddComponent<PopUpContextMenu>();

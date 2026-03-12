@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using Sirenix.Utilities;
 using Sirenix.OdinInspector;
+using System;
 
 [CreateAssetMenu(fileName = "UIBuilder", menuName = "GameUI/UIBuilder")]
 public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IUIElementBuilder<RectTransform>
@@ -202,5 +203,41 @@ public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IUIEl
         le.flexibleHeight = 0f;
         if(prefferedHeight > 0f)
             le.preferredHeight = prefferedHeight;
+    }
+
+    private Dictionary<Type, WidgetView> registry = new();
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
+    public static void Initialize()
+    {
+        Debug.Log("Initializing SimpleUIBuilder and registering prefabs");
+        Instance.RegisterPrefabs();
+    }
+
+    public void RegisterPrefabs()
+    {
+        var prefabs = Resources.LoadAll<GameObject>("Prefabs/UI/Widgets");
+
+        foreach (var prefab in prefabs)
+        {
+            var view = prefab.GetComponent<WidgetView>();
+            Debug.Log($"Found prefab {prefab.name} with WidgetView component: {view != null}");
+            if (view == null)
+                continue;
+            Debug.Log($"Registering prefab {prefab.name} for widget type {view.WidgetType}");
+            registry[view.WidgetType] = view;
+        }
+    }
+
+    public RectTransform Build(Widget widget, Transform parent)
+    {
+        var prefabView = registry[widget.GetType()];
+
+        var view = Instantiate(prefabView, parent);
+
+        view.Bind(widget);
+        view.BuildChildren(this, widget);
+
+        return view.GetComponent<RectTransform>();
     }
 }
