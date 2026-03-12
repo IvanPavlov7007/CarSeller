@@ -4,7 +4,11 @@ public class SellHandler : TransactionHandler<SellTransaction>
 {
     public override TransactionResult Handle(SellTransaction transaction)
     {
-        throw new System.NotImplementedException();
+        G.PlayerManager.AddPlayerMoney(transaction.Price);
+        City.EntityLifetimeService.Destroy(transaction.Car);
+        City.EntityLifetimeService.Destroy(transaction.Buyer);
+
+        return TransactionResult.Success();
 
         //if (result == null && sellData == null)
         //{

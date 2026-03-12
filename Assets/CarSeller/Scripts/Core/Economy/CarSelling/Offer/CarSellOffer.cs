@@ -34,11 +34,12 @@ public class CarSellOffer : IOffer
         Debug.Assert(CanAccept(), "Cannot accept offer: car not delivered.");
 
         FinalRewardPrice = CalculatePrice();
-        Transaction transaction = new SellTransaction(Car, FinalRewardPrice);
+        throw new System.NotImplementedException();
+        //Transaction transaction = new SellTransaction(Car, FinalRewardPrice);
 
         Accepted = true;
 
-        return transaction;
+        //return transaction;
     }
 
     public bool CanAccept()

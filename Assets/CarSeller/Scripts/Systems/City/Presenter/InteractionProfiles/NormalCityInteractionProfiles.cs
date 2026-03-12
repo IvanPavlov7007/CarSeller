@@ -144,6 +144,12 @@ public class NormalCityTriggerProfile : ICityTriggerProfile
             { G.ProcessRunner.Run(new PersonalVehicleShopProcess(vehicleShop)); });
         }
 
+        if (ctx.Kind == TriggerContext.TriggerKind.DragEnd && ctx.Trigger.Subject is Buyer buyer)
+        {
+            return new TriggerAction(true, () =>
+            { G.ProcessRunner.Run(new BuyerProcess(buyer, ctx.TriggerCause.Subject as Car)); });
+        }
+
         // Generic city target reached events (figure should also trigger them)
         if (ctx.Trigger is CityEntity cityEntity)
         {

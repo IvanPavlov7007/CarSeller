@@ -1,9 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Timeline;
 
 public static class BuyerManager
 {
+    [Obsolete]
     public static Buyer CreateBuyer(Car car, CarSellOffer offer)
     {
         Warehouse warehouse = CityLocatorHelper.GetWarehouse(car);
@@ -22,6 +24,22 @@ public static class BuyerManager
         Buyer buyer = new Buyer(car.Name + "_buyer", createInfoText(offer));
         CityEntitiesCreationHelper.CreateBuyer(buyer, pos);
         return buyer;
+    }
+
+    public static void CreateRandomBuyers()
+    {
+        var markers = G.City.QueryMarkers("buyer").ToList();
+        foreach (var marker in markers)
+        {
+            var pos = marker.PositionOnGraph;
+            if (pos == null)
+            {
+                Debug.LogWarning($"Buyer marker {marker.Name} does not have a valid position on graph.");
+                continue;
+            }
+            Buyer buyer = new Buyer(marker.Name, "Just a random buyer.");
+            CityEntitiesCreationHelper.CreateBuyer(buyer, pos.Value);
+        }
     }
 
     private static string createInfoText(CarSellOffer offer)

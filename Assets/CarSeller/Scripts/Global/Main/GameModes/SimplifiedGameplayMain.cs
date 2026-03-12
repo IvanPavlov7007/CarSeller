@@ -9,6 +9,7 @@
         G.CarSpawnManager.SubscribeToEvents();
         G.CarSpawnManager.NewCarsRotation();
         createShop(gameConfig.VehicleControllerConfig.vehicleShopConfig);
+        BuyerManager.CreateRandomBuyers();
     }
     public override void InitializeLogic(GameConfig gameConfig)
     {

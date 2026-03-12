@@ -36,26 +36,6 @@ public sealed class VehicleController
         ChangeState(new PrimaryVehicleControlState(initialEntity,this));
     }
 
-    [Obsolete]
-    private void initializePersonalVehicles(VehicleControllerConfig data)
-    {
-        Debug.Assert(data.ownedCars != null, "Owned cars list cannot be null");
-        Debug.Assert(data.ownedCars.Count <= data.maxOwnedCars,
-            $"Number of owned cars ({data.ownedCars.Count}) exceeds the maximum allowed ({data.maxOwnedCars}).");
-        
-        PersonalVehicles = new PersonalVehiclesList(createInitialPersonalVehicles(data.ownedCars));
-    }
-
-    private List<PersonalVehicle> createInitialPersonalVehicles(List<SimpleCarSpawnConfig> carConfigs)
-    {
-        var personalVehicles = new List<PersonalVehicle>();
-        for (int i = 0; i < carConfigs.Count; i++)
-        {
-            personalVehicles.Add(PersonalVehicle.CreateNew(carConfigs[i]));
-        }
-        return personalVehicles;
-    }
-
     private void initializePrimaryVehicleManager(int initialPrimaryVehicleIndex)
     {
         PrimaryVehicleManager = new PrimaryVehicleManager(PersonalVehicles, initialPrimaryVehicleIndex);

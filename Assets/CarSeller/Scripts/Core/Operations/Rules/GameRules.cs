@@ -12,6 +12,7 @@ public static class GameRules
     public static readonly CarCanBeDisassembled CarCanBeDisassembled = new CarCanBeDisassembled();
     public static readonly ModelControlledByPlayer ModelControlledByPlayer = new ModelControlledByPlayer();
     public static readonly CanBePurchased CanBePurchased = new CanBePurchased();
+    public static readonly CarCanBeSoldToBuyer CarCanBeSoldToBuyer = new CarCanBeSoldToBuyer();
 }
 
 public class CarBelongsToPlayer
@@ -21,7 +22,8 @@ public class CarBelongsToPlayer
         if (car == null)
             return false;
 
-        return G.Player.Owns(car);
+        return G.VehicleController.GetPersonalVehiclesList().OwnsVehicle(car);
+        //return G.Player.Owns(car);
     }
 }
 
@@ -137,5 +139,16 @@ public class CanBePurchased
         if (!purchasable.IsAvailable)
             return "Not available";
         return "";
+    }
+}
+
+public class CarCanBeSoldToBuyer
+{
+    public bool Check(Car car, Buyer buyer)
+    {
+        Debug.Assert(car != null, "Car is null");
+        Debug.Assert(buyer != null, "Buyer is null");
+
+        return !GameRules.CarBelongsToPlayer.Check(car);
     }
 }

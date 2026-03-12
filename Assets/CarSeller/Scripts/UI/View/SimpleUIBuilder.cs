@@ -210,7 +210,6 @@ public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IUIEl
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
     public static void Initialize()
     {
-        Debug.Log("Initializing SimpleUIBuilder and registering prefabs");
         Instance.RegisterPrefabs();
     }
 
@@ -222,10 +221,8 @@ public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IUIEl
         foreach (var prefab in prefabs)
         {
             var view = prefab.GetComponent<WidgetView>();
-            Debug.Log($"Found prefab {prefab.name} with WidgetView component: {view != null}");
             if (view == null)
                 continue;
-            Debug.Log($"Registering prefab {prefab.name} for widget type {view.WidgetType}");
             registry[view.WidgetType] = view;
         }
     }

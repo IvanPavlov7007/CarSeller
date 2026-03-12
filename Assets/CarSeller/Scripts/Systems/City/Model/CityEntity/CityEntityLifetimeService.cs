@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class CityEntityLifetimeService
@@ -38,6 +37,7 @@ public class CityEntityLifetimeService
     }
 
     private readonly HashSet<ILocatable> _destroyInProgress = new HashSet<ILocatable>();
+
     public void Destroy(ILocatable anyLocatable)
     {
         if (anyLocatable == null)
@@ -59,16 +59,20 @@ public class CityEntityLifetimeService
             switch (anyLocatable)
             {
                 case Product p:
+                    // DestroyProduct() will detach from its current ILocation.
+                    // If that location is a CityEntity, it already removes the entity from G.City.Entities.
                     G.ProductLifetimeService.DestroyProduct(p);
-                    if (!removeEntity(p))
-                        Debug.LogError($"Failed to remove city entity for locatable {anyLocatable}");
+
+                    // Best-effort cleanup if something left a stale mapping behind.
+                    TryDetachFromCity(p);
                     break;
 
                 default:
-                    // calling this first because some destroy trackers might rely on the entity still being in the city (e.g., for position info)
+                    // Calling this first because some destroy trackers might rely on the entity still being in the city (e.g., for position info)
                     GameEvents.Instance.OnLocatableDestroyed?.Invoke(new LocatableDestroyedEventData(anyLocatable));
-                    if (!removeEntity(anyLocatable))
-                        Debug.LogError($"Failed to remove city entity for locatable {anyLocatable}");
+
+                    if (!TryDetachFromCity(anyLocatable))
+                        Debug.LogError($"Failed to detach city entity for locatable {anyLocatable}");
                     break;
             }
         }
@@ -79,11 +83,16 @@ public class CityEntityLifetimeService
         }
     }
 
-    bool removeEntity(ILocatable locatable)
+    private bool TryDetachFromCity(ILocatable locatable)
     {
         Debug.Assert(locatable != null);
         if (locatable == null)
             return false;
-        return G.City.Entities.Remove(locatable);
+
+        if (!G.City.TryGetEntity(locatable, out var entity) || entity == null)
+            return false;
+
+        entity.Detach();
+        return true;
     }
 }

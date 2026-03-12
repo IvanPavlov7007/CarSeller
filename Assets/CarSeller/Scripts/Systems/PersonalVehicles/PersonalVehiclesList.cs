@@ -78,6 +78,11 @@ public class PersonalVehiclesList
     {
         OwnedVehicles = new List<PersonalVehicle>(newVehicles);
     }
+
+    public bool OwnsVehicle(Car car)
+    {
+        return OwnedVehicles.Any(vehicle => vehicle.Car == car);
+    }
 }
 
 public class PersonalVehicle

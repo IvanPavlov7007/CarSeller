@@ -104,24 +104,32 @@ public class CitySceneManager : Singleton<CitySceneManager>
     private void onLocatableLocationChanged(LocatableLocationChangedEventData data)
     {
         Debug.Assert(data.Locatable != null, "Locatable cannot be null in location change event data");
-        Debug.Assert(data.NewLocation != null, "New location cannot be null in location change event data");
-        Debug.Assert(data.OldLocation != null, "Old location cannot be null in location change event data");
-
-
-        if (data.OldLocation.Holder == City)
+        if(data.OldLocation == null)
         {
+            Debug.LogWarning("Old location is null in location change event data. This may indicate an issue with the locatable's location management.");
+        }
+
+        
+
+        if (data.OldLocation?.Holder == City)
+        {
+            //Stupid design, but its ok to read the entity from the city even if the locatable is not there anymore, 
+            //because the entity is not destroyed until after this event is processed,
+            //so the view can still be cleared based on the entity data.
             if (G.City.TryGetEntity(data.Locatable, out var entity))
             {
                 clearView(entity);
+                return;
             }
 
         }
 
-        if (data.NewLocation.Holder == City)
+        if (data.NewLocation?.Holder == City)
         {
             if (G.City.TryGetEntity(data.Locatable, out var entity))
             {
                 applyProfileToObject(entity);
+                return;
             }
         }
     }

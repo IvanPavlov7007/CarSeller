@@ -67,7 +67,7 @@ namespace Pixelplacement
             if (_dontDestroyOnLoad)
             {
                 //don't destroy on load only works on root objects so let's force this transform to be a root object:
-                transform.parent = null;
+                transform.SetParent(null);
                 DontDestroyOnLoad(gameObject);
             }
 
