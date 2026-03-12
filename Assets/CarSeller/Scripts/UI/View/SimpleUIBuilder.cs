@@ -217,6 +217,7 @@ public class SimpleUIBuilder : SingletonScriptableObject<SimpleUIBuilder>, IUIEl
     public void RegisterPrefabs()
     {
         var prefabs = Resources.LoadAll<GameObject>("Prefabs/UI/Widgets");
+        registry.Clear();
 
         foreach (var prefab in prefabs)
         {

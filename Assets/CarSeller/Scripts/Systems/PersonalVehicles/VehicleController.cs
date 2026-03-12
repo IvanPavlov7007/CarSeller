@@ -99,7 +99,6 @@ public sealed class VehicleController
 
         GameEvents.Instance.onVehicleControlStateChanged?.
             Invoke(new VehicleControlStateChangedEventData(oldState, newState));
-        Debug.Log($"VehicleController: State changed from {oldState?.GetType().Name ?? "null"} to {newState.GetType().Name}");
     }
 
     

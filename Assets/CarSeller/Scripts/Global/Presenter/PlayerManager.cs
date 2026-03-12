@@ -20,6 +20,7 @@ public class PlayerManager
 
     public float SetPlayerMoney(float amount)
     {
+        Debug.Log($"Setting player money to {amount}");
         float oldMoney = Player.Money;
         Player.ChangeMoney(amount);
         GameEvents.Instance.OnPlayerMoneyChanged?.Invoke(new PlayerMoneyChangeEventData(Player, oldMoney, Player.Money));

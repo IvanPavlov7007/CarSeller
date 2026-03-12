@@ -37,14 +37,12 @@ public class PersonalVehicleSelectorController
 
     Widget selectedVehicleUIContent(PersonalVehicle vehicle)
     {
-        return new PrimarySelectionCarButtonWidget(vehicle.Car,
-            PrimarySelectionCarButtonWidget.SelectionState.Selected, null);
+        return PrimarySelectionCarButtonWidgetCreator.CreateSelected(vehicle.Car, null);
     }
 
     Widget availableVehicleUIContent(PersonalVehicle vehicle)
     {
-        return new PrimarySelectionCarButtonWidget(vehicle.Car,
-            PrimarySelectionCarButtonWidget.SelectionState.Available, () =>
+        return PrimarySelectionCarButtonWidgetCreator.CreateAvailable(vehicle.Car, () =>
             {
                 G.VehicleController.SwapPrimaryVehicle(vehicle);
                 OnRefresh?.Invoke();

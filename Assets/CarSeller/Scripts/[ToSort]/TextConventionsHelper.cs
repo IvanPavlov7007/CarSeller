@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 public static class TextConventionsHelper
 {
@@ -22,6 +23,28 @@ public static class TextConventionsHelper
 
     public static string CarDescription(Car car)
     {
-        return "Placeholder stats:\n- Max Speed: 180\n- Acceleration: 5.0\n- Handling: 80";
+        return $"Type: {car.Type.ToString()}\nColor: {car.Color.ToString()}";
+    }
+
+    public static string FormatPrice(float price)
+    {
+        return price.ToString("C0", CultureInfo.CurrentCulture);
+    }
+
+    public static string FormatPriceWithSign(float price)
+    {
+        string numbs = FormatPrice(Math.Abs(price));
+        if (price > 0)
+        {
+            return $"+{numbs}";
+        }
+        else if (price < 0)
+        {
+            return $"-{numbs}";
+        }
+        else
+        {
+            return numbs;
+        }
     }
 }

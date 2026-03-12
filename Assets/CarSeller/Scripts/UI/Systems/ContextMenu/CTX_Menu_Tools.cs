@@ -33,33 +33,10 @@ public static class CTX_Menu_Tools
         return new UIElement
         {
             Type = UIElementType.Text,
-            Text = withSign? FormatPriceWithSign(price) : FormatPrice(price),
+            Text = withSign? TextConventionsHelper.FormatPriceWithSign(price) : TextConventionsHelper.FormatPrice(price),
             Style = "price"
         };
     }
-
-    public static string FormatPrice(float price)
-    {
-        return price.ToString("C0", CultureInfo.CurrentCulture);
-    }
-
-    public static string FormatPriceWithSign(float price)
-    {
-        string numbs = FormatPrice(Math.Abs(price));
-        if(price > 0)
-        {
-            return $"+{numbs}";
-        }
-        else if(price < 0)
-        {
-            return $"-{numbs}";
-        }
-        else
-        {
-            return numbs;
-        }
-    }
-
     public static UIElement Description(string description)
     {
         return new UIElement
@@ -168,7 +145,7 @@ public static class CTX_Menu_Tools
             new UIElement
             {
                 Type = UIElementType.Text,
-                Text = $"sell for: {FormatPrice(offer.InitialOfferPrice)}",
+                Text = $"sell for: {TextConventionsHelper.FormatPrice(offer.InitialOfferPrice)}",
                 Style = "price"
             },
             new UIElement

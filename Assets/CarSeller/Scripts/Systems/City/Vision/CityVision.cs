@@ -138,7 +138,6 @@ public sealed class CityVision
         // Only care about city-locatable items.
         if (data.Item is not ILocatable locatable)
             return;
-        Debug.Log($"CityVision: Ownership changed for {locatable}, new owner: {data.NewOwner}");
         if (data.NewOwner == G.Player)
         {
             TryAddOwnedWarehouseCenter(locatable);

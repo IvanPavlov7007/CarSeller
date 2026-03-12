@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
 // TODO sort out not used anymore
 public static class GameRules
@@ -127,5 +128,14 @@ public class CanBePurchased
     public bool Check(IPurchasable purchasable)
     {
         return G.Player.Money >= purchasable.Price && purchasable.IsAvailable;
+    }
+
+    public string GetUnavailabilityReason(IPurchasable purchasable)
+    {
+        if (G.Player.Money < purchasable.Price)
+            return "Not enough money";
+        if (!purchasable.IsAvailable)
+            return "Not available";
+        return "";
     }
 }

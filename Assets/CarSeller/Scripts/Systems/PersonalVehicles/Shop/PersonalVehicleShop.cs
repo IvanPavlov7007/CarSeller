@@ -141,20 +141,17 @@ public class PersonalVehicleShopController
         onRefreshUI += onRefresh;
     }
 
-    public UIElement GenerateMenuUI()
+    public Widget GenerateMenuUI()
     {
-        var container = new UIElement()
-        {
-            Type = UIElementType.Container,
-            Style = "grid",
-            Children = new List<UIElement>()
-        };
+        var container = new DoubleRowChoicePanelWidget(
+            "Personal Vehicle Shop",
+            "Purchase new personal vehicles to use as your primary vehicle.");
 
         populateContainerWithSlots(container, shop.GetAvailableEntries());
         return container;
     }
 
-    private void populateContainerWithSlots(UIElement container, IReadOnlyList<PersonalVehicleShopEntry> AvailableShopEntries)
+    private void populateContainerWithSlots(Widget container, IReadOnlyList<PersonalVehicleShopEntry> AvailableShopEntries)
     {
         var children = container.Children;
         foreach (var item in AvailableShopEntries)
@@ -170,36 +167,14 @@ public class PersonalVehicleShopController
         }
     }
 
-    private UIElement ownedEntry(PersonalVehicleShopEntry entry)
+    private Widget ownedEntry(PersonalVehicleShopEntry entry)
     {
-        return new UIElement()
-        {
-            Type = UIElementType.ButtonContainer,
-            IsInteractable = false,
-            Children = new List<UIElement>()
-            {
-                CTX_Menu_Tools.CarIcon(entry.PersonalVehicle.Car),
-                CTX_Menu_Tools.CarRarityText(entry.PersonalVehicle.Car),
-                CTX_Menu_Tools.Header("Purchased")
-            }
-        };
+        return BuyCarButtonWidgetCreator.CreateBought(entry, null);
     }
 
-    private UIElement availableEntry(PersonalVehicleShopEntry entry)
+    private Widget availableEntry(PersonalVehicleShopEntry entry)
     {
-        return new UIElement()
-        {
-            Type = UIElementType.ButtonContainer,
-            OnClick = () => entryClicked(entry),
-            IsInteractable = GameRules.CanBePurchased.Check(entry),
-            UnavailabilityReason = "Not enough money!",
-            Children = new List<UIElement>()
-            {
-                CTX_Menu_Tools.CarIcon(entry.PersonalVehicle.Car),
-                CTX_Menu_Tools.CarRarityText(entry.PersonalVehicle.Car),
-                CTX_Menu_Tools.Header($"Price: {entry.Price}")
-            }
-        };
+        return BuyCarButtonWidgetCreator.CreateAvailable(entry, () => entryClicked(entry));
     }
 
     private void entryClicked(PersonalVehicleShopEntry entry)

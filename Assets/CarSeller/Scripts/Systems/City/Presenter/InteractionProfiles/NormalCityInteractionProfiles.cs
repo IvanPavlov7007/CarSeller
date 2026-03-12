@@ -110,7 +110,7 @@ public class NormalCityTriggerProfile : ICityTriggerProfile
             return new TriggerAction(true, () =>
             {
                 G.VehicleController.DriveWorldVehicle(ctx.Trigger);
-                CameraHelper.SetCurrentPositionAtCar();
+                //CameraHelper.SetCurrentPositionAtCar();
             });
         }
 

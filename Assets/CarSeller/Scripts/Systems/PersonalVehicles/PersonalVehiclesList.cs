@@ -134,7 +134,6 @@ public class PersonalVehicle
         if (CityEntity != null)
         {
             G.ProductLifetimeService.MoveProduct(Car, World.Instance.HiddenSpace.GetEmptyLocation());
-            Debug.Log($"Vehicle {Car} has been hidden from the city.");
         }
         CityEntity = null;
     }

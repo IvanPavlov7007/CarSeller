@@ -11,6 +11,6 @@ public class CurrencyRewardBundle : RewardBundle
 
     public override string GetRewardDescription()
     {
-        return CTX_Menu_Tools.FormatPrice(amount);
+        return TextConventionsHelper.FormatPrice(amount);
     }
 }

@@ -52,10 +52,14 @@ public abstract class ButtonWidget : Widget
 {
     public Action OnClick;
     public bool CloseParentMenuOnClick;
+    public bool IsInteractable;
+    public string UnavailabilityReason;
 
-    protected ButtonWidget(Action onClick, bool closeParentMenuOnClick = false)
+    protected ButtonWidget(Action onClick, bool isInteractable = true, bool closeParentMenuOnClick = false, string unavailabilityReason = "")
     {
         OnClick = onClick;
         CloseParentMenuOnClick = closeParentMenuOnClick;
+        IsInteractable = isInteractable;
+        UnavailabilityReason = unavailabilityReason;
     }
 }
