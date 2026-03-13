@@ -2010,7 +2010,7 @@ MonoBehaviour:
   followStrength: 0.25
   enableZoom: 1
   minOrthoSize: 0.8
-  maxOrthoSize: 5
+  maxOrthoSize: 10
   wheelZoomSpeed: 1.25
   pinchZoomSpeed: 0.001
   zoomSmoothing: 12

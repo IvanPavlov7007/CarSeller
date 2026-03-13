@@ -127,20 +127,13 @@ public class CityViewObjectBuilder : ScriptableObject
         {
             initializeAspect(go, viewController, entity, aspect);
         }
-
-        // If this entity is distance-scaled by vision, attach the scaler once.
-        if (entity.Aspects != null && entity.Aspects.OfType<VisionDistanceScaleAspect>().Any())
-        {
-            if (go.GetComponent<VisionDistanceScaler>() == null)
-                go.AddComponent<VisionDistanceScaler>();
-        }
     }
 
     void initializeAspect(GameObject go, CityViewObjectController viewController, CityEntity entity, CityEntityAspect aspect)
     {
         switch (aspect)
         {
-            case PinStyleAspect pinStyleAspect:
+            case PinAspect pinStyleAspect:
                 CityUIBuilder.SetUpCityPin(
                     viewController,
                     pinUIPrefab,
@@ -190,6 +183,9 @@ public class CityViewObjectBuilder : ScriptableObject
             case RigidbodyAspect rigidbodyAspect:
                 var rigidbody2D = go.AddComponent<Rigidbody2D>();
                 rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
+                break;
+            case VisibleDistanceScalerAspect visibleDistanceScalerAspect:
+                go.AddComponent<VisionDistanceScaler>().Initialize(visibleDistanceScalerAspect);
                 break;
         }
     }

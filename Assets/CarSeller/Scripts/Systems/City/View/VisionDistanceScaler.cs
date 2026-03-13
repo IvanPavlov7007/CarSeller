@@ -6,104 +6,81 @@ using UnityEngine;
 /// Requires `VisionDistanceScaleAspect` on the underlying `CityEntity`.
 /// </summary>
 [DisallowMultipleComponent]
+[RequireComponent(typeof(CityViewObjectController))]
 public sealed class VisionDistanceScaler : MonoBehaviour
 {
-    private CityViewObjectController _controller;
-    private Transform _root;
+    private VisibleDistanceScalerAspect scalerAspect;
 
-    private VisionDistanceScaleAspect _aspect;
+    private Vector3 baseLocalScale;
 
-    private Vector3 _baseLocalScale;
-
-    private Renderer[] _renderers;
-    private CanvasGroup[] _canvasGroups;
+    private Renderer[] renderers;
+    private CanvasGroup[] canvasGroups;
 
     private bool _hasInit;
 
     private void Awake()
     {
-        _controller = GetComponent<CityViewObjectController>();
-        _root = transform;
-        _baseLocalScale = _root.localScale;
+        baseLocalScale = transform.localScale;
 
-        _renderers = GetComponentsInChildren<Renderer>(true);
-        _canvasGroups = GetComponentsInChildren<CanvasGroup>(true);
+        renderers = GetComponentsInChildren<Renderer>(true);
+        canvasGroups = GetComponentsInChildren<CanvasGroup>(true);
     }
 
-    private void OnEnable()
+    public void Initialize(VisibleDistanceScalerAspect scalerAspect)
     {
-        TryResolveAspect();
-        _hasInit = true;
+        this.scalerAspect = scalerAspect;
     }
 
     private void LateUpdate()
     {
-        if (!_hasInit) return;
-
-        if (_controller == null || _controller.CityEntity == null)
-            return;
-
-        if (!TryResolveAspect() || _aspect.Disable)
-            return;
-
-        var fog = CityFogRenderer.Instance;
-        if (fog == null)
-        {
-            ApplyVisibility(visible: true);
-            return;
-        }
-
-        Vector2 myPos = _controller.CityEntity.Position.WorldPosition;
-
-        if (!G.CityVision.TryGetNearestCenter(myPos, out var centerEntity, out var centerAspect) || centerAspect?.Config == null)
+        if (!scalerAspect.VisibleAspect.Visible && scalerAspect.Config.HideBeyondMax)
         {
             ApplyVisibility(visible: false);
             return;
         }
 
-        float dist = Vector2.Distance(myPos, centerEntity.Position.WorldPosition);
-        var cfg = centerAspect.Config;
-
-        if (cfg.HideBeyondMax && dist > cfg.VisionMax)
+        if (scalerAspect.VisibleAspect.NearestCenter == null)
         {
-            ApplyVisibility(visible: false);
+            OnNoVision();
             return;
         }
 
         ApplyVisibility(visible: true);
 
-        float scaleMul = cfg.EvaluateScale(dist);
-        _root.localScale = _baseLocalScale * Mathf.Max(0f, scaleMul);
+        var scalerEvaluation = scalerAspect.Evaluate();
 
-        ApplyAlpha(cfg.EvaluateAlpha(dist));
+        transform.localScale = baseLocalScale * Mathf.Max(0f, scalerEvaluation.Scale);
+        ApplyAlpha(scalerEvaluation.Alpha);
     }
 
-    private bool TryResolveAspect()
+    private void OnNoVision()
     {
-        if (_controller == null || _controller.CityEntity == null) return false;
-
-        var a = _controller.CityEntity.Aspects?.OfType<VisionDistanceScaleAspect>().FirstOrDefault();
-        if (a == null) return false;
-
-        _aspect = a;
-        return true;
+        if(VisionLogic.VisibleWhenNoCenter)
+        {
+            ApplyVisibility(visible: true);
+            ApplyAlpha(1f);
+        }
+        else
+        {
+            ApplyVisibility(visible: false);
+        }
     }
 
     private void ApplyVisibility(bool visible)
     {
-        if (_renderers != null && _renderers.Length > 0)
+        if (renderers != null && renderers.Length > 0)
         {
-            for (int i = 0; i < _renderers.Length; i++)
+            for (int i = 0; i < renderers.Length; i++)
             {
-                if (_renderers[i] != null) _renderers[i].enabled = visible;
+                if (renderers[i] != null) renderers[i].enabled = visible;
             }
         }
 
-        if (_canvasGroups != null && _canvasGroups.Length > 0)
+        if (canvasGroups != null && canvasGroups.Length > 0)
         {
-            for (int i = 0; i < _canvasGroups.Length; i++)
+            for (int i = 0; i < canvasGroups.Length; i++)
             {
-                var cg = _canvasGroups[i];
+                var cg = canvasGroups[i];
                 if (cg == null) continue;
                 if (!visible) cg.alpha = 0f;
                 cg.interactable = visible;
@@ -128,11 +105,11 @@ public sealed class VisionDistanceScaler : MonoBehaviour
     {
         alpha = Mathf.Clamp01(alpha);
 
-        if (_canvasGroups != null && _canvasGroups.Length > 0)
+        if (canvasGroups != null && canvasGroups.Length > 0)
         {
-            for (int i = 0; i < _canvasGroups.Length; i++)
+            for (int i = 0; i < canvasGroups.Length; i++)
             {
-                var cg = _canvasGroups[i];
+                var cg = canvasGroups[i];
                 if (cg != null) cg.alpha = alpha;
             }
             return;

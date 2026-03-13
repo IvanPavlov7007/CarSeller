@@ -86,7 +86,7 @@ public class WorldManager
             G.CityRoot = GameObject.Instantiate(cityConfig.CityGraph.PrefabRoot);
             G.CityRoot.SetActive(false);
         }
-        World.Instance.City = new City(cityConfig, G.CityRoot.transform);
+        World.Instance.City = new City(cityConfig, G.CityRoot.transform, createAspectsSystem());
 
         
         foreach (var warehouseConfig in cityConfig.warehouseConfigs)
@@ -96,6 +96,11 @@ public class WorldManager
         }
 
         initializeCarStashWarehouses(cityConfig.carStashWarehouseConfigs);
+    }
+
+    AspectsSystem createAspectsSystem()
+    {
+            return new AspectsSystem();
     }
 
     //TODO make this more organic, don't just duplicate the warehouse code, extract commonalities

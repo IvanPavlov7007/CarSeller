@@ -69,10 +69,6 @@ public class CitySceneManager : Singleton<CitySceneManager>
     private void registerNewView(CityEntity entity, CityViewObjectController view)
     {
         builtObjectsViews[entity] = view;
-
-        // Lazy init so we have the views map.
-        _aspectsViewBuilder ??= new AspectsViewBuilder(builtObjectsViews);
-        _aspectsViewBuilder.ApplyAllExistingAspects(entity, view);
     }
 
     private void clearView(CityEntity entity)

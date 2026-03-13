@@ -51,6 +51,20 @@ public sealed class CityEntityAspectsService
     public bool HasAspect<T>(CityEntity entity) where T : CityEntityAspect
         => entity != null && entity.Aspects != null && entity.Aspects.OfType<T>().Any();
 
+    public bool TryAddAspects(CityEntity entity, IEnumerable<CityEntityAspect> aspects, bool allowDuplicateType = false)
+    {
+        Debug.Assert(entity != null, "CityEntityAspectsService.TryAddAspects: entity is null");
+        Debug.Assert(aspects != null, "CityEntityAspectsService.TryAddAspects: aspects is null");
+        if (entity == null || aspects == null) return false;
+        bool allAdded = true;
+        foreach (var aspect in aspects)
+        {
+            if (!TryAddAspect(entity, aspect, allowDuplicateType))
+                allAdded = false;
+        }
+        return allAdded;
+    }
+
     public bool TryAddAspect(CityEntity entity, CityEntityAspect aspect, bool allowDuplicateType = false)
     {
         Debug.Assert(entity != null, "CityEntityAspectsService.TryAddAspect: entity is null");
@@ -74,10 +88,23 @@ public sealed class CityEntityAspectsService
         }
 
         if (aspect is CityEntityAspectBase b)
-            b.Entity = entity;
+            b.InternalBindToEntity(entity);
 
         EmitAdded(entity, aspect);
         return true;
+    }
+
+    public void TryRemoveAllAspects(CityEntity cityEntity)
+    {
+        Debug.Assert(cityEntity != null, "CityEntityAspectsService.TryRemoveAllAspects: cityEntity is null");
+        if (cityEntity == null) return;
+
+        // Snapshot to avoid mutating the underlying HashSet while iterating.
+        var snapshot = cityEntity.Aspects.ToArray();
+        for (int i = 0; i < snapshot.Length; i++)
+        {
+            TryRemoveAspect(cityEntity, snapshot[i]);
+        }
     }
 
     public bool TryRemoveAspect<T>(CityEntity entity) where T : CityEntityAspect
@@ -107,8 +134,7 @@ public sealed class CityEntityAspectsService
             return false;
         }
 
-        if (aspect is CityEntityAspectBase b)
-            b.Entity = null;
+        aspect.InternalUnbindFromEntity();
 
         EmitRemoved(entity, aspect);
         return true;

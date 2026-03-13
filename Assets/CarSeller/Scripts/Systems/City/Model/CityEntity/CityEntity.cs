@@ -29,6 +29,11 @@ public sealed class CityEntity : ILocation, ICityPositionable
         return aspects.OfType<T>().ToArray();
     }
 
+    public T GetAspect<T>() where T : CityEntityAspect
+    {
+        return aspects.OfType<T>().FirstOrDefault();
+    }
+
     public bool IsValid()
     {
         return Subject != null;
@@ -39,24 +44,14 @@ public sealed class CityEntity : ILocation, ICityPositionable
         City = city;
         Position = initialCityPosition;
         Attach(subject);
-        AddAspects(aspects);
+        city.AspectsService.TryAddAspects(this, aspects);
     }
 
     internal CityEntity(City city, CityPosition initialCityPosition, ICollection<CityEntityAspect> aspects)
     {
         City = city;
-        Position = initialCityPosition;
-        AddAspects(aspects);
-    }
-
-    private void AddAspects(ICollection<CityEntityAspect> aspectsToAdd)
-    {
-        foreach (var aspect in aspectsToAdd)
-        {
-            aspects.Add(aspect);
-            if (aspect is CityEntityAspectBase b)
-                b.Entity = this;
-        }
+        Position = initialCityPosition;;
+        city.AspectsService.TryAddAspects(this, aspects);
     }
 
     internal bool TryAddAspectInternal(CityEntityAspect aspect)
@@ -88,7 +83,16 @@ public sealed class CityEntity : ILocation, ICityPositionable
     public void Detach()
     {
         if (Subject == null) return;
+
+        G.City.AspectsService.TryRemoveAllAspects(this);
+
         City.Entities.Remove(Subject);
         Subject = null;
+    }
+
+    public override string ToString()
+    {
+        var subjectStr = Subject != null ? Subject.ToString() : "NoSubject";
+        return base.ToString() + ' ' + subjectStr;
     }
 }

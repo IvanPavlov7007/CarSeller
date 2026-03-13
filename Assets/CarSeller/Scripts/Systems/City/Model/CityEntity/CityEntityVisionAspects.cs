@@ -8,16 +8,16 @@ using UnityEngine;
 /// </summary>
 public sealed class VisionCenterAspect : CityEntityAspectBase
 {
-    public readonly VisionConfig Config;
+    public readonly VisionCenterConfig Config;
 
-    public VisionCenterAspect(VisionConfig config)
+    public VisionCenterAspect(VisionCenterConfig config)
     {
         Config = config ?? throw new ArgumentNullException(nameof(config));
     }
 
     public VisionCenterAspect(float radius)
     {
-        Config = new VisionConfig { Radius = Mathf.Max(0f, radius) };
+        Config = new VisionCenterConfig { Radius = Mathf.Max(0f, radius) };
     }
 }
 
@@ -25,15 +25,35 @@ public sealed class VisionCenterAspect : CityEntityAspectBase
 /// Enables scaling / fading with distance to the nearest vision center.
 /// The scaling curve/ranges are taken from the nearest vision center's <see cref="VisionCenterAspect"/>.
 /// </summary>
-public sealed class VisionDistanceScaleAspect : CityEntityAspectBase
+public sealed class VisibleDistanceScalerAspect : CityEntityAspectBase
 {
-    /// <summary>
-    /// When true, this entity is always rendered at its base scale and never hidden.
-    /// </summary>
-    public readonly bool Disable;
+    public CityVisibleAspect VisibleAspect { get; private set; }
+    public readonly VisibleDistanceScalerConfig Config;
 
-    public VisionDistanceScaleAspect(bool disable = false)
+    public VisibleDistanceScalerConfig.EvaluationResult Evaluate()
     {
-        Disable = disable;
+        return Config.Evaluate(VisibleAspect.DistanceToNearestCenter, VisibleAspect.NearestCenter.Config.Radius);
+    }
+
+    public VisibleDistanceScalerAspect(VisibleDistanceScalerConfig config)
+    {
+        Config = config;
+    }
+
+    public VisibleDistanceScalerAspect()
+    {
+        Config = new VisibleDistanceScalerConfig();
+    }
+
+    public static VisibleDistanceScalerAspect CreateDontHide()
+    {
+        return new VisibleDistanceScalerAspect(new VisibleDistanceScalerConfig { HideBeyondMax = false, ScaleAtMax = 0.7f});
+    }
+
+    public override void InternalBindToEntity(CityEntity entity)
+    {
+        base.InternalBindToEntity(entity);
+        VisibleAspect = entity.GetAspect<CityVisibleAspect>();
+        Debug.Assert(VisibleAspect != null, $"Entity {entity} has {nameof(VisibleDistanceScalerAspect)} but no {nameof(CityVisibleAspect)}");
     }
 }

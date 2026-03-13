@@ -15,6 +15,7 @@ public class CityUIPinPositioner : MonoBehaviour
 
     public bool IsDragging { get; private set; }
 
+
     CityUIPinDragHandler dragHandler;
     Quaternion userRotation = Quaternion.identity;
 
@@ -22,8 +23,42 @@ public class CityUIPinPositioner : MonoBehaviour
     RectTransform iconTransform;
     [SerializeField]
     RectTransform frameTransform;
+    [SerializeField]
+    RectTransform circleTransform;
+
     RectTransform rectTransform;
     Quaternion initialIconRotation;
+
+
+    public bool ConfinedToScreen { get; set; } = true;
+    public GraphicsMode graphicsMode = GraphicsMode.Pin;
+    public enum GraphicsMode
+    {
+        Hidden,
+        Circle,
+        Pin
+    }
+
+    public void SetGraphicsMode(GraphicsMode mode)
+    {
+        graphicsMode = mode;
+        switch (mode)
+        {
+            case GraphicsMode.Hidden:
+                frameTransform.gameObject.SetActive(false);
+                circleTransform.gameObject.SetActive(false);
+                break;
+            case GraphicsMode.Circle:
+                frameTransform.gameObject.SetActive(false);
+                circleTransform.gameObject.SetActive(true);
+                break;
+            case GraphicsMode.Pin:
+                frameTransform.gameObject.SetActive(true);
+                circleTransform.gameObject.SetActive(false);
+                break;
+        }
+    }
+
 
     private void Awake()
     {
@@ -73,7 +108,8 @@ public class CityUIPinPositioner : MonoBehaviour
         Vector2 screenPos;
 
         // Is target within camera world rect?
-        if (cameraWorldSizeRect(cam).Contains(target.position))
+        // Or if not confined to screen, just treat as on-screen and let it be positioned according to its actual screen position (which may be off-screen).
+        if (!ConfinedToScreen || cameraWorldSizeRect(cam).Contains(target.position))
         {
             // Target on screen: start from its screen position
             screenPos = cam.WorldToScreenPoint(target.position);

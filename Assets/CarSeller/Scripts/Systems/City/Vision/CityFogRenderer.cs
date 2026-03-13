@@ -19,16 +19,9 @@ public sealed class CityFogRenderer : Singleton<CityFogRenderer>
     [Tooltip("Optional parent for spawned circle masks. If null, masks are parented to this GameObject.")]
     [SerializeField] private Transform masksParent;
 
-    private readonly Dictionary<CityEntity, GameObject> _circleMasks = new();
+    private readonly Dictionary<VisionCenterAspect, GameObject> circleMasks = new();
 
-    public struct VisionCenterRuntime
-    {
-        public Vector2 Position;
-        public VisionConfig Config;
-    }
-
-    public IReadOnlyList<VisionCenterRuntime> VisionCenters => _visionCenters;
-    private readonly List<VisionCenterRuntime> _visionCenters = new();
+    CityVisionCentersSystem centersSystem;
 
     protected override void OnRegistration()
     {
@@ -36,35 +29,28 @@ public sealed class CityFogRenderer : Singleton<CityFogRenderer>
         if (masksParent == null) masksParent = transform;
     }
 
-    private void OnEnable()
+    private void Awake()
     {
-        if (G.CityVision == null)
-        {
-            Debug.LogError("CityFogRenderer: G.CityVision is null");
-            return;
-        }
+        InitializeSystem(G.City.AspectsSystem.centersSystem);
+    }
 
-        G.CityVision.OnCenterAdded += OnCenterChanged;
-        G.CityVision.OnCenterRemoved += OnCenterChanged;
+    public void InitializeSystem(CityVisionCentersSystem centersSystem)
+    {
+        Debug.Assert(centersSystem != null);
+        this.centersSystem = centersSystem;
 
-        GameEvents.Instance.OnLocatableDestroyed += OnLocatableDestroyed;
-        GameEvents.Instance.OnLocatableLocationChanged += OnLocatableLocationChanged;
+        centersSystem.OnCenterAdded += OnCenterChanged;
+        centersSystem.OnCenterRemoved += OnCenterChanged;
 
         Rebuild();
     }
 
     private void OnDisable()
     {
-        if (G.CityVision != null)
+        if (centersSystem != null)
         {
-            G.CityVision.OnCenterAdded -= OnCenterChanged;
-            G.CityVision.OnCenterRemoved -= OnCenterChanged;
-        }
-
-        if (GameEvents.Instance != null)
-        {
-            GameEvents.Instance.OnLocatableDestroyed -= OnLocatableDestroyed;
-            GameEvents.Instance.OnLocatableLocationChanged -= OnLocatableLocationChanged;
+            centersSystem.OnCenterAdded -= OnCenterChanged;
+            centersSystem.OnCenterRemoved -= OnCenterChanged;
         }
 
         ClearAllMasks();
@@ -75,29 +61,15 @@ public sealed class CityFogRenderer : Singleton<CityFogRenderer>
         UpdateMasksAndCenters();
     }
 
-    private void OnCenterChanged(CityEntity entity) => Rebuild();
-
-    private void OnLocatableDestroyed(LocatableDestroyedEventData data) => Rebuild();
-    private void OnLocatableLocationChanged(LocatableLocationChangedEventData data) => Rebuild();
+    private void OnCenterChanged(CityEntity entity, VisionCenterAspect aspect) => Rebuild();
 
     private void Rebuild()
     {
-        if (G.City == null)
-        {
-            ClearAllMasks();
-            return;
-        }
+        Debug.Assert(centersSystem != null, "CityFogRenderer.Rebuild called but G.CityVision is null");
 
-        if (G.CityVision == null)
-        {
-            Debug.LogError("CityFogRenderer.Rebuild: G.CityVision is null");
-            ClearAllMasks();
-            return;
-        }
+        var centers = centersSystem.VisionCenters;
 
-        var centers = G.CityVision.Centers.Where(e => e != null).ToList();
-
-        var toRemove = _circleMasks.Keys.Where(e => !centers.Contains(e)).ToList();
+        var toRemove = circleMasks.Keys.Where(e => !centers.Contains(e)).ToList();
         for (int i = 0; i < toRemove.Count; i++)
             RemoveMask(toRemove[i]);
 
@@ -107,15 +79,12 @@ public sealed class CityFogRenderer : Singleton<CityFogRenderer>
         UpdateMasksAndCenters();
     }
 
-    private void EnsureMask(CityEntity entity)
+    private void EnsureMask(VisionCenterAspect aspect)
     {
-        if (entity == null)
-        {
-            Debug.LogWarning("CityFogRenderer.EnsureMask called with null entity");
-            return;
-        }
 
-        if (_circleMasks.ContainsKey(entity)) return;
+        Debug.Assert(aspect != null, "CityFogRenderer.EnsureMask called with null aspect");
+
+        if (circleMasks.ContainsKey(aspect)) return;
 
         if (CircleMaskPrefab == null)
         {
@@ -124,79 +93,45 @@ public sealed class CityFogRenderer : Singleton<CityFogRenderer>
         }
 
         var go = Instantiate(CircleMaskPrefab, masksParent);
-        go.name = $"VisionMask_{entity.Subject?.GetType().Name ?? "Entity"}";
-        _circleMasks[entity] = go;
+        go.name = $"VisionMask_{aspect.Entity}";
+        circleMasks[aspect] = go;
     }
 
-    private void RemoveMask(CityEntity entity)
+    private void RemoveMask(VisionCenterAspect aspect)
     {
-        if (entity == null) return;
-        if (_circleMasks.TryGetValue(entity, out var go))
+        Debug.Assert(aspect != null, "CityFogRenderer.RemoveMask called with null aspect");
+
+        if (circleMasks.TryGetValue(aspect, out var go))
         {
             if (go != null) Destroy(go);
-            _circleMasks.Remove(entity);
+            circleMasks.Remove(aspect);
         }
     }
 
     private void ClearAllMasks()
     {
-        foreach (var kv in _circleMasks)
+        foreach (var kv in circleMasks)
         {
             if (kv.Value != null) Destroy(kv.Value);
         }
-        _circleMasks.Clear();
-        _visionCenters.Clear();
-    }
-
-    public bool TryGetNearestCenter(Vector2 worldPos, out VisionCenterRuntime nearest)
-    {
-        // Delegate to CityVision.
-        if (!G.CityVision.TryGetNearestCenter(worldPos, out var entity, out var center) || center?.Config == null)
-        {
-            nearest = default;
-            return false;
-        }
-
-        nearest = new VisionCenterRuntime
-        {
-            Position = entity.Position.WorldPosition,
-            Config = center.Config
-        };
-        return true;
+        circleMasks.Clear();
     }
 
     private void UpdateMasksAndCenters()
     {
-        _visionCenters.Clear();
-
-        foreach (var kv in _circleMasks)
+        foreach (var kv in circleMasks)
         {
-            var entity = kv.Key;
+            var aspect = kv.Key;
             var go = kv.Value;
-            if (entity == null || go == null) continue;
+            if (aspect == null || go == null) continue;
 
-            var center = entity.Aspects?.OfType<VisionCenterAspect>().FirstOrDefault();
-            if (center == null || center.Config == null)
-            {
-                Debug.LogWarning($"CityFogRenderer: Entity {entity.Subject} has a mask but no VisionCenterAspect/Config. Removing mask.");
-                RemoveMask(entity);
-                continue;
-            }
-
-            var pos = entity.Position.WorldPosition;
-
-            _visionCenters.Add(new VisionCenterRuntime
-            {
-                Position = pos,
-                Config = center.Config
-            });
+            var pos = aspect.Entity.Position.WorldPosition;
 
             go.transform.position = new Vector3(pos.x, pos.y, go.transform.position.z);
-            float diameter = Mathf.Max(0.01f, center.Config.Radius * 2f);
+            float diameter = Mathf.Max(0.01f, aspect.Config.Radius * 2f);
             go.transform.localScale = new Vector3(diameter, diameter, 1f);
 
             var mask = go.GetComponent<SpriteMask>();
-            //if (mask != null) mask.isCustomRangeActive = false;
         }
     }
 }

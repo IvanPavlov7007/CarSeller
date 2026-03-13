@@ -11,6 +11,7 @@ public class CityUIPin : MonoBehaviour
 
     Interactable interactable => cityViewObjectController.GetComponent<Interactable>();
 
+
     private void Awake()
     {
         positioner = GetComponent<CityUIPinPositioner>();
@@ -36,12 +37,42 @@ public class CityUIPin : MonoBehaviour
 
         gameObject.AddComponent<ViewStateChangerUI>().Initialize(cityViewObjectController);
 
-        // New: mirror vision scaling onto the UI pin.
-        if (gameObject.GetComponent<VisionPinScaler>() == null)
-            gameObject.AddComponent<VisionPinScaler>();
-
         cityViewObjectController.OnDestroyed += handleObjectDestroyed;
-        gameObject.GetComponentInChildren<Button>().onClick.AddListener(onClick);
+        addButtonListeners();
+
+        var scaler = cityViewObjectController.CityEntity.GetAspect<VisibleDistanceScalerAspect>();
+        gameObject.AddComponent<VisionPinScaler>().Initialize(scaler);
+    }
+
+    private void Update()
+    {
+        checkDiscovered();
+        checkConfined();
+    }
+
+    private void checkConfined()
+    {
+        PinAspect pinAspect = cityViewObjectController.CityEntity.GetAspect<PinAspect>();
+        if (pinAspect != null)
+        {
+            positioner.ConfinedToScreen = pinAspect.IsScreenConfined;
+        }
+    }
+
+    private void checkDiscovered()
+    {
+        CityVisibleAspect visibleAspect = cityViewObjectController.CityEntity.GetAspect<CityVisibleAspect>();
+        if (visibleAspect != null)
+        {
+            if (visibleAspect.Discovered)
+            {
+                positioner.SetGraphicsMode(CityUIPinPositioner.GraphicsMode.Pin);
+            }
+            else
+            {
+                positioner.SetGraphicsMode(CityUIPinPositioner.GraphicsMode.Circle);
+            }
+        }
     }
 
     private void OnDisable()
@@ -49,8 +80,22 @@ public class CityUIPin : MonoBehaviour
         if (cityViewObjectController != null)
         cityViewObjectController.OnDestroyed -= handleObjectDestroyed;
 
-        var btn = gameObject.GetComponentInChildren<Button>();
-        if (btn != null)
+        removeButtonListeners();
+    }
+
+    private void addButtonListeners()
+    {
+        var btns = GetComponentsInChildren<Button>(true);
+        foreach (var btn in btns)
+        {
+            btn.onClick.AddListener(onClick);
+        }
+    }
+
+    private void removeButtonListeners()
+    {
+        var btns = GetComponentsInChildren<Button>(true);
+        foreach (var btn in btns)
             btn.onClick.RemoveListener(onClick);
     }
 

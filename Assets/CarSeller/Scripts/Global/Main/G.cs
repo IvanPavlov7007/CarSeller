@@ -55,10 +55,6 @@ public static class G
     public static CityEntityLifetimeService CityEntityLifetimeService = new CityEntityLifetimeService();
     public static CityActionService CityActionService = new CityActionService();
 
-    // New: runtime aspect mutations + vision orchestration
-    public static CityEntityAspectsService CityEntityAspectsService = new CityEntityAspectsService();
-    public static CityVision CityVision = new CityVision(CityEntityAspectsService);
-
     public static WarehouseEntryCooldownService WarehouseEntryCooldownService = new WarehouseEntryCooldownService();
 
     //Interaction
@@ -85,6 +81,7 @@ public static class G
 
     public static void Initialize( ViewBuildersConfig handlersConfig)
     {
+        Debug.Log("Initializing global services locator");
         viewBuildersConfig = handlersConfig;
 
         initializeTransactionProcessor();

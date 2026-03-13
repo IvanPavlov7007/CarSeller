@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-public class World
+public class World : IDisposable
 {
     public WorldRegistry WorldRegistry{ get; private set; } = new WorldRegistry();
 
@@ -12,6 +12,7 @@ public class World
     public Dictionary<Product, ILocation> productLocations = new Dictionary<Product, ILocation>();
     public Dictionary<ILocatable, ILocation> allLocations = new Dictionary<ILocatable, ILocation>();
     internal Dictionary<IOwnable, HashSet<IOwnable>> ownerships = new Dictionary<IOwnable, HashSet<IOwnable>>();
+
     public City City;
     public Economy Economy;
 
@@ -19,11 +20,21 @@ public class World
 
     public static World Reset()
     {
+        Instance?.Dispose();
         Instance = new World();
         return Instance;
     }
+
+    public void Dispose()
+    {
+        City?.Dispose();
+    }
 }
 
+public interface IDisposable
+{
+    public void Dispose();
+}
 
 
 /// <summary>

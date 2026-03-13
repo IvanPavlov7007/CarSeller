@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Splines;
-using static UnityEditor.FilePathAttribute;
 
-public class City : ILocationsHolder
+public class City : ILocationsHolder, IDisposable
 {
     public CityConfig Config;
     internal Dictionary<ILocatable, CityEntity> Entities { get; private set; } = new();
@@ -19,7 +18,9 @@ public class City : ILocationsHolder
 
     private CityEntityLifetimeService lifetimeService = new CityEntityLifetimeService();
     public static CityEntityLifetimeService EntityLifetimeService => G.City.lifetimeService;
-    public static CityEntityAspectsService AspectsService => G.CityEntityAspectsService;
+    public AspectsSystem AspectsSystem { get; private set; }
+    public CityEntityAspectsService AspectsService => AspectsSystem.AspectsService;
+
     // MARKERS RUNTIME
     public sealed class CityMarker
     {
@@ -49,6 +50,8 @@ public class City : ILocationsHolder
 
     private readonly Dictionary<string, CityMarker> _markersById = new();
     public IReadOnlyDictionary<string, CityMarker> MarkersById => _markersById;
+
+    
 
     internal void InitializeMarkers(IEnumerable<CityMarker> markers)
     {
@@ -88,12 +91,13 @@ public class City : ILocationsHolder
         return list[UnityEngine.Random.Range(0, list.Count)];
     }
 
-    public City(CityConfig cityConfig, Transform graphRoot)
+    public City(CityConfig cityConfig, Transform graphRoot, AspectsSystem aspectsSystem)
     {
         Config = cityConfig;
         // IMPORTANT: pass a valid root that contains your authored edges/nodes when available.
         // If null, CityGraphLoader must scan the active scene root(s).
         CityGraphLoader.LoadFromScene(this, cityConfig.CityGraph, graphRoot);
+        this.AspectsSystem = aspectsSystem;
     }
 
     public void InitializeFromGraph(CityGraphAsset graphAsset)
@@ -226,12 +230,27 @@ public class City : ILocationsHolder
         return default;
     }
 
-    
+    public void Dispose()
+    {
+        AspectsSystem.Dispose();
+    }
 }
-
 
 public readonly struct CityPosition
 {
+    public RoadNode Node { get; }
+    public RoadEdge Edge { get; }
+    /// <summary>
+    /// A percentage [0..1] along the edge if Edge is not null.
+    /// From the 'From' node (0) to the 'To' node (1) if Forward is true,
+    /// </summary>
+    public float Percentage { get; }
+    public bool Forward { get; }
+    /// <summary>
+    /// Important: doesn't get updated automatically if the underlying node/edge moves
+    /// </summary>
+    public Vector2 WorldPosition { get; }
+
     CityPosition(RoadNode atNode)
     {
         Debug.Assert(atNode != null, "CityPosition.At requires a non-null node.");
@@ -239,6 +258,7 @@ public readonly struct CityPosition
         Edge = null;
         Percentage = 0f;
         Forward = true;
+        WorldPosition = atNode.Position;
     }
 
     CityPosition(RoadEdge edge, float t, bool forward = true)
@@ -256,41 +276,25 @@ public readonly struct CityPosition
         Edge = edge;
         Percentage = Mathf.Clamp01(t);
         Forward = forward;
+        WorldPosition = SpecificWorldPositionOnEdge(Edge, Percentage, Forward);
     }
 
-    public RoadNode Node { get; }
-    public RoadEdge Edge { get; }
-    /// <summary>
-    /// A percentage [0..1] along the edge if Edge is not null.
-    /// From the 'From' node (0) to the 'To' node (1) if Forward is true,
-    /// </summary>
-    public float Percentage { get; }
-    public bool Forward { get; }
-
-    public Vector2 WorldPosition
+    private static Vector2 SpecificWorldPositionOnEdge(RoadEdge edge, float t, bool forward)
     {
-        get
-        {
-            if (Edge == null)
-            {
-                Debug.Assert(Node != null, "CityPosition must have either Node or Edge.");
-                return Node.Position;
-            }
-            return SpecificWorldPositionOnEdge(Percentage);
-        }
+        Debug.Assert(edge != null, "SpecificWorldPositionOnEdge can only be used for edge positions.");
+        Debug.Assert(t >= 0f && t <= 1f, "SpecificWorldPositionOnEdge t must be in [0,1].");
+        var spline = edge.GetSpline();
+        Debug.Assert(spline != null, "SpecificWorldPositionOnEdge: Edge spline is missing.");
+        var localPos = SplineUtility.EvaluatePosition(spline, forward ? t : 1f - t);
+        var worldPos = edge.Container != null
+            ? edge.Container.transform.TransformPoint((Vector3)localPos)
+            : (Vector3)localPos;
+        return new Vector2(worldPos.x, worldPos.y);
     }
 
     public Vector2 SpecificWorldPositionOnEdge(float t)
     {
-        Debug.Assert(Edge != null, "SpecificWorldPositionOnEdge can only be used for edge positions.");
-        Debug.Assert(t >= 0f && t <= 1f, "SpecificWorldPositionOnEdge t must be in [0,1].");
-        var spline = Edge.GetSpline();
-        Debug.Assert(spline != null, "SpecificWorldPositionOnEdge: Edge spline is missing.");
-        var localPos = SplineUtility.EvaluatePosition(spline, Forward ? t : 1f - t);
-        var worldPos = Edge.Container != null
-            ? Edge.Container.transform.TransformPoint((Vector3)localPos)
-            : (Vector3)localPos;
-        return new Vector2(worldPos.x, worldPos.y);
+        return SpecificWorldPositionOnEdge(Edge, t, Forward);
     }
 
     public CityPosition WithPercentage(float t)

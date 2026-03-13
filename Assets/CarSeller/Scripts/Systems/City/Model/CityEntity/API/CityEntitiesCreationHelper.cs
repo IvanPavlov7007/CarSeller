@@ -1,5 +1,4 @@
-﻿using Pixelplacement;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -24,7 +23,9 @@ public static class CityEntitiesCreationHelper
     public static CityEntity CreateBuyer(Buyer buyer, CityPosition position)
     {
         return CreateTriggerInteractable(buyer, position,
-            new PinStyleAspect(G.cityViewObjectBuilder.BuyerPinStyle));
+            new CityVisibleAspect(),
+            VisibleDistanceScalerAspect.CreateDontHide(),
+            new PinAspect(G.cityViewObjectBuilder.BuyerPinStyle));
     }
 
     public static CityEntity CreateMissionLauncher(MissionLauncher missionLauncher)
@@ -32,29 +33,39 @@ public static class CityEntitiesCreationHelper
         var config = missionLauncher.Config;
         var marker = config.cityMarkerRef.GetMarker();
         return CreateTriggerInteractable(missionLauncher, marker.PositionOnGraph.Value,
-            new PinStyleAspect(config.pinStyle),
+            CityVisibleAspect.CreateDiscovered(),
+            VisibleDistanceScalerAspect.CreateDontHide(),
+            new PinAspect(config.pinStyle, true),
             new MarkerReferenceAspect(marker));
     }
 
     public static CityEntity CreateWarehouse(Warehouse warehouse, CityPosition position)
     {
-        return CreateTriggerInteractable(warehouse, position, new PinStyleAspect(G.cityViewObjectBuilder.WarehousePinStyle));
+        return CreateTriggerInteractable(warehouse, position, new PinAspect(G.cityViewObjectBuilder.WarehousePinStyle));
     }
 
     public static CityEntity CreateCarStashWarehouse(CarStashWarehouse carStashWarehouse, CityPosition position)
     {
-        return CreateTriggerInteractable(carStashWarehouse, position, new PinStyleAspect(G.cityViewObjectBuilder.CarStashWarehousePinStyle));
+        return CreateTriggerInteractable(carStashWarehouse, position,
+            new CityVisibleAspect(),
+            VisibleDistanceScalerAspect.CreateDontHide(),
+            new PinAspect(G.cityViewObjectBuilder.CarStashWarehousePinStyle,true));
     }
 
     public static CityEntity CreatePersonalVehicleShop(PersonalVehicleShop personalVehicleShop, CityPosition position)
     {
-        return CreateTriggerInteractable(personalVehicleShop, position, new PinStyleAspect(G.cityViewObjectBuilder.PersonalVehicleShopPinStyle));
+        return CreateTriggerInteractable(personalVehicleShop, position,
+            CityVisibleAspect.CreateDiscovered(),
+            VisibleDistanceScalerAspect.CreateDontHide(),
+            new PinAspect(G.cityViewObjectBuilder.PersonalVehicleShopPinStyle,true));
     }
 
-    public static CityEntity CreatePinnedMarkerReferencedTriggerInteractable(ILocatable locatable, CityPosition position, PinStyle pinStyle, CityMarkerRef markerRef)
+    public static CityEntity CreatePinnedMarkerReferencedTriggerInteractable(ILocatable locatable, CityPosition position, PinStyle pinStyle, CityMarkerRef markerRef, bool confinedToScreen = true)
     {
         return CreateTriggerInteractable(locatable, position,
-            new PinStyleAspect(pinStyle),
+            CityVisibleAspect.CreateDiscovered(),
+            VisibleDistanceScalerAspect.CreateDontHide(),
+            new PinAspect(pinStyle, confinedToScreen),
             new MarkerReferenceAspect(markerRef.GetMarker()));
     }
 
@@ -64,7 +75,6 @@ public static class CityEntitiesCreationHelper
         {
             new InteractableAspect(5),
             new TriggerableAspect(),
-            new VisionDistanceScaleAspect(),
         };
         aspects.AddRange(additionalAspects);
 
@@ -104,7 +114,7 @@ public static class CityEntitiesCreationHelper
 
     public static CityEntity MoveInExistingCar(Car car, CityPosition position)
     {
-        if (City.EntityLifetimeService.TryMoveToCity(car, position, out CityEntity entity, carAspects))
+        if (City.EntityLifetimeService.TryMoveToCity(car, position, out CityEntity entity, CreateCarAspects()))
         {
             return entity;
         }
@@ -116,7 +126,7 @@ public static class CityEntitiesCreationHelper
     {
         Debug.Assert(playerFigure != null);
 
-        if (City.EntityLifetimeService.TryCreate(playerFigure, position, out CityEntity entity, playerFigureAspects))
+        if (City.EntityLifetimeService.TryCreate(playerFigure, position, out CityEntity entity, CreatePlayerFigureAspects()))
         {
             return entity;
         }
@@ -125,22 +135,30 @@ public static class CityEntitiesCreationHelper
         return null;
     }
 
-    static CityEntityAspect[] carAspects = new CityEntityAspect[]
+    static CityEntityAspect[] CreateCarAspects()
     {
-        new RigidbodyAspect(),
-        new DragInteractableAspect(1),
-        new TriggerableAspect(),
-        new TriggerCausableAspect(),
-        new CarAspect(),
-        new VisionDistanceScaleAspect()
-    };
+        return new CityEntityAspect[]
+        {
+            new RigidbodyAspect(),
+            new DragInteractableAspect(1),
+            new TriggerableAspect(),
+            new TriggerCausableAspect(),
+            new CarAspect(),
+            new CityVisibleAspect(),
+            new VisibleDistanceScalerAspect()
+        };
+    }
 
-    static CityEntityAspect[] playerFigureAspects = new CityEntityAspect[]
+    static CityEntityAspect[] CreatePlayerFigureAspects()
     {
-        new RigidbodyAspect(),
-        new DragInteractableAspect(1),
-        new PlayerFigureAspect(),
-        new TriggerCausableAspect(),
-        new VisionDistanceScaleAspect()
-    };
+        return new CityEntityAspect[]
+        {
+            new RigidbodyAspect(),
+            new DragInteractableAspect(1),
+            new PlayerFigureAspect(),
+            new TriggerCausableAspect(),
+            new CityVisibleAspect(),
+            new VisibleDistanceScalerAspect()
+        };
+    }
 }

@@ -11,12 +11,12 @@ using UnityEngine;
 public class MissionController : MissionControllerBase
 {
     Dictionary<MissionRuntime, HashSet<IDestroyable>> missionOwnedObjects = new();
-    MissionMonoBehaviourHelper monoBehaviourHelper;
+    TinyMonoBehaviourHelper monoBehaviourHelper;
 
     public MissionController(List<MissionConfig> configs) : base(configs)
     {
-        monoBehaviourHelper = new GameObject("MissionMonoBehaviourHelper")
-            .AddComponent<MissionMonoBehaviourHelper>();
+        monoBehaviourHelper = TinyMonoBehaviourHelper.Create("MissionControllerHelper");
+        GameObject.DontDestroyOnLoad(monoBehaviourHelper.gameObject);
         Enable();
     }
 

@@ -19,7 +19,6 @@
         G.GameFlowController.SetGameState(roamingState);
 
         G.VehicleController.Initialize(gameConfig.VehicleControllerConfig, shop.PersonalVehiclesList);
-        G.CityVision.Initialize();
     }
 
     private void createShop(VehicleShopConfig config)

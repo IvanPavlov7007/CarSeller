@@ -7,64 +7,76 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public sealed class VisionPinScaler : MonoBehaviour
 {
-    private CityUIPinPositioner _positioner;
-    private RectTransform _rect;
-    private Vector3 _baseScale;
-    private CanvasGroup _canvasGroup;
+    private VisibleDistanceScalerAspect scalerAspect;
+
+    private CityUIPinPositioner positioner;
+    private RectTransform rect;
+    private Vector3 baseScale;
+    private CanvasGroup canvasGroup;
 
     private void Awake()
     {
-        _positioner = GetComponent<CityUIPinPositioner>();
-        _rect = GetComponent<RectTransform>();
-        if (_rect != null) _baseScale = _rect.localScale;
+        positioner = GetComponent<CityUIPinPositioner>();
+        rect = GetComponent<RectTransform>();
+        if (rect != null) baseScale = rect.localScale;
 
-        _canvasGroup = GetComponent<CanvasGroup>();
-        if (_canvasGroup == null)
-            _canvasGroup = gameObject.AddComponent<CanvasGroup>();
+        canvasGroup = GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+            canvasGroup = gameObject.AddComponent<CanvasGroup>();
+    }
+
+    public void Initialize(VisibleDistanceScalerAspect scalerAspect)
+    {
+        this.scalerAspect = scalerAspect;
     }
 
     private void LateUpdate()
     {
-        if (_positioner == null || _positioner.target == null) return;
+        if (scalerAspect == null || scalerAspect.VisibleAspect == null)
+            return;
 
-        Vector2 worldPos = _positioner.target.position;
-
-        if (!G.CityVision.TryGetNearestCenter(worldPos, out var centerEntity, out var centerAspect) || centerAspect?.Config == null)
+        if (!scalerAspect.VisibleAspect.Visible && scalerAspect.Config.HideBeyondMax)
         {
-            ApplyVisible(false);
+            ApplyVisibility(visible: false);
             return;
         }
 
-        float dist = Vector2.Distance(worldPos, centerEntity.Position.WorldPosition);
-        var cfg = centerAspect.Config;
-
-        if (cfg.HideBeyondMax && dist > cfg.VisionMax)
+        if (scalerAspect.VisibleAspect.NearestCenter == null)
         {
-            ApplyVisible(false);
+            OnNoVision();
             return;
         }
 
-        ApplyVisible(true);
+        ApplyVisibility(visible: true);
 
-        float s = cfg.EvaluateScale(dist);
-        ApplyScale(s);
+        var scalerEvaluation = scalerAspect.Evaluate();
 
-        // UI alpha fade (also used for smoothing within min/max).
-        float a = cfg.EvaluateAlpha(dist);
-        _canvasGroup.alpha = Mathf.Clamp01(a);
+        ApplyScale(scalerEvaluation.Scale);
     }
 
-    private void ApplyVisible(bool visible)
+    private void OnNoVision()
+    {
+        if (VisionLogic.VisibleWhenNoCenter)
+        {
+            ApplyVisibility(visible: true);
+        }
+        else
+        {
+            ApplyVisibility(visible: false);
+        }
+    }
+
+    private void ApplyVisibility(bool visible)
     {
         // Do NOT SetActive(false) here, otherwise LateUpdate stops and the pin can never become visible again.
-        _canvasGroup.alpha = visible ? _canvasGroup.alpha : 0f;
-        _canvasGroup.interactable = visible;
-        _canvasGroup.blocksRaycasts = visible;
+        canvasGroup.alpha = visible ? 1f : 0f;
+        canvasGroup.interactable = visible;
+        canvasGroup.blocksRaycasts = visible;
     }
 
     private void ApplyScale(float scaleMul)
     {
-        if (_rect == null) return;
-        _rect.localScale = _baseScale * Mathf.Max(0f, scaleMul);
+        if (rect == null) return;
+        rect.localScale = baseScale * Mathf.Max(0f, scaleMul);
     }
 }

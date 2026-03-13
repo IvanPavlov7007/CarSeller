@@ -1,6 +1,10 @@
 ﻿using System;
 
-public interface CityEntityAspect { }
+public interface CityEntityAspect {
+    public CityEntity Entity { get; }
+
+    void InternalUnbindFromEntity();
+}
 
 /// <summary>
 /// Base class for aspects that need to know which CityEntity they belong to.
@@ -8,7 +12,17 @@ public interface CityEntityAspect { }
 /// </summary>
 public abstract class CityEntityAspectBase : CityEntityAspect
 {
-    public CityEntity Entity { get; internal set; }
+    public CityEntity Entity { get; private set; }
+    public virtual void InternalBindToEntity(CityEntity entity)
+    {
+        Entity = entity;
+    }
+
+    public virtual void InternalUnbindFromEntity()
+    {
+        Entity = null;
+    }
+
 }
 
 public sealed class MarkerReferenceAspect : CityEntityAspectBase
@@ -20,13 +34,15 @@ public sealed class MarkerReferenceAspect : CityEntityAspectBase
         CityMarker = cityMarker;
     }
 }
-public sealed class PinStyleAspect : CityEntityAspectBase
+public sealed class PinAspect : CityEntityAspectBase
 {
     public readonly PinStyle Style;
+    public bool IsScreenConfined = false;
 
-    public PinStyleAspect(PinStyle style)
+    public PinAspect(PinStyle style, bool isScreenConfined = false)
     {
         Style = style ?? throw new ArgumentNullException(nameof(style));
+        IsScreenConfined = isScreenConfined;
     }
 }
 public sealed class TriggerableAspect : CityEntityAspectBase
