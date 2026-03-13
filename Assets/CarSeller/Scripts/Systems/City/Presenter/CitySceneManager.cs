@@ -50,6 +50,15 @@ public class CitySceneManager : Singleton<CitySceneManager>
         GameEvents.Instance.OnGameStateChanged -= onGameStateChanged;
     }
 
+    public CityViewObjectController getExiting(CityEntity entity)
+    {
+        if (builtObjectsViews.TryGetValue(entity, out var view))
+        {
+            return view;
+        }
+        return null;
+    }
+
     public void InitializeCity()
     {
         if (City == null)
