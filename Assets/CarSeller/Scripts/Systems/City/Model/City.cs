@@ -311,7 +311,10 @@ public readonly struct CityPosition
     {
         Debug.Assert(this.Edge != null);
         Debug.Assert(Edge == other.Edge);
-        return ((this.Percentage < other.Percentage && this.Forward) || (this.Percentage > other.Percentage && !this.Forward));
+        float t1 = this.Percentage;
+        float t2 = this.Forward == other.Forward ? other.Percentage : 1f - other.Percentage;
+
+        return t2 > t1;
     }
 
     public CityPosition TowardsAnotherForDistance(CityPosition other, float distance)
@@ -351,6 +354,24 @@ public readonly struct CityPosition
         return On(Edge, newT, Forward);
     }
 
+    public float DistanceToAnotherOnSameEdge(CityPosition other)
+    {
+        Debug.Assert(this.Edge != null && other.Edge != null, "DistanceTo currently only supports positions on edges.");
+        Debug.Assert(this.Edge == other.Edge, "DistanceTo currently only supports positions on the same edge.");
+
+        if (other.Forward != this.Forward)
+        {
+            other = other.Reversed();
+        }
+        float deltaT = Mathf.Abs(this.Percentage - other.Percentage);
+        return deltaT * Edge.Length;
+    }
+
+    public CityPosition Reversed()
+    {
+        return On(Edge, 1f - Percentage, !Forward);
+    }
+
     public Vector2 GetCurrentTangent()
     {
         Debug.Assert(Edge != null, "GetCurrentTangent can only be used for edge positions.");
@@ -367,30 +388,52 @@ public readonly struct CityPosition
     public static CityPosition At(RoadNode node) => new CityPosition(node);
     public static CityPosition On(RoadEdge edge, float t, bool forward = true) => new CityPosition(edge, t, forward);
 
-    public static CityPosition GetConnectionPositionOnEdgeA(RoadEdge A, RoadEdge B)
+    public CityPosition GetConnectionPositionFromAnotherEdge(RoadEdge AnotherEdge)
     {
-        if (A.From == B.From)
+        Debug.Assert(this.Edge != null, "GetConnectionPositionFromAnotherEdge can only be used for edge positions.");
+        
+        if (AnotherEdge.From == Edge.From)
         {
-            return On(A, 0f, forward: true);
+            return On(Edge, 0f, forward: true);
         }
-        else if (A.From == B.To)
+        else if (AnotherEdge.To == Edge.From)
         {
-            return On(A, 0f, forward: true);
+            return On(Edge, 0f, forward: true);
         }
-        else if (A.To == B.From)
+        else if (AnotherEdge.From == Edge.To)
         {
-            return On(A, 1f, forward: true);
+            return On(Edge, 0f, forward: false);
         }
-        else if (A.To == B.To)
+        else if (AnotherEdge.To == Edge.To)
         {
-            return On(A, 1f, forward: true);
+            return On(Edge, 0f, forward: false);
         }
         else
         {
-            Debug.LogError("Edges A and B are not connected.");
-            return default;
+            throw new InvalidOperationException("Edges are not connected.");
         }
+    }
 
-
+    public CityPosition GetConnectionPositionTowardsEdge(RoadEdge AnotherEdge)
+    {
+        Debug.Assert(this.Edge != null, "GetConnectionPositionTowardsEdge can only be used for edge positions.");
+        
+        if(AnotherEdge.From == Edge.To)
+        {
+            return On(Edge, 1f, forward: true);
+        }
+        else if(AnotherEdge.To == Edge.To)
+        {
+            return On(Edge, 1f, forward: true);
+        }
+        else if(AnotherEdge.From == Edge.From)
+        {
+            return On(Edge, 1f, forward: false);
+        }
+        else if (AnotherEdge.To == Edge.From)
+        {
+            return On(Edge, 1f, forward: false);
+        }
+        throw new InvalidOperationException("Edges are not connected.");
     }
 }
