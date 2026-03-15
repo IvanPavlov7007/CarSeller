@@ -34,6 +34,7 @@ public class SelectableVisuals : MonoBehaviour
         selectionRing.transform.localScale *= settings.selectionRingScaleMultiplier;
         var sprite = selectionRing.GetComponent<SpriteRenderer>();
         sprite.color = settings.selectionRingColor;
+        sprite.sortingOrder = settings.sortingOrder;
     }
 
     void activateSelection(bool active)

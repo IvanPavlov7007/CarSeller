@@ -88,55 +88,74 @@ public class CityUIPinPositioner : MonoBehaviour
         iconTransform.rotation = initialIconRotation;
     }
 
-    void RelocatePin()
+    private void RelocateOnScreen()
     {
-        if (cam == null)
-        {
-            Debug.LogWarning("No camera registered");
-            return;
-        }
-
-        if (canvas == null)
-        {
-            Debug.LogWarning("No canvas registered");
-            return;
-        }
-
         Vector2 distanceToTarget = target.position - origin.position;
         Vector2 directionToTarget = distanceToTarget.normalized;
         Vector2 screenSize = new Vector2(Screen.width, Screen.height);
         Vector2 screenPos;
 
-        // Is target within camera world rect?
-        // Or if not confined to screen, just treat as on-screen and let it be positioned according to its actual screen position (which may be off-screen).
-        if (!ConfinedToScreen || cameraWorldSizeRect(cam).Contains(target.position))
-        {
-            // Target on screen: start from its screen position
-            screenPos = cam.WorldToScreenPoint(target.position);
-            screenPos -= directionToTarget * targetOnScreenMargin;
-        }
-        else
-        {
-            // Target off screen: clamp to screen edge
-            Vector2 edgePoint = GetEdgePoint(directionToTarget, screenSize);
-            screenPos = edgePoint - directionToTarget * screenEdgeMargin;
-            userRotation = Quaternion.identity; // reset user rotation when target is offscreen
-        }
+        screenPos = cam.WorldToScreenPoint(target.position);
+        screenPos -= directionToTarget * targetOnScreenMargin;
 
-        // Convert screen position to canvas local position.
-        // For Screen Space - Camera, we must pass the canvas' render camera.
+        SetScreenPosisition(screenPos);
+        SetUpRotation(userRotation * Vector2.up);
+    }
+
+    private void RelocateOnEdge()
+    {
+        Vector2 distanceToTarget = target.position - origin.position;
+        Vector2 directionToTarget = distanceToTarget.normalized;
+        Vector2 screenSize = new Vector2(Screen.width, Screen.height);
+
+        Vector2 screenPos;
+        Vector2 edgePoint = GetEdgePoint(directionToTarget, screenSize);
+        screenPos = edgePoint - directionToTarget * screenEdgeMargin;
+        userRotation = Quaternion.identity; // reset user rotation when target is offscreen
+
+        SetScreenPosisition(screenPos);
+        SetUpRotation(-directionToTarget);
+    }
+
+    private void SetScreenPosisition(Vector2 screenPosition)
+    {
         Camera canvasCamera = canvas.worldCamera != null ? canvas.worldCamera : cam;
 
         Vector2 localPos;
         RectTransform canvasRect = canvas.transform as RectTransform;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvasRect,
-            screenPos,
+            screenPosition,
             canvasCamera,
             out localPos);
 
         rectTransform.anchoredPosition = localPos;
-        rectTransform.up = userRotation * -directionToTarget;
+    }
+
+    private void SetUpRotation(Vector2 up)
+    {
+        rectTransform.up = up;
+    }
+
+    void RelocatePin()
+    {
+        Debug.Assert(cam != null, "Camera not set for CityUIPinPositioner");
+        Debug.Assert(canvas != null, "Canvas not set for CityUIPinPositioner");
+
+        // Is target within camera world rect?
+        // Or if not confined to screen,
+        // just treat as on-screen and let it be positioned
+        // according to its actual screen position (which may be off-screen).
+        if (!ConfinedToScreen || cameraWorldSizeRect(cam).Contains(target.position))
+        {
+            // Target on screen: start from its screen position
+            RelocateOnScreen();
+        }
+        else
+        {
+            // Target off screen: clamp to screen edge
+            RelocateOnEdge();
+        }
     }
 
     public static Vector2 worldScreenHalfSize(Camera cam)
