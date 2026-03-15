@@ -15,5 +15,5 @@ MonoBehaviour:
   selectionRingColor: {r: 0, g: 1, b: 0, a: 0.78039217}
   selectionRingScaleMultiplier: 1
   selectionRingHeightOffset: 0.1
-  sortingOrder: 4
+  sortingOrder: -1
   selectionRingPrefab: {fileID: 6629855009665736187, guid: f760583703482554ab1c386f80e9aa74, type: 3}
