@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Splines;
@@ -32,6 +31,76 @@ public sealed class RoadEdge
         var splines = Container.Splines;
         if (splines == null || SplineIndex < 0 || SplineIndex >= splines.Count) return null;
         return splines[SplineIndex];
+    }
+
+    public float LengthFromTo(float t1, float t2)
+    {
+        return Length * Mathf.Abs(t2 - t1);
+    }
+
+    public bool TryGetClosestPoint(Vector2 worldPosition, out float bestT, out float bestDist2, int coarseDivisions = 64, int refineIterations = 8)
+    {
+        bestT = 0f;
+        bestDist2 = float.PositiveInfinity;
+
+        if (Container == null)
+        {
+            return false;
+        }
+
+        var spline = GetSpline();
+        if (spline == null)
+        {
+            return false;
+        }
+
+        var tr = Container.transform;
+
+        // 1) Coarse pass
+        for (int i = 0; i <= coarseDivisions; i++)
+        {
+            float t = i / (float)coarseDivisions;
+            float d2 = DistanceSquaredToEdgeAt(spline, tr, worldPosition, t);
+            if (d2 < bestDist2)
+            {
+                bestDist2 = d2;
+                bestT = t;
+            }
+        }
+
+        // 2) Local refinement around the best coarse sample
+        float step = 1f / coarseDivisions;
+        for (int iter = 0; iter < refineIterations; iter++)
+        {
+            float tLeft = Mathf.Clamp01(bestT - step);
+            float tRight = Mathf.Clamp01(bestT + step);
+
+            float d2Left = DistanceSquaredToEdgeAt(spline, tr, worldPosition, tLeft);
+            if (d2Left < bestDist2)
+            {
+                bestDist2 = d2Left;
+                bestT = tLeft;
+            }
+
+            float d2Right = DistanceSquaredToEdgeAt(spline, tr, worldPosition, tRight);
+            if (d2Right < bestDist2)
+            {
+                bestDist2 = d2Right;
+                bestT = tRight;
+            }
+
+            step *= 0.5f;
+        }
+
+        return true;
+    }
+
+    private static float DistanceSquaredToEdgeAt(Spline spline, Transform containerTransform, Vector2 worldPosition, float t)
+    {
+        var localPos = SplineUtility.EvaluatePosition(spline, t);
+        var worldPos3 = containerTransform.TransformPoint((Vector3)localPos);
+        var worldPos2 = new Vector2(worldPos3.x, worldPos3.y);
+        return (worldPos2 - worldPosition).sqrMagnitude;
     }
 
     /// <summary>

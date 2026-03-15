@@ -1,8 +1,8 @@
-﻿using System.Collections;
+﻿using Sirenix.Utilities;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.Splines;
-    
+
 public class MovingPoint : MonoBehaviour, IMovement
 {
     /// <summary>
@@ -19,6 +19,7 @@ public class MovingPoint : MonoBehaviour, IMovement
     Transform body;
 
     private const float Epsilon = 1e-4f;
+    private const float Tolerance = 0.1f; // To avoid floating point issues
 
     float currentSpeed = 0f;
     Vector2 currentDirection = Vector2.up;
@@ -42,7 +43,223 @@ public class MovingPoint : MonoBehaviour, IMovement
         body.up = currentDirection;
     }
 
+    struct CityPositionWithDistance
+    {
+        public readonly CityPosition Position;
+        public readonly float Distance;
+        public CityPositionWithDistance(CityPosition position, float distance)
+        {
+            Position = position;
+            Distance = distance;
+        }
+    }
+
+    private IReadOnlyList<CityPositionWithDistance> findRecursivePathToClosest(
+        RoadEdge currentEdge,
+        Vector2 target,
+        float minDistance,
+        ImmutableHashSet<RoadEdge> visitedEdges)
+    {
+        if (visitedEdges.Contains(currentEdge))
+        {
+            return new List<CityPositionWithDistance>();
+        }
+
+        CityPosition closest = CityPosition.GetClosestOnEdge(currentEdge, target);
+        float closestDistance = Vector2.Distance(closest.WorldPosition, target);
+        if (closestDistance >= minDistance)
+        {
+            return new List<CityPositionWithDistance>();
+        }
+        minDistance = closestDistance;
+
+        var newVisitedEdges = new HashSet<RoadEdge>(visitedEdges);
+        newVisitedEdges.Add(currentEdge);
+
+        var outgoings = new List<RoadEdge>(currentEdge.From.Outgoing);
+        outgoings.AddRange(currentEdge.To.Outgoing);
+
+        var currentEntry = new CityPositionWithDistance(closest, closestDistance);
+
+        List<CityPositionWithDistance> bestPath = null;
+        foreach (var edge in outgoings)
+        {
+            if (newVisitedEdges.Contains(edge))
+            {
+                continue;
+            }
+
+            var path = findRecursivePathToClosest(
+                    edge,
+                    target,
+                    closestDistance,
+                    new ImmutableHashSet<RoadEdge>(newVisitedEdges))
+                .ToList();
+
+            if (path.Count == 0)
+            {
+                continue;
+            }
+
+            var last = path.Last();
+            if (last.Distance < minDistance)
+            {
+                minDistance = last.Distance;
+                bestPath = path;
+            }
+        }
+
+        if (bestPath == null)
+        {
+            return new List<CityPositionWithDistance>() { currentEntry };
+        }
+
+        bestPath.Insert(0, currentEntry);
+        return bestPath;
+    }
+
+    CityPosition debugFinal;
+
+    private CityPosition processMovementGeneral(CityPosition currentPosition, Vector2 target, float distance)
+    {
+        List<CityPosition> closestPoints;
+        // if we start on a node, we can just pick the best edge and go there
+        if (currentPosition.Edge == null)
+        {
+            closestPoints = bestPathFromNode(currentPosition.Node, target);
+            if(closestPoints != null && closestPoints.Count > 0)
+            {
+                bool nodeIsFrom = closestPoints[0].Edge.From == currentPosition.Node;
+
+                currentPosition = CityPosition.On(closestPoints[0].Edge, nodeIsFrom ? 0f : 1f);
+            }
+        }
+        else
+        {
+            closestPoints
+                = findRecursivePathToClosest(currentPosition.Edge,
+                target,
+                Mathf.Infinity,
+                new ImmutableHashSet<RoadEdge>(new HashSet<RoadEdge>())
+                ).Select(p => p.Position).ToList();
+        }
+        if(closestPoints == null || closestPoints.Count == 0)
+        {
+            return currentPosition; // No path to target
+        }
+        debugFinal = closestPoints.Last();
+        return moveToNextPoint(closestPoints, currentPosition, distance);
+    }
+
+    // Here we assume that closestPoints[0] is on the same edge as current
+    private CityPosition moveToNextPoint(IReadOnlyList<CityPosition> closestPoints, CityPosition current, float remainingDistance)
+    {
+        if(closestPoints.Count == 1)
+        {
+            return moveToNextPointFinally(current, closestPoints[0], remainingDistance);
+        }
+        
+        var currentEdgeTargetPosition = CityPosition.GetConnectionPositionOnEdgeA(current.Edge, closestPoints[1].Edge);
+
+        RoadEdge currentEdge = current.Edge;
+        float stepDistance = currentEdge.LengthFromTo(current.Percentage, currentEdgeTargetPosition.Percentage);
+        Debug.Log($"Current: {current}, Target on edge: {currentEdgeTargetPosition}, Step distance: {stepDistance}, Remaining distance: {remainingDistance}");
+        if (remainingDistance > stepDistance)
+        {
+            var nextCurrent = CityPosition.GetConnectionPositionOnEdgeA(closestPoints[1].Edge, currentEdge);
+            Debug.Log($"Moving from {current} to {currentEdgeTargetPosition} on edge {currentEdge.Id} with step distance {stepDistance}, remaining distance {remainingDistance}");
+            return moveToNextPoint(closestPoints.Skip(1).ToList(), nextCurrent, remainingDistance - stepDistance);
+        }
+        return moveToNextPointFinally(current, currentEdgeTargetPosition, remainingDistance);
+    }
+    const float tolerance = 0.1f; // To avoid floating point issues
+    private CityPosition moveToNextPointFinally(CityPosition currernt, CityPosition final, float remainingDistance)
+    {
+        //print node ids of both edges:
+        Debug.Assert(currernt.Edge == final.Edge, "Final point must be on the same edge as current point,\n" +
+            $"Currently {currernt.Edge} and {final.Edge}");
+
+        if (!currernt.FlowsIntoAnotherOnTheSameEdge(final))
+        {
+            return currernt; // We cannot move to the final point
+        }
+
+        float distanceToFinal = currernt.Edge.LengthFromTo(currernt.Percentage, final.Percentage);
+        if (distanceToFinal < tolerance)
+        {
+            return currernt; // We are close enough to the final point
+        }
+
+
+        return currernt.TowardsAnotherForDistance(final, Mathf.Min(distanceToFinal, remainingDistance));
+    }
+
+    private List<CityPosition> bestPathFromNode(RoadNode node, Vector2 target)
+    {
+        IReadOnlyList<CityPositionWithDistance> bestOptionPath = null;
+        float bestOptionDistance = float.MaxValue;
+
+        foreach (var edge in node.Outgoing)
+        {
+            var path = findRecursivePathToClosest(
+                    edge,
+                    target,
+                    bestOptionDistance,
+                    new ImmutableHashSet<RoadEdge>(new HashSet<RoadEdge>()))
+                .ToList();
+
+            if (path.Count == 0)
+            {
+                continue;
+            }
+
+            var last = path.Last();
+            if (last.Distance < bestOptionDistance)
+            {
+                bestOptionDistance = last.Distance;
+                bestOptionPath = path;
+            }
+        }
+
+        if (bestOptionPath == null)
+        {
+            return null;
+        }
+
+        return bestOptionPath.Select(p => p.Position).ToList();
+    }
+
     private void processMovement()
+    {
+        Vector2 inputDirection = Vector2.ClampMagnitude(directionProvider.ProvidedDirection, 1f);
+        Vector2 inputDirectionN = inputDirection.sqrMagnitude > Epsilon ? inputDirection.normalized : Vector2.zero;
+
+        float lerpV = 10f * Time.deltaTime;
+        arrowRotationPoint.rotation = Quaternion.Lerp(arrowRotationPoint.rotation, Quaternion.FromToRotation(Vector2.up, inputDirection.normalized), lerpV);
+        arrowRotationPoint.localScale = new Vector3(1f, Mathf.Lerp(arrowRotationPoint.localScale.y, Mathf.Clamp01(inputDirection.magnitude), lerpV), 1f);
+
+        var cityPosition = cityPositionable.Position;
+
+        Vector2 cappedTarget = inputDirection * 1f + cityPosition.WorldPosition;
+
+        currentSpeed = Mathf.MoveTowards(currentSpeed, speedProvider.Speed, speedProvider.Acceleration * Time.deltaTime);
+
+        Debug.DrawLine(cityPosition.WorldPosition, cappedTarget, Color.green);
+
+        cityPosition = processMovementGeneral(cityPosition, cappedTarget, Time.deltaTime * currentSpeed);
+
+        Debug.Assert(cityPosition.Edge != null || cityPosition.Node != null, "Position must be either on an edge or on a node");
+
+        Vector2 chosenTangentDirection =
+            cityPosition.Edge != null ? cityPosition.GetCurrentTangent() :
+            (inputDirectionN.sqrMagnitude > Epsilon ? inputDirectionN : currentDirection);
+
+        cityPositionable.Position = cityPosition;
+        currentDirection = chosenTangentDirection;
+        transform.position = cityPosition.WorldPosition;
+    }
+
+    private void processMovementOld()
     {
         Vector2 inputDirection = Vector2.ClampMagnitude(directionProvider.ProvidedDirection, 1f);
         Vector2 inputDirectionN = inputDirection.sqrMagnitude > Epsilon ? inputDirection.normalized : Vector2.zero;
@@ -218,5 +435,13 @@ public class MovingPoint : MonoBehaviour, IMovement
             }
         }
         return edge != null;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Vector2 worldPos = debugFinal.WorldPosition;
+        //draw a circle at worldPos
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(worldPos, 0.2f);
     }
 }

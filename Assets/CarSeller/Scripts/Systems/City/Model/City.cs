@@ -166,24 +166,16 @@ public class City : ILocationsHolder, IDisposable
 
         foreach (var edge in _edges)
         {
-            var spline = edge.GetSpline();
-            if (spline == null || edge.Container == null) continue;
-
-            // Coarse sampling. Increase divisions for more accuracy if needed.
-            const int divisions = 64;
-            for (int i = 0; i <= divisions; i++)
+            if (!edge.TryGetClosestPoint(worldPosition, out float edgeT, out float edgeDist2))
             {
-                float t = i / (float)divisions;
-                var localPos = SplineUtility.EvaluatePosition(spline, t);
-                var worldPos3 = edge.Container.transform.TransformPoint((Vector3)localPos);
-                var worldPos2 = new Vector2(worldPos3.x, worldPos3.y);
-                float d2 = (worldPos2 - worldPosition).sqrMagnitude;
-                if (d2 < bestEdgeDist2)
-                {
-                    bestEdgeDist2 = d2;
-                    bestEdge = edge;
-                    bestEdgeT = t;
-                }
+                continue;
+            }
+
+            if (edgeDist2 < bestEdgeDist2)
+            {
+                bestEdgeDist2 = edgeDist2;
+                bestEdge = edge;
+                bestEdgeT = edgeT;
             }
         }
 
@@ -304,6 +296,101 @@ public readonly struct CityPosition
         return new CityPosition(Edge, t, Forward);
     }
 
+    /// <summary>
+    /// Finds the closest point on an edge to <paramref name="worldTarget"/> and returns it as a <see cref="CityPosition"/>.
+    /// Uses <see cref="RoadEdge.TryGetClosestPoint"/> (coarse sampling + refinement).
+    /// </summary>
+    public static CityPosition GetClosestOnEdge(RoadEdge edge, Vector2 worldTarget, int coarseDivisions = 64, int refineIterations = 8)
+    {
+        edge.TryGetClosestPoint(worldTarget, out float t, out _, coarseDivisions, refineIterations);
+
+        return On(edge, t, forward: true);
+    }
+
+    public bool FlowsIntoAnotherOnTheSameEdge(CityPosition other)
+    {
+        Debug.Assert(this.Edge != null);
+        Debug.Assert(Edge == other.Edge);
+        return ((this.Percentage < other.Percentage && this.Forward) || (this.Percentage > other.Percentage && !this.Forward));
+    }
+
+    public CityPosition TowardsAnotherForDistance(CityPosition other, float distance)
+    {
+        Debug.Assert(this.Edge != null);
+        Debug.Assert(Edge == other.Edge);
+
+        float deltaT = distance / Edge.Length;
+        float t1 = this.Percentage;
+        float t2 = other.Percentage;
+
+        float newT;
+
+        if (Forward == other.Forward)
+        {
+            if (t1 > t2)
+            {
+                newT = t1 - deltaT;
+            }
+            else
+            {
+                newT = t1 + deltaT;
+            }
+        }
+        else
+        {
+            if (t1 > (1f - t2))
+            {
+                newT = t1 - deltaT;
+            }
+            else
+            {
+                newT = t1 + deltaT;
+            }
+        }
+        newT = Mathf.Clamp01(newT);
+        return On(Edge, newT, Forward);
+    }
+
+    public Vector2 GetCurrentTangent()
+    {
+        Debug.Assert(Edge != null, "GetCurrentTangent can only be used for edge positions.");
+        if(Forward)
+        {
+            return Edge.GetTangentFromNode(Edge.From, Percentage, out _);
+        }
+        else
+        {
+            return Edge.GetTangentFromNode(Edge.To, Percentage, out _);
+        }
+    }
+
     public static CityPosition At(RoadNode node) => new CityPosition(node);
     public static CityPosition On(RoadEdge edge, float t, bool forward = true) => new CityPosition(edge, t, forward);
+
+    public static CityPosition GetConnectionPositionOnEdgeA(RoadEdge A, RoadEdge B)
+    {
+        if (A.From == B.From)
+        {
+            return On(A, 0f, forward: true);
+        }
+        else if (A.From == B.To)
+        {
+            return On(A, 0f, forward: true);
+        }
+        else if (A.To == B.From)
+        {
+            return On(A, 1f, forward: true);
+        }
+        else if (A.To == B.To)
+        {
+            return On(A, 1f, forward: true);
+        }
+        else
+        {
+            Debug.LogError("Edges A and B are not connected.");
+            return default;
+        }
+
+
+    }
 }

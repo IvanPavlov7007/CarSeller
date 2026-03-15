@@ -6,8 +6,8 @@
     public override void InitializeWorld(GameConfig gameConfig)
     {
         base.InitializeWorld(gameConfig);
-        G.CarSpawnManager.SubscribeToEvents();
-        G.CarSpawnManager.NewCarsRotation();
+        //G.CarSpawnManager.SubscribeToEvents();
+        //G.CarSpawnManager.NewCarsRotation();
         createShop(gameConfig.VehicleControllerConfig.vehicleShopConfig);
         BuyerManager.CreateRandomBuyers();
     }
@@ -34,8 +34,8 @@
 
         FirstLoadActions();
 
-        if (sceneMain is CitySceneMain)
-            G.CarSpawnManager.CheckAndRefill();
+        //if (sceneMain is CitySceneMain)
+            //G.CarSpawnManager.CheckAndRefill();
     }
 
     void FirstLoadActions()
