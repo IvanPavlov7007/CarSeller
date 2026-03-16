@@ -16,7 +16,7 @@ public class MovingPointSimpleView : MonoBehaviour
         Debug.Assert(graphMovement.Owner != null);
         var positionData = graphMovement.Owner.CityPosition;
         transform.position = positionData.WorldPosition;
-        transform.up = graphMovement.Up;
+        transform.up = Vector3.Slerp(transform.up, graphMovement.Up, Time.deltaTime * 10f);
     }
 
 }

@@ -34,7 +34,7 @@ MonoBehaviour:
     ForegroundColor: {r: 0, g: 0, b: 0, a: 1}
     BackgroundColor: {r: 1, g: 1, b: 1, a: 1}
   BuyerPinStyle:
-    Icon: {fileID: 21300000, guid: c1b5f65d87e95354b8d4c90ed54fbc65, type: 3}
+    Icon: {fileID: 21300000, guid: b4b98c46c7010fb45993a5351d63a05e, type: 3}
     Text: 
     ForegroundColor: {r: 0, g: 0, b: 0, a: 1}
     BackgroundColor: {r: 1, g: 1, b: 1, a: 1}
