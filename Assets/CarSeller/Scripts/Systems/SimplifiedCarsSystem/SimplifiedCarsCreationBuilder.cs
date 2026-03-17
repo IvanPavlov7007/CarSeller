@@ -8,6 +8,7 @@ public class SimplifiedCarsCreationBuilder : SerializedScriptableObject
 {
     [OdinSerialize] Dictionary<(CarType, CarRarity), CarBaseConfig> baseConfigs = new Dictionary<(CarType, CarRarity), CarBaseConfig>();
     [OdinSerialize] Dictionary<CarColor, CarVariantConfig> variantConfigs = new Dictionary<CarColor, CarVariantConfig>();
+    [OdinSerialize] List<CarBaseConfig> mainBaseConfigs = new List<CarBaseConfig>();
 
     NonDuplicatesIdentifiedCarList<CarRuntimeConfig> runtimeConfigs;
     public IReadOnlyNonDuplicatesIdentifiedCarList<CarRuntimeConfig> RuntimeConfigs => runtimeConfigs;
@@ -29,6 +30,12 @@ public class SimplifiedCarsCreationBuilder : SerializedScriptableObject
                 var identifier = new SimplifiedCarIdentifier(baseConfig.Key.Item1, baseConfig.Key.Item2, variantConfig.Key);
                 runtimeConfigs.Add(identifier, resolver.Resolve(baseConfig.Value, variantConfig.Value));
             }
+        }
+
+        foreach (var mainBaseConfig in mainBaseConfigs)
+        {
+                var identifier = new SimplifiedCarIdentifier(mainBaseConfig.Type, mainBaseConfig.Rarity, mainBaseConfig.Color);
+                runtimeConfigs.Add(identifier, resolver.Resolve(mainBaseConfig, null));
         }
     }
 

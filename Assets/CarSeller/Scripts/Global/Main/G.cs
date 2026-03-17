@@ -79,6 +79,10 @@ public static class G
 
     static ViewBuildersConfig viewBuildersConfig;
 
+
+    //to sort
+    public static CityArea Area;
+
     public static void Initialize( ViewBuildersConfig handlersConfig)
     {
         Debug.Log("Initializing global services locator");

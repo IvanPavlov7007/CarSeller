@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfe4b9843d2ee22468076cb1d618e500, type: 3}
-  m_Name: '[3d]ScooterFullBaseConfig'
+  m_Name: '[3d]HachirokuFullBaseConfig'
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -432,13 +432,13 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  Name: Scooter
+  Name: Rokunana
   BasePrice: 2200
   Speed: 2
   Acceleration: 1.5
   CarFrameBaseConfig: {fileID: 11400000, guid: 526c83c7d5e9c39488bba242842be9a0, type: 2}
-  TopView: {fileID: 21300000, guid: ad8cef36413faf242a9ed5cfcdb1a806, type: 3}
-  SideView: {fileID: 21300000, guid: 45aa428c67fbe1045bccf183115f2bca, type: 3}
+  TopView: {fileID: 21300000, guid: 3ada92f5009da7e468ee2f759fcc1ab1, type: 3}
+  SideView: {fileID: 21300000, guid: 050b79ab2fc07b84e958d250ca691f37, type: 3}
   Color: 4
-  Type: 2
+  Type: 1
   Rarity: 0

@@ -577,7 +577,7 @@ MonoBehaviour:
   topCamera: {fileID: 1250783173}
   sideCamera: {fileID: 1327713562}
   buildPosition: {fileID: 422550644}
-  prefabToRender: {fileID: 1339859497037224304, guid: 28cf34e748fefc246a98c854b7bd6d0b, type: 3}
+  prefabToRender: {fileID: 5820527614695462415, guid: c34acd670d88c1a4696c18f8381f868e, type: 3}
   prefabsToRender:
   - {fileID: 1339859497037224304, guid: 28cf34e748fefc246a98c854b7bd6d0b, type: 3}
   - {fileID: 3224294686992037834, guid: beb6341eb2f5b8a409d2d874bf6a92be, type: 3}
@@ -602,13 +602,15 @@ MonoBehaviour:
   resourcesSubFolder: Cars/Icons
   topSuffix: top
   sideSuffix: side
-  width: 1028
-  height: 1028
+  width: 512
+  height: 512
   backgroundColor: {r: 0, g: 0, b: 0, a: 0}
   padding: 0.08
-  fitToView: 0
+  fitToView: 1
   cropTransparent: 0
   importAsSprite: 1
+  preserveImporterSettings: 1
+  defaultSpritePixelsPerUnit: 100
 --- !u!4 &1788802635
 Transform:
   m_ObjectHideFlags: 0

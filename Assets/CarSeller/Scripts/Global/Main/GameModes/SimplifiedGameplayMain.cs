@@ -6,8 +6,10 @@
     public override void InitializeWorld(GameConfig gameConfig)
     {
         base.InitializeWorld(gameConfig);
-        //G.CarSpawnManager.SubscribeToEvents();
-        //G.CarSpawnManager.NewCarsRotation();
+        G.CarSpawnManager.SubscribeToEvents();
+        G.CarSpawnManager.NewCarsRotation();
+        BuyerManager.InitializeArea();
+        BuyerManager.CreateManager();
         createShop(gameConfig.VehicleControllerConfig.vehicleShopConfig);
         BuyerManager.CreateRandomBuyers();
     }

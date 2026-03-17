@@ -13,9 +13,11 @@ public class CarSpawnManager
     int nextCarsToHaveMinCount;
     int nextCarsToSpawnCount;
 
-    CarSpawnConfig carSpawnConfig => G.Economy.Config.CarSpawnConfig;
+    //CarSpawnConfig carSpawnConfig => G.Economy.Config.CarSpawnConfig;
 
     bool subscribed;
+    private int CarsToHaveMinCount = 10;
+    private int CarsToSpawnMaxCount = 20;
 
     public void SubscribeToEvents()
     {
@@ -84,8 +86,8 @@ public class CarSpawnManager
 
     void pickCarsCount()
     {
-        nextCarsToHaveMinCount = Random.Range(carSpawnConfig.CarsToHaveMinCount, carSpawnConfig.CarsToSpawnMaxCount);
-        nextCarsToSpawnCount = Random.Range(nextCarsToHaveMinCount + 1, carSpawnConfig.CarsToSpawnMaxCount + 1);
+        nextCarsToHaveMinCount = Random.Range(CarsToHaveMinCount, CarsToSpawnMaxCount);
+        nextCarsToSpawnCount = Random.Range(nextCarsToHaveMinCount + 1, CarsToSpawnMaxCount + 1);
     }
 
     List<City.CityMarker> getCarSpawnMarkers()
@@ -132,15 +134,16 @@ public class CarSpawnManager
     {
         foreach (var marker in markers)
         {
-            var carSpawnEntry = carSpawnConfig.GetWeightedRandomCarForRegion(marker.RegionId);
-
+            //GetWeightedRandomCarForRegion(marker.RegionId);
             if (marker.PositionOnGraph == null)
             {
                 Debug.LogWarning($"Marker {marker.Id} has no position on graph, skipping car spawn.");
                 continue;
             }
-            var car = generateCar(marker.PositionOnGraph.Value, carSpawnEntry);
 
+            var car = G.SimplifiedCarsManager.CreateCarHidden(G.SimplifiedCarsCreationBuilder.RuntimeConfigs.Keys.First());
+            //var car = generateCar(marker.PositionOnGraph.Value, carSpawnEntry);
+            CityEntitiesCreationHelper.MoveInExistingCar(car, marker.PositionOnGraph.Value);
             temporaryCars.Add(car);
             usedMarkers.Add(car, marker);
         }

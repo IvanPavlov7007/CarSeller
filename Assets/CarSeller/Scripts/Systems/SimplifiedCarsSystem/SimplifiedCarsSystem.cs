@@ -29,6 +29,14 @@ public class SimplifiedCarsManager
 
     public Car CreateCar(SimplifiedCarIdentifier identifier, ILocation location)
     {
+        //List all identifiers in config and current identifier
+        Debug.Log($"Creating car with identifier: Type={identifier.Type}, Rarity={identifier.Rarity}, Color={identifier.Color}");
+        Debug.Log($"Available identifiers in config:");
+        foreach (var configIdentifier in CreationBuilder.RuntimeConfigs.Keys)
+        {
+            Debug.Log($"- Type={configIdentifier.Type}, Rarity={configIdentifier.Rarity}, Color={configIdentifier.Color}");
+        }
+
         var car = G.ProductManager.CreateCar(CreationBuilder.RuntimeConfigs[identifier], location);
         return car;
     }

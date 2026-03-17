@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff2af80c02fdb8946950bb655d320bde, type: 3}
-  m_Name: VehicleControllerConfig
+  m_Name: '[3d]VehicleControllerConfig'
   m_EditorClassIdentifier: 
   initialPosition: {x: 0, y: 0}
   initialPrimeVehicleIndex: 0
   vehicleShopConfig: {fileID: 11400000, guid: b86a9df7c4ec2724a8ac4895704ded73, type: 2}
   maxOwnedCars: 10
-  ownedCars:
-  - {fileID: 11400000, guid: 19c0585447331ff4691ff858c910d60d, type: 2}
-  - {fileID: 11400000, guid: a352ec21d783a704b93c597c55ec9a79, type: 2}
+  ownedCars: []

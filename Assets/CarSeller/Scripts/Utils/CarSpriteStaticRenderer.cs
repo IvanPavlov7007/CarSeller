@@ -63,7 +63,7 @@ public class CarSpriteStaticRenderer : MonoBehaviour
     [SerializeField] private float padding = 0.08f;
 
     [TitleGroup("Render Settings")]
-    [Tooltip("If true and cameras are orthographic, the object will be uniformly scaled to fit both cameras.")]
+    [Tooltip("If true, the object will be fit to the cameras. Orthographic: uniform scale. Perspective: per-camera depth fit while keeping the object centered.")]
     [SerializeField] private bool fitToView = true;
 
     [TitleGroup("Render Settings")]
@@ -74,6 +74,14 @@ public class CarSpriteStaticRenderer : MonoBehaviour
     [TitleGroup("Unity Import (Editor)")]
     [Tooltip("If enabled, imports saved PNGs as Sprite assets (useful for UI/icons).")]
     [SerializeField] private bool importAsSprite = true;
+
+    [TitleGroup("Unity Import (Editor)")]
+    [Tooltip("When overwriting an existing asset, keep its current import settings (sprite mode, PPU, etc).")]
+    [SerializeField] private bool preserveImporterSettings = true;
+
+    [TitleGroup("Unity Import (Editor)")]
+    [Tooltip("Used only when creating a NEW sprite asset (or converting a non-sprite to sprite).")]
+    [SerializeField] private float defaultSpritePixelsPerUnit = 100f;
 #endif
 
     RenderTexture _rt;
@@ -135,10 +143,13 @@ public class CarSpriteStaticRenderer : MonoBehaviour
             Stage(go, parent);
             CenterOnBounds(go, parent);
 
-            if (fitToView)
+            bool bothOrtho = topCamera.orthographic && sideCamera.orthographic;
+            if (fitToView && bothOrtho)
             {
                 FitOrthographicToBoth(go, parent, padding, topCamera, sideCamera);
             }
+
+            var baseline = TransformState.Capture(go.transform);
 
             var outDirProject = GetOutputDirectoryProjectPath();
             EnsureDirectoryExists(outDirProject);
@@ -146,8 +157,8 @@ public class CarSpriteStaticRenderer : MonoBehaviour
             var topPath = CombineUnityPath(outDirProject, $"{baseName}_{SanitizeFileName(topSuffix)}.png");
             var sidePath = CombineUnityPath(outDirProject, $"{baseName}_{SanitizeFileName(sideSuffix)}.png");
 
-            RenderAndSaveCamera(topCamera, topPath);
-            RenderAndSaveCamera(sideCamera, sidePath);
+            RenderAndSaveCamera(go, topCamera, topPath, baseline);
+            RenderAndSaveCamera(go, sideCamera, sidePath, baseline);
 
 #if UNITY_EDITOR
             AssetDatabase.Refresh();
@@ -165,8 +176,22 @@ public class CarSpriteStaticRenderer : MonoBehaviour
         }
     }
 
-    void RenderAndSaveCamera(Camera cam, string assetPath)
+    void RenderAndSaveCamera(GameObject go, Camera cam, string assetPath, TransformState baseline)
     {
+        baseline.ApplyTo(go.transform);
+
+        if (fitToView)
+        {
+            if (cam.orthographic)
+            {
+                FitOrthographicToCamera(go, buildPosition != null ? buildPosition : transform, cam, padding);
+            }
+            else
+            {
+                FitPerspectiveToCamera(go, cam, padding);
+            }
+        }
+
         var prevTarget = cam.targetTexture;
         var prevClearFlags = cam.clearFlags;
         var prevBg = cam.backgroundColor;
@@ -201,17 +226,12 @@ public class CarSpriteStaticRenderer : MonoBehaviour
             SafeDestroy(tex);
 
             var absPath = AssetPathToAbsolutePath(assetPath);
+
+            bool existedBeforeWrite = File.Exists(absPath);
             File.WriteAllBytes(absPath, png);
 
 #if UNITY_EDITOR
-            if (importAsSprite)
-            {
-                ImportAsSprite(assetPath);
-            }
-            else
-            {
-                AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ForceUpdate);
-            }
+            PostprocessWrittenPng(assetPath, existedBeforeWrite);
 #endif
         }
         finally
@@ -223,14 +243,34 @@ public class CarSpriteStaticRenderer : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-    static void ImportAsSprite(string assetPath)
+    void PostprocessWrittenPng(string assetPath, bool existedBeforeWrite)
     {
         AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ForceUpdate);
+
+        if (!importAsSprite)
+        {
+            return;
+        }
 
         var importer = AssetImporter.GetAtPath(assetPath) as TextureImporter;
         if (importer == null) return;
 
-        importer.textureType = TextureImporterType.Sprite;
+        if (preserveImporterSettings && existedBeforeWrite)
+        {
+            // Do not touch importer settings. Overwriting the file + reimport keeps Sprite Mode, PPU, etc.
+            return;
+        }
+
+        // New asset (or user disabled preserving): apply defaults once.
+        if (importer.textureType != TextureImporterType.Sprite)
+        {
+            importer.textureType = TextureImporterType.Sprite;
+        }
+
+        // Only set "safe defaults" that establish a usable sprite;
+        // user can change after first import and it will be preserved on subsequent overwrites.
+        importer.spriteImportMode = SpriteImportMode.Single;
+        importer.spritePixelsPerUnit = Mathf.Max(1f, defaultSpritePixelsPerUnit);
         importer.alphaIsTransparency = true;
         importer.mipmapEnabled = false;
         importer.filterMode = FilterMode.Bilinear;
@@ -269,6 +309,15 @@ public class CarSpriteStaticRenderer : MonoBehaviour
         CenterOnBounds(go, parent);
     }
 
+    void FitOrthographicToCamera(GameObject go, Transform parent, Camera cam, float pad)
+    {
+        float uniform = GetFitOrthographicScale(go, cam, pad);
+        if (uniform <= 0f || float.IsNaN(uniform) || float.IsInfinity(uniform)) return;
+
+        go.transform.localScale *= uniform;
+        CenterOnBounds(go, parent);
+    }
+
     static float GetFitOrthographicScale(GameObject go, Camera cam, float pad)
     {
         if (cam == null || !cam.orthographic) return 1f;
@@ -287,6 +336,61 @@ public class CarSpriteStaticRenderer : MonoBehaviour
         float scaleY = targetHeight / sizeY;
 
         return Mathf.Min(scaleX, scaleY);
+    }
+
+    static void FitPerspectiveToCamera(GameObject go, Camera cam, float pad)
+    {
+        if (cam == null || cam.orthographic) return;
+        if (!TryGetBoundsStatic(go, out var bounds)) return;
+
+        var centerLocal = cam.transform.InverseTransformPoint(bounds.center);
+        var targetCenterWorld = cam.transform.TransformPoint(new Vector3(0f, 0f, centerLocal.z));
+        go.transform.position += (targetCenterWorld - bounds.center);
+
+        if (!TryGetBoundsStatic(go, out bounds)) return;
+
+        float vTan = Mathf.Tan(cam.fieldOfView * Mathf.Deg2Rad * 0.5f);
+        float hTan = vTan * cam.aspect;
+
+        float usable = Mathf.Clamp01(1f - pad);
+        vTan *= usable;
+        hTan *= usable;
+
+        if (vTan <= 1e-6f || hTan <= 1e-6f) return;
+
+        var ext = bounds.extents;
+        var c = bounds.center;
+
+        float maxDeltaZ = 0f;
+        float minZ = float.PositiveInfinity;
+
+        for (int xi = -1; xi <= 1; xi += 2)
+        for (int yi = -1; yi <= 1; yi += 2)
+        for (int zi = -1; zi <= 1; zi += 2)
+        {
+            var cornerWorld = c + Vector3.Scale(ext, new Vector3(xi, yi, zi));
+            var p = cam.transform.InverseTransformPoint(cornerWorld);
+
+            float z = Mathf.Max(p.z, 1e-4f);
+            minZ = Mathf.Min(minZ, z);
+
+            float needZFromX = Mathf.Abs(p.x) / hTan;
+            float needZFromY = Mathf.Abs(p.y) / vTan;
+
+            float needZ = Mathf.Max(needZFromX, needZFromY);
+            float deltaZ = needZ - z;
+
+            if (deltaZ > maxDeltaZ) maxDeltaZ = deltaZ;
+        }
+
+        float nearMargin = 0.01f;
+        float needNearDelta = (cam.nearClipPlane + nearMargin) - minZ;
+        if (needNearDelta > maxDeltaZ) maxDeltaZ = needNearDelta;
+
+        if (maxDeltaZ > 0f && !float.IsNaN(maxDeltaZ) && !float.IsInfinity(maxDeltaZ))
+        {
+            go.transform.position += cam.transform.forward * maxDeltaZ;
+        }
     }
 
     bool TryGetBounds(GameObject go, out Bounds bounds) => TryGetBoundsStatic(go, out bounds);
@@ -374,14 +478,12 @@ public class CarSpriteStaticRenderer : MonoBehaviour
 
     static string AssetPathToAbsolutePath(string assetPath)
     {
-        // assetPath like "Assets/Resources/..."
         var path = assetPath.Replace("\\", "/");
         if (!path.StartsWith("Assets/", StringComparison.Ordinal) && path != "Assets")
         {
             throw new ArgumentException($"Expected an Assets-relative path, got: {assetPath}");
         }
 
-        // Application.dataPath points to ".../<Project>/Assets"
         var projectRoot = Application.dataPath.Substring(0, Application.dataPath.Length - "Assets".Length);
         return Path.Combine(projectRoot, path);
     }
@@ -469,5 +571,28 @@ public class CarSpriteStaticRenderer : MonoBehaviour
         }
 #endif
         Destroy(obj);
+    }
+
+    readonly struct TransformState
+    {
+        public readonly Vector3 Position;
+        public readonly Quaternion Rotation;
+        public readonly Vector3 LocalScale;
+
+        TransformState(Vector3 position, Quaternion rotation, Vector3 localScale)
+        {
+            Position = position;
+            Rotation = rotation;
+            LocalScale = localScale;
+        }
+
+        public static TransformState Capture(Transform t) => new TransformState(t.position, t.rotation, t.localScale);
+
+        public void ApplyTo(Transform t)
+        {
+            t.position = Position;
+            t.rotation = Rotation;
+            t.localScale = LocalScale;
+        }
     }
 }

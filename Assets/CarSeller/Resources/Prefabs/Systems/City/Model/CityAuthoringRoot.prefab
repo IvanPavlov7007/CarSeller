@@ -451,7 +451,7 @@ GameObject:
   - component: {fileID: 4470078235411864221}
   - component: {fileID: 2655516449380762818}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Edge) (16)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -465,12 +465,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 41648860660040945}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.05, y: 26.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2655516449380762818
 MonoBehaviour:
@@ -488,7 +488,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 2
   Radius: 0
   Kind: 2
@@ -540,7 +539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 168e9bde91e849adb510674949cd777c
+  id: b3416ebbbbb142628a3f038dcbbc9c67
   StartLooksAway: 0
 --- !u!1 &61521117812070331
 GameObject:
@@ -641,7 +640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 9f99cdfbf7a14ac69be894b4f12147ad
+  id: bd96f31876584a04860047f0c5bf19e9
   StartLooksAway: 0
 --- !u!1 &87286420727136686
 GameObject:
@@ -1149,7 +1148,7 @@ GameObject:
   - component: {fileID: 7255188666588732880}
   - component: {fileID: 4303044567967181153}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Node) (4)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1163,12 +1162,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 249179751525612496}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.19, y: -2.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4303044567967181153
 MonoBehaviour:
@@ -1186,7 +1185,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 1
   Radius: 0
   Kind: 1
@@ -1205,7 +1203,7 @@ GameObject:
   - component: {fileID: 1877131050724214608}
   - component: {fileID: 9096883757457153479}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Node) (3)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1219,12 +1217,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 249903781937726054}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3, y: -0.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9096883757457153479
 MonoBehaviour:
@@ -1242,7 +1240,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 1
   Radius: 0
   Kind: 1
@@ -1734,7 +1731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 7490eb06615d407185b39af08eb85ec1
+  id: 9870777987eb46f6a22cd9198e7df6de
   StartLooksAway: 0
 --- !u!1 &314496287630514999
 GameObject:
@@ -2220,7 +2217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 19d925b0fa544d99bfa251c94d096ee0
+  id: c9b836741ccc43099b596f5e908819d5
   StartLooksAway: 0
 --- !u!1 &410088572292530425
 GameObject:
@@ -2541,7 +2538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 3f85e509411b49ae90cffa3e0ec93508
+  id: 48893c9369434c1b955a815883d89d03
   StartLooksAway: 0
 --- !u!1 &608731963010511686
 GameObject:
@@ -3004,7 +3001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 7316b2a01c8e4d6cabf93f75280de346
+  id: bcd8a8eb071946c1be5b2104ce568186
   StartLooksAway: 0
 --- !u!1 &730216267558441178
 GameObject:
@@ -3270,7 +3267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 300e64d1795d486db0e5d5a1c9d1d03a
+  id: 684c2b6380df421593bc1fc99fabd33a
   StartLooksAway: 0
 --- !u!1 &858033830361913705
 GameObject:
@@ -3283,7 +3280,7 @@ GameObject:
   - component: {fileID: 1027301984262873174}
   - component: {fileID: 8134169253566834354}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Node) (1)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3297,12 +3294,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 858033830361913705}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.48, y: 1.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8134169253566834354
 MonoBehaviour:
@@ -3320,7 +3317,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 1
   Radius: 0
   Kind: 1
@@ -3394,7 +3390,7 @@ GameObject:
   - component: {fileID: 7286350877371350081}
   - component: {fileID: 6732853152401394509}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Edge) (18)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3408,12 +3404,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 986099830513157289}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -15.33, y: 18.84, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6732853152401394509
 MonoBehaviour:
@@ -3431,7 +3427,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 2
   Radius: 0
   Kind: 2
@@ -4110,7 +4105,7 @@ GameObject:
   - component: {fileID: 2303937652441993415}
   - component: {fileID: 2829019652866514544}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Edge) (19)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -4124,12 +4119,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1064234350134345517}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -16.9, y: 13.73, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2829019652866514544
 MonoBehaviour:
@@ -4147,7 +4142,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 2
   Radius: 0
   Kind: 2
@@ -4639,7 +4633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 4f8794c3c033448ab33330c517091f14
+  id: 88fffe598b344774ac5574ff3c87d90c
   StartLooksAway: 0
 --- !u!1 &1184565992540015367
 GameObject:
@@ -4685,7 +4679,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: a65981182caa42a7b74eceb7cc6b660d
+  id: 714b238b71ed4c83bb4682e7dfe8a620
   StartLooksAway: 0
 --- !u!1 &1207381558451165784
 GameObject:
@@ -4731,7 +4725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 268e3e9da1dc4072ad541882a6632362
+  id: 162de47c7fed4ef0aa5379c3da97b8b1
   StartLooksAway: 0
 --- !u!1 &1224302669726083727
 GameObject:
@@ -4777,7 +4771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: ae2192cbe4f0402bbf62e1f02b948d16
+  id: 96e01167298c4ee8a0d652bd3d56b9f5
   StartLooksAway: 0
 --- !u!1 &1260122397711993328
 GameObject:
@@ -4790,7 +4784,7 @@ GameObject:
   - component: {fileID: 2052561904695742556}
   - component: {fileID: 2287210816001816720}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Node)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -4804,12 +4798,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1260122397711993328}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -5.16, y: -0.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2287210816001816720
 MonoBehaviour:
@@ -4827,7 +4821,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 1
   Radius: 0
   Kind: 1
@@ -4900,7 +4893,7 @@ GameObject:
   - component: {fileID: 4180130139769777957}
   - component: {fileID: 5407398957482520074}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Edge) (2)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -4914,12 +4907,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1289357107975040285}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -8.7, y: -2.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5407398957482520074
 MonoBehaviour:
@@ -4937,7 +4930,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 1
   Radius: 0
   Kind: 2
@@ -5736,7 +5728,7 @@ GameObject:
   - component: {fileID: 4211504915439671825}
   - component: {fileID: 5086847740268441055}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Edge) (12)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -5750,12 +5742,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1624918123218574720}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.14, y: 15.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5086847740268441055
 MonoBehaviour:
@@ -5773,7 +5765,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 2
   Radius: 0
   Kind: 2
@@ -6045,7 +6036,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1bc39fdccf01435b907a964fb5356a5b
+  id: 34ba11c248bc4e7089479b6850e1390f
   StartLooksAway: 0
 --- !u!1 &1704544522299915754
 GameObject:
@@ -6365,7 +6356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 6e04be6b7b7e479e989129f56721cde7
+  id: 76aa9c5b23024a02906aa7b23fc50970
   StartLooksAway: 0
 --- !u!1 &1808145863626060099
 GameObject:
@@ -6598,7 +6589,7 @@ GameObject:
   - component: {fileID: 4658448185254639446}
   - component: {fileID: 895071212438365886}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Edge) (21)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -6612,12 +6603,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1809997057572498712}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -10.36, y: 14.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &895071212438365886
 MonoBehaviour:
@@ -6635,8 +6626,62 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 2
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
+--- !u!1 &1848453174962469725
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6032605073414425096}
+  - component: {fileID: 478064644417941656}
+  m_Layer: 0
+  m_Name: buyerMarker (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6032605073414425096
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848453174962469725}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.24, y: 23.94, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 3625052708962996217}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &478064644417941656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848453174962469725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 663a99f3d171418391ddc4f2e07a4c7a
+  DisplayName: 
+  Tags:
+  - buyer
+  RegionId: 1
   Radius: 0
   Kind: 2
   Node: {fileID: 0}
@@ -6907,7 +6952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: b8c9c7d9c5f54b9bbb1642cc41b89453
+  id: c960f07143ab4aa195b299eb7dc6b94f
   StartLooksAway: 0
 --- !u!1 &2036526115462591911
 GameObject:
@@ -7722,7 +7767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 36d1b9eb1e7142e0a696bd1fc2657d65
+  id: 9adf23d214624415a6b4b8c10f8947be
   StartLooksAway: 0
 --- !u!1 &2159865404305829039
 GameObject:
@@ -8428,7 +8473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 7af799dc333144f597b38d674f1fddde
+  id: 0c9d82a16eda410b8d5bbac09e6f77eb
   StartLooksAway: 0
 --- !u!1 &2233877080997974367
 GameObject:
@@ -8474,7 +8519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 8d13854625fd4ca0aea48606118c2141
+  id: 432c300e7403471aa66ed162b2ae1927
   StartLooksAway: 0
 --- !u!1 &2260850954342260165
 GameObject:
@@ -9147,7 +9192,7 @@ GameObject:
   - component: {fileID: 8237625392515658646}
   - component: {fileID: 7633394693572136767}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Edge) (6)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -9161,12 +9206,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2302711797504500777}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.92, y: 3.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7633394693572136767
 MonoBehaviour:
@@ -9184,7 +9229,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 1
   Radius: 0
   Kind: 2
@@ -9456,7 +9500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: df9be60a72464ad98bc0537c477aff45
+  id: 26fff44131a24eb0a8de80f78d1b6a0c
   StartLooksAway: 0
 --- !u!1 &2341267944093257772
 GameObject:
@@ -9502,7 +9546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 160e14d4e75248e78e478213ce45e3f7
+  id: afb5ea1fea244547b9ce5a16df883f37
   StartLooksAway: 0
 --- !u!1 &2353784140943584197
 GameObject:
@@ -9790,7 +9834,7 @@ GameObject:
   - component: {fileID: 6128763179948372949}
   - component: {fileID: 4576093650330793764}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Edge) (10)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -9804,12 +9848,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2381388125573550045}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -8.06, y: 4.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4576093650330793764
 MonoBehaviour:
@@ -9827,7 +9871,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 1
   Radius: 0
   Kind: 2
@@ -9846,7 +9889,7 @@ GameObject:
   - component: {fileID: 3421118655997943151}
   - component: {fileID: 991720851819501506}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Edge) (13)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -9860,12 +9903,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2396935984903922175}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.44, y: 20.71, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &991720851819501506
 MonoBehaviour:
@@ -9883,7 +9926,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 2
   Radius: 0
   Kind: 2
@@ -10265,7 +10307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 63b808a3d39740fdaad72d61ec58fb18
+  id: e7c5f8faa96d4ec2a9433c1d3ea825fc
   StartLooksAway: 0
 --- !u!1 &2533737086865470006
 GameObject:
@@ -10476,7 +10518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: c9a941796f2746ee853e51abc636621f
+  id: 48f4e36e12ac4862aeef6725d064cd12
   StartLooksAway: 0
 --- !u!1 &2678072158634465555
 GameObject:
@@ -10522,7 +10564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: cbeeb78baa7848519710d59840e57c55
+  id: 880f3160bad24424946e63e4fae1017f
   StartLooksAway: 0
 --- !u!1 &2716773691518334067
 GameObject:
@@ -10788,8 +10830,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: e2e6e39319a54c989492db0f0c5b5357
+  id: 92c5954dd93e467da6d27b3f0b7d5cee
   StartLooksAway: 0
+--- !u!1 &2758477945492293645
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3632865925349299303}
+  m_Layer: 0
+  m_Name: CarMarker Group
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3632865925349299303
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2758477945492293645}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 5502221091689671450}
+  - {fileID: 2317182323568840330}
+  - {fileID: 4180130139769777957}
+  - {fileID: 87500253163701078}
+  - {fileID: 4979594078042396417}
+  - {fileID: 8464229551752288571}
+  - {fileID: 8237625392515658646}
+  - {fileID: 7697770737147757089}
+  - {fileID: 6037252791762034634}
+  - {fileID: 4429306713314040319}
+  - {fileID: 6128763179948372949}
+  - {fileID: 8600452745316512236}
+  - {fileID: 4211504915439671825}
+  - {fileID: 3421118655997943151}
+  - {fileID: 6490056458137661937}
+  - {fileID: 5085613023870452097}
+  - {fileID: 4470078235411864221}
+  - {fileID: 9128677009059295836}
+  - {fileID: 7286350877371350081}
+  - {fileID: 2303937652441993415}
+  - {fileID: 6612636552902545022}
+  - {fileID: 4658448185254639446}
+  - {fileID: 1558288118460696085}
+  - {fileID: 2052561904695742556}
+  - {fileID: 1027301984262873174}
+  - {fileID: 7653363208776591944}
+  - {fileID: 1877131050724214608}
+  - {fileID: 7255188666588732880}
+  - {fileID: 6079206405967840591}
+  - {fileID: 6756633666900925937}
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2793900079726120753
 GameObject:
   m_ObjectHideFlags: 0
@@ -11010,6 +11113,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &2797403011961250414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7654184881795701214}
+  - component: {fileID: 1767311685317155953}
+  m_Layer: 0
+  m_Name: buyerMarker (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7654184881795701214
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2797403011961250414}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -12.78, y: 16.38, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 3625052708962996217}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1767311685317155953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2797403011961250414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 931e84e08a6c4a4c8cb7947ee3efb808
+  DisplayName: 
+  Tags:
+  - buyer
+  RegionId: 1
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &2818043981372939135
 GameObject:
   m_ObjectHideFlags: 0
@@ -11108,7 +11266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 78b402af65064078a6860dbbb86a1db6
+  id: 70f8d1160d4a4ae4831f5ea3943c9540
   StartLooksAway: 0
 --- !u!1 &2867327167003898250
 GameObject:
@@ -11682,7 +11840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: cba74f17a10a49b6bf21caefe010e098
+  id: 6ce903b092d141bf997c05b0d2a0b666
   StartLooksAway: 0
 --- !u!1 &2933072186465158745
 GameObject:
@@ -11728,7 +11886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 50c41b49764449348f28de03f9900d9c
+  id: eface787ed8c4308b911a70410ff0153
   StartLooksAway: 0
 --- !u!1 &2942010305189585682
 GameObject:
@@ -12565,36 +12723,6 @@ Transform:
   - {fileID: 6747569048990115243}
   - {fileID: 325899974334231779}
   - {fileID: 7188931246996942824}
-  - {fileID: 5502221091689671450}
-  - {fileID: 2317182323568840330}
-  - {fileID: 4180130139769777957}
-  - {fileID: 87500253163701078}
-  - {fileID: 4979594078042396417}
-  - {fileID: 8464229551752288571}
-  - {fileID: 8237625392515658646}
-  - {fileID: 7697770737147757089}
-  - {fileID: 6037252791762034634}
-  - {fileID: 4429306713314040319}
-  - {fileID: 6128763179948372949}
-  - {fileID: 8600452745316512236}
-  - {fileID: 4211504915439671825}
-  - {fileID: 3421118655997943151}
-  - {fileID: 6490056458137661937}
-  - {fileID: 5085613023870452097}
-  - {fileID: 4470078235411864221}
-  - {fileID: 9128677009059295836}
-  - {fileID: 7286350877371350081}
-  - {fileID: 2303937652441993415}
-  - {fileID: 6612636552902545022}
-  - {fileID: 4658448185254639446}
-  - {fileID: 1558288118460696085}
-  - {fileID: 2052561904695742556}
-  - {fileID: 1027301984262873174}
-  - {fileID: 7653363208776591944}
-  - {fileID: 1877131050724214608}
-  - {fileID: 7255188666588732880}
-  - {fileID: 6079206405967840591}
-  - {fileID: 6756633666900925937}
   - {fileID: 8885072244227073986}
   - {fileID: 6487973891566705806}
   - {fileID: 3130297653407010091}
@@ -12613,6 +12741,8 @@ Transform:
   - {fileID: 6084779090728521067}
   - {fileID: 4919995048075708858}
   - {fileID: 5059808087151268900}
+  - {fileID: 3632865925349299303}
+  - {fileID: 3625052708962996217}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7092553036261487221
@@ -12684,7 +12814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: d8be7579c717478c95483c8a1383ee8b
+  id: 8b2fe43485e540ecb410c454ab7ec962
   StartLooksAway: 0
 --- !u!1 &3120970606773818701
 GameObject:
@@ -13181,6 +13311,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &3194911140125836127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8517726082693738556}
+  - component: {fileID: 6166039005291570008}
+  m_Layer: 0
+  m_Name: buyerMarker (8)
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8517726082693738556
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3194911140125836127}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -10.84, y: 26.52, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 3625052708962996217}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6166039005291570008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3194911140125836127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 463c5be330f041778ed183c5e5eabe40
+  DisplayName: 
+  Tags:
+  - buyer
+  RegionId: 1
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &3242184967093822113
 GameObject:
   m_ObjectHideFlags: 0
@@ -13192,7 +13377,7 @@ GameObject:
   - component: {fileID: 6756633666900925937}
   - component: {fileID: 4703286542922146962}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Node) (6)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -13206,12 +13391,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3242184967093822113}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -15.85, y: 15.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4703286542922146962
 MonoBehaviour:
@@ -13229,7 +13414,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 2
   Radius: 0
   Kind: 1
@@ -13281,7 +13465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 14218168df464a2aa33374036e4343f4
+  id: b88a59f65afa41ef8f30b722cb99372a
   StartLooksAway: 0
 --- !u!1 &3268335673281468554
 GameObject:
@@ -13767,7 +13951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: d8798a3c094241b991695b097e0bdb73
+  id: fe5c9e9de1514e8d967e6dbbd7a617c2
   StartLooksAway: 0
 --- !u!1 &3285021724821431788
 GameObject:
@@ -14440,7 +14624,7 @@ GameObject:
   - component: {fileID: 6037252791762034634}
   - component: {fileID: 9054492330661147566}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Edge) (8)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -14454,12 +14638,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3343779361453553083}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.89, y: -4.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9054492330661147566
 MonoBehaviour:
@@ -14477,7 +14661,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 1
   Radius: 0
   Kind: 2
@@ -14529,7 +14712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: a6b4e438b430495ea5b9ad4ed0796588
+  id: 9c6f5c9220a6408f9f974cbbc79dbd5f
   StartLooksAway: 0
 --- !u!1 &3385902991446659639
 GameObject:
@@ -15619,7 +15802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 426660fe54c744c8ad7d9ae95505a1dc
+  id: e198c162d5b2441d8dd4f406c08d0fa8
   StartLooksAway: 0
 --- !u!1 &3569436227173251686
 GameObject:
@@ -15885,7 +16068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 92493233fb71466786b716241b451e97
+  id: eb72456ea9a54799adbc66c18ba2cf55
   StartLooksAway: 0
 --- !u!1 &3608184069535583116
 GameObject:
@@ -16327,6 +16510,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &3656484769155798678
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8483612046644646381}
+  - component: {fileID: 1515998545080455284}
+  m_Layer: 0
+  m_Name: buyerMarker (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8483612046644646381
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3656484769155798678}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -10.77, y: 19.12, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 3625052708962996217}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1515998545080455284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3656484769155798678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 061ae31b4dc344a38cf0db90d8ddca50
+  DisplayName: 
+  Tags:
+  - buyer
+  RegionId: 1
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &3709271436130770412
 GameObject:
   m_ObjectHideFlags: 0
@@ -16393,7 +16631,7 @@ GameObject:
   - component: {fileID: 2317182323568840330}
   - component: {fileID: 4702967439202637843}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Edge) (1)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -16407,12 +16645,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3735109018541798215}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -6.98, y: -3.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4702967439202637843
 MonoBehaviour:
@@ -16430,7 +16668,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 1
   Radius: 0
   Kind: 2
@@ -16482,7 +16719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: fe8d27aed9204df59e11ebc84ce5bc45
+  id: 966db191706c4dcf8ac3251bfaa5b3bd
   StartLooksAway: 0
 --- !u!1 &3796209921473131484
 GameObject:
@@ -17408,7 +17645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: f3a9eb80dd1641709e442adc37a560e3
+  id: fceb352d9a604e6f9d97fef48d7db3ed
   StartLooksAway: 0
 --- !u!1 &3856842535875866652
 GameObject:
@@ -17454,7 +17691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: e6bd925216284cb5898053fa18bba119
+  id: c4fd8949845640d8b6db92e3362b4c72
   StartLooksAway: 0
 --- !u!1 &3906983289342995544
 GameObject:
@@ -17940,7 +18177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 044439e746e14cdebaeeea816ff75157
+  id: 950571c59bb5434c8de4cf97384be04f
   StartLooksAway: 0
 --- !u!1 &4080063219029146342
 GameObject:
@@ -18206,7 +18443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 2e061d3795464d9c8f9c0869676faaf9
+  id: af4872a0d8764797b85892b0f8e445e7
   StartLooksAway: 0
 --- !u!1 &4137025774208493690
 GameObject:
@@ -18692,7 +18929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: c56924da326b4ecd98b8c5af149fe909
+  id: 2d581ce24ea54e37863ff304e50111f6
   StartLooksAway: 0
 --- !u!1 &4174483994138862492
 GameObject:
@@ -18738,7 +18975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 9246e219fe024630a5245ae0c082ec27
+  id: 99d568305b364c03b56010d567dffe3a
   StartLooksAway: 0
 --- !u!1 &4175399611144295929
 GameObject:
@@ -18751,7 +18988,7 @@ GameObject:
   - component: {fileID: 7697770737147757089}
   - component: {fileID: 6354490421188237631}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Edge) (7)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -18765,12 +19002,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4175399611144295929}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 5.84, y: -0.53, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6354490421188237631
 MonoBehaviour:
@@ -18788,7 +19025,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 1
   Radius: 0
   Kind: 2
@@ -19060,7 +19296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1794f7edbaef4d85904924e2b027c985
+  id: b9fdcf6eee434300889a57d060211209
   StartLooksAway: 0
 --- !u!1 &4227267492155709418
 GameObject:
@@ -19161,7 +19397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: b9aa6e225cd5470eb858703be2fa3264
+  id: 8fbfc95a60574c16876beb923f7e0461
   StartLooksAway: 0
 --- !u!1 &4301046531310827164
 GameObject:
@@ -19207,7 +19443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 7ae2e37096ac4944925f3bbdcff408a1
+  id: 0372f6f813eb4f5380aac369070e0831
   StartLooksAway: 0
 --- !u!1 &4303857436368037944
 GameObject:
@@ -19220,7 +19456,7 @@ GameObject:
   - component: {fileID: 5502221091689671450}
   - component: {fileID: 2665131790177123761}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Edge)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -19234,12 +19470,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4303857436368037944}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -7.13, y: -0.82, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2665131790177123761
 MonoBehaviour:
@@ -19257,7 +19493,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 1
   Radius: 0
   Kind: 2
@@ -19276,7 +19511,7 @@ GameObject:
   - component: {fileID: 6490056458137661937}
   - component: {fileID: 5494871512748701922}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Edge) (14)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -19290,12 +19525,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4324017184782372658}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.67, y: 17.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5494871512748701922
 MonoBehaviour:
@@ -19313,7 +19548,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 2
   Radius: 0
   Kind: 2
@@ -19585,7 +19819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 78d0bd7f98304ee9aed28e70eb028a95
+  id: 3850222562f04d149024a3f9fa55fe61
   StartLooksAway: 0
 --- !u!1 &4441617165858588389
 GameObject:
@@ -20148,7 +20382,7 @@ GameObject:
   - component: {fileID: 8600452745316512236}
   - component: {fileID: 961116733616640470}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Edge) (11)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -20162,12 +20396,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4484304290375000247}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -7.97, y: 2.73, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &961116733616640470
 MonoBehaviour:
@@ -20185,7 +20419,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 1
   Radius: 0
   Kind: 2
@@ -20457,7 +20690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 2e6bdc1792bf44eca5f11d52d15b99f1
+  id: 9684db83da9a4c15b60f7664ce126d5d
   StartLooksAway: 0
 --- !u!1 &4553002844874333260
 GameObject:
@@ -20832,7 +21065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 8898b14669be40b6bccc4353502d903d
+  id: b02e26210bfa450d9df086085c97be19
   StartLooksAway: 0
 --- !u!1 &4666993956743121763
 GameObject:
@@ -20878,7 +21111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 785a4b985585446d899605eb09daf2ad
+  id: eb5e89795d9840ef8f37bb20d2662d16
   StartLooksAway: 0
 --- !u!1 &4669369221140143116
 GameObject:
@@ -20979,7 +21212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 6ae91d8f12cd49f38a0850b240df1c82
+  id: ec17bd0109194cd5b48e0c868b033d1a
   StartLooksAway: 0
 --- !u!1 &4678255155500903948
 GameObject:
@@ -21025,7 +21258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: a6c3894ac8ed4d2e9bebdb7fc397222f
+  id: 1f9b98ec5e4549e29a38ad6116fd3a51
   StartLooksAway: 0
 --- !u!1 &4690419230862975558
 GameObject:
@@ -21401,7 +21634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: d7315215a66f43e58f862884c99d92e9
+  id: 41d3e750089e4a4eafb0db4af2bedb8f
   StartLooksAway: 0
 --- !u!1 &4845776729460761358
 GameObject:
@@ -21667,7 +21900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: ca229bc7ade64ab9b05b794f6b95a0f5
+  id: 68d8175e724240be82a15440a5a4eca0
   StartLooksAway: 0
 --- !u!1 &4853282268640685438
 GameObject:
@@ -21768,7 +22001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: d9c169433eb44f5d82b11ce9bd0b6b7b
+  id: 56aff0d8913840faafa5a8b1cb70eb19
   StartLooksAway: 0
 --- !u!1 &4880816243261270481
 GameObject:
@@ -22094,6 +22327,61 @@ MonoBehaviour:
   Tags:
   - cash
   RegionId: 
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
+--- !u!1 &4906195636089388464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4362653144000212485}
+  - component: {fileID: 8703461468599802563}
+  m_Layer: 0
+  m_Name: buyerMarker (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4362653144000212485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4906195636089388464}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.54, y: 4.64, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 3625052708962996217}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8703461468599802563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4906195636089388464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: b382b2cfb6e64292b6dc166e435d0776
+  DisplayName: 
+  Tags:
+  - buyer
+  RegionId: 1
   Radius: 0
   Kind: 2
   Node: {fileID: 0}
@@ -23024,7 +23312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 42dc1c7eeb364081af6bd9172be0bacd
+  id: 79dffcc1fa0e4c8e8f0fe810e27cffec
   StartLooksAway: 0
 --- !u!1 &5064014548498942372
 GameObject:
@@ -24566,7 +24854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 749a20f838374ce080b3dbd52830462e
+  id: 988f48c582e44e4e98a791ca5943c1cc
   StartLooksAway: 0
 --- !u!1 &5345653530213079933
 GameObject:
@@ -25106,7 +25394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: f0e0fce1532049eeb5d49360d34bdea0
+  id: 3be2537647bd4ea7a05f95bce248d201
   StartLooksAway: 0
 --- !u!1 &5378136603422923143
 GameObject:
@@ -25152,7 +25440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: cafe027edc5b4aa78ff4e30d98531311
+  id: a2e65946743f44e8a20c2de814fd4ba3
   StartLooksAway: 0
 --- !u!1 &5411873109688107325
 GameObject:
@@ -25605,7 +25893,7 @@ GameObject:
   - component: {fileID: 5085613023870452097}
   - component: {fileID: 7105143875807468913}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Edge) (15)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -25619,12 +25907,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5436454509011780596}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.15, y: 24.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7105143875807468913
 MonoBehaviour:
@@ -25642,7 +25930,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 2
   Radius: 0
   Kind: 2
@@ -26134,7 +26421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 5abf4bf002044047b6cf32e80f045236
+  id: e88bbc25606c4640b001a2a12c3726bb
   StartLooksAway: 0
 --- !u!1 &5518432546761581308
 GameObject:
@@ -26576,6 +26863,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &5579379165766679077
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5719928100090563977}
+  - component: {fileID: 1161338992735373917}
+  m_Layer: 0
+  m_Name: buyerMarker (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5719928100090563977
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5579379165766679077}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.62, y: 17.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 3625052708962996217}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1161338992735373917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5579379165766679077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 2fc7d711c86a4fe0a11c4857f52805ff
+  DisplayName: 
+  Tags:
+  - buyer
+  RegionId: 1
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &5581273934686223766
 GameObject:
   m_ObjectHideFlags: 0
@@ -26620,7 +26962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 18d2e32046354ee29070cb04fdd027d3
+  id: e192e0b2cd434269bda141e6b61a9a36
   StartLooksAway: 0
 --- !u!1 &5613170331580891122
 GameObject:
@@ -26666,7 +27008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: a1665be3e26542458a5b5f3e66edaabf
+  id: 9c4c27d48c264139804b076b0ed79624
   StartLooksAway: 0
 --- !u!1 &5681857478072572026
 GameObject:
@@ -26767,7 +27109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 2cdbd177e6a244daaac57f9d3938c527
+  id: 2fb085d2cb714923b78270cce142d487
   StartLooksAway: 0
 --- !u!1 &5702952960710835005
 GameObject:
@@ -26813,7 +27155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 2f4bfb5aa8fd472fa298cab12d8ee23b
+  id: 7b870a023ea248048acef55fc0a89ae5
   StartLooksAway: 0
 --- !u!1 &5748970255504459029
 GameObject:
@@ -27079,7 +27421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: f271ecce9cba47cd8d21d12da44efa36
+  id: 20727d6bffd14ea08ec5b2018d1f2841
   StartLooksAway: 0
 --- !u!1 &5815791641525209875
 GameObject:
@@ -27565,7 +27907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0332132d40b74b43a645853ac88af397
+  id: f3b23e20b64c4767856076866e1bfd26
   StartLooksAway: 0
 --- !u!1 &5886402070759785954
 GameObject:
@@ -28887,6 +29229,46 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &6023194360588272644
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3625052708962996217}
+  m_Layer: 0
+  m_Name: buyerMarker Group
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3625052708962996217
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6023194360588272644}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 8578085666327335720}
+  - {fileID: 4397877332412654414}
+  - {fileID: 4362653144000212485}
+  - {fileID: 7654184881795701214}
+  - {fileID: 6032605073414425096}
+  - {fileID: 5719928100090563977}
+  - {fileID: 5117320754284483842}
+  - {fileID: 8483612046644646381}
+  - {fileID: 8517726082693738556}
+  m_Father: {fileID: 8402189115892838342}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6055755846871166430
 GameObject:
   m_ObjectHideFlags: 0
@@ -29151,7 +29533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: b47bfcab348e43cbb6c5fc2b244b1501
+  id: 5d6e492bc9524c4689b8429d2ab042c9
   StartLooksAway: 0
 --- !u!1 &6088939488919725242
 GameObject:
@@ -29164,7 +29546,7 @@ GameObject:
   - component: {fileID: 8464229551752288571}
   - component: {fileID: 5172517059885517291}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Edge) (5)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -29178,12 +29560,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6088939488919725242}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.15, y: 3.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5172517059885517291
 MonoBehaviour:
@@ -29201,7 +29583,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 1
   Radius: 0
   Kind: 2
@@ -29308,7 +29689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: d8fa6c5ad5c0497b8f856b9c06303b27
+  id: 99d8312ec08b4e018d94ecfca85e0006
   StartLooksAway: 0
 --- !u!1 &6188715305298186303
 GameObject:
@@ -29541,7 +29922,7 @@ GameObject:
   - component: {fileID: 4979594078042396417}
   - component: {fileID: 4283531042709942554}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Edge) (4)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -29555,12 +29936,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6208155838218550198}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4.1, y: 1.54, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4283531042709942554
 MonoBehaviour:
@@ -29578,7 +29959,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 1
   Radius: 0
   Kind: 2
@@ -29850,7 +30230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: cec14614ddd8494ba374c3c2cbe699a3
+  id: 39a3c8bec3f14b1ba6ed009a1444e90c
   StartLooksAway: 0
 --- !u!1 &6342619749987660521
 GameObject:
@@ -30743,7 +31123,7 @@ GameObject:
   - component: {fileID: 4429306713314040319}
   - component: {fileID: 218684643757424998}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Edge) (9)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -30757,12 +31137,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6402835381150805061}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -6.16, y: 4.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &218684643757424998
 MonoBehaviour:
@@ -30780,7 +31160,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 1
   Radius: 0
   Kind: 2
@@ -30832,7 +31211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: db5c259d4a5e4c03a8f27e979e5d0143
+  id: 1cf7814ee3154fff86df5aeed20db4fa
   StartLooksAway: 0
 --- !u!1 &6494189131205331533
 GameObject:
@@ -30878,8 +31257,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: f3455cdff36e4cc4adb8bfc8eaed493c
+  id: e19d784007a04448a7bb5d9f89d4246e
   StartLooksAway: 0
+--- !u!1 &6518393360198001292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4397877332412654414}
+  - component: {fileID: 8201973860737812209}
+  m_Layer: 0
+  m_Name: buyerMarker (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4397877332412654414
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6518393360198001292}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.12, y: -0.97, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 3625052708962996217}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8201973860737812209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6518393360198001292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: f533463437d94d1495066c58fcd9a802
+  DisplayName: 
+  Tags:
+  - buyer
+  RegionId: 1
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &6527353898199588898
 GameObject:
   m_ObjectHideFlags: 0
@@ -31198,7 +31632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: ea9f892bcff14df79b5f53a369742e28
+  id: 7d8ff029d72244208eecc7ca7c323a91
   StartLooksAway: 0
 --- !u!1 &6705768085333791156
 GameObject:
@@ -31706,7 +32140,7 @@ GameObject:
   - component: {fileID: 9128677009059295836}
   - component: {fileID: 1461972697051827013}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Edge) (17)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -31720,12 +32154,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6754945357925475099}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -6.19, y: 28.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1461972697051827013
 MonoBehaviour:
@@ -31743,7 +32177,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 2
   Radius: 0
   Kind: 2
@@ -31795,7 +32228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 01ed0c17243448c18db0aeb9be678d7c
+  id: 36359ddfd2bb4d81ac577ccad55cd075
   StartLooksAway: 0
 --- !u!1 &6803357062582862677
 GameObject:
@@ -31841,7 +32274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 3fe67cca381645b2b91432d7e0a5bceb
+  id: d0b4662c801b45f3b4fa8ef7df73101e
   StartLooksAway: 0
 --- !u!1 &6825432869852151944
 GameObject:
@@ -31887,7 +32320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: d762999642974e5ea27bbfede350f96b
+  id: 5ba7f48ed9df4e02bc121a9cf83c3757
   StartLooksAway: 0
 --- !u!1 &6860848520228692577
 GameObject:
@@ -32153,7 +32586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: d940c89291644e7c80fcbd7c8799637a
+  id: 3fcb05e68f8940eea20953e8943c7869
   StartLooksAway: 0
 --- !u!1 &6978828406906265623
 GameObject:
@@ -32199,7 +32632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 52072bdb982243f0b197e2368bb6ff08
+  id: 8c3f09ebc55a4e3ba52e8f1a72d71465
   StartLooksAway: 0
 --- !u!1 &7003510467454579614
 GameObject:
@@ -33125,7 +33558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 9f3722b4c9544798af20fb6f043cf3ab
+  id: da7048d3ea004ab893b692d2f4300775
   StartLooksAway: 0
 --- !u!1 &7070338258145527556
 GameObject:
@@ -33391,7 +33824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 3249a97ac40e4e0b90ea6e7bf12b33ea
+  id: c22daf91b2c548bd9efef7c8b20a51e4
   StartLooksAway: 0
 --- !u!1 &7087440910077412243
 GameObject:
@@ -33476,7 +33909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: c004b6a2b2c54ad39c992ffec5b8be2c
+  id: c2a8aeb01b534fc0aed8703275391380
   StartLooksAway: 0
 --- !u!1 &7137569240786054154
 GameObject:
@@ -33797,7 +34230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: abe1a423f0a649b48a706e8ef33069ab
+  id: 8f756adc9389471b89e461305fe32ebe
   StartLooksAway: 0
 --- !u!1 &7306165308910885499
 GameObject:
@@ -34118,7 +34551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 6530b5d315e44c499c28c92624dfe228
+  id: 7c25babbda2d47eb9e0491d894b8c55a
   StartLooksAway: 0
 --- !u!1 &7371318301103344991
 GameObject:
@@ -34438,7 +34871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 2dcd9a317e61408dab5cb9f952d3fc9f
+  id: 9b635295bf5a4ba3875cbd0d85ca5240
   StartLooksAway: 0
 --- !u!1 &7390199550068916492
 GameObject:
@@ -34484,7 +34917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: d160c848e7ed42a99b9334757d045aba
+  id: 4802dfa02efb4ecdbc1ab6d63640ea25
   StartLooksAway: 0
 --- !u!1 &7399013660741912426
 GameObject:
@@ -34497,7 +34930,7 @@ GameObject:
   - component: {fileID: 7653363208776591944}
   - component: {fileID: 1588999014650487827}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Node) (2)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -34511,12 +34944,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7399013660741912426}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.22, y: -0.77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1588999014650487827
 MonoBehaviour:
@@ -34534,7 +34967,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 1
   Radius: 0
   Kind: 1
@@ -35037,6 +35469,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &7441077896848874532
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8578085666327335720}
+  - component: {fileID: 5038284338572681548}
+  m_Layer: 0
+  m_Name: buyerMarker
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8578085666327335720
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7441077896848874532}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.56, y: 0.06, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 3625052708962996217}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5038284338572681548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7441077896848874532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 49175b9154e849fea7259be48379ce3f
+  DisplayName: 
+  Tags:
+  - buyer
+  RegionId: 1
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &7508733582389045241
 GameObject:
   m_ObjectHideFlags: 0
@@ -35477,6 +35964,61 @@ MonoBehaviour:
       type: {class: Circle, ns: UnityEngine.Splines.ExtrusionShapes, asm: Unity.Splines}
       data:
         m_Sides: 8
+--- !u!1 &7551164956765054992
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5117320754284483842}
+  - component: {fileID: 3540553425024378824}
+  m_Layer: 0
+  m_Name: buyerMarker (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5117320754284483842
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7551164956765054992}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -16.21, y: 16.54, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 3625052708962996217}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3540553425024378824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7551164956765054992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c10a2b77b0e3ec4399bfb24439deec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: d7c3c67d26c740ae840cea886ce30a7b
+  DisplayName: 
+  Tags:
+  - buyer
+  RegionId: 1
+  Radius: 0
+  Kind: 2
+  Node: {fileID: 0}
+  Edge: {fileID: 0}
+  T: 0.5
+  Forward: 1
 --- !u!1 &7572934588316803313
 GameObject:
   m_ObjectHideFlags: 0
@@ -35741,7 +36283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1ae7db10da2b4f1cba79be421a77ac73
+  id: 21ef0c38466944f68fe5fd6c93fe445e
   StartLooksAway: 0
 --- !u!1 &7672626534901810127
 GameObject:
@@ -36447,7 +36989,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: f3b1fb27a8b64a90b92a26cc6708c809
+  id: 118a3b7a59584d60bb2bea409075990e
   StartLooksAway: 0
 --- !u!1 &7779536913849610070
 GameObject:
@@ -36713,7 +37255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 71218bfa6f1741358457c15c2690bec7
+  id: 2a58c8db78e94c7c87c33e7730e076cf
   StartLooksAway: 0
 --- !u!1 &7798469224757355449
 GameObject:
@@ -36979,7 +37521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 80aafcdad5774e6d84c85851722aef74
+  id: c9c506287976461793f3a16c987950b1
   StartLooksAway: 0
 --- !u!1 &7833410299641812597
 GameObject:
@@ -37025,7 +37567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 018fff18acec4da3a4f08180037ab7eb
+  id: 41a5635677934eb5a3f7eeba65136457
   StartLooksAway: 0
 --- !u!1 &7854672043264370412
 GameObject:
@@ -37291,7 +37833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: f92cc7bbc1f445d2a65ff8b361439671
+  id: a88e4c26472b494fb3bc1ed47799eef0
   StartLooksAway: 0
 --- !u!1 &7899294947615216939
 GameObject:
@@ -37886,7 +38428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 211d04712a544fe98e8282889ca1a37a
+  id: f7d7fcc61194443b87ee363d9a333110
   StartLooksAway: 0
 --- !u!1 &8039808235134291924
 GameObject:
@@ -37932,7 +38474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 903be0e118ef46a48475dad911866ccf
+  id: ffc58718f83d4b64bbd4c20aa33d2b50
   StartLooksAway: 0
 --- !u!1 &8056723336230943083
 GameObject:
@@ -37945,7 +38487,7 @@ GameObject:
   - component: {fileID: 87500253163701078}
   - component: {fileID: 6130778635831800583}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Edge) (3)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -37959,12 +38501,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8056723336230943083}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4.93, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6130778635831800583
 MonoBehaviour:
@@ -37982,7 +38524,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 1
   Radius: 0
   Kind: 2
@@ -38034,7 +38575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: af96fcbbc6ce4a4592f9e0d39610a89f
+  id: 729458e104cf49ff95d925109fdef4e1
   StartLooksAway: 0
 --- !u!1 &8106478674843598800
 GameObject:
@@ -38080,7 +38621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 78f31b6f60ee4e8aa31460e32781455c
+  id: cb8fdf0dc5bb423ea683cd741657445d
   StartLooksAway: 0
 --- !u!1 &8117491005302766644
 GameObject:
@@ -38346,7 +38887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: b3c4c6fe9dab4da68f49dabfc11e8b91
+  id: 2b4bee4597614aa5a51d949e311c642c
   StartLooksAway: 0
 --- !u!1 &8150438304573124956
 GameObject:
@@ -38392,7 +38933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: bda4a2e3ed8340cfb8726ab7b9e89953
+  id: 43962fc344fe4ca39368e2afb5c0f28b
   StartLooksAway: 0
 --- !u!1 &8156578057992581259
 GameObject:
@@ -38438,7 +38979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 315614545d5141c4b7917722b3043abf
+  id: 0be4abb296dd497da4e730482f46dc08
   StartLooksAway: 0
 --- !u!1 &8221338701776726817
 GameObject:
@@ -39364,7 +39905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: c5a83da4d87b4ed2898fb59af174bf4c
+  id: 49bba9108b0b4604b115261c326bd52f
   StartLooksAway: 0
 --- !u!1 &8293726632703149642
 GameObject:
@@ -39597,7 +40138,7 @@ GameObject:
   - component: {fileID: 1558288118460696085}
   - component: {fileID: 2614690836943614636}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Edge) (22)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -39611,12 +40152,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8307231066845671260}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -12.59, y: 22.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2614690836943614636
 MonoBehaviour:
@@ -39634,7 +40175,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 2
   Radius: 0
   Kind: 2
@@ -39906,7 +40446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 5943d091ef644309995a666a89d3e8f4
+  id: 2730350d85ee48b7a8446d7e2fd86a7f
   StartLooksAway: 0
 --- !u!1 &8341161806283412255
 GameObject:
@@ -40314,7 +40854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 36a11057dd644e68b8caeebc276eb465
+  id: 89d9b74d28684425997b0efaed650886
   StartLooksAway: 0
 --- !u!1 &8448351966928508648
 GameObject:
@@ -40360,7 +40900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: e65e8125714f444aa7d6dc99eead15c8
+  id: e5060c77fe3c4305acd79c77999c7651
   StartLooksAway: 0
 --- !u!1 &8451356840634664829
 GameObject:
@@ -40406,7 +40946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: d18a777b05724f8da129bbacfc3ebcb5
+  id: 3de36f8fea5940469d6e9509ed097051
   StartLooksAway: 0
 --- !u!1 &8460166650306507941
 GameObject:
@@ -40452,7 +40992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: e297341770c1431a9b9855164d6440c0
+  id: 718726940bba4763bb1ac8dc89f58707
   StartLooksAway: 0
 --- !u!1 &8509177419210988546
 GameObject:
@@ -40685,7 +41225,7 @@ GameObject:
   - component: {fileID: 6079206405967840591}
   - component: {fileID: 1918410412289306427}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Node) (5)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -40699,12 +41239,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8516717764076600869}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4.31, y: 5.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1918410412289306427
 MonoBehaviour:
@@ -40722,7 +41262,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 1
   Radius: 0
   Kind: 1
@@ -40774,7 +41313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: bc0949e648e941c7bedd91811faba4dc
+  id: 3768049afdf4492ab83ca17fabe7c5a0
   StartLooksAway: 0
 --- !u!1 &8629063461592095357
 GameObject:
@@ -40820,7 +41359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 56d875b329c841929cf252a29a00e2b5
+  id: 9f47fe53839d40159a8496d352e85490
   StartLooksAway: 0
 --- !u!1 &8636060961116728778
 GameObject:
@@ -40866,7 +41405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 7f999382ce4f4527bf6f551f0558606a
+  id: b27ff45880ec471e9995ffe67a1667c8
   StartLooksAway: 0
 --- !u!1 &8667377052541494170
 GameObject:
@@ -41407,7 +41946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: c78fcc3babb14f3fa0dfc59ccade6095
+  id: 8c2bb2ca63984616bfa388aa9fb93a49
   StartLooksAway: 0
 --- !u!1 &8747156911311768029
 GameObject:
@@ -41453,7 +41992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0a73d58b5f3045fdbf38f05e1efe921a
+  id: 1187a5a4db9a4bc494cb5c9ff7e4db1a
   StartLooksAway: 0
 --- !u!1 &8749284768099094831
 GameObject:
@@ -41499,7 +42038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: f6757b13df0b4c3ca59dc5dab0cbcd2f
+  id: 704232800e4f400fa6c8eb4421b92a2e
   StartLooksAway: 0
 --- !u!1 &8751279510676172343
 GameObject:
@@ -41819,7 +42358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: f6202a6f21744876a82fe99255ae65bc
+  id: 6fa7bbecf6834209b442dd9124c201f2
   StartLooksAway: 0
 --- !u!1 &8773752165319025420
 GameObject:
@@ -41832,7 +42371,7 @@ GameObject:
   - component: {fileID: 6612636552902545022}
   - component: {fileID: 3504828059079957591}
   m_Layer: 0
-  m_Name: CarOrBuyerMarker(Edge) (20)
+  m_Name: CarMarker
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -41846,12 +42385,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8773752165319025420}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -11.7, y: 15.88, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8402189115892838342}
+  m_Father: {fileID: 3632865925349299303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3504828059079957591
 MonoBehaviour:
@@ -41869,7 +42408,6 @@ MonoBehaviour:
   DisplayName: 
   Tags:
   - Car
-  - Buyer
   RegionId: 2
   Radius: 0
   Kind: 2
@@ -41921,7 +42459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 30935a516b92480d819822bb4d08cb0a
+  id: 83eecb0971a24ffdb7e05ba78d992ea0
   StartLooksAway: 0
 --- !u!1 &8861561380292458889
 GameObject:
@@ -42187,7 +42725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 3b521426015249f3bdcab09fc4ee9660
+  id: d38a2c06fcda404d9df614c98cff59de
   StartLooksAway: 0
 --- !u!1 &8919126689545993021
 GameObject:
@@ -42673,7 +43211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 84c855f0ed0448a5b4954ea0ed9f0fac
+  id: 44b82834f9904169b0988966e260243a
   StartLooksAway: 0
 --- !u!1 &8958261052236675804
 GameObject:
@@ -42719,7 +43257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 3d4f16a5c41240549b8b12d43ef46558
+  id: 7301930762e440c4b7442cc542e92423
   StartLooksAway: 0
 --- !u!1 &9070443126825429840
 GameObject:
@@ -42765,7 +43303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: cc0fc545e5cf4e34b7835df6ea59318e
+  id: a6eb1d599b194da58d4a38d8e5664d46
   StartLooksAway: 0
 --- !u!1 &9075212809496647366
 GameObject:
@@ -43031,7 +43569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: a13eeff3e59d4021911b2f2b01fd1995
+  id: b04be563796f4e23922cad990ef4ce6e
   StartLooksAway: 0
 --- !u!1 &9115215787965142243
 GameObject:
@@ -43077,7 +43615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63311a1b0b723bd47ba0ecda5c15cc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: e7737617b4bb48b6b0aa3b7d33dcc92c
+  id: 4d3e3756fc6d4ae59cf09fa888ff80ee
   StartLooksAway: 0
 --- !u!1 &9192688886880660822
 GameObject:
