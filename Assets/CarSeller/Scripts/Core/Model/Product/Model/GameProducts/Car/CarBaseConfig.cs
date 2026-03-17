@@ -12,6 +12,8 @@ public class CarBaseConfig : SerializedScriptableObject, IBaseConfig
     public float Speed = 2f;
     public float Acceleration = 0.3f;
     public CarFrameBaseConfig CarFrameBaseConfig;
+    public Sprite TopView;
+    public Sprite SideView;
     [ShowInInspector]
     [OdinSerialize]
     public List<PartSlotBaseConfig> SlotConfigs = new List<PartSlotBaseConfig>();

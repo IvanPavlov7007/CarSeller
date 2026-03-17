@@ -6,7 +6,8 @@ public enum CarColor
     Red,
     Green,
     Blue,
-    Yellow
+    Yellow, 
+    Unique
 }
 [Serializable]
 public enum CarType
@@ -21,9 +22,8 @@ public enum CarType
 public enum CarRarity
 {
     Common,
-    Rare,
-    Epic,
-    Legendary
+    Uncommon,
+    Epic
 }
 
 public interface ISimplifiedCarModel

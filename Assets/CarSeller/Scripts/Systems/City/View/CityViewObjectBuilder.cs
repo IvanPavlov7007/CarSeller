@@ -161,8 +161,9 @@ public class CityViewObjectBuilder : ScriptableObject
                 go.AddComponent<SpeedProviderFromCar>().Initialize(car);
                 go.AddComponent<MovingPoint>().Initialize(entity);
                 var sr = go.GetComponentInChildren<SpriteRenderer>();
-                sr.sprite = car.CarFrame.runtimeConfig.Icon;
-                sr.color = car.CarFrame.runtimeConfig.FrameColor;
+                if(car.runtimeConfig.TopView != null)
+                    sr.sprite = car.runtimeConfig.TopView;
+                //sr.color = car.CarFrame.runtimeConfig.FrameColor;
                 go.AddComponent<SelectableVisuals>();
                 break;
             case PlayerFigureAspect playerFigureAspect:

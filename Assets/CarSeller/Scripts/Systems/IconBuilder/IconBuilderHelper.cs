@@ -36,6 +36,11 @@ public static class IconBuilderHelper
 
         // Use the visitor implementation on Product to pick the right BuildX method.
         // IconBuilderManager implements IProductViewBuilder<Sprite>.
+        if (product is Car car)
+        {
+            return car.runtimeConfig.SideView;
+        }
+
         return product.GetRepresentation(IconBuilderManager.Instance);
     }
 }

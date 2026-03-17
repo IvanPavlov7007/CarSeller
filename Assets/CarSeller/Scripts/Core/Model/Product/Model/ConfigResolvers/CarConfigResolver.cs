@@ -69,6 +69,9 @@ public class CarConfigResolver
         else
             result.Rarity = carBase.Rarity;
 
+        result.TopView = carBase.TopView;
+        result.SideView = carBase.SideView;
+
         // COMPOSITION
         // Build pools
         var basePool = carBase.SlotConfigs != null

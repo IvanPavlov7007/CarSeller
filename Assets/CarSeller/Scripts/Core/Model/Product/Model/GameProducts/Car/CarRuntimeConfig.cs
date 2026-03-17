@@ -12,6 +12,8 @@ public class CarRuntimeConfig : IRuntimeConfig
     public float BasePrice;
     public float Speed;
     public float Acceleration;
+    public Sprite TopView;
+    public Sprite SideView;
     public CarFrameRuntimeConfig CarFrameRuntimeConfig;
     public List<PartSlotRuntimeConfig> SlotConfigs;
 
