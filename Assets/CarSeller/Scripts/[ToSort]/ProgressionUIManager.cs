@@ -56,6 +56,6 @@ public class ProgressionUIManager : MonoBehaviour
         _showingTime = 0f;
         progressionUI.targetProgressLevel = data.Area.CurrentLevelNode.Value.levelNumber;
         progressionUI.targetProgressValue = data.Area.currentXP / data.Area.CurrentLevelNode.Value.xpToNextLevel;
-        progressionUI.targetIsMax = data.Area.areaLevels.Count == data.NewLevel;
+        //progressionUI.targetIsMax = data.Area.areaLevels.Count == data.NewLevel;
     }
 }

@@ -2,12 +2,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
+using Pixelplacement;
 
 public class ProgressionUI : MonoBehaviour
 {
     public TMP_Text nextLevelIndexDisplayer;
     public Slider slider;
     public ParticleSystem particlesSystem;
+    public Image levelBackground;
 
     public float progressSpeed = 1f;
 
@@ -53,7 +55,18 @@ public class ProgressionUI : MonoBehaviour
         _currentProgressLevel++;
         _currentProgressValue = 0f;
         particlesSystem.Play();
+        animateLevelBackground();
         updateIndexDisplayer();
+    }
+
+    void animateLevelBackground()
+    {
+        Tween.Size(levelBackground.rectTransform, levelBackground.rectTransform.sizeDelta * 1.2f, 0.3f,0f,Tween.EaseOutBack,
+            completeCallback: () =>
+            {
+                Tween.Size(levelBackground.rectTransform, levelBackground.rectTransform.sizeDelta / 1.2f, 0.3f,0f, Tween.EaseOutBack);
+            });
+        Tween.Color(levelBackground, Color.white, 0.3f, 0f, Tween.EaseOutBack, Tween.LoopType.PingPong);
     }
 
     void updateIndexDisplayer()
