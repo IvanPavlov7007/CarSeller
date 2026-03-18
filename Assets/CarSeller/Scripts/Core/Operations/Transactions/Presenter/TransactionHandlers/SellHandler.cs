@@ -5,6 +5,7 @@ public class SellHandler : TransactionHandler<SellTransaction>
     public override TransactionResult Handle(SellTransaction transaction)
     {
         G.PlayerManager.AddPlayerMoney(transaction.Price);
+        AreaProgressionManager.Instance.ProgressCarSale(transaction);
         City.EntityLifetimeService.Destroy(transaction.Car);
         City.EntityLifetimeService.Destroy(transaction.Buyer);
 

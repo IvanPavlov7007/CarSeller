@@ -4,12 +4,25 @@ public class CityArea
 {
     public LinkedList<AreaLevel> areaLevels;
     public float currentXP;
+    public const float XP_PER_PRICE = 0.05f;
 
     public LinkedListNode<AreaLevel> CurrentLevelNode;
 
     public CityArea(BuyersPool pool)
     {
         BuyersPool = pool;
+        initialize();
+    }
+
+    void initialize()
+    {
+        areaLevels = new LinkedList<AreaLevel>(
+        new[]{
+            new AreaLevel() { levelNumber = 1, xpToNextLevel = 100f },
+            new AreaLevel() { levelNumber = 2, xpToNextLevel = 200f },
+            new AreaLevel() { levelNumber = 3, xpToNextLevel = 300f },
+        });
+        CurrentLevelNode = areaLevels.First;
     }
     public BuyersPool BuyersPool { get; private set; }
 }

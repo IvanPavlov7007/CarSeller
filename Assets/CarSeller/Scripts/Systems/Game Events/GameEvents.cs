@@ -40,6 +40,9 @@ public class GameEvents
         onPlayerBusted = null;
 
         onVehicleControlStateChanged = null;
+
+        onAreaProgressed = null;
+        onAreaLevelUp = null;
     }
 
     public Action OnGamePaused;
@@ -80,4 +83,38 @@ public class GameEvents
 
     // Player Interaction Events
     public Action<VehicleControlStateChangedEventData> onVehicleControlStateChanged;
+
+    public Action<AreaProgressEventData> onAreaProgressed;
+    public Action<AreaLevelUpEventData> onAreaLevelUp;
+}
+
+public class AreaProgressEventData : GameEventData
+{
+    public readonly CityArea Area;
+    public readonly float InitialXP;
+    public readonly float NewXP;
+
+    public readonly int InitialLevel;
+    public readonly int NewLevel;
+    public AreaProgressEventData(CityArea area, float initialXP, float newXP, int initialLevel, int newLevel)
+    {
+        Area = area;
+        InitialXP = initialXP;
+        NewXP = newXP;
+        InitialLevel = initialLevel;
+        NewLevel = newLevel;
+    }
+}
+
+public class AreaLevelUpEventData : GameEventData
+{
+    public readonly CityArea Area;
+    public readonly int NewLevel;
+    public readonly bool IsMaxLevel;
+    public AreaLevelUpEventData(CityArea area, int newLevel, bool isMaxLevel)
+    {
+        Area = area;
+        NewLevel = newLevel;
+        IsMaxLevel = isMaxLevel;
+    }
 }
