@@ -62,7 +62,6 @@ public class BuyerManager : MonoBehaviour
 
     public static BuyerManager CreateManager()
     {
-        Debug.Log("Creating BuyerManager...");
         var ob = new GameObject("BuyerManager");
         var manager = ob.AddComponent<BuyerManager>();
 
@@ -71,7 +70,6 @@ public class BuyerManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Updating BuyerManager...");
         G.CarSpawnManager.CheckAndRefill();
         UpdateArea(G.Area, Time.deltaTime);
     }

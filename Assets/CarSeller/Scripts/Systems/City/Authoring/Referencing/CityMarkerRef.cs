@@ -124,6 +124,28 @@ public static class CityMarkerRefDefaults
         if (_cachedDefault != null)
             return _cachedDefault;
 
+        // 0) Prefer the graph referenced by the active game config (GameMainConfig is a Resources singleton).
+        try
+        {
+            var fromGameMainConfig = GameMainConfig.Instance != null
+                ? GameMainConfig.Instance.GameConfig != null
+                    ? GameMainConfig.Instance.GameConfig.CityConfig != null
+                        ? GameMainConfig.Instance.GameConfig.CityConfig.CityGraph
+                        : null
+                    : null
+                : null;
+
+            if (fromGameMainConfig != null)
+            {
+                _cachedDefault = fromGameMainConfig;
+                return _cachedDefault;
+            }
+        }
+        catch (Exception)
+        {
+            // GameMainConfig.Instance throws if it's not present in Resources; ignore and fall back.
+        }
+
         // 1. Try Resources at runtime (and in editor as fallback).
         //    If you keep your graphs under Resources/CityGraphs, this can be:
         //    Resources.LoadAll<CityGraphAsset>("CityGraphs");

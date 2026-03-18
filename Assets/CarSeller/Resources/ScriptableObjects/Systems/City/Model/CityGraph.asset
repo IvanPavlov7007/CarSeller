@@ -2513,7 +2513,7 @@ MonoBehaviour:
       T: 0
       Forward: 1
       EdgeId: 
-      WorldPoint: {x: 3, y: -0.61}
+      WorldPoint: {x: 3.63, y: -1.3}
     AuthorId: 91cd40b208334297aba4fc494f903904
     AuthorPath: CityAuthoringRoot/CarMarker Group/CarMarker
   - Id: ede4252b1fad40469141d36d6935e9dd
@@ -2588,7 +2588,7 @@ MonoBehaviour:
       T: 0.5
       Forward: 1
       EdgeId: 
-      WorldPoint: {x: 3.12, y: -0.97}
+      WorldPoint: {x: 3.11, y: -0.76}
     AuthorId: f533463437d94d1495066c58fcd9a802
     AuthorPath: CityAuthoringRoot/buyerMarker Group/buyerMarker (1)
   - Id: b382b2cfb6e64292b6dc166e435d0776

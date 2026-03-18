@@ -2,12 +2,22 @@
 
 public class CityArea
 {
+    public LinkedList<AreaLevel> areaLevels;
+    public float currentXP;
+
+    public LinkedListNode<AreaLevel> CurrentLevelNode;
+
     public CityArea(BuyersPool pool)
     {
         BuyersPool = pool;
     }
     public BuyersPool BuyersPool { get; private set; }
+}
 
+public class AreaLevel
+{
+    public int levelNumber;
+    public float xpToNextLevel;
 }
 
 public class BuyersPool
