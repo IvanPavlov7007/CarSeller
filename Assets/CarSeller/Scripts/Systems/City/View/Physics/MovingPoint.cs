@@ -40,7 +40,16 @@ public class MovingPoint : MonoBehaviour, IMovement
     void LateUpdate()
     {
         processMovement();
-        body.up = Vector3.Slerp(body.up, currentDirection, 10f * Time.deltaTime);
+        body.rotation = safeSlerp(body.rotation, currentDirection, 10f * Time.deltaTime);
+        //body.up = Vector3.Slerp(body.up, currentDirection, 10f * Time.deltaTime);
+    }
+
+    private Quaternion safeSlerp(Quaternion currentRotation, Vector2 currentDirection, float t)
+    {
+        float angle = Mathf.Atan2(currentDirection.y, currentDirection.x) * Mathf.Rad2Deg;
+
+        Quaternion quaternion = Quaternion.AngleAxis(angle - 90f, Vector3.forward);
+        return Quaternion.Slerp(currentRotation, quaternion,t);
     }
 
     struct CityPositionWithDistance
@@ -248,17 +257,39 @@ public class MovingPoint : MonoBehaviour, IMovement
     private void processMovement()
     {
         Vector2 inputDirection = Vector2.ClampMagnitude(directionProvider.ProvidedDirection, 1f);
+        float inputMagnitude = inputDirection.magnitude;
         Vector2 inputDirectionN = inputDirection.sqrMagnitude > Epsilon ? inputDirection.normalized : Vector2.zero;
 
         float lerpV = 10f * Time.deltaTime;
-        arrowRotationPoint.rotation = Quaternion.Lerp(arrowRotationPoint.rotation, Quaternion.FromToRotation(Vector2.up, inputDirection.normalized), lerpV);
-        arrowRotationPoint.localScale = new Vector3(1f, Mathf.Lerp(arrowRotationPoint.localScale.y, Mathf.Clamp01(inputDirection.magnitude), lerpV), 1f);
+
+        Vector2 arrowDir = inputDirectionN.sqrMagnitude > Epsilon ? inputDirectionN : Vector2.up;
+        arrowRotationPoint.rotation = Quaternion.Lerp(
+            arrowRotationPoint.rotation,
+            Quaternion.FromToRotation(Vector2.up, arrowDir),
+            lerpV);
+
+        arrowRotationPoint.localScale = new Vector3(
+            1f,
+            Mathf.Lerp(arrowRotationPoint.localScale.y, Mathf.Clamp01(inputMagnitude), lerpV),
+            1f);
 
         var cityPosition = cityPositionable.Position;
 
         Vector2 cappedTarget = inputDirection * 1f + cityPosition.WorldPosition;
 
-        currentSpeed = Mathf.MoveTowards(currentSpeed, speedProvider.Speed, speedProvider.Acceleration * Time.deltaTime);
+        // Speed scales with |inputDirection| and brakes when input is reduced.
+        float desiredSpeed = speedProvider.Speed * inputMagnitude;
+
+        const float brakeMultiplier = 2.5f;
+        float previousSpeed = currentSpeed;
+
+        float speedChangePerSecond =
+            desiredSpeed > currentSpeed
+                ? speedProvider.Acceleration
+                : speedProvider.Acceleration * brakeMultiplier;
+
+        currentSpeed = Mathf.MoveTowards(currentSpeed, desiredSpeed, speedChangePerSecond * Time.deltaTime);
+        Acceleration = Time.deltaTime > Epsilon ? (currentSpeed - previousSpeed) / Time.deltaTime : 0f;
 
         Debug.DrawLine(cityPosition.WorldPosition, cappedTarget, Color.green);
 

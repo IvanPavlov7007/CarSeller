@@ -22,8 +22,9 @@ public class ProgressionUIManager : MonoBehaviour
 
     private void resetProgressbar()
     {
-        progressionUI.targetProgressLevel = G.Area.CurrentLevelNode.Value.levelNumber;
-        progressionUI.targetProgressValue = G.Area.currentXP / G.Area.CurrentLevelNode.Value.xpToNextLevel;
+        int level = G.Area.CurrentLevelNode.Value.levelNumber;
+        float progress = G.Area.currentXP / G.Area.CurrentLevelNode.Value.xpToNextLevel;
+        progressionUI.SetupInitValues(level, progress);
     }
 
     bool _showing = false;

@@ -434,8 +434,8 @@ MonoBehaviour:
       Data: 
   Name: Rokunana
   BasePrice: 2200
-  Speed: 2
-  Acceleration: 1.5
+  Speed: 1
+  Acceleration: 0.5
   CarFrameBaseConfig: {fileID: 11400000, guid: 526c83c7d5e9c39488bba242842be9a0, type: 2}
   TopView: {fileID: 21300000, guid: 3ada92f5009da7e468ee2f759fcc1ab1, type: 3}
   SideView: {fileID: 21300000, guid: 050b79ab2fc07b84e958d250ca691f37, type: 3}

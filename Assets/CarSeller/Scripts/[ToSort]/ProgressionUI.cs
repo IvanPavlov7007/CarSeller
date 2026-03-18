@@ -23,6 +23,13 @@ public class ProgressionUI : MonoBehaviour
 
     const float TERMINAL_PROGRESS_VALUE = 0.999f;
 
+    public void SetupInitValues(int currentLevel, float currentProgress)
+    {
+        _currentProgressLevel = currentLevel;
+        _currentProgressValue = currentProgress;
+        targetProgressLevel = currentLevel;
+        targetProgressValue = currentProgress;
+    }
 
     [Button]
     public void ResetBar()
@@ -66,7 +73,9 @@ public class ProgressionUI : MonoBehaviour
             {
                 Tween.Size(levelBackground.rectTransform, levelBackground.rectTransform.sizeDelta / 1.2f, 0.3f,0f, Tween.EaseOutBack);
             });
-        Tween.Color(levelBackground, Color.white, 0.3f, 0f, Tween.EaseOutBack, Tween.LoopType.PingPong);
+        var initColor = levelBackground.color;
+        Tween.Color(levelBackground, Color.white, 0.3f, 0f, Tween.EaseOutBack);
+        Tween.Color(levelBackground, initColor, 0.3f, 0.3f, Tween.EaseOutBack);
     }
 
     void updateIndexDisplayer()
