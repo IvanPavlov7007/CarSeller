@@ -59,6 +59,7 @@ public sealed class VisionPinScaler : MonoBehaviour
         if (VisionLogic.VisibleWhenNoCenter)
         {
             ApplyVisibility(visible: true);
+            ApplyScale(1f);
         }
         else
         {

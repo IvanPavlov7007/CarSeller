@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Splines;
@@ -18,12 +19,24 @@ public sealed class RoadEdge
     public RoadNode From;
     public RoadNode To;
 
+    public string[] Tags;
+
     // Unity Splines authoring model: container holding one or more splines
     public SplineContainer Container;
     public int SplineIndex;
 
     public float Length;
     public bool Bidirectional = true;
+
+    public bool HasTag(string tag)
+    {
+        if (Tags == null || tag == null) return false;
+        for (int i = 0; i < Tags.Length; i++)
+        {
+            if (string.Equals(Tags[i], tag, StringComparison.OrdinalIgnoreCase)) return true;
+        }
+        return false;
+    }
 
     public Spline GetSpline()
     {

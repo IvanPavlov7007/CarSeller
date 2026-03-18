@@ -58,6 +58,7 @@ public sealed class VisionDistanceScaler : MonoBehaviour
         if(VisionLogic.VisibleWhenNoCenter)
         {
             ApplyVisibility(visible: true);
+            transform.localScale = baseLocalScale;
             ApplyAlpha(1f);
         }
         else

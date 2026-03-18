@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Splines;
 using Sirenix.OdinInspector;
 using Unity.Mathematics;
@@ -14,8 +16,10 @@ public class RoadEdgeAuthor : MonoBehaviour
     [BoxGroup("Options")] public bool Bidirectional = true;
     [BoxGroup("Options")] public bool ClampToXY = true;
 
-    [SerializeField, ReadOnly] private string id;
-    [ShowInInspector, ReadOnly] public string Id => id;
+    [BoxGroup("Identification")] public string[] Tags;
+
+    [BoxGroup("Identification"), SerializeField, ReadOnly] private string id;
+    [BoxGroup("Identification"), ShowInInspector, ReadOnly] public string Id => id;
 
     [Button, DisableInPlayMode]
     public void EnsureId()

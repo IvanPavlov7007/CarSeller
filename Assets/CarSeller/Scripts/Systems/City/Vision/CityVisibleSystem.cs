@@ -50,6 +50,8 @@ public class CityVisibleSystem : AspectSystem<CityVisibleAspect>
 {
     CityVisionCentersSystem CityVisionCentersSystem;
 
+    public bool cheatVisible = false;
+
     public CityVisibleSystem(CityEntityAspectsService aspectsService, CityVisionCentersSystem cityVisionCentersSystem) : base(aspectsService)
     {
         this.CityVisionCentersSystem = cityVisionCentersSystem;
@@ -60,6 +62,15 @@ public class CityVisibleSystem : AspectSystem<CityVisibleAspect>
         //how many
         foreach (var asp in aspects.Values)
         {
+            if(cheatVisible)
+            {
+                asp.SetVisible(true);
+                asp.NearestCenter = null;
+                asp.DistanceToNearestCenter = 0f;
+                if (asp.Discovered == false)
+                    asp.Discover();
+                continue;
+            }
             updateAspect(asp);
         }
     }
@@ -84,7 +95,7 @@ public class CityVisibleSystem : AspectSystem<CityVisibleAspect>
 
 public static class VisionLogic
 {
-    public const bool VisibleWhenNoCenter = false;
+    public const bool VisibleWhenNoCenter = true;
 }
 
 public class CityVisibleAspect : CityEntityAspectBase

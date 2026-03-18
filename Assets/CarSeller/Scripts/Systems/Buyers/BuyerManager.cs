@@ -68,6 +68,11 @@ public class BuyerManager : MonoBehaviour
         return manager;
     }
 
+    private void Awake()
+    {
+        G.BuyerManager = this;
+    }
+
     private void Update()
     {
         G.CarSpawnManager.CheckAndRefill();
@@ -100,11 +105,18 @@ public class BuyerManager : MonoBehaviour
         }
         var randomSpawnPoint = freeSpawnPoints[UnityEngine.Random.Range(0, freeSpawnPoints.Count)];
         Buyer buyer = new Buyer($"Buyer_{Guid.NewGuid()}", "A new buyer has arrived.");
-        CityEntitiesCreationHelper.CreateBuyer(buyer, randomSpawnPoint.Position);
+        SpawnBuyerAtPosition(randomSpawnPoint.Position, randomSpawnPoint);
+        pool.lastSpawnTime = Time.time;
+    }
+
+    public void SpawnBuyerAtPosition(CityPosition position, BuyerSpawnPoint spawnPoint)
+    {
+        Buyer buyer = new Buyer($"Buyer_{Guid.NewGuid()}", "A new buyer has arrived.");
+        CityEntitiesCreationHelper.CreateBuyer(buyer, position);
 
         buyer.onBeingDestroyed += onBuyerRemove;
-        pool.lastSpawnTime = Time.time;
-        randomSpawnPoint.buyer = buyer;
+        if(spawnPoint != null)
+            spawnPoint.buyer = buyer;
     }
 
     void onBuyerRemove(IDestroyable buyer)

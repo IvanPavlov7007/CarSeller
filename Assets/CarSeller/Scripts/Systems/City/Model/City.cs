@@ -127,6 +127,7 @@ public class City : ILocationsHolder, IDisposable
                 Id = e.Id,
                 From = nodeMap[e.FromNodeId],
                 To = nodeMap[e.ToNodeId],
+                Tags = e.Tags,
                 // DO NOT assign scene references here. Let CityGraphLoader resolve Container/Spline later.
                 Container = null,
                 SplineIndex = Mathf.Max(0, e.SplineIndex),

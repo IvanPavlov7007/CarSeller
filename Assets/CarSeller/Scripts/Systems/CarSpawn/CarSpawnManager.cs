@@ -27,7 +27,6 @@ public class CarSpawnManager
         GameEvents.Instance.OnProductDestroyed += OnProductDestroyed;
         subscribed = true;
     }
-
     public void UnsubscribeFromEvents()
     {
         if (!subscribed)
@@ -141,12 +140,19 @@ public class CarSpawnManager
                 continue;
             }
 
-            var car = G.SimplifiedCarsManager.CreateCarHidden(G.SimplifiedCarsCreationBuilder.RuntimeConfigs.Keys.First());
-            //var car = generateCar(marker.PositionOnGraph.Value, carSpawnEntry);
-            CityEntitiesCreationHelper.MoveInExistingCar(car, marker.PositionOnGraph.Value);
-            temporaryCars.Add(car);
-            usedMarkers.Add(car, marker);
+            SpawnCarAtPosition(marker.PositionOnGraph.Value, marker);
         }
+    }
+
+    public void SpawnCarAtPosition(CityPosition position, City.CityMarker marker)
+    {
+        var car = G.SimplifiedCarsManager.CreateCarHidden(G.SimplifiedCarsCreationBuilder.RuntimeConfigs.Keys.First());
+        //var car = generateCar(marker.PositionOnGraph.Value, carSpawnEntry);
+        CityEntitiesCreationHelper.MoveInExistingCar(car, position);
+        temporaryCars.Add(car);
+        
+        if(marker != null)
+            usedMarkers.Add(car, marker);
     }
 
     Car generateCar(CityPosition position, CarSpawnConfig.CarSpawnEntry carSpawnEntry)

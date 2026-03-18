@@ -11,7 +11,7 @@
         BuyerManager.InitializeArea();
         BuyerManager.CreateManager();
         createShop(gameConfig.VehicleControllerConfig.vehicleShopConfig);
-        BuyerManager.CreateRandomBuyers();
+        //BuyerManager.CreateRandomBuyers();
     }
     public override void InitializeLogic(GameConfig gameConfig)
     {

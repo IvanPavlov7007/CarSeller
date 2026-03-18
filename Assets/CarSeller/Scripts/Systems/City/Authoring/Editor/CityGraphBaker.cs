@@ -5,8 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 
-
-//ChatGPT generated code
+// ChatGPT generated code
 public static class CityGraphBaker
 {
     private const string LastFolderPrefKey = "CityGraphBaker.LastFolder";
@@ -28,7 +27,6 @@ public static class CityGraphBaker
         foreach (var n in nodes)
         {
             n.EnsureId();
-#if UNITY_EDITOR
             // Re-check uniqueness at baking time
             var dupes = nodes.Where(x => x != n && x.Id == n.Id).ToList();
             if (dupes.Count > 0)
@@ -37,21 +35,19 @@ public static class CityGraphBaker
                 n.GetType().GetMethod("EnsureUniqueIdInScene", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
                     ?.Invoke(n, null);
             }
-#endif
         }
+
         foreach (var e in edges) e.EnsureId();
 
         foreach (var m in markers)
         {
             m.EnsureId();
-#if UNITY_EDITOR
             var dupes = markers.Where(x => x != m && x.Id == m.Id).ToList();
             if (dupes.Count > 0)
             {
                 m.GetType().GetMethod("EnsureUniqueIdInScene", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
                     ?.Invoke(m, null);
             }
-#endif
         }
 
         // Load last-used folder (default to Assets)
@@ -107,6 +103,7 @@ public static class CityGraphBaker
             FromNodeId = e.From ? e.From.Id : null,
             ToNodeId = e.To ? e.To.Id : null,
             Bidirectional = e.Bidirectional,
+            Tags = e.Tags,
             // We no longer store scene references here for persistence hygiene
             EdgeAuthorId = e.Id,
             EdgeAuthorPath = GetHierarchyPath(e.gameObject),

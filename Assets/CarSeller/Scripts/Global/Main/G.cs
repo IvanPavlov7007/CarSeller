@@ -82,6 +82,7 @@ public static class G
 
     //to sort
     public static CityArea Area;
+    internal static BuyerManager BuyerManager;
 
     public static void Initialize( ViewBuildersConfig handlersConfig)
     {

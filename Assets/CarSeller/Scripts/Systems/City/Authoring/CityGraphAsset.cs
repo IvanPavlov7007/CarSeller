@@ -22,6 +22,8 @@ public class CityGraphAsset : ScriptableObject
         public string ToNodeId;
         public bool Bidirectional = true;
 
+        public string[] Tags;
+
         // Authoring linkage to resolve spline in scene/prefab:
         public string EdgeAuthorId;     // RoadEdgeAuthor.Id
         public string EdgeAuthorPath;   // optional: scene hierarchy path for robust lookup
