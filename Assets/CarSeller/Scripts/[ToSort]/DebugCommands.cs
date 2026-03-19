@@ -9,7 +9,7 @@ public class DebugCommands : MonoBehaviour
     public void OnA(InputValue val)
     {
 
-        G.CarSpawnManager.SpawnCarAtPosition(G.VehicleController.CurrentVehicleEntity.Position, null);
+        G.CarSpawnManager.SpawnCarAtPosition(G.VehicleController.CurrentVehicleEntity.Position);
     }
 
     public void OnD(InputValue val)

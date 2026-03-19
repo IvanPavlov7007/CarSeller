@@ -12,6 +12,140 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f7218baa2d3de45977d2104aa8f14c, type: 3}
   m_Name: '[SimplifiedGP]GameplayConfig'
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: CarSpawnConfig
+      Entry: 7
+      Data: 0|CarPoolConfig, Assembly-CSharp
+    - Name: PreferredOverallCount
+      Entry: 3
+      Data: 100
+    - Name: WeightedIdentifiers
+      Entry: 7
+      Data: 1|System.Collections.Generic.Dictionary`2[[SimplifiedCarIdentifier, Assembly-CSharp],[System.Single,
+        mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 2|System.Collections.Generic.ObjectEqualityComparer`1[[SimplifiedCarIdentifier,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 4
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: SimplifiedCarIdentifier, Assembly-CSharp
+    - Name: Type
+      Entry: 3
+      Data: 0
+    - Name: Rarity
+      Entry: 3
+      Data: 0
+    - Name: Color
+      Entry: 3
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 4
+      Data: 20
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: SimplifiedCarIdentifier, Assembly-CSharp
+    - Name: Type
+      Entry: 3
+      Data: 1
+    - Name: Rarity
+      Entry: 3
+      Data: 0
+    - Name: Color
+      Entry: 3
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 4
+      Data: 10
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: SimplifiedCarIdentifier, Assembly-CSharp
+    - Name: Type
+      Entry: 3
+      Data: 2
+    - Name: Rarity
+      Entry: 3
+      Data: 0
+    - Name: Color
+      Entry: 3
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 4
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: SimplifiedCarIdentifier, Assembly-CSharp
+    - Name: Type
+      Entry: 3
+      Data: 4
+    - Name: Rarity
+      Entry: 3
+      Data: 0
+    - Name: Color
+      Entry: 3
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   GameConfigMode: 3
   CityConfig: {fileID: 11400000, guid: c1fdbf47ec54e1f4fb8d788a6e51336a, type: 2}
   EconomyConfig: {fileID: 11400000, guid: 17df03b81af7c6b45a107fcc583aab44, type: 2}

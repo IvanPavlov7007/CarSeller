@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Sirenix.Serialization;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -21,6 +23,13 @@ public class CarSpawnManager
     bool subscribed;
     private int CarsToHaveMinCount = 10;
     private int CarsToSpawnMaxCount = 20;
+
+    CarsPool carsPool;
+
+    public void Initialize(CarPoolConfig carPoolConfig)
+    {
+        carsPool = new CarsPool(carPoolConfig);
+    }
 
     public void SubscribeToEvents()
     {
@@ -57,6 +66,8 @@ public class CarSpawnManager
         temporaryCars.Remove(car);
         usedMarkers.Remove(car);
         cellSpawnedCars.Remove(car);
+        if(carsPool.AllCars.Contains(car) && !carsPool.Queue.Contains(car))
+            carsPool.Queue.Enqueue(car);
     }
 
     public void activeCellsUpdated(UpdatedActiveCellsData data, CellWrapperManager cellWrapperManager)
@@ -112,7 +123,12 @@ public class CarSpawnManager
 
     void spawnCellCarAtPosition(CityPosition position, City.CityMarker marker)
     {
-        var car = G.SimplifiedCarsManager.CreateCarHidden(G.SimplifiedCarsCreationBuilder.RuntimeConfigs.Keys.First());
+        var car = carsPool.Queue.Dequeue();
+        if(car == null)
+        {
+            Debug.LogError("CarsPool returned null car. Make sure to populate the pool with enough cars before using.");
+            return;
+        }
         CityEntitiesCreationHelper.MoveInExistingCar(car, position);
 
         cellSpawnedCars.Add(car);
@@ -172,7 +188,7 @@ public class CarSpawnManager
     {
         return G.City.QueryMarkers("car").ToList();
     }
-
+    [Obsolete]
     void SpawnTemporaryCars()
     {
         var markers = getCarSpawnMarkers();
@@ -183,6 +199,7 @@ public class CarSpawnManager
         spawnCarsAtMarkers(markers.Take(nextCarsToSpawnCount).ToList());
     }
 
+    [Obsolete]
     void spawnCarsAtMarkers(List<City.CityMarker> markers)
     {
         foreach (var marker in markers)
@@ -193,22 +210,20 @@ public class CarSpawnManager
                 continue;
             }
 
-            SpawnCarAtPosition(marker.PositionOnGraph.Value, marker);
+            //SpawnCarAtPosition(marker.PositionOnGraph.Value, marker);
         }
     }
 
-    // Rotation/temp cars (legacy path)
-    public void SpawnCarAtPosition(CityPosition position, City.CityMarker marker)
+    // Debug
+    public void SpawnCarAtPosition(CityPosition position)
     {
-        var car = G.SimplifiedCarsManager.CreateCarHidden(G.SimplifiedCarsCreationBuilder.RuntimeConfigs.Keys.First());
-        CityEntitiesCreationHelper.MoveInExistingCar(car, position);
-
-        temporaryCars.Add(car);
-
-        if (marker != null)
+        var car = carsPool.Queue.Dequeue();
+        if(car == null)
         {
-            usedMarkers[car] = marker;
+            Debug.LogError("CarsPool returned null car. Make sure to populate the pool with enough cars before using.");
+            return;
         }
+        CityEntitiesCreationHelper.MoveInExistingCar(car, position);
     }
 
     void RemoveTemporaryCars()
@@ -236,4 +251,46 @@ public class CarSpawnManager
     {
         G.CityEntityLifetimeService.Destroy(car);
     }
+}
+
+public class CarsPool
+{
+    public Queue<Car> Queue = new Queue<Car>();
+    public HashSet<Car> AllCars;
+    public readonly CarPoolConfig Config;
+
+    public CarsPool(CarPoolConfig config)
+    {
+        Config = config;
+        populate();
+    }
+
+    public void populate()
+    {
+        List<Car> list = new List<Car>(Config.PreferredOverallCount);
+        float totalWeight = Config.WeightedIdentifiers.Values.Sum();
+        foreach (var kvp in Config.WeightedIdentifiers)
+        {
+            var identifier = kvp.Key;
+            var weight = kvp.Value;
+            int carsCountForIdentifier = Mathf.RoundToInt((weight / totalWeight) * Config.PreferredOverallCount);
+            for (int i = 0; i < carsCountForIdentifier; i++)
+            {
+                list.Add(G.SimplifiedCarsManager.CreateCarHidden(identifier));
+            }
+        }
+        list.Shuffle();
+        foreach (var car in list)
+        {
+            Queue.Enqueue(car);
+        }
+        this.AllCars = new HashSet<Car>(list);
+    }
+}
+
+public class CarPoolConfig
+{
+    public int PreferredOverallCount = 50;
+    [OdinSerialize]
+    public Dictionary<SimplifiedCarIdentifier, float> WeightedIdentifiers = new Dictionary<SimplifiedCarIdentifier, float>();
 }
