@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70f7218baa2d3de45977d2104aa8f14c, type: 3}
+  m_Name: '[SimplifiedGP]GameplayConfig'
+  m_EditorClassIdentifier: 
+  GameConfigMode: 3
+  CityConfig: {fileID: 11400000, guid: c1fdbf47ec54e1f4fb8d788a6e51336a, type: 2}
+  EconomyConfig: {fileID: 11400000, guid: 17df03b81af7c6b45a107fcc583aab44, type: 2}
+  WorldMissionsConfig: {fileID: 0}
+  VehicleControllerConfig: {fileID: 11400000, guid: e54005ec40494bb4fbf9c2e465ebe794, type: 2}
+  GameModeData: {fileID: 0}

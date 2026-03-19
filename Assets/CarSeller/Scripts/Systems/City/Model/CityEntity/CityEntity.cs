@@ -88,6 +88,7 @@ public sealed class CityEntity : ILocation, ICityPositionable
 
         City.Entities.Remove(Subject);
         Subject = null;
+        GameEvents.Instance.OnCityEntityDestroyed?.Invoke(new CityEntityDestroyedEventData(this));
     }
 
     public override string ToString()

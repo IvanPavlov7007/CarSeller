@@ -19,6 +19,7 @@ MonoBehaviour:
   gridNodesCountY: 6
   gridNodeWorldSize: 2
   CityGraph: {fileID: 11400000, guid: 08c07a6d16a659b4a9dbf56415fa0699, type: 2}
+  SpatialGridConfig: {fileID: 11400000, guid: 4ce736eec0ba40d498e63057bb80c018, type: 2}
   warehouseConfigs: []
   carStashWarehouseConfigs:
   - {fileID: 11400000, guid: cd956df23f3cfc24b9f3fed94f0cb726, type: 2}

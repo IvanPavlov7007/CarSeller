@@ -1,5 +1,4 @@
-﻿using Pixelplacement;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -9,6 +8,10 @@ public class CarSpawnManager
 {
     readonly List<Car> temporaryCars = new List<Car>();
     readonly Dictionary<Car, City.CityMarker> usedMarkers = new Dictionary<Car, City.CityMarker>();
+
+    // Cars spawned by SpatialGrid activation (NOT part of rotation cars)
+    readonly HashSet<Car> cellSpawnedCars = new HashSet<Car>();
+    readonly Dictionary<City.CityMarker, Car> markerToCellCar = new Dictionary<City.CityMarker, Car>();
 
     int nextCarsToHaveMinCount;
     int nextCarsToSpawnCount;
@@ -27,6 +30,7 @@ public class CarSpawnManager
         GameEvents.Instance.OnProductDestroyed += OnProductDestroyed;
         subscribed = true;
     }
+
     public void UnsubscribeFromEvents()
     {
         if (!subscribed)
@@ -41,8 +45,83 @@ public class CarSpawnManager
         if (car == null)
             return;
 
+        // If this car was spawned by a marker, free the marker mapping first.
+        if (usedMarkers.TryGetValue(car, out City.CityMarker marker) && marker != null)
+        {
+            if (markerToCellCar.TryGetValue(marker, out Car mappedCar) && mappedCar == car)
+            {
+                markerToCellCar.Remove(marker);
+            }
+        }
+
         temporaryCars.Remove(car);
         usedMarkers.Remove(car);
+        cellSpawnedCars.Remove(car);
+    }
+
+    public void activeCellsUpdated(UpdatedActiveCellsData data, CellWrapperManager cellWrapperManager)
+    {
+        if (data == null || !data.HasChanges)
+            return;
+
+        foreach (var cell in data.NewActiveCells)
+        {
+            populateCell(cellWrapperManager.GetCarSpawnWrapper(cell));
+        }
+
+        foreach (var cell in data.DisactivatedCells)
+        {
+            clearCell(cellWrapperManager.GetCarSpawnWrapper(cell));
+        }
+    }
+
+    void populateCell(CarSpawnCellWrapper cellWrapper)
+    {
+        var markers = cellWrapper.GetMarkers().ToList();
+
+        // Only use markers that are not already occupied by a cell-spawned car.
+        markers.RemoveAll(m => m == null || markerToCellCar.ContainsKey(m));
+
+        int desiredCarsCount = Mathf.Min(Mathf.FloorToInt(cellWrapper.density), markers.Count);
+        if (desiredCarsCount <= 0)
+            return;
+
+        markers.Shuffle();
+
+        for (int i = 0; i < desiredCarsCount; i++)
+        {
+            var marker = markers[i];
+            if (marker.PositionOnGraph == null)
+                continue;
+
+            spawnCellCarAtPosition(marker.PositionOnGraph.Value, marker);
+        }
+    }
+
+    void clearCell(CarSpawnCellWrapper cellWrapper)
+    {
+        // Despawn ONLY cars spawned by the cell activation system.
+        foreach (var carEntity in cellWrapper.GetCars())
+        {
+            if (carEntity?.Subject is Car car && cellSpawnedCars.Contains(car))
+            {
+                DespawnCar(carEntity);
+            }
+        }
+    }
+
+    void spawnCellCarAtPosition(CityPosition position, City.CityMarker marker)
+    {
+        var car = G.SimplifiedCarsManager.CreateCarHidden(G.SimplifiedCarsCreationBuilder.RuntimeConfigs.Keys.First());
+        CityEntitiesCreationHelper.MoveInExistingCar(car, position);
+
+        cellSpawnedCars.Add(car);
+
+        if (marker != null)
+        {
+            usedMarkers[car] = marker;
+            markerToCellCar[marker] = car;
+        }
     }
 
     public void NewCarsRotation()
@@ -104,36 +183,10 @@ public class CarSpawnManager
         spawnCarsAtMarkers(markers.Take(nextCarsToSpawnCount).ToList());
     }
 
-    /// <summary>
-    /// Old method, spawns cars from provided entries at provided markers
-    /// </summary>
-    void spawnCarsAtMarkers(List<City.CityMarker> markers, CarSpawnConfig.CarSpawnEntry[] carSpawnEntries)
-    {
-        Debug.Assert(markers.Count >= carSpawnEntries.Length,
-            $"Not enough car markers in the city to spawn {carSpawnEntries.Length} cars. Found only {markers.Count} markers.");
-
-        for (int i = 0; i < carSpawnEntries.Length; i++)
-        {
-            var carSpawnEntry = carSpawnEntries[i];
-            var randomMarker = markers[i];
-
-            if(randomMarker.PositionOnGraph == null)
-            {
-                Debug.LogWarning($"Marker {randomMarker.Id} has no position on graph, skipping car spawn.");
-                continue;
-            }
-            var car = generateCar(randomMarker.PositionOnGraph.Value, carSpawnEntry);
-
-            temporaryCars.Add(car);
-            usedMarkers.Add(car, randomMarker);
-        }
-    }
-
     void spawnCarsAtMarkers(List<City.CityMarker> markers)
     {
         foreach (var marker in markers)
         {
-            //GetWeightedRandomCarForRegion(marker.RegionId);
             if (marker.PositionOnGraph == null)
             {
                 Debug.LogWarning($"Marker {marker.Id} has no position on graph, skipping car spawn.");
@@ -144,35 +197,31 @@ public class CarSpawnManager
         }
     }
 
+    // Rotation/temp cars (legacy path)
     public void SpawnCarAtPosition(CityPosition position, City.CityMarker marker)
     {
         var car = G.SimplifiedCarsManager.CreateCarHidden(G.SimplifiedCarsCreationBuilder.RuntimeConfigs.Keys.First());
-        //var car = generateCar(marker.PositionOnGraph.Value, carSpawnEntry);
         CityEntitiesCreationHelper.MoveInExistingCar(car, position);
-        temporaryCars.Add(car);
-        
-        if(marker != null)
-            usedMarkers.Add(car, marker);
-    }
 
-    Car generateCar(CityPosition position, CarSpawnConfig.CarSpawnEntry carSpawnEntry)
-    {
-        var entity = CityEntitiesCreationHelper.CreateNewCar(
-            carSpawnEntry.CarBaseConfig,
-            carSpawnEntry.CarVariantConfig,
-            position);
-        return entity.Subject as Car;
+        temporaryCars.Add(car);
+
+        if (marker != null)
+        {
+            usedMarkers[car] = marker;
+        }
     }
 
     void RemoveTemporaryCars()
     {
         foreach (var car in temporaryCars)
         {
-            // TODO check that the are no leftovers in some registries
             G.ProductLifetimeService.DestroyProduct(car);
         }
+
         temporaryCars.Clear();
-        usedMarkers.Clear();
+
+        // Note: usedMarkers for temporary cars will be cleaned via OnProductDestroyed -> ReleaseCar.
+        // Keeping usedMarkers here avoids losing marker mapping for cellSpawnedCars.
     }
 
     void OnProductDestroyed(ProductDestroyedEventData eventData)
@@ -181,5 +230,10 @@ public class CarSpawnManager
         {
             ReleaseCar(car);
         }
+    }
+
+    internal void DespawnCar(CityEntity car)
+    {
+        G.CityEntityLifetimeService.Destroy(car);
     }
 }

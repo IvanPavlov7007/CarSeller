@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines;
+using static City;
 
 public class City : ILocationsHolder, IDisposable
 {
@@ -20,6 +22,8 @@ public class City : ILocationsHolder, IDisposable
     public static CityEntityLifetimeService EntityLifetimeService => G.City.lifetimeService;
     public AspectsSystem AspectsSystem { get; private set; }
     public CityEntityAspectsService AspectsService => AspectsSystem.AspectsService;
+
+    public SpatialGridManager SpatialGridManager;
 
     // MARKERS RUNTIME
     public sealed class CityMarker
@@ -77,11 +81,7 @@ public class City : ILocationsHolder, IDisposable
 
     public IEnumerable<CityMarker> QueryMarkers(string tag = null, string region = null, Predicate<CityMarker> predicate = null)
     {
-        IEnumerable<CityMarker> q = _markersById.Values;
-        if (!string.IsNullOrEmpty(tag)) q = q.Where(m => m.HasTag(tag));
-        if (!string.IsNullOrEmpty(region)) q = q.Where(m => string.Equals(m.RegionId, region, StringComparison.OrdinalIgnoreCase));
-        if (predicate != null) q = q.Where(m => predicate(m));
-        return q;
+        return _markersById.Values.QueryMarkers(tag, region, predicate);
     }
 
     public CityMarker GetRandomMarker(string tag = null, string region = null, Predicate<CityMarker> predicate = null)
@@ -98,6 +98,7 @@ public class City : ILocationsHolder, IDisposable
         // If null, CityGraphLoader must scan the active scene root(s).
         CityGraphLoader.LoadFromScene(this, cityConfig.CityGraph, graphRoot);
         this.AspectsSystem = aspectsSystem;
+        SpatialGridManager = SpatialGridManager.Create(cityConfig.SpatialGridConfig, this);
     }
 
     public void InitializeFromGraph(CityGraphAsset graphAsset)
@@ -225,7 +226,9 @@ public class City : ILocationsHolder, IDisposable
 
     public void Dispose()
     {
+        GameObject.Destroy(SpatialGridManager.gameObject);
         AspectsSystem.Dispose();
+        
     }
 }
 
@@ -436,5 +439,17 @@ public readonly struct CityPosition
             return On(Edge, 1f, forward: false);
         }
         throw new InvalidOperationException("Edges are not connected.");
+    }
+}
+
+public static class CityExtensions
+{
+    public static IEnumerable<CityMarker> QueryMarkers(this IEnumerable<CityMarker> collection, string tag = null, string region = null, Predicate<CityMarker> predicate = null)
+    {
+        IEnumerable<CityMarker> q = collection;
+        if (!string.IsNullOrEmpty(tag)) q = q.Where(m => m.HasTag(tag));
+        if (!string.IsNullOrEmpty(region)) q = q.Where(m => string.Equals(m.RegionId, region, StringComparison.OrdinalIgnoreCase));
+        if (predicate != null) q = q.Where(m => predicate(m));
+        return q;
     }
 }

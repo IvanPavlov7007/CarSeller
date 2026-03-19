@@ -75,7 +75,6 @@ public class BuyerManager : MonoBehaviour
 
     private void Update()
     {
-        G.CarSpawnManager.CheckAndRefill();
         UpdateArea(G.Area, Time.deltaTime);
     }
 

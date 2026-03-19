@@ -43,6 +43,8 @@ public class GameEvents
 
         onAreaProgressed = null;
         onAreaLevelUp = null;
+
+        OnCityEntityDestroyed = null;
     }
 
     public Action OnGamePaused;
@@ -86,6 +88,17 @@ public class GameEvents
 
     public Action<AreaProgressEventData> onAreaProgressed;
     public Action<AreaLevelUpEventData> onAreaLevelUp;
+
+    public Action<CityEntityDestroyedEventData> OnCityEntityDestroyed;
+}
+
+public class CityEntityDestroyedEventData : GameEventData
+{
+    public readonly CityEntity DestroyedEntity;
+    public CityEntityDestroyedEventData(CityEntity destroyedEntity)
+    {
+        DestroyedEntity = destroyedEntity;
+    }
 }
 
 public class AreaProgressEventData : GameEventData

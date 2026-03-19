@@ -7,7 +7,7 @@
     {
         base.InitializeWorld(gameConfig);
         G.CarSpawnManager.SubscribeToEvents();
-        G.CarSpawnManager.NewCarsRotation();
+        //G.CarSpawnManager.NewCarsRotation();
         BuyerManager.InitializeArea();
         BuyerManager.CreateManager();
         createShop(gameConfig.VehicleControllerConfig.vehicleShopConfig);

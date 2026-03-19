@@ -3,12 +3,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-/// <summary>
-/// Managers that loads and manages city in the city scene
-/// Set ups and changes states( visuals, interactive) of city views based on the game state
-/// Creates and destroys views for city entities
-/// </summary>
 public class CitySceneManager : Singleton<CitySceneManager>
 {
     public City City => World.Instance.City;
@@ -25,7 +19,6 @@ public class CitySceneManager : Singleton<CitySceneManager>
         currentProfile = profileRegistry.Get(state);
     }
 
-
     private void OnEnable()
     {
         GameEvents.Instance.OnLocatableRegistered += onNewLocatableCreated;
@@ -35,9 +28,9 @@ public class CitySceneManager : Singleton<CitySceneManager>
         GameEvents.Instance.onVehicleControlStateChanged += onVehicleControlStateChanged;
 
         GameEvents.Instance.OnGameStateChanged += onGameStateChanged;
-    }
 
-    
+        GameEvents.Instance.OnCityEntityDestroyed += onCityEntityDestroyed;
+    }
 
     private void OnDisable()
     {
@@ -48,6 +41,16 @@ public class CitySceneManager : Singleton<CitySceneManager>
         GameEvents.Instance.onVehicleControlStateChanged -= onVehicleControlStateChanged;
 
         GameEvents.Instance.OnGameStateChanged -= onGameStateChanged;
+
+        GameEvents.Instance.OnCityEntityDestroyed -= onCityEntityDestroyed;
+    }
+
+    private void onCityEntityDestroyed(CityEntityDestroyedEventData data)
+    {
+        if (data?.DestroyedEntity == null)
+            return;
+
+        clearView(data.DestroyedEntity);
     }
 
     public CityViewObjectController getExiting(CityEntity entity)

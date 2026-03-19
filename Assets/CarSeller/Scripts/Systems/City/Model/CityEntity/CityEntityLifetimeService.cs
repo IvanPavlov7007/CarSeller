@@ -38,6 +38,13 @@ public class CityEntityLifetimeService
 
     private readonly HashSet<ILocatable> _destroyInProgress = new HashSet<ILocatable>();
 
+    public void Destroy(CityEntity entity)
+    {
+        if (entity == null)
+            return;
+        Destroy(entity.Subject);
+    }
+
     public void Destroy(ILocatable anyLocatable)
     {
         if (anyLocatable == null)
@@ -54,6 +61,12 @@ public class CityEntityLifetimeService
             if (anyLocatable is IDestroyTracker tracker)
             {
                 tracker.NotifyDestroyed();
+            }
+
+            // IMPORTANT: emit CityEntityDestroyed while we can still resolve the entity (before detach / subject null).
+            if (G.City != null && G.City.TryGetEntity(anyLocatable, out var cityEntity) && cityEntity != null)
+            {
+                GameEvents.Instance.OnCityEntityDestroyed?.Invoke(new CityEntityDestroyedEventData(cityEntity));
             }
 
             switch (anyLocatable)

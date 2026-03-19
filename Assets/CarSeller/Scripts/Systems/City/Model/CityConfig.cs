@@ -11,6 +11,7 @@ public class CityConfig : ScriptableObject
     public int gridNodesCountY;
     public float gridNodeWorldSize;
     public CityGraphAsset CityGraph;
+    public SpatialGridConfig SpatialGridConfig;
 
     //TODO make this more generic, e.g. List<ILocatableEntitySpawnConfig> and then have separate spawn configs for warehouses, car stashes, buyers, etc.
     public WarehouseConfig[] warehouseConfigs;
