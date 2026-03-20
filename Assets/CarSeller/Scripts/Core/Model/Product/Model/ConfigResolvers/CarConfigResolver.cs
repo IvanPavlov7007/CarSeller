@@ -45,30 +45,7 @@ public class CarConfigResolver
         else
             result.Acceleration = carBase.Acceleration;
 
-        // Color
-        if (carVariant != null && carVariant.OverrideColor)
-        {
-            result.Color = carVariant.Color;
-        }
-        else
-            result.Color = carBase.Color;
-
-        // Type
-        if (carVariant != null && carVariant.OverrideType)
-        {
-            result.Type = carVariant.Type;
-        }
-        else
-            result.Type = carBase.Type;
-
-        // Rarity
-        if (carVariant != null && carVariant.OverrideRarity)
-        {
-            result.Rarity = carVariant.Rarity;
-        }
-        else
-            result.Rarity = carBase.Rarity;
-
+        result.Kind = carBase.Kind;
         result.TopView = carBase.TopView;
         result.SideView = carBase.SideView;
 

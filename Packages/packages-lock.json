@@ -16,6 +16,13 @@
       },
       "hash": "9a7535a3fad66ebec5458a8b22f6ad023c960fd3"
     },
+    "com.norska-lib.spreadsheets": {
+      "version": "https://github.com/NorskaGames/NorskaLib.Spreadsheets.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "bf43763b1641023278d0f77a23dd2d3a9fcf3fbe"
+    },
     "com.singularitygroup.hotreload": {
       "version": "git+https://gitlab.hotreload.net/root/hot-reload-releases.git#1.13.11",
       "depth": 0,

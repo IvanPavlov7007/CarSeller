@@ -13,7 +13,7 @@ public enum CarColor
 public enum CarType
 {
     Sedan,
-    Mini,
+    Small,
     Bike,
     Truck,
     Super
@@ -28,7 +28,16 @@ public enum CarRarity
 
 public interface ISimplifiedCarModel
 {
-    public CarColor Color { get; }
-    public CarType Type { get; }
-    public CarRarity Rarity { get; }
+    public CarKind Kind { get; }
+}
+
+public struct CarKind
+{
+    public CarType Type;
+    public CarRarity Rarity;
+    public CarKind(CarType type, CarRarity rarity)
+    {
+        Type = type;
+        Rarity = rarity;
+    }
 }

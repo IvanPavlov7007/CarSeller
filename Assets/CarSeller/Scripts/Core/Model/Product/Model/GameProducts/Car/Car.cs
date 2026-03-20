@@ -18,9 +18,7 @@ public sealed class Car : Product, IOwnershipContainer, ILocationsHolder, ISimpl
     public IOwnable GetOwnerOfContainer() => this;
 
     #region ISimplifiedCarModel implementation
-    public CarColor Color => runtimeConfig.Color;
-    public CarType Type => runtimeConfig.Type;
-    public CarRarity Rarity => runtimeConfig.Rarity;
+    public CarKind Kind => runtimeConfig.Kind;
     #endregion
 
     public Car(CarRuntimeConfig runtimeConfig)

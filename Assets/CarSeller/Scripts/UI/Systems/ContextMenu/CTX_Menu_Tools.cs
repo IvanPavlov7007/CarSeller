@@ -26,7 +26,7 @@ public static class CTX_Menu_Tools
 
     public static UIElement CarRarityText(Car car)
     {
-        return Header(TextConventionsHelper.GetColoredRarityText(car.Rarity.ToString(), car.Rarity));
+        return Header(TextConventionsHelper.GetColoredRarityText(car.Kind.Rarity.ToString(), car.Kind.Rarity));
     }
     public static UIElement Price(float price, bool withSign = false)
     {

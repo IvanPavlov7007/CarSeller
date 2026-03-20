@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class CarRuntimeConfig : IRuntimeConfig
+public class CarRuntimeConfig : IRuntimeConfig, ISimplifiedCarModel
 {
     public string Name;
     public float BasePrice;
@@ -17,7 +17,7 @@ public class CarRuntimeConfig : IRuntimeConfig
     public CarFrameRuntimeConfig CarFrameRuntimeConfig;
     public List<PartSlotRuntimeConfig> SlotConfigs;
 
-    public CarColor Color;
-    public CarType Type;
-    public CarRarity Rarity;
+    public CarKind Kind;
+
+    CarKind ISimplifiedCarModel.Kind => Kind;
 }

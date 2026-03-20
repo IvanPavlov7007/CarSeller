@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df5178183ee9dd942986a2067713c811, type: 3}
+  m_Name: '[3d]CarsDefinitionLibrary'
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 8025686ed98763547a86262c16b9fccf, type: 2}
+    - {fileID: 11400000, guid: 2d19b61e57273bd4fbf9545020ad55e0, type: 2}
+    - {fileID: 11400000, guid: 540f4a76cf671524081f297430f5b637, type: 2}
+    - {fileID: 11400000, guid: 853fc401f947b1249b032c097442862b, type: 2}
+    - {fileID: 11400000, guid: 4f4c0cdc287a52d4e921e3180428dfd5, type: 2}
+    - {fileID: 11400000, guid: 69125c7f96ad2064582bc763184bf29a, type: 2}
+    - {fileID: 11400000, guid: 478087f17ba5be24b8cf264be96ba143, type: 2}
+    - {fileID: 11400000, guid: d33bdf0076be28d4ea19dcd755c2d539, type: 2}
+    - {fileID: 11400000, guid: e5d7fdefde8179a48807fbed636ecf14, type: 2}
+    - {fileID: 11400000, guid: 402f5f37d1f85494389cd0fdc4be204f, type: 2}
+    - {fileID: 11400000, guid: c7c029a25a68ebf4b9d44075952c6b50, type: 2}
+    - {fileID: 11400000, guid: 471d4d4604889104190a37bd3cca946a, type: 2}
+    - {fileID: 11400000, guid: 982a40bdac533b547bdf913f57d7af37, type: 2}
+    - {fileID: 11400000, guid: 5cd20c8294dda2d47b3be72592da5c42, type: 2}
+    - {fileID: 11400000, guid: 723371f7ea31abb4bb761da1a95ddbb0, type: 2}
+    - {fileID: 11400000, guid: 653c1c6382725ec4cb7172217fd5375f, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: mainBaseConfigs
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[CarBaseConfig, ProductCore]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 16
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 10
+      Data: 6
+    - Name: 
+      Entry: 10
+      Data: 7
+    - Name: 
+      Entry: 10
+      Data: 8
+    - Name: 
+      Entry: 10
+      Data: 9
+    - Name: 
+      Entry: 10
+      Data: 10
+    - Name: 
+      Entry: 10
+      Data: 11
+    - Name: 
+      Entry: 10
+      Data: 12
+    - Name: 
+      Entry: 10
+      Data: 13
+    - Name: 
+      Entry: 10
+      Data: 14
+    - Name: 
+      Entry: 10
+      Data: 15
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 

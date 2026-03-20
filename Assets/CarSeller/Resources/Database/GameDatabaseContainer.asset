@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560c6c0b3edc2be4b8c1cfc762c214e7, type: 3}
+  m_Name: GameDatabaseContainer
+  m_EditorClassIdentifier: 
+  foldoutImportGUI: 0
+  documentId: 185Ha06iIM76nwZKmgb5kFhRPRYGTEzlobiPtEPYcmOM
+  selectedTogglesIds:
+  - Area1CarRaritySpawnWeightsPerLevelList
+  - Area1CarTypeSpawnWeightsPerLevelList
+  foldoutSerializationGUI: 0
+  serializationOutputPath: ../../Configs
+  serializationFileName: Configs.v0.1
+  serializationFormat: 0
+  AreaBalancingContent:
+    Area1CarTypeSpawnWeightsPerLevelList:
+    - AreaLevel: 0
+      Small: 10
+      Sedan: 30
+      Truck: 5
+      Bike: 2
+      Super: 0
+    - AreaLevel: 1
+      Small: 10
+      Sedan: 30
+      Truck: 5
+      Bike: 2
+      Super: 1
+    - AreaLevel: 2
+      Small: 10
+      Sedan: 30
+      Truck: 5
+      Bike: 2
+      Super: 3
+    - AreaLevel: 3
+      Small: 10
+      Sedan: 30
+      Truck: 5
+      Bike: 2
+      Super: 5
+    Area1CarRaritySpawnWeightsPerLevelList:
+    - AreaLevel: 0
+      Common: 20
+      Uncommon: 0
+      Epic: 0
+    - AreaLevel: 1
+      Common: 20
+      Uncommon: 1
+      Epic: 0
+    - AreaLevel: 2
+      Common: 20
+      Uncommon: 5
+      Epic: 0
+    - AreaLevel: 3
+      Common: 20
+      Uncommon: 5
+      Epic: 1

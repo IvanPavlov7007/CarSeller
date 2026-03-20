@@ -23,5 +23,5 @@ public struct ViewBuildersConfig
     public CityViewObjectBuilder cityViewObjectBuilder;
 
     [Header("Simplified")]
-    public SimplifiedCarsCreationBuilder simplifiedCarsCreationBuilder;
+    public CarsDefinitionLibrary simplifiedCarsCreationBuilder;
 }

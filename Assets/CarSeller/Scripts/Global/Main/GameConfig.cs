@@ -10,8 +10,7 @@ public class GameConfig : SerializedScriptableObject
     public EconomyConfig EconomyConfig;
     public WorldMissionsConfig WorldMissionsConfig;
     public VehicleControllerConfig VehicleControllerConfig;
-    [OdinSerialize]
-    public CarPoolConfig CarSpawnConfig;
+    public GameDatabaseContainer GameDatabaseContainer;
     [Header("Game Modes Data")]
     public ScriptableObject GameModeData;
 }

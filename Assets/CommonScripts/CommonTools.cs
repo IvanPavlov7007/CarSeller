@@ -1,4 +1,4 @@
-//Version: 5
+//Version: 6
 //increment version each change
 using System;
 using System.Collections;
@@ -126,12 +126,19 @@ public static class CommonTools
         return RandomIndex(weights, sum);
     }
 
-    public static T RandomObject<T>(T[] elements)
+    public static T RandomObject<T>(this T[] elements)
     {
         return elements[Random.Range(0, elements.Length)];
     }
 
-    public static T RandomObject<T>(T[] elements, int[] weights)
+    public static T RandomObject<T>(this T[] elements, int[] weights)
+    {
+        if (weights.Length != elements.Length)
+            throw new System.Exception("weights count doesn't match elements count");
+        return elements[RandomIndex(weights)];
+    }
+
+    public static T RandomObject<T>(this T[] elements, float[] weights)
     {
         if (weights.Length != elements.Length)
             throw new System.Exception("weights count doesn't match elements count");
@@ -171,18 +178,6 @@ public static class CommonTools
             throw new System.Exception("Sum of weights must be positive");
 
         return RandomIndex(weights, sum);
-    }
-
-    public static T RandomObject<T>(T[] elements, float[] weights)
-    {
-        if (weights == null)
-            throw new System.ArgumentNullException("weights");
-        if (elements == null)
-            throw new System.ArgumentNullException("elements");
-        if (weights.Length != elements.Length)
-            throw new System.Exception("weights count doesn't match elements count");
-
-        return elements[RandomIndex(weights)];
     }
 
     public static Vector2 RotateDir(Vector2 dir, float angle)

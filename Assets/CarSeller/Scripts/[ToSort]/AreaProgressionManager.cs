@@ -13,15 +13,17 @@ public class AreaProgressionManager : Singleton<AreaProgressionManager>
     public void progressArea(float xp)
     {
         float initialXP = area.currentXP;
-        int initialLevel = area.CurrentLevelNode.Value.levelNumber;
+        var initialLevel = area.CurrentLevelNode.Value;
+        if(!initialLevel.Final)
+            progressRecursively(xp);
 
-        progressRecursively(xp);
+        var currentLevel = area.CurrentLevelNode.Value;
 
         GameEvents.Instance.onAreaProgressed?.Invoke(new AreaProgressEventData(
             area,
             initialXP,
             area.currentXP,
-            initialLevel, area.CurrentLevelNode.Value.levelNumber));
+            initialLevel, currentLevel));
     }
 
     void progressRecursively(float xp)
@@ -29,11 +31,11 @@ public class AreaProgressionManager : Singleton<AreaProgressionManager>
         var currentLevel = area.CurrentLevelNode.Value;
         float newXP = area.currentXP + xp;
 
-        if (newXP >= currentLevel.xpToNextLevel)
+        if (newXP >= currentLevel.XpToNextLevel)
         {
-            float remainderXP = newXP - currentLevel.xpToNextLevel;
+            float remainderXP = newXP - currentLevel.XpToNextLevel;
 
-            area.currentXP = currentLevel.xpToNextLevel;
+            area.currentXP = currentLevel.XpToNextLevel;
 
             if (tryUpgradeArea(area))
             {

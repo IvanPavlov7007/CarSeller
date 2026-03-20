@@ -107,9 +107,9 @@ public class AreaProgressEventData : GameEventData
     public readonly float InitialXP;
     public readonly float NewXP;
 
-    public readonly int InitialLevel;
-    public readonly int NewLevel;
-    public AreaProgressEventData(CityArea area, float initialXP, float newXP, int initialLevel, int newLevel)
+    public readonly AreaLevel InitialLevel;
+    public readonly AreaLevel NewLevel;
+    public AreaProgressEventData(CityArea area, float initialXP, float newXP, AreaLevel initialLevel, AreaLevel newLevel)
     {
         Area = area;
         InitialXP = initialXP;

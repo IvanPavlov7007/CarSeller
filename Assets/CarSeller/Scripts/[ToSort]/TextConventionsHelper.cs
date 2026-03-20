@@ -23,7 +23,7 @@ public static class TextConventionsHelper
 
     public static string CarDescription(Car car)
     {
-        return $"Type: {car.Type.ToString()}\nColor: {car.Color.ToString()}";
+        return $"Type: {car.Kind.ToString()}, Rarity: {GetColoredRarityText(car.Kind.Rarity)}";
     }
 
     public static string FormatPrice(float price)

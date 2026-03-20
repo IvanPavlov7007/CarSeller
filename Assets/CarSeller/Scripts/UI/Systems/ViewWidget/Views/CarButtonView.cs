@@ -57,7 +57,7 @@ public class CarButtonWidget : ButtonWidget
     {
         sprite = IconBuilderHelper.BuildProdutSpite(car);
         name = car.Name;
-        rarity = TextConventionsHelper.GetColoredRarityText(car.Rarity);
+        rarity = TextConventionsHelper.GetColoredRarityText(car.Kind.Rarity);
         description = TextConventionsHelper.CarDescription(car);
         OnClick = onClick;
     }

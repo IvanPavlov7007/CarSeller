@@ -75,7 +75,7 @@ public static class G
     public static CityViewObjectBuilder cityViewObjectBuilder => viewBuildersConfig.cityViewObjectBuilder;
     public static CityViewStreetsBuilder cityViewStreetsBuilder = new CityViewStreetsBuilder();
 
-    public static SimplifiedCarsCreationBuilder SimplifiedCarsCreationBuilder => viewBuildersConfig.simplifiedCarsCreationBuilder;
+    public static CarsDefinitionLibrary SimplifiedCarsCreationBuilder => viewBuildersConfig.simplifiedCarsCreationBuilder;
 
     static ViewBuildersConfig viewBuildersConfig;
 

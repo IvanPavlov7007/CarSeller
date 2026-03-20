@@ -19,7 +19,7 @@ public class PersonalVehicleShop : ILocatable
         GeneratePersonalVehiclesList(shopConfig.initiallyUnlockedOptions);
     }
 
-    private void GeneratePersonalVehiclesList(IReadOnlyList<SimplifiedCarIdentifier> initiallyAvailable)
+    private void GeneratePersonalVehiclesList(IReadOnlyList<CarKind> initiallyAvailable)
     {
         Debug.Assert(initiallyAvailable != null, "Initially available cars list cannot be null.");
         Debug.Assert(AllPersonalVehiclesShopEntries != null);
@@ -86,7 +86,7 @@ public class PersonalVehicleShopEntry : IPurchasable
     public bool IsAvailable { get; private set; } = true;
     public PersonalVehicle PersonalVehicle => personalVehicle;
 
-    internal PersonalVehicleShopEntry(SimplifiedCarIdentifier carIdentifier, PersonalVehicleShop shop)
+    internal PersonalVehicleShopEntry(CarKind carIdentifier, PersonalVehicleShop shop)
     {
         personalVehicle = PersonalVehicle.CreateNew(carIdentifier);
         Price = getPrice();

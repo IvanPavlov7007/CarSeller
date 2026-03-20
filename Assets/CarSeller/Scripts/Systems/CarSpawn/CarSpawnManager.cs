@@ -24,12 +24,7 @@ public class CarSpawnManager
     private int CarsToHaveMinCount = 10;
     private int CarsToSpawnMaxCount = 20;
 
-    CarsPool carsPool;
-
-    public void Initialize(CarPoolConfig carPoolConfig)
-    {
-        carsPool = new CarsPool(carPoolConfig);
-    }
+    CarsPool carsPool => G.Area.CurrentLevelNode.Value.CarPool;
 
     public void SubscribeToEvents()
     {
@@ -255,42 +250,13 @@ public class CarSpawnManager
 
 public class CarsPool
 {
-    public Queue<Car> Queue = new Queue<Car>();
+    public Queue<Car> Queue;
     public HashSet<Car> AllCars;
-    public readonly CarPoolConfig Config;
 
-    public CarsPool(CarPoolConfig config)
+    public CarsPool(List<Car> list)
     {
-        Config = config;
-        populate();
-    }
-
-    public void populate()
-    {
-        List<Car> list = new List<Car>(Config.PreferredOverallCount);
-        float totalWeight = Config.WeightedIdentifiers.Values.Sum();
-        foreach (var kvp in Config.WeightedIdentifiers)
-        {
-            var identifier = kvp.Key;
-            var weight = kvp.Value;
-            int carsCountForIdentifier = Mathf.RoundToInt((weight / totalWeight) * Config.PreferredOverallCount);
-            for (int i = 0; i < carsCountForIdentifier; i++)
-            {
-                list.Add(G.SimplifiedCarsManager.CreateCarHidden(identifier));
-            }
-        }
         list.Shuffle();
-        foreach (var car in list)
-        {
-            Queue.Enqueue(car);
-        }
-        this.AllCars = new HashSet<Car>(list);
+        AllCars = new HashSet<Car>(list);
+        Queue = new Queue<Car>(list);
     }
-}
-
-public class CarPoolConfig
-{
-    public int PreferredOverallCount = 50;
-    [OdinSerialize]
-    public Dictionary<SimplifiedCarIdentifier, float> WeightedIdentifiers = new Dictionary<SimplifiedCarIdentifier, float>();
 }

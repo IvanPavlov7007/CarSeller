@@ -22,20 +22,4 @@ public class CarVariantConfig : SerializedScriptableObject, IVariantConfig
     public CarFrameVariantConfig carFrameRuntimeConfig;
     [OdinSerialize]
     public List<PartSlotVariantConfig> slotConfigs = new List<PartSlotVariantConfig>();
-
-
-    [BoxGroup("Simplified params")]
-    public bool OverrideColor;
-    [ShowIf("OverrideColor")]
-    [BoxGroup("Simplified params")]
-    public CarColor Color;
-    [BoxGroup("Simplified params")]
-    public bool OverrideType;
-    [ShowIf("OverrideType")]
-    [BoxGroup("Simplified params")]
-    public CarType Type;
-    public bool OverrideRarity;
-    [ShowIf("OverrideRarity")]
-    [BoxGroup("Simplified params")]
-    public CarRarity Rarity;
 }

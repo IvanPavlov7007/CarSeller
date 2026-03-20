@@ -7,199 +7,206 @@ using Sirenix.Serialization;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-
-[Serializable]
-public struct SimplifiedCarIdentifier
-{
-    public CarType Type;
-    public CarRarity Rarity;
-    public CarColor Color;
-    public SimplifiedCarIdentifier(CarType type, CarRarity rarity, CarColor color)
-    {
-        Type = type;
-        Rarity = rarity;
-        Color = color;
-    }
-}
 
 public class SimplifiedCarsManager
 {
-    SimplifiedCarsCreationBuilder CreationBuilder => G.SimplifiedCarsCreationBuilder;
+    CarsDefinitionLibrary CreationBuilder => G.SimplifiedCarsCreationBuilder;
 
-    public Car CreateCar(SimplifiedCarIdentifier identifier, ILocation location)
+    public Car CreateCar(CarKind identifier, ILocation location)
     {
-        //List all identifiers in config and current identifier
-        Debug.Log($"Creating car with identifier: Type={identifier.Type}, Rarity={identifier.Rarity}, Color={identifier.Color}");
-        Debug.Log($"Available identifiers in config:");
-        foreach (var configIdentifier in CreationBuilder.RuntimeConfigs.Keys)
-        {
-            Debug.Log($"- Type={configIdentifier.Type}, Rarity={configIdentifier.Rarity}, Color={configIdentifier.Color}");
-        }
-
-        var car = G.ProductManager.CreateCar(CreationBuilder.RuntimeConfigs[identifier], location);
+        var car = G.ProductManager.CreateCar(CreationBuilder.RuntimeConfigs[identifier].ToArray().RandomObject(), location);
         return car;
     }
 
-    public Car CreateCarHidden(SimplifiedCarIdentifier identifier)
+    public Car CreateCarHidden(CarKind identifier)
     {
         var car = CreateCar(identifier, World.Instance.HiddenSpace.GetEmptyLocation());
         return car;
     }
+
+    public List<Car> CreatePooledCarList(CarSpawnWeight[] spawnWeights, float weightMultiplicator = 1f)
+    {
+        var result = new List<Car>();
+        foreach (var spawnWeight in spawnWeights)
+        {
+            if(CreationBuilder.RuntimeConfigs.TryGetValue(spawnWeight.CarKind, out var configs))
+            {
+                if(configs.Count == 0)
+                {
+                    Debug.LogWarning($"No config found for car kind {spawnWeight.CarKind}");
+                    continue;
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"No config found for car kind {spawnWeight.CarKind}");
+                continue;
+            }
+            var weight = spawnWeight.Weight * weightMultiplicator;
+            var count = Mathf.FloorToInt(weight);
+            for (int i = 0; i < count; i++)
+            {
+                result.Add(CreateCarHidden(spawnWeight.CarKind));
+            }
+        }
+        return result;
+    }
 }
 
-public interface IReadOnlyDuplicatesIdentifiedCarList<T> : IReadOnlyDictionary<SimplifiedCarIdentifier, List<T>>
+public interface IReadOnlyDuplicatesIdentifiedCarList<T> : IReadOnlyDictionary<CarKind, List<T>>
 {
 }
 
-public interface IReadOnlyNonDuplicatesIdentifiedCarList<T> : IReadOnlyDictionary<SimplifiedCarIdentifier, T>
+public interface IReadOnlyNonDuplicatesIdentifiedCarList<T> : IReadOnlyDictionary<CarKind, T>
 {
 }
 
-public sealed class DuplicatesIdentifiedCarList<T> : IDictionary<SimplifiedCarIdentifier, List<T>>, IReadOnlyDuplicatesIdentifiedCarList<T>
+public sealed class DuplicatesIdentifiedCarList<T> : IDictionary<CarKind, List<T>>, IReadOnlyDuplicatesIdentifiedCarList<T>
 {
-    private readonly Dictionary<SimplifiedCarIdentifier, List<T>> _inner;
+    private readonly Dictionary<CarKind, List<T>> _inner;
 
     public DuplicatesIdentifiedCarList()
-        : this(new Dictionary<SimplifiedCarIdentifier, List<T>>())
+        : this(new Dictionary<CarKind, List<T>>())
     {
     }
 
-    public DuplicatesIdentifiedCarList(IEqualityComparer<SimplifiedCarIdentifier> comparer)
-        : this(new Dictionary<SimplifiedCarIdentifier, List<T>>(comparer))
+    public DuplicatesIdentifiedCarList(IEqualityComparer<CarKind> comparer)
+        : this(new Dictionary<CarKind, List<T>>(comparer))
     {
     }
 
-    public DuplicatesIdentifiedCarList(IDictionary<SimplifiedCarIdentifier, List<T>> dictionary)
-        : this(new Dictionary<SimplifiedCarIdentifier, List<T>>(dictionary))
+    public DuplicatesIdentifiedCarList(IDictionary<CarKind, List<T>> dictionary)
+        : this(new Dictionary<CarKind, List<T>>(dictionary))
     {
     }
 
-    public DuplicatesIdentifiedCarList(IReadOnlyDictionary<SimplifiedCarIdentifier, List<T>> dictionary)
-        : this(new Dictionary<SimplifiedCarIdentifier, List<T>>(dictionary))
+    public DuplicatesIdentifiedCarList(IReadOnlyDictionary<CarKind, List<T>> dictionary)
+        : this(new Dictionary<CarKind, List<T>>(dictionary))
     {
     }
 
-    private DuplicatesIdentifiedCarList(Dictionary<SimplifiedCarIdentifier, List<T>> inner)
+    private DuplicatesIdentifiedCarList(Dictionary<CarKind, List<T>> inner)
     {
         _inner = inner;
     }
 
-    public List<T> this[SimplifiedCarIdentifier key]
+    public List<T> this[CarKind key]
     {
         get => _inner[key];
         set => _inner[key] = value;
     }
 
-    public ICollection<SimplifiedCarIdentifier> Keys => _inner.Keys;
+    public ICollection<CarKind> Keys => _inner.Keys;
 
-    IEnumerable<SimplifiedCarIdentifier> IReadOnlyDictionary<SimplifiedCarIdentifier, List<T>>.Keys => _inner.Keys;
+    IEnumerable<CarKind> IReadOnlyDictionary<CarKind, List<T>>.Keys => _inner.Keys;
 
     public ICollection<List<T>> Values => _inner.Values;
 
-    IEnumerable<List<T>> IReadOnlyDictionary<SimplifiedCarIdentifier, List<T>>.Values => _inner.Values;
+    IEnumerable<List<T>> IReadOnlyDictionary<CarKind, List<T>>.Values => _inner.Values;
 
     public int Count => _inner.Count;
 
-    public bool IsReadOnly => ((IDictionary<SimplifiedCarIdentifier, List<T>>)_inner).IsReadOnly;
+    public bool IsReadOnly => ((IDictionary<CarKind, List<T>>)_inner).IsReadOnly;
 
-    public void Add(SimplifiedCarIdentifier key, List<T> value) => _inner.Add(key, value);
+    public void Add(CarKind key, List<T> value) => _inner.Add(key, value);
 
-    public void Add(KeyValuePair<SimplifiedCarIdentifier, List<T>> item)
-        => ((IDictionary<SimplifiedCarIdentifier, List<T>>)_inner).Add(item);
+    public void Add(KeyValuePair<CarKind, List<T>> item)
+        => ((IDictionary<CarKind, List<T>>)_inner).Add(item);
 
     public void Clear() => _inner.Clear();
 
-    public bool Contains(KeyValuePair<SimplifiedCarIdentifier, List<T>> item)
-        => ((IDictionary<SimplifiedCarIdentifier, List<T>>)_inner).Contains(item);
+    public bool Contains(KeyValuePair<CarKind, List<T>> item)
+        => ((IDictionary<CarKind, List<T>>)_inner).Contains(item);
 
-    public bool ContainsKey(SimplifiedCarIdentifier key) => _inner.ContainsKey(key);
+    public bool ContainsKey(CarKind key) => _inner.ContainsKey(key);
 
-    public void CopyTo(KeyValuePair<SimplifiedCarIdentifier, List<T>>[] array, int arrayIndex)
-        => ((IDictionary<SimplifiedCarIdentifier, List<T>>)_inner).CopyTo(array, arrayIndex);
+    public void CopyTo(KeyValuePair<CarKind, List<T>>[] array, int arrayIndex)
+        => ((IDictionary<CarKind, List<T>>)_inner).CopyTo(array, arrayIndex);
 
-    public IEnumerator<KeyValuePair<SimplifiedCarIdentifier, List<T>>> GetEnumerator() => _inner.GetEnumerator();
+    public IEnumerator<KeyValuePair<CarKind, List<T>>> GetEnumerator() => _inner.GetEnumerator();
 
-    public bool Remove(SimplifiedCarIdentifier key) => _inner.Remove(key);
+    public bool Remove(CarKind key) => _inner.Remove(key);
 
-    public bool Remove(KeyValuePair<SimplifiedCarIdentifier, List<T>> item)
-        => ((IDictionary<SimplifiedCarIdentifier, List<T>>)_inner).Remove(item);
+    public bool Remove(KeyValuePair<CarKind, List<T>> item)
+        => ((IDictionary<CarKind, List<T>>)_inner).Remove(item);
 
-    public bool TryGetValue(SimplifiedCarIdentifier key, out List<T> value) => _inner.TryGetValue(key, out value);
+    public bool TryGetValue(CarKind key, out List<T> value) => _inner.TryGetValue(key, out value);
 
     IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_inner).GetEnumerator();
 }
 
-public sealed class NonDuplicatesIdentifiedCarList<T> : IDictionary<SimplifiedCarIdentifier, T>, IReadOnlyNonDuplicatesIdentifiedCarList<T>
+public sealed class NonDuplicatesIdentifiedCarList<T> : IDictionary<CarKind, T>, IReadOnlyNonDuplicatesIdentifiedCarList<T>
 {
-    private readonly Dictionary<SimplifiedCarIdentifier, T> _inner;
+    private readonly Dictionary<CarKind, T> _inner;
 
     public NonDuplicatesIdentifiedCarList()
-        : this(new Dictionary<SimplifiedCarIdentifier, T>())
+        : this(new Dictionary<CarKind, T>())
     {
     }
 
-    public NonDuplicatesIdentifiedCarList(IEqualityComparer<SimplifiedCarIdentifier> comparer)
-        : this(new Dictionary<SimplifiedCarIdentifier, T>(comparer))
+    public NonDuplicatesIdentifiedCarList(IEqualityComparer<CarKind> comparer)
+        : this(new Dictionary<CarKind, T>(comparer))
     {
     }
 
-    public NonDuplicatesIdentifiedCarList(IDictionary<SimplifiedCarIdentifier, T> dictionary)
-        : this(new Dictionary<SimplifiedCarIdentifier, T>(dictionary))
+    public NonDuplicatesIdentifiedCarList(IDictionary<CarKind, T> dictionary)
+        : this(new Dictionary<CarKind, T>(dictionary))
     {
     }
 
-    public NonDuplicatesIdentifiedCarList(IReadOnlyDictionary<SimplifiedCarIdentifier, T> dictionary)
-        : this(new Dictionary<SimplifiedCarIdentifier, T>(dictionary))
+    public NonDuplicatesIdentifiedCarList(IReadOnlyDictionary<CarKind, T> dictionary)
+        : this(new Dictionary<CarKind, T>(dictionary))
     {
     }
 
-    private NonDuplicatesIdentifiedCarList(Dictionary<SimplifiedCarIdentifier, T> inner)
+    private NonDuplicatesIdentifiedCarList(Dictionary<CarKind, T> inner)
     {
         _inner = inner;
     }
 
-    public T this[SimplifiedCarIdentifier key]
+    public T this[CarKind key]
     {
         get => _inner[key];
         set => _inner[key] = value;
     }
 
-    public ICollection<SimplifiedCarIdentifier> Keys => _inner.Keys;
+    public ICollection<CarKind> Keys => _inner.Keys;
 
-    IEnumerable<SimplifiedCarIdentifier> IReadOnlyDictionary<SimplifiedCarIdentifier, T>.Keys => _inner.Keys;
+    IEnumerable<CarKind> IReadOnlyDictionary<CarKind, T>.Keys => _inner.Keys;
 
     public ICollection<T> Values => _inner.Values;
 
-    IEnumerable<T> IReadOnlyDictionary<SimplifiedCarIdentifier, T>.Values => _inner.Values;
+    IEnumerable<T> IReadOnlyDictionary<CarKind, T>.Values => _inner.Values;
 
     public int Count => _inner.Count;
 
-    public bool IsReadOnly => ((IDictionary<SimplifiedCarIdentifier, T>)_inner).IsReadOnly;
+    public bool IsReadOnly => ((IDictionary<CarKind, T>)_inner).IsReadOnly;
 
-    public void Add(SimplifiedCarIdentifier key, T value) => _inner.Add(key, value);
+    public void Add(CarKind key, T value) => _inner.Add(key, value);
 
-    public void Add(KeyValuePair<SimplifiedCarIdentifier, T> item)
-        => ((IDictionary<SimplifiedCarIdentifier, T>)_inner).Add(item);
+    public void Add(KeyValuePair<CarKind, T> item)
+        => ((IDictionary<CarKind, T>)_inner).Add(item);
 
     public void Clear() => _inner.Clear();
 
-    public bool Contains(KeyValuePair<SimplifiedCarIdentifier, T> item)
-        => ((IDictionary<SimplifiedCarIdentifier, T>)_inner).Contains(item);
+    public bool Contains(KeyValuePair<CarKind, T> item)
+        => ((IDictionary<CarKind, T>)_inner).Contains(item);
 
-    public bool ContainsKey(SimplifiedCarIdentifier key) => _inner.ContainsKey(key);
+    public bool ContainsKey(CarKind key) => _inner.ContainsKey(key);
 
-    public void CopyTo(KeyValuePair<SimplifiedCarIdentifier, T>[] array, int arrayIndex)
-        => ((IDictionary<SimplifiedCarIdentifier, T>)_inner).CopyTo(array, arrayIndex);
+    public void CopyTo(KeyValuePair<CarKind, T>[] array, int arrayIndex)
+        => ((IDictionary<CarKind, T>)_inner).CopyTo(array, arrayIndex);
 
-    public IEnumerator<KeyValuePair<SimplifiedCarIdentifier, T>> GetEnumerator() => _inner.GetEnumerator();
+    public IEnumerator<KeyValuePair<CarKind, T>> GetEnumerator() => _inner.GetEnumerator();
 
-    public bool Remove(SimplifiedCarIdentifier key) => _inner.Remove(key);
+    public bool Remove(CarKind key) => _inner.Remove(key);
 
-    public bool Remove(KeyValuePair<SimplifiedCarIdentifier, T> item)
-        => ((IDictionary<SimplifiedCarIdentifier, T>)_inner).Remove(item);
+    public bool Remove(KeyValuePair<CarKind, T> item)
+        => ((IDictionary<CarKind, T>)_inner).Remove(item);
 
-    public bool TryGetValue(SimplifiedCarIdentifier key, out T value) => _inner.TryGetValue(key, out value);
+    public bool TryGetValue(CarKind key, out T value) => _inner.TryGetValue(key, out value);
 
     IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_inner).GetEnumerator();
 }

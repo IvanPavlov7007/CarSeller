@@ -22,8 +22,8 @@ public class ProgressionUIManager : MonoBehaviour
 
     private void resetProgressbar()
     {
-        int level = G.Area.CurrentLevelNode.Value.levelNumber;
-        float progress = G.Area.currentXP / G.Area.CurrentLevelNode.Value.xpToNextLevel;
+        int level = G.Area.CurrentLevelNode.Value.Index;
+        float progress = G.Area.currentXP / G.Area.CurrentLevelNode.Value.XpToNextLevel;
         progressionUI.SetupInitValues(level, progress);
     }
 
@@ -55,8 +55,8 @@ public class ProgressionUIManager : MonoBehaviour
     {
         _showing = true;
         _showingTime = 0f;
-        progressionUI.targetProgressLevel = data.Area.CurrentLevelNode.Value.levelNumber;
-        progressionUI.targetProgressValue = data.Area.currentXP / data.Area.CurrentLevelNode.Value.xpToNextLevel;
+        progressionUI.targetProgressLevel = data.Area.CurrentLevelNode.Value.Index;
+        progressionUI.targetProgressValue = data.Area.currentXP / data.Area.CurrentLevelNode.Value.XpToNextLevel;
         //progressionUI.targetIsMax = data.Area.areaLevels.Count == data.NewLevel;
     }
 }

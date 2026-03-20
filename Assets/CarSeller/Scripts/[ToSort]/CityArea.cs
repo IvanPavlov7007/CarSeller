@@ -18,20 +18,38 @@ public class CityArea
     {
         areaLevels = new LinkedList<AreaLevel>(
         new[]{
-            new AreaLevel() { levelNumber = 1, xpToNextLevel = 100f },
-            new AreaLevel() { levelNumber = 2, xpToNextLevel = 200f },
-            new AreaLevel() { levelNumber = 3, xpToNextLevel = 300f },
+            new AreaLevel(0, 100f ),
+            new AreaLevel(1,200f),
+            new AreaLevel(2, 300f),
+            new AreaLevel(3, 0f,true),
         });
         CurrentLevelNode = areaLevels.First;
     }
+
     public BuyersPool BuyersPool { get; private set; }
 }
 
 public class AreaLevel
 {
-    public int levelNumber;
-    public float xpToNextLevel;
+    public readonly int Index;
+    public readonly float XpToNextLevel;
+    public readonly bool Final = false;
+    public CarSpawnWeight[] CarSpawnWeights;
+    public CarsPool CarPool;
+
+    public AreaLevel(int index, float xpToNextLevel, bool final = false)
+    {
+        this.Index = index;
+        this.XpToNextLevel = xpToNextLevel;
+        this.Final = final;
+
+        CarSpawnWeights = G.Config.GameDatabaseContainer.AreaBalancing.CalculateCarSpawnWeightsForLevel(index);
+        CarPool = new CarsPool(G.SimplifiedCarsManager.CreatePooledCarList(CarSpawnWeights));
+    }
+
 }
+
+
 
 public class BuyersPool
 {
@@ -50,14 +68,4 @@ public class BuyerSpawnPoint
 {
     public Buyer buyer;
     public CityPosition Position;
-}
-
-public class CarSpawnAlgorithm
-{
-    
-
-    void onCarDestroyed(Car car)
-    {
-
-    }
 }
