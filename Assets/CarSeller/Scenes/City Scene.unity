@@ -16687,6 +16687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03b910df2bb151b44af0fe1613f7a1ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  description: {fileID: 399187270}
   nextLevelIndexDisplayer: {fileID: 449499244}
   slider: {fileID: 1992117581}
   particlesSystem: {fileID: 1411307615}
