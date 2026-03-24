@@ -88,7 +88,17 @@ public class CarSpawnManager
         // Only use markers that are not already occupied by a cell-spawned car.
         markers.RemoveAll(m => m == null || markerToCellCar.ContainsKey(m));
 
-        int desiredCarsCount = Mathf.Min(Mathf.FloorToInt(cellWrapper.density), markers.Count);
+        float desiredCarsFloat = Mathf.Clamp(cellWrapper.density, 0f, markers.Count);
+
+        int desiredCarsCount = Mathf.FloorToInt(desiredCarsFloat);
+        float remainder = desiredCarsFloat - desiredCarsCount;
+
+        // Probabilistic rounding for fractional densities (e.g. 0.5 => 50% chance to spawn 1).
+        if (Random.value < remainder)
+            desiredCarsCount++;
+
+        desiredCarsCount = Mathf.Min(desiredCarsCount, markers.Count);
+
         if (desiredCarsCount <= 0)
             return;
 
