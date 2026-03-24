@@ -1,5 +1,4 @@
-﻿using Sirenix.Serialization;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -18,13 +17,9 @@ public class CarSpawnManager
     int nextCarsToHaveMinCount;
     int nextCarsToSpawnCount;
 
-    //CarSpawnConfig carSpawnConfig => G.Economy.Config.CarSpawnConfig;
-
     bool subscribed;
     private int CarsToHaveMinCount = 10;
     private int CarsToSpawnMaxCount = 20;
-
-    CarsPool carsPool => G.Area.CurrentLevelNode.Value.CarPool;
 
     public void SubscribeToEvents()
     {
@@ -49,7 +44,6 @@ public class CarSpawnManager
         if (car == null)
             return;
 
-        // If this car was spawned by a marker, free the marker mapping first.
         if (usedMarkers.TryGetValue(car, out City.CityMarker marker) && marker != null)
         {
             if (markerToCellCar.TryGetValue(marker, out Car mappedCar) && mappedCar == car)
@@ -61,7 +55,19 @@ public class CarSpawnManager
         temporaryCars.Remove(car);
         usedMarkers.Remove(car);
         cellSpawnedCars.Remove(car);
-        if(carsPool.AllCars.Contains(car) && !carsPool.Queue.Contains(car))
+
+        if (marker == null)
+            return;
+
+        var area = marker.GetPrimaryAreaOrNull();
+        if (area == null)
+            return;
+
+        CarsPool carsPool = area.CarsPool;
+        if (carsPool == null)
+            return;
+
+        if (carsPool.AllItems.Contains(car) && !carsPool.Queue.Contains(car))
             carsPool.Queue.Enqueue(car);
     }
 
@@ -85,7 +91,6 @@ public class CarSpawnManager
     {
         var markers = cellWrapper.GetMarkers().ToList();
 
-        // Only use markers that are not already occupied by a cell-spawned car.
         markers.RemoveAll(m => m == null || markerToCellCar.ContainsKey(m));
 
         float desiredCarsFloat = Mathf.Clamp(cellWrapper.density, 0f, markers.Count);
@@ -93,7 +98,6 @@ public class CarSpawnManager
         int desiredCarsCount = Mathf.FloorToInt(desiredCarsFloat);
         float remainder = desiredCarsFloat - desiredCarsCount;
 
-        // Probabilistic rounding for fractional densities (e.g. 0.5 => 50% chance to spawn 1).
         if (Random.value < remainder)
             desiredCarsCount++;
 
@@ -116,7 +120,6 @@ public class CarSpawnManager
 
     void clearCell(CarSpawnCellWrapper cellWrapper)
     {
-        // Despawn ONLY cars spawned by the cell activation system.
         foreach (var carEntity in cellWrapper.GetCars())
         {
             if (carEntity?.Subject is Car car && cellSpawnedCars.Contains(car))
@@ -128,21 +131,55 @@ public class CarSpawnManager
 
     void spawnCellCarAtPosition(CityPosition position, City.CityMarker marker)
     {
-        var car = carsPool.Queue.Dequeue();
-        if(car == null)
+        var area = marker.GetPrimaryAreaOrNull();
+        if (area == null)
+            return;
+
+        var pool = area.CarsPool;
+        if (pool == null || pool.Queue == null || pool.Queue.Count == 0)
+        {
+            Debug.LogError("CarsPool is empty. Not enough pooled cars for this area.");
+            return;
+        }
+
+        var car = pool.Queue.Dequeue();
+        if (car == null)
         {
             Debug.LogError("CarsPool returned null car. Make sure to populate the pool with enough cars before using.");
             return;
         }
+
         CityEntitiesCreationHelper.MoveInExistingCar(car, position);
 
         cellSpawnedCars.Add(car);
 
-        if (marker != null)
+        usedMarkers[car] = marker;
+        markerToCellCar[marker] = car;
+    }
+
+    // Debug
+    public void SpawnCarAtPosition(CityPosition position)
+    {
+        if (!G.City.TryGetCityAreaAt(position, out var area))
         {
-            usedMarkers[car] = marker;
-            markerToCellCar[marker] = car;
+            Debug.LogWarning("No city area found at position. Skipping debug car spawn.");
+            return;
         }
+
+        if (area.CarsPool == null || area.CarsPool.Queue == null || area.CarsPool.Queue.Count == 0)
+        {
+            Debug.LogError("CarsPool is empty. Not enough pooled cars for this area.");
+            return;
+        }
+
+        var car = area.CarsPool.Queue.Dequeue();
+        if (car == null)
+        {
+            Debug.LogError("CarsPool returned null car. Make sure to populate the pool with enough cars before using.");
+            return;
+        }
+
+        CityEntitiesCreationHelper.MoveInExistingCar(car, position);
     }
 
     public void NewCarsRotation()
@@ -219,18 +256,6 @@ public class CarSpawnManager
         }
     }
 
-    // Debug
-    public void SpawnCarAtPosition(CityPosition position)
-    {
-        var car = carsPool.Queue.Dequeue();
-        if(car == null)
-        {
-            Debug.LogError("CarsPool returned null car. Make sure to populate the pool with enough cars before using.");
-            return;
-        }
-        CityEntitiesCreationHelper.MoveInExistingCar(car, position);
-    }
-
     void RemoveTemporaryCars()
     {
         foreach (var car in temporaryCars)
@@ -258,15 +283,3 @@ public class CarSpawnManager
     }
 }
 
-public class CarsPool
-{
-    public Queue<Car> Queue;
-    public HashSet<Car> AllCars;
-
-    public CarsPool(List<Car> list)
-    {
-        list.Shuffle();
-        AllCars = new HashSet<Car>(list);
-        Queue = new Queue<Car>(list);
-    }
-}

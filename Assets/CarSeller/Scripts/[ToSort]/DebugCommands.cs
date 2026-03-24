@@ -25,7 +25,7 @@ public class DebugCommands : MonoBehaviour
 
     public void OnS(InputValue val)
     {
-        G.BuyerManager.SpawnBuyerAtPosition(G.VehicleController.CurrentVehicleEntity.Position, null);
+        G.BuyerManager.SpawnBuyerAtPosition(Buyer.Any(), G.VehicleController.CurrentVehicleEntity.Position, null,null);
     }
 
     public void OnW(InputValue val)

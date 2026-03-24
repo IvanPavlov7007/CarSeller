@@ -9,6 +9,36 @@ public static class CityGraphLoader
     {
         city.InitializeFromGraph(graph);
 
+        // Areas are purely data-driven (polygons baked in PrefabRoot local space).
+        // We transform them to world-space once at load time.
+        var areas = new List<City.CityPolygonArea>();
+        if (graph.Areas != null)
+        {
+            foreach (var a in graph.Areas)
+            {
+                Vector2[] poly = null;
+                if (a.Polygon != null && a.Polygon.Length > 0)
+                {
+                    poly = new Vector2[a.Polygon.Length];
+                    for (int i = 0; i < a.Polygon.Length; i++)
+                    {
+                        var w = root.TransformPoint(new Vector3(a.Polygon[i].x, a.Polygon[i].y, 0f));
+                        poly[i] = new Vector2(w.x, w.y);
+                    }
+                }
+
+                areas.Add(new City.CityPolygonArea
+                {
+                    Id = a.Id,
+                    Name = a.DisplayName,
+                    Tags = a.Tags,
+                    Polygon = poly
+                });
+            }
+        }
+
+        city.InitializeAreas(areas);
+
         var authors = root.GetComponentsInChildren<RoadEdgeAuthor>(true)
                           .ToDictionary(a => a.Id);
 
@@ -113,6 +143,16 @@ public static class CityGraphLoader
                             }
                         }
                         break;
+                }
+
+                if (areas.Count > 0)
+                {
+                    var wp = cm.WorldPosition;
+                    cm.AreaIds = areas.Where(a => a.Contains(wp)).Select(a => a.Id).Where(id => !string.IsNullOrEmpty(id)).ToArray();
+                }
+                else
+                {
+                    cm.AreaIds = System.Array.Empty<string>();
                 }
 
                 markers.Add(cm);

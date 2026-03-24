@@ -42,8 +42,8 @@ public sealed class NeutralWarehouseContextMenuProfile : IWarehouseContextMenuPr
                 IsInteractable = car.IsComplete(),
                 OnClick = () =>
                 {
-                    G.GameFlowManager.SellCar(
-                        G.Economy.CarSellOfferProvider.GetOfferByCar(car));
+                    //G.GameFlowManager.SellCar(
+                    //    G.Economy.CarSellOfferProvider.GetOfferByCar(car));
                 },
                 UnavailabilityReason = "Some car part's are missing"
             });

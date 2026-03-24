@@ -1,4 +1,7 @@
-﻿public class SimplifiedGameplayMain : GameMain
+﻿using System.Collections.Generic;
+using System.Linq;
+
+public class SimplifiedGameplayMain : GameMain
 {
     bool firstLoaded = false;
     PersonalVehicleShop shop;
@@ -7,11 +10,16 @@
     {
         base.InitializeWorld(gameConfig);
         G.CarSpawnManager.SubscribeToEvents();
-        BuyerManager.InitializeArea();
-        BuyerManager.CreateManager();
+        initializeCityAreas();
         createShop(gameConfig.VehicleControllerConfig.vehicleShopConfig);
-        //BuyerManager.CreateRandomBuyers();
     }
+
+    private void initializeCityAreas()
+    {
+        G.Areas = G.Balancing.AreaBalancingByAreaName.
+            ToDictionary(area => area.Id, area => new CityArea(area));
+    }
+
     public override void InitializeLogic(GameConfig gameConfig)
     {
         base.InitializeLogic(gameConfig);

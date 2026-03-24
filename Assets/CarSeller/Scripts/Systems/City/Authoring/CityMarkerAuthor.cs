@@ -1,4 +1,5 @@
 using System;
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -18,7 +19,8 @@ public class CityMarkerAuthor : MonoBehaviour
     [Header("Identification")]
     public string DisplayName;
     public string[] Tags;
-    public string RegionId;
+    [Obsolete("Legacy field. Use CityAreaAuthor polygons; marker AreaIds are computed based on containment.")]
+    [HideInInspector] public string RegionId;
     public float Radius;
 
     [Header("Anchor")]

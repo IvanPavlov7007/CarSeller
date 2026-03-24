@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class NormalCityContextMenuProfile : ICityContextMenuProfile
 {
-    public virtual UIElement GenerateContent(CityEntity model, GameState gameState)
+    public virtual UIElement GenerateContent(CityEntity entity, GameState gameState)
     {
         if (gameState == null)
         {
@@ -12,12 +13,14 @@ public class NormalCityContextMenuProfile : ICityContextMenuProfile
             return null;
         }
 
-        if (model.Subject is MissionLauncher launcher)
+        //TODO: check by visibility and other aspects if the entity is displayed, but not discovered
+        // and show "undiscovered" hint in that case instead of actual content
+
+        if (entity.Subject is MissionLauncher launcher)
         {
             return CTX_Menu_Tools.MissionLauncherHint(launcher);
         }
-
-        if (model.Subject is PlayerFigure figure)
+        if (entity.Subject is PlayerFigure figure)
         {
             // "It's you"
             return new UIElement
@@ -31,7 +34,7 @@ public class NormalCityContextMenuProfile : ICityContextMenuProfile
             };
         }
 
-        if (model.Subject is Car car)
+        if (entity.Subject is Car car)
         {
             List<UIElement> elements = CTX_Menu_Tools.CarBaseInfoElements(car);
 
@@ -58,11 +61,11 @@ public class NormalCityContextMenuProfile : ICityContextMenuProfile
             };
         }
 
-        if (model.Subject is Warehouse)
+        if (entity.Subject is Warehouse)
         {
             // Warehouse shouldn't be enter-able by button in any case.
             // Keep only base info / purchase info.
-            var warehouse = (Warehouse)model.Subject;
+            var warehouse = (Warehouse)entity.Subject;
             var warehouseOffer = G.Economy.WarehouseOfferProvider.GetOfferForWarehouse(warehouse);
 
             var elementsList = CTX_Menu_Tools.WarehouseBaseInfoElements(warehouse);
@@ -82,7 +85,23 @@ public class NormalCityContextMenuProfile : ICityContextMenuProfile
             };
         }
 
-        Debug.LogWarning($"NormalCityContextMenuProfile: No context menu defined for model type {model.Subject.GetType()}");
+        if (entity.Subject is Buyer buyer)
+        {
+            return new UIElement
+            {
+                Type = UIElementType.Container,
+                Children = new ()
+                {
+                    new UIElement
+                    {
+                        Type = UIElementType.Text,
+                        Text = $"Buyer for {buyer.RequiredCarType.ToString()} cars"
+                    },
+                }
+            };
+        }
+
+        Debug.LogWarning($"NormalCityContextMenuProfile: No context menu defined for model type {entity.Subject.GetType()}");
         return null;
     }
 }

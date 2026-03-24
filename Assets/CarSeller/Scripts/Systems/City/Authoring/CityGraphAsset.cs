@@ -73,9 +73,29 @@ public class CityGraphAsset : ScriptableObject
         public string AuthorPath;
     }
 
+    // AREAS
+
+    [Serializable]
+    public class AreaData
+    {
+        public string Id;
+        public string DisplayName;
+        public string[] Tags;
+
+        // Polygon points in PrefabRoot local space (XY).
+        public Vector2[] Polygon;
+
+        // Authoring linkage
+        public string AuthorId;
+        public string AuthorPath;
+    }
+
     public List<NodeData> Nodes = new();
     public List<EdgeData> Edges = new();
 
     // New: Markers authored in scene/prefab and baked here
     public List<MarkerData> Markers = new();
+
+    // New: Areas authored via PolygonCollider2D and baked here
+    public List<AreaData> Areas = new();
 }

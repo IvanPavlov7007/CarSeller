@@ -91,7 +91,6 @@ public class CityEntityLifetimeService
         }
         finally
         {
-            Debug.Log($"{anyLocatable} is being destroyed");
             _destroyInProgress.Remove(anyLocatable);
         }
     }

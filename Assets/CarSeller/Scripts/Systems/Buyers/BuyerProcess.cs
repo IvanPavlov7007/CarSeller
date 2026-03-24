@@ -22,7 +22,7 @@ public class BuyerProcess : IProcess
                 new TransactionFeedbackLocation(TransactionLocationType.WorldSpace, BuyerEntity.Position.WorldPosition));
             if(result.Type != TransactionResultType.Success)
             {
-                Debug.LogError($"Failed to sell car to buyer {Buyer.Name}. Reason: {result.Data}");
+                Debug.LogError($"Failed to sell car to buyer {Buyer}. Reason: {result.Data}");
             }
             G.VehicleController.ExitWorldVehicle();
         }

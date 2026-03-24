@@ -6,7 +6,7 @@ public class ProgressionUIManager : MonoBehaviour
     public ProgressionUI progressionUI;
 
     CanvasGroup canvasGroup;
-
+    CityArea currentArea;
 
     private void Awake()
     {
@@ -17,14 +17,28 @@ public class ProgressionUIManager : MonoBehaviour
     void Start()
     {
         GameEvents.Instance.onAreaProgressed += onAreaProgressed;
-        resetProgressbar();
+        resetProgressbar(null, 0f);
     }
 
-    private void resetProgressbar()
+    private void OnDestroy()
     {
-        int level = G.Area.CurrentLevelNode.Value.Index;
-        float progress = G.Area.currentXP / G.Area.CurrentLevelNode.Value.XpToNextLevel;
-        progressionUI.SetupInitValues(level, progress);
+        if (GameEvents.Instance != null)
+            GameEvents.Instance.onAreaProgressed -= onAreaProgressed;
+    }
+
+    private static float normalizeXP(float xp, AreaLevel level)
+    {
+        if (level == null || level.XpToNextLevel <= 0f)
+            return 0f;
+
+        return Mathf.Clamp01(xp / level.XpToNextLevel);
+    }
+
+    private void resetProgressbar(AreaLevel level, float xp)
+    {
+        var levelIndex = level != null ? level.Index : 0;
+        var normalizedProgress = normalizeXP(xp, level);
+        progressionUI.SetupInitValues(levelIndex, normalizedProgress);
     }
 
     bool _showing = false;
@@ -53,10 +67,18 @@ public class ProgressionUIManager : MonoBehaviour
 
     void onAreaProgressed(AreaProgressEventData data)
     {
+        if (currentArea != data.Area)
+        {
+            currentArea = data.Area;
+            resetProgressbar(data.InitialLevel, data.InitialXP);
+            progressionUI.description.text = $"Progress in {currentArea.Id}";
+        }
+
         _showing = true;
         _showingTime = 0f;
-        progressionUI.targetProgressLevel = data.Area.CurrentLevelNode.Value.Index;
-        progressionUI.targetProgressValue = data.Area.currentXP / data.Area.CurrentLevelNode.Value.XpToNextLevel;
-        //progressionUI.targetIsMax = data.Area.areaLevels.Count == data.NewLevel;
+
+        progressionUI.targetProgressLevel = data.NewLevel.Index;
+        progressionUI.targetProgressValue = normalizeXP(data.NewXP, data.NewLevel);
+        //progressionUI.targetIsMax = data.NewLevel.Final;
     }
 }

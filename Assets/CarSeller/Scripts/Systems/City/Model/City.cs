@@ -32,6 +32,7 @@ public class City : ILocationsHolder, IDisposable
         public string Name;
         public string[] Tags;
         public string RegionId;
+        public string[] AreaIds;
         public float Radius;
 
         public CityPosition? PositionOnGraph; // Node or Edge@T anchor
@@ -55,7 +56,66 @@ public class City : ILocationsHolder, IDisposable
     private readonly Dictionary<string, CityMarker> _markersById = new();
     public IReadOnlyDictionary<string, CityMarker> MarkersById => _markersById;
 
-    
+    // AREAS RUNTIME
+    public sealed class CityPolygonArea
+    {
+        public string Id;
+        public string Name;
+        public string[] Tags;
+
+        // World-space polygon points (XY)
+        public Vector2[] Polygon;
+
+        public bool HasTag(string tag)
+        {
+            if (Tags == null || tag == null) return false;
+            for (int i = 0; i < Tags.Length; i++)
+            {
+                if (string.Equals(Tags[i], tag, StringComparison.OrdinalIgnoreCase)) return true;
+            }
+            return false;
+        }
+
+        public bool Contains(CityPosition position)
+        {
+            return Contains(position.WorldPosition);
+        }
+
+        public bool Contains(Vector2 point)
+        {
+            if (Polygon == null || Polygon.Length < 3)
+                return false;
+
+            bool inside = false;
+            for (int i = 0, j = Polygon.Length - 1; i < Polygon.Length; j = i++)
+            {
+                var pi = Polygon[i];
+                var pj = Polygon[j];
+
+                bool intersect = ((pi.y > point.y) != (pj.y > point.y))
+                                 && (point.x < (pj.x - pi.x) * (point.y - pi.y) / (pj.y - pi.y + float.Epsilon) + pi.x);
+                if (intersect)
+                    inside = !inside;
+            }
+            return inside;
+        }
+
+        public float ApproxArea()
+        {
+            if (Polygon == null || Polygon.Length < 3)
+                return 0f;
+
+            float sum = 0f;
+            for (int i = 0, j = Polygon.Length - 1; i < Polygon.Length; j = i++)
+            {
+                sum += (Polygon[j].x * Polygon[i].y) - (Polygon[i].x * Polygon[j].y);
+            }
+            return Mathf.Abs(sum) * 0.5f;
+        }
+    }
+
+    private readonly Dictionary<string, CityPolygonArea> _areasById = new();
+    public IReadOnlyDictionary<string, CityPolygonArea> AreasById => _areasById;
 
     internal void InitializeMarkers(IEnumerable<CityMarker> markers)
     {
@@ -69,6 +129,27 @@ public class City : ILocationsHolder, IDisposable
         }
     }
 
+    internal void InitializeAreas(IEnumerable<CityPolygonArea> areas)
+    {
+        _areasById.Clear();
+        if (areas == null) return;
+        foreach (var a in areas)
+        {
+            if (!string.IsNullOrEmpty(a.Id))
+                _areasById[a.Id] = a;
+        }
+    }
+
+    public bool TryGetArea(string id, out CityPolygonArea area)
+    {
+        if (string.IsNullOrEmpty(id))
+        {
+            area = null;
+            return false;
+        }
+        return _areasById.TryGetValue(id, out area);
+    }
+
     public bool TryGetMarker(string id, out CityMarker marker)
     {
         if (string.IsNullOrEmpty(id))
@@ -79,14 +160,69 @@ public class City : ILocationsHolder, IDisposable
         return _markersById.TryGetValue(id, out marker);
     }
 
-    public IEnumerable<CityMarker> QueryMarkers(string tag = null, string region = null, Predicate<CityMarker> predicate = null)
+    public IEnumerable<CityPolygonArea> QueryAreasAt(CityPosition position, string tag = null, Predicate<CityPolygonArea> predicate = null, bool recomputePosition = false)
     {
-        return _markersById.Values.QueryMarkers(tag, region, predicate);
+        foreach (var area in _areasById.Values)
+        {
+            if (area == null)
+                continue;
+
+            if (!string.IsNullOrEmpty(tag) && !area.HasTag(tag))
+                continue;
+
+            if (predicate != null && !predicate(area))
+                continue;
+
+            if (area.Contains(position))
+                yield return area;
+        }
     }
 
-    public CityMarker GetRandomMarker(string tag = null, string region = null, Predicate<CityMarker> predicate = null)
+    public bool TryGetAreaAt(CityPosition position, out CityPolygonArea area, string tag = null, Predicate<CityPolygonArea> predicate = null, bool recomputePosition = false, bool preferSmallest = true)
     {
-        var list = QueryMarkers(tag, region, predicate).ToList();
+        area = null;
+
+        float bestMetric = float.PositiveInfinity;
+
+        foreach (var a in _areasById.Values)
+        {
+            if (a == null)
+                continue;
+
+            if (!string.IsNullOrEmpty(tag) && !a.HasTag(tag))
+                continue;
+
+            if (predicate != null && !predicate(a))
+                continue;
+
+            if (!a.Contains(position))
+                continue;
+
+            if (!preferSmallest)
+            {
+                area = a;
+                return true;
+            }
+
+            float metric = a.ApproxArea();
+            if (area == null || metric < bestMetric)
+            {
+                bestMetric = metric;
+                area = a;
+            }
+        }
+
+        return area != null;
+    }
+
+    public IEnumerable<CityMarker> QueryMarkers(string tag = null, string areaId = null, Predicate<CityMarker> predicate = null)
+    {
+        return _markersById.Values.QueryMarkers(tag, areaId, predicate);
+    }
+
+    public CityMarker GetRandomMarker(string tag = null, string areaId = null, Predicate<CityMarker> predicate = null)
+    {
+        var list = QueryMarkers(tag, areaId, predicate).ToList();
         if (list.Count == 0) return null;
         return list[UnityEngine.Random.Range(0, list.Count)];
     }
@@ -150,14 +286,14 @@ public class City : ILocationsHolder, IDisposable
         // Markers are finalized after edges' containers are resolved in CityGraphLoader.
         InitializeMarkers(Array.Empty<CityMarker>());
     }
-    public ILocation[] GetLocations() => Entities.Select(x=>x.Value).ToArray();
+    public ILocation[] GetLocations() => Entities.Select(x => x.Value).ToArray();
 
     public bool TryGetEntity(ILocatable locatable, out CityEntity entity)
     {
         return Entities.TryGetValue(locatable, out entity);
     }
 
-    public IReadOnlyDictionary<ILocatable,CityEntity> GetEntities() => Entities;
+    public IReadOnlyDictionary<ILocatable, CityEntity> GetEntities() => Entities;
 
     internal CityPosition GetClosestPosition(Vector2 worldPosition)
     {
@@ -228,7 +364,7 @@ public class City : ILocationsHolder, IDisposable
     {
         GameObject.Destroy(SpatialGridManager.gameObject);
         AspectsSystem.Dispose();
-        
+
     }
 }
 
@@ -379,7 +515,7 @@ public readonly struct CityPosition
     public Vector2 GetCurrentTangent()
     {
         Debug.Assert(Edge != null, "GetCurrentTangent can only be used for edge positions.");
-        if(Forward)
+        if (Forward)
         {
             return Edge.GetTangentFromNode(Edge.From, Percentage, out _);
         }
@@ -395,7 +531,7 @@ public readonly struct CityPosition
     public CityPosition GetConnectionPositionFromAnotherEdge(RoadEdge AnotherEdge)
     {
         Debug.Assert(this.Edge != null, "GetConnectionPositionFromAnotherEdge can only be used for edge positions.");
-        
+
         if (AnotherEdge.From == Edge.From)
         {
             return On(Edge, 0f, forward: true);
@@ -421,16 +557,16 @@ public readonly struct CityPosition
     public CityPosition GetConnectionPositionTowardsEdge(RoadEdge AnotherEdge)
     {
         Debug.Assert(this.Edge != null, "GetConnectionPositionTowardsEdge can only be used for edge positions.");
-        
-        if(AnotherEdge.From == Edge.To)
+
+        if (AnotherEdge.From == Edge.To)
         {
             return On(Edge, 1f, forward: true);
         }
-        else if(AnotherEdge.To == Edge.To)
+        else if (AnotherEdge.To == Edge.To)
         {
             return On(Edge, 1f, forward: true);
         }
-        else if(AnotherEdge.From == Edge.From)
+        else if (AnotherEdge.From == Edge.From)
         {
             return On(Edge, 1f, forward: false);
         }
@@ -444,12 +580,89 @@ public readonly struct CityPosition
 
 public static class CityExtensions
 {
-    public static IEnumerable<CityMarker> QueryMarkers(this IEnumerable<CityMarker> collection, string tag = null, string region = null, Predicate<CityMarker> predicate = null)
+    public static IEnumerable<CityMarker> QueryMarkers(this IEnumerable<CityMarker> collection, string tag = null, string areaId = null, Predicate<CityMarker> predicate = null)
     {
         IEnumerable<CityMarker> q = collection;
         if (!string.IsNullOrEmpty(tag)) q = q.Where(m => m.HasTag(tag));
-        if (!string.IsNullOrEmpty(region)) q = q.Where(m => string.Equals(m.RegionId, region, StringComparison.OrdinalIgnoreCase));
+        if (!string.IsNullOrEmpty(areaId))
+        {
+            q = q.Where(m => m.AreaIds != null && m.AreaIds.Any(a => string.Equals(a, areaId, StringComparison.OrdinalIgnoreCase)));
+        }
         if (predicate != null) q = q.Where(m => predicate(m));
         return q;
+    }
+
+    public static CityArea[] GetAreas(this City.CityMarker marker)
+    {
+        if (marker == null || marker.AreaIds == null || marker.AreaIds.Length == 0)
+            return Array.Empty<CityArea>();
+
+        CityArea[] areas = new CityArea[marker.AreaIds.Length];
+        for (int i = 0; i < marker.AreaIds.Length; i++)
+        {
+            var id = marker.AreaIds[i];
+            if (string.IsNullOrEmpty(id))
+                continue;
+
+            if (G.Areas != null && G.Areas.TryGetValue(id, out var cityArea))
+            {
+                areas[i] = cityArea;
+            }
+        }
+        return areas;
+    }
+
+    // This is the “single method” to codify “use the first one”.
+
+    public static bool TryGetPrimaryArea(this City.CityMarker marker, out CityArea area)
+    {
+        area = null;
+
+        if (marker == null || marker.AreaIds == null || marker.AreaIds.Length == 0)
+            return false;
+
+        if (G.Areas == null)
+            return false;
+
+        for (int i = 0; i < marker.AreaIds.Length; i++)
+        {
+            var id = marker.AreaIds[i];
+            if (string.IsNullOrEmpty(id))
+                continue;
+
+            if (G.Areas.TryGetValue(id, out area) && area != null)
+                return true;
+        }
+
+        area = null;
+        return false;
+    }
+
+    public static CityArea GetPrimaryAreaOrNull(this City.CityMarker marker)
+    {
+        return marker.TryGetPrimaryArea(out var area) ? area : null;
+    }
+
+    public static bool TryGetCityAreaAt(this City city, CityPosition position, out CityArea area, string tag = null, Predicate<City.CityPolygonArea> predicate = null, bool preferSmallest = true)
+    {
+        area = null;
+
+        if (city == null)
+            return false;
+
+        if (!city.TryGetAreaAt(position, out var polygonArea, tag, predicate, preferSmallest: preferSmallest))
+            return false;
+
+        area = polygonArea.GetArea();
+        return area != null;
+    }
+
+    public static CityArea GetArea(this City.CityPolygonArea area)
+    {
+        if (G.Areas.TryGetValue(area.Id, out var cityArea))
+        {
+            return cityArea;
+        }
+        return null;
     }
 }

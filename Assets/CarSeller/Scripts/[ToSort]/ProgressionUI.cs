@@ -6,6 +6,7 @@ using Pixelplacement;
 
 public class ProgressionUI : MonoBehaviour
 {
+    public TMP_Text description;
     public TMP_Text nextLevelIndexDisplayer;
     public Slider slider;
     public ParticleSystem particlesSystem;

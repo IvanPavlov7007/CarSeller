@@ -16,7 +16,8 @@ public enum CarType
     Small,
     Bike,
     Truck,
-    Super
+    Super,
+    Any
 }
 [Serializable]
 public enum CarRarity

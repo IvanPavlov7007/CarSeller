@@ -27,6 +27,8 @@ public static class G
 
     public static CarSpawnManager CarSpawnManager => Economy.CarSpawnManager;
 
+    public static AreaBalancingContent Balancing => Config.GameDatabaseContainer.Balancing;
+
     //MODEL AND VIEW MIXED (SORRY)
     public static GameObject CityRoot { get; set; }
 
@@ -81,8 +83,8 @@ public static class G
 
 
     //to sort
-    public static CityArea Area;
-    internal static BuyerManager BuyerManager;
+    public static Dictionary<string, CityArea> Areas;
+    internal static BuyerManager BuyerManager => Economy.BuyerManager;
 
     public static void Initialize( ViewBuildersConfig handlersConfig)
     {

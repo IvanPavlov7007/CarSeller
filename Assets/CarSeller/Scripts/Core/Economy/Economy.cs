@@ -17,6 +17,7 @@ public class Economy
     public ProductPriceCalculator ProductPriceCalculator = new ProductPriceCalculator();
 
     public CarSpawnManager CarSpawnManager = new CarSpawnManager();
+    public BuyerManager BuyerManager = new BuyerManager();
 
     public Player Player;
 

@@ -23,6 +23,7 @@ public static class CityGraphBaker
         var nodes = root.GetComponentsInChildren<RoadNodeAuthor>(true);
         var edges = root.GetComponentsInChildren<RoadEdgeAuthor>(true);
         var markers = root.GetComponentsInChildren<CityMarkerAuthor>(false);
+        var areas = root.GetComponentsInChildren<CityAreaAuthor>(false);
 
         foreach (var n in nodes)
         {
@@ -47,6 +48,17 @@ public static class CityGraphBaker
             {
                 m.GetType().GetMethod("EnsureUniqueIdInScene", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
                     ?.Invoke(m, null);
+            }
+        }
+
+        foreach (var a in areas)
+        {
+            a.EnsureId();
+            var dupes = areas.Where(x => x != a && x.Id == a.Id).ToList();
+            if (dupes.Count > 0)
+            {
+                a.GetType().GetMethod("EnsureUniqueIdInScene", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+                    ?.Invoke(a, null);
             }
         }
 
@@ -151,6 +163,36 @@ public static class CityGraphBaker
             return md;
         }).ToList();
 
+        // New: bake areas
+        graph.Areas = areas.Select(a =>
+        {
+            var poly = a.PolygonCollider;
+
+            Vector2[] points = System.Array.Empty<Vector2>();
+            if (poly != null && poly.pathCount > 0)
+            {
+                var offset = poly.offset;
+                var path = poly.GetPath(0);
+                points = new Vector2[path.Length];
+                for (int i = 0; i < path.Length; i++)
+                {
+                    var world = a.transform.TransformPoint(path[i] + offset);
+                    var rootLocal = root.transform.InverseTransformPoint(world);
+                    points[i] = new Vector2(rootLocal.x, rootLocal.y);
+                }
+            }
+
+            return new CityGraphAsset.AreaData
+            {
+                Id = a.Id,
+                DisplayName = a.DisplayName,
+                Tags = a.Tags,
+                Polygon = points,
+                AuthorId = a.Id,
+                AuthorPath = GetHierarchyPath(a.gameObject)
+            };
+        }).ToList();
+
         // Warn for multiple splines between same node pair
         var duplicates = new Dictionary<(string from, string to), int>();
         foreach (var ed in graph.Edges)
@@ -171,7 +213,7 @@ public static class CityGraphBaker
 
         EditorUtility.SetDirty(graph);
         AssetDatabase.SaveAssets();
-        Debug.Log($"Baked {graph.Nodes.Count} nodes, {graph.Edges.Count} edges, {graph.Markers.Count} markers to '{path}'.");
+        Debug.Log($"Baked {graph.Nodes.Count} nodes, {graph.Edges.Count} edges, {graph.Markers.Count} markers, {graph.Areas.Count} areas to '{path}'.");
     }
 
     private static string GetHierarchyPath(GameObject go)

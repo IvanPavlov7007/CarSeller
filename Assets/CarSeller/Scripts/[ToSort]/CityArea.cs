@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine.Pool;
 
 public class CityArea
 {
@@ -8,25 +11,34 @@ public class CityArea
 
     public LinkedListNode<AreaLevel> CurrentLevelNode;
 
-    public CityArea(BuyersPool pool)
+    public AreaLevel CurrentLevel => CurrentLevelNode.Value;
+
+    public CarsPool CarsPool => CurrentLevel.CarPool;
+    public BuyersPool BuyersPool => CurrentLevel.BuyersPool;
+
+    public AreaBuyerSystem buyersSystem { get; private set; }
+    public string Id { get; internal set; }
+
+    public CityArea(AreaCollection data)
     {
-        BuyersPool = pool;
-        initialize();
+        Id = data.Id;
+        initializeBuyersSpawnPoints(data);
+        initializeLevels(data);
     }
 
-    void initialize()
+    private void initializeBuyersSpawnPoints(AreaCollection areaData)
     {
-        areaLevels = new LinkedList<AreaLevel>(
-        new[]{
-            new AreaLevel(0, 100f ),
-            new AreaLevel(1,200f),
-            new AreaLevel(2, 300f),
-            new AreaLevel(3, 0f,true),
-        });
+        var buyersPositions = G.City.QueryMarkers("buyer",areaData.Id).Where(m => m.PositionOnGraph != null).Select(m => m.PositionOnGraph.Value).ToList();
+        buyersSystem = new AreaBuyerSystem(
+            buyersPositions.Select(pos => new BuyerSpawnPoint { Position = pos }).ToList());
+    }
+
+    private void initializeLevels(AreaCollection data)
+    {
+        areaLevels = new LinkedList<AreaLevel>(AreaLevel.createLevels(data.Levels));
         CurrentLevelNode = areaLevels.First;
     }
-
-    public BuyersPool BuyersPool { get; private set; }
+    
 }
 
 public class AreaLevel
@@ -34,31 +46,92 @@ public class AreaLevel
     public readonly int Index;
     public readonly float XpToNextLevel;
     public readonly bool Final = false;
+
     public CarSpawnWeight[] CarSpawnWeights;
+    public BuyerSpawnSpawnWeight[] BuyerSpawnWeights;
+
     public CarsPool CarPool;
+    public BuyersPool BuyersPool;
 
-    public AreaLevel(int index, float xpToNextLevel, bool final = false)
+    AreaLevel(LevelBalancing balancing, bool final)
     {
-        this.Index = index;
-        this.XpToNextLevel = xpToNextLevel;
-        this.Final = final;
+        Index = balancing.AreaLevel;
+        XpToNextLevel = balancing.RequiredXP;
+        Final = final;
 
-        CarSpawnWeights = G.Config.GameDatabaseContainer.AreaBalancing.CalculateCarSpawnWeightsForLevel(index);
+        intializeCars(balancing);
+        initializeBuyers(balancing);
+    }
+
+    private void intializeCars(LevelBalancing balancing)
+    {
+        CarSpawnWeights = balancing.CalculateCarSpawnWeightsForLevel();
         CarPool = new CarsPool(G.SimplifiedCarsManager.CreatePooledCarList(CarSpawnWeights));
+    }
+
+    private void initializeBuyers(LevelBalancing balancing)
+    {
+        BuyerSpawnWeights = balancing.CalculateBuyerSpawnWeightsForLevel();
+        BuyersPool = new BuyersPool(BuyerManager.CreatePooledBuyerList(BuyerSpawnWeights));
+    }
+
+    public static AreaLevel[] createLevels(List<LevelBalancing> balancings)
+    {
+        AreaLevel[] result = new AreaLevel[balancings.Count];
+        for (int i = 0; i < balancings.Count; i++)
+        {
+            result[i] = new AreaLevel(balancings[i], i == balancings.Count - 1);
+        }
+        return result;
     }
 
 }
 
+public class Pool<T>
+{
+    public Queue<T> Queue;
+    public HashSet<T> AllItems;
+
+    public Pool(List<T> list)
+    {
+        list.Shuffle();
+        AllItems = new HashSet<T>(list);
+        Queue = new Queue<T>(list);
+    }
+
+    public void shuffle()
+    {
+        var list = new List<T>(Queue);
+        list.Shuffle();
+        Queue = new Queue<T>(list);
+    }
+}
+
+public class CarsPool : Pool<Car>
+{
+    public CarsPool(List<Car> list) : base(list)
+    {
+    }
+}
+
+public class BuyersPool : Pool<Buyer>
+{
+    public BuyersPool(List<Buyer> list) : base(list)
+    {
+    }
+}
 
 
-public class BuyersPool
+
+
+public class AreaBuyerSystem
 {
     public float minSpawnInterval = 5f;
     public float averageSpawnInterval = 10f;
     public float lastSpawnTime = 0f;
     public List<BuyerSpawnPoint> SpawnPoints { get; private set; }
 
-    public BuyersPool(List<BuyerSpawnPoint> spawnPoints)
+    public AreaBuyerSystem(List<BuyerSpawnPoint> spawnPoints)
     {
         SpawnPoints = spawnPoints;
     }
@@ -69,3 +142,4 @@ public class BuyerSpawnPoint
     public Buyer buyer;
     public CityPosition Position;
 }
+

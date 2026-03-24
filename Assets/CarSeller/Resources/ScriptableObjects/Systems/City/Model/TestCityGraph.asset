@@ -11124,7 +11124,7 @@ MonoBehaviour:
     Radius: 0
     Anchor:
       Kind: 1
-      NodeId: 
+      NodeId: 36359ddfd2bb4d81ac577ccad55cd075
       T: 0
       Forward: 1
       EdgeId: 
@@ -27855,3 +27855,34 @@ MonoBehaviour:
       WorldPoint: {x: 17.5, y: 9}
     AuthorId: 174fa17d32fa43bfab377c73e9abc766
     AuthorPath: TestGraph_34x17/Markers/Marker_Edge_Node_32_16_Main_to_Node_33_16_Secondary
+  Areas:
+  - Id: Area1
+    DisplayName: 
+    Tags: []
+    Polygon:
+    - {x: 11.196714, y: 17.112272}
+    - {x: -4.844187, y: 17.05367}
+    - {x: -5.10268, y: -0.6551485}
+    - {x: 11.211681, y: -0.5629072}
+    AuthorId: Area1
+    AuthorPath: TestGraph_34x17/Areas/Area1
+  - Id: Area2
+    DisplayName: 
+    Tags: []
+    Polygon:
+    - {x: 24.426714, y: 17.112272}
+    - {x: 8.385814, y: 17.05367}
+    - {x: 8.12732, y: -0.6551485}
+    - {x: 24.44168, y: -0.5629072}
+    AuthorId: Area2
+    AuthorPath: TestGraph_34x17/Areas/Area2
+  - Id: Area3
+    DisplayName: 
+    Tags: []
+    Polygon:
+    - {x: 39.586716, y: 17.112272}
+    - {x: 23.545815, y: 17.05367}
+    - {x: 23.287321, y: -0.6551485}
+    - {x: 39.601685, y: -0.5629072}
+    AuthorId: Area3
+    AuthorPath: TestGraph_34x17/Areas/Area3
