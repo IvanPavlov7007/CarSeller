@@ -35,7 +35,10 @@ public class DebugCommands : MonoBehaviour
 
     public void OnQ(InputValue val)
     {
-
+        CarFlexibleJunctionPolicy.IgnoreRules = !CarFlexibleJunctionPolicy.IgnoreRules;
+        //var pos = G.VehicleController.CurrentVehicleEntity.Position;
+        //Car car = G.SimplifiedCarsManager.CreateCarHidden(new CarKind(CarType.Bike, CarRarity.Common));
+        //CityEntitiesCreationHelper.MoveInExistingCar(car, pos);
     }
 
 

@@ -6,6 +6,8 @@ public class CarFlexibleJunctionPolicy : IJunctionPolicy
     public readonly CityEntity Entity;
     public readonly Car Car;
 
+    public static bool IgnoreRules = false;
+
     public CarFlexibleJunctionPolicy(CityEntity entity)
     {
         Entity = entity;
@@ -17,7 +19,7 @@ public class CarFlexibleJunctionPolicy : IJunctionPolicy
         bool canNarrow = Car.HasModifier<CanNarrowStreet>();
         foreach (var edge in atNode.Outgoing)
         {
-            if (canNarrow || !edge.HasTag("secondary"))
+            if (IgnoreRules || canNarrow || !edge.HasTag("secondary"))
             {
                 yield return edge;
             }
