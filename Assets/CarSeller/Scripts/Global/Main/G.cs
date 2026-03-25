@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public static class G
 {
+    public static SellPriceWrapper CurrentSellPriceWrapped => Economy.CurrentPriceWrapper;
+    public static SellPriceCalculator SellPriceCalculator => Economy.SellPriceCalculator;
 
     public static GameConfig Config => GameMainConfig.Instance.GameConfig;
     public static CityConfig CityConfig => Config.CityConfig;

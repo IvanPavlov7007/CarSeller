@@ -14,7 +14,7 @@ public class MoneyDisplayer : MonoBehaviour
     private void OnEnable()
     {
         GameEvents.Instance.OnPlayerMoneyChanged += onPlayerMoneyChanged;
-        updateAccountValue(G.Player.Money);
+        updateAccountAbsoluteValue(G.Player.Money);
     }
 
     private void OnDisable()
@@ -24,10 +24,10 @@ public class MoneyDisplayer : MonoBehaviour
 
     void onPlayerMoneyChanged(PlayerMoneyChangeEventData data)
     {
-        updateAccountValue(data.NewMoney);
+        updateAccountAbsoluteValue(SellPriceWrapper.CalculateAbsolutePrice(data.NewMoney));
     }
 
-    void updateAccountValue(float value)
+    void updateAccountAbsoluteValue(float value)
     {
         if (TextMeshProUGUI == null) return;
         TextMeshProUGUI.text = value.ToString("C2", CultureInfo.CurrentCulture);

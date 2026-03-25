@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef69532a2ce800d489631b8f8ee9f912, type: 3}
   m_Name: 0Warehouses
   m_EditorClassIdentifier: 
-  initialMoney: 10000
+  initialMoney: 0
   ownWarehouses: []

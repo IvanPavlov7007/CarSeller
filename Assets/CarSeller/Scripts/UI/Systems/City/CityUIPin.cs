@@ -42,6 +42,9 @@ public class CityUIPin : MonoBehaviour
 
         var scaler = cityViewObjectController.CityEntity.GetAspect<VisibleDistanceScalerAspect>();
         gameObject.AddComponent<VisionPinScaler>().Initialize(scaler);
+
+        positioner.update();
+        Update();
     }
 
     private void Update()

@@ -21,6 +21,9 @@ MonoBehaviour:
   - Area2
   - Area3
   - AreasDefinitions
+  - CarRarityConfigs
+  - CarTypeConfigs
+  - GlobalConfig
   foldoutSerializationGUI: 0
   serializationOutputPath: ../../Configs
   serializationFileName: Configs.v0.1
@@ -448,3 +451,31 @@ MonoBehaviour:
       BuyerBike: 6
       BuyerSuper: 2
       BuyerAny: 1
+    CarTypeConfigs:
+    - Type: Small
+      BaseValue: 1.2
+      SpecificValue: 2
+    - Type: Sedan
+      BaseValue: 1
+      SpecificValue: 2
+    - Type: Truck
+      BaseValue: 1.5
+      SpecificValue: 2
+    - Type: Bike
+      BaseValue: 0.8
+      SpecificValue: 2
+    - Type: Super
+      BaseValue: 3
+      SpecificValue: 2
+    - Type: Any
+      BaseValue: 0
+      SpecificValue: 1
+    CarRarityConfigs:
+    - Rarity: Common
+      ValueMultiplier: 1
+    - Rarity: Uncommon
+      ValueMultiplier: 6
+    - Rarity: Epic
+      ValueMultiplier: 15
+    GlobalConfig:
+      DisplayValueMultiplier: 1000

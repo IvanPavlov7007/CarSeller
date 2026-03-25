@@ -13,6 +13,7 @@ public static class GameRules
     public static readonly ModelControlledByPlayer ModelControlledByPlayer = new ModelControlledByPlayer();
     public static readonly CanBePurchased CanBePurchased = new CanBePurchased();
     public static readonly CarCanBeSoldToBuyer CarCanBeSoldToBuyer = new CarCanBeSoldToBuyer();
+    public static readonly CarIsOfRequiredType CarIsOfRequiredType = new CarIsOfRequiredType();
 }
 
 public class CarBelongsToPlayer
@@ -142,6 +143,19 @@ public class CanBePurchased
     }
 }
 
+public class CarIsOfRequiredType
+{
+    public bool Check(Car car, CarType requiredType)
+    {
+        Debug.Assert(car != null, "Car is null");
+
+        if(requiredType == CarType.Any)
+            return true;
+
+        return car.Kind.Type == requiredType;
+    }
+}
+
 public class CarCanBeSoldToBuyer
 {
     public bool Check(Car car, Buyer buyer)
@@ -149,6 +163,39 @@ public class CarCanBeSoldToBuyer
         Debug.Assert(car != null, "Car is null");
         Debug.Assert(buyer != null, "Buyer is null");
 
-        return !GameRules.CarBelongsToPlayer.Check(car);
+        return !GameRules.CarBelongsToPlayer.Check(car) &&
+            GameRules.CarIsOfRequiredType.Check(car,buyer.RequiredCarType);
+    }
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+public class SellPriceCalculator : SellPriceWrapper
+{
+    public override float CalculateUnitSellPrice(Car car, Buyer buyer)
+    {
+        Debug.Assert(car != null, "Car is null");
+        Debug.Assert(buyer != null, "Buyer is null");
+
+        CarType requiredType = buyer.RequiredCarType;
+        CarType carType = car.Kind.Type;
+        CarRarity carRarity = car.Kind.Rarity;
+
+        CarTypeConfig carTypeConfig = G.Balancing.CarTypeConfigs.Find(x => x.GetType() == carType);
+        CarTypeConfig requiredTypeConfig = G.Balancing.CarTypeConfigs.Find(x => x.GetType() == requiredType);
+        CarRarityConfig carRarityConfig = G.Balancing.CarRarityConfigs.Find(x => x.GetRarity() == carRarity);
+
+        float price = carTypeConfig.BaseValue * carRarityConfig.ValueMultiplier * requiredTypeConfig.SpecificValue;
+        return price;
+
+    }
+}
+
+public abstract class SellPriceWrapper
+{
+    public abstract float CalculateUnitSellPrice(Car car, Buyer buyer);
+    public static float CalculateAbsolutePrice(float unitPrice)
+    {
+        return G.Balancing.GlobalConfig.DisplayValueMultiplier * unitPrice;
     }
 }

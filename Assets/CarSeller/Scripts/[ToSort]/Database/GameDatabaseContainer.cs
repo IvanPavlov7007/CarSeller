@@ -21,6 +21,15 @@ public class AreaBalancingContent
     [SpreadsheetPage("Area3")]
     public List<LevelBalancing> Area3;
 
+    [SpreadsheetPage("CarTypes")]
+    public List<CarTypeConfig> CarTypeConfigs;
+    [SpreadsheetPage("CarRarities")]
+    public List<CarRarityConfig> CarRarityConfigs;
+
+    [SpreadsheetPage("Global")]
+    public GlobalConfig GlobalConfig;
+
+
     static Dictionary<string, FieldInfo> LevelListFieldByAreaId;
 
     public void RebuildAreaBalancingByAreaName()
@@ -228,4 +237,44 @@ public struct BuyerSpawnSpawnWeight
         this.CarType = carType;
         this.Weight = weight;
     }
+}
+
+
+[Serializable]
+public struct CarTypeConfig
+{
+    public string Type;
+    public CarType GetType()
+    {
+        if(Enum.TryParse(Type, ignoreCase: true, out CarType result))
+        {
+            return result;
+        }
+        Debug.LogError($"Failed to parse CarType from string '{Type}'. Defaulting to Sedan.");
+        return CarType.Sedan;
+    }
+    public float BaseValue;
+    public float SpecificValue;
+}
+
+[Serializable]
+public struct CarRarityConfig
+{
+    public string Rarity;
+    public CarRarity GetRarity()
+    {
+        if (Enum.TryParse(Rarity, ignoreCase: true, out CarRarity result))
+        {
+            return result;
+        }
+        Debug.LogError($"Failed to parse CarRarity from string '{Rarity}'. Defaulting to Common.");
+        return CarRarity.Common;
+    }
+    public float ValueMultiplier;
+}
+
+[Serializable]
+public struct GlobalConfig
+{
+    public float DisplayValueMultiplier;
 }

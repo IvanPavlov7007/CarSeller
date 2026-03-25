@@ -7,13 +7,18 @@ using UnityEngine;
 public class Economy
 {
     public EconomyConfig Config { get; private set; }
-
+    
     public WarehouseOfferProvider WarehouseOfferProvider;
 
     public CarSellOneTimeOfferProvider CarSellOfferProvider = new CarSellOneTimeOfferProvider();
 
     public CarShopOfferProvider CarShopOfferProvider;
 
+
+    public SellPriceWrapper CurrentPriceWrapper => SellPriceCalculator;
+    // Simplified calculator
+    public SellPriceCalculator SellPriceCalculator = new SellPriceCalculator();
+    // Older calculator for recursive price calculations
     public ProductPriceCalculator ProductPriceCalculator = new ProductPriceCalculator();
 
     public CarSpawnManager CarSpawnManager = new CarSpawnManager();

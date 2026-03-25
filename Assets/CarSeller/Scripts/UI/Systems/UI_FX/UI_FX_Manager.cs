@@ -33,13 +33,13 @@ public class UI_FX_Manager : Singleton<UI_FX_Manager>
 
             case SellTransaction sellData:
                 {
-                    playMoneyEffect(sellData.Price, data.TransactionFeedbackLocation);
+                    playMoneyEffect(sellData.AbsolutePrice, data.TransactionFeedbackLocation);
                     break;
                 }
 
             case RewardTransaction rewardData:
                 {
-                    playMoneyEffect(rewardData.Price, data.TransactionFeedbackLocation);
+                    playMoneyEffect(SellPriceWrapper.CalculateAbsolutePrice(rewardData.Price), data.TransactionFeedbackLocation);
                     break;
                 }
 

@@ -18,7 +18,7 @@ public class BuyerProcess : IProcess
     {
         if (GameRules.CarCanBeSoldToBuyer.Check(Car, Buyer))
         {
-            var result = G.TransactionProcessor.Process(new SellTransaction(Car, Buyer, Car.CalculatePrice()),
+            var result = G.TransactionProcessor.Process(new SellTransaction(Car, Buyer, G.CurrentSellPriceWrapped),
                 new TransactionFeedbackLocation(TransactionLocationType.WorldSpace, BuyerEntity.Position.WorldPosition));
             if(result.Type != TransactionResultType.Success)
             {

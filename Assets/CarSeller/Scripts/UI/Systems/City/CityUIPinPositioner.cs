@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class CityUIPinPositioner : MonoBehaviour
@@ -253,5 +254,10 @@ public class CityUIPinPositioner : MonoBehaviour
             cam,
             out Vector3 worldPoint);
         return (worldPoint - rectTransform.position).normalized;
+    }
+
+    internal void update()
+    {
+        LateUpdate();
     }
 }

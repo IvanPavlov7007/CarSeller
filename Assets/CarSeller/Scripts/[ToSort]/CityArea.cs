@@ -7,7 +7,7 @@ public class CityArea
 {
     public LinkedList<AreaLevel> areaLevels;
     public float currentXP;
-    public const float XP_PER_PRICE = 0.05f;
+    public const float XP_PER_PRICE = 1f;
 
     public LinkedListNode<AreaLevel> CurrentLevelNode;
 

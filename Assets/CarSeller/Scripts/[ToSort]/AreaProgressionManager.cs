@@ -14,7 +14,7 @@ public class AreaProgressionManager : Singleton<AreaProgressionManager>
             return;
         }
 
-        progressArea(area, transaction.Price * CityArea.XP_PER_PRICE);
+        progressArea(area, transaction.UnitPrice * CityArea.XP_PER_PRICE);
     }
 
 
