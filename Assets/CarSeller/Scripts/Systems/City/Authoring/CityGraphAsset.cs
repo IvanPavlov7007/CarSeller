@@ -6,6 +6,7 @@ using UnityEngine;
 public class CityGraphAsset : ScriptableObject
 {
     public GameObject PrefabRoot; // prefab root for authoring linkage
+    public GameObject TrafficLightPrefab;
 
     [Serializable]
     public class NodeData
@@ -30,8 +31,6 @@ public class CityGraphAsset : ScriptableObject
         public int SplineIndex = 0;     // convention: one spline per edge
     }
 
-    // MARKERS
-
     [Serializable]
     public enum MarkerAnchorKind
     {
@@ -45,15 +44,12 @@ public class CityGraphAsset : ScriptableObject
     {
         public MarkerAnchorKind Kind = MarkerAnchorKind.WorldPoint;
 
-        // Node anchor:
         public string NodeId;
 
-        // Edge anchor:
         [Range(0f, 1f)] public float T;
         public bool Forward = true;
         public string EdgeId;
 
-        // World point anchor:
         public Vector2 WorldPoint;
     }
 
@@ -68,12 +64,9 @@ public class CityGraphAsset : ScriptableObject
 
         public MarkerAnchorData Anchor = new MarkerAnchorData();
 
-        // Authoring linkage
         public string AuthorId;
         public string AuthorPath;
     }
-
-    // AREAS
 
     [Serializable]
     public class AreaData
@@ -82,20 +75,47 @@ public class CityGraphAsset : ScriptableObject
         public string DisplayName;
         public string[] Tags;
 
-        // Polygon points in PrefabRoot local space (XY).
         public Vector2[] Polygon;
 
-        // Authoring linkage
         public string AuthorId;
         public string AuthorPath;
     }
 
-    public List<NodeData> Nodes = new();
-    public List<EdgeData> Edges = new();
+    [Serializable]
+    public class TrafficLightEdgeSlotData
+    {
+        public string Key;
+        public string EdgeId;
+    }
 
-    // New: Markers authored in scene/prefab and baked here
-    public List<MarkerData> Markers = new();
+    [Serializable]
+    public class TrafficLightProgramStepData
+    {
+        public float DurationSeconds = 5f;
+        public string[] GoEdgeKeys;
+    }
 
-    // New: Areas authored via PolygonCollider2D and baked here
-    public List<AreaData> Areas = new();
+    [Serializable]
+    public class TrafficLightData
+    {
+        public string Id;
+
+        public string NodeId;
+
+        public string AuthorId;
+        public string AuthorPath;
+
+        public float PreparationTimeSeconds = 0.75f;
+
+        public List<TrafficLightEdgeSlotData> EdgeSlots = new List<TrafficLightEdgeSlotData>();
+        public List<TrafficLightProgramStepData> Program = new List<TrafficLightProgramStepData>();
+    }
+
+    public List<NodeData> Nodes = new List<NodeData>();
+    public List<EdgeData> Edges = new List<EdgeData>();
+
+    public List<MarkerData> Markers = new List<MarkerData>();
+    public List<AreaData> Areas = new List<AreaData>();
+
+    public List<TrafficLightData> TrafficLights = new List<TrafficLightData>();
 }

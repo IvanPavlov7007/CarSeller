@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TestCityGraph
   m_EditorClassIdentifier: 
   PrefabRoot: {fileID: 9188537253596400111, guid: ebf99f13e84fe544e9dbc150d883f616, type: 3}
+  TrafficLightPrefab: {fileID: 8550951961844043500, guid: 0dd8ca3eb829ecb43b72969f2a238238, type: 3}
   Nodes:
   - Id: 5a3341a399964d9e8e3a4e26bd5a844b
     Position: {x: -15, y: -7}
@@ -27886,3 +27887,101 @@ MonoBehaviour:
     - {x: 39.601685, y: -0.5629072}
     AuthorId: Area3
     AuthorPath: TestGraph_34x17/Areas/Area3
+  TrafficLights:
+  - Id: 02c4631e99cf46759fc0412ac7dc74ba
+    NodeId: 030257c60cef45ebb744721f680581da
+    AuthorId: 02c4631e99cf46759fc0412ac7dc74ba
+    AuthorPath: TestGraph_34x17/TrafficLights/TrafficLIght
+    PreparationTimeSeconds: 1
+    EdgeSlots:
+    - Key: a
+      EdgeId: 9686a86648f446838b7990c12b8b6606
+    - Key: b
+      EdgeId: 216bc5eb019940dfa2cd5ab9fad773aa
+    - Key: c
+      EdgeId: 73e09de020cd45ba84b61ca7e098b67a
+    - Key: d
+      EdgeId: 0eb70f2055884df39358dbe0b72b4ff2
+    Program:
+    - DurationSeconds: 10
+      GoEdgeKeys:
+      - a
+      - c
+    - DurationSeconds: 10
+      GoEdgeKeys:
+      - b
+      - d
+  - Id: 9f92f313c99a401c9bdb808d380d3c9a
+    NodeId: ed6c6bd7b87b4b16bc3f9266fdbbc3d8
+    AuthorId: 9f92f313c99a401c9bdb808d380d3c9a
+    AuthorPath: TestGraph_34x17/TrafficLights/TrafficLIght (1)
+    PreparationTimeSeconds: 1
+    EdgeSlots:
+    - Key: e
+      EdgeId: dc02dd6103394b3fb947fc1771fb8161
+    - Key: f
+      EdgeId: 9f7e03caf3c6423487c814c09297d18d
+    - Key: g
+      EdgeId: 49f1305a4edb4d3e9fe07e589d9e22bd
+    - Key: h
+      EdgeId: ed4904fd5e7e4fbdaf0c512120d55696
+    Program:
+    - DurationSeconds: 10
+      GoEdgeKeys:
+      - e
+      - g
+    - DurationSeconds: 10
+      GoEdgeKeys:
+      - f
+      - h
+  - Id: d438c759c10941bc9e5ab88b7d2b70d5
+    NodeId: 04893bfee8414fc5874f671abfaef50b
+    AuthorId: d438c759c10941bc9e5ab88b7d2b70d5
+    AuthorPath: TestGraph_34x17/TrafficLights/TrafficLIght (2)
+    PreparationTimeSeconds: 1
+    EdgeSlots:
+    - Key: a
+      EdgeId: 9fe9cb974d814ac98dfeee93699fa10f
+    - Key: b
+      EdgeId: 702ef7e97ecd4506ad62c0a74068ac03
+    - Key: c
+      EdgeId: 765a86e696cc4eefbcf913ff28149d79
+    - Key: d
+      EdgeId: 74ca9f1002be41b8a2b6a5bb683bb717
+    Program:
+    - DurationSeconds: 5
+      GoEdgeKeys:
+      - a
+      - b
+    - DurationSeconds: 5
+      GoEdgeKeys:
+      - a
+      - c
+    - DurationSeconds: 5
+      GoEdgeKeys:
+      - a
+      - d
+    - DurationSeconds: 5
+      GoEdgeKeys:
+      - b
+      - a
+    - DurationSeconds: 5
+      GoEdgeKeys:
+      - b
+      - c
+    - DurationSeconds: 5
+      GoEdgeKeys:
+      - b
+      - d
+    - DurationSeconds: 5
+      GoEdgeKeys:
+      - c
+      - b
+    - DurationSeconds: 5
+      GoEdgeKeys:
+      - c
+      - d
+    - DurationSeconds: 5
+      GoEdgeKeys:
+      - c
+      - a

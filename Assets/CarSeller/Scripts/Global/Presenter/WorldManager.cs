@@ -66,7 +66,7 @@ public class WorldManager
                     break;
             }
         }
-        World.WorldRegistry.Register<Warehouse>(warehouse,warehouseConfig);
+        World.WorldRegistry.Register<Warehouse>(warehouse, warehouseConfig);
     }
 
     public void InitializeWorld(CityConfig cityConfig, EconomyConfig economyConfig, WorldMissionsConfig worldMissionsConfig)
@@ -88,7 +88,8 @@ public class WorldManager
         }
         World.Instance.City = new City(cityConfig, G.CityRoot.transform, createAspectsSystem());
 
-        
+        CityTrafficLightsSpawner.Spawn(World.Instance.City, cityConfig.CityGraph, G.CityRoot.transform);
+
         foreach (var warehouseConfig in cityConfig.warehouseConfigs)
         {
             //TODO extract into a specific creation service

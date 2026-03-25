@@ -24,6 +24,7 @@ public static class CityGraphBaker
         var edges = root.GetComponentsInChildren<RoadEdgeAuthor>(true);
         var markers = root.GetComponentsInChildren<CityMarkerAuthor>(false);
         var areas = root.GetComponentsInChildren<CityAreaAuthor>(false);
+        var trafficLights = root.GetComponentsInChildren<TrafficLightAuthor>(false);
 
         foreach (var n in nodes)
         {
@@ -59,6 +60,17 @@ public static class CityGraphBaker
             {
                 a.GetType().GetMethod("EnsureUniqueIdInScene", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
                     ?.Invoke(a, null);
+            }
+        }
+
+        foreach (var t in trafficLights)
+        {
+            t.EnsureId();
+            var dupes = trafficLights.Where(x => x != t && x.Id == t.Id).ToList();
+            if (dupes.Count > 0)
+            {
+                t.GetType().GetMethod("EnsureUniqueIdInScene", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+                    ?.Invoke(t, null);
             }
         }
 
@@ -193,6 +205,50 @@ public static class CityGraphBaker
             };
         }).ToList();
 
+        // New: bake traffic lights
+        graph.TrafficLights = trafficLights.Select(t =>
+        {
+            var data = new CityGraphAsset.TrafficLightData
+            {
+                Id = t.Id,
+                NodeId = t.Node ? t.Node.Id : null,
+                AuthorId = t.Id,
+                AuthorPath = GetHierarchyPath(t.gameObject),
+                PreparationTimeSeconds = t.PreparationTimeSeconds,
+                EdgeSlots = new List<CityGraphAsset.TrafficLightEdgeSlotData>(),
+                Program = new List<CityGraphAsset.TrafficLightProgramStepData>()
+            };
+
+            var slots = t.EdgeSlots;
+            if (slots != null)
+            {
+                for (int i = 0; i < slots.Count; i++)
+                {
+                    var s = slots[i];
+                    data.EdgeSlots.Add(new CityGraphAsset.TrafficLightEdgeSlotData
+                    {
+                        Key = s.Key,
+                        EdgeId = s.Edge != null ? s.Edge.Id : null
+                    });
+                }
+            }
+
+            if (t.Program != null)
+            {
+                for (int i = 0; i < t.Program.Count; i++)
+                {
+                    var p = t.Program[i];
+                    data.Program.Add(new CityGraphAsset.TrafficLightProgramStepData
+                    {
+                        DurationSeconds = p.DurationSeconds,
+                        GoEdgeKeys = p.GoEdgeKeys != null ? p.GoEdgeKeys.ToArray() : System.Array.Empty<string>()
+                    });
+                }
+            }
+
+            return data;
+        }).ToList();
+
         // Warn for multiple splines between same node pair
         var duplicates = new Dictionary<(string from, string to), int>();
         foreach (var ed in graph.Edges)
@@ -213,7 +269,7 @@ public static class CityGraphBaker
 
         EditorUtility.SetDirty(graph);
         AssetDatabase.SaveAssets();
-        Debug.Log($"Baked {graph.Nodes.Count} nodes, {graph.Edges.Count} edges, {graph.Markers.Count} markers, {graph.Areas.Count} areas to '{path}'.");
+        Debug.Log($"Baked {graph.Nodes.Count} nodes, {graph.Edges.Count} edges, {graph.Markers.Count} markers, {graph.Areas.Count} areas, {graph.TrafficLights.Count} traffic lights to '{path}'.");
     }
 
     private static string GetHierarchyPath(GameObject go)
