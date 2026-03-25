@@ -17,6 +17,9 @@ public class MovingPoint : MonoBehaviour, IMovement
     ISpeedProvider speedProvider;
     Transform arrowRotationPoint;
     Transform body;
+    Car Car;
+
+    CarFlexibleJunctionPolicy _flexPolicy;
 
     private const float Epsilon = 1e-4f;
     private const float Tolerance = 0.1f; // To avoid floating point issues
@@ -32,7 +35,12 @@ public class MovingPoint : MonoBehaviour, IMovement
         arrowRotationPoint = transform.GetChild(1);
     }
 
-    public void Initialize(ICityPositionable cityPositionable) { this.cityPositionable = cityPositionable; }
+    public void Initialize(CityEntity entity) 
+    {
+        this.cityPositionable = entity; 
+        _flexPolicy = new CarFlexibleJunctionPolicy(entity);
+        Car = entity.Subject as Car;
+    }
 
 
 
@@ -85,8 +93,8 @@ public class MovingPoint : MonoBehaviour, IMovement
         var newVisitedEdges = new HashSet<RoadEdge>(visitedEdges);
         newVisitedEdges.Add(currentEdge);
 
-        var outgoings = new List<RoadEdge>(currentEdge.From.Outgoing);
-        outgoings.AddRange(currentEdge.To.Outgoing);
+        var outgoings = new List<RoadEdge>(_flexPolicy.GetAllowedOutgoing(currentEdge.From));
+        outgoings.AddRange(_flexPolicy.GetAllowedOutgoing(currentEdge.To));
 
         var currentEntry = new CityPositionWithDistance(closest, closestDistance);
 
@@ -202,7 +210,7 @@ public class MovingPoint : MonoBehaviour, IMovement
             final = final.Reversed();
         }
 
-        if (!currernt.FlowsIntoAnotherOnTheSameEdge(final) && !currernt.Edge.Bidirectional)
+        if (!currernt.FlowsIntoAnotherOnTheSameEdge(final) &&  !Car.HasModifier<CanTurnAround>())
         {
             Debug.Log($"Cannot flow from {currernt} to {final} on the same edge");
             // T and forward of both:

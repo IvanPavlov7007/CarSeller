@@ -2,9 +2,12 @@
 using UnityEngine;
 using static UnityEngine.Rendering.GPUSort;
 using System.Linq;
+using Sirenix.OdinInspector;
+using System.Collections.Generic;
+using System;
 
 [CreateAssetMenu(fileName = "CityViewObjectBuilder", menuName = "Configs/View/CityViewObjectBuilder")]
-public class CityViewObjectBuilder : ScriptableObject
+public class CityViewObjectBuilder : SerializedScriptableObject
 {
     public GameObject carViewPrefab;
     public GameObject playerFigureViewPrefab;
@@ -20,6 +23,7 @@ public class CityViewObjectBuilder : ScriptableObject
     public PinStyle CarStashWarehousePinStyle;
     public PinStyle PersonalVehicleShopPinStyle;
     public PinStyle BuyerPinStyle;
+    public Dictionary<CarType, Sprite> BuyersPinSprites;
 
     CityUIBuilder CityUIBuilder = new CityUIBuilder();
 
@@ -189,5 +193,15 @@ public class CityViewObjectBuilder : ScriptableObject
                 go.AddComponent<VisionDistanceScaler>().Initialize(visibleDistanceScalerAspect);
                 break;
         }
+    }
+
+    public PinStyle GetBuyerPinStyle(CarType requiredCarType)
+    {
+        var style = BuyerPinStyle.Clone();
+        if (BuyersPinSprites.TryGetValue(requiredCarType, out var sprite))
+        {
+            style.Icon = sprite;
+        }
+        return style;
     }
 }

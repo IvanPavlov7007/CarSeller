@@ -5,6 +5,17 @@ using UnityEngine;
 public sealed class Car : Product, IOwnershipContainer, ILocationsHolder, ISimplifiedCarModel
 {
     public CarRuntimeConfig runtimeConfig { get; private set; }
+    public CarKind Kind => runtimeConfig.Kind;
+    public T GetModifier<T>() where T : CarModifier
+    {
+        return runtimeConfig.GetModifier<T>();
+    }
+
+    public bool HasModifier<T>() where T : CarModifier
+    {
+        return GetModifier<T>() != null;
+    }
+
     public Dictionary<CarPartLocation, PartSlotRuntimeConfig> carParts { get; private set; }
     private FrameProductLocation FrameLocation;
 
@@ -16,11 +27,6 @@ public sealed class Car : Product, IOwnershipContainer, ILocationsHolder, ISimpl
 
     public OwnershipResolution OwnershipResolution => OwnershipResolution.Container;
     public IOwnable GetOwnerOfContainer() => this;
-
-    #region ISimplifiedCarModel implementation
-    public CarKind Kind => runtimeConfig.Kind;
-    #endregion
-
     public Car(CarRuntimeConfig runtimeConfig)
     {
         this.runtimeConfig = runtimeConfig;

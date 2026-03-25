@@ -169,5 +169,5 @@ public sealed class RoadEdge
 public interface IJunctionPolicy
 {
     // Returns allowed outgoing edges given desired direction and time/context.
-    IEnumerable<RoadEdge> GetAllowedOutgoing(RoadNode atNode, Vector2 desiredDir);
+    IEnumerable<RoadEdge> GetAllowedOutgoing(RoadNode atNode);
 }

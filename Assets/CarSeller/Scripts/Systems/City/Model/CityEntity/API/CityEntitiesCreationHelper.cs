@@ -22,10 +22,12 @@ public static class CityEntitiesCreationHelper
 
     public static CityEntity CreateBuyer(Buyer buyer, CityPosition position)
     {
+        var specificPinStyle = G.cityViewObjectBuilder.GetBuyerPinStyle(buyer.RequiredCarType);
+
         return CreateTriggerInteractable(buyer, position,
             new CityVisibleAspect(),
             VisibleDistanceScalerAspect.CreateDontHide(),
-            new PinAspect(G.cityViewObjectBuilder.BuyerPinStyle));
+            new PinAspect(specificPinStyle));
     }
 
     public static CityEntity CreateMissionLauncher(MissionLauncher missionLauncher)

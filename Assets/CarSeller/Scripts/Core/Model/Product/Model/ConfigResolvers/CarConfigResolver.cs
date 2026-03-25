@@ -49,6 +49,8 @@ public class CarConfigResolver
         result.TopView = carBase.TopView;
         result.SideView = carBase.SideView;
 
+        initializeBasicModifiers(result);
+
         // COMPOSITION
         // Build pools
         var basePool = carBase.SlotConfigs != null
@@ -78,6 +80,22 @@ public class CarConfigResolver
         }
 
         return result;
+    }
+
+
+    private void initializeBasicModifiers(CarRuntimeConfig config)
+    {
+        var list = new List<CarModifier>();
+        switch (config.Kind.Type)
+        {
+            case CarType.Bike:
+                list.AddRange(new CarModifier[] { new CanNarrowStreet(), new CanTurnAround() });
+                break;
+            case CarType.Small:
+                list.Add(new CanTurnAround());
+                break;
+        }
+        config.InitializeModifiers(list);
     }
 
     private CarFrameRuntimeConfig ResolveFrame(CarBaseConfig baseCfg, CarVariantConfig variantCfg)

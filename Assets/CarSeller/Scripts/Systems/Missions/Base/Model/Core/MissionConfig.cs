@@ -88,6 +88,17 @@ public class PinStyle
     public string Text = "";
     public Color ForegroundColor = Color.black;
     public Color BackgroundColor = Color.white;
+
+    public PinStyle Clone()
+    {
+        return new PinStyle
+        {
+            Icon = this.Icon,
+            Text = this.Text,
+            ForegroundColor = this.ForegroundColor,
+            BackgroundColor = this.BackgroundColor
+        };
+    }
 }
 
 public interface IResettable
