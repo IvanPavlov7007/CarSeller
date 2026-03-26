@@ -14,15 +14,29 @@ public class CarFlexibleJunctionPolicy : IJunctionPolicy
         Car = entity.Subject as Car;
     }
 
-    public IEnumerable<RoadEdge> GetAllowedOutgoing(RoadNode atNode)
+    public IEnumerable<RoadEdge> GetAllowedOutgoing(RoadNode atNode, RoadEdge fromEdge)
     {
         bool canNarrow = Car.HasModifier<CanNarrowStreet>();
+
+        if (G.City.TryGetTrafficLightAtNode(atNode, out var tl))
+        {
+            if (!tl.TryGetStateForEdge(fromEdge, out var state) || state == TrafficLightState.Stop)
+                yield break;
+        }
+
         foreach (var edge in atNode.Outgoing)
         {
-            if (IgnoreRules || canNarrow || !edge.HasTag("secondary"))
+            if (!IgnoreRules && !canNarrow && edge.HasTag("secondary"))
+                continue;
+
+            // Traffic lights gating (only if node has a TL)
+            if (!IgnoreRules && tl != null)
             {
-                yield return edge;
+                if (!tl.TryGetStateForEdge(edge, out var state) || state == TrafficLightState.Stop)
+                    continue;
             }
+
+            yield return edge;
         }
     }
 }

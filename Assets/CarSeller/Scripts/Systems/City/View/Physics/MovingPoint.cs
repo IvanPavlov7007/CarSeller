@@ -93,8 +93,8 @@ public class MovingPoint : MonoBehaviour, IMovement
         var newVisitedEdges = new HashSet<RoadEdge>(visitedEdges);
         newVisitedEdges.Add(currentEdge);
 
-        var outgoings = new List<RoadEdge>(_flexPolicy.GetAllowedOutgoing(currentEdge.From));
-        outgoings.AddRange(_flexPolicy.GetAllowedOutgoing(currentEdge.To));
+        var outgoings = new List<RoadEdge>(_flexPolicy.GetAllowedOutgoing(currentEdge.From,currentEdge));
+        outgoings.AddRange(_flexPolicy.GetAllowedOutgoing(currentEdge.To, currentEdge));
 
         var currentEntry = new CityPositionWithDistance(closest, closestDistance);
 

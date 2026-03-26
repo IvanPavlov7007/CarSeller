@@ -25,7 +25,6 @@ public class CityGraphAsset : ScriptableObject
 
         public string[] Tags;
 
-        // Authoring linkage to resolve spline in scene/prefab:
         public string EdgeAuthorId;     // RoadEdgeAuthor.Id
         public string EdgeAuthorPath;   // optional: scene hierarchy path for robust lookup
         public int SplineIndex = 0;     // convention: one spline per edge
@@ -84,14 +83,16 @@ public class CityGraphAsset : ScriptableObject
     [Serializable]
     public class TrafficLightEdgeSlotData
     {
-        public string Key;
-        public string EdgeId;
+        public string Key;     // local key: a,b,c,d...
+        public string EdgeId;  // baked RoadEdgeAuthor.Id
     }
 
     [Serializable]
     public class TrafficLightProgramStepData
     {
         public float DurationSeconds = 5f;
+
+        // Keys from TrafficLightEdgeSlotData.Key that should be "Go" in this phase.
         public string[] GoEdgeKeys;
     }
 
@@ -106,6 +107,7 @@ public class CityGraphAsset : ScriptableObject
         public string AuthorPath;
 
         public float PreparationTimeSeconds = 0.75f;
+        public float InitialTimeOffsetSeconds = 0f;
 
         public List<TrafficLightEdgeSlotData> EdgeSlots = new List<TrafficLightEdgeSlotData>();
         public List<TrafficLightProgramStepData> Program = new List<TrafficLightProgramStepData>();

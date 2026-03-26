@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -225,6 +226,80 @@ public class City : ILocationsHolder, IDisposable
         var list = QueryMarkers(tag, areaId, predicate).ToList();
         if (list.Count == 0) return null;
         return list[UnityEngine.Random.Range(0, list.Count)];
+    }
+
+    private readonly Dictionary<string, TrafficLightRuntimeController> _trafficLightsById = new();
+    public IReadOnlyDictionary<string, TrafficLightRuntimeController> TrafficLightsById => _trafficLightsById;
+
+    private readonly Dictionary<string, List<TrafficLightRuntimeController>> _trafficLightsByNodeId = new();
+
+    internal void InitializeTrafficLights(IEnumerable<TrafficLightRuntimeController> trafficLights)
+    {
+        _trafficLightsById.Clear();
+        _trafficLightsByNodeId.Clear();
+
+        if (trafficLights == null)
+            return;
+
+        foreach (var tl in trafficLights)
+        {
+            if (tl == null)
+                continue;
+
+            if (!string.IsNullOrEmpty(tl.Id))
+            {
+                _trafficLightsById[tl.Id] = tl;
+            }
+
+            if (!string.IsNullOrEmpty(tl.NodeId))
+            {
+                if (!_trafficLightsByNodeId.TryGetValue(tl.NodeId, out var list))
+                {
+                    list = new List<TrafficLightRuntimeController>();
+                    _trafficLightsByNodeId.Add(tl.NodeId, list);
+                }
+                list.Add(tl);
+            }
+        }
+    }
+
+    public bool TryGetTrafficLight(string id, out TrafficLightRuntimeController trafficLight)
+    {
+        if (string.IsNullOrEmpty(id))
+        {
+            trafficLight = null;
+            return false;
+        }
+
+        return _trafficLightsById.TryGetValue(id, out trafficLight);
+    }
+
+    public bool TryGetTrafficLightAtNode(RoadNode node, out TrafficLightRuntimeController trafficLight)
+    {
+        trafficLight = null;
+
+        if (node == null || string.IsNullOrEmpty(node.Id))
+            return false;
+
+        if (_trafficLightsByNodeId.TryGetValue(node.Id, out var list) && list != null && list.Count > 0)
+        {
+            trafficLight = list[0]; // current assumption: one traffic light per node
+            return trafficLight != null;
+        }
+
+        return false;
+    }
+
+    public bool TryGetTrafficLightState(RoadNode node, RoadEdge edge, out TrafficLightState state)
+    {
+        state = default;
+
+        if (!TryGetTrafficLightAtNode(node, out var tl) || tl == null)
+            return false;
+
+        // If node has a traffic light, treat unknown edges as "not allowed"
+        // (so we don't accidentally allow through a missing config).
+        return tl.TryGetStateForEdge(edge, out state);
     }
 
     public City(CityConfig cityConfig, Transform graphRoot, AspectsSystem aspectsSystem)

@@ -6,18 +6,20 @@ public static class CityTrafficLightsSpawner
 {
     private const string TrafficLightsRootName = "TrafficLights";
 
-    public static void Spawn(City city, CityGraphAsset graph, Transform cityRoot)
+    public static List<TrafficLightRuntimeController> Spawn(City city, CityGraphAsset graph, Transform cityRoot)
     {
+        var created = new List<TrafficLightRuntimeController>();
+
         if (city == null || graph == null || cityRoot == null)
-            return;
+            return created;
 
         if (graph.TrafficLights == null || graph.TrafficLights.Count == 0)
-            return;
+            return created;
 
         if (graph.TrafficLightPrefab == null)
         {
             Debug.LogWarning("CityTrafficLightsSpawner: CityGraphAsset.TrafficLightPrefab is null.");
-            return;
+            return created;
         }
 
         var existing = cityRoot.Find(TrafficLightsRootName);
@@ -52,6 +54,7 @@ public static class CityTrafficLightsSpawner
             }
 
             var directionsByKey = new Dictionary<string, Vector2>();
+            var keyByEdgeId = new Dictionary<string, string>();
 
             if (tl.EdgeSlots != null)
             {
@@ -61,21 +64,20 @@ public static class CityTrafficLightsSpawner
                     if (slot == null || string.IsNullOrEmpty(slot.Key) || string.IsNullOrEmpty(slot.EdgeId))
                         continue;
 
+                    keyByEdgeId[slot.EdgeId] = slot.Key;
+
                     if (!edgeById.TryGetValue(slot.EdgeId, out var edge) || edge == null)
                         continue;
 
                     Vector2 dir;
-
                     try
                     {
-                        // Tangent leaving the node along this edge (world XY).
                         dir = edge.GetTangentFromNode(node, 0.05f, out _);
                         if (dir.sqrMagnitude <= 0f)
                             throw new System.Exception("Zero tangent.");
                     }
                     catch
                     {
-                        // Fallback: direction to the other endpoint.
                         var other = edge.From == node ? edge.To : edge.From;
                         dir = other != null ? (other.Position - node.Position).normalized : Vector2.up;
                     }
@@ -90,7 +92,19 @@ public static class CityTrafficLightsSpawner
             if (runtime == null)
                 runtime = go.AddComponent<TrafficLightRuntimeController>();
 
-            runtime.Initialize(view, directionsByKey.Keys, tl.Program, tl.PreparationTimeSeconds);
+            runtime.Initialize(
+                id: tl.Id,
+                nodeId: tl.NodeId,
+                view: view,
+                keyByEdgeId: keyByEdgeId,
+                allKeys: directionsByKey.Keys,
+                program: tl.Program,
+                preparationTimeSeconds: tl.PreparationTimeSeconds,
+                initialTimeOffsetSeconds: tl.InitialTimeOffsetSeconds);
+
+            created.Add(runtime);
         }
+
+        return created;
     }
 }

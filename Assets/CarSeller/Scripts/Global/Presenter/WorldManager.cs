@@ -88,7 +88,8 @@ public class WorldManager
         }
         World.Instance.City = new City(cityConfig, G.CityRoot.transform, createAspectsSystem());
 
-        CityTrafficLightsSpawner.Spawn(World.Instance.City, cityConfig.CityGraph, G.CityRoot.transform);
+        var createdTrafficLights = CityTrafficLightsSpawner.Spawn(World.Instance.City, cityConfig.CityGraph, G.CityRoot.transform);
+        World.Instance.City.InitializeTrafficLights(createdTrafficLights);
 
         foreach (var warehouseConfig in cityConfig.warehouseConfigs)
         {

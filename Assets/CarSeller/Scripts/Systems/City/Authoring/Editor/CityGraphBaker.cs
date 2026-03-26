@@ -215,6 +215,7 @@ public static class CityGraphBaker
                 AuthorId = t.Id,
                 AuthorPath = GetHierarchyPath(t.gameObject),
                 PreparationTimeSeconds = t.PreparationTimeSeconds,
+                InitialTimeOffsetSeconds = t.InitialTimeOffsetSeconds,
                 EdgeSlots = new List<CityGraphAsset.TrafficLightEdgeSlotData>(),
                 Program = new List<CityGraphAsset.TrafficLightProgramStepData>()
             };

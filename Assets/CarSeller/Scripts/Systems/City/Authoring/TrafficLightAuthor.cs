@@ -41,6 +41,14 @@ public sealed class TrafficLightAuthor : MonoBehaviour
     [MinValue(0f)]
     public float PreparationTimeSeconds = 0.75f;
 
+    [BoxGroup("Timing")]
+    [MinValue(0f)]
+    public float InitialTimeOffsetSeconds = 0f;
+
+    [BoxGroup("Program")]
+    [OnValueChanged(nameof(OnPresetChanged))]
+    public TrafficLightProgramPreset Preset;
+
     [BoxGroup("Anchor")]
     [Button, DisableInPlayMode]
     [EnableIf(nameof(CanSnapToNode))]
@@ -58,6 +66,22 @@ public sealed class TrafficLightAuthor : MonoBehaviour
     }
 
     [BoxGroup("Edges")]
+    [Button("Normalize Keys (a,b,c,...)"), DisableInPlayMode]
+    [EnableIf(nameof(HasAnyEdgeSlots))]
+    private void NormalizeKeysButton()
+    {
+        NormalizeKeys();
+    }
+
+    [BoxGroup("Program")]
+    [Button("Apply Preset"), DisableInPlayMode]
+    [EnableIf(nameof(HasPreset))]
+    private void ApplyPresetButton()
+    {
+        ApplyPreset();
+    }
+
+    [BoxGroup("Edges")]
     [TableList(IsReadOnly = true, AlwaysExpanded = true)]
     [SerializeField]
     private List<EdgeSlot> edgeSlots = new List<EdgeSlot>();
@@ -69,6 +93,10 @@ public sealed class TrafficLightAuthor : MonoBehaviour
     private bool HasNode => Node != null;
 
     private bool CanSnapToNode => Node != null;
+
+    private bool HasPreset => Preset != null;
+
+    private bool HasAnyEdgeSlots => edgeSlots != null && edgeSlots.Count > 0;
 
     public IReadOnlyList<EdgeSlot> EdgeSlots => edgeSlots;
 
@@ -110,6 +138,49 @@ public sealed class TrafficLightAuthor : MonoBehaviour
         RefreshConnectedEdges();
     }
 
+    private void OnPresetChanged()
+    {
+        if (Preset == null)
+            return;
+
+        ApplyPreset();
+    }
+
+    private void ApplyPreset()
+    {
+        if (Preset == null)
+            return;
+
+        // Ensures keys start at a,b,c,... so preset letters map 1:1.
+        NormalizeKeys();
+
+        PreparationTimeSeconds = Mathf.Max(0f, Preset.PreparationTimeSeconds);
+
+        var validKeys = new HashSet<string>(GetEdgeKeys());
+
+        Program.Clear();
+
+        if (Preset.Program == null)
+            return;
+
+        for (int i = 0; i < Preset.Program.Count; i++)
+        {
+            var src = Preset.Program[i];
+            if (src == null)
+                continue;
+
+            var step = new ProgramStep
+            {
+                DurationSeconds = Mathf.Max(0.01f, src.DurationSeconds),
+                GoEdgeKeys = src.GoEdgeKeys != null
+                    ? src.GoEdgeKeys.Where(k => !string.IsNullOrEmpty(k) && validKeys.Contains(k)).ToList()
+                    : new List<string>()
+            };
+
+            Program.Add(step);
+        }
+    }
+
     private void RefreshConnectedEdges()
     {
         if (Node == null)
@@ -142,6 +213,7 @@ public sealed class TrafficLightAuthor : MonoBehaviour
             return aa.CompareTo(bb);
         });
 
+        // Preserve existing keys when possible (stable authoring).
         var existingKeyByEdgeId = new Dictionary<string, string>();
         for (int i = 0; i < edgeSlots.Count; i++)
         {
@@ -164,7 +236,7 @@ public sealed class TrafficLightAuthor : MonoBehaviour
         {
             while (true)
             {
-                var candidate = IndexToKey(nextKeyIndex++);
+                var candidate = TrafficLightProgramPreset.IndexToKey(nextKeyIndex++);
                 if (usedKeys.Add(candidate))
                     return candidate;
             }
@@ -191,7 +263,8 @@ public sealed class TrafficLightAuthor : MonoBehaviour
 
         edgeSlots = nextSlots;
 
-        var validKeys = new HashSet<string>(edgeSlots.Select(s => s.Key));
+        // Cleanup program: remove keys that no longer exist.
+        var validKeys = new HashSet<string>(GetEdgeKeys());
         for (int i = 0; i < Program.Count; i++)
         {
             var step = Program[i];
@@ -199,6 +272,50 @@ public sealed class TrafficLightAuthor : MonoBehaviour
                 continue;
 
             step.GoEdgeKeys.RemoveAll(k => string.IsNullOrEmpty(k) || !validKeys.Contains(k));
+        }
+    }
+
+    private void NormalizeKeys()
+    {
+        if (edgeSlots == null || edgeSlots.Count == 0)
+            return;
+
+        // Remap oldKey -> newKey sequentially in current slot order.
+        var mapOldToNew = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+        for (int i = 0; i < edgeSlots.Count; i++)
+        {
+            var slot = edgeSlots[i];
+            if (slot == null)
+                continue;
+
+            var newKey = TrafficLightProgramPreset.IndexToKey(i);
+
+            if (!string.IsNullOrEmpty(slot.Key) && !mapOldToNew.ContainsKey(slot.Key))
+                mapOldToNew.Add(slot.Key, newKey);
+
+            slot.Key = newKey;
+        }
+
+        // Update program keys.
+        for (int i = 0; i < Program.Count; i++)
+        {
+            var step = Program[i];
+            if (step?.GoEdgeKeys == null)
+                continue;
+
+            for (int k = 0; k < step.GoEdgeKeys.Count; k++)
+            {
+                var oldKey = step.GoEdgeKeys[k];
+                if (string.IsNullOrEmpty(oldKey))
+                    continue;
+
+                if (mapOldToNew.TryGetValue(oldKey, out var newKey))
+                    step.GoEdgeKeys[k] = newKey;
+            }
+
+            // De-dup + remove invalid.
+            step.GoEdgeKeys = step.GoEdgeKeys.Where(x => !string.IsNullOrEmpty(x)).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
         }
     }
 
@@ -213,22 +330,6 @@ public sealed class TrafficLightAuthor : MonoBehaviour
 
         var dir = (otherPos - nodePos).normalized;
         return Mathf.Atan2(dir.y, dir.x);
-    }
-
-    private static string IndexToKey(int index)
-    {
-        const int alphabet = 26;
-        index = Mathf.Max(0, index);
-
-        var s = string.Empty;
-        do
-        {
-            int r = index % alphabet;
-            s = (char)('a' + r) + s;
-            index = (index / alphabet) - 1;
-        } while (index >= 0);
-
-        return s;
     }
 
     public IEnumerable<string> GetEdgeKeys()

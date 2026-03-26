@@ -27893,6 +27893,7 @@ MonoBehaviour:
     AuthorId: 02c4631e99cf46759fc0412ac7dc74ba
     AuthorPath: TestGraph_34x17/TrafficLights/TrafficLIght
     PreparationTimeSeconds: 1
+    InitialTimeOffsetSeconds: 1.5
     EdgeSlots:
     - Key: a
       EdgeId: 9686a86648f446838b7990c12b8b6606
@@ -27903,42 +27904,44 @@ MonoBehaviour:
     - Key: d
       EdgeId: 0eb70f2055884df39358dbe0b72b4ff2
     Program:
-    - DurationSeconds: 10
+    - DurationSeconds: 7
       GoEdgeKeys:
       - a
       - c
-    - DurationSeconds: 10
+    - DurationSeconds: 7
       GoEdgeKeys:
       - b
       - d
-  - Id: 9f92f313c99a401c9bdb808d380d3c9a
+  - Id: 9a6147caee124ee5bddbc0440a58d1fa
     NodeId: ed6c6bd7b87b4b16bc3f9266fdbbc3d8
-    AuthorId: 9f92f313c99a401c9bdb808d380d3c9a
+    AuthorId: 9a6147caee124ee5bddbc0440a58d1fa
     AuthorPath: TestGraph_34x17/TrafficLights/TrafficLIght (1)
     PreparationTimeSeconds: 1
+    InitialTimeOffsetSeconds: 0
     EdgeSlots:
-    - Key: e
+    - Key: a
       EdgeId: dc02dd6103394b3fb947fc1771fb8161
-    - Key: f
+    - Key: b
       EdgeId: 9f7e03caf3c6423487c814c09297d18d
-    - Key: g
+    - Key: c
       EdgeId: 49f1305a4edb4d3e9fe07e589d9e22bd
-    - Key: h
+    - Key: d
       EdgeId: ed4904fd5e7e4fbdaf0c512120d55696
     Program:
-    - DurationSeconds: 10
+    - DurationSeconds: 7
       GoEdgeKeys:
-      - e
-      - g
-    - DurationSeconds: 10
+      - a
+      - c
+    - DurationSeconds: 7
       GoEdgeKeys:
-      - f
-      - h
+      - b
+      - d
   - Id: d438c759c10941bc9e5ab88b7d2b70d5
     NodeId: 04893bfee8414fc5874f671abfaef50b
     AuthorId: d438c759c10941bc9e5ab88b7d2b70d5
     AuthorPath: TestGraph_34x17/TrafficLights/TrafficLIght (2)
     PreparationTimeSeconds: 1
+    InitialTimeOffsetSeconds: 0.75
     EdgeSlots:
     - Key: a
       EdgeId: 9fe9cb974d814ac98dfeee93699fa10f
@@ -27976,6 +27979,10 @@ MonoBehaviour:
     - DurationSeconds: 5
       GoEdgeKeys:
       - c
+      - a
+    - DurationSeconds: 5
+      GoEdgeKeys:
+      - c
       - b
     - DurationSeconds: 5
       GoEdgeKeys:
@@ -27983,5 +27990,13 @@ MonoBehaviour:
       - d
     - DurationSeconds: 5
       GoEdgeKeys:
-      - c
+      - d
       - a
+    - DurationSeconds: 5
+      GoEdgeKeys:
+      - d
+      - b
+    - DurationSeconds: 5
+      GoEdgeKeys:
+      - d
+      - c
