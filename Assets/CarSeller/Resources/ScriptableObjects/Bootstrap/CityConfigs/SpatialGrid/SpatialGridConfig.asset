@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06bb683a2218f13498f85687a529d30b, type: 3}
   m_Name: SpatialGridConfig
   m_EditorClassIdentifier: 
-  gridSizeX: 20
+  gridSizeX: 10
   gridSizeY: 10
-  cellSize: 4
-  originPosition: {x: -40, y: -20}
+  cellSize: 10
+  originPosition: {x: -40, y: -40}
