@@ -69,7 +69,12 @@ public class CitySceneManager : Singleton<CitySceneManager>
             Debug.LogWarning("City instance is not set");
             return;
         }
+
         initializeMap();
+
+        // Area overlays (hidden by default; you control them at runtime).
+        CityAreasVisualsController.Ensure(City);
+
         rebuildSceneForState(G.GameState);
     }
 

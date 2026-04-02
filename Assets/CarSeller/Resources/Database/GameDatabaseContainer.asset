@@ -41,8 +41,9 @@ MonoBehaviour:
         Common: 20
         Uncommon: 0
         Epic: 0
-        RequiredXP: 100
+        RequiredXP: 3
         IncomeMultiplier: 1
+        BuyerCount: 3
         BuyerSmall: 1
         BuyerSedan: 2
         BuyerTruck: 0
@@ -58,8 +59,9 @@ MonoBehaviour:
         Common: 20
         Uncommon: 5
         Epic: 0
-        RequiredXP: 200
+        RequiredXP: 10
         IncomeMultiplier: 1.05
+        BuyerCount: 4
         BuyerSmall: 1
         BuyerSedan: 2
         BuyerTruck: 1
@@ -75,8 +77,9 @@ MonoBehaviour:
         Common: 20
         Uncommon: 5
         Epic: 0
-        RequiredXP: 300
+        RequiredXP: 15
         IncomeMultiplier: 1.1
+        BuyerCount: 4
         BuyerSmall: 2
         BuyerSedan: 1
         BuyerTruck: 2
@@ -94,6 +97,7 @@ MonoBehaviour:
         Epic: 1
         RequiredXP: -1
         IncomeMultiplier: 1.2
+        BuyerCount: 5
         BuyerSmall: 2
         BuyerSedan: 0
         BuyerTruck: 3
@@ -111,8 +115,9 @@ MonoBehaviour:
         Common: 20
         Uncommon: 0
         Epic: 0
-        RequiredXP: 100
+        RequiredXP: 3
         IncomeMultiplier: 1
+        BuyerCount: 3
         BuyerSmall: 1
         BuyerSedan: 0
         BuyerTruck: 0
@@ -128,8 +133,9 @@ MonoBehaviour:
         Common: 20
         Uncommon: 5
         Epic: 0
-        RequiredXP: 200
+        RequiredXP: 10
         IncomeMultiplier: 1.05
+        BuyerCount: 4
         BuyerSmall: 1
         BuyerSedan: 1
         BuyerTruck: 1
@@ -145,8 +151,9 @@ MonoBehaviour:
         Common: 20
         Uncommon: 5
         Epic: 0
-        RequiredXP: 300
+        RequiredXP: 15
         IncomeMultiplier: 1.1
+        BuyerCount: 4
         BuyerSmall: 2
         BuyerSedan: 2
         BuyerTruck: 1
@@ -164,6 +171,7 @@ MonoBehaviour:
         Epic: 1
         RequiredXP: -1
         IncomeMultiplier: 1.2
+        BuyerCount: 5
         BuyerSmall: 4
         BuyerSedan: 4
         BuyerTruck: 2
@@ -181,8 +189,9 @@ MonoBehaviour:
         Common: 20
         Uncommon: 0
         Epic: 0
-        RequiredXP: 100
+        RequiredXP: 3
         IncomeMultiplier: 1
+        BuyerCount: 3
         BuyerSmall: 1
         BuyerSedan: 0
         BuyerTruck: 2
@@ -198,8 +207,9 @@ MonoBehaviour:
         Common: 20
         Uncommon: 5
         Epic: 0
-        RequiredXP: 200
+        RequiredXP: 10
         IncomeMultiplier: 1.05
+        BuyerCount: 4
         BuyerSmall: 1
         BuyerSedan: 1
         BuyerTruck: 1
@@ -215,8 +225,9 @@ MonoBehaviour:
         Common: 20
         Uncommon: 5
         Epic: 0
-        RequiredXP: 300
+        RequiredXP: 15
         IncomeMultiplier: 1.1
+        BuyerCount: 4
         BuyerSmall: 4
         BuyerSedan: 2
         BuyerTruck: 1
@@ -234,6 +245,7 @@ MonoBehaviour:
         Epic: 1
         RequiredXP: -1
         IncomeMultiplier: 1.2
+        BuyerCount: 5
         BuyerSmall: 4
         BuyerSedan: 4
         BuyerTruck: 0
@@ -254,8 +266,9 @@ MonoBehaviour:
       Common: 20
       Uncommon: 0
       Epic: 0
-      RequiredXP: 100
+      RequiredXP: 3
       IncomeMultiplier: 1
+      BuyerCount: 3
       BuyerSmall: 1
       BuyerSedan: 2
       BuyerTruck: 0
@@ -271,8 +284,9 @@ MonoBehaviour:
       Common: 20
       Uncommon: 5
       Epic: 0
-      RequiredXP: 200
+      RequiredXP: 10
       IncomeMultiplier: 1.05
+      BuyerCount: 4
       BuyerSmall: 1
       BuyerSedan: 2
       BuyerTruck: 1
@@ -288,8 +302,9 @@ MonoBehaviour:
       Common: 20
       Uncommon: 5
       Epic: 0
-      RequiredXP: 300
+      RequiredXP: 15
       IncomeMultiplier: 1.1
+      BuyerCount: 4
       BuyerSmall: 2
       BuyerSedan: 1
       BuyerTruck: 2
@@ -307,6 +322,7 @@ MonoBehaviour:
       Epic: 1
       RequiredXP: -1
       IncomeMultiplier: 1.2
+      BuyerCount: 5
       BuyerSmall: 2
       BuyerSedan: 0
       BuyerTruck: 3
@@ -323,8 +339,9 @@ MonoBehaviour:
       Common: 20
       Uncommon: 0
       Epic: 0
-      RequiredXP: 100
+      RequiredXP: 3
       IncomeMultiplier: 1
+      BuyerCount: 3
       BuyerSmall: 1
       BuyerSedan: 0
       BuyerTruck: 0
@@ -340,8 +357,9 @@ MonoBehaviour:
       Common: 20
       Uncommon: 5
       Epic: 0
-      RequiredXP: 200
+      RequiredXP: 10
       IncomeMultiplier: 1.05
+      BuyerCount: 4
       BuyerSmall: 1
       BuyerSedan: 1
       BuyerTruck: 1
@@ -357,8 +375,9 @@ MonoBehaviour:
       Common: 20
       Uncommon: 5
       Epic: 0
-      RequiredXP: 300
+      RequiredXP: 15
       IncomeMultiplier: 1.1
+      BuyerCount: 4
       BuyerSmall: 2
       BuyerSedan: 2
       BuyerTruck: 1
@@ -376,6 +395,7 @@ MonoBehaviour:
       Epic: 1
       RequiredXP: -1
       IncomeMultiplier: 1.2
+      BuyerCount: 5
       BuyerSmall: 4
       BuyerSedan: 4
       BuyerTruck: 2
@@ -392,8 +412,9 @@ MonoBehaviour:
       Common: 20
       Uncommon: 0
       Epic: 0
-      RequiredXP: 100
+      RequiredXP: 3
       IncomeMultiplier: 1
+      BuyerCount: 3
       BuyerSmall: 1
       BuyerSedan: 0
       BuyerTruck: 2
@@ -409,8 +430,9 @@ MonoBehaviour:
       Common: 20
       Uncommon: 5
       Epic: 0
-      RequiredXP: 200
+      RequiredXP: 10
       IncomeMultiplier: 1.05
+      BuyerCount: 4
       BuyerSmall: 1
       BuyerSedan: 1
       BuyerTruck: 1
@@ -426,8 +448,9 @@ MonoBehaviour:
       Common: 20
       Uncommon: 5
       Epic: 0
-      RequiredXP: 300
+      RequiredXP: 15
       IncomeMultiplier: 1.1
+      BuyerCount: 4
       BuyerSmall: 4
       BuyerSedan: 2
       BuyerTruck: 1
@@ -445,6 +468,7 @@ MonoBehaviour:
       Epic: 1
       RequiredXP: -1
       IncomeMultiplier: 1.2
+      BuyerCount: 5
       BuyerSmall: 4
       BuyerSedan: 4
       BuyerTruck: 0

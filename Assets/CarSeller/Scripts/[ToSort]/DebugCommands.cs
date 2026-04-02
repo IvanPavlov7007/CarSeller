@@ -28,9 +28,17 @@ public class DebugCommands : MonoBehaviour
         G.BuyerManager.SpawnBuyerAtPosition(Buyer.Any(), G.VehicleController.CurrentVehicleEntity.Position, null,null);
     }
 
+
+    static bool showAreas = false;
     public void OnW(InputValue val)
     {
-
+        var vc = GameObject.FindAnyObjectByType<CityAreasVisualsController>();
+        Debug.Assert(vc != null, "CityAreasVisualsController not found in scene");
+        foreach (var area in G.Areas.Values)
+        {
+            vc.SetHighlighted(area.Id, !showAreas);
+        }
+        showAreas = !showAreas;
     }
 
     public void OnQ(InputValue val)

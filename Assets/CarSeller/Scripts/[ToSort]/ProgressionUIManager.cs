@@ -26,7 +26,7 @@ public class ProgressionUIManager : MonoBehaviour
             GameEvents.Instance.onAreaProgressed -= onAreaProgressed;
     }
 
-    private static float normalizeXP(float xp, AreaLevel level)
+    public static float NormalizeXP(float xp, AreaLevel level)
     {
         if (level == null || level.XpToNextLevel <= 0f)
             return 0f;
@@ -37,7 +37,7 @@ public class ProgressionUIManager : MonoBehaviour
     private void resetProgressbar(AreaLevel level, float xp)
     {
         var levelIndex = level != null ? level.Index : 0;
-        var normalizedProgress = normalizeXP(xp, level);
+        var normalizedProgress = NormalizeXP(xp, level);
         progressionUI.SetupInitValues(levelIndex, normalizedProgress);
     }
 
@@ -78,7 +78,7 @@ public class ProgressionUIManager : MonoBehaviour
         _showingTime = 0f;
 
         progressionUI.targetProgressLevel = data.NewLevel.Index;
-        progressionUI.targetProgressValue = normalizeXP(data.NewXP, data.NewLevel);
+        progressionUI.targetProgressValue = NormalizeXP(data.NewXP, data.NewLevel);
         //progressionUI.targetIsMax = data.NewLevel.Final;
     }
 }
