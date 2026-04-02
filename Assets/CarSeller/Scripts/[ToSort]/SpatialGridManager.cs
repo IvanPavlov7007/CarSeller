@@ -92,7 +92,7 @@ public class SpatialGridManager : MonoBehaviour
         GridActivationData data = new GridActivationData
         {
             playerPos = G.VehicleController.CurrentVehicleEntity.Position.WorldPosition,
-            activationRadius = 5f,
+            activationRadius = 8f,
             gridManager = this
         };
         var result =  _cellActivationManager.UpdateActiveCells(data);

@@ -138,6 +138,7 @@ public struct LevelBalancing
 
     public float RequiredXP;
     public float IncomeMultiplier;
+    public int BuyerCount;
 
     public float BuyerSmall;
     public float BuyerSedan;

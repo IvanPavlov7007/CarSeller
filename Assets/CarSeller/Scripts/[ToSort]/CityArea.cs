@@ -30,7 +30,7 @@ public class CityArea
     {
         var buyersPositions = G.City.QueryMarkers("buyer",areaData.Id).Where(m => m.PositionOnGraph != null).Select(m => m.PositionOnGraph.Value).ToList();
         buyersSystem = new AreaBuyerSystem(
-            buyersPositions.Select(pos => new BuyerSpawnPoint { Position = pos }).ToList());
+            buyersPositions.Select(pos => new BuyerSpawnPoint { Position = pos }).ToList(), this);
     }
 
     private void initializeLevels(AreaCollection data)
@@ -46,6 +46,8 @@ public class AreaLevel
     public readonly int Index;
     public readonly float XpToNextLevel;
     public readonly bool Final = false;
+
+    public int MaxBuyersCount;
 
     public CarSpawnWeight[] CarSpawnWeights;
     public BuyerSpawnSpawnWeight[] BuyerSpawnWeights;
@@ -73,6 +75,7 @@ public class AreaLevel
     {
         BuyerSpawnWeights = balancing.CalculateBuyerSpawnWeightsForLevel();
         BuyersPool = new BuyersPool(BuyerManager.CreatePooledBuyerList(BuyerSpawnWeights));
+        MaxBuyersCount = balancing.BuyerCount;
     }
 
     public static AreaLevel[] createLevels(List<LevelBalancing> balancings)
@@ -127,14 +130,19 @@ public class BuyersPool : Pool<Buyer>
 public class AreaBuyerSystem
 {
     public float minSpawnInterval = 5f;
-    public float averageSpawnInterval = 10f;
+    public float averageSpawnInterval = 15f;
     public float lastSpawnTime = 0f;
+    public CityArea Area { get; private set; }
     public List<BuyerSpawnPoint> SpawnPoints { get; private set; }
 
-    public AreaBuyerSystem(List<BuyerSpawnPoint> spawnPoints)
+    public AreaBuyerSystem(List<BuyerSpawnPoint> spawnPoints, CityArea area)
     {
         SpawnPoints = spawnPoints;
+        Area = area;
+        lastSpawnTime = minSpawnInterval + 1f; 
     }
+
+    public IReadOnlyList<BuyerSpawnPoint> activeSpawnPoints => SpawnPoints.Where(sp => sp.buyer != null).ToList();
 }
 
 public class BuyerSpawnPoint

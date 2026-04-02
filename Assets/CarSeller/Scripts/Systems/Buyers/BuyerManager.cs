@@ -15,6 +15,9 @@ public class BuyerManager
         if (system == null || pool == null)
             return;
 
+        if(system.activeSpawnPoints.Count >= system.Area.CurrentLevel.MaxBuyersCount)
+            return;
+
         var freeSpawnPoints = system.SpawnPoints.Where(sp => sp.buyer == null).ToList();
         if (freeSpawnPoints.Count == 0)
             return;
@@ -26,6 +29,14 @@ public class BuyerManager
         Buyer buyer = pool.Queue.Dequeue();
         if (buyer == null)
             return;
+
+        var edge = randomSpawnPoint.Position.Edge;
+        // Check if the buyer's required car type can be spawned on this edge
+        if (!GameRules.BuyerTypeCanBeSpanwnedOnEdge.Check(buyer.RequiredCarType, edge))
+        {
+            pool.Queue.Enqueue(buyer);
+            return;
+        }
 
         SpawnBuyerAtPosition(buyer, randomSpawnPoint.Position, randomSpawnPoint, pool);
         system.lastSpawnTime = Time.time;

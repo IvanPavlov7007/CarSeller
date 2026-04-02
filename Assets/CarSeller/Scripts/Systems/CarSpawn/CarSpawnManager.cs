@@ -149,6 +149,14 @@ public class CarSpawnManager
             return;
         }
 
+        var edge = position.Edge;
+        // Check if the car can be spawned on this edge. If not, return the car to the pool and skip spawning.
+        if (!GameRules.CarCanBeSpawnedOnEdge.Check(car, edge))
+        {
+            pool.Queue.Enqueue(car);
+            return;
+        }
+
         CityEntitiesCreationHelper.MoveInExistingCar(car, position);
 
         cellSpawnedCars.Add(car);

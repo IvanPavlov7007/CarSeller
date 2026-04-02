@@ -14,6 +14,9 @@ public static class GameRules
     public static readonly CanBePurchased CanBePurchased = new CanBePurchased();
     public static readonly CarCanBeSoldToBuyer CarCanBeSoldToBuyer = new CarCanBeSoldToBuyer();
     public static readonly CarIsOfRequiredType CarIsOfRequiredType = new CarIsOfRequiredType();
+    public static readonly EdgeIsSecondary EdgeIsSecondary = new EdgeIsSecondary();
+    public static readonly CarCanBeSpawnedOnEdge CarCanBeSpawnedOnEdge = new CarCanBeSpawnedOnEdge();
+    public static readonly BuyerTypeCanBeSpanwnedOnEdge BuyerTypeCanBeSpanwnedOnEdge = new BuyerTypeCanBeSpanwnedOnEdge();
 }
 
 public class CarBelongsToPlayer
@@ -165,6 +168,34 @@ public class CarCanBeSoldToBuyer
 
         return !GameRules.CarBelongsToPlayer.Check(car) &&
             GameRules.CarIsOfRequiredType.Check(car,buyer.RequiredCarType);
+    }
+}
+
+public class EdgeIsSecondary
+{
+    public bool Check(RoadEdge edge)
+    {
+        Debug.Assert(edge != null, "Edge is null");
+        return edge.HasTag("Secondary");
+    }
+}
+
+public class CarCanBeSpawnedOnEdge
+{
+    public bool Check(Car car, RoadEdge edge)
+    {
+        Debug.Assert(car != null, "Car is null");
+        return !GameRules.EdgeIsSecondary.Check(edge) || car.HasModifier<CanNarrowStreet>();
+    }
+}
+
+public class BuyerTypeCanBeSpanwnedOnEdge
+{
+    public bool Check(CarType buyerType, RoadEdge edge)
+    {
+        Debug.Assert(edge != null, "Edge is null");
+
+        return !GameRules.EdgeIsSecondary.Check(edge) || buyerType == CarType.Bike || buyerType == CarType.Any;
     }
 }
 

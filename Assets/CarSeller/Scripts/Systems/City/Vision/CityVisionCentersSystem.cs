@@ -50,7 +50,7 @@ public sealed class CityVisionCentersSystem : AspectSystem<VisionCenterAspect>
         Debug.Assert(GameEvents.Instance != null, "CityVision.Initialize: GameEvents.Instance is null");
 
         // React to global game/domain changes.
-        GameEvents.Instance.OnOwnershipChanged += OnOwnershipChanged;
+        //GameEvents.Instance.OnOwnershipChanged += OnOwnershipChanged;
         GameEvents.Instance.onVehicleControlStateChanged += OnVehicleControlStateChanged;
 
         // Apply initial state once.
@@ -72,7 +72,7 @@ public sealed class CityVisionCentersSystem : AspectSystem<VisionCenterAspect>
     {
         if (GameEvents.Instance != null)
         {
-            GameEvents.Instance.OnOwnershipChanged -= OnOwnershipChanged;
+            //GameEvents.Instance.OnOwnershipChanged -= OnOwnershipChanged;
             GameEvents.Instance.onVehicleControlStateChanged -= OnVehicleControlStateChanged;
         }
         // Do not automatically remove aspects on shutdown; keep state as-is.
