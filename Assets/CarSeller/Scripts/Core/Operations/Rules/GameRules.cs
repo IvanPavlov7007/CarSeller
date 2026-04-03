@@ -195,8 +195,9 @@ public class BuyerTypeCanBeSpanwnedOnEdge
     {
         Debug.Assert(edge != null, "Edge is null");
 
-        return !GameRules.EdgeIsSecondary.Check(edge) || buyerType == CarType.Bike || buyerType == CarType.Any;
-    }
+        return true;
+        //return !GameRules.EdgeIsSecondary.Check(edge) || buyerType == CarType.Bike || buyerType == CarType.Any;
+    } 
 }
 
 //////////////////////////////////////////////////////////////////////////////////////

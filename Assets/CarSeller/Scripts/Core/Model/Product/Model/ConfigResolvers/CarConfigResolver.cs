@@ -86,15 +86,16 @@ public class CarConfigResolver
     private void initializeBasicModifiers(CarRuntimeConfig config)
     {
         var list = new List<CarModifier>();
-        switch (config.Kind.Type)
-        {
-            case CarType.Bike:
-                list.AddRange(new CarModifier[] { new CanNarrowStreet(), new CanTurnAround() });
-                break;
-            case CarType.Small:
-                list.Add(new CanTurnAround());
-                break;
-        }
+        //switch (config.Kind.Type)
+        //{
+        //    case CarType.Bike:
+        //        list.AddRange(new CarModifier[] { new CanNarrowStreet(), new CanTurnAround() });
+        //        break;
+        //    case CarType.Small:
+        //        list.Add(new CanTurnAround());
+        //        break;
+        //}
+        list.AddRange(new CarModifier[] { new CanNarrowStreet(), new CanTurnAround() });
         config.InitializeModifiers(list);
     }
 

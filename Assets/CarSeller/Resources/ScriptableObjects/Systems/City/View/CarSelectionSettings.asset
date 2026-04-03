@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c4d6b02ee88104d9ed6b3d121064e7, type: 3}
   m_Name: CarSelectionSettings
   m_EditorClassIdentifier: 
-  selectionRingColor: {r: 0, g: 1, b: 0, a: 0.78039217}
+  selectionRingColor: {r: 1, g: 1, b: 1, a: 0.78039217}
   selectionRingScaleMultiplier: 1
   selectionRingHeightOffset: 0.1
   sortingOrder: -1

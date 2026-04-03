@@ -36,6 +36,7 @@ public class ProgressOverviewManager : MonoBehaviour
         {
                 resetProgressbar(area);
         }
+        HideProgressOverview();
     }
 
     private void OnEnable()
