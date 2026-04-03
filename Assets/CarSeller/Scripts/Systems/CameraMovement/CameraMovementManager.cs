@@ -38,11 +38,18 @@ public class CameraMovementManager : Singleton<CameraMovementManager>
     [Header("Zoom")]
     [Tooltip("Enable/disable zoom input (wheel/pinch).")]
     public bool enableZoom = true;
-    [Tooltip("Min orthographic size (zoomed in).")]
+    [Tooltip("Min orthographic size (zoomed in). Used only when the camera is orthographic.")]
     public float minOrthoSize = 3.5f;
-    [Tooltip("Max orthographic size (zoomed out).")]
+    [Tooltip("Max orthographic size (zoomed out). Used only when the camera is orthographic.")]
     public float maxOrthoSize = 14f;
-    [Tooltip("Mouse wheel zoom speed (orthographic size units per wheel step).")]
+
+    [Header("Perspective Zoom")]
+    [Tooltip("Min field of view in degrees (zoomed in). Used only when the camera is perspective.")]
+    public float minFieldOfView = 25f;
+    [Tooltip("Max field of view in degrees (zoomed out). Used only when the camera is perspective.")]
+    public float maxFieldOfView = 70f;
+
+    [Tooltip("Mouse wheel zoom speed (zoom units per wheel step). Units = OrthoSize when orthographic, Degrees when perspective.")]
     public float wheelZoomSpeed = 1.25f;
     [Tooltip("Pinch zoom speed multiplier.")]
     public float pinchZoomSpeed = 0.02f;
@@ -64,7 +71,7 @@ public class CameraMovementManager : Singleton<CameraMovementManager>
     Vector3 _pendingTargetPos; // desired target position when using inertia
 
     // Zoom state
-    float _userZoomT; // 0..1 => lerp(minOrthoSize, maxOrthoSize)
+    float _userZoomT; // 0..1 => lerp(min..max) depending on camera mode
     float _gameZoom01; // 0..1 externally set (speed etc)
 
     // Scripted camera control
@@ -79,16 +86,32 @@ public class CameraMovementManager : Singleton<CameraMovementManager>
         if (virtualCamera == null)
             virtualCamera = FindAnyObjectByType<CinemachineCamera>();
 
-        // Initialize zoom from vcam lens (NOT Camera.main).
-        if (virtualCamera != null && virtualCamera.Lens.Orthographic)
+        // Initialize zoom from the authoritative driver (Cinemachine vcam if present; otherwise Camera.main).
+        if (virtualCamera != null)
         {
-            float s = Mathf.Clamp(virtualCamera.Lens.OrthographicSize, minOrthoSize, maxOrthoSize);
-            _userZoomT = Mathf.InverseLerp(minOrthoSize, maxOrthoSize, s);
+            if (virtualCamera.Lens.Orthographic)
+            {
+                float s = Mathf.Clamp(virtualCamera.Lens.OrthographicSize, minOrthoSize, maxOrthoSize);
+                _userZoomT = Mathf.InverseLerp(minOrthoSize, maxOrthoSize, s);
+            }
+            else
+            {
+                float f = Mathf.Clamp(virtualCamera.Lens.FieldOfView, minFieldOfView, maxFieldOfView);
+                _userZoomT = Mathf.InverseLerp(minFieldOfView, maxFieldOfView, f);
+            }
         }
-        else if (cam != null && cam.orthographic)
+        else if (cam != null)
         {
-            float s = Mathf.Clamp(cam.orthographicSize, minOrthoSize, maxOrthoSize);
-            _userZoomT = Mathf.InverseLerp(minOrthoSize, maxOrthoSize, s);
+            if (cam.orthographic)
+            {
+                float s = Mathf.Clamp(cam.orthographicSize, minOrthoSize, maxOrthoSize);
+                _userZoomT = Mathf.InverseLerp(minOrthoSize, maxOrthoSize, s);
+            }
+            else
+            {
+                float f = Mathf.Clamp(cam.fieldOfView, minFieldOfView, maxFieldOfView);
+                _userZoomT = Mathf.InverseLerp(minFieldOfView, maxFieldOfView, f);
+            }
         }
 
         if (cameraTarget != null)
@@ -127,6 +150,25 @@ public class CameraMovementManager : Singleton<CameraMovementManager>
         ApplyZoom();
     }
 
+    bool IsOrthographicMode()
+    {
+        if (virtualCamera != null) return virtualCamera.Lens.Orthographic;
+        return cam != null && cam.orthographic;
+    }
+
+    void GetZoomLimits(out float min, out float max)
+    {
+        if (IsOrthographicMode())
+        {
+            min = minOrthoSize;
+            max = maxOrthoSize;
+            return;
+        }
+
+        min = minFieldOfView;
+        max = maxFieldOfView;
+    }
+
     void HandleZoomInput()
     {
         // Block zoom when pointer is over UI.
@@ -143,12 +185,15 @@ public class CameraMovementManager : Singleton<CameraMovementManager>
             if (IsPointerOverUI(pointerPos)) return;
         }
 
+        GetZoomLimits(out float min, out float max);
+        float range = Mathf.Max(0.01f, max - min);
+
         if (Mouse.current != null)
         {
             float wheel = Mouse.current.scroll.ReadValue().y;
             if (Mathf.Abs(wheel) > 0.01f)
             {
-                float deltaT = -wheel * (wheelZoomSpeed / Mathf.Max(0.01f, (maxOrthoSize - minOrthoSize))) * 0.1f;
+                float deltaT = -wheel * (wheelZoomSpeed / range) * 0.1f;
                 _userZoomT = Mathf.Clamp01(_userZoomT + deltaT);
             }
         }
@@ -189,24 +234,43 @@ public class CameraMovementManager : Singleton<CameraMovementManager>
             biasedT = Mathf.Lerp(_userZoomT, 1f, push);
         }
 
-        float targetSize = Mathf.Lerp(minOrthoSize, maxOrthoSize, biasedT);
-        targetSize = Mathf.Clamp(targetSize, minOrthoSize, maxOrthoSize);
+        GetZoomLimits(out float min, out float max);
+
+        float targetValue = Mathf.Lerp(min, max, biasedT);
+        targetValue = Mathf.Clamp(targetValue, min, max);
+
+        float smooth = 1f - Mathf.Exp(-zoomSmoothing * Time.unscaledDeltaTime);
 
         // Apply to Cinemachine vcam lens (authoritative in Cinemachine setups).
-        if (virtualCamera != null && virtualCamera.Lens.Orthographic)
+        if (virtualCamera != null)
         {
-            float current = virtualCamera.Lens.OrthographicSize;
-            float smooth = 1f - Mathf.Exp(-zoomSmoothing * Time.unscaledDeltaTime);
-            virtualCamera.Lens.OrthographicSize = Mathf.Lerp(current, targetSize, smooth);
+            if (virtualCamera.Lens.Orthographic)
+            {
+                float current = virtualCamera.Lens.OrthographicSize;
+                virtualCamera.Lens.OrthographicSize = Mathf.Lerp(current, targetValue, smooth);
+            }
+            else
+            {
+                float current = virtualCamera.Lens.FieldOfView;
+                virtualCamera.Lens.FieldOfView = Mathf.Lerp(current, targetValue, smooth);
+            }
+
             return;
         }
 
         // Fallback if you ever run without Cinemachine.
-        if (cam != null && cam.orthographic)
+        if (cam != null)
         {
-            float current = cam.orthographicSize;
-            float smooth = 1f - Mathf.Exp(-zoomSmoothing * Time.unscaledDeltaTime);
-            cam.orthographicSize = Mathf.Lerp(current, targetSize, smooth);
+            if (cam.orthographic)
+            {
+                float current = cam.orthographicSize;
+                cam.orthographicSize = Mathf.Lerp(current, targetValue, smooth);
+            }
+            else
+            {
+                float current = cam.fieldOfView;
+                cam.fieldOfView = Mathf.Lerp(current, targetValue, smooth);
+            }
         }
     }
 
@@ -227,15 +291,35 @@ public class CameraMovementManager : Singleton<CameraMovementManager>
         _gameZoom01 = Mathf.Clamp01(zoom01);
     }
 
+    float GetCurrentFieldOfView()
+    {
+        if (virtualCamera != null) return virtualCamera.Lens.FieldOfView;
+        if (cam != null) return cam.fieldOfView;
+        return 60f;
+    }
+
     float GetCurrentOrthoSize()
     {
-        if (virtualCamera != null && virtualCamera.Lens.Orthographic)
-            return virtualCamera.Lens.OrthographicSize;
+        // NOTE: despite the name, this returns the camera half-height (in world units)
+        // on the cameraTarget plane. For orthographic cameras it's orthographicSize;
+        // for perspective cameras it's computed from FOV and distance.
+        if (IsOrthographicMode())
+        {
+            if (virtualCamera != null && virtualCamera.Lens.Orthographic)
+                return virtualCamera.Lens.OrthographicSize;
 
-        if (cam != null && cam.orthographic)
-            return cam.orthographicSize;
+            if (cam != null && cam.orthographic)
+                return cam.orthographicSize;
 
-        return 5f;
+            return 5f;
+        }
+
+        if (cam == null || cameraTarget == null) return 5f;
+
+        float distance = Mathf.Abs(cameraTarget.position.z - cam.transform.position.z);
+        float fov = Mathf.Clamp(GetCurrentFieldOfView(), 1f, 179f);
+        float halfHeight = Mathf.Tan(0.5f * fov * Mathf.Deg2Rad) * distance;
+        return Mathf.Max(0.0001f, halfHeight);
     }
 
     Vector2 GetCameraHalfExtentsWorld()
