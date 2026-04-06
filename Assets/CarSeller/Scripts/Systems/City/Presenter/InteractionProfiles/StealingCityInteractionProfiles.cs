@@ -5,25 +5,9 @@ using UnityEngine;
 [Obsolete]
 public sealed class StealingCityContextMenuProfile : ICityContextMenuProfile
 {
-    public UIElement GenerateContent(CityEntity model, GameState gameState)
+    public Widget GenerateContent(CityEntity model, GameState gameState)
     {
-        var stealingState = gameState as StealingGameState;
-        if (stealingState == null)
-        {
-            Debug.LogError($"StealingCityContextMenuProfile used with non-stealing state {gameState?.GetType().Name}");
-            return null;
-        }
-
-        switch (model.Subject)
-        {
-            case Car car:
-                return generateStealingCarContent(stealingState, car);
-            case Warehouse warehouse:
-                return generateStealingWarehouseContent(stealingState, warehouse);
-            default:
-                Debug.LogError($"StealingCityContextMenuProfile: Unsupported model type {model.GetType()}");
-                return null;
-        }
+        return null;
     }
 
     private UIElement generateStealingCarContent(StealingGameState stealingGameState, Car car)

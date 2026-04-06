@@ -130,10 +130,10 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 14338
-      y: 4
-      width: 931
-      height: 745
+      x: 8204
+      y: 9832
+      width: 2374
+      height: 3273
     spriteID: 5db61d2c98b3d6a46aa09830aa8d6da3
     spriteBone: []
     spriteOutline: []
@@ -142,8 +142,8 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 14338, y: 4}
-    spritePosition: {x: 2765, y: 4568}
+    uvTransform: {x: 8204, y: 9832}
+    spritePosition: {x: 2765, y: 2040}
   - name: Middle
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -156,7 +156,7 @@ ScriptedImporter:
       y: 8204
       width: 6490
       height: 5995
-    spriteID: 32123a402049eae4ea314256de4ecad9
+    spriteID: 3c93a66cb120f3f4fb2f20b112b76a61
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -196,8 +196,8 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 14338
-      y: 757
+      x: 8204
+      y: 13113
       width: 259
       height: 350
     spriteID: dfe9b2b0715790d4eb6350aef20546ef
@@ -208,7 +208,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 14338, y: 757}
+    uvTransform: {x: 8204, y: 13113}
     spritePosition: {x: 4384, y: 2263}
   - name: Background
     originalName: 
@@ -317,7 +317,13 @@ ScriptedImporter:
     categories: []
   spritePackingTag: 
   resliceFromLayer: 0
-  pSDLayerImportSetting: []
+  pSDLayerImportSetting:
+  - spriteId: 5db61d2c98b3d6a46aa09830aa8d6da3
+    name: Cliever
+    layerId: 171
+    flatten: 0
+    isGroup: 0
+    importLayer: 1
   psdLayers:
   - name: UpperHighspeed
     spriteName: UpperHighspeed
@@ -335,7 +341,7 @@ ScriptedImporter:
     parentIndex: -1
     spriteID: 5db61d2c98b3d6a46aa09830aa8d6da3
     layerID: 171
-    mosaicPosition: {x: 14338, y: 4}
+    mosaicPosition: {x: 8204, y: 9832}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -343,8 +349,8 @@ ScriptedImporter:
     spriteName: Middle
     isGroup: 0
     parentIndex: -1
-    spriteID: 32123a402049eae4ea314256de4ecad9
-    layerID: 160
+    spriteID: 3c93a66cb120f3f4fb2f20b112b76a61
+    layerID: 302
     mosaicPosition: {x: 4, y: 8204}
     flatten: 0
     isImported: 1
@@ -365,10 +371,80 @@ ScriptedImporter:
     parentIndex: -1
     spriteID: dfe9b2b0715790d4eb6350aef20546ef
     layerID: 288
-    mosaicPosition: {x: 14338, y: 757}
+    mosaicPosition: {x: 8204, y: 13113}
     flatten: 0
     isImported: 1
     isVisible: 1
+  - name: Examples
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 097d39191cee14f4abd43a6f2e95f6dd
+    layerID: 82
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Shape 4
+    spriteName: 
+    isGroup: 0
+    parentIndex: 5
+    spriteID: 2214530a079e48a438312f5ba0ee6c43
+    layerID: 79
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Shape 3
+    spriteName: 
+    isGroup: 0
+    parentIndex: 5
+    spriteID: f7da7a59041014140b163fdb9f5d851f
+    layerID: 78
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Shape 2 copy
+    spriteName: 
+    isGroup: 0
+    parentIndex: 5
+    spriteID: 6fed3a3b44f4b444ebcf8b5cf9551b11
+    layerID: 76
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Shape 2
+    spriteName: 
+    isGroup: 0
+    parentIndex: 5
+    spriteID: 5c527f5de9535db419c423f5f3928d21
+    layerID: 75
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Shape 1
+    spriteName: 
+    isGroup: 0
+    parentIndex: 5
+    spriteID: 105629393c6da4b41971580a4592b198
+    layerID: 74
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: sketch
+    spriteName: 
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 880815c51a030a14cb0e8c28b54a5953
+    layerID: 51
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
   - name: Background
     spriteName: Background
     isGroup: 0

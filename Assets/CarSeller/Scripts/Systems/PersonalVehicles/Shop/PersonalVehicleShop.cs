@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PersonalVehicleShop : ILocatable
 {
+    public string DisplayName => "Personal Vehicle Shop";
     NonDuplicatesIdentifiedCarList<PersonalVehicleShopEntry> AllPersonalVehiclesShopEntries;
     PersonalVehiclesList list;
 
@@ -89,10 +90,10 @@ public class PersonalVehicleShopEntry : IPurchasable
     internal PersonalVehicleShopEntry(CarKind carIdentifier, PersonalVehicleShop shop)
     {
         personalVehicle = PersonalVehicle.CreateNew(carIdentifier);
-        Price = getPrice();
+        UnitPrice = getPrice();
         this.shop = shop;
     }
-    public float Price { get; private set; }
+    public float UnitPrice { get; private set; }
 
     public void CompletePurchase()
     {
@@ -112,7 +113,7 @@ public class PersonalVehicleShopEntry : IPurchasable
 
     public bool TryPurchase(TransactionFeedbackLocation feedbackLocation)
     {
-        var transaction = new PurchaseTransaction(Price, this);
+        var transaction = new PurchaseTransaction(UnitPrice, this);
         var result = G.TransactionProcessor.Process(transaction,feedbackLocation);
         if(result.Type == TransactionResultType.Success)
         {
@@ -143,9 +144,8 @@ public class PersonalVehicleShopController
 
     public Widget GenerateMenuUI()
     {
-        var container = new DoubleRowChoicePanelWidget(
-            "Personal Vehicle Shop",
-            "Purchase new personal vehicles to use as your primary vehicle.");
+        var container = new VerticalContentWidget(
+            shop.DisplayName);
 
         populateContainerWithSlots(container, shop.GetAvailableEntries());
         return container;
@@ -216,7 +216,7 @@ public class PurchaseTransaction : Transaction
 
 public interface IPurchasable
 {
-    public float Price { get; }
+    public float UnitPrice { get; }
     public bool IsAvailable { get; }
     public void CompletePurchase();
 }

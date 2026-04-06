@@ -110,7 +110,7 @@ public class CityInteractionManager : IInteractionManager
         var content = profile.GenerateContent(model, gameState);
         if (content != null)
         {
-            ContextMenuManager.Instance.CreateContextMenu(interactable.gameObject, content);
+            FixedContextMenuManager.Instance.CreateContextMenu(content);
         }
     }
 

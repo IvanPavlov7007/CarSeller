@@ -3,25 +3,9 @@ using UnityEngine;
 
 public sealed class SellingCityContextMenuProfile : ICityContextMenuProfile
 {
-    public UIElement GenerateContent(CityEntity model, GameState gameState)
+    public Widget GenerateContent(CityEntity model, GameState gameState)
     {
-        var sellingState = gameState as SellingGameState;
-        if (sellingState == null)
-        {
-            Debug.LogError($"SellingCityContextMenuProfile used with non-selling state {gameState?.GetType().Name}");
-            return null;
-        }
-
-        switch (model.Subject)
-        {
-            case Car car:
-                return generateSellingCarContent(sellingState, car);
-            case Warehouse warehouse:
-                return generateSellingWarehouseContent(sellingState, warehouse);
-            default:
-                Debug.LogError($"SellingCityContextMenuProfile: Unsupported model type {model.Subject.GetType()}");
-                return null;
-        }
+        return null;
     }
     private UIElement generateSellingWarehouseContent(SellingGameState sellingState, Warehouse warehouse)
     {

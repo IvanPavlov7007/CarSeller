@@ -8,8 +8,6 @@ public class PauseMenuManager : Singleton<PauseMenuManager>, IClosable
 {
     CanvasGroup canvasGroup;
     Canvas canvas;
-    [SerializeField]
-    RectTransform container;
 
     private void Awake()
     {
@@ -21,6 +19,7 @@ public class PauseMenuManager : Singleton<PauseMenuManager>, IClosable
     {
         GameEvents.Instance.OnGamePaused += onPaused;
         GameEvents.Instance.OnGameUnpaused += onResumed;
+        onResumed();
     }
 
     public void Close()
@@ -31,40 +30,6 @@ public class PauseMenuManager : Singleton<PauseMenuManager>, IClosable
     void onPaused()
     {
         BlockUIManager.Instance.Block(canvas,()=> GameManager.Instance.Pause(false));
-        SimpleUIBuilder.Instance?.Build(
-            new UIElement
-            {
-                Type = UIElementType.Container,
-                Children = new List<UIElement>()
-                {
-                    new UIElement
-                    {
-                        Text = "Pause Menu",
-                        Type = UIElementType.Text
-                    },
-                    new UIElement
-                    {
-                        Text = "Resume",
-                        Type = UIElementType.Button,
-                        OnClick = () =>
-                        {
-                            GameManager.Instance.Pause(false);
-                        }
-                    },
-                    new UIElement
-                    {
-                        Text = "Reset Game",
-                        Type = UIElementType.Button,
-                        OnClick = () =>
-                        {
-                            GameManager.Instance.ResetGame();
-                        }
-                    }
-
-                }
-            }
-
-            , container);
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
     }
@@ -72,10 +37,6 @@ public class PauseMenuManager : Singleton<PauseMenuManager>, IClosable
     void onResumed()
     {
         BlockUIManager.Instance.Unblock(canvas);
-        foreach (Transform child in container)
-        {
-            Destroy(child.gameObject);
-        }
         canvasGroup.alpha = 0f;
         canvasGroup.blocksRaycasts = false;
     }

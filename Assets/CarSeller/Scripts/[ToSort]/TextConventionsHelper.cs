@@ -47,4 +47,9 @@ public static class TextConventionsHelper
             return numbs;
         }
     }
+
+    internal static object FormatPrice(object absolutePrice)
+    {
+        throw new NotImplementedException();
+    }
 }

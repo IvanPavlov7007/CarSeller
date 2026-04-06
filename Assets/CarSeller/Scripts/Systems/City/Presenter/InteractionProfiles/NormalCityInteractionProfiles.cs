@@ -5,7 +5,7 @@ using UnityEngine.Rendering.Universal;
 
 public class NormalCityContextMenuProfile : ICityContextMenuProfile
 {
-    public virtual UIElement GenerateContent(CityEntity entity, GameState gameState)
+    public virtual Widget GenerateContent(CityEntity entity, GameState gameState)
     {
         if (gameState == null)
         {
@@ -18,87 +18,35 @@ public class NormalCityContextMenuProfile : ICityContextMenuProfile
 
         if (entity.Subject is MissionLauncher launcher)
         {
-            return CTX_Menu_Tools.MissionLauncherHint(launcher);
+            //return CTX_Menu_Tools.MissionLauncherHint(launcher);
         }
         if (entity.Subject is PlayerFigure figure)
         {
             // "It's you"
-            return new UIElement
-            {
-                Type = UIElementType.Container,
-                Children = new List<UIElement>
-                {
-                    CTX_Menu_Tools.Header("You"),
-                    CTX_Menu_Tools.Hint("It's you")
-                }
-            };
+            //return new UIElement
+            //{
+            //    Type = UIElementType.Container,
+            //    Children = new List<UIElement>
+            //    {
+            //        CTX_Menu_Tools.Header("You"),
+            //        CTX_Menu_Tools.Hint("It's you")
+            //    }
+            //};
         }
 
         if (entity.Subject is Car car)
         {
-            List<UIElement> elements = CTX_Menu_Tools.CarBaseInfoElements(car);
-
             if (GameRules.carCanBeExited.Check(car))
             {
-                elements.Add(new UIElement
-                {
-                    Type = UIElementType.Button,
-                    Text = "Exit",
-                    IsInteractable = true,
-                    OnClick = () =>
-                    {
-                        G.VehicleController.ExitWorldVehicle();
-                    },
-                    closePopupOnClick = true
-                });
-            }
-            
-
-            return new UIElement
-            {
-                Type = UIElementType.Container,
-                Children = elements
-            };
-        }
-
-        if (entity.Subject is Warehouse)
-        {
-            // Warehouse shouldn't be enter-able by button in any case.
-            // Keep only base info / purchase info.
-            var warehouse = (Warehouse)entity.Subject;
-            var warehouseOffer = G.Economy.WarehouseOfferProvider.GetOfferForWarehouse(warehouse);
-
-            var elementsList = CTX_Menu_Tools.WarehouseBaseInfoElements(warehouse);
-            if (warehouseOffer != null)
-            {
-                elementsList.AddRange(CTX_Menu_Tools.WarehousePurchaseElements(warehouseOffer));
-            }
-            else
-            {
-                elementsList.Add(CTX_Menu_Tools.Hint("Drive or walk into it to enter"));
+                return CarInfoWidget.WorldCar(car);
             }
 
-            return new UIElement
-            {
-                Type = UIElementType.Container,
-                Children = elementsList.ToList()
-            };
+            return CarInfoWidget.PrimaryCar(car);
         }
 
         if (entity.Subject is Buyer buyer)
         {
-            return new UIElement
-            {
-                Type = UIElementType.Container,
-                Children = new ()
-                {
-                    new UIElement
-                    {
-                        Type = UIElementType.Text,
-                        Text = $"Buyer for {buyer.RequiredCarType.ToString()} cars"
-                    },
-                }
-            };
+            return new BuyerInfoWidget(buyer);
         }
 
         Debug.LogWarning($"NormalCityContextMenuProfile: No context menu defined for model type {entity.Subject.GetType()}");

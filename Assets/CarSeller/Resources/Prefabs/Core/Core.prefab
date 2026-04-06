@@ -731,9 +731,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 0
-  fixedPopUpMenuPrefab: {fileID: 1448607247116826726, guid: 9534f3d911e21984c89040eb9fe3f72b, type: 3}
+  fixedPopUpMenuPrefab: {fileID: 7296095602608439675, guid: a38571ae3aac083439a4143754984098, type: 3}
   UIBuilder: {fileID: 11400000, guid: 9d960e958a906b7478173d9e9dcf1c93, type: 2}
-  UsedContextMenuColor: {r: 0.7921569, g: 0.7921569, b: 0.7921569, a: 0.3882353}
+  UsedContextMenuColor: {r: 0.15686275, g: 0.15686275, b: 0.15686275, a: 0.6}
 --- !u!1 &7399064851901602296
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,12 +792,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 0
-  popUpMenuPrefab: {fileID: 1448607247116826726, guid: 9534f3d911e21984c89040eb9fe3f72b, type: 3}
+  popUpMenuPrefab: {fileID: 7296095602608439675, guid: a38571ae3aac083439a4143754984098, type: 3}
   _menuTargetPadding: 8
   _screenEdgePadding: 8
   _positionLerpFactor: 0.25
   IdealViewHight: 800
-  UsedContextMenuColor: {r: 0.7921569, g: 0.7921569, b: 0.7921569, a: 0.3882353}
+  UsedContextMenuColor: {r: 0.156, g: 0.156, b: 0.156, a: 0.6039216}
 --- !u!1 &7622794948036269532
 GameObject:
   m_ObjectHideFlags: 0

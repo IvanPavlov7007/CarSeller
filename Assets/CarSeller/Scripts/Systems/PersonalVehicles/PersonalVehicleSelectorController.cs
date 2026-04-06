@@ -13,9 +13,8 @@ public class PersonalVehicleSelectorController
     }
     public Widget CreateMenuUIContent()
     {
-        Widget container = new DoubleRowChoicePanelWidget(
-            "Your Personal Vehicles",
-            "Select the primary vehicle.");
+        Widget container = new VerticalContentWidget(
+            "Select Primary Vehicle");
         populateVehicleSelectionContainer(container, G.VehicleController.CurrentPrimaryVehicle);
         return container;
     }

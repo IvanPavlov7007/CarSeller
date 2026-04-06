@@ -133,12 +133,12 @@ public class CanBePurchased
 {
     public bool Check(IPurchasable purchasable)
     {
-        return G.Player.Money >= purchasable.Price && purchasable.IsAvailable;
+        return G.Player.Money >= purchasable.UnitPrice && purchasable.IsAvailable;
     }
 
     public string GetUnavailabilityReason(IPurchasable purchasable)
     {
-        if (G.Player.Money < purchasable.Price)
+        if (G.Player.Money < purchasable.UnitPrice)
             return "Not enough money";
         if (!purchasable.IsAvailable)
             return "Not available";
@@ -204,6 +204,14 @@ public class BuyerTypeCanBeSpanwnedOnEdge
 
 public class SellPriceCalculator : SellPriceWrapper
 {
+    public override float CalculateMultiplier(CarRarity rarity, CarType requiredType)
+    {
+        CarRarityConfig carRarityConfig = G.Balancing.CarRarityConfigs.Find(x => x.GetRarity() == rarity);
+        CarTypeConfig requiredTypeConfig = G.Balancing.CarTypeConfigs.Find(x => x.GetType() == requiredType);
+        float multiplier = carRarityConfig.ValueMultiplier * requiredTypeConfig.SpecificValue;
+        return multiplier;
+    }
+
     public override float CalculateUnitSellPrice(Car car, Buyer buyer)
     {
         Debug.Assert(car != null, "Car is null");
@@ -225,6 +233,8 @@ public class SellPriceCalculator : SellPriceWrapper
 
 public abstract class SellPriceWrapper
 {
+
+    public abstract float CalculateMultiplier(CarRarity rarity, CarType requiredType);
     public abstract float CalculateUnitSellPrice(Car car, Buyer buyer);
     public static float CalculateAbsolutePrice(float unitPrice)
     {
