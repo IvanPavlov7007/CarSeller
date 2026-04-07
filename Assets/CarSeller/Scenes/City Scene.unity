@@ -23360,18 +23360,50 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 652847862574595082, guid: dc13231c05eff604e8b3215dbd7eb35e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -25.310059
+      objectReference: {fileID: 0}
     - target: {fileID: 1701941524739589145, guid: dc13231c05eff604e8b3215dbd7eb35e, type: 3}
       propertyPath: m_Name
       value: Shared Canvases
+      objectReference: {fileID: 0}
+    - target: {fileID: 1884514940122055836, guid: dc13231c05eff604e8b3215dbd7eb35e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1884514940122055836, guid: dc13231c05eff604e8b3215dbd7eb35e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1884514940122055836, guid: dc13231c05eff604e8b3215dbd7eb35e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -83
       objectReference: {fileID: 0}
     - target: {fileID: 3756607327986925819, guid: dc13231c05eff604e8b3215dbd7eb35e, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 330585545}
+    - target: {fileID: 4586528568062653518, guid: dc13231c05eff604e8b3215dbd7eb35e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -56.52002
+      objectReference: {fileID: 0}
     - target: {fileID: 5363321386785950769, guid: dc13231c05eff604e8b3215dbd7eb35e, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 330585545}
+    - target: {fileID: 5466503350305606838, guid: dc13231c05eff604e8b3215dbd7eb35e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5466503350305606838, guid: dc13231c05eff604e8b3215dbd7eb35e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5466503350305606838, guid: dc13231c05eff604e8b3215dbd7eb35e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -194
+      objectReference: {fileID: 0}
     - target: {fileID: 5953551665187417009, guid: dc13231c05eff604e8b3215dbd7eb35e, type: 3}
       propertyPath: m_Camera
       value: 

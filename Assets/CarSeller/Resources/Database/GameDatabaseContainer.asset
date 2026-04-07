@@ -106,7 +106,7 @@ MonoBehaviour:
         BuyerSuper: 3
         BuyerAny: 1
     - Id: Area2
-      DisplayName: Industrial
+      DisplayName: Urban
       Levels:
       - AreaLevel: 0
         Small: 10
@@ -181,7 +181,7 @@ MonoBehaviour:
         BuyerSuper: 0
         BuyerAny: 1
     - Id: Area3
-      DisplayName: Urban
+      DisplayName: Industrial
       Levels:
       - AreaLevel: 0
         Small: 1

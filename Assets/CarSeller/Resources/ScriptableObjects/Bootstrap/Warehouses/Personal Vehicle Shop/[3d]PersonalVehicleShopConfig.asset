@@ -20,127 +20,19 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: allCarOptions
-      Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[CarKind, ProductCore]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 7
-    - Name: 
-      Entry: 7
-      Data: CarKind, ProductCore
-    - Name: Type
-      Entry: 3
-      Data: 0
-    - Name: Rarity
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: CarKind, ProductCore
-    - Name: Type
-      Entry: 3
-      Data: 2
-    - Name: Rarity
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: CarKind, ProductCore
-    - Name: Type
-      Entry: 3
-      Data: 3
-    - Name: Rarity
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: CarKind, ProductCore
-    - Name: Type
-      Entry: 3
-      Data: 1
-    - Name: Rarity
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: CarKind, ProductCore
-    - Name: Type
-      Entry: 3
-      Data: 0
-    - Name: Rarity
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: CarKind, ProductCore
-    - Name: Type
-      Entry: 3
-      Data: 1
-    - Name: Rarity
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: CarKind, ProductCore
-    - Name: Type
-      Entry: 3
-      Data: 4
-    - Name: Rarity
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: initiallyUnlockedOptions
-      Entry: 7
-      Data: 1|System.Collections.Generic.List`1[[CarKind, ProductCore]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: CarKind, ProductCore
-    - Name: Type
-      Entry: 3
-      Data: 0
-    - Name: Rarity
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
   Marker:
     Graph: {fileID: 0}
     MarkerId: personalCarShop
+  allCarOptions:
+  - Bicycle
+  - Sedan
+  - Bike
+  - Taxi
+  - Minirare
+  - Police
+  - Cricket
+  - Rokunana
+  - Grader
+  initiallyUnlockedOptions:
+  - Bicycle

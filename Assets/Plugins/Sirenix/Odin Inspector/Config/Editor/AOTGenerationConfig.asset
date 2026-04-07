@@ -80,9 +80,6 @@ MonoBehaviour:
   - TypeName: System.Collections.Generic.List`1[[CarBaseConfig, ProductCore]], mscorlib
     IsCustom: 0
     Emit: 1
-  - TypeName: System.Collections.Generic.List`1[[CarKind, ProductCore]], mscorlib
-    IsCustom: 0
-    Emit: 1
   - TypeName: System.Collections.Generic.List`1[[MissionCondition, Assembly-CSharp]],
       mscorlib
     IsCustom: 0

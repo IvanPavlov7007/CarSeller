@@ -5,14 +5,14 @@ using UnityEngine;
 public class PersonalVehicleShop : ILocatable
 {
     public string DisplayName => "Personal Vehicle Shop";
-    NonDuplicatesIdentifiedCarList<PersonalVehicleShopEntry> AllPersonalVehiclesShopEntries;
+    Dictionary<string,PersonalVehicleShopEntry> AllPersonalVehiclesShopEntries;
     PersonalVehiclesList list;
 
     public PersonalVehiclesList PersonalVehiclesList => list;
 
     public PersonalVehicleShop(VehicleShopConfig shopConfig)
     {
-        AllPersonalVehiclesShopEntries = new NonDuplicatesIdentifiedCarList<PersonalVehicleShopEntry>();
+        AllPersonalVehiclesShopEntries = new Dictionary<string, PersonalVehicleShopEntry>();
         foreach (var carIdentifier in shopConfig.allCarOptions)
         {
             AllPersonalVehiclesShopEntries.Add(carIdentifier, new PersonalVehicleShopEntry(carIdentifier, this));
@@ -20,7 +20,7 @@ public class PersonalVehicleShop : ILocatable
         GeneratePersonalVehiclesList(shopConfig.initiallyUnlockedOptions);
     }
 
-    private void GeneratePersonalVehiclesList(IReadOnlyList<CarKind> initiallyAvailable)
+    private void GeneratePersonalVehiclesList(IReadOnlyList<string> initiallyAvailable)
     {
         Debug.Assert(initiallyAvailable != null, "Initially available cars list cannot be null.");
         Debug.Assert(AllPersonalVehiclesShopEntries != null);
@@ -87,7 +87,7 @@ public class PersonalVehicleShopEntry : IPurchasable
     public bool IsAvailable { get; private set; } = true;
     public PersonalVehicle PersonalVehicle => personalVehicle;
 
-    internal PersonalVehicleShopEntry(CarKind carIdentifier, PersonalVehicleShop shop)
+    internal PersonalVehicleShopEntry(string carIdentifier, PersonalVehicleShop shop)
     {
         personalVehicle = PersonalVehicle.CreateNew(carIdentifier);
         UnitPrice = getPrice();

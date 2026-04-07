@@ -444,10 +444,10 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  Name: Mini
+  Name: Minicar
   BasePrice: 2
-  Speed: 2
-  Acceleration: 1.5
+  Speed: 1.4
+  Acceleration: 1
   CarFrameBaseConfig: {fileID: 11400000, guid: 526c83c7d5e9c39488bba242842be9a0, type: 2}
   TopView: {fileID: 21300000, guid: 6beea635922d3874cbaf179c7a587503, type: 3}
   SideView: {fileID: 21300000, guid: de99e5632dbbeb945a607b33e8269b12, type: 3}

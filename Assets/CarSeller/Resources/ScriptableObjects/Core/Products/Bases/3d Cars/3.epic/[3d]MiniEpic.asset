@@ -444,10 +444,10 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  Name: Grader
-  BasePrice: 10
-  Speed: 2
-  Acceleration: 1.5
+  Name: Miniepic
+  BasePrice: 2
+  Speed: 2.2
+  Acceleration: 1.8
   CarFrameBaseConfig: {fileID: 11400000, guid: 526c83c7d5e9c39488bba242842be9a0, type: 2}
-  TopView: {fileID: 21300000, guid: 6cf064a0df3694c40a165a15c84846ab, type: 3}
-  SideView: {fileID: 21300000, guid: 23fa4322eda307743a5d826a105f9a97, type: 3}
+  TopView: {fileID: 21300000, guid: 660943fccd7345445b4cd264dcd3d95a, type: 3}
+  SideView: {fileID: 21300000, guid: 37b10632e6665f94da1942a27c13b7b9, type: 3}

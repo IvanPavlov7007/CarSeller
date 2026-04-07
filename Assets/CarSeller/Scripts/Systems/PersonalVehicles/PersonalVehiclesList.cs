@@ -103,9 +103,9 @@ public class PersonalVehicle
         };
     }
 
-    public static PersonalVehicle CreateNew(CarKind simplifiedCarIdentifier)
+    public static PersonalVehicle CreateNew(string carIdentifier)
     {
-        var car = G.SimplifiedCarsManager.CreateCarHidden(simplifiedCarIdentifier);
+        var car = G.SimplifiedCarsManager.CreateCarHidden(carIdentifier);
         return new PersonalVehicle
         {
             Car = car,

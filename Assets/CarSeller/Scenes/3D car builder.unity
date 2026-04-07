@@ -577,26 +577,11 @@ MonoBehaviour:
   topCamera: {fileID: 1250783173}
   sideCamera: {fileID: 1327713562}
   buildPosition: {fileID: 422550644}
-  prefabToRender: {fileID: 6687583357071715599, guid: f15ec262c1e731d45a95408acf3ebf7e, type: 3}
+  prefabToRender: {fileID: 9096244821008962894, guid: 5d89622f2e162a347a0d4ebaf04bc6d3, type: 3}
   prefabsToRender:
-  - {fileID: 1339859497037224304, guid: 28cf34e748fefc246a98c854b7bd6d0b, type: 3}
-  - {fileID: 3224294686992037834, guid: beb6341eb2f5b8a409d2d874bf6a92be, type: 3}
-  - {fileID: 2936342628159377558, guid: bec954be4fd3f1241832577d84fcdcff, type: 3}
-  - {fileID: 5701681113211402617, guid: c123fe3883f329149bac66ffa94ac035, type: 3}
-  - {fileID: 481979294999496064, guid: aebf331b2bf3b9b44966a550bfcfdcf0, type: 3}
-  - {fileID: 435807136798610648, guid: 1aea6649a5a20bc4b84aeb21e857d05a, type: 3}
-  - {fileID: 8778188778901200150, guid: 708f41aa5a06fee40a411f1b8daad89a, type: 3}
-  - {fileID: 659717717119206292, guid: 7ef259e95c193674bae0bd6e1d347a7c, type: 3}
-  - {fileID: 4592136106314847828, guid: b961936d73b8c944eb62ee77ed48a4a8, type: 3}
-  - {fileID: 8475435320046483716, guid: 1ec5145094564ac41876564197ce360f, type: 3}
-  - {fileID: 9096244821008962894, guid: 5d89622f2e162a347a0d4ebaf04bc6d3, type: 3}
-  - {fileID: 3183318059235057828, guid: cde205a69aea7344b8bfec58e9078e21, type: 3}
-  - {fileID: 7037540532904234190, guid: 9b645ddc5fd8f3141a4c5c2af3e373cd, type: 3}
-  - {fileID: 5820527614695462415, guid: c34acd670d88c1a4696c18f8381f868e, type: 3}
-  - {fileID: 8124565346764170617, guid: e1d00f120ffbd29478cefcd150468c2e, type: 3}
-  - {fileID: 6039720625462300067, guid: 3015ab4a59f4abb4f91fac1430479795, type: 3}
-  - {fileID: 8343795002408726150, guid: 504252ab29a952a4b8a45e6bff4f8abf, type: 3}
-  - {fileID: 8884135133843905987, guid: 1ec1c55698732964ab3628ac5da4babb, type: 3}
+  - {fileID: 2936342628159377558, guid: f5ccb96af99ec2e4d997bb02f68865c2, type: 3}
+  - {fileID: 2936342628159377558, guid: c0397ad1ffc93aa4681c38e64c2de211, type: 3}
+  - {fileID: 4592136106314847828, guid: 3ac3020459d9bde43968d8a47769ec49, type: 3}
   usePrefabNameAsBase: 1
   baseFileName: Car
   resourcesSubFolder: Cars/Icons
@@ -610,7 +595,7 @@ MonoBehaviour:
   cropTransparent: 0
   importAsSprite: 1
   preserveImporterSettings: 1
-  defaultSpritePixelsPerUnit: 100
+  defaultSpritePixelsPerUnit: 500
 --- !u!4 &1788802635
 Transform:
   m_ObjectHideFlags: 0

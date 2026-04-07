@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfe4b9843d2ee22468076cb1d618e500, type: 3}
-  m_Name: '[3d]HachirokuFullBaseConfig'
+  m_Name: '[3d]Truck uncommon'
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -437,17 +437,17 @@ MonoBehaviour:
       Data: CarKind, ProductCore
     - Name: Type
       Entry: 3
-      Data: 1
+      Data: 3
     - Name: Rarity
       Entry: 3
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 8
       Data: 
-  Name: Rokunana
-  BasePrice: 5
-  Speed: 1
-  Acceleration: 0.5
+  Name: Epic Electro Truck
+  BasePrice: 12
+  Speed: 2
+  Acceleration: 1.5
   CarFrameBaseConfig: {fileID: 11400000, guid: 526c83c7d5e9c39488bba242842be9a0, type: 2}
-  TopView: {fileID: 21300000, guid: 3ada92f5009da7e468ee2f759fcc1ab1, type: 3}
-  SideView: {fileID: 21300000, guid: 050b79ab2fc07b84e958d250ca691f37, type: 3}
+  TopView: {fileID: 21300000, guid: 816165ae952fe964b855f01ee3df0647, type: 3}
+  SideView: {fileID: 21300000, guid: 6efb31326886856499429acb5ee48afd, type: 3}

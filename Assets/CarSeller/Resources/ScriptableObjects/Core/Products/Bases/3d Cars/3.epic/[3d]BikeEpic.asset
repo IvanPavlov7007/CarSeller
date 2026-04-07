@@ -444,10 +444,10 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  Name: Grader
+  Name: Superbike
   BasePrice: 10
   Speed: 2
-  Acceleration: 1.5
+  Acceleration: 2
   CarFrameBaseConfig: {fileID: 11400000, guid: 526c83c7d5e9c39488bba242842be9a0, type: 2}
   TopView: {fileID: 21300000, guid: 9703dfc69f359874680597736bb830b4, type: 3}
   SideView: {fileID: 21300000, guid: bcc81085f933e294b940f8743e12ac93, type: 3}

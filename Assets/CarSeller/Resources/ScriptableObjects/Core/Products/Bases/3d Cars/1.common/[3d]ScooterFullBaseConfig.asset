@@ -444,10 +444,10 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  Name: Scooter
-  BasePrice: 2
-  Speed: 2
-  Acceleration: 1.5
+  Name: Bike
+  BasePrice: 7.3
+  Speed: 1.2
+  Acceleration: 1.3
   CarFrameBaseConfig: {fileID: 11400000, guid: 526c83c7d5e9c39488bba242842be9a0, type: 2}
   TopView: {fileID: 21300000, guid: ad8cef36413faf242a9ed5cfcdb1a806, type: 3}
   SideView: {fileID: 21300000, guid: 45aa428c67fbe1045bccf183115f2bca, type: 3}

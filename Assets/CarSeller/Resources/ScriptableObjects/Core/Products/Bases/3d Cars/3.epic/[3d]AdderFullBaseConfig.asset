@@ -445,9 +445,9 @@ MonoBehaviour:
       Entry: 8
       Data: 
   Name: Grader
-  BasePrice: 10
-  Speed: 2
-  Acceleration: 1.5
+  BasePrice: 100
+  Speed: 4
+  Acceleration: 3
   CarFrameBaseConfig: {fileID: 11400000, guid: 526c83c7d5e9c39488bba242842be9a0, type: 2}
   TopView: {fileID: 21300000, guid: e5650bdc156a32344ab013493dc00a7a, type: 3}
   SideView: {fileID: 21300000, guid: 54b38932871d437448e635e0a9cfbda7, type: 3}

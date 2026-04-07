@@ -20,7 +20,19 @@ public class SimplifiedCarsManager
         return car;
     }
 
+    public Car CreateCar(string identifier, ILocation location)
+    {
+        var car = G.ProductManager.CreateCar(CreationBuilder.RuntimeConfigsById[identifier], location);
+        return car;
+    }
+
     public Car CreateCarHidden(CarKind identifier)
+    {
+        var car = CreateCar(identifier, World.Instance.HiddenSpace.GetEmptyLocation());
+        return car;
+    }
+
+    public Car CreateCarHidden(string identifier)
     {
         var car = CreateCar(identifier, World.Instance.HiddenSpace.GetEmptyLocation());
         return car;

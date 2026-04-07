@@ -244,7 +244,7 @@ public class UpdatedActiveCellsData
 public class CarSpawnCellWrapper
 {
     public readonly SpawnGridCell Cell;
-    public float density = 2;
+    public float density = 0.6f;
 
 
     public CarSpawnCellWrapper(SpawnGridCell cell)

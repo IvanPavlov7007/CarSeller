@@ -48,9 +48,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6652725513331149018, guid: 5addbc0643e20334699082c7ea738434, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a33c36793379b764d8e5d9a8ae093368, type: 2}
     - target: {fileID: 919132149155446097, guid: 5addbc0643e20334699082c7ea738434, type: 3}
       propertyPath: m_Name
-      value: Car 3
+      value: mini
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5addbc0643e20334699082c7ea738434, type: 3}
       propertyPath: m_IsActive
