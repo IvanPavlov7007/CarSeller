@@ -39,4 +39,21 @@ public class GlobalUIMethods : MonoBehaviour
         G.GameFlowController.EnterWarehouse((Warehouse)
                     World.Instance.City.Entities.Keys.First(x => x.GetType() == typeof(Warehouse)));
     }
+
+    public void ResetGame()
+    {
+        GameManager.Instance.ResetGame();
+    }
+
+    public void Resume()
+    {
+        GameManager.Instance.Pause(false);
+        Debug.Log("Resuming game");
+    }
+
+    public void Pause()
+    {
+        GameManager.Instance.Pause(true);
+        Debug.Log("Pausing game");
+    }
 }

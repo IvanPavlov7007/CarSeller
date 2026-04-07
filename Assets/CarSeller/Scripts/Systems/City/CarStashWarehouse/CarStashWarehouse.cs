@@ -40,7 +40,7 @@ public abstract class StashSessionDisplayer
 
     public Widget generateOffers()
     {
-        var container = new VerticalContentWidget("Stolen cars warehouse");
+        var container = new VerticalContentWidget(CarStashWarehouse.DisplayName);
         populateContainerWithSlots(container, ShownSlots, onSlotSelected);
         return container;
     }
@@ -184,6 +184,8 @@ public class CarStashWarehouse : ILocationsHolder,ILocatable
 
     List<StashSlot> stashes;
     public int MaxCount { get; private set; }
+    public static string DisplayName { get; internal set; } = "Stolen cars warehouse";
+
     public CarStashWarehouse(CarStashWarehouseConfig config)
     {
         Debug.Assert(config != null, "Attempted to create a CarStashWarehouse with null config.");

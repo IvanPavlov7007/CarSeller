@@ -23,6 +23,18 @@ MonoBehaviour:
   - TypeName: BustedCondition, Assembly-CSharp
     IsCustom: 0
     Emit: 1
+  - TypeName: CarBaseConfig, ProductCore
+    IsCustom: 0
+    Emit: 1
+  - TypeName: CarKind, ProductCore
+    IsCustom: 0
+    Emit: 1
+  - TypeName: CarRarity, ProductCore
+    IsCustom: 0
+    Emit: 1
+  - TypeName: CarType, ProductCore
+    IsCustom: 0
+    Emit: 1
   - TypeName: CityGraphAsset, Assembly-CSharp
     IsCustom: 0
     Emit: 1
@@ -33,6 +45,10 @@ MonoBehaviour:
     IsCustom: 0
     Emit: 1
   - TypeName: CurrencyRewardBundle, Assembly-CSharp
+    IsCustom: 0
+    Emit: 1
+  - TypeName: System.Collections.Generic.Dictionary`2[[CarType, ProductCore],[UnityEngine.Sprite,
+      UnityEngine.CoreModule]], mscorlib
     IsCustom: 0
     Emit: 1
   - TypeName: EngineBaseConfig, ProductCore
@@ -47,10 +63,24 @@ MonoBehaviour:
   - TypeName: EngineVariantConfig, ProductCore
     IsCustom: 0
     Emit: 1
+  - TypeName: System.Collections.Generic.EnumEqualityComparer`1[[CarType, ProductCore]],
+      mscorlib
+    IsCustom: 0
+    Emit: 1
   - TypeName: System.Single, mscorlib
     IsCustom: 0
     Emit: 1
+  - TypeName: System.Collections.Generic.IEqualityComparer`1[[CarType, ProductCore]],
+      mscorlib
+    IsCustom: 0
+    Emit: 1
   - TypeName: System.Int32, mscorlib
+    IsCustom: 0
+    Emit: 1
+  - TypeName: System.Collections.Generic.List`1[[CarBaseConfig, ProductCore]], mscorlib
+    IsCustom: 0
+    Emit: 1
+  - TypeName: System.Collections.Generic.List`1[[CarKind, ProductCore]], mscorlib
     IsCustom: 0
     Emit: 1
   - TypeName: System.Collections.Generic.List`1[[MissionCondition, Assembly-CSharp]],

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using static UnityEditor.FilePathAttribute;
 
 [CreateAssetMenu(fileName = "SimpleCarSpawnConfig", menuName = "Configs/Spawn/CarSpawnConfig")]
 public class SimpleCarSpawnConfig : ScriptableObject

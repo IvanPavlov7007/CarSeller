@@ -71,7 +71,7 @@ public class ProgressionUIManager : MonoBehaviour
         {
             currentArea = data.Area;
             resetProgressbar(data.InitialLevel, data.InitialXP);
-            progressionUI.description.text = $"Progress in {currentArea.Id}";
+            progressionUI.description.text = $"Progress in {currentArea.DisplayName} Area";
         }
 
         _showing = true;

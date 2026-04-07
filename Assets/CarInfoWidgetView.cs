@@ -42,11 +42,19 @@ public class CarInfoWidget : BlockingInputWidget
     }
 
 
-    public static CarInfoWidget WorldCar(Car car)
+    public static CarInfoWidget StolenCar(Car car)
     {
         var carInfo = new CarInfoWidget(car);
         carInfo.HeaderName = "Stolen Vehicle";
         carInfo.ExitButton = new AutoHidingButtonWidget("Exit",G.VehicleController.ExitWorldVehicle, true, true);
+        return carInfo;
+    }
+
+    public static CarInfoWidget WorldCar(Car car)
+    {
+        var carInfo = new CarInfoWidget(car);
+        carInfo.HeaderName = "World Vehicle";
+        carInfo.ExitButton = new AutoHidingButtonWidget(null, true, true);
         return carInfo;
     }
 

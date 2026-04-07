@@ -8,7 +8,7 @@ public static class TextConventionsHelper
         string colorHex = rarity switch
         {
             CarRarity.Common => "#FFFFFF",
-            CarRarity.Uncommon => "#0070DD",
+            CarRarity.Uncommon => "#22BB99",
             CarRarity.Epic => "#A335EE",
             //CarRarity.Legendary => "#FF8000",
             _ => "#FFFFFF"

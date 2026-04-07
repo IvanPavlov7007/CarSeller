@@ -9,11 +9,17 @@ public class VehicleControlUI : Singleton<VehicleControlUI>
     private void Awake()
     {
         PrimaryVehicleButton.button.onClick.AddListener(onPrimaryClick);
+        CurrentVehicleButton.button.onClick.AddListener(onCurrentVechicleClick);
     }
 
     private void onPrimaryClick()
     {
         G.ProcessRunner.Run(new SelectPrimaryVehicleProcess());
+    }
+
+    private void onCurrentVechicleClick()
+    {
+        CameraMovementManager.Instance.Teleport(G.VehicleController.CurrentVehicleEntity.Position.WorldPosition);
     }
 
     private void OnEnable()

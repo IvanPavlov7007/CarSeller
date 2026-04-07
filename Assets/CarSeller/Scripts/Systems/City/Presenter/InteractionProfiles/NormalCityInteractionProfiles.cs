@@ -16,6 +16,23 @@ public class NormalCityContextMenuProfile : ICityContextMenuProfile
         //TODO: check by visibility and other aspects if the entity is displayed, but not discovered
         // and show "undiscovered" hint in that case instead of actual content
 
+        bool discovered = entity.GetAspect<CityVisibleAspect>()?.Discovered ?? false;
+
+        if (!discovered)
+        {
+            return new GenericInfoWidget("???", "There is something here. Come closer to find out what is it.");
+        }
+
+        if(entity.Subject is PersonalVehicleShop vehicleShop)
+        {
+            return new GenericInfoWidget(vehicleShop.DisplayName, "A place where you can buy personal vehicles. Drag your car here to see what they offer.");
+        }
+
+        if(entity.Subject is CarStashWarehouse carStashWarehouse)
+        {
+            return new GenericInfoWidget(CarStashWarehouse.DisplayName, "A place where you can stash stolen cars. Drag the car here to stash it for later.");
+        }
+
         if (entity.Subject is MissionLauncher launcher)
         {
             //return CTX_Menu_Tools.MissionLauncherHint(launcher);
@@ -38,10 +55,13 @@ public class NormalCityContextMenuProfile : ICityContextMenuProfile
         {
             if (GameRules.carCanBeExited.Check(car))
             {
-                return CarInfoWidget.WorldCar(car);
+                return CarInfoWidget.StolenCar(car);
             }
 
-            return CarInfoWidget.PrimaryCar(car);
+            if(G.VehicleController.CurrentCar == car)
+                return CarInfoWidget.PrimaryCar(car);
+
+            return CarInfoWidget.WorldCar(car);
         }
 
         if (entity.Subject is Buyer buyer)

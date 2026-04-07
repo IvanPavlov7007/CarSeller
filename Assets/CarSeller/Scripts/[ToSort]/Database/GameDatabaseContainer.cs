@@ -79,6 +79,7 @@ public class AreaBalancingContent
             AreaBalancingByAreaName.Add(new AreaCollection
             {
                 Id = areaId,
+                DisplayName = AreasDefinitions[i].DisplayName,
                 Levels = levels
             });
         }
@@ -112,6 +113,7 @@ public class AreaBalancingContent
 public class AreaCollection
 {
     public string Id;
+    public string DisplayName;
     public List<LevelBalancing> Levels;
 }
 
@@ -119,6 +121,7 @@ public class AreaCollection
 public struct AreasDefinition
 {
     public string AreaID;
+    public string DisplayName;
 }
 
 [Serializable]

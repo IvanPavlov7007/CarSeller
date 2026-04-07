@@ -31,6 +31,7 @@ MonoBehaviour:
   AreaBalancingContent:
     AreaBalancingByAreaName:
     - Id: Area1
+      DisplayName: Metropolitan
       Levels:
       - AreaLevel: 0
         Small: 10
@@ -105,6 +106,7 @@ MonoBehaviour:
         BuyerSuper: 3
         BuyerAny: 1
     - Id: Area2
+      DisplayName: Industrial
       Levels:
       - AreaLevel: 0
         Small: 10
@@ -123,7 +125,7 @@ MonoBehaviour:
         BuyerTruck: 0
         BuyerBike: 3
         BuyerSuper: 0
-        BuyerAny: 5
+        BuyerAny: 8
       - AreaLevel: 1
         Small: 10
         Sedan: 2
@@ -179,6 +181,7 @@ MonoBehaviour:
         BuyerSuper: 0
         BuyerAny: 1
     - Id: Area3
+      DisplayName: Urban
       Levels:
       - AreaLevel: 0
         Small: 1
@@ -254,8 +257,11 @@ MonoBehaviour:
         BuyerAny: 1
     AreasDefinitions:
     - AreaID: Area1
+      DisplayName: Metropolitan
     - AreaID: Area2
+      DisplayName: Urban
     - AreaID: Area3
+      DisplayName: Industrial
     Area1:
     - AreaLevel: 0
       Small: 10
@@ -347,7 +353,7 @@ MonoBehaviour:
       BuyerTruck: 0
       BuyerBike: 3
       BuyerSuper: 0
-      BuyerAny: 5
+      BuyerAny: 8
     - AreaLevel: 1
       Small: 10
       Sedan: 2

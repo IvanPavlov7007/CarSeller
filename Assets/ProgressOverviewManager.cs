@@ -94,7 +94,7 @@ public class ProgressOverviewManager : MonoBehaviour
     {
         if (!_areaToProgressionUI.TryGetValue(area, out var progressionUI))
             return;
-        progressionUI.description.text = $"Progress in {area.Id}";
+        progressionUI.description.text = $"Progress in {area.DisplayName} Area";
         var levelIndex = area.CurrentLevel.Index;
         var normalizedProgress = ProgressionUIManager.NormalizeXP(area.currentXP, area.CurrentLevel);
         progressionUI.SetupInitValues(levelIndex, normalizedProgress);

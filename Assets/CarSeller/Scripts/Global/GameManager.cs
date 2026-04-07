@@ -65,6 +65,7 @@ public class GameManager : Singleton<GameManager>
 
     public void ResetGame()
     {
+        Pause(false);
         Debug.Log("Resetting game...");
         SceneManager.LoadScene(0);
         GameMain.GameReset();

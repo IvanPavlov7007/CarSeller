@@ -17,7 +17,7 @@ public sealed class CityVisionCentersSystem : AspectSystem<VisionCenterAspect>
     // Additional vision centers granted by other rules (e.g., ownership)
     private readonly Dictionary<ILocatable, CityEntity> ownedCenterEntities = new();
     // Default configs (kept internal; can later be moved to config asset)
-    private readonly VisionCenterConfig defaultActorVision = new VisionCenterConfig { Radius = 2f};
+    private readonly VisionCenterConfig defaultActorVision = new VisionCenterConfig { Radius = 4f};
     private readonly VisionCenterConfig defaultWarehouseVision = new VisionCenterConfig { Radius = 1f};
 
     public CityVisionCentersSystem(CityEntityAspectsService aspectsService) : base(aspectsService)

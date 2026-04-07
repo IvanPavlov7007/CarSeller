@@ -18,10 +18,12 @@ public class CityArea
 
     public AreaBuyerSystem buyersSystem { get; private set; }
     public string Id { get; internal set; }
+    public string DisplayName;
 
     public CityArea(AreaCollection data)
     {
         Id = data.Id;
+        DisplayName = data.DisplayName;
         initializeBuyersSpawnPoints(data);
         initializeLevels(data);
     }

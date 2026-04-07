@@ -247,7 +247,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 191.96, y: 5.769989}
+  m_AnchoredPosition: {x: 191.96, y: 5.7700195}
   m_SizeDelta: {x: 436.61, y: -62.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6484360205050168553
@@ -572,6 +572,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2064239906373791102, guid: a1df8efdafeb01043a19a2d74b97b68d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -25.309937
+      objectReference: {fileID: 0}
     - target: {fileID: 2999552970876205988, guid: a1df8efdafeb01043a19a2d74b97b68d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -650,7 +654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3029895058292204858, guid: a1df8efdafeb01043a19a2d74b97b68d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -555
+      value: -421.8
       objectReference: {fileID: 0}
     - target: {fileID: 3029895058292204858, guid: a1df8efdafeb01043a19a2d74b97b68d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -666,7 +670,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3163343597942148649, guid: a1df8efdafeb01043a19a2d74b97b68d, type: 3}
       propertyPath: m_Name
-      value: CarInfo Variant
+      value: CarInfoWidgetView
       objectReference: {fileID: 0}
     - target: {fileID: 3163343597942148649, guid: a1df8efdafeb01043a19a2d74b97b68d, type: 3}
       propertyPath: m_IsActive

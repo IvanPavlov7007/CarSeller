@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff2af80c02fdb8946950bb655d320bde, type: 3}
   m_Name: '[3d]VehicleControllerConfig'
   m_EditorClassIdentifier: 
-  initialPosition: {x: 0, y: 0}
+  initialPosition: {x: -21, y: 2}
   initialPrimeVehicleIndex: 0
   vehicleShopConfig: {fileID: 11400000, guid: b86a9df7c4ec2724a8ac4895704ded73, type: 2}
   maxOwnedCars: 10
