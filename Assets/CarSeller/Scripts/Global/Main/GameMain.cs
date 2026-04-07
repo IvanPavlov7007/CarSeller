@@ -59,7 +59,6 @@ public abstract partial class GameMain
     public static void GameReset()
     {
         Instance.ResetData(GameMainConfig.Instance.GameConfig);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public virtual void Destroy()
@@ -67,16 +66,16 @@ public abstract partial class GameMain
         SceneManager.sceneLoaded -= onSceneLoaded;
     }
 
-    public virtual void ResetStaticState() 
+    public virtual void ResetStaticState()
     {
         GameEvents.Instance.Reset();
         G.Initialize(GameMainConfig.Instance.ViewBuilders);
     }
-    public virtual void InitializeWorld(GameConfig gameConfig) 
+    public virtual void InitializeWorld(GameConfig gameConfig)
     {
         G.WorldManager.InitializeWorld(gameConfig.CityConfig, gameConfig.EconomyConfig, gameConfig.WorldMissionsConfig);
     }
-    public virtual void InitializeLogic(GameConfig gameConfig) 
+    public virtual void InitializeLogic(GameConfig gameConfig)
     {
 
     }
@@ -89,16 +88,21 @@ public abstract partial class GameMain
     void onSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Assert(scene != null);
-        Debug.Assert(SceneEntrancePoint.Instance != null, "SceneEntrancePoint instance is null on scene loaded.");
-        
+
         if (sceneMain != null)
             sceneMain.Exit();
 
-        var entryPoint = SceneEntrancePoint.Instance;
-        sceneMain = sceneMainResolver.Resolve(entryPoint);
-        
-        sceneMain.Enter();
+        var entryPoint = GameObject.FindAnyObjectByType<SceneEntrancePoint>();
+        if(entryPoint == null)
+            sceneMain = null;
+        else
+            sceneMain = sceneMainResolver.Resolve(entryPoint);
 
-        AfterSceneLoad(sceneMain);
+        if (sceneMain != null)
+        {
+
+            sceneMain.Enter();
+            AfterSceneLoad(sceneMain);
+        }
     }
 }

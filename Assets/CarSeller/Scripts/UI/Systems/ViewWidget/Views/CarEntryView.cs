@@ -26,6 +26,24 @@ public class CarEntryView : WidgetView<CarEntryWidget>
         CarName.text = widget.name;
         CarRarity.text = widget.rarity;
         typeImage.sprite = widget.typeSprite;
+
+        if(image.sprite == null)
+        {
+            image.color = new Color(0, 0, 0, 0);
+        }
+        else
+        {
+            image.color = Color.white;
+        }
+
+        if(typeImage.sprite == null)
+        {
+            typeImage.color = new Color(0, 0, 0, 0);
+        }
+        else
+        {
+            typeImage.color = Color.white;
+        }
     }
 }
 
@@ -49,43 +67,62 @@ public class CarEntryWidget : Widget
         this.buttonWidget = buttonWidget;
     }
 
-    public CarEntryWidget Empty(AutoHidingButtonWidget buttonWidget)
+    public CarEntryWidget(string name, AutoHidingButtonWidget buttonWidget)
     {
         sprite = null;
         typeSprite = null;
-        name = "";
+        this.name = name;
         rarity = "";
         this.buttonWidget = buttonWidget;
-        return this;
+    }
+}
+
+public static class CarStashEntryWidgetCreator
+{
+    public static CarEntryWidget CreateDeployEntry(Car car, Action onClick)
+    {
+        var widget = new CarEntryWidget(car, new AutoHidingButtonWidget("Deploy",onClick, true, true));
+        return widget;
+    }
+
+    public static CarEntryWidget CreateSwapStoreEntry(Car car, Action onClick)
+    {
+        var widget = new CarEntryWidget(car, new AutoHidingButtonWidget("Swap", onClick, true, true));
+        return widget;
+    }
+
+    public static CarEntryWidget CreateEmptyStoreEntry(Action onClick)
+    {
+        var widget = new CarEntryWidget("Empty",new AutoHidingButtonWidget("Store", onClick, true, true));
+        return widget;
     }
 }
 
 public static class  BuyCarButtonWidgetCreator
 {
-    static CarEntryWidget Create(PersonalVehicleShopEntry entry, Action onClick)
+    static CarEntryWidget Create(string text, PersonalVehicleShopEntry entry, Action onClick)
     {
         bool interactable = GameRules.CanBePurchased.Check(entry);
         string unavailabilityReason = interactable ? "" : GameRules.CanBePurchased.GetUnavailabilityReason(entry);
 
-        var widget = new CarEntryWidget(entry.PersonalVehicle.Car, new AutoHidingButtonWidget(onClick, interactable, false, unavailabilityReason));
+        var widget = new CarEntryWidget(entry.PersonalVehicle.Car, new AutoHidingButtonWidget(text ,onClick, interactable, false, unavailabilityReason));
 
         return widget;
     }
 
     public static CarEntryWidget CreateBought(PersonalVehicleShopEntry entry, Action onClick)
     {
-        var widget = Create(entry, onClick);
+        var widget = Create("OWNED",entry, onClick);
         widget.buttonWidget.IsInteractable = false;
         widget.buttonWidget.CloseParentMenuOnClick = true;
         widget.buttonWidget.UnavailabilityReason = "You already own this vehicle.";
-        widget.stateText = "OWNED";
         return widget;
     }
 
     public static CarEntryWidget CreateAvailable(PersonalVehicleShopEntry entry, Action onClick)
     {
-        var widget = Create(entry, onClick);
-        widget.stateText = $"BUY: {TextConventionsHelper.FormatPrice(SellPriceWrapper.CalculateAbsolutePrice(entry.UnitPrice))}";
+        var widget = Create($"BUY: {TextConventionsHelper.FormatPrice(SellPriceWrapper.CalculateAbsolutePrice(entry.UnitPrice))}",
+            entry, onClick);
         return widget;
     }
 }

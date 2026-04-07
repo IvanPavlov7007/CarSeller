@@ -1,26 +1,17 @@
 ﻿using Sirenix.OdinInspector;
 using Sirenix.Serialization;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class IntroScene : SerializedMonoBehaviour
+public class IntroScene : MonoBehaviour
 {
-    public RectTransform introPanel;
-    [OdinSerialize]
-    IUIElementBuilder<RectTransform> uIElementBuilder;
-    
-    private void Awake()
+    private IEnumerator Start()
     {
-        var content = new UIElement()
-        {
-            Type = UIElementType.Button,
-            OnClick = () =>
-            {
-                G.GameFlowController.EnterWarehouse((Warehouse)
-                    World.Instance.City.Entities.Keys.First(x => x.GetType() == typeof(Warehouse)));
-            },
-            Text = "Start game"
-        };
-        uIElementBuilder.Build(content,introPanel);
+        var handle = SceneManager.LoadSceneAsync(1);
+        handle.allowSceneActivation = false;
+        yield return new WaitForSeconds(2f);
+        handle.allowSceneActivation = true;
     }
 }

@@ -10,7 +10,7 @@ public class DeployStashSessionDisplayer : StashSessionDisplayer
     public DeployStashSessionDisplayer(IReadOnlyList<StashSlot> shownSlots, Action<StashSlot> onSlotSelected) : base(shownSlots, onSlotSelected)
     {
     }
-    protected override UIElement createSlotElement(StashSlot slot, Action<StashSlot> action)
+    protected override Widget createSlotElement(StashSlot slot, Action<StashSlot> action)
     {
         return createDeploySlotElement(slot, action);
     }
@@ -21,7 +21,7 @@ public class StoreStashSessionDisplayer : StashSessionDisplayer
     public StoreStashSessionDisplayer(IReadOnlyList<StashSlot> shownSlots, Action<StashSlot> onSlotSelected) : base(shownSlots, onSlotSelected)
     {
     }
-    protected override UIElement createSlotElement(StashSlot slot, Action<StashSlot> action)
+    protected override Widget createSlotElement(StashSlot slot, Action<StashSlot> action)
     {
         return createStoreSlotElement(slot, action);
     }
@@ -38,27 +38,14 @@ public abstract class StashSessionDisplayer
         this.onSlotSelected = onSlotSelected;
     }
 
-    public UIElement generateOffers()
+    public Widget generateOffers()
     {
-        var container = new UIElement()
-        {
-            Type = UIElementType.Container,
-            Style = "grid",
-            Children = new List<UIElement>()
-        };
-        if(ShownSlots.Count == 0)
-        {
-            container.Style = "";
-            container.Children.Add(CTX_Menu_Tools.Header("Hidden warehouse for stashing stolen cars"));
-            container.Children.Add(CTX_Menu_Tools.Description("There are no cars in the stash currently. You can temporary store cars here"));
-            return container;
-        }
-
+        var container = new VerticalContentWidget("Stolen cars warehouse");
         populateContainerWithSlots(container, ShownSlots, onSlotSelected);
         return container;
     }
 
-    protected void populateContainerWithSlots(UIElement container, IReadOnlyList<StashSlot> slots, Action<StashSlot> onClickAction)
+    protected void populateContainerWithSlots(Widget container, IReadOnlyList<StashSlot> slots, Action<StashSlot> onClickAction)
     {
         foreach(var slot in slots)
         {
@@ -66,25 +53,14 @@ public abstract class StashSessionDisplayer
         }
     }
 
-    protected abstract UIElement createSlotElement(StashSlot slot, Action<StashSlot> action);
+    protected abstract Widget createSlotElement(StashSlot slot, Action<StashSlot> action);
 
-    protected UIElement createDeploySlotElement(StashSlot slot, Action<StashSlot> action)
+    protected Widget createDeploySlotElement(StashSlot slot, Action<StashSlot> action)
     {
-        return new UIElement()
-        {
-            Type = UIElementType.ButtonContainer,
-            IsInteractable = true,
-            OnClick = () => action(slot),
-            Children = new List<UIElement>()
-            {
-                CTX_Menu_Tools.CarIcon(slot.Car),
-                CTX_Menu_Tools.CarRarityText(slot.Car),
-                CTX_Menu_Tools.Header("Deploy")
-            }
-        };
+        return CarStashEntryWidgetCreator.CreateDeployEntry(slot.Car, () => action(slot));
     }
 
-    protected UIElement createStoreSlotElement(StashSlot slot, Action<StashSlot> action)
+    protected Widget createStoreSlotElement(StashSlot slot, Action<StashSlot> action)
     {
         if (slot.Car != null)
         {
@@ -96,35 +72,14 @@ public abstract class StashSessionDisplayer
         }
     }
 
-    protected UIElement createEmptyStoreSlotElement(StashSlot slot, Action<StashSlot> action)
+    protected Widget createEmptyStoreSlotElement(StashSlot slot, Action<StashSlot> action)
     {
-        return new UIElement()
-        {
-            Type = UIElementType.ButtonContainer,
-            IsInteractable = true,
-            OnClick = () => action(slot),
-            Children = new List<UIElement>()
-            {
-                CTX_Menu_Tools.Header("Empty"),
-                CTX_Menu_Tools.Description("Store")
-            }
-        };
+        return CarStashEntryWidgetCreator.CreateEmptyStoreEntry(() => action(slot));
     }
 
-    protected UIElement createSwapStoreSlotElement(StashSlot slot, Action<StashSlot> action)
+    protected Widget createSwapStoreSlotElement(StashSlot slot, Action<StashSlot> action)
     {
-        return new UIElement()
-        {
-            Type = UIElementType.ButtonContainer,
-            IsInteractable = true,
-            OnClick = () => action(slot),
-            Children = new List<UIElement>()
-            {
-                CTX_Menu_Tools.CarIcon(slot.Car),
-                CTX_Menu_Tools.CarRarityText(slot.Car),
-                CTX_Menu_Tools.Header("Swap")
-            }
-        };
+        return CarStashEntryWidgetCreator.CreateSwapStoreEntry(slot.Car, () => action(slot));
     }
 }
 
