@@ -39,6 +39,7 @@ public class ProgressionUIManager : MonoBehaviour
         var levelIndex = level != null ? level.Index : 0;
         var normalizedProgress = NormalizeXP(xp, level);
         progressionUI.SetupInitValues(levelIndex, normalizedProgress);
+        progressionUI.targetIsMax = level?.Final ?? false;
     }
 
     bool _showing = false;
@@ -79,6 +80,7 @@ public class ProgressionUIManager : MonoBehaviour
 
         progressionUI.targetProgressLevel = data.NewLevel.Index;
         progressionUI.targetProgressValue = NormalizeXP(data.NewXP, data.NewLevel);
+        progressionUI.targetIsMax = data.NewLevel.Final;
         //progressionUI.targetIsMax = data.NewLevel.Final;
     }
 }

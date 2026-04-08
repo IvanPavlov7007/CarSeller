@@ -169,7 +169,7 @@ public class PersonalVehicleShopController
 
     private Widget ownedEntry(PersonalVehicleShopEntry entry)
     {
-        return BuyCarButtonWidgetCreator.CreateBought(entry, null);
+        return BuyCarButtonWidgetCreator.CreateBought(entry, () => selectEntryClicked(entry));
     }
 
     private Widget availableEntry(PersonalVehicleShopEntry entry)
@@ -180,6 +180,12 @@ public class PersonalVehicleShopController
     private void entryClicked(PersonalVehicleShopEntry entry)
     {
         PurchaseEntry(entry);
+    }
+
+    private void selectEntryClicked(PersonalVehicleShopEntry entry)
+    {
+        G.VehicleController.SwapPrimaryVehicle(entry.PersonalVehicle);
+        onRefreshUI?.Invoke();
     }
 
 

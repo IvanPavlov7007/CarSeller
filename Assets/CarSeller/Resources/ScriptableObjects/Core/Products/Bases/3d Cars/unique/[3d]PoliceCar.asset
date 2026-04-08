@@ -449,5 +449,5 @@ MonoBehaviour:
   Speed: 2
   Acceleration: 1.5
   CarFrameBaseConfig: {fileID: 11400000, guid: 526c83c7d5e9c39488bba242842be9a0, type: 2}
-  TopView: {fileID: 21300000, guid: 6cf064a0df3694c40a165a15c84846ab, type: 3}
-  SideView: {fileID: 21300000, guid: 23fa4322eda307743a5d826a105f9a97, type: 3}
+  TopView: {fileID: 21300000, guid: 041c8af9ef7e09c47a64581605ba9b55, type: 3}
+  SideView: {fileID: 21300000, guid: 217b0374df448e947a51b0abdde870cf, type: 3}

@@ -46,7 +46,7 @@ public class CarInfoWidget : BlockingInputWidget
     {
         var carInfo = new CarInfoWidget(car);
         carInfo.HeaderName = "Stolen Vehicle";
-        carInfo.ExitButton = new AutoHidingButtonWidget("Exit",G.VehicleController.ExitWorldVehicle, true, true);
+        carInfo.ExitButton = new AutoHidingButtonWidget("Exit",G.VehicleController.ExitWorldVehicle, G.ColorPalette.WhiteColor, true, true);
         return carInfo;
     }
 

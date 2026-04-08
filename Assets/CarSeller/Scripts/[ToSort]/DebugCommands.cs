@@ -5,7 +5,12 @@ using UnityEngine.InputSystem;
 public class DebugCommands : MonoBehaviour
 {
 #if UNITY_EDITOR || DEBUG
-    
+
+    public void OnSprint(InputValue inputValue)
+    {
+        GameManager.Instance.switchFastForward();
+    }
+
     public void OnA(InputValue val)
     {
 

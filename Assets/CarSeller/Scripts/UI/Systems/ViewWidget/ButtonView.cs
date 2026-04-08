@@ -43,7 +43,7 @@ public abstract class ButtonView<T> : WidgetView<T> , IPointerDownHandler, IPoin
             GlobalHintManager.Instance.ShowHint(widget.UnavailabilityReason);
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(onClick);

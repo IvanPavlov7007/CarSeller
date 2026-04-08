@@ -14,7 +14,7 @@ public class VehicleControlUI : Singleton<VehicleControlUI>
 
     private void onPrimaryClick()
     {
-        G.ProcessRunner.Run(new SelectPrimaryVehicleProcess());
+        G.ProcessRunner.Run(new PersonalVehicleShopProcess(G.VehicleShop));
     }
 
     private void onCurrentVechicleClick()

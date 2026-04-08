@@ -34,106 +34,106 @@ MonoBehaviour:
       DisplayName: Metropolitan
       Levels:
       - AreaLevel: 0
-        Small: 10
+        Small: 5
         Sedan: 30
-        Truck: 5
-        Bike: 2
+        Truck: 2
+        Bike: 1
         Super: 0
         Common: 20
         Uncommon: 0
         Epic: 0
-        RequiredXP: 3
+        RequiredXP: 5
         IncomeMultiplier: 1
         BuyerCount: 3
-        BuyerSmall: 1
-        BuyerSedan: 2
+        BuyerSmall: 0
+        BuyerSedan: 1
         BuyerTruck: 0
         BuyerBike: 0
         BuyerSuper: 0
         BuyerAny: 5
       - AreaLevel: 1
-        Small: 10
+        Small: 5
         Sedan: 30
-        Truck: 5
-        Bike: 2
+        Truck: 2
+        Bike: 1
         Super: 0
         Common: 20
-        Uncommon: 5
+        Uncommon: 1
         Epic: 0
         RequiredXP: 10
         IncomeMultiplier: 1.05
         BuyerCount: 4
         BuyerSmall: 1
-        BuyerSedan: 2
+        BuyerSedan: 1
         BuyerTruck: 1
         BuyerBike: 1
         BuyerSuper: 0
         BuyerAny: 3
       - AreaLevel: 2
-        Small: 10
+        Small: 5
         Sedan: 30
-        Truck: 5
-        Bike: 2
+        Truck: 2
+        Bike: 1
         Super: 1
         Common: 20
-        Uncommon: 5
+        Uncommon: 1
         Epic: 0
         RequiredXP: 15
         IncomeMultiplier: 1.1
         BuyerCount: 4
-        BuyerSmall: 2
+        BuyerSmall: 1
         BuyerSedan: 1
-        BuyerTruck: 2
-        BuyerBike: 3
-        BuyerSuper: 2
-        BuyerAny: 2
+        BuyerTruck: 1
+        BuyerBike: 1
+        BuyerSuper: 1
+        BuyerAny: 3
       - AreaLevel: 3
-        Small: 10
+        Small: 5
         Sedan: 30
-        Truck: 5
-        Bike: 2
+        Truck: 2
+        Bike: 1
         Super: 2
-        Common: 20
-        Uncommon: 5
+        Common: 40
+        Uncommon: 3
         Epic: 1
         RequiredXP: -1
         IncomeMultiplier: 1.2
         BuyerCount: 5
-        BuyerSmall: 2
-        BuyerSedan: 0
-        BuyerTruck: 3
-        BuyerBike: 4
-        BuyerSuper: 3
-        BuyerAny: 1
+        BuyerSmall: 1
+        BuyerSedan: 1
+        BuyerTruck: 1
+        BuyerBike: 1
+        BuyerSuper: 1
+        BuyerAny: 3
     - Id: Area2
       DisplayName: Urban
       Levels:
       - AreaLevel: 0
-        Small: 10
-        Sedan: 2
-        Truck: 5
-        Bike: 30
+        Small: 1
+        Sedan: 5
+        Truck: 1
+        Bike: 20
         Super: 0
         Common: 20
         Uncommon: 0
         Epic: 0
-        RequiredXP: 3
+        RequiredXP: 5
         IncomeMultiplier: 1
         BuyerCount: 3
         BuyerSmall: 1
-        BuyerSedan: 0
-        BuyerTruck: 0
-        BuyerBike: 3
+        BuyerSedan: 1
+        BuyerTruck: 1
+        BuyerBike: 2
         BuyerSuper: 0
         BuyerAny: 8
       - AreaLevel: 1
-        Small: 10
-        Sedan: 2
-        Truck: 5
-        Bike: 30
+        Small: 5
+        Sedan: 5
+        Truck: 1
+        Bike: 20
         Super: 0
         Common: 20
-        Uncommon: 5
+        Uncommon: 1
         Epic: 0
         RequiredXP: 10
         IncomeMultiplier: 1.05
@@ -145,116 +145,116 @@ MonoBehaviour:
         BuyerSuper: 0
         BuyerAny: 5
       - AreaLevel: 2
-        Small: 10
-        Sedan: 2
-        Truck: 5
-        Bike: 30
+        Small: 5
+        Sedan: 5
+        Truck: 1
+        Bike: 20
         Super: 1
         Common: 20
-        Uncommon: 5
+        Uncommon: 1
         Epic: 0
         RequiredXP: 15
         IncomeMultiplier: 1.1
         BuyerCount: 4
-        BuyerSmall: 2
-        BuyerSedan: 2
+        BuyerSmall: 1
+        BuyerSedan: 1
         BuyerTruck: 1
-        BuyerBike: 0
-        BuyerSuper: 0
-        BuyerAny: 3
+        BuyerBike: 2
+        BuyerSuper: 1
+        BuyerAny: 5
       - AreaLevel: 3
-        Small: 10
-        Sedan: 2
-        Truck: 5
-        Bike: 30
-        Super: 1
-        Common: 20
-        Uncommon: 5
+        Small: 5
+        Sedan: 5
+        Truck: 1
+        Bike: 20
+        Super: 2
+        Common: 40
+        Uncommon: 2
         Epic: 1
         RequiredXP: -1
         IncomeMultiplier: 1.2
         BuyerCount: 5
-        BuyerSmall: 4
-        BuyerSedan: 4
-        BuyerTruck: 2
-        BuyerBike: 1
-        BuyerSuper: 0
-        BuyerAny: 1
+        BuyerSmall: 1
+        BuyerSedan: 1
+        BuyerTruck: 1
+        BuyerBike: 2
+        BuyerSuper: 1
+        BuyerAny: 5
     - Id: Area3
       DisplayName: Industrial
       Levels:
       - AreaLevel: 0
-        Small: 1
-        Sedan: 2
+        Small: 5
+        Sedan: 10
         Truck: 20
         Bike: 1
         Super: 0
         Common: 20
         Uncommon: 0
         Epic: 0
-        RequiredXP: 3
+        RequiredXP: 5
         IncomeMultiplier: 1
         BuyerCount: 3
         BuyerSmall: 1
-        BuyerSedan: 0
+        BuyerSedan: 1
         BuyerTruck: 2
-        BuyerBike: 0
+        BuyerBike: 1
         BuyerSuper: 0
         BuyerAny: 5
       - AreaLevel: 1
-        Small: 1
-        Sedan: 2
+        Small: 5
+        Sedan: 10
         Truck: 20
         Bike: 1
         Super: 0
         Common: 20
-        Uncommon: 5
+        Uncommon: 1
         Epic: 0
         RequiredXP: 10
         IncomeMultiplier: 1.05
         BuyerCount: 4
         BuyerSmall: 1
         BuyerSedan: 1
-        BuyerTruck: 1
-        BuyerBike: 2
+        BuyerTruck: 2
+        BuyerBike: 1
         BuyerSuper: 0
         BuyerAny: 5
       - AreaLevel: 2
-        Small: 2
-        Sedan: 2
-        Truck: 25
+        Small: 5
+        Sedan: 10
+        Truck: 20
         Bike: 2
         Super: 1
         Common: 20
-        Uncommon: 5
+        Uncommon: 1
         Epic: 0
         RequiredXP: 15
         IncomeMultiplier: 1.1
         BuyerCount: 4
-        BuyerSmall: 4
-        BuyerSedan: 2
-        BuyerTruck: 1
-        BuyerBike: 4
+        BuyerSmall: 1
+        BuyerSedan: 1
+        BuyerTruck: 2
+        BuyerBike: 1
         BuyerSuper: 1
-        BuyerAny: 3
+        BuyerAny: 5
       - AreaLevel: 3
-        Small: 2
-        Sedan: 2
-        Truck: 26
+        Small: 5
+        Sedan: 10
+        Truck: 20
         Bike: 1
         Super: 3
-        Common: 20
-        Uncommon: 5
+        Common: 40
+        Uncommon: 2
         Epic: 1
         RequiredXP: -1
         IncomeMultiplier: 1.2
         BuyerCount: 5
-        BuyerSmall: 4
-        BuyerSedan: 4
-        BuyerTruck: 0
-        BuyerBike: 6
-        BuyerSuper: 2
-        BuyerAny: 1
+        BuyerSmall: 1
+        BuyerSedan: 1
+        BuyerTruck: 1
+        BuyerBike: 1
+        BuyerSuper: 1
+        BuyerAny: 5
     AreasDefinitions:
     - AreaID: Area1
       DisplayName: Metropolitan
@@ -264,177 +264,31 @@ MonoBehaviour:
       DisplayName: Industrial
     Area1:
     - AreaLevel: 0
-      Small: 10
+      Small: 5
       Sedan: 30
-      Truck: 5
-      Bike: 2
-      Super: 0
-      Common: 20
-      Uncommon: 0
-      Epic: 0
-      RequiredXP: 3
-      IncomeMultiplier: 1
-      BuyerCount: 3
-      BuyerSmall: 1
-      BuyerSedan: 2
-      BuyerTruck: 0
-      BuyerBike: 0
-      BuyerSuper: 0
-      BuyerAny: 5
-    - AreaLevel: 1
-      Small: 10
-      Sedan: 30
-      Truck: 5
-      Bike: 2
-      Super: 0
-      Common: 20
-      Uncommon: 5
-      Epic: 0
-      RequiredXP: 10
-      IncomeMultiplier: 1.05
-      BuyerCount: 4
-      BuyerSmall: 1
-      BuyerSedan: 2
-      BuyerTruck: 1
-      BuyerBike: 1
-      BuyerSuper: 0
-      BuyerAny: 3
-    - AreaLevel: 2
-      Small: 10
-      Sedan: 30
-      Truck: 5
-      Bike: 2
-      Super: 1
-      Common: 20
-      Uncommon: 5
-      Epic: 0
-      RequiredXP: 15
-      IncomeMultiplier: 1.1
-      BuyerCount: 4
-      BuyerSmall: 2
-      BuyerSedan: 1
-      BuyerTruck: 2
-      BuyerBike: 3
-      BuyerSuper: 2
-      BuyerAny: 2
-    - AreaLevel: 3
-      Small: 10
-      Sedan: 30
-      Truck: 5
-      Bike: 2
-      Super: 2
-      Common: 20
-      Uncommon: 5
-      Epic: 1
-      RequiredXP: -1
-      IncomeMultiplier: 1.2
-      BuyerCount: 5
-      BuyerSmall: 2
-      BuyerSedan: 0
-      BuyerTruck: 3
-      BuyerBike: 4
-      BuyerSuper: 3
-      BuyerAny: 1
-    Area2:
-    - AreaLevel: 0
-      Small: 10
-      Sedan: 2
-      Truck: 5
-      Bike: 30
-      Super: 0
-      Common: 20
-      Uncommon: 0
-      Epic: 0
-      RequiredXP: 3
-      IncomeMultiplier: 1
-      BuyerCount: 3
-      BuyerSmall: 1
-      BuyerSedan: 0
-      BuyerTruck: 0
-      BuyerBike: 3
-      BuyerSuper: 0
-      BuyerAny: 8
-    - AreaLevel: 1
-      Small: 10
-      Sedan: 2
-      Truck: 5
-      Bike: 30
-      Super: 0
-      Common: 20
-      Uncommon: 5
-      Epic: 0
-      RequiredXP: 10
-      IncomeMultiplier: 1.05
-      BuyerCount: 4
-      BuyerSmall: 1
-      BuyerSedan: 1
-      BuyerTruck: 1
-      BuyerBike: 2
-      BuyerSuper: 0
-      BuyerAny: 5
-    - AreaLevel: 2
-      Small: 10
-      Sedan: 2
-      Truck: 5
-      Bike: 30
-      Super: 1
-      Common: 20
-      Uncommon: 5
-      Epic: 0
-      RequiredXP: 15
-      IncomeMultiplier: 1.1
-      BuyerCount: 4
-      BuyerSmall: 2
-      BuyerSedan: 2
-      BuyerTruck: 1
-      BuyerBike: 0
-      BuyerSuper: 0
-      BuyerAny: 3
-    - AreaLevel: 3
-      Small: 10
-      Sedan: 2
-      Truck: 5
-      Bike: 30
-      Super: 1
-      Common: 20
-      Uncommon: 5
-      Epic: 1
-      RequiredXP: -1
-      IncomeMultiplier: 1.2
-      BuyerCount: 5
-      BuyerSmall: 4
-      BuyerSedan: 4
-      BuyerTruck: 2
-      BuyerBike: 1
-      BuyerSuper: 0
-      BuyerAny: 1
-    Area3:
-    - AreaLevel: 0
-      Small: 1
-      Sedan: 2
-      Truck: 20
+      Truck: 2
       Bike: 1
       Super: 0
       Common: 20
       Uncommon: 0
       Epic: 0
-      RequiredXP: 3
+      RequiredXP: 5
       IncomeMultiplier: 1
       BuyerCount: 3
-      BuyerSmall: 1
-      BuyerSedan: 0
-      BuyerTruck: 2
+      BuyerSmall: 0
+      BuyerSedan: 1
+      BuyerTruck: 0
       BuyerBike: 0
       BuyerSuper: 0
       BuyerAny: 5
     - AreaLevel: 1
-      Small: 1
-      Sedan: 2
-      Truck: 20
+      Small: 5
+      Sedan: 30
+      Truck: 2
       Bike: 1
       Super: 0
       Common: 20
-      Uncommon: 5
+      Uncommon: 1
       Epic: 0
       RequiredXP: 10
       IncomeMultiplier: 1.05
@@ -442,45 +296,191 @@ MonoBehaviour:
       BuyerSmall: 1
       BuyerSedan: 1
       BuyerTruck: 1
-      BuyerBike: 2
+      BuyerBike: 1
       BuyerSuper: 0
-      BuyerAny: 5
+      BuyerAny: 3
     - AreaLevel: 2
-      Small: 2
-      Sedan: 2
-      Truck: 25
-      Bike: 2
+      Small: 5
+      Sedan: 30
+      Truck: 2
+      Bike: 1
       Super: 1
       Common: 20
-      Uncommon: 5
+      Uncommon: 1
       Epic: 0
       RequiredXP: 15
       IncomeMultiplier: 1.1
       BuyerCount: 4
-      BuyerSmall: 4
-      BuyerSedan: 2
+      BuyerSmall: 1
+      BuyerSedan: 1
       BuyerTruck: 1
-      BuyerBike: 4
+      BuyerBike: 1
       BuyerSuper: 1
       BuyerAny: 3
     - AreaLevel: 3
-      Small: 2
-      Sedan: 2
-      Truck: 26
+      Small: 5
+      Sedan: 30
+      Truck: 2
       Bike: 1
-      Super: 3
-      Common: 20
-      Uncommon: 5
+      Super: 2
+      Common: 40
+      Uncommon: 3
       Epic: 1
       RequiredXP: -1
       IncomeMultiplier: 1.2
       BuyerCount: 5
-      BuyerSmall: 4
-      BuyerSedan: 4
-      BuyerTruck: 0
-      BuyerBike: 6
-      BuyerSuper: 2
-      BuyerAny: 1
+      BuyerSmall: 1
+      BuyerSedan: 1
+      BuyerTruck: 1
+      BuyerBike: 1
+      BuyerSuper: 1
+      BuyerAny: 3
+    Area2:
+    - AreaLevel: 0
+      Small: 1
+      Sedan: 5
+      Truck: 1
+      Bike: 20
+      Super: 0
+      Common: 20
+      Uncommon: 0
+      Epic: 0
+      RequiredXP: 5
+      IncomeMultiplier: 1
+      BuyerCount: 3
+      BuyerSmall: 1
+      BuyerSedan: 1
+      BuyerTruck: 1
+      BuyerBike: 2
+      BuyerSuper: 0
+      BuyerAny: 8
+    - AreaLevel: 1
+      Small: 5
+      Sedan: 5
+      Truck: 1
+      Bike: 20
+      Super: 0
+      Common: 20
+      Uncommon: 1
+      Epic: 0
+      RequiredXP: 10
+      IncomeMultiplier: 1.05
+      BuyerCount: 4
+      BuyerSmall: 1
+      BuyerSedan: 1
+      BuyerTruck: 1
+      BuyerBike: 2
+      BuyerSuper: 0
+      BuyerAny: 5
+    - AreaLevel: 2
+      Small: 5
+      Sedan: 5
+      Truck: 1
+      Bike: 20
+      Super: 1
+      Common: 20
+      Uncommon: 1
+      Epic: 0
+      RequiredXP: 15
+      IncomeMultiplier: 1.1
+      BuyerCount: 4
+      BuyerSmall: 1
+      BuyerSedan: 1
+      BuyerTruck: 1
+      BuyerBike: 2
+      BuyerSuper: 1
+      BuyerAny: 5
+    - AreaLevel: 3
+      Small: 5
+      Sedan: 5
+      Truck: 1
+      Bike: 20
+      Super: 2
+      Common: 40
+      Uncommon: 2
+      Epic: 1
+      RequiredXP: -1
+      IncomeMultiplier: 1.2
+      BuyerCount: 5
+      BuyerSmall: 1
+      BuyerSedan: 1
+      BuyerTruck: 1
+      BuyerBike: 2
+      BuyerSuper: 1
+      BuyerAny: 5
+    Area3:
+    - AreaLevel: 0
+      Small: 5
+      Sedan: 10
+      Truck: 20
+      Bike: 1
+      Super: 0
+      Common: 20
+      Uncommon: 0
+      Epic: 0
+      RequiredXP: 5
+      IncomeMultiplier: 1
+      BuyerCount: 3
+      BuyerSmall: 1
+      BuyerSedan: 1
+      BuyerTruck: 2
+      BuyerBike: 1
+      BuyerSuper: 0
+      BuyerAny: 5
+    - AreaLevel: 1
+      Small: 5
+      Sedan: 10
+      Truck: 20
+      Bike: 1
+      Super: 0
+      Common: 20
+      Uncommon: 1
+      Epic: 0
+      RequiredXP: 10
+      IncomeMultiplier: 1.05
+      BuyerCount: 4
+      BuyerSmall: 1
+      BuyerSedan: 1
+      BuyerTruck: 2
+      BuyerBike: 1
+      BuyerSuper: 0
+      BuyerAny: 5
+    - AreaLevel: 2
+      Small: 5
+      Sedan: 10
+      Truck: 20
+      Bike: 2
+      Super: 1
+      Common: 20
+      Uncommon: 1
+      Epic: 0
+      RequiredXP: 15
+      IncomeMultiplier: 1.1
+      BuyerCount: 4
+      BuyerSmall: 1
+      BuyerSedan: 1
+      BuyerTruck: 2
+      BuyerBike: 1
+      BuyerSuper: 1
+      BuyerAny: 5
+    - AreaLevel: 3
+      Small: 5
+      Sedan: 10
+      Truck: 20
+      Bike: 1
+      Super: 3
+      Common: 40
+      Uncommon: 2
+      Epic: 1
+      RequiredXP: -1
+      IncomeMultiplier: 1.2
+      BuyerCount: 5
+      BuyerSmall: 1
+      BuyerSedan: 1
+      BuyerTruck: 1
+      BuyerBike: 1
+      BuyerSuper: 1
+      BuyerAny: 5
     CarTypeConfigs:
     - Type: Small
       BaseValue: 1.2

@@ -17,6 +17,7 @@ public class World : IDisposable
     public Economy Economy;
 
     public static World Instance = new World();
+    internal PersonalVehicleShop VehicleShop;
 
     public static World Reset()
     {

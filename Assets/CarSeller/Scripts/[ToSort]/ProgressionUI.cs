@@ -11,6 +11,7 @@ public class ProgressionUI : MonoBehaviour
     public Slider slider;
     public ParticleSystem particlesSystem;
     public Image levelBackground;
+    public CanvasGroup maxHint;
 
     public float progressSpeed = 1f;
 
@@ -79,13 +80,28 @@ public class ProgressionUI : MonoBehaviour
         Tween.Color(levelBackground, initColor, 0.3f, 0.3f, Tween.EaseOutBack);
     }
 
+    bool atMax => targetIsMax && _currentProgressLevel == targetProgressLevel;
+
     void updateIndexDisplayer()
     {
-        nextLevelIndexDisplayer.text = targetIsMax ? "MAX" : _currentProgressLevel.ToString();
+        nextLevelIndexDisplayer.text = _currentProgressLevel.ToString();
+        if(atMax)
+        {
+            maxHint.alpha = 1f;
+        }
+        else
+        {
+            maxHint.alpha = 0f;
+        }
     }
 
     void updateProgressBar()
     {
+        if(atMax)
+        {
+            slider.value = 1f;
+            return;
+        }
         slider.value = _currentProgressValue;
     }
 

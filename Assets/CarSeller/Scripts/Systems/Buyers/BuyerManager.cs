@@ -106,6 +106,8 @@ public class BuyerManager
 public class Buyer : CityDestroyable, ILocatable
 {
     public readonly CarType RequiredCarType;
+    public string Name = "Buyer";
+
     public Buyer(CarType requiredCarType)
     {
         this.RequiredCarType = requiredCarType;

@@ -70,6 +70,7 @@ public class CityUIPin : MonoBehaviour
             if (visibleAspect.Discovered)
             {
                 positioner.SetGraphicsMode(CityUIPinPositioner.GraphicsMode.Pin);
+                cityViewObjectController.CityEntity.GetAspect<PinAspect>().IsScreenConfined = true;
             }
             else
             {

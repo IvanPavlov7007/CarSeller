@@ -33,8 +33,10 @@ public class SimplifiedGameplayMain : GameMain
     private void createShop(VehicleShopConfig config)
     {
         shop = new PersonalVehicleShop(config);
-        var pos = config.Marker.GetCityPosition();
-        CityEntitiesCreationHelper.CreatePersonalVehicleShop(shop, pos);
+        World.Instance.VehicleShop = shop;
+
+        //var pos = config.Marker.GetCityPosition();
+        //CityEntitiesCreationHelper.CreatePersonalVehicleShop(shop, pos);
     }
 
     public override void AfterSceneLoad(ISceneMain sceneMain)

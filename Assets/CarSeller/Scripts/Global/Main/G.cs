@@ -88,6 +88,10 @@ public static class G
     public static Dictionary<string, CityArea> Areas;
     internal static BuyerManager BuyerManager => Economy.BuyerManager;
 
+    public static ColorPalette ColorPalette => Config.ColorPalette;
+
+    public static PersonalVehicleShop VehicleShop => World.Instance.VehicleShop;
+
     public static void Initialize( ViewBuildersConfig handlersConfig)
     {
         Debug.Log("Initializing global services locator");

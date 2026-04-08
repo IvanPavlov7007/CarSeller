@@ -81,19 +81,19 @@ public static class CarStashEntryWidgetCreator
 {
     public static CarEntryWidget CreateDeployEntry(Car car, Action onClick)
     {
-        var widget = new CarEntryWidget(car, new AutoHidingButtonWidget("Deploy",onClick, true, true));
+        var widget = new CarEntryWidget(car, new AutoHidingButtonWidget("Deploy",onClick, G.ColorPalette.LimeGreenColor, true, true));
         return widget;
     }
 
     public static CarEntryWidget CreateSwapStoreEntry(Car car, Action onClick)
     {
-        var widget = new CarEntryWidget(car, new AutoHidingButtonWidget("Swap", onClick, true, true));
+        var widget = new CarEntryWidget(car, new AutoHidingButtonWidget("Swap", onClick, G.ColorPalette.LimeGreenColor,true, true));
         return widget;
     }
 
     public static CarEntryWidget CreateEmptyStoreEntry(Action onClick)
     {
-        var widget = new CarEntryWidget("Empty",new AutoHidingButtonWidget("Store", onClick, true, true));
+        var widget = new CarEntryWidget("Empty",new AutoHidingButtonWidget("Store", onClick, G.ColorPalette.LimeGreenColor,true, true));
         return widget;
     }
 }
@@ -105,17 +105,16 @@ public static class  BuyCarButtonWidgetCreator
         bool interactable = GameRules.CanBePurchased.Check(entry);
         string unavailabilityReason = interactable ? "" : GameRules.CanBePurchased.GetUnavailabilityReason(entry);
 
-        var widget = new CarEntryWidget(entry.PersonalVehicle.Car, new AutoHidingButtonWidget(text ,onClick, interactable, false, unavailabilityReason));
+        var widget = new CarEntryWidget(entry.PersonalVehicle.Car, new AutoHidingButtonWidget(text ,onClick, G.ColorPalette.LimeGreenColor, interactable, false, unavailabilityReason));
 
         return widget;
     }
 
     public static CarEntryWidget CreateBought(PersonalVehicleShopEntry entry, Action onClick)
     {
-        var widget = Create("OWNED",entry, onClick);
-        widget.buttonWidget.IsInteractable = false;
+        var widget = Create("Select",entry, onClick);
+        widget.buttonWidget.IsInteractable = true;
         widget.buttonWidget.CloseParentMenuOnClick = true;
-        widget.buttonWidget.UnavailabilityReason = "You already own this vehicle.";
         return widget;
     }
 
@@ -131,13 +130,13 @@ public static class PrimarySelectionCarButtonWidgetCreator
 {
     public static CarEntryWidget CreateAvailable(Car car, Action onClick)
     {
-        var widget = new CarEntryWidget(car, new AutoHidingButtonWidget("Select",onClick, true, true));
+        var widget = new CarEntryWidget(car, new AutoHidingButtonWidget("Select",onClick, G.ColorPalette.LimeGreenColor, true, true));
         return widget;
     }
 
     public static CarEntryWidget CreateSelected(Car car, Action onClick)
     {
-        var widget = new CarEntryWidget(car, new AutoHidingButtonWidget("SELECTED",onClick, true, true));
+        var widget = new CarEntryWidget(car, new AutoHidingButtonWidget("SELECTED",onClick, G.ColorPalette.LimeGreenColor, true, true));
         widget.buttonColor = Color.gray;
 
         return widget;

@@ -56,4 +56,9 @@ public class GlobalUIMethods : MonoBehaviour
         GameManager.Instance.Pause(true);
         Debug.Log("Pausing game");
     }
+
+    public void OpenShop()
+    {
+        G.ProcessRunner.Run(new PersonalVehicleShopProcess(G.VehicleShop));
+    }
 }

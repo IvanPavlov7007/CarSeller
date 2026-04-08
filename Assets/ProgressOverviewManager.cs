@@ -98,6 +98,7 @@ public class ProgressOverviewManager : MonoBehaviour
         var levelIndex = area.CurrentLevel.Index;
         var normalizedProgress = ProgressionUIManager.NormalizeXP(area.currentXP, area.CurrentLevel);
         progressionUI.SetupInitValues(levelIndex, normalizedProgress);
+        progressionUI.targetIsMax = area.CurrentLevel.Final;
     }
 
     void UpdateAreaProgression(CityArea area, AreaLevel level, float xp)
@@ -106,6 +107,7 @@ public class ProgressOverviewManager : MonoBehaviour
             return;
         progressionUI.targetProgressLevel = level.Index;
         progressionUI.targetProgressValue = ProgressionUIManager.NormalizeXP(xp, level);
+        progressionUI.targetIsMax = level.Final;
     }
 
 }

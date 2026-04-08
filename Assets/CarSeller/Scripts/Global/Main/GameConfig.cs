@@ -11,6 +11,7 @@ public class GameConfig : SerializedScriptableObject
     public WorldMissionsConfig WorldMissionsConfig;
     public VehicleControllerConfig VehicleControllerConfig;
     public GameDatabaseContainer GameDatabaseContainer;
+    public ColorPalette ColorPalette;
     [Header("Game Modes Data")]
     public ScriptableObject GameModeData;
 }

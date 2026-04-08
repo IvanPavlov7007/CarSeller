@@ -16,15 +16,27 @@ public class BuyerProcess : IProcess
 
     public IEnumerator Run()
     {
-        if (GameRules.CarCanBeSoldToBuyer.Check(Car, Buyer))
+        var requirementState = GameRules.CarCanBeSoldToBuyer.Check(Car, Buyer);
+
+        switch (requirementState)
         {
-            var result = G.TransactionProcessor.Process(new SellTransaction(Car, Buyer, G.CurrentSellPriceWrapped),
-                new TransactionFeedbackLocation(TransactionLocationType.WorldSpace, BuyerEntity.Position.WorldPosition));
-            if(result.Type != TransactionResultType.Success)
-            {
-                Debug.LogError($"Failed to sell car to buyer {Buyer}. Reason: {result.Data}");
-            }
-            G.VehicleController.ExitWorldVehicle();
+            case CanCantBeSoldReason.None:
+                {
+                    var result = G.TransactionProcessor.Process(new SellTransaction(Car, Buyer, G.CurrentSellPriceWrapped),
+                        new TransactionFeedbackLocation(TransactionLocationType.WorldSpace, BuyerEntity.Position.WorldPosition));
+                    if (result.Type != TransactionResultType.Success)
+                    {
+                        Debug.LogError($"Failed to sell car to buyer {Buyer}. Reason: {result.Data}");
+                    }
+                    G.VehicleController.ExitWorldVehicle();
+                    break;
+                }
+            case CanCantBeSoldReason.CarBelongsToPlayer:
+                FixedContextMenuManager.Instance.CreateContextMenu(new GenericInfoWidget(Buyer.Name, "You can't sell your own vehicle."));
+                break;
+            case CanCantBeSoldReason.CarNotOfRequiredType:
+                FixedContextMenuManager.Instance.CreateContextMenu(new GenericInfoWidget(Buyer.Name, "This buyer is not interested in this type of vehicle."));
+                break;
         }
         yield break;
     }

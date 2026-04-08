@@ -18,6 +18,13 @@ public class CarFlexibleJunctionPolicy : IJunctionPolicy
     {
         bool canNarrow = Car.HasModifier<CanNarrowStreet>();
 
+        foreach (var edge in atNode.Outgoing)
+        {
+            yield return edge;
+        }
+
+        yield break;
+
         if (G.City.TryGetTrafficLightAtNode(atNode, out var tl))
         {
             if (!tl.TryGetStateForEdge(fromEdge, out var state) || state == TrafficLightState.Stop)

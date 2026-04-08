@@ -10,11 +10,6 @@ public class PlayerInputController : Singleton<PlayerInputController>
     public event Action jumped;
     public event Action restarted;
 
-    public void OnSprint(InputValue inputValue)
-    {
-        GameManager.Instance.switchFastForward();
-    }
-
     //Debugging purpose
     public void OnCrouch(InputValue inputValue)
     {

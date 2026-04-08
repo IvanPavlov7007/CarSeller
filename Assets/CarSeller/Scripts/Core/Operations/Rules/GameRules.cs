@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
+using UnityEngine;
 
 // TODO sort out not used anymore
 public static class GameRules
@@ -159,15 +159,25 @@ public class CarIsOfRequiredType
     }
 }
 
+public enum CanCantBeSoldReason
+{
+    None,
+    CarBelongsToPlayer,
+    CarNotOfRequiredType
+}
+
 public class CarCanBeSoldToBuyer
 {
-    public bool Check(Car car, Buyer buyer)
+    public CanCantBeSoldReason Check(Car car, Buyer buyer)
     {
         Debug.Assert(car != null, "Car is null");
         Debug.Assert(buyer != null, "Buyer is null");
 
-        return !GameRules.CarBelongsToPlayer.Check(car) &&
-            GameRules.CarIsOfRequiredType.Check(car,buyer.RequiredCarType);
+        if(GameRules.CarBelongsToPlayer.Check(car))
+            return CanCantBeSoldReason.CarBelongsToPlayer;
+        if(!GameRules.CarIsOfRequiredType.Check(car,buyer.RequiredCarType))
+            return CanCantBeSoldReason.CarNotOfRequiredType;
+        return CanCantBeSoldReason.None;
     }
 }
 
@@ -201,6 +211,17 @@ public class BuyerTypeCanBeSpanwnedOnEdge
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
+
+[Serializable]
+public struct ColorPalette
+{
+    public Color WhiteColor;
+    public Color LimeGreenColor;
+    public Color LightBlueColor;
+    public Color GreyedOutColor;
+    public Color RedColor;
+    public Color YellowColor;
+}
 
 public class SellPriceCalculator : SellPriceWrapper
 {
