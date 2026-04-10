@@ -1,6 +1,6 @@
+using System;
 using System.Text;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,7 +27,7 @@ public class BuyerInfoWidgetView : WidgetView<BuyerInfoWidget>
     string getPaymentMultipliers(CarType requiredType)
     {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < EnumUtility.ValuesByNames(typeof(CarRarity)).Count; i++)
+        for (int i = 0; i < Enum.GetNames(typeof(CarRarity)).Length; i++)
         {
             CarRarity rarity = (CarRarity)i;
             float multiplier = G.SellPriceCalculator.CalculateMultiplier(rarity,requiredType);

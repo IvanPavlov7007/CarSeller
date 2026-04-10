@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-public sealed class Engine : Product
+﻿public sealed class Engine : Product
 {
     public EngineRuntimeConfig runtimeConfig;
 

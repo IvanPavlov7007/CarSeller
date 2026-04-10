@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public sealed class SellingCityContextMenuProfile : ICityContextMenuProfile
 {

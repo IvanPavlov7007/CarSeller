@@ -1,4 +1,3 @@
-using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor.Validation;
 
 // Register this validator for all properties/objects whose value type is IVariantConfig.

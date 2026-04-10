@@ -1,6 +1,4 @@
-﻿using System;
-
-public class CityActionService
+﻿public class CityActionService
 {
     public bool PutCarOutsideWarehouse(Car car, Warehouse warehouse)
     {

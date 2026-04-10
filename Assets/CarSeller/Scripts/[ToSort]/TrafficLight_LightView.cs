@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class TrafficLight_LightView : MonoBehaviour

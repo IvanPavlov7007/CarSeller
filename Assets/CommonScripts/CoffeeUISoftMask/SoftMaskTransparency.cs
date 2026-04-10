@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using Coffee.UISoftMask;
 using Coffee.UISoftMaskInternal;
 

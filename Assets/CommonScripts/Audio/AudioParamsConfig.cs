@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using UnityEngine;
-using Sirenix.Serialization;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
-using UnityEngine.Rendering;
+using System.Collections.Generic;
 
 [System.Serializable]
-public sealed class AudioParamsConfig : SerializedDictionary<string, SerializedAudio>
+public sealed class AudioParamsConfig : Dictionary<string, SerializedAudio>
 {
 }
 

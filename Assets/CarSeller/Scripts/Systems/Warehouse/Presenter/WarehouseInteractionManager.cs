@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 // remove later – now unused; can be deleted once nothing references it
 public class ContextMenuContext : IInteractionContext

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public interface IProductViewComponentBuilder<TProductView> where TProductView : ProductView
 {

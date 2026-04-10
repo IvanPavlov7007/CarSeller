@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-using Sirenix.OdinInspector;
-
-[System.Serializable]
+﻿[System.Serializable]
 public abstract class PartSlotVariantConfig
 {
     public abstract PartSlotType SlotType { get; }

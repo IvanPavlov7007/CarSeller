@@ -1,6 +1,5 @@
 ﻿using Sirenix.OdinInspector;
 using System;
-using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Frame", menuName = "Configs/Products/Frame/Frame Variant Config")]

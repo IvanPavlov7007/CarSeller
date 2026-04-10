@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-public sealed class Spoiler : Product
+﻿public sealed class Spoiler : Product
 {
     public override string Name => runtimeConfig.Name;
 

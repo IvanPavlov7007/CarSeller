@@ -1,8 +1,5 @@
-using System.Collections;
 using MyExercise_1;
 using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.TestTools;
 
 public class NewTestScript
 {

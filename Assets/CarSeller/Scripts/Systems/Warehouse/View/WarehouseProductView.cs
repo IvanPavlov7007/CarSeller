@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-
-/// <summary>
+﻿/// <summary>
 /// Tracking location of product in warehouse
 /// </summary>
 public class WarehouseProductView : ProductView

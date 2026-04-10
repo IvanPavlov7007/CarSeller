@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public abstract class AspectSystem<TAspect> : IDisposable where TAspect : class, CityEntityAspect
 {

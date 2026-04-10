@@ -1,5 +1,4 @@
-﻿using System.Data.Common;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MovingPointSimpleView : MonoBehaviour
 {

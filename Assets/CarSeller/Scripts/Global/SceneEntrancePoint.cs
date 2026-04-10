@@ -1,5 +1,4 @@
 ﻿using Pixelplacement;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public sealed class SceneEntrancePoint : Singleton<SceneEntrancePoint>

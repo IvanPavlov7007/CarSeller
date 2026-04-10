@@ -1,6 +1,4 @@
 ﻿using Pixelplacement;
-using UnityEditor;
-using UnityEngine;
 public class DebugGameBootstrapper : Singleton<DebugGameBootstrapper>
 {
     private void Awake()

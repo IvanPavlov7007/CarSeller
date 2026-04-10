@@ -1,7 +1,4 @@
-﻿using System;
-using UnityEngine;
-
-public abstract class GameState
+﻿public abstract class GameState
 {
 }
 

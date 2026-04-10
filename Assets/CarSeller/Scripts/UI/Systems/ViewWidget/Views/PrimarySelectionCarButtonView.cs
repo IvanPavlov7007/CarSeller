@@ -1,8 +1,4 @@
-﻿using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
-using Pixelplacement;
-using System;
+﻿using UnityEngine;
 
 public class PrimarySelectionCarButtonView : MonoBehaviour
 {

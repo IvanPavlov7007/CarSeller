@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using Coffee.UISoftMask;
 
 public static partial class Transparency
 {

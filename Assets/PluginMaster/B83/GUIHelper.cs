@@ -1,6 +1,3 @@
-using UnityEngine;
-using System.Collections;
-
 public class GUIHelper
 {
 	private static int m_WinIDCounter = 1340;

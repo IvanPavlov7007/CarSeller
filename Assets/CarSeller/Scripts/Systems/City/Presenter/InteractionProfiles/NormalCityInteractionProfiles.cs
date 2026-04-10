@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using UnityEngine.Rendering.Universal;
+﻿using UnityEngine;
 
 public class NormalCityContextMenuProfile : ICityContextMenuProfile
 {
@@ -23,12 +20,12 @@ public class NormalCityContextMenuProfile : ICityContextMenuProfile
             return new GenericInfoWidget("???", "There is something here. Come closer to find out what is it.");
         }
 
-        if(entity.Subject is PersonalVehicleShop vehicleShop)
+        if (entity.Subject is PersonalVehicleShop vehicleShop)
         {
             return new GenericInfoWidget(vehicleShop.DisplayName, "A place where you can buy personal vehicles. Drag your car here to see what they offer.");
         }
 
-        if(entity.Subject is CarStashWarehouse carStashWarehouse)
+        if (entity.Subject is CarStashWarehouse carStashWarehouse)
         {
             return new GenericInfoWidget(CarStashWarehouse.DisplayName, "A place where you can stash stolen cars. Drag the car here to stash it for later.");
         }
@@ -58,7 +55,7 @@ public class NormalCityContextMenuProfile : ICityContextMenuProfile
                 return CarInfoWidget.StolenCar(car);
             }
 
-            if(G.VehicleController.CurrentCar == car)
+            if (G.VehicleController.CurrentCar == car)
                 return CarInfoWidget.PrimaryCar(car);
 
             return CarInfoWidget.WorldCar(car);
@@ -121,7 +118,7 @@ public class NormalCityTriggerProfile : ICityTriggerProfile
 
         if (ctx.Kind == TriggerContext.TriggerKind.DragEnd && ctx.Trigger.Subject is CarStashWarehouse carStashWarehouse)
         {
-            return new TriggerAction(true, () => 
+            return new TriggerAction(true, () =>
             { G.ProcessRunner.Run(new CarStashProcess(ctx.TriggerCause, carStashWarehouse)); });
         }
 

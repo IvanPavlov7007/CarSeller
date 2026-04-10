@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "EngineBaseConfig", menuName = "Configs/Products/Engine/Engine Base Config")]
 public class EngineBaseConfig : ScriptableObject, IBaseConfig

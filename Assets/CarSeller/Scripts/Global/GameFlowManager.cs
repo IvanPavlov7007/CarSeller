@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-[System.Obsolete]
+﻿[System.Obsolete]
 public class GameFlowManager : RoutinedObject
 {
     //GameFlowController GameFlowController => G.GameFlowController;

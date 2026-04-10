@@ -1,5 +1,4 @@
 ﻿using Pixelplacement;
-using System;
 using UnityEngine;
 
 public class MoneyGoalManager : Singleton<MoneyGoalManager>

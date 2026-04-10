@@ -2,12 +2,8 @@
 //Data base that allows to easily create cars
 //Some identificaitons?
 
-using Sirenix.OdinInspector;
-using Sirenix.Serialization;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class SimplifiedCarsManager

@@ -1,6 +1,5 @@
 using Pixelplacement;
 using System.Collections.Generic;
-using UnityEngine;
 
 /// <summary>
 /// Lives in the scene and manages all interactable objects

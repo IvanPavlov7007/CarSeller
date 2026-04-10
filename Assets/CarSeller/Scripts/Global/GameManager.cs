@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using Pixelplacement;
-using System;
 using UnityEngine.SceneManagement;
 
 /// <summary>

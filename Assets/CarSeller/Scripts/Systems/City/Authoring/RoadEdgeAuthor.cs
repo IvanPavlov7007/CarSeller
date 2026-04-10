@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Splines;
 using Sirenix.OdinInspector;
 using Unity.Mathematics;

@@ -1,10 +1,6 @@
-﻿using System.Drawing;
-using UnityEngine;
-using static UnityEngine.Rendering.GPUSort;
-using System.Linq;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
-using System;
 
 [CreateAssetMenu(fileName = "CityViewObjectBuilder", menuName = "Configs/View/CityViewObjectBuilder")]
 public class CityViewObjectBuilder : SerializedScriptableObject

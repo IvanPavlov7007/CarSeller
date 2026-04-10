@@ -1,5 +1,4 @@
 ﻿using Sirenix.OdinInspector;
-using Sirenix.Serialization;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "GameConfig", menuName = "Configs/Game Config")]

@@ -1,5 +1,4 @@
-﻿using Pixelplacement;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ProgressionUIManager : MonoBehaviour
 {

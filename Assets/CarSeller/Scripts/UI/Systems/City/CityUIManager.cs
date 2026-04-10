@@ -1,6 +1,5 @@
 ﻿using Pixelplacement;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CityUIManager : Singleton<CityUIManager>
 {

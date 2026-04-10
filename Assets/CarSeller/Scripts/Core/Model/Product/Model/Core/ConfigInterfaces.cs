@@ -1,7 +1,4 @@
-﻿
-// example: [CreateAssetMenu(fileName = "WheelBaseConfig", menuName = "Configs/Products/Wheel/Wheel Base Config")]
-using Sirenix.OdinInspector;
-
+﻿// example: [CreateAssetMenu(fileName = "WheelBaseConfig", menuName = "Configs/Products/Wheel/Wheel Base Config")]
 public interface IBaseConfig
 {
 }

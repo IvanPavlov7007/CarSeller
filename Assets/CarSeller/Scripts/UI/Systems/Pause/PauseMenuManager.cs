@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Pixelplacement;
-using UnityEngine.UIElements;
 
 public class PauseMenuManager : Singleton<PauseMenuManager>, IClosable
 {

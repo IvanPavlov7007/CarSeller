@@ -1,5 +1,3 @@
-using System;
-
 public abstract class CityEntityAspectEventData : GameEventData
 {
     public CityEntity Entity { get; }

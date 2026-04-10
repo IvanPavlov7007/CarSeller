@@ -1,5 +1,4 @@
 ﻿using Pixelplacement;
-using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class UIInputController : Singleton<UIInputController>

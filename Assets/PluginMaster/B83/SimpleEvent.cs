@@ -1,6 +1,3 @@
-using UnityEngine;
-using System.Collections;
-
 public class SimpleEvent
 {
 	private System.Action m_Delegate = ()=>{};

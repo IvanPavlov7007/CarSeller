@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-
-public class CarFrame : Product
+﻿public class CarFrame : Product
 {
     public CarFrameRuntimeConfig runtimeConfig;
 

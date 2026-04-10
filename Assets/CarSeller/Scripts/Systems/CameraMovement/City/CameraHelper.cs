@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using Pixelplacement;
-using System.Collections;
 
 public static class CameraHelper
 {

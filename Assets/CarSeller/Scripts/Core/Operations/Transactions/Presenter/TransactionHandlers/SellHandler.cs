@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class SellHandler : TransactionHandler<SellTransaction>
+﻿public class SellHandler : TransactionHandler<SellTransaction>
 {
     public override TransactionResult Handle(SellTransaction transaction)
     {

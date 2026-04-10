@@ -1,6 +1,4 @@
-﻿using System;
-
-public interface IOwnable
+﻿public interface IOwnable
 {
     IOwnable Owner { get; }
 }

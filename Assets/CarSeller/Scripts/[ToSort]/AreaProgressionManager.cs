@@ -1,5 +1,4 @@
 ﻿using Pixelplacement;
-using System.Linq;
 using UnityEngine;
 
 public class AreaProgressionManager : Singleton<AreaProgressionManager>

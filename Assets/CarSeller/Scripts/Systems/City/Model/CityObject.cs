@@ -1,7 +1,4 @@
-﻿using System;
-using UnityEngine;
-
-/// <summary>
+﻿/// <summary>
 /// Base class for objects that only exist within the city environment.
 /// Used by Profiles through ContentProvider
 /// </summary>

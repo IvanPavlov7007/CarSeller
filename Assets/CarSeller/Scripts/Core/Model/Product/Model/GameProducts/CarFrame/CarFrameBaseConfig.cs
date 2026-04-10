@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 [CreateAssetMenu(fileName = "CarFrameBaseConfig", menuName = "Configs/Products/Frame/FrameBaseConfig")]
 public class CarFrameBaseConfig : ScriptableObject, IBaseConfig
 {

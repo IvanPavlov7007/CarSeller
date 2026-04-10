@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using static GameManager;
-
-public sealed class MissionCityContextMenuProfile : NormalCityContextMenuProfile
+﻿public sealed class MissionCityContextMenuProfile : NormalCityContextMenuProfile
 {
 }
 

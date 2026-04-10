@@ -2,7 +2,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static PrimarySelectionCarButtonWidgetCreator;
 
 public class CarEntryView : WidgetView<CarEntryWidget>
 {

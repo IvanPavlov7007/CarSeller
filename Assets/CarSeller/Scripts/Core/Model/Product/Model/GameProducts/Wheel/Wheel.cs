@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-
-public sealed class Wheel : Product
+﻿public sealed class Wheel : Product
 {
     public WheelRuntimeConfig runtimeConfig;
 

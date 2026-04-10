@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-using Pixelplacement;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class MaskedImageTransparency : MonoBehaviour, ITransparencyController

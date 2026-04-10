@@ -1,5 +1,4 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using UnityEngine;
 
 //Todo maybe move type switch to classes themselves

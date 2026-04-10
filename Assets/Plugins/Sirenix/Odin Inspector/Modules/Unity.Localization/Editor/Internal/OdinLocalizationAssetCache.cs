@@ -6,7 +6,6 @@
 
 using System;
 using System.Collections.Generic;
-using Sirenix.Config;
 using UnityEditor;
 using UnityEngine.Localization.Tables;
 
