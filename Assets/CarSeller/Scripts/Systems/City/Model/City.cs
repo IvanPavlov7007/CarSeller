@@ -435,8 +435,9 @@ public class City : ILocationsHolder, IDisposable
 
     public void Dispose()
     {
-        GameObject.Destroy(SpatialGridManager.gameObject);
-        AspectsSystem.Dispose();
+        if(SpatialGridManager != null)
+            GameObject.Destroy(SpatialGridManager.gameObject);
+        AspectsSystem?.Dispose();
 
     }
 }

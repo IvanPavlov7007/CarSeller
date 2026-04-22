@@ -23,6 +23,8 @@ public abstract class AspectSystem<TAspect> : IDisposable where TAspect : class,
 
     void Unsubscribe()
     {
+        if(aspectsService == null)
+            return;
         aspectsService.UnsubscribeAdded<TAspect>(onAspectAdded);
         aspectsService.UnsubscribeRemoved<TAspect>(onAspectRemoved);
         aspectsService = null;

@@ -26,9 +26,10 @@ public class AspectsSystem : IDisposable
 
     public void Dispose()
     {
-        centersSystem.Dispose();
-        visibleSystem.Dispose();
-        GameObject.Destroy(monoBehaviourHelper.gameObject);
+        centersSystem?.Dispose();
+        visibleSystem?.Dispose();
+        if(monoBehaviourHelper != null)
+            GameObject.Destroy(monoBehaviourHelper.gameObject);
     }
 
     public void Update()
