@@ -66,7 +66,7 @@ public class GameManager : Singleton<GameManager>
         Pause(false);
         Debug.Log("Resetting game...");
         SceneManager.LoadScene(0);
-        GameMain.GameReset();
+        ServicedMain.GameReset();
     }
 
     void changeTime()

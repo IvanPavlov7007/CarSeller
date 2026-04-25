@@ -8,6 +8,8 @@ public class TutorialSystem : MonoBehaviour
     GameObject tutorialFinger;
     IEnumerator Start()
     {
+        if (!G.runIntialized)
+            yield break;
         yield return new WaitUntil(() => G.VehicleController != null && G.VehicleController.CurrentVehicleEntity != null);
         var position = G.VehicleController.CurrentVehicleEntity.Position;
         var initVec3 = position.WorldPosition;

@@ -6,6 +6,7 @@ using UnityEngine;
 /// </summary>
 public static class G
 {
+    public static bool runIntialized = false;
     public static SellPriceWrapper CurrentSellPriceWrapped => Economy.CurrentPriceWrapper;
     public static SellPriceCalculator SellPriceCalculator => Economy.SellPriceCalculator;
 

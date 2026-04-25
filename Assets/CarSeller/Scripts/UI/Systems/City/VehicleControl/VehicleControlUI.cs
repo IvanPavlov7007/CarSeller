@@ -19,6 +19,8 @@ public class VehicleControlUI : Singleton<VehicleControlUI>
 
     private void onCurrentVechicleClick()
     {
+        if (!G.runIntialized)
+            return;
         CameraMovementManager.Instance.Teleport(G.VehicleController.CurrentVehicleEntity.Position.WorldPosition);
     }
 
@@ -26,7 +28,8 @@ public class VehicleControlUI : Singleton<VehicleControlUI>
     {
         Debug.Assert(G.VehicleController != null);
         GameEvents.Instance.onVehicleControlStateChanged += OnVehicleStateChanged;
-        Redraw(G.VehicleController.CurrentState);
+        if(G.VehicleController != null)
+            Redraw(G.VehicleController.CurrentState);
     }
 
     private void OnDisable()
@@ -38,6 +41,9 @@ public class VehicleControlUI : Singleton<VehicleControlUI>
 
     void Redraw(VehicleController.VehicleControlState state)
     {
+        if(!G.runIntialized)
+            return;
+        
         var primaryVehicle = G.VehicleController.PrimaryCar;
         var currentVehicle = state.Car;
         RedrawCurrent(currentVehicle, primaryVehicle);

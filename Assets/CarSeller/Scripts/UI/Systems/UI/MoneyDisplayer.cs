@@ -14,6 +14,8 @@ public class MoneyDisplayer : MonoBehaviour
     private void OnEnable()
     {
         GameEvents.Instance.OnPlayerMoneyChanged += onPlayerMoneyChanged;
+        if(!G.runIntialized)
+            return;
         updateAccountAbsoluteValue(G.Player.Money);
     }
 
@@ -24,6 +26,8 @@ public class MoneyDisplayer : MonoBehaviour
 
     void onPlayerMoneyChanged(PlayerMoneyChangeEventData data)
     {
+        if(!G.runIntialized)
+            return;
         updateAccountAbsoluteValue(SellPriceWrapper.CalculateAbsolutePrice(data.NewMoney));
     }
 

@@ -1,9 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public abstract partial class GameMain
-{
-    public class CitySceneMain : ISceneMain
+    public class CitySceneMain : MonoBehaviour
     {
+        private void Awake()
+        {
+            Enter();
+        }
+
         public void Enter()
         {
             G.GameFlowController.SetCity();
@@ -33,4 +37,3 @@ public abstract partial class GameMain
             }
         }
     }
-}

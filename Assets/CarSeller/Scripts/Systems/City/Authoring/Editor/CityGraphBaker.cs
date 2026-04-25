@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Splines;
 using System.Linq;
 using System.Collections.Generic;
 using System.IO;
@@ -142,12 +143,15 @@ public static class CityGraphBaker
                 Id = m.Id,
                 DisplayName = m.DisplayName,
                 Tags = m.Tags,
-                RegionId = m.RegionId,
                 Radius = m.Radius,
                 AuthorId = m.Id,
                 AuthorPath = GetHierarchyPath(m.gameObject),
                 Anchor = new CityGraphAsset.MarkerAnchorData()
             };
+
+#pragma warning disable CS0618
+            md.RegionId = m.RegionId;
+#pragma warning restore CS0618
 
             // Always store the marker's world position for snapping fallback
             var wp = m.transform.position;
@@ -166,7 +170,7 @@ public static class CityGraphBaker
 
                 case CityMarkerAuthor.AnchorKind.Edge:
                     md.Anchor.Kind = CityGraphAsset.MarkerAnchorKind.Edge;
-                    md.Anchor.EdgeId = m.Edge ? m.Edge.Id : null;
+                    md.Anchor.EdgeId = m.Edge ? m.Edge.Id : TryFindNearestEdgeAuthorId(edges, m.transform.position);
                     md.Anchor.T = Mathf.Clamp01(m.T);
                     md.Anchor.Forward = m.Forward;
                     break;
@@ -184,11 +188,11 @@ public static class CityGraphBaker
             if (poly != null && poly.pathCount > 0)
             {
                 var offset = poly.offset;
-                var path = poly.GetPath(0);
-                points = new Vector2[path.Length];
-                for (int i = 0; i < path.Length; i++)
+                var splinePath = poly.GetPath(0);
+                points = new Vector2[splinePath.Length];
+                for (int i = 0; i < splinePath.Length; i++)
                 {
-                    var world = a.transform.TransformPoint(path[i] + offset);
+                    var world = a.transform.TransformPoint(splinePath[i] + offset);
                     var rootLocal = root.transform.InverseTransformPoint(world);
                     points[i] = new Vector2(rootLocal.x, rootLocal.y);
                 }
@@ -268,9 +272,65 @@ public static class CityGraphBaker
             }
         }
 
+        if (graph.Markers != null)
+        {
+            foreach (var marker in graph.Markers)
+            {
+                if (marker == null || marker.Anchor == null) continue;
+
+                if (marker.Anchor.Kind == CityGraphAsset.MarkerAnchorKind.Edge && string.IsNullOrEmpty(marker.Anchor.EdgeId))
+                {
+                    Debug.LogWarning($"[CityGraphBaker] Marker '{marker.Id}' is edge-anchored but has no associated edge. Re-bake after assigning an edge or adjust the marker position.");
+                }
+            }
+        }
+
         EditorUtility.SetDirty(graph);
         AssetDatabase.SaveAssets();
         Debug.Log($"Baked {graph.Nodes.Count} nodes, {graph.Edges.Count} edges, {graph.Markers.Count} markers, {graph.Areas.Count} areas, {graph.TrafficLights.Count} traffic lights to '{path}'.");
+    }
+
+    private static string TryFindNearestEdgeAuthorId(RoadEdgeAuthor[] edges, Vector3 worldPoint)
+    {
+        if (edges == null || edges.Length == 0)
+        {
+            return null;
+        }
+
+        RoadEdgeAuthor bestEdge = null;
+        float bestD2 = float.PositiveInfinity;
+        var worldPoint2 = new Vector2(worldPoint.x, worldPoint.y);
+
+        for (int i = 0; i < edges.Length; i++)
+        {
+            var edge = edges[i];
+            if (edge == null || edge.Container == null)
+            {
+                continue;
+            }
+
+            var spline = edge.Container.Splines.Count > 0 ? edge.Container.Splines[edge.SplineIndex] : null;
+            if (spline == null)
+            {
+                continue;
+            }
+
+            const int divisions = 32;
+            for (int j = 0; j <= divisions; j++)
+            {
+                float t = j / (float)divisions;
+                var localPos = SplineUtility.EvaluatePosition(spline, t);
+                var worldPos3 = edge.Container.transform.TransformPoint(localPos);
+                float d2 = (new Vector2(worldPos3.x, worldPos3.y) - worldPoint2).sqrMagnitude;
+                if (d2 < bestD2)
+                {
+                    bestD2 = d2;
+                    bestEdge = edge;
+                }
+            }
+        }
+
+        return bestEdge != null ? bestEdge.Id : null;
     }
 
     private static string GetHierarchyPath(GameObject go)

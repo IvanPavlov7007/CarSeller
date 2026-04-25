@@ -27,6 +27,9 @@ public class CenterButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!G.runIntialized)
+            return;
+        
         if(G.VehicleController.CurrentVehicleEntity == null)
         {
             group.alpha = 0;

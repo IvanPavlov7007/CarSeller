@@ -4,6 +4,9 @@ public static class CameraHelper
 {
     public static void SetCurrentPositionAtCar()
     {
+        
+        if(!G.runIntialized)
+            return;
         var cityEntity = G.VehicleController.CurrentVehicleEntity;
         Debug.Assert(CameraMovementManager.Instance != null);
         CameraMovementManager.Instance?.Teleport(cityEntity.Position.WorldPosition);

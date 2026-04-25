@@ -82,6 +82,8 @@ public class SpatialGridManager : MonoBehaviour
 
     private void Update()
     {
+        if(!G.runIntialized)
+            return;
         trackNewEntitiesPositions();
         updateActivationManager();
     }

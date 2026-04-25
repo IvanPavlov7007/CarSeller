@@ -19,6 +19,8 @@ public class AreaProgressionManager : Singleton<AreaProgressionManager>
 
     private void Update()
     {
+        if(!G.runIntialized)
+            return;
         foreach (var area in G.Areas.Values)
             UpdateArea(area, Time.deltaTime);
     }

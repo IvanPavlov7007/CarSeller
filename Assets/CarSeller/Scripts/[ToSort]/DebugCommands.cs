@@ -12,7 +12,8 @@ public class DebugCommands : MonoBehaviour
 
     public void OnA(InputValue val)
     {
-
+        if(!G.runIntialized)
+            return;
         G.CarSpawnManager.SpawnCarAtPosition(G.VehicleController.CurrentVehicleEntity.Position);
     }
 
@@ -29,6 +30,8 @@ public class DebugCommands : MonoBehaviour
 
     public void OnS(InputValue val)
     {
+        if(!G.runIntialized)
+            return;
         G.BuyerManager.SpawnBuyerAtPosition(Buyer.Any(), G.VehicleController.CurrentVehicleEntity.Position, null,null);
     }
 

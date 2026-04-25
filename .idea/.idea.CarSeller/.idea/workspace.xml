@@ -5,9 +5,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8e8ede7b-73da-4df4-a8b7-b0f15c3f0fde" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Systems/City/Model/City.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Systems/City/Model/City.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Systems/City/Model/CityEntity/AspectsSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Systems/City/Model/CityEntity/AspectsSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Systems/City/Vision/CityVisibleSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Systems/City/Vision/CityVisibleSystem.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Main/ServicedMain.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/[ToSort]/CityRootManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/[ToSort]/CityRootManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.CarSeller/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CarSeller/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Resources/Fonts/Sofia_Sans/static/SofiaSans-Medium SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Resources/Fonts/Sofia_Sans/static/SofiaSans-Medium SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Resources/Fonts/Sofia_Sans/static/SofiaSans-MediumItalic SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Resources/Fonts/Sofia_Sans/static/SofiaSans-MediumItalic SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Resources/Prefabs/Systems/City/Model/NewCityGraph.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Resources/Prefabs/Systems/City/Model/NewCityGraph.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Resources/ScriptableObjects/Systems/City/Model/NewCityGraph.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Resources/ScriptableObjects/Systems/City/Model/NewCityGraph.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scenes/City Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scenes/City Scene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Main/CitySceneMain.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Main/CitySceneMain.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Main/G.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Main/G.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Main/GameConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Main/GameConfig.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Main/GameMain.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Main/GameMain.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Main/ServicedMain.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Main/GameModes/CarShopGameMain.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Main/GameModes/CarShopGameMain.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Main/GameModes/CarStealGameMain.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Main/GameModes/CarStealGameMain.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Main/GameModes/DisassembleStolenCarsGameMain.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Main/GameModes/DisassembleStolenCarsGameMain.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Main/GameModes/SimplifiedGameplayMain.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Main/GameModes/SimplifiedGameplayMain.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Main/MainResolvers.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Main/MainResolvers.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Main/WarehouseSceneMain.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Main/WarehouseSceneMain.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Presenter/WorldManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Global/Presenter/WorldManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Systems/CameraMovement/City/CameraHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Systems/CameraMovement/City/CameraHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Systems/City/Authoring/Editor/CityGraphBaker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Systems/City/Authoring/Editor/CityGraphBaker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Systems/City/Model/CityGraphLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Systems/City/Model/CityGraphLoader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Systems/City/Presenter/CitySceneManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Systems/City/Presenter/CitySceneManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Systems/City/View/TrafficLights/CityTrafficLightsSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Systems/City/View/TrafficLights/CityTrafficLightsSpawner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Systems/City/Vision/CityFogRenderer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/Systems/City/Vision/CityFogRenderer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/UI/Systems/City/VehicleControl/VehicleControlUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/UI/Systems/City/VehicleControl/VehicleControlUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/UI/Systems/UI/MoneyDisplayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/UI/Systems/UI/MoneyDisplayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/[ToSort]/AreaProgressionManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/[ToSort]/AreaProgressionManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/[ToSort]/CenterButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/[ToSort]/CenterButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/[ToSort]/DebugCommands.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/[ToSort]/DebugCommands.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/[ToSort]/ProgressOverviewManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/[ToSort]/ProgressOverviewManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/[ToSort]/SpatialGridManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/[ToSort]/SpatialGridManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CarSeller/Scripts/[ToSort]/TutorialSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CarSeller/Scripts/[ToSort]/TutorialSystem.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,30 +59,46 @@
     </persistenceIdMap>
   </component>
   <component name="CopilotUserSelectedChatMode">
-    <option name="chatModeId" value="Ask" />
+    <option name="chatModeId" value="Agent" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 8
-}]]></component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="cidr-memory-view://0" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/CarSeller/Scripts/[ToSort]/CityRootManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@aa507f3228f0/Tests/Runtime/UGUI/Canvas/CanvasSizeCorrectInAwakeAndStart.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="3ChcgQpXSm1nmfBRk1ifkgR6FGS" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
+    "Device#class com.jetbrains.rider.plugins.unity.run.devices.UnityEditorDeviceKind#com.jetbrains.rider.plugins.unity.run.devices.UnityDevicesProvider#Attach to Unity Editor: Attach to Unity Editor": "Unity Editor",
+    "Device#class com.jetbrains.rider.plugins.unity.run.devices.UnityEditorDeviceKind#com.jetbrains.rider.plugins.unity.run.devices.UnityDevicesProvider#Unity Attach To: Attach to": "Unity Editor",
+    "DeviceKind#com.jetbrains.rider.plugins.unity.run.devices.UnityDevicesProvider": "Unity Editor",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "Unity Attach To.Attach to.executor": "Debug",
+    "XThreadsFramesViewSplitterKey": "0.33896515",
     "cidr.known.project.marker": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "git-widget-placeholder": "main",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -68,13 +123,15 @@
       <option name="MIXED_MODE_DEBUG" value="0" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" useMixedMode="false">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" useMixedMode="true" ignored-value-for-modified-check="21936">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="21936" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list />
+        <list>
+          <MonoRuntime />
+        </list>
       </option>
       <option name="selectedOptions">
         <list />
@@ -84,6 +141,12 @@
     <configuration name="Attach to" type="UnityDevicePlayer" factoryName="UnityAttachToDevicePlayer">
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Attach to Unity Editor.Attach to Unity Editor" />
+      <item itemvalue="Standalone Player.Start Unity" />
+      <item itemvalue="Standalone Player.Unit Tests (batch mode)" />
+      <item itemvalue="Unity Attach To.Attach to" />
+    </list>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -92,7 +155,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1776841362289</updated>
-      <workItem from="1776841368323" duration="1547000" />
+      <workItem from="1776841368323" duration="8047000" />
+      <workItem from="1777128370295" duration="8057000" />
     </task>
     <servers />
   </component>
@@ -126,6 +190,11 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="UnityDevicePlayer">
+        <watch expression="this" custom="1" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

@@ -70,10 +70,8 @@ public class CitySceneManager : Singleton<CitySceneManager>
             return;
         }
 
-        initializeMap();
-
-        // Area overlays (hidden by default; you control them at runtime).
-        CityAreasVisualsController.Ensure(City);
+        // initializeMap();
+        
 
         rebuildSceneForState(G.GameState);
     }
@@ -188,9 +186,11 @@ public class CitySceneManager : Singleton<CitySceneManager>
 
     private void rebuildSceneForState(GameState state)
     {
+        Debug.Log($"Rebuilding city scene for game state {state.GetType().Name} with profile {currentProfile.GetType().Name}");
         // rebuild views based on the current profile
         foreach (var entity in City.GetEntities().Values)
         {
+            Debug.Log($"Rebuilding view for entity {entity} of type {entity.Subject} in state {state.GetType().Name}");
             applyProfileToObject(entity, state);
         }
     }

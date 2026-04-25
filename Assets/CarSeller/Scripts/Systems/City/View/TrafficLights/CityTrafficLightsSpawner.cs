@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static class CityTrafficLightsSpawner
 {
@@ -22,14 +23,8 @@ public static class CityTrafficLightsSpawner
             return created;
         }
 
-        var existing = cityRoot.Find(TrafficLightsRootName);
-        if (existing != null)
-        {
-            Object.Destroy(existing.gameObject);
-        }
-
-        var root = new GameObject(TrafficLightsRootName);
-        root.transform.SetParent(cityRoot, false);
+        var root = GetOrCreateRuntimeRoot(cityRoot);
+        ClearChildren(root);
 
         var nodeById = city.Nodes.Where(n => n != null && !string.IsNullOrEmpty(n.Id)).ToDictionary(n => n.Id);
         var edgeById = city.Edges.Where(e => e != null && !string.IsNullOrEmpty(e.Id)).ToDictionary(e => e.Id);
@@ -42,7 +37,7 @@ public static class CityTrafficLightsSpawner
             if (!nodeById.TryGetValue(tl.NodeId, out var node))
                 continue;
 
-            var go = Object.Instantiate(graph.TrafficLightPrefab, root.transform);
+            var go = Object.Instantiate(graph.TrafficLightPrefab, root);
             go.name = string.IsNullOrEmpty(tl.Id) ? "TrafficLight" : $"TrafficLight_{tl.Id}";
             go.transform.position = node.Position;
 
@@ -106,5 +101,43 @@ public static class CityTrafficLightsSpawner
         }
 
         return created;
+    }
+
+    private static Transform GetOrCreateRuntimeRoot(Transform cityRoot)
+    {
+        var runtimeParent = cityRoot.parent;
+
+        if (runtimeParent != null)
+        {
+            var existingSibling = runtimeParent.Find(TrafficLightsRootName);
+            if (existingSibling != null)
+                return existingSibling;
+
+            var siblingRoot = new GameObject(TrafficLightsRootName);
+            siblingRoot.transform.SetParent(runtimeParent, false);
+            return siblingRoot.transform;
+        }
+
+        var scene = cityRoot.gameObject.scene;
+        if (scene.IsValid())
+        {
+            foreach (var rootObject in scene.GetRootGameObjects())
+            {
+                if (rootObject.name == TrafficLightsRootName)
+                    return rootObject.transform;
+            }
+        }
+
+        var runtimeRoot = new GameObject(TrafficLightsRootName);
+        if (scene.IsValid())
+            SceneManager.MoveGameObjectToScene(runtimeRoot, scene);
+
+        return runtimeRoot.transform;
+    }
+
+    private static void ClearChildren(Transform root)
+    {
+        for (int i = root.childCount - 1; i >= 0; i--)
+            Object.Destroy(root.GetChild(i).gameObject);
     }
 }

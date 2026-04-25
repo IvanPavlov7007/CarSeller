@@ -31,6 +31,8 @@ public sealed class CityFogRenderer : Singleton<CityFogRenderer>
 
     private void Awake()
     {
+        if(!G.runIntialized)
+            return;
         InitializeSystem(G.City.AspectsSystem.centersSystem);
     }
 

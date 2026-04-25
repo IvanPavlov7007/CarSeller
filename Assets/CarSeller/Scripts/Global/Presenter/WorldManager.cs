@@ -71,25 +71,26 @@ public class WorldManager
 
     public void InitializeWorld(CityConfig cityConfig, EconomyConfig economyConfig, WorldMissionsConfig worldMissionsConfig)
     {
+        Debug.Log($"InitializeWorld start - CityRoot: {(G.CityRoot != null ? $"{G.CityRoot.name} (id: {G.CityRoot.GetInstanceID()})" : "null")}");
         World.Reset();
         initializeCity(cityConfig);
         // Initialize economy after city so that economy can reference city objects if needed
         initializeEconomy(economyConfig);
         initializeWorldMissions(worldMissionsConfig);
+        Debug.Log($"InitializeWorld end - CityRoot: {(G.CityRoot != null ? $"{G.CityRoot.name} (id: {G.CityRoot.GetInstanceID()})" : "null")}");
     }
 
     //1.
     private void initializeCity(CityConfig cityConfig)
     {
-        if (G.CityRoot == null)
-        {
-            G.CityRoot = GameObject.Instantiate(cityConfig.CityGraph.PrefabRoot);
-            G.CityRoot.SetActive(false);
-        }
+        // Check if the previously stored CityRoot is still valid (not destroyed)
+        createCityRoot(cityConfig);
+        
         World.Instance.City = new City(cityConfig, G.CityRoot.transform, createAspectsSystem());
-
         var createdTrafficLights = CityTrafficLightsSpawner.Spawn(World.Instance.City, cityConfig.CityGraph, G.CityRoot.transform);
         World.Instance.City.InitializeTrafficLights(createdTrafficLights);
+        // Area overlays (hidden by default; you control them at runtime).
+        CityAreasVisualsController.Ensure(World.Instance.City);
 
         foreach (var warehouseConfig in cityConfig.warehouseConfigs)
         {
@@ -98,6 +99,15 @@ public class WorldManager
         }
 
         initializeCarStashWarehouses(cityConfig.carStashWarehouseConfigs);
+    }
+    
+    private void createCityRoot(CityConfig cityConfig)
+    {
+        var obj = GameObject.Instantiate(cityConfig.CityGraph.PrefabRoot);
+        // var obj = new GameObject();
+        obj.AddComponent<CityRootManager>();
+        obj.name = "CityRoot"; // Ensure consistent naming
+        GameObject.DontDestroyOnLoad(G.CityRoot);
     }
 
     AspectsSystem createAspectsSystem()

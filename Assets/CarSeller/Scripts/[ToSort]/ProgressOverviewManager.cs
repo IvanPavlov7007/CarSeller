@@ -28,6 +28,9 @@ public class ProgressOverviewManager : MonoBehaviour
 
     private void Start()
     {
+        if(!G.runIntialized)
+            return;
+        
         var list = G.Areas.Values.ToList();
         _areaToProgressionUI[list[0]] = area1progression;
         _areaToProgressionUI[list[1]] = area2progression;
@@ -65,6 +68,8 @@ public class ProgressOverviewManager : MonoBehaviour
 
     private void SetAreas(bool shown)
     {
+        if(!G.runIntialized)
+            return;
         var vc = GameObject.FindAnyObjectByType<CityAreasVisualsController>();
         Debug.Assert(vc != null, "CityAreasVisualsController not found in scene");
         foreach (var area in G.Areas.Values)
