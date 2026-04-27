@@ -1,12 +1,13 @@
-﻿using Pixelplacement;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 // Might be used in the future for fixed context menus
 // TODO don't duplicate code with ContextMenuManager
-public class FixedContextMenuManager : Singleton<FixedContextMenuManager>
+public class FixedContextMenuManager : GlobalSingletonBehaviour<FixedContextMenuManager>
 {
+    protected override FixedContextMenuManager GlobalInstance { get => G.FixedContextMenuManager; set => G.FixedContextMenuManager = value; }
+
     public GameObject fixedPopUpMenuPrefab;
     public SimpleUIBuilder UIBuilder;
     public HashSet<PopUpContextMenu> activeMenus = new HashSet<PopUpContextMenu>();
@@ -17,7 +18,7 @@ public class FixedContextMenuManager : Singleton<FixedContextMenuManager>
 
     public PopUpContextMenu CreateContextMenu(UIElement content)
     {
-        GameObject panel = Instantiate(fixedPopUpMenuPrefab, FixedContextMenuCanvas.Instance.Canvas.transform);
+        GameObject panel = Instantiate(fixedPopUpMenuPrefab, G.FixedContextMenuCanvas.Canvas.transform);
         RectTransform panelTransform = panel.GetComponent<RectTransform>();
 
         // Set panel color
@@ -33,18 +34,18 @@ public class FixedContextMenuManager : Singleton<FixedContextMenuManager>
         var menu = createContextMenu(panel, content.blockingInput);
         menu.Initialize(null, contentTransform, OnMenuClose);
 
-        GameCursor.Instance.CancelCurrentInteraction(invokeDragEnd: false);
+        G.GameCursor.CancelCurrentInteraction(invokeDragEnd: false);
         return menu;
     }
 
     public PopUpContextMenu CreateContextMenu(Widget widget)
     {
-        RectTransform view = UIBuilder.Build(widget, FixedContextMenuCanvas.Instance.Canvas.transform);
+        RectTransform view = UIBuilder.Build(widget, G.FixedContextMenuCanvas.Canvas.transform);
 
         var menu = createContextMenu(view.gameObject, widget.BlockingInput);
         menu.Initialize(null, view, OnMenuClose);
 
-        GameCursor.Instance.CancelCurrentInteraction(invokeDragEnd: false);
+        G.GameCursor.CancelCurrentInteraction(invokeDragEnd: false);
         return menu;
     }
 
@@ -53,7 +54,7 @@ public class FixedContextMenuManager : Singleton<FixedContextMenuManager>
         var ctxMenu = panel.AddComponent<PopUpContextMenu>();
         activeMenus.Add(ctxMenu);
         if (blocking)
-            BlockUIManager.Instance.Block(FixedContextMenuCanvas.Instance.Canvas, ctxMenu.Close);
+            G.BlockUIManager.Block(G.FixedContextMenuCanvas.Canvas, ctxMenu.Close);
         return ctxMenu;
     }
 
@@ -62,7 +63,7 @@ public class FixedContextMenuManager : Singleton<FixedContextMenuManager>
         if (activeMenus.Contains(menu))
         {
             activeMenus.Remove(menu);
-            BlockUIManager.Instance.Unblock(FixedContextMenuCanvas.Instance.Canvas);
+            G.BlockUIManager.Unblock(G.FixedContextMenuCanvas.Canvas);
             Destroy(menu.gameObject);
         }
     }

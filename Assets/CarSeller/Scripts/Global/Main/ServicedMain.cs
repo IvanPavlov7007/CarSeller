@@ -39,9 +39,19 @@ public sealed class ServicedMain : MonoBehaviour
 
     public void Initialize(GameConfig gameConfig)
     {
+        InitializeServices();
         Debug.Log("Initializing game config");
         ResetStaticState(gameConfig);
         ResetData(gameConfig);
+    }
+
+    void InitializeServices()
+    {
+        G.GameManager = gameObject.AddComponent<GameManager>();
+        G.InteractionController = gameObject.AddComponent<InteractionController>();
+        
+        G.LocatableStateChangeEventFunnel = gameObject.AddComponent<LocatableStateChangeEventFunnel>();
+
     }
 
     public void ResetData(GameConfig gameConfig)

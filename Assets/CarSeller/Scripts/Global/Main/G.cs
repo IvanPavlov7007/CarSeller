@@ -7,6 +7,8 @@ using UnityEngine;
 public static class G
 {
     public static bool runIntialized = false;
+    public static GameManager GameManager;
+    
     public static SellPriceWrapper CurrentSellPriceWrapped => Economy.CurrentPriceWrapper;
     public static SellPriceCalculator SellPriceCalculator => Economy.SellPriceCalculator;
 
@@ -91,6 +93,41 @@ public static class G
     public static ColorPalette ColorPalette => Config.ColorPalette;
 
     public static PersonalVehicleShop VehicleShop => World.Instance.VehicleShop;
+    public static GameCursor GameCursor { get; set; }
+    public static InteractionController InteractionController { get; set; }
+    public static LocatableStateChangeEventFunnel LocatableStateChangeEventFunnel { get; set; }
+    public static CameraMovementManager CameraMovementManager { get; set; }
+    public static CarShopSceneManager CarShopSceneManager { get; set; }
+    public static CitySceneManager CitySceneManager { get; set; }
+    public static StreetsSingleton StreetsSingleton { get; set; }
+    public static CityFogRenderer CityFogRenderer { get; set; }
+    public static ContextMenuManager ContextMenuManager { get; set; }
+    public static FixedContextMenuManager FixedContextMenuManager { get; set; }
+    public static DebugCustomActions DebugCustomActions { get; set; }
+    public static DebugGameBootstrapper DebugGameBootstrapper { get; set; }
+    public static CollectablesManager CollectablesManager { get; set; }
+    public static IconBuilderManager IconBuilderManager { get; set; }
+    public static PlayerInputController PlayerInputController { get; set; }
+    public static PlayerInputLocator PlayerInputLocator { get; set; }
+    public static UIInputController UIInputController { get; set; }
+    public static PoliceManager PoliceManager { get; set; }
+    public static CongradulationsMenu CongradulationsMenu { get; set; }
+    public static MoneyGoalManager MoneyGoalManager { get; set; }
+    public static PlayerPossessionTracker PlayerPossessionTracker { get; set; }
+    public static WarehouseSceneManager WarehouseSceneManager { get; set; }
+    public static DynamicCanvasGroups DynamicCanvasGroups { get; set; }
+    public static BlockUIManager BlockUIManager { get; set; }
+    public static CarShopUIManager CarShopUIManager { get; set; }
+    public static CityUIManager CityUIManager { get; set; }
+    public static VehicleControlUI VehicleControlUI { get; set; }
+    public static ContextMenuCanvas ContextMenuCanvas { get; set; }
+    public static FixedContextMenuCanvas FixedContextMenuCanvas { get; set; }
+    public static GlobalHintManager GlobalHintManager { get; set; }
+    public static PauseMenuManager PauseMenuManager { get; set; }
+    public static UIEffectsDisplayer UIEffectsDisplayer { get; set; }
+    public static UI_FX_Manager UIFXManager { get; set; }
+    public static AreaProgressionManager AreaProgressionManager { get; set; }
+    public static AudioController AudioController { get; set; }
 
     public static void Initialize( ViewBuildersConfig handlersConfig)
     {

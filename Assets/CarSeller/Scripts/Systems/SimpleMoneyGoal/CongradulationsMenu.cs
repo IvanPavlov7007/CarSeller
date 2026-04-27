@@ -1,16 +1,20 @@
 ﻿using UnityEngine;
-using Pixelplacement;
 using UnityEngine.UI;
 
-public class CongradulationsMenu : Singleton<CongradulationsMenu>
+public class CongradulationsMenu : GlobalSingletonBehaviour<CongradulationsMenu>
 {
+    protected override CongradulationsMenu GlobalInstance { get => G.CongradulationsMenu; set => G.CongradulationsMenu = value; }
+
     public Canvas Canvas { get; private set; }
     public CanvasGroup CanvasGroup { get; private set; }
     //[SerializeField] TMPro.TextMeshProUGUI goalAmountText;
     Button closeButton;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        if (!IsActiveSingleton) return;
+
         Canvas = GetComponent<Canvas>();
         CanvasGroup = GetComponent<CanvasGroup>();
         closeButton = GetComponentInChildren<Button>();
@@ -23,13 +27,13 @@ public class CongradulationsMenu : Singleton<CongradulationsMenu>
     }
     public void Show()
     {
-        BlockUIManager.Instance.Block(Canvas, Hide);
+        G.BlockUIManager.Block(Canvas, Hide);
         CanvasGroup.alpha = 1;
         CanvasGroup.blocksRaycasts = true;
     }
     public void Hide()
     {
-        BlockUIManager.Instance.Unblock(Canvas);
+        G.BlockUIManager.Unblock(Canvas);
         CanvasGroup.alpha = 0;
         CanvasGroup.blocksRaycasts = false;
     }

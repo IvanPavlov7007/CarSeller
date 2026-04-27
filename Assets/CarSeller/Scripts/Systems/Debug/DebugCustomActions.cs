@@ -1,19 +1,21 @@
-﻿using Pixelplacement;
-
-public class DebugCustomActions : Singleton<DebugCustomActions>
+﻿public class DebugCustomActions : GlobalSingletonBehaviour<DebugCustomActions>
 {
+    protected override DebugCustomActions GlobalInstance { get => G.DebugCustomActions; set => G.DebugCustomActions = value; }
+
 #if DEBUG
 
-    private void OnEnable()
+    private void Start()
     {
-        PlayerInputController.Instance.crouched += onActionOne;
-        PlayerInputController.Instance.jumped += onActionTwo;
+        G.PlayerInputController.crouched += onActionOne;
+        G.PlayerInputController.jumped += onActionTwo;
     }
 
     private void OnDisable()
     {
-        PlayerInputController.Instance.crouched -= onActionOne;
-        PlayerInputController.Instance.jumped -= onActionTwo;
+        if (G.PlayerInputController == null)
+            return;
+        G.PlayerInputController.crouched -= onActionOne;
+        G.PlayerInputController.jumped -= onActionTwo;
     }
 
     void onActionOne()

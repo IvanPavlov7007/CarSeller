@@ -7,7 +7,7 @@ public class DebugCommands : MonoBehaviour
 
     public void OnSprint(InputValue inputValue)
     {
-        GameManager.Instance.switchFastForward();
+        G.GameManager.switchFastForward();
     }
 
     public void OnA(InputValue val)

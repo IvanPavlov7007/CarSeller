@@ -1,9 +1,11 @@
-﻿using Pixelplacement;
-public class DebugGameBootstrapper : Singleton<DebugGameBootstrapper>
+﻿public class DebugGameBootstrapper : GlobalSingletonBehaviour<DebugGameBootstrapper>
 {
-    private void Awake()
+    protected override DebugGameBootstrapper GlobalInstance { get => G.DebugGameBootstrapper; set => G.DebugGameBootstrapper = value; }
+
+    protected override void Awake()
     {
-        if(Singleton<DebugGameBootstrapper>.Instance != this)
+        base.Awake();
+        if (!IsActiveSingleton)
         {
             return;
         }

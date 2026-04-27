@@ -1,8 +1,9 @@
-﻿using Pixelplacement;
-using UnityEngine.InputSystem;
+﻿using UnityEngine.InputSystem;
 
-public class UIInputController : Singleton<UIInputController>
+public class UIInputController : GlobalSingletonBehaviour<UIInputController>
 {
+    protected override UIInputController GlobalInstance { get => G.UIInputController; set => G.UIInputController = value; }
+
     public event System.Action onPaused;
     public event System.Action onResumed;
 

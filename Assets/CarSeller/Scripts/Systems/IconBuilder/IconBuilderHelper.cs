@@ -40,6 +40,6 @@ public static class IconBuilderHelper
             return car.runtimeConfig.SideView;
         }
 
-        return product.GetRepresentation(IconBuilderManager.Instance);
+        return product.GetRepresentation(G.IconBuilderManager);
     }
 }

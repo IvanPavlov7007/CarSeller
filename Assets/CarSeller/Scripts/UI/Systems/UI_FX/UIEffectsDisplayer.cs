@@ -2,8 +2,10 @@
 using TMPro;
 using UnityEngine;
 
-public class UIEffectsDisplayer : Singleton<UIEffectsDisplayer>
+public class UIEffectsDisplayer : GlobalSingletonBehaviour<UIEffectsDisplayer>
 {
+    protected override UIEffectsDisplayer GlobalInstance { get => G.UIEffectsDisplayer; set => G.UIEffectsDisplayer = value; }
+
     [Header("World")]
     public float MoneyEffectHeightOffset = 2f;
     public GameObject MoneyWorldEffectPrefab;
@@ -15,8 +17,11 @@ public class UIEffectsDisplayer : Singleton<UIEffectsDisplayer>
     Canvas _canvas;
     Camera Camera => Camera.main;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        if (!IsActiveSingleton) return;
+
         _canvas = GetComponent<Canvas>();
     }
 

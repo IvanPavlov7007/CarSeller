@@ -19,7 +19,7 @@ public class DragInteractable : Interactable, IDirectionProvider, IActivatable
     {
         // Security check that dragging is still valid
         // fast fix for issue when switching windows while dragging
-        if (dragging && GameCursor.Instance.draggedInteractable == null)
+        if (dragging && G.GameCursor.draggedInteractable == null)
         {
             OnCursorDragEnd();
         }
@@ -29,7 +29,7 @@ public class DragInteractable : Interactable, IDirectionProvider, IActivatable
     {
         if (dragging)
         {
-            ProvidedDirection = (GameCursor.Instance.transform.position - transform.position);
+            ProvidedDirection = (G.GameCursor.transform.position - transform.position);
         }
     }
 

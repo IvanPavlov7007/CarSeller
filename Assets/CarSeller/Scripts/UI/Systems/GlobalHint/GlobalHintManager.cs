@@ -2,8 +2,10 @@
 using UnityEngine;
 using Pixelplacement;
 
-public class GlobalHintManager : Singleton<GlobalHintManager>
+public class GlobalHintManager : GlobalSingletonBehaviour<GlobalHintManager>
 {
+    protected override GlobalHintManager GlobalInstance { get => G.GlobalHintManager; set => G.GlobalHintManager = value; }
+
     CanvasGroup canvasGroup;
     TMPro.TextMeshProUGUI hintText;
     Coroutine currentHintCoroutine;
@@ -11,8 +13,11 @@ public class GlobalHintManager : Singleton<GlobalHintManager>
     float displayDuration = 2f;
 
     ITransparencyController transparencyController;
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        if (!IsActiveSingleton) return;
+
         canvasGroup = GetComponent<CanvasGroup>();
         ITransparencyController transparencyController = Transparency.GetController(canvasGroup);
         hintText = GetComponentInChildren<TMPro.TextMeshProUGUI>();

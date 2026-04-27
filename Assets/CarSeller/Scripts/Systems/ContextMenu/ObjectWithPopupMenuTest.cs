@@ -15,10 +15,10 @@ public class ObjectWithPopupMenuTest : MonoBehaviour
         switch (buttonToTest)
         {
             case TestButton.Crouch:
-                PlayerInputController.Instance.crouched += OnTestButton;
+                G.PlayerInputController.crouched += OnTestButton;
                 break;
             case TestButton.Jump:
-                PlayerInputController.Instance.jumped += OnTestButton;
+                G.PlayerInputController.jumped += OnTestButton;
                 break;
             default:
                 break;
@@ -31,10 +31,10 @@ public class ObjectWithPopupMenuTest : MonoBehaviour
         switch (buttonToTest)
         {
             case TestButton.Crouch:
-                PlayerInputController.Instance.crouched -= OnTestButton;
+                G.PlayerInputController.crouched -= OnTestButton;
                 break;
             case TestButton.Jump:
-                PlayerInputController.Instance.jumped -= OnTestButton;
+                G.PlayerInputController.jumped -= OnTestButton;
                 break;
             default:
                 break;

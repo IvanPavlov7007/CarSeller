@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
-using Pixelplacement;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.Pool; // for LayoutRebuilder
 
-public class ContextMenuManager : Singleton<ContextMenuManager>
+public class ContextMenuManager : GlobalSingletonBehaviour<ContextMenuManager>
 {
+    protected override ContextMenuManager GlobalInstance { get => G.ContextMenuManager; set => G.ContextMenuManager = value; }
+
     public GameObject popUpMenuPrefab;
     private List<PopUpContextMenu> activeMenus = new List<PopUpContextMenu>();
 
@@ -32,7 +33,7 @@ public class ContextMenuManager : Singleton<ContextMenuManager>
         if (activeMenus.Contains(menu))
         {
             activeMenus.Remove(menu);
-            BlockUIManager.Instance.Unblock(ContextMenuCanvas.Instance.Canvas);
+            G.BlockUIManager.Unblock(G.ContextMenuCanvas.Canvas);
             Destroy(menu.gameObject);
         }
     }
@@ -41,7 +42,7 @@ public class ContextMenuManager : Singleton<ContextMenuManager>
     // If needed to find a view based on a model
     public void CreateContextMenu(GameObject target, UIElement content)
     {
-        GameObject panel = Instantiate(popUpMenuPrefab, ContextMenuCanvas.Instance.Canvas.transform);
+        GameObject panel = Instantiate(popUpMenuPrefab, G.ContextMenuCanvas.Canvas.transform);
         RectTransform panelTransform = panel.GetComponent<RectTransform>();
 
         //Set panel color
@@ -60,7 +61,7 @@ public class ContextMenuManager : Singleton<ContextMenuManager>
         ctxMenu.Initialize(target.transform, contentRT, closeMenu);
 
         UpdateContextMenu(ctxMenu);
-        GameCursor.Instance.CancelCurrentInteraction(invokeDragEnd: false);
+        G.GameCursor.CancelCurrentInteraction(invokeDragEnd: false);
     }
 
     private RectTransform getContentTransform(GameObject panel)
@@ -166,7 +167,7 @@ public class ContextMenuManager : Singleton<ContextMenuManager>
         var ctxMenu = panel.AddComponent<PopUpContextMenu>();
         activeMenus.Add(ctxMenu);
         if (blocking)
-            BlockUIManager.Instance.Block(ContextMenuCanvas.Instance.Canvas, ctxMenu.Close);
+            G.BlockUIManager.Block(G.ContextMenuCanvas.Canvas, ctxMenu.Close);
         return ctxMenu;
     }
 
@@ -180,7 +181,7 @@ public class ContextMenuManager : Singleton<ContextMenuManager>
 
     private void UpdateContextMenu(PopUpContextMenu menu)
     {
-        var canvas = ContextMenuCanvas.Instance.Canvas;
+        var canvas = G.ContextMenuCanvas.Canvas;
         var camera = Camera.main;
         
         Debug.Assert(menu != null, "UpdateContextMenu: menu is null");

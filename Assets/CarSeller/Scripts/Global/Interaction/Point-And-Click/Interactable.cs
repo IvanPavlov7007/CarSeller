@@ -26,12 +26,12 @@ public class Interactable : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        InteractionController.Instance.RegisterInteractable(this);
+        G.InteractionController.RegisterInteractable(this);
     }
 
     protected virtual void OnDisable()
     {
-        InteractionController.Instance.UnregisterInteractable(this);
+        G.InteractionController.UnregisterInteractable(this);
     }
 
     public void CursorSelectStart()

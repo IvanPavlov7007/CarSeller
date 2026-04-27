@@ -48,7 +48,7 @@ public class WarehouseInteractionManager : IInteractionManager
         var ctxMenuContent = profile.GenerateContent(model, gameState);
         if (ctxMenuContent != null)
         {
-            ContextMenuManager.Instance.CreateContextMenu(interactable.gameObject, ctxMenuContent);
+            G.ContextMenuManager.CreateContextMenu(interactable.gameObject, ctxMenuContent);
         }
     }
 
@@ -62,9 +62,9 @@ public class WarehouseInteractionManager : IInteractionManager
 
         // casting all products on drop location
         var positionInteractables = InteractionPhysics.RaycastForInteractables(
-            GameCursor.Instance.interactableLayersMask,
+            G.GameCursor.interactableLayersMask,
             interactable.transform.position,
-            GameCursor.Instance.use3dPhysics);
+            G.GameCursor.use3dPhysics);
 
         tryDropProduct(positionInteractables);
 

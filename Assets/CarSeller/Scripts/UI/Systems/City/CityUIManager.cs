@@ -1,8 +1,9 @@
-﻿using Pixelplacement;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CityUIManager : Singleton<CityUIManager>
+public class CityUIManager : GlobalSingletonBehaviour<CityUIManager>
 {
+    protected override CityUIManager GlobalInstance { get => G.CityUIManager; set => G.CityUIManager = value; }
+
     private Camera _cam;
     private Canvas _canvas;
     public Camera Camera
@@ -32,9 +33,9 @@ public class CityUIBuilder
         Debug.Assert(cityViewObjectController != null);
         Debug.Assert(pinPrefab != null);
         Debug.Assert(pinStyle != null);
-        Debug.Assert(CityUIManager.Instance != null);
+        Debug.Assert(G.CityUIManager != null);
 
-        CityUIPin pinInstance = GameObject.Instantiate(pinPrefab, CityUIManager.Instance.Canvas.transform).AddComponent<CityUIPin>();
+        CityUIPin pinInstance = GameObject.Instantiate(pinPrefab, G.CityUIManager.Canvas.transform).AddComponent<CityUIPin>();
         pinInstance.Initialize(cityViewObjectController, pinStyle);
         return pinInstance;
     }

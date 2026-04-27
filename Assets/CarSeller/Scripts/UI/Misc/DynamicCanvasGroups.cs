@@ -1,12 +1,16 @@
-﻿using Pixelplacement;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class DynamicCanvasGroups : Singleton<DynamicCanvasGroups>
+public class DynamicCanvasGroups : GlobalSingletonBehaviour<DynamicCanvasGroups>
 {
+    protected override DynamicCanvasGroups GlobalInstance { get => G.DynamicCanvasGroups; set => G.DynamicCanvasGroups = value; }
+
     [SerializeField]
     CanvasGroup[] canvasGroups;
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        if (!IsActiveSingleton) return;
+
         if(canvasGroups == null || canvasGroups.Length == 0)
             canvasGroups = GetComponentsInChildren<CanvasGroup>();
     }

@@ -32,10 +32,10 @@ public class BuyerProcess : IProcess
                     break;
                 }
             case CanCantBeSoldReason.CarBelongsToPlayer:
-                FixedContextMenuManager.Instance.CreateContextMenu(new GenericInfoWidget(Buyer.Name, "You can't sell your own vehicle."));
+                G.FixedContextMenuManager.CreateContextMenu(new GenericInfoWidget(Buyer.Name, "You can't sell your own vehicle."));
                 break;
             case CanCantBeSoldReason.CarNotOfRequiredType:
-                FixedContextMenuManager.Instance.CreateContextMenu(new GenericInfoWidget(Buyer.Name, "This buyer is not interested in this type of vehicle."));
+                G.FixedContextMenuManager.CreateContextMenu(new GenericInfoWidget(Buyer.Name, "This buyer is not interested in this type of vehicle."));
                 break;
         }
         yield break;

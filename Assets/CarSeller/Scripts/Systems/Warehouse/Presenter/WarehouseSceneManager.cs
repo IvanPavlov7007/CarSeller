@@ -1,4 +1,3 @@
-using Pixelplacement;
 using UnityEngine;
 
 
@@ -6,8 +5,10 @@ using UnityEngine;
 /// Loads and manages warehouse in the warehouse scene
 /// Listens when to create product views and creates them in the scene
 /// </summary>
-public class WarehouseSceneManager : Singleton<WarehouseSceneManager>
+public class WarehouseSceneManager : GlobalSingletonBehaviour<WarehouseSceneManager>
 {
+    protected override WarehouseSceneManager GlobalInstance { get => G.WarehouseSceneManager; set => G.WarehouseSceneManager = value; }
+
     static Warehouse CurrentWarehouse => G.GameFlowController.CurrentWarehouse;
 
     public Transform emptyPosition;

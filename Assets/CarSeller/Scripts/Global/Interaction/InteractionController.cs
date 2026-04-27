@@ -1,16 +1,18 @@
+using System;
 using Pixelplacement;
 using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// Lives in the scene and manages all interactable objects
 /// </summary>
-public class InteractionController : Singleton<InteractionController>
+public class InteractionController : MonoBehaviour
 {
     public List<Interactable> interactables = new List<Interactable>();
     public List<ITriggerable> triggerables = new List<ITriggerable>();
 
-    IInteractionManager interactionManager => G.InteractionManager;
-    
+    private IInteractionManager interactionManager => G.InteractionManager;
+
     public void RegisterInteractable(Interactable interactable)
     {
         if (!interactables.Contains(interactable))

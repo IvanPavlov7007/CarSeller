@@ -5,7 +5,7 @@ public class PoliceSpotlightVisionVisuals : MonoBehaviour
 {
     PoliceStateViewController policeStateViewController;
     PoliceUnit policeUnit;
-    SpotlightColors spotlightColors => PoliceManager.Instance.SpotlightColors;
+    SpotlightColors spotlightColors => G.PoliceManager.SpotlightColors;
 
     MeshFilter meshFilter;
     MeshRenderer meshRenderer;

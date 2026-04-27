@@ -1,10 +1,11 @@
-﻿using Pixelplacement;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CitySceneManager : Singleton<CitySceneManager>
+public class CitySceneManager : GlobalSingletonBehaviour<CitySceneManager>
 {
+    protected override CitySceneManager GlobalInstance { get => G.CitySceneManager; set => G.CitySceneManager = value; }
+
     public City City => World.Instance.City;
 
     CitySceneProfileRegistry profileRegistry = new CitySceneProfileRegistry();
@@ -19,7 +20,7 @@ public class CitySceneManager : Singleton<CitySceneManager>
         currentProfile = profileRegistry.Get(state);
     }
 
-    private void OnEnable()
+    private void Bind()
     {
         GameEvents.Instance.OnLocatableRegistered += onNewLocatableCreated;
         GameEvents.Instance.OnLocatableLocationChanged += onLocatableLocationChanged;
@@ -71,7 +72,8 @@ public class CitySceneManager : Singleton<CitySceneManager>
         }
 
         // initializeMap();
-        
+
+        Bind();
 
         rebuildSceneForState(G.GameState);
     }

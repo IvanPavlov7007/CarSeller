@@ -20,12 +20,12 @@ public class Triggerable : MonoBehaviour, ITriggerable
         CustomTrigger2D?.onEnter.AddListener(OnTriggered);
         CustomTrigger2D?.onExit.AddListener(OnTriggerExited);
         CustomTrigger2D.onStay.AddListener(OnTriggerStayed);
-        InteractionController.Instance.RegisterTriggerable(this);
+        G.InteractionController.RegisterTriggerable(this);
     }
 
     private void OnDisable()
     {
-        InteractionController.Instance.UnregisterTriggerable(this);
+        G.InteractionController.UnregisterTriggerable(this);
         CustomTrigger2D?.onEnter.RemoveListener(OnTriggered);
         CustomTrigger2D?.onExit.RemoveListener(OnTriggerExited);
         CustomTrigger2D.onStay.RemoveListener(OnTriggerStayed);

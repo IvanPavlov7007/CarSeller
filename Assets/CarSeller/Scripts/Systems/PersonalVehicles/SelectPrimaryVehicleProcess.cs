@@ -22,7 +22,7 @@ public class SelectPrimaryVehicleProcess : IProcess
         {
             refreshRequested = false;
 
-            PopUpContextMenu menu = FixedContextMenuManager.Instance.CreateContextMenu(controller.CreateMenuUIContent());
+            PopUpContextMenu menu = G.FixedContextMenuManager.CreateContextMenu(controller.CreateMenuUIContent());
             menu.Closed += _ =>
             {
                 finished = true;

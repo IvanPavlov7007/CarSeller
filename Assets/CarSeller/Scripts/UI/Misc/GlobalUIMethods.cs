@@ -42,18 +42,18 @@ public class GlobalUIMethods : MonoBehaviour
 
     public void ResetGame()
     {
-        GameManager.Instance.ResetGame();
+        G.GameManager.ResetGame();
     }
 
     public void Resume()
     {
-        GameManager.Instance.Pause(false);
+        G.GameManager.Pause(false);
         Debug.Log("Resuming game");
     }
 
     public void Pause()
     {
-        GameManager.Instance.Pause(true);
+        G.GameManager.Pause(true);
         Debug.Log("Pausing game");
     }
 

@@ -39,6 +39,8 @@ public class ProgressOverviewManager : MonoBehaviour
         {
                 resetProgressbar(area);
         }
+
+        CityAreasVisualsController.Ensure(World.Instance.City);
         HideProgressOverview();
     }
 

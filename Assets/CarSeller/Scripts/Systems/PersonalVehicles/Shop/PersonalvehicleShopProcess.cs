@@ -24,7 +24,7 @@ public class PersonalVehicleShopProcess : IProcess
         {
             refreshRequested = false;
 
-            PopUpContextMenu menu = FixedContextMenuManager.Instance.CreateContextMenu(controller.GenerateMenuUI());
+            PopUpContextMenu menu = G.FixedContextMenuManager.CreateContextMenu(controller.GenerateMenuUI());
             menu.Closed += _ =>
             {
                 finished = true;

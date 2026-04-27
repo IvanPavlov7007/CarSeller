@@ -3,7 +3,7 @@
     public override TransactionResult Handle(SellTransaction transaction)
     {
         G.PlayerManager.AddPlayerMoney(transaction.UnitPrice);
-        AreaProgressionManager.Instance.ProgressCarSale(transaction);
+        G.AreaProgressionManager.ProgressCarSale(transaction);
         City.EntityLifetimeService.Destroy(transaction.Car);
         City.EntityLifetimeService.Destroy(transaction.Buyer);
 

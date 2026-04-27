@@ -34,7 +34,7 @@ public class ButtonStateController : MonoBehaviour, IPointerDownHandler, IPointe
 
         // Now treat it as a real tap
         if (!Interactable)
-            GlobalHintManager.Instance.ShowHint(uIElement.UnavailabilityReason);
+            G.GlobalHintManager.ShowHint(uIElement.UnavailabilityReason);
     }
 
     private void Awake()

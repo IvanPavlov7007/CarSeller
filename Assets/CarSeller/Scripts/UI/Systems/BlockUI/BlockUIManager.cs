@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Pixelplacement;
 using System;
 using UnityEngine.UI;
 
@@ -9,8 +8,10 @@ using UnityEngine.UI;
 /// <summary>
 ///  
 /// </summary>
-public class BlockUIManager : Singleton<BlockUIManager>
+public class BlockUIManager : GlobalSingletonBehaviour<BlockUIManager>
 {
+    protected override BlockUIManager GlobalInstance { get => G.BlockUIManager; set => G.BlockUIManager = value; }
+
     CanvasGroup canvasGroup;
     Canvas canvas;
     Button button;
@@ -20,8 +21,11 @@ public class BlockUIManager : Singleton<BlockUIManager>
     Canvas focusCanvas;
     int initialTargetSortingOrder;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        if (!IsActiveSingleton) return;
+
         canvas = GetComponent<Canvas>();
         canvasGroup = GetComponent<CanvasGroup>();
         button = GetComponentInChildren<Button>();
@@ -41,6 +45,9 @@ public class BlockUIManager : Singleton<BlockUIManager>
                 return;
             }
         }
+        if(focusCanvas == null)
+            return;
+        
         this.focusCanvas = focusCanvas;
         initialTargetSortingOrder = focusCanvas.sortingOrder;
         focusCanvas.sortingOrder = canvas.sortingOrder + 1;

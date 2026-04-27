@@ -1,8 +1,9 @@
-﻿using Pixelplacement;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class UI_FX_Manager : Singleton<UI_FX_Manager>
+public class UI_FX_Manager : GlobalSingletonBehaviour<UI_FX_Manager>
 {
+    protected override UI_FX_Manager GlobalInstance { get => G.UIFXManager; set => G.UIFXManager = value; }
+
     private void OnEnable() { GameEvents.Instance.OnTransactionComplete += onTransactionComplete; }
     private void OnDisable()
     {
@@ -58,11 +59,11 @@ public class UI_FX_Manager : Singleton<UI_FX_Manager>
 
         if (location.Type == TransactionLocationType.WorldSpace)
         {
-            UIEffectsDisplayer.Instance.PlayMoneyEffectWorld(amount, location.Position);
+            G.UIEffectsDisplayer.PlayMoneyEffectWorld(amount, location.Position);
         }
         else
         {
-            UIEffectsDisplayer.Instance.PlayMonetEffectScreen(amount, location.Position);
+            G.UIEffectsDisplayer.PlayMonetEffectScreen(amount, location.Position);
         }
     }
 }

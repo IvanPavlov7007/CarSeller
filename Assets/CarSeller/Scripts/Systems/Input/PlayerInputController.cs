@@ -1,9 +1,10 @@
-﻿using Pixelplacement;
-using UnityEngine.InputSystem;
+﻿using UnityEngine.InputSystem;
 using System;
 
-public class PlayerInputController : Singleton<PlayerInputController>
+public class PlayerInputController : GlobalSingletonBehaviour<PlayerInputController>
 {
+    protected override PlayerInputController GlobalInstance { get => G.PlayerInputController; set => G.PlayerInputController = value; }
+
     public event Action crouched;
     public event Action jumped;
     public event Action restarted;

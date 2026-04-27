@@ -18,8 +18,8 @@ public class CityUIPin : MonoBehaviour
     public void Initialize(CityViewObjectController cityViewObjectController, PinStyle pinStyle)
     {
         this.cityViewObjectController = cityViewObjectController;
-        Camera cam = CityUIManager.Instance.Camera;
-        Canvas canvas = CityUIManager.Instance.Canvas;
+        Camera cam = G.CityUIManager.Camera;
+        Canvas canvas = G.CityUIManager.Canvas;
         positioner.Initialize(cam, canvas, cam.transform, cityViewObjectController.transform);
 
         var txt = positioner.GetComponentInChildren<TextMeshProUGUI>();

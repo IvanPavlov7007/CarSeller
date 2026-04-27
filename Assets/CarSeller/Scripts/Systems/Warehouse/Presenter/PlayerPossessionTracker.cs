@@ -1,5 +1,4 @@
-﻿using Pixelplacement;
-using System;
+﻿using System;
 using UnityEngine;
 
 //TODO in the future, make the Ownership system as suggested by GPT
@@ -9,8 +8,10 @@ using UnityEngine;
 /// <summary>
 /// Unfinished system to track player possessions based on locatable events. Please apply suggestion above.
 /// </summary>
-public class PlayerPossessionTracker : Singleton<PlayerPossessionTracker>
+public class PlayerPossessionTracker : GlobalSingletonBehaviour<PlayerPossessionTracker>
 {
+    protected override PlayerPossessionTracker GlobalInstance { get => G.PlayerPossessionTracker; set => G.PlayerPossessionTracker = value; }
+
     private void OnEnable()
     {
         GameEvents.Instance.OnLocatableRegistered += onLocatableCreated;

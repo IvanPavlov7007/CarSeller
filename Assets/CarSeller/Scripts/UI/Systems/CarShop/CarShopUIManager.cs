@@ -1,10 +1,11 @@
-﻿using Pixelplacement;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarShopUIManager : Singleton<CarShopUIManager>
+public class CarShopUIManager : GlobalSingletonBehaviour<CarShopUIManager>
 {
+    protected override CarShopUIManager GlobalInstance { get => G.CarShopUIManager; set => G.CarShopUIManager = value; }
+
     public RectTransform content;
     public SimpleUIBuilder uiBuilder;
 

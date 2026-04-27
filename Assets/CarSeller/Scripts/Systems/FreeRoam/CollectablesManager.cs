@@ -1,7 +1,7 @@
-﻿using Pixelplacement;
-
-public class CollectablesManager : Singleton<CollectablesManager>
+﻿public class CollectablesManager : GlobalSingletonBehaviour<CollectablesManager>
 {
+    protected override CollectablesManager GlobalInstance { get => G.CollectablesManager; set => G.CollectablesManager = value; }
+
     private void OnEnable()
     {
         GameEvents.Instance.OnTargetReached += onCityTargetReached;

@@ -40,7 +40,7 @@ public abstract class ButtonView<T> : WidgetView<T> , IPointerDownHandler, IPoin
 
         // Now treat it as a real tap
         if (!Interactable)
-            GlobalHintManager.Instance.ShowHint(widget.UnavailabilityReason);
+            G.GlobalHintManager.ShowHint(widget.UnavailabilityReason);
     }
 
     protected virtual void Awake()

@@ -131,11 +131,11 @@ public class MissionController : MissionControllerBase
         public event Action<IDestroyable> onBeingDestroyed;
         public PoliceMissionLifetimeWrapper()
         {
-            PoliceManager.Instance.CreatePolice();
+            G.PoliceManager.CreatePolice();
         }
         public void Destroy()
         {
-            PoliceManager.Instance.ClearPolice();
+            G.PoliceManager.ClearPolice();
             onBeingDestroyed?.Invoke(this);
         }
 
@@ -150,7 +150,7 @@ public class MissionController : MissionControllerBase
     {
         if (evt.ReachedObject.Subject is MissionLauncher missionLauncher)
         {
-            ContextMenuManager.Instance.CreateContextMenu(evt.TriggerContext.TriggerView, CTX_Menu_Tools.MissionLauncherTrigger(missionLauncher));
+            G.ContextMenuManager.CreateContextMenu(evt.TriggerContext.TriggerView, CTX_Menu_Tools.MissionLauncherTrigger(missionLauncher));
         }
     }
 
@@ -167,12 +167,12 @@ public class MissionController : MissionControllerBase
 
     void showMissionCompletedInfo(MissionCompletedEventData missionCompletedEvent)
     {
-        FixedContextMenuManager.Instance.CreateContextMenu(CTX_Menu_Tools.MissionCompletedInfo(missionCompletedEvent.Mission));
+        G.FixedContextMenuManager.CreateContextMenu(CTX_Menu_Tools.MissionCompletedInfo(missionCompletedEvent.Mission));
     }
 
     void showMissionFailedInfo(MissionFailedEventData missionFailedEvent)
     {
-        FixedContextMenuManager.Instance.CreateContextMenu(CTX_Menu_Tools.MissionFailedInfo(missionFailedEvent.Mission));
+        G.FixedContextMenuManager.CreateContextMenu(CTX_Menu_Tools.MissionFailedInfo(missionFailedEvent.Mission));
     }
 
     void rewardPlayerForMissionCompletion(MissionCompletedEventData e)

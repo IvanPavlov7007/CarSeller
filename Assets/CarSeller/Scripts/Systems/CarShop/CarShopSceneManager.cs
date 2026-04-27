@@ -1,8 +1,9 @@
-﻿using Pixelplacement;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CarShopSceneManager : Singleton<CarShopSceneManager>
+public class CarShopSceneManager : GlobalSingletonBehaviour<CarShopSceneManager>
 {
+    protected override CarShopSceneManager GlobalInstance { get => G.CarShopSceneManager; set => G.CarShopSceneManager = value; }
+
     static CarShopOfferProvider OfferProvider => G.Economy.CarShopOfferProvider;
     static Warehouse CurrentWarehouse => G.GameFlowController.CurrentWarehouse;
 
@@ -56,7 +57,7 @@ public class CarShopSceneManager : Singleton<CarShopSceneManager>
     void updateOffers()
     {
         var offers = OfferProvider.GetOffers(findCurrentCar(), 500f);
-        CarShopUIManager.Instance.UpdateOffers(offers, onOfferClick);
+        G.CarShopUIManager.UpdateOffers(offers, onOfferClick);
     }
 
     void onOfferClick(CarShopOffer offer)

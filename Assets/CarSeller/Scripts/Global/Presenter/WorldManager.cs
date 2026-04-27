@@ -103,6 +103,8 @@ public class WorldManager
     
     private void createCityRoot(CityConfig cityConfig)
     {
+        if(G.CityRoot != null)
+            return;
         var obj = GameObject.Instantiate(cityConfig.CityGraph.PrefabRoot);
         // var obj = new GameObject();
         obj.AddComponent<CityRootManager>();

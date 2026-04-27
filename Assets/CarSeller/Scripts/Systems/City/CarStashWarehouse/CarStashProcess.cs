@@ -41,7 +41,7 @@ public class CarStashProcess : IProcess
             {
                 chosenSlot = x;
             });
-            var menu = FixedContextMenuManager.Instance.CreateContextMenu(displayer.generateOffers());
+            var menu = G.FixedContextMenuManager.CreateContextMenu(displayer.generateOffers());
 
             menu.Closed += _ =>
             {

@@ -1,8 +1,9 @@
-﻿using Pixelplacement;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class IconBuilderManager : Singleton<IconBuilderManager>, IProductViewBuilder<Sprite>
+public class IconBuilderManager : GlobalSingletonBehaviour<IconBuilderManager>, IProductViewBuilder<Sprite>
 {
+    protected override IconBuilderManager GlobalInstance { get => G.IconBuilderManager; set => G.IconBuilderManager = value; }
+
     [Header("Rendering")]
     public Camera iconRenderCamera;
     public Transform buildPosition;

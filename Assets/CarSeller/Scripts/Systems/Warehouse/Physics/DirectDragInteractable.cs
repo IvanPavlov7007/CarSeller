@@ -19,7 +19,7 @@ public class DirectDragInteractable : Interactable
     {
         if (dragging)
         {
-            targetJoint.target = GameCursor.Instance.transform.position;
+            targetJoint.target = G.GameCursor.transform.position;
         }
     }
 
@@ -32,8 +32,8 @@ public class DirectDragInteractable : Interactable
         dragging = true;
 
         targetJoint = gameObject.AddComponent<TargetJoint2D>();
-        targetJoint.anchor = rb.transform.InverseTransformPoint(GameCursor.Instance.transform.position);
-        targetJoint.target = GameCursor.Instance.transform.position;
+        targetJoint.anchor = rb.transform.InverseTransformPoint(G.GameCursor.transform.position);
+        targetJoint.target = G.GameCursor.transform.position;
 
         targetJoint.maxForce = 1000f;
         targetJoint.dampingRatio = 1f;

@@ -1,9 +1,10 @@
-﻿using Pixelplacement;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PoliceManager : Singleton<PoliceManager>
+public class PoliceManager : GlobalSingletonBehaviour<PoliceManager>
 {
+    protected override PoliceManager GlobalInstance { get => G.PoliceManager; set => G.PoliceManager = value; }
+
     PoliceAISystem aiSystem = new PoliceAISystem();
     PoliceAIContext stateMachine;
 

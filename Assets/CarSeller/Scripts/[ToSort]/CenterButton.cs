@@ -21,7 +21,7 @@ public class CenterButton : MonoBehaviour
 
     private void onClick()
     {
-        CameraMovementManager.Instance.Teleport(G.VehicleController.CurrentVehicleEntity.Position.WorldPosition);
+        G.CameraMovementManager.Teleport(G.VehicleController.CurrentVehicleEntity.Position.WorldPosition);
     }
 
     // Update is called once per frame

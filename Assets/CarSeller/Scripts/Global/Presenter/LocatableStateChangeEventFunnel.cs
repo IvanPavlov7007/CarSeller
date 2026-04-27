@@ -1,5 +1,6 @@
 ﻿using Pixelplacement;
 using System;
+using UnityEngine;
 
 [Obsolete]
 /// <summary>
@@ -7,7 +8,7 @@ using System;
 /// Useful for presenters that need to respond to any locatable state change
 /// Such as SceneManagers
 /// </summary>
-public class LocatableStateChangeEventFunnel : Singleton<LocatableStateChangeEventFunnel>
+public class LocatableStateChangeEventFunnel : MonoBehaviour
 {
     private void OnEnable()
     {

@@ -1,10 +1,11 @@
-﻿using Pixelplacement;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
 
-public class CameraMovementManager : Singleton<CameraMovementManager>
+public class CameraMovementManager : GlobalSingletonBehaviour<CameraMovementManager>
 {
+    protected override CameraMovementManager GlobalInstance { get => G.CameraMovementManager; set => G.CameraMovementManager = value; }
+
     [Header("References")]
     public Transform cameraTarget;
     public GameObject camConfiner; // GameObject holding the 2D collider used by CinemachineConfiner2D
@@ -80,8 +81,11 @@ public class CameraMovementManager : Singleton<CameraMovementManager>
     int _forceToken;
     float _forceBlend; // 0..1 for “how much override is applied”
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        if (!IsActiveSingleton) return;
+
         // If not assigned, try to find a vcam in scene (safe fallback).
         if (virtualCamera == null)
             virtualCamera = FindAnyObjectByType<CinemachineCamera>();
@@ -122,7 +126,7 @@ public class CameraMovementManager : Singleton<CameraMovementManager>
     {
         if (cam == null || cameraTarget == null) return;
 
-        var cursor = GameCursor.Instance;
+        var cursor = G.GameCursor;
         Interactable dragged = cursor != null ? cursor.draggedInteractable : null;
 
         if (followDraggedMovingPoint && dragged != null)

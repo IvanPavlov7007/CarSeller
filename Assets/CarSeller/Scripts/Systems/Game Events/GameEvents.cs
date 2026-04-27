@@ -42,6 +42,8 @@ public class GameEvents
         onAreaLevelUp = null;
 
         OnCityEntityDestroyed = null;
+
+        Instance = new GameEvents();
     }
 
     public Action OnGamePaused;

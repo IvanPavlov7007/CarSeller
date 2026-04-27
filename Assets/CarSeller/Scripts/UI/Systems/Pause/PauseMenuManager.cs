@@ -1,13 +1,18 @@
-﻿using UnityEngine;
-using Pixelplacement;
+﻿using System;
+using UnityEngine;
 
-public class PauseMenuManager : Singleton<PauseMenuManager>, IClosable
+public class PauseMenuManager : GlobalSingletonBehaviour<PauseMenuManager>, IClosable
 {
+    protected override PauseMenuManager GlobalInstance { get => G.PauseMenuManager; set => G.PauseMenuManager = value; }
+
     CanvasGroup canvasGroup;
     Canvas canvas;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        if (!IsActiveSingleton) return;
+
         canvasGroup = GetComponent<CanvasGroup>();
         canvas = GetComponent<Canvas>();
     }
@@ -19,21 +24,27 @@ public class PauseMenuManager : Singleton<PauseMenuManager>, IClosable
         onResumed();
     }
 
+    private void OnDisable()
+    {
+        GameEvents.Instance.OnGamePaused -= onPaused;
+        GameEvents.Instance.OnGameUnpaused -= onResumed;
+    }
+
     public void Close()
     {
-        GameManager.Instance.Pause(false);
+        G.GameManager.Pause(false);
     }
 
     void onPaused()
     {
-        BlockUIManager.Instance.Block(canvas,()=> GameManager.Instance.Pause(false));
+        G.BlockUIManager.Block(canvas,()=> G.GameManager.Pause(false));
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
     }
 
     void onResumed()
     {
-        BlockUIManager.Instance.Unblock(canvas);
+        G.BlockUIManager.Unblock(canvas);
         canvasGroup.alpha = 0f;
         canvasGroup.blocksRaycasts = false;
     }

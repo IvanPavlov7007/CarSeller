@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Pixelplacement;
 using UnityEngine;
 
 /// <summary>
@@ -9,8 +8,10 @@ using UnityEngine;
 /// 
 /// Game logic that decides which entities are centers lives in `CityVision`.
 /// </summary>
-public sealed class CityFogRenderer : Singleton<CityFogRenderer>
+public sealed class CityFogRenderer : GlobalSingletonBehaviour<CityFogRenderer>
 {
+    protected override CityFogRenderer GlobalInstance { get => G.CityFogRenderer; set => G.CityFogRenderer = value; }
+
     [Header("Mask Prefab")]
     [Tooltip("Prefab with a SpriteMask (and optionally a SpriteRenderer for debug).")]
     public GameObject CircleMaskPrefab;
@@ -23,14 +24,13 @@ public sealed class CityFogRenderer : Singleton<CityFogRenderer>
 
     CityVisionCentersSystem centersSystem;
 
-    protected override void OnRegistration()
+    protected override void Awake()
     {
-        base.OnRegistration();
-        if (masksParent == null) masksParent = transform;
-    }
+        base.Awake();
+        if (!IsActiveSingleton) return;
 
-    private void Awake()
-    {
+        if (masksParent == null) masksParent = transform;
+
         if(!G.runIntialized)
             return;
         InitializeSystem(G.City.AspectsSystem.centersSystem);

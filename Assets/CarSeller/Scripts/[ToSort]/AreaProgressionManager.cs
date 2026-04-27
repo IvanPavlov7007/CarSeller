@@ -1,8 +1,9 @@
-﻿using Pixelplacement;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class AreaProgressionManager : Singleton<AreaProgressionManager>
+public class AreaProgressionManager : GlobalSingletonBehaviour<AreaProgressionManager>
 {
+    protected override AreaProgressionManager GlobalInstance { get => G.AreaProgressionManager; set => G.AreaProgressionManager = value; }
+
     public void ProgressCarSale(SellTransaction transaction)
     {
         var position = CityLocatorHelper.GetCityEntity(transaction.Buyer).Position;

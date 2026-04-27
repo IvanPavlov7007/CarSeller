@@ -8,8 +8,8 @@ public static class CameraHelper
         if(!G.runIntialized)
             return;
         var cityEntity = G.VehicleController.CurrentVehicleEntity;
-        Debug.Assert(CameraMovementManager.Instance != null);
-        CameraMovementManager.Instance?.Teleport(cityEntity.Position.WorldPosition);
+        Debug.Assert(G.CameraMovementManager != null);
+        G.CameraMovementManager?.Teleport(cityEntity.Position.WorldPosition);
     }
 
     private static Vector2 getCityLocationPosition(CityEntity cityEntity)

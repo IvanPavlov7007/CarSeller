@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
-using Pixelplacement;
 using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Currently in the background of GameFlowManager, probably should merge
 /// </summary>
-public class GameManager : Singleton<GameManager>
+public class GameManager : MonoBehaviour
 {
     public enum TimeState
     {
@@ -15,13 +14,62 @@ public class GameManager : Singleton<GameManager>
     TimeState currentTimeState = TimeState.Normal;
     public TimeState CurrentTimeState { get { return currentTimeState; } }
 
+    private void Awake()
+    {
+        G.GameManager = this;
+    }
+
     private void OnEnable()
     {
-        UIInputController.Instance.onPaused += () => Pause(true);
-        UIInputController.Instance.onResumed += () => Pause(false);
+        if (G.UIInputController != null)
+        {
+            G.UIInputController.onPaused += onPausedInput;
+            G.UIInputController.onResumed += onResumedInput;
+        }
 #if UNITY_EDITOR
-        PlayerInputController.Instance.restarted += () => ResetGame();
+        if (G.PlayerInputController != null)
+        {
+            G.PlayerInputController.restarted += onRestartInput;
+        }
 #endif
+    }
+
+    private void OnDisable()
+    {
+        if (G.UIInputController != null)
+        {
+            G.UIInputController.onPaused -= onPausedInput;
+            G.UIInputController.onResumed -= onResumedInput;
+        }
+#if UNITY_EDITOR
+        if (G.PlayerInputController != null)
+        {
+            G.PlayerInputController.restarted -= onRestartInput;
+        }
+#endif
+    }
+
+    private void OnDestroy()
+    {
+        if (ReferenceEquals(G.GameManager, this))
+        {
+            G.GameManager = null;
+        }
+    }
+
+    private void onPausedInput()
+    {
+        Pause(true);
+    }
+
+    private void onResumedInput()
+    {
+        Pause(false);
+    }
+
+    private void onRestartInput()
+    {
+        ResetGame();
     }
 
     public void Pause(bool pause)
@@ -36,9 +84,9 @@ public class GameManager : Singleton<GameManager>
         if (pausing || unpausing)
         {
             if(pause)
-                PlayerInputLocator.Instance.PlayerInput.SwitchCurrentActionMap("UI");
+                G.PlayerInputLocator.PlayerInput.SwitchCurrentActionMap("UI");
             else
-                PlayerInputLocator.Instance.PlayerInput.SwitchCurrentActionMap("Player");
+                G.PlayerInputLocator.PlayerInput.SwitchCurrentActionMap("Player");
         }
 
             // change notification

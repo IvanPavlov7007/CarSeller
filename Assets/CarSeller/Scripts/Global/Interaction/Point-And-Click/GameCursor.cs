@@ -1,12 +1,12 @@
 ﻿using System;
 using UnityEngine;
-using Pixelplacement;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
-public class GameCursor : Singleton<GameCursor>
+public class GameCursor : GlobalSingletonBehaviour<GameCursor>
 {
+    
     public Interactable currentInteractable { get; private set; }
     public Interactable draggedInteractable { get; private set; }
 
@@ -65,6 +65,12 @@ public class GameCursor : Singleton<GameCursor>
         }
     }
 
+    protected override GameCursor GlobalInstance
+    {
+        get { return G.GameCursor;}
+        set { G.GameCursor = value; }
+    }
+
     private void Start()
     {
         //Cursor.lockState = CursorLockMode.Confined;
@@ -80,7 +86,7 @@ public class GameCursor : Singleton<GameCursor>
 
     private bool IsTouchControlScheme()
     {
-        var locator = PlayerInputLocator.Instance;
+        var locator = G.PlayerInputLocator;
         var playerInput = locator != null ? locator.PlayerInput : null;
         var scheme = playerInput != null ? playerInput.currentControlScheme : null;
         if (string.IsNullOrEmpty(scheme)) return false;

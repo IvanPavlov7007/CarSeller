@@ -1,14 +1,18 @@
-﻿using Pixelplacement;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class MoneyGoalManager : Singleton<MoneyGoalManager>
+public class MoneyGoalManager : GlobalSingletonBehaviour<MoneyGoalManager>
 {
+    protected override MoneyGoalManager GlobalInstance { get => G.MoneyGoalManager; set => G.MoneyGoalManager = value; }
+
     public MoneyGoal CurrentMoneyGoal;
 
     MoneyGoalDisplayer moneyGoalDisplayer;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        if (!IsActiveSingleton) return;
+
         moneyGoalDisplayer = FindAnyObjectByType<MoneyGoalDisplayer>();
     }
 
@@ -44,7 +48,7 @@ public class MoneyGoalManager : Singleton<MoneyGoalManager>
 
         if (CurrentMoneyGoal.IsCompleted(data.NewMoney))
         {
-            CongradulationsMenu.Instance.Show();
+            G.CongradulationsMenu.Show();
         }
     }
 }

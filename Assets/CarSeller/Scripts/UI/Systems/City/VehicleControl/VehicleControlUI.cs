@@ -1,13 +1,17 @@
-﻿using Pixelplacement;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class VehicleControlUI : Singleton<VehicleControlUI>
+public class VehicleControlUI : GlobalSingletonBehaviour<VehicleControlUI>
 {
+    protected override VehicleControlUI GlobalInstance { get => G.VehicleControlUI; set => G.VehicleControlUI = value; }
+
     public VehicleButtonUI CurrentVehicleButton;
     public VehicleButtonUI PrimaryVehicleButton;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        if (!IsActiveSingleton) return;
+
         PrimaryVehicleButton.button.onClick.AddListener(onPrimaryClick);
         CurrentVehicleButton.button.onClick.AddListener(onCurrentVechicleClick);
     }
@@ -21,7 +25,7 @@ public class VehicleControlUI : Singleton<VehicleControlUI>
     {
         if (!G.runIntialized)
             return;
-        CameraMovementManager.Instance.Teleport(G.VehicleController.CurrentVehicleEntity.Position.WorldPosition);
+        G.CameraMovementManager.Teleport(G.VehicleController.CurrentVehicleEntity.Position.WorldPosition);
     }
 
     private void OnEnable()

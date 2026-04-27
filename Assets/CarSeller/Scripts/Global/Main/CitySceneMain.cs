@@ -3,7 +3,7 @@ using UnityEngine;
 
     public class CitySceneMain : MonoBehaviour
     {
-        private void Awake()
+        private void Start()
         {
             Enter();
         }
@@ -11,8 +11,8 @@ using UnityEngine;
         public void Enter()
         {
             G.GameFlowController.SetCity();
-            CitySceneManager.Instance.SetCurrentProfile((G.GameState));
-            CitySceneManager.Instance.InitializeCity();
+            G.CitySceneManager.SetCurrentProfile((G.GameState));
+            G.CitySceneManager.InitializeCity();
             setRootActive(true);
 
             CameraHelper.SetCurrentPositionAtCar();

@@ -54,7 +54,7 @@ public class WarehouseEnterProcess : IProcess
         onAccept: () => { accepted = true; done = true; },
         onCancel: () => { done = true; });
 
-        var menu = FixedContextMenuManager.Instance.CreateContextMenu(element);
+        var menu = G.FixedContextMenuManager.CreateContextMenu(element);
 
         // If the menu closes for any other reason (e.g., blocker close), also proceed.
         menu.Closed += _ => done = true;
@@ -75,7 +75,7 @@ public class WarehouseEnterProcess : IProcess
         onAccept: () => { accepted = true; done = true; },
         onCancel: () => { done = true; });
 
-        var menu = FixedContextMenuManager.Instance.CreateContextMenu(element);
+        var menu = G.FixedContextMenuManager.CreateContextMenu(element);
 
         // If the menu closes for any other reason (e.g., blocker close), also proceed.
         menu.Closed += _ => done = true;
@@ -104,7 +104,7 @@ public class WarehouseEnterProcess : IProcess
         onAccept: () => { accepted = true; done = true; },
         onCancel: () => { done = true; });
 
-        var menu = FixedContextMenuManager.Instance.CreateContextMenu(element);
+        var menu = G.FixedContextMenuManager.CreateContextMenu(element);
         menu.Closed += _ => done = true;
 
         yield return new WaitUntil(() => done);
@@ -128,7 +128,7 @@ public class WarehouseEnterProcess : IProcess
         //open results window with claim button
         var stripData = stripTransaction as StripCarTransaction;
         element = CTX_Menu_Tools.StipReslutsClaim(stripData.StrippingProcess.StrippedParts);
-        menu = FixedContextMenuManager.Instance.CreateContextMenu(element);
+        menu = G.FixedContextMenuManager.CreateContextMenu(element);
         done = false;
         menu.Closed += _ => done = true;
         yield return new WaitUntil(() => done);
@@ -144,7 +144,7 @@ public class WarehouseEnterProcess : IProcess
             Debug.Log("Products placed inside warehouse: " + placingData.PuttingResult.skippedProducts.Count);
             if (placingData.PuttingResult.CarsSkipped)
             {
-                GlobalHintManager.Instance.ShowHint("Couldn't store care base: no place available");
+                G.GlobalHintManager.ShowHint("Couldn't store care base: no place available");
             }
         }
     }

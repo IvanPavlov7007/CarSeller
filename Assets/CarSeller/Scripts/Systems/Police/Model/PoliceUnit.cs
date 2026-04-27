@@ -162,7 +162,7 @@ public class GraphMovement : IAIMovement, ISpeedProvider
     public Vector2 ProvidedDirection => Up;
 
     SpeedVarations speedVariations;
-    public SpeedVarations SpeedVariations => PoliceManager.Instance.policeSpeedVariations;
+    public SpeedVarations SpeedVariations => G.PoliceManager.policeSpeedVariations;
 
     public float Speed
     {
@@ -211,7 +211,7 @@ public class SliceVision : IVision
 {
     public readonly PoliceUnit Owner;
     SliceVisionSettings settings;
-    public SliceVisionSettings Settings => PoliceManager.Instance.SliceVisionSettings; //{ get { return settings; } set { settings = value; } }
+    public SliceVisionSettings Settings => G.PoliceManager.SliceVisionSettings; //{ get { return settings; } set { settings = value; } }
 
     public SliceVision(PoliceUnit owner, SliceVisionSettings settings)
     {
